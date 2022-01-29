@@ -6,6 +6,8 @@ public class WASD_walk : MonoBehaviour
 {
     // Start is called before the first frame update
     public float speed = 1.5f;
+    public float rotationSpeed = 2.5f;
+
     void Start()
     {
 
@@ -17,11 +19,14 @@ public class WASD_walk : MonoBehaviour
         //  Time.deltaTime balances back out different speeds of computers
         if (Input.GetKey(KeyCode.W)) {
             transform.position += Vector3.forward * speed * Time.deltaTime;
-        }else if (Input.GetKey(KeyCode.A)) {
+        }
+        if (Input.GetKey(KeyCode.A)) {
             transform.position += Vector3.left * speed * Time.deltaTime;
-        }else if (Input.GetKey(KeyCode.S)) {
+        }
+        if (Input.GetKey(KeyCode.S)) {
             transform.position += Vector3.back * speed * Time.deltaTime;
-        }else if (Input.GetKey(KeyCode.D)) {
+        }
+        if (Input.GetKey(KeyCode.D)) {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
     }
