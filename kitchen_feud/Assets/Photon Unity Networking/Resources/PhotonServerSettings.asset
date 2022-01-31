@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppID: dc461be4-373e-4000-88a5-3f600e3397c8
   VoiceAppID: 
-  ChatAppID: 
+  ChatAppID: dc461be4-373e-4000-88a5-3f600e3397c8
   HostType: 1
   PreferredRegion: 0
   EnabledRegions: -1
-  Protocol: 0
+  Protocol: 5
   ServerAddress: 
   ServerPort: 5055
   VoiceServerPort: 5055

@@ -79,7 +79,9 @@ public class menuController : MonoBehaviour
 
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(createGameInput.text, new RoomOptions() { MaxPlayers = 8 }, null);
+        // CREATE LOBBY HERE
+        //PhotonNetwork.CreateRoom(createGameInput.text, new RoomOptions() { MaxPlayers = 8 }, null);
+
         InitializeLobby(createGameInput.text);
     }
 
@@ -87,21 +89,31 @@ public class menuController : MonoBehaviour
     {
         lobbyMenu.SetActive(false);
         connectPanel.SetActive(true);
-        PhotonNetwork.LeaveRoom();
+
+        // LEAVE ROOM HERE
+        //PhotonNetwork.LeaveRoom();
     }
 
     public void JoinGame()
     {   
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 8;
-        PhotonNetwork.JoinOrCreateRoom(joinGameInput.text, roomOptions, TypedLobby.Default);
+
+        // JOIN EXISTING LOBBY HERE
+        // PhotonNetwork.JoinOrCreateRoom(joinGameInput.text, roomOptions, TypedLobby.Default);
+
         InitializeLobby(joinGameInput.text);
 
     }
 
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel("SampleScene");
+    }
+
     private void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("LEVEL HERE");
+        PhotonNetwork.LoadLevel("SampleScene");
     }
 }
    
