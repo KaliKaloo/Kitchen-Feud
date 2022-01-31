@@ -45,6 +45,14 @@ public class menuController : MonoBehaviour
         return players;
     }
 
+    private void InitializeLobby(string name)
+    {
+        connectPanel.SetActive(false);
+        lobbyMenu.SetActive(true);
+        lobbyName.text = "Lobby: " + name;
+        playerList.text = GetPlayers();
+    }
+
     private void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
@@ -72,10 +80,7 @@ public class menuController : MonoBehaviour
     public void CreateGame()
     {
         PhotonNetwork.CreateRoom(createGameInput.text, new RoomOptions() { MaxPlayers = 8 }, null);
-        connectPanel.SetActive(false);
-        lobbyMenu.SetActive(true);
-        lobbyName.text = "Lobby: " + createGameInput.text;
-        playerList.text = GetPlayers();
+        InitializeLobby(createGameInput.text);
     }
 
     public void LeaveGame()
@@ -90,10 +95,8 @@ public class menuController : MonoBehaviour
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 8;
         PhotonNetwork.JoinOrCreateRoom(joinGameInput.text, roomOptions, TypedLobby.Default);
+        InitializeLobby(joinGameInput.text);
 
-        connectPanel.SetActive(false);
-        lobbyMenu.SetActive(true);
-        lobbyName.text = "Lobby: " + joinGameInput.text;
     }
 
     private void OnJoinedRoom()
