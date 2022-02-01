@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-
+using Photon.Realtime;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -22,7 +22,6 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text lobbyName;
     [SerializeField] private Text playerList;
     [SerializeField] private Text lobbyError;
-
 
     private void Start()
     {
@@ -78,7 +77,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Create room here
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(createGameInput.text);
+        PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
     }
 
     // Leave existing lobby
@@ -94,7 +93,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public void JoinGame()
     {
       PhotonNetwork.JoinRoom(joinGameInput.text);
-      lobbyError.text = "";
     }
 
     // Load level once game is started
@@ -107,10 +105,23 @@ public class menuController : MonoBehaviourPunCallbacks
     {   
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         lobbyError.text = "Lobby does not exist!";
     }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        playerList.text = GetPlayers();
+    }
+
+    public override void OnPlayerLeftRoom(Player newPlayer)
+    {
+        playerList.text = GetPlayers();
+    }
+
+
 }
 
 
