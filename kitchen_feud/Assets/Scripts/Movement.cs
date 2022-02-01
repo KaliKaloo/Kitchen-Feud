@@ -11,11 +11,11 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            player.velocity = transform.forward * m_speed * Time.deltaTime;
+            transform.position += transform.forward * m_speed* Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            player.velocity = -transform.forward * m_speed * Time.deltaTime;
+            transform.position += -transform.forward * m_speed*Time.deltaTime;
         }
     }
     void Update()

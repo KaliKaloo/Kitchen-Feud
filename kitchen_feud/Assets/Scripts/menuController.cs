@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class menuController : MonoBehaviour
-{ 
+
+public class menuController : MonoBehaviourPunCallbacks
+{
     [SerializeField] private string VersionName = "0.1";
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
@@ -23,39 +25,34 @@ public class menuController : MonoBehaviour
     [SerializeField] private Text playerList;
 
 
-    private void Awake()
-    {
-        PhotonNetwork.ConnectUsingSettings(VersionName);
-    }
-
     private void Start()
     {
-        greetingMenu.text = "";
-        usernameMenu.SetActive(true);
-        lobbyMenu.SetActive(false);
+        PhotonNetwork.ConnectUsingSettings();
     }
+
+
 
     private string GetPlayers()
     {
         string players = "Players:" + System.Environment.NewLine;
-        foreach (PhotonPlayer player in PhotonNetwork.playerList)
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             players += player.NickName + System.Environment.NewLine;
         }
         return players;
     }
 
-    private void InitializeLobby(string name)
+    /*private void InitializeLobby(string name)
     {
         connectPanel.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = "Lobby: " + name;
         playerList.text = GetPlayers();
     }
-
-    private void OnConnectedToMaster()
+   */
+    public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
+        PhotonNetwork.JoinLobby();
         Debug.Log("Connected");
     }
 
@@ -64,7 +61,8 @@ public class menuController : MonoBehaviour
         if (usernameInput.text.Length >= 1)
         {
             startButton.SetActive(true);
-        } else
+        }
+        else
         {
             startButton.SetActive(false);
         }
@@ -73,16 +71,16 @@ public class menuController : MonoBehaviour
     public void SetUsername()
     {
         usernameMenu.SetActive(false);
-        PhotonNetwork.playerName = usernameInput.text;
-        greetingMenu.text = "Welcome " + usernameInput.text + "!"; 
+        PhotonNetwork.NickName = usernameInput.text;
+        greetingMenu.text = "Welcome " + usernameInput.text + "!";
     }
 
     public void CreateGame()
     {
         // CREATE LOBBY HERE
-        //PhotonNetwork.CreateRoom(createGameInput.text, new RoomOptions() { MaxPlayers = 8 }, null);
+        PhotonNetwork.CreateRoom(createGameInput.text);
 
-        InitializeLobby(createGameInput.text);
+
     }
 
     public void LeaveGame()
@@ -95,26 +93,21 @@ public class menuController : MonoBehaviour
     }
 
     public void JoinGame()
-    {   
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 8;
+    {
+
 
         // JOIN EXISTING LOBBY HERE
-        // PhotonNetwork.JoinOrCreateRoom(joinGameInput.text, roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinRoom(joinGameInput.text);
 
-        InitializeLobby(joinGameInput.text);
+
 
     }
 
-    public void StartGame()
-    {
-        PhotonNetwork.LoadLevel("SampleScene");
-    }
 
-    private void OnJoinedRoom()
+    public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("SampleScene");
     }
 }
-   
+
 
