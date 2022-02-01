@@ -70,6 +70,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void SetUsername()
     {
         usernameMenu.SetActive(false);
+        connectPanel.SetActive(true);
         PhotonNetwork.NickName = usernameInput.text;
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
     }
@@ -83,10 +84,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // Leave existing lobby
     public void LeaveGame()
     {
-        lobbyMenu.SetActive(false);
-        connectPanel.SetActive(true);
         lobbyError.text = "";
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveRoom(false);
     }
 
     // JOIN EXISTING LOBBY HERE
@@ -106,6 +105,12 @@ public class menuController : MonoBehaviourPunCallbacks
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
+    public override void OnLeftRoom()
+    {
+        lobbyMenu.SetActive(false);
+        connectPanel.SetActive(true);
+        usernameMenu.SetActive(false);
+    }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         lobbyError.text = "Lobby does not exist!";
@@ -113,12 +118,12 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        playerList.text = GetPlayers();
+        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
     public override void OnPlayerLeftRoom(Player newPlayer)
     {
-        playerList.text = GetPlayers();
+        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
 
