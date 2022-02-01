@@ -97,6 +97,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Load level once game is started
     public void StartGame()
     {
+        //PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel("SampleScene");
     }
 
@@ -116,7 +117,7 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyError.text = "Lobby does not exist!";
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }

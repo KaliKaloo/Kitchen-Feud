@@ -7,10 +7,9 @@ public class Movement : MonoBehaviour
 {
     public Rigidbody player;
     public float m_speed, rotatespeed;
+    public static GameObject LocalPlayerInstance;
     [SerializeField]private Camera m_camera;
     PhotonView view;
-
-
 
     private void Start()
     {
@@ -22,6 +21,8 @@ public class Movement : MonoBehaviour
             m_camera.enabled = false;
         }
        
+        DontDestroyOnLoad(gameObject);
+
     }
 
 
