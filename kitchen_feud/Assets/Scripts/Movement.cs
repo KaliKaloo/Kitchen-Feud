@@ -1,32 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Movement : MonoBehaviour
 {
     public Rigidbody player;
     public float m_speed, rotatespeed;
+    [SerializeField]private Camera m_camera;
+    PhotonView view;
 
-    void FixedUpdate()
+
+
+    private void Start()
     {
-        if (Input.GetKey(KeyCode.W))
+        //m_camera = Camera.main;
+        view = GetComponent<PhotonView>();
+        player = GetComponent<Rigidbody>();
+        if(!view.IsMine)
         {
-            transform.position += transform.forward * m_speed* Time.deltaTime;
+            m_camera.enabled = false;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += -transform.forward * m_speed*Time.deltaTime;
-        }
+       
     }
+
+
+
+
     void Update()
+     
     {
-        if (Input.GetKey(KeyCode.A))
+        if (view.IsMine)
         {
-            transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
+
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.position += transform.forward * m_speed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.position += -transform.forward * m_speed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
+            }
         }
     }
 }
