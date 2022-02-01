@@ -17,21 +17,21 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private InputField joinGameInput;
 
     [SerializeField] private GameObject startButton;
-    [SerializeField] private GameObject leaveButton;
-    [SerializeField] private GameObject startGameButton;
 
     [SerializeField] private Text greetingMenu;
     [SerializeField] private Text lobbyName;
     [SerializeField] private Text playerList;
+    [SerializeField] private Text lobbyError;
 
 
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        usernameMenu.SetActive(true);
     }
 
 
-
+    // gets list of players in the lobby in string
     private string GetPlayers()
     {
         string players = "Players:" + System.Environment.NewLine;
@@ -42,14 +42,14 @@ public class menuController : MonoBehaviourPunCallbacks
         return players;
     }
 
-    /*private void InitializeLobby(string name)
+    private void InitializeLobby(string name)
     {
         connectPanel.SetActive(false);
         lobbyMenu.SetActive(true);
-        lobbyName.text = "Lobby: " + name;
+        lobbyName.text = name;
         playerList.text = GetPlayers();
     }
-   */
+   
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
@@ -58,7 +58,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void ChangeUsernameInput()
     {
-        if (usernameInput.text.Length >= 1)
+        if (usernameInput.text.Length >= 1 && usernameInput.text.Length <= 9)
         {
             startButton.SetActive(true);
         }
@@ -75,38 +75,41 @@ public class menuController : MonoBehaviourPunCallbacks
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
     }
 
+    // Create room here
     public void CreateGame()
     {
-        // CREATE LOBBY HERE
         PhotonNetwork.CreateRoom(createGameInput.text);
-
-
     }
 
+    // Leave existing lobby
     public void LeaveGame()
     {
         lobbyMenu.SetActive(false);
         connectPanel.SetActive(true);
-
-        // LEAVE ROOM HERE
-        //PhotonNetwork.LeaveRoom();
+        lobbyError.text = "";
+        PhotonNetwork.LeaveRoom();
     }
 
+    // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
-
-
-        // JOIN EXISTING LOBBY HERE
-        PhotonNetwork.JoinRoom(joinGameInput.text);
-
-
-
+      PhotonNetwork.JoinRoom(joinGameInput.text);
+      lobbyError.text = "";
     }
 
-
-    public override void OnJoinedRoom()
+    // Load level once game is started
+    public void StartGame()
     {
         PhotonNetwork.LoadLevel("SampleScene");
+    }
+
+    public override void OnJoinedRoom()
+    {   
+        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        lobbyError.text = "Lobby does not exist!";
     }
 }
 
