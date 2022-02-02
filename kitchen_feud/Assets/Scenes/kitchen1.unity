@@ -8383,6 +8383,7 @@ MonoBehaviour:
   player: {fileID: 1081042911}
   m_speed: 200
   rotatespeed: 90
+  m_camera: {fileID: 0}
 --- !u!54 &1081042911
 Rigidbody:
   m_ObjectHideFlags: 0
