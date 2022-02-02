@@ -7,7 +7,7 @@ using Photon.Realtime;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private string VersionName = "0.1";
+   
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
@@ -98,7 +98,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         //PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("SampleScene");
+        PhotonNetwork.LoadLevel("kitchens");
     }
 
     public override void OnJoinedRoom()
