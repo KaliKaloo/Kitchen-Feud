@@ -22,29 +22,29 @@ jobs:
             Library-
 
       # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-        with:
-          projectPath: kitchen_feud
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Run tests
+#         uses: game-ci/unity-test-runner@v2
+#         env:
+#           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+#           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+#           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+#         with:
+#           projectPath: kitchen_feud
+#           githubToken: ${{ secrets.GITHUB_TOKEN }}
           
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: Test results
-          path: artifacts
+#       - uses: actions/upload-artifact@v2
+#         if: always()
+#         with:
+#           name: Test results
+#           path: artifacts
 
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           projectPath: kitchen_feud
           targetPlatform: WebGL
