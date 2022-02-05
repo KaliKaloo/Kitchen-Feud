@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         if (view.IsMine)
         {
@@ -38,7 +38,7 @@ public class Movement : MonoBehaviour
                 player.velocity = -transform.forward * m_speed * Time.deltaTime;
             }
         }
-    }
+    */
     void Update()
     {
         if (view.IsMine)
@@ -50,6 +50,15 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                player.velocity = transform.forward * m_speed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                player.velocity = -transform.forward * m_speed * Time.deltaTime;
             }
         }
     }
