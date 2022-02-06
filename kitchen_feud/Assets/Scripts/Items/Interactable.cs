@@ -11,7 +11,7 @@ using Photon.Pun;
 public class Interactable : MonoBehaviour
 {
 
-	public float radius = 3f;              
+	public float radius = 1.4f;              
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
 	bool isFocus = false;  
@@ -22,10 +22,7 @@ public class Interactable : MonoBehaviour
 	public virtual void Interact()
 	{
 		// This method is meant to be overwritten
-		// TEMPORARY
-		Debug.Log("Interacting with " + transform.name);
-		Destroy(gameObject);
-		// TEMPORARY
+		// Debug.Log("Interacting with " + transform.name);
 	}
 
 	void Update()

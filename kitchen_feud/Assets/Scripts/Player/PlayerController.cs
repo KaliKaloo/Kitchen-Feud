@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float m_speed, rotatespeed;
 	public Interactable focus;  // Our current focus: Item, Enemy etc.
 	[SerializeField] private Camera cam;         // Reference to our camera
+ 	PlayerHolding playerHold;
+
 	PhotonView view;
 
 	// Get references
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
 			// cam = Camera.main;
 			view = GetComponent<PhotonView>();
 			player = GetComponent<Rigidbody>();
+			playerHold = GetComponent<PlayerHolding>();
+
 			if (!view.IsMine)
 			{
 				cam.enabled = false;
@@ -32,7 +36,11 @@ public class PlayerController : MonoBehaviour
 		// If we press left mouse
 		if (view.IsMine)
         {
-			if (Input.GetButtonDown("Fire1"))
+			if(Input.GetMouseButtonDown(0) && playerHold.items.Count!=0){
+				RemoveFocus();
+				playerHold.dropItem();
+			}
+			else if (Input.GetButtonDown("Fire1"))
 			{
 				// We create a ray
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -42,9 +50,14 @@ public class PlayerController : MonoBehaviour
 				if (Physics.Raycast(ray, out hit, 100))
 				{
 					Interactable interactable = hit.collider.GetComponent<Interactable>();
+					var obj = hit.collider.gameObject;
+					
 					if (interactable != null)
 					{
 						SetFocus(interactable);
+						bool canPickUp = playerHold.canPickUp(obj);
+						if (canPickUp)
+							playerHold.pickUpItem();
 					}
 				}
 			}
@@ -88,19 +101,18 @@ public class PlayerController : MonoBehaviour
 
 				focus = newFocus;   // Set our new focus
 			}
-
 			newFocus.OnFocused(transform);
 		}
 	}
 
-	// // Remove our current focus
-	// void RemoveFocus()
-	// {
-	// 	if (focus != null)
-	// 		focus.OnDefocused();
+	// Remove our current focus
+	void RemoveFocus()
+	{
+		if (focus != null)
+			focus.OnDefocused();
 
-	// 	focus = null;
-	// }
+		focus = null;
+	}
 
 	
 }
