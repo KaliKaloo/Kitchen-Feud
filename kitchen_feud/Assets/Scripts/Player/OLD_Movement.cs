@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+using Photon.Pun; 
 
 public class Movement : MonoBehaviour
 {
@@ -39,6 +37,7 @@ public class Movement : MonoBehaviour
             }
         }
     }
+    
     void Update()
     {
         if (view.IsMine)
@@ -52,9 +51,7 @@ public class Movement : MonoBehaviour
                 transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
             }
         }
-    }
-
-
+    }    
 }
 
 
