@@ -9,4 +9,8 @@ public class Order : ScriptableObject
     public string orderSide;
     public string orderDrink;
     
+    // public GameObject ticket;
+
+  
 }
+

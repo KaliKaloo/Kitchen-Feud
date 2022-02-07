@@ -34,10 +34,7 @@ public class Database : MonoBehaviour
             if (order.orderID == ID)
                 return order;
         }
-
         return null;
-
-
     }
 
     public static Order GetRandomOrder()
