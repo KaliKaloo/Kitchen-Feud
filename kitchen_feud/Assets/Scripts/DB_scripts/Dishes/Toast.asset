@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: Toast
+  m_EditorClassIdentifier: 
+  dishID: DI0407
+  dishName: Toas
+  maxScore: 30
+  cookingTime: 10
+  toCook: Fry
+  finalScore: 0
+  ingredient1: {fileID: 11400000, guid: bff8b1c83a9dfdc49a7c4f125205d6eb, type: 2}
+  ingredient2: {fileID: 11400000, guid: 940e7e4f905263f45aadb764923a5d6e, type: 2}
+  ingredient3: {fileID: 0}
