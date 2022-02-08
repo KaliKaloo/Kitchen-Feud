@@ -5,14 +5,22 @@ using Photon.Pun;
 
 public class PlayerHolding : MonoBehaviour
 {
-
     public int holdingLimit = 1;
-    public List<Item> items = new List<Item>();
+    public List<ItemObject> items = new List<ItemObject>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    Item item;
+    ItemObject item;
 	PhotonView view;
+
+    // void update(){
+    //     if (clickedObj == null){
+    //         clickedObj = null;
+    //         heldObj = null;
+    //         item=null;
+    //         items.Clear();
+    //     }
+    // }
 
     public bool canPickUp(GameObject obj){
         pickableItem PickableItem = obj.GetComponent<pickableItem>();
@@ -29,14 +37,13 @@ public class PlayerHolding : MonoBehaviour
 
     public void pickUpItem(){
         
-        if(items.Count >= holdingLimit){
-            Debug.Log("You are already holding an item. Please drop it first.");
-            return;
-        }
+        // if(items.Count >= holdingLimit){
+        //     Debug.Log("You are already holding an item. Please drop it first.");
+        //     return;
+        // }
         items.Add(item);
         heldObj = clickedObj;
         // move object to slot
-
 		Debug.Log("Pick up item: "+ items[0].name);
         if(heldObj.GetComponent<Rigidbody>()){
             Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
@@ -45,8 +52,8 @@ public class PlayerHolding : MonoBehaviour
             heldObj.transform.parent = slot;
             heldObj.transform.localPosition = Vector3.zero;
             heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            objRig.isKinematic = true;
-            objcol.isTrigger = true;
+            // objRig.isKinematic = true;
+            // objcol.isTrigger = true;
         }
     }
 
@@ -57,7 +64,7 @@ public class PlayerHolding : MonoBehaviour
         Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
         Collider objcol = heldObj.GetComponent<Collider>();
         heldObj.transform.SetParent(null);
-        objRig.isKinematic = false;
-        objcol.isTrigger = false;
+        // objRig.isKinematic = false;
+        // objcol.isTrigger = false;
     }
 }
