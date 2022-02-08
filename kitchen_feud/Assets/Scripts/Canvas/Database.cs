@@ -22,6 +22,7 @@ public class Database : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            Debug.LogWarning("instance not null");
         }
     }
 

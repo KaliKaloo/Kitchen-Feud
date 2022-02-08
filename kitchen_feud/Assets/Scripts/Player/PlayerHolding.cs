@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class PlayerHolding : MonoBehaviour
 {
-
     public int holdingLimit = 1;
     public List<ItemObject> items = new List<ItemObject>();
     public Transform slot;
@@ -13,6 +12,15 @@ public class PlayerHolding : MonoBehaviour
     public GameObject heldObj;
     ItemObject item;
 	PhotonView view;
+
+    // void update(){
+    //     if (clickedObj == null){
+    //         clickedObj = null;
+    //         heldObj = null;
+    //         item=null;
+    //         items.Clear();
+    //     }
+    // }
 
     public bool canPickUp(GameObject obj){
         pickableItem PickableItem = obj.GetComponent<pickableItem>();
