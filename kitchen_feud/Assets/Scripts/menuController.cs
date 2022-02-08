@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -9,7 +10,7 @@ using Photon.Realtime;
 // j = 2 game has ended and user wants to play again (i.e. skip username menu)
 public class MyTestScriptNoMonoBehaviour
 {
-    int j = 0;
+    static int j = 0;
 
     public void Beginning()
     {
@@ -35,8 +36,8 @@ public class MyTestScriptNoMonoBehaviour
 
     public bool IsInitialized()
     {
-        if ((j == 1) || (j == 2)) return true;
-        else return false;
+        if ((j == 1) || (j == 2)) return false;
+        else return true;
     }
 
     public string ReturnString()
@@ -72,7 +73,8 @@ public class menuController : MonoBehaviourPunCallbacks
             gameOver.Beginning();
             PhotonNetwork.ConnectUsingSettings();
             usernameMenu.SetActive(true);
-        } else if (gameOver.IsEnd())
+        } 
+        else if (gameOver.IsEnd())
         {
             // NEED TO ADD CURRENT USERNAME HERE
             // greetingMenu.text = "Welcome " + usernameInput.text + "!";
