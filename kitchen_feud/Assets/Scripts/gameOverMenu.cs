@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class gameOverMenu : MonoBehaviour
 {
     // SCORES GO HERE
-    private readonly int team1Score = 10000;
-    private readonly int team2Score = 20000;
+    private int team1Score = 0;
+    private int team2Score = 0;
 
     [SerializeField] private Text team1UIScore;
     [SerializeField] private Text team2UIScore;
 
     [SerializeField] private Text winnerText;
 
+    private static MyTestScriptNoMonoBehaviour gameOver = new MyTestScriptNoMonoBehaviour();
+
     // Start is called before the first frame update
     void Start()
     {
+        //randomize scores for now
+        System.Random r = new System.Random();
+        int score1 = r.Next(0, 20000);
+        int score2 = r.Next(0, 20000);
+        team1Score = score1;
+        team2Score = score2;
+
         // update scores received onto UI
         team1UIScore.text = String.Format("{0:n0}", team1Score);
         team2UIScore.text = String.Format("{0:n0}", team2Score);
@@ -26,6 +35,7 @@ public class gameOverMenu : MonoBehaviour
         CompareScore();
     }
 
+    // compare scores and update who wins based on scores
     public void CompareScore()
     {
         if (team2Score < team1Score)
@@ -42,10 +52,11 @@ public class gameOverMenu : MonoBehaviour
         }
     }
 
+    // alters global variable and returns straight to lobby menu
     public void PlayAgain()
     {
-        print("work");
-        PhotonNetwork.LoadLevel("mainMenu");
+        gameOver.End();
+        SceneManager.LoadScene("mainMenu");
     }
 
 
