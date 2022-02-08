@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4aaea3fc1d506df4388ec268bcb2f0ae, type: 3}
-  m_Name: IN001
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  ingredientID: 01
-  ingredientName: Mushroom
+  ingredientID: 02
+  ingredientName: Potato
+  location: 2
   canPickUp: 1
   canFry: 0
   canCut: 0

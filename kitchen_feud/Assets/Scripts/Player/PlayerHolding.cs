@@ -6,11 +6,11 @@ using Photon.Pun;
 public class PlayerHolding : MonoBehaviour
 {
     public int holdingLimit = 1;
-    public List<ItemObject> items = new List<ItemObject>();
+    public List<IngredientSO> items = new List<IngredientSO>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    ItemObject item;
+    IngredientSO item;
 	PhotonView view;
 
     // void update(){
@@ -52,8 +52,8 @@ public class PlayerHolding : MonoBehaviour
             heldObj.transform.parent = slot;
             heldObj.transform.localPosition = Vector3.zero;
             heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            // objRig.isKinematic = true;
-            // objcol.isTrigger = true;
+            objRig.isKinematic = true;
+            objcol.isTrigger = true;
         }
     }
 
@@ -64,7 +64,8 @@ public class PlayerHolding : MonoBehaviour
         Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
         Collider objcol = heldObj.GetComponent<Collider>();
         heldObj.transform.SetParent(null);
-        // objRig.isKinematic = false;
-        // objcol.isTrigger = false;
+        objRig.isKinematic = false;
+        objcol.isTrigger = false;
+        objRig.useGravity = true;
     }
 }

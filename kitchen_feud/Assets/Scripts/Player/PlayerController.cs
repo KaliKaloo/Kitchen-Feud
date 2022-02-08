@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 		// If we press left mouse
 		if (view.IsMine)
         {
+
 			if(Input.GetMouseButtonDown(0) && playerHold.items.Count!=0){
 				RemoveFocus();
 				playerHold.dropItem();
@@ -59,7 +60,10 @@ public class PlayerController : MonoBehaviour
 						if (canPickUp)
 							playerHold.pickUpItem();
 					}
+
+					
 				}
+				
 			}
 		
             if (Input.GetKey(KeyCode.A))

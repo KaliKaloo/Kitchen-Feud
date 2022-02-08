@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Pantry", menuName ="Pantry System/Pantry")]
-public class PantryObject : ScriptableObject
+[CreateAssetMenu(fileName = "New Subroom", menuName ="Subroom System/Subroom")]
+public class SubroomObject : ScriptableObject
 {
-    public List<PantrySlot> Container = new List<PantrySlot>();
+    public List<SubroomSlot> Container = new List<SubroomSlot>();
 
-    public void AddItem( ItemObject _item, int _amount){
+    public void AddItem( IngredientSO _item, int _amount){
         bool hasItem = false;
         for (int i = 0; i < Container.Count; i++)
         {
@@ -18,16 +18,16 @@ public class PantryObject : ScriptableObject
             }
         }
         if(!hasItem){
-            Container.Add(new PantrySlot(_item, _amount));
+            Container.Add(new SubroomSlot(_item, _amount));
         }
     }
 }
 
 [System.Serializable]
-public class PantrySlot{
-    public ItemObject item;
+public class SubroomSlot{
+    public IngredientSO item;
     public int amount;
-    public PantrySlot(ItemObject _item, int _amount){
+    public SubroomSlot(IngredientSO _item, int _amount){
         item = _item;
         amount = _amount;
     }

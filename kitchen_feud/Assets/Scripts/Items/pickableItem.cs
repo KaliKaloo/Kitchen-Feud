@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class pickableItem : Interactable
 {
-    public ItemObject item;
+    public IngredientSO item;
 
     public override void Interact()
 	{
         base.Interact();
+    
 	}
 
    

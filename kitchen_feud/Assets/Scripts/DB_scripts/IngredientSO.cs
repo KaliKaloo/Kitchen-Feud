@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemType{
+public enum Location{
     Freezer,
     Fridge,
 
@@ -13,7 +13,7 @@ public class IngredientSO : ScriptableObject
     
     public string ingredientID;
     public string ingredientName;
-    public ItemType type;
+    public Location location;
     public bool canPickUp = false;
     public bool canFry = false;
     public bool canCut = false;
