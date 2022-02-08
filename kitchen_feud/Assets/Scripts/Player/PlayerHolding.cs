@@ -7,11 +7,11 @@ public class PlayerHolding : MonoBehaviour
 {
 
     public int holdingLimit = 1;
-    public List<Item> items = new List<Item>();
+    public List<ItemObject> items = new List<ItemObject>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    Item item;
+    ItemObject item;
 	PhotonView view;
 
     public bool canPickUp(GameObject obj){
@@ -29,10 +29,10 @@ public class PlayerHolding : MonoBehaviour
 
     public void pickUpItem(){
         
-        if(items.Count >= holdingLimit){
-            Debug.Log("You are already holding an item. Please drop it first.");
-            return;
-        }
+        // if(items.Count >= holdingLimit){
+        //     Debug.Log("You are already holding an item. Please drop it first.");
+        //     return;
+        // }
         items.Add(item);
         heldObj = clickedObj;
         // move object to slot
