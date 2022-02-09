@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
+  - enabled: 1
+    path: Assets/Scenes/score (merge with kitchen).unity
+    guid: 500ece1e38869a74c885ec8aa8a68278
+  - enabled: 1
+    path: Assets/Scenes/gameOver.unity
+    guid: 7443b865e1187a842a4a04533276e0d2
   m_configObjects: {}

@@ -16,17 +16,15 @@ public class gameOverMenu : MonoBehaviour
 
     [SerializeField] private Text winnerText;
 
-    private static MyTestScriptNoMonoBehaviour gameOver = new MyTestScriptNoMonoBehaviour();
+    private static CheckEnd gameOver = new CheckEnd();
+    private static ParseScore endScores = new ParseScore();
 
     // Start is called before the first frame update
     void Start()
     {
-        //randomize scores for now
-        System.Random r = new System.Random();
-        int score1 = r.Next(0, 20000);
-        int score2 = r.Next(0, 20000);
-        team1Score = score1;
-        team2Score = score2;
+        //get scores from score screen
+        team1Score = endScores.GetScore1();
+        team2Score = endScores.GetScore2();
 
         // update scores received onto UI
         team1UIScore.text = String.Format("{0:n0}", team1Score);

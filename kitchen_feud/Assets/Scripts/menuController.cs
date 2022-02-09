@@ -8,7 +8,7 @@ using Photon.Realtime;
 // j = 0 means not initialized 
 // j = 1 beginning has been initialized
 // j = 2 game has ended and user wants to play again (i.e. skip username menu)
-public class MyTestScriptNoMonoBehaviour
+public class CheckEnd
 {
     static int j = 0;
 
@@ -64,7 +64,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text playerList;
     [SerializeField] private Text lobbyError;
 
-    private static MyTestScriptNoMonoBehaviour gameOver = new MyTestScriptNoMonoBehaviour();
+    private static CheckEnd gameOver = new CheckEnd();
 
     private void Start()
     {

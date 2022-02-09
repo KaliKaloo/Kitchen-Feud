@@ -5,6 +5,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public class ParseScore
+{
+    private static int score1 = 0;
+    private static int score2 = 0;
+
+    public void UpdateScores(int newScore1, int newScore2)
+    {
+        score1 = newScore1;
+        score2 = newScore2;
+    }
+
+    public int GetScore1()
+    {
+        return score1;
+    }
+
+    public int GetScore2()
+    {
+        return score2;
+    }
+}
+
 public class scoreController : MonoBehaviour
 {
     [SerializeField] private Text score1Text;
@@ -12,14 +34,23 @@ public class scoreController : MonoBehaviour
 
     [SerializeField] private Text timerText;
 
-    private int timer = 300;
+    // How long the game lasts in seconds
+    private int timer = 10;
+    private int score1 = 0;
+    private int score2 = 0;
+    float elapsed = 0f;
+    
+    // updates end scores to compare in game over scene
+    private static ParseScore endScores = new ParseScore();
+
 
     // Start is called before the first frame update
     void Start()
     {
         // start scores at 0
-        score1Text.text = ConvertScoreToString(0);
-        score2Text.text = ConvertScoreToString(0);
+        score1Text.text = ConvertScoreToString(score1);
+        score2Text.text = ConvertScoreToString(score2);
+        timerText.text = ConvertSecondToMinutes(timer);
     }
 
     // Converts an integer to a string with proper comma notation
@@ -28,16 +59,50 @@ public class scoreController : MonoBehaviour
         return String.Format("{0:n0}", score);
     }
 
+    private string ConvertSecondToMinutes(int seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        string str = time.ToString(@"mm\:ss");
+        return str;
+    }
+
+    public void Add100ToScore1()
+    {
+            score1 += 100;
+    }
+
+    public void Add100ToScore2()
+    {
+        score2 += 100;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
+        // update scores every frame
+        score1Text.text = ConvertScoreToString(score1);
+        score2Text.text = ConvertScoreToString(score2);
+
+        // increment every second
+        elapsed += Time.deltaTime;
+        if (elapsed >= 1f)
+        {
+            elapsed = elapsed % 1f;
+            OutputTime();
+        }
+    }
+
+    // calls this function every second
+    void OutputTime()
+    {
+        if (timer != 0)
         {
             timer = timer - 1;
-            timerText.text = String.Format("{0}", timer);
+            timerText.text = ConvertSecondToMinutes(timer);
         }
         else
         {
+            endScores.UpdateScores(score1, score2);
             SceneManager.LoadScene("gameOver");
         }
     }
