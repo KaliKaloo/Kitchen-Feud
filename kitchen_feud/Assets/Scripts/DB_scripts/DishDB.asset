@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f35e91e70f67574d84d7c92f3ba80d4, type: 3}
+  m_Name: DishDB
+  m_EditorClassIdentifier: 
+  allDishes:
+  - {fileID: 11400000, guid: 3b2a98c0012de4e4792223afdee175b0, type: 2}
+  - {fileID: 11400000, guid: a18533cd21448664194292b5400d53a2, type: 2}
+  - {fileID: 11400000, guid: 10a32242a2df58f43a724bb808178902, type: 2}

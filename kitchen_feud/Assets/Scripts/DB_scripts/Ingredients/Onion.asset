@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510a799e4417fdb46878eee6e86b0838, type: 3}
-  m_Name: Mushroom
+  m_Script: {fileID: 11500000, guid: 4aaea3fc1d506df4388ec268bcb2f0ae, type: 3}
+  m_Name: Onion
   m_EditorClassIdentifier: 
-  name: Mushroom
-  ItemType: Ingredient
-  ItemPrefab: {fileID: 0}
+  ingredientID: 
+  ingredientName: 
   canPickUp: 1
   canFry: 0
   canCut: 0

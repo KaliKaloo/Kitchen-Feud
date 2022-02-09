@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510a799e4417fdb46878eee6e86b0838, type: 3}
-  m_Name: Pot
+  m_Script: {fileID: 11500000, guid: 4aaea3fc1d506df4388ec268bcb2f0ae, type: 3}
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  name: Pan
-  ItemType: Cookware
-  ItemPrefab: {fileID: 0}
-  canPickUp: 0
+  ingredientID: 02
+  ingredientName: Potato
+  location: 2
+  canPickUp: 1
   canFry: 0
   canCut: 0
