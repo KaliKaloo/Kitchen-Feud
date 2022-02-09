@@ -17,6 +17,8 @@ public class gameOverMenu : MonoBehaviour
     [SerializeField] private Text winnerText;
 
     private static CheckEnd gameOver = new CheckEnd();
+
+    // receives scores from score screen
     private static ParseScore endScores = new ParseScore();
 
     // Start is called before the first frame update
