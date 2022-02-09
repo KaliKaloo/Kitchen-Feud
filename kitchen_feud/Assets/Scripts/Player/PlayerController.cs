@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	public Interactable focus;  // Our current focus: Item, Enemy etc.
 	[SerializeField] private Camera cam;         // Reference to our camera
  	PlayerHolding playerHold;
+	Stove stove;
 
 	PhotonView view;
 
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
 			view = GetComponent<PhotonView>();
 			player = GetComponent<Rigidbody>();
 			playerHold = GetComponent<PlayerHolding>();
+			//not sure if correct, will work only for one stove so prob not
+			stove = GameObject.Find("Stove 1").GetComponent<Stove>();
 
 			if (!view.IsMine)
 			{
@@ -37,8 +40,34 @@ public class PlayerController : MonoBehaviour
 		if (view.IsMine)
         {
 			if(Input.GetMouseButtonDown(0) && playerHold.items.Count!=0){
-				RemoveFocus();
-				playerHold.dropItem();
+
+				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;				
+				//if stove in focus cooking
+				if (Physics.Raycast(ray, out hit, 100))
+				{
+					Interactable interactableStove = hit.collider.GetComponent<Interactable>();
+					var potentialStove = hit.collider.gameObject;
+					
+					if (interactableStove != null)
+					{						
+						bool isStove = stove.isStoveFunction(potentialStove);
+						if (isStove) {
+							SetFocus(interactableStove);
+							stove.Cook(playerHold.heldObj, playerHold);
+							RemoveFocus();
+						}
+						else {
+							RemoveFocus();
+							playerHold.dropItem();
+						}
+					}
+				}
+				else {
+					RemoveFocus();
+					playerHold.dropItem();
+				}
+
 			}
 			else if (Input.GetButtonDown("Fire1"))
 			{
@@ -55,9 +84,11 @@ public class PlayerController : MonoBehaviour
 					if (interactable != null)
 					{
 						SetFocus(interactable);
+						
+						bool isStove = stove.isStoveFunction(obj);
 						bool canPickUp = playerHold.canPickUp(obj);
-						if (canPickUp)
-							playerHold.pickUpItem();
+						if (isStove) stove.Cook();
+						else if (canPickUp) playerHold.pickUpItem();
 					}
 				}
 			}

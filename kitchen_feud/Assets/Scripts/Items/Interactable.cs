@@ -10,7 +10,7 @@ using Photon.Pun;
 
 public class Interactable : MonoBehaviour
 {
-
+	public bool isStove;
 	public float radius = 1.4f;              
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 

@@ -16,13 +16,17 @@ public class PlayerHolding : MonoBehaviour
 
     public bool canPickUp(GameObject obj){
         pickableItem PickableItem = obj.GetComponent<pickableItem>();
-        if(PickableItem.item.canPickUp){
+        if (PickableItem == null) {
+            //Debug.Log("null Pickableitem");
+            return false;
+        }
+        else if(PickableItem.item.canPickUp){
             item = PickableItem.item;
             clickedObj = obj;
             return true;
         } 
         else{
-            Debug.Log("cannot pickup item");
+            //Debug.Log("cannot pickup item");
             return false;
         }
     }
