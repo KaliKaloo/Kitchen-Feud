@@ -208,8 +208,8 @@ public class scoreController : MonoBehaviour
         score1Text.text = ConvertScoreToString(score1);
         score2Text.text = ConvertScoreToString(score2);
 
-        foodRating1.text = mushroomSoup1.GetCurrentScore().ToString();
-        foodRating2.text = mushroomSoup2.GetCurrentScore().ToString();
+        //foodRating1.text = mushroomSoup1.GetCurrentScore().ToString();
+        //foodRating2.text = mushroomSoup2.GetCurrentScore().ToString();
 
         // increment every second
         elapsed += Time.deltaTime;
