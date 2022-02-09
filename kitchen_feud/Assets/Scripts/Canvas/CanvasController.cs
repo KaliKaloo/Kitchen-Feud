@@ -42,6 +42,11 @@ public class CanvasController : MonoBehaviour
         justClicked.SetActive(false);
         orderMenu.SetActive(false);
         makeTicket.SetActive(true);
+
+        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
+
+        tray_Controller.resetTray(d_ticket.orderid);
     }
 
 
@@ -59,7 +64,7 @@ public class CanvasController : MonoBehaviour
             { 
                 ticket3.SetActive(true);
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                Ticket3.DisplayNewRandomOrder();
+                DisplayNewRandomOrder(Ticket3);
                 
             }
             
@@ -67,7 +72,7 @@ public class CanvasController : MonoBehaviour
             { 
                 ticket2.SetActive(true);
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-                Ticket2.DisplayNewRandomOrder();
+                DisplayNewRandomOrder(Ticket2);
             }
         }
 
@@ -75,9 +80,22 @@ public class CanvasController : MonoBehaviour
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
             ticket1.SetActive(true);
-            Ticket1.DisplayNewRandomOrder();
+            DisplayNewRandomOrder(Ticket1);
         }
 
        
     }
+
+     public void DisplayNewRandomOrder(DisplayTicket ticket)
+    {
+       Order o = Database.GetRandomOrder();
+       string orderID = o.orderID;
+       
+       TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+       tray_Controller.makeTray(orderID);
+       ticket.SetUI(o);
+
+    }
+ 
+
 }
