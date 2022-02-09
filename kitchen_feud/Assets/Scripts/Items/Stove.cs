@@ -34,6 +34,7 @@ public class Stove : Interactable
         //+possibly also on player side switching to the scene
         //cooking in the game, return a new object + score (delete the objects put in)
         Debug.Log("Cooking!");
+        EnterScene("stoveMinigame");
 	}
 
     public void Cook(GameObject heldObjArg, PlayerHolding playerHold) {

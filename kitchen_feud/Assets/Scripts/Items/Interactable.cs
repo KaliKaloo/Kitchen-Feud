@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 
 /*	
@@ -61,6 +62,10 @@ public class Interactable : MonoBehaviour
 
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(interactionTransform.position, radius);
+	}
+
+	public void EnterScene(string sceneName) {
+		SceneManager.LoadScene(sceneName);
 	}
 
 }
