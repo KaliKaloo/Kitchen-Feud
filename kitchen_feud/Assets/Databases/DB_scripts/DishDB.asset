@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: DishDB
   m_EditorClassIdentifier: 
   allDishes:
-  - {fileID: 11400000, guid: 3b2a98c0012de4e4792223afdee175b0, type: 2}
-  - {fileID: 11400000, guid: a18533cd21448664194292b5400d53a2, type: 2}
-  - {fileID: 11400000, guid: 10a32242a2df58f43a724bb808178902, type: 2}
+  - {fileID: 11400000, guid: c5d6c2eb89125b64f8e2ae753ecb2c13, type: 2}
+  - {fileID: 11400000, guid: d0c2151100cfd7144acf5dbe2582a9b6, type: 2}
+  - {fileID: 11400000, guid: 5aae169e82c010f4b8ce4655d91e25ed, type: 2}
+  - {fileID: 11400000, guid: a33b3d9ac18f9724482d4b1b927618e3, type: 2}
+  - {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
+  - {fileID: 11400000, guid: 5f3e64a12ab083946ad39bea94b2dcb4, type: 2}
+  - {fileID: 11400000, guid: 0fc96ab0824a7444d932df0b0fdba016, type: 2}
+  - {fileID: 11400000, guid: 14830925f81f13943b928fc5c939196b, type: 2}
+  - {fileID: 11400000, guid: e52fb280f1f0e374ba507be57a481957, type: 2}
