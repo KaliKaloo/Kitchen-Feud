@@ -29,18 +29,18 @@ public class PhotonPlayer : MonoBehaviour
         {
             if (myTeam == 1)
             {
-                int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                 if (PV.IsMine)
                 {
+                    int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
                 }
             }
             else
             {
-                int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                 if (PV.IsMine)
                 {
+                    int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
                 }

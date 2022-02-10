@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: Chips
+  m_EditorClassIdentifier: 
+  name: Chips
+  location: 0
+  Prefab: {fileID: 0}
+  Type: 1
+  canPickUp: 1
+  dishID: DI02
+  maxScore: 50
+  cookingTime: 10
+  toCook: Fryer
+  finalScore: 0
+  recipe:
+  - {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
