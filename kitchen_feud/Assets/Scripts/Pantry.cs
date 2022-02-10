@@ -7,12 +7,14 @@ public class Pantry : MonoBehaviour
     public SubroomObject container;
 
     public void OnTriggerEnter(Collider other){
-        var item = other.GetComponent<pickableItem>();
+        var pickable = other.GetComponent<pickableItem>();
 
-        if(item && item.item.location == Location.Pantry){
-            container.AddItem(item.item, 1);
-            Destroy(other.gameObject);
-            Debug.Log(item.item.name+" put back in pantry");
+        if(pickable){
+            if(pickable.item.location == Location.Pantry){
+                container.AddItem(pickable.item, 1);
+                Destroy(other.gameObject);
+                Debug.Log(pickable.item.name+" put back in pantry");
+            }
         }
     }
 

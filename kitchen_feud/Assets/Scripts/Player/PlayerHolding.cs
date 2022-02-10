@@ -6,11 +6,11 @@ using Photon.Pun;
 public class PlayerHolding : MonoBehaviour
 {
     public int holdingLimit = 1;
-    public List<IngredientSO> items = new List<IngredientSO>();
+    public List<BaseFood> items = new List<BaseFood>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    IngredientSO item;
+    BaseFood item;
 	PhotonView view;
 
     // void update(){
