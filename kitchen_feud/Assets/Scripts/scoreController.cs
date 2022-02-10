@@ -107,7 +107,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text timerText;
 
     // How long the game lasts in seconds
-    private int timer = 10;
+    private int timer = 100;
 
     private int score1 = 0;
     private int score2 = 0;
