@@ -22,6 +22,7 @@ public class PlayerHolding : MonoBehaviour
     //     }
     // }
 
+
     public bool canPickUp(GameObject obj){
         pickableItem PickableItem = obj.GetComponent<pickableItem>();
         if(PickableItem.item.canPickUp){
@@ -52,6 +53,7 @@ public class PlayerHolding : MonoBehaviour
             heldObj.transform.parent = slot;
             heldObj.transform.localPosition = Vector3.zero;
             heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+
             objRig.isKinematic = true;
             objcol.isTrigger = true;
         }
