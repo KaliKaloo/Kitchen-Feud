@@ -68,4 +68,9 @@ public class Interactable : MonoBehaviour
 		SceneManager.LoadScene(sceneName);
 	}
 
+	//allow only one player at a time to interact with the object
+	public void LockInteraction() {
+
+	}
+
 }

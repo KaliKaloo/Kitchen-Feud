@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 				{
 					Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
-					
+					//instantiate the particular stove here instead of at the top
 					if (interactable != null)
 					{
 						SetFocus(interactable);
