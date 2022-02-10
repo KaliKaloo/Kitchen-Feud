@@ -16,6 +16,16 @@ public class ParseScore
         score2 = newScore2;
     }
 
+    public void AddScore1(int newScore1)
+    {
+        score1 += newScore1;
+    }
+
+    public void AddScore2(int newScore2)
+    {
+        score2 += newScore2;
+    }
+
     public int GetScore1()
     {
         return score1;
@@ -70,6 +80,9 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
+        score1 = endScores.GetScore1();
+        score2 = endScores.GetScore2();
+
         score1Text.text = ConvertScoreToString(score1);
         score2Text.text = ConvertScoreToString(score2);
 
