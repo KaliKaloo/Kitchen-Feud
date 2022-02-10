@@ -101,8 +101,8 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text score1Text;
     [SerializeField] private Text score2Text;
 
-    [SerializeField] private Text foodRating1;
-    [SerializeField] private Text foodRating2;
+    // [SerializeField] private Text foodRating1;
+    // [SerializeField] private Text foodRating2;
 
     [SerializeField] private Text timerText;
 
@@ -207,7 +207,6 @@ public class scoreController : MonoBehaviour
         // update scores every frame
         score1Text.text = ConvertScoreToString(score1);
         score2Text.text = ConvertScoreToString(score2);
-
         //foodRating1.text = mushroomSoup1.GetCurrentScore().ToString();
         //foodRating2.text = mushroomSoup2.GetCurrentScore().ToString();
 
