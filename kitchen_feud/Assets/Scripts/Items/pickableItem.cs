@@ -12,6 +12,4 @@ public class pickableItem : Interactable
         base.Interact();
        
 	}
-
-   
 }

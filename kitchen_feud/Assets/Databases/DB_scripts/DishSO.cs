@@ -7,11 +7,11 @@ public class DishSO : BaseFood
 {
     //dishID is made by combining the indgredientIDs of ingredients take make the dish
     public string dishID;
-    public int maxScore;
+    public string toCook;
     public int cookingTime;
 
-    public string toCook;
-    public int finalScore;
+    // public int maxScore;
+    // public int finalScore;
     public List<IngredientSO> recipe = new List<IngredientSO>();
 
     // public GameObject ticket;

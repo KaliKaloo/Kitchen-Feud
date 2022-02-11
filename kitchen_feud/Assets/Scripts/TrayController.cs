@@ -38,12 +38,13 @@ public class TrayController : MonoBehaviour
     }
 
     // gets the full max score of an order
-    private int GetDishScore(List<DishSO> orderDishes)
+    private int GetDishScore(List<BaseFood> trayDishes)
     {
         int total = 0;
 
-        foreach(DishSO dish in orderDishes)
+        foreach(BaseFood dish in trayDishes)
         {
+            // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
             total += dish.maxScore;
         }
 
@@ -54,26 +55,26 @@ public class TrayController : MonoBehaviour
     private void CompareOrder(List<BaseFood> tray, string orderid)
     {
         Order o = Database.GetOrderByID(orderid);
-
-
         // change lists to hash sets so order doesn't matter
         // RIGHT NOW TRAY AND DISH ARE DIFFERENT TYPES
         // CANNOT COMPARE
         HashSet<BaseFood> trayHash = new HashSet<BaseFood>(tray);
-        HashSet<DishSO> orderHash = new HashSet<DishSO>(o.dishes);
+        HashSet<BaseFood> orderHash = new HashSet<BaseFood>(o.dishes);
 
         // Compares two dishes without order mattering
-        if (orderHash.SetEquals(orderHash)) {
+        
+        if (orderHash.SetEquals(trayHash)) {
+
             // IF PLAYER PART OF TEAM 1
             if (true)
             {
-                scores.AddScore1(GetDishScore(o.dishes));
+                scores.AddScore1(GetDishScore(tray));
             }
             // IF PLAYER PART OF TEAM 2
-            else if (false)
-            {
-                scores.AddScore2(GetDishScore(o.dishes));
-            }
+            // else if (false)
+            // {
+            //     scores.AddScore2(GetDishScore(o.dishes));
+            // }
         } 
     }
 
