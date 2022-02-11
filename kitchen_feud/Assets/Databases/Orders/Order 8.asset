@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73080a40642afa54ca39357ccb82ecd3, type: 3}
-  m_Name: Order 1
+  m_Name: Order 8
   m_EditorClassIdentifier: 
-  orderID: OR01
+  orderID: OR08
   orderNumber: 0
   dishes:
+  - {fileID: 11400000, guid: 5aae169e82c010f4b8ce4655d91e25ed, type: 2}
   - {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
+  - {fileID: 11400000, guid: 14830925f81f13943b928fc5c939196b, type: 2}
