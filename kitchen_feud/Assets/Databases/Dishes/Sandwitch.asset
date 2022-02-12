@@ -17,12 +17,12 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
-  dishID: DI030910
+  dishID: DI3910
   maxScore: 50
   cookingTime: 10
   toCook: Counter
   finalScore: 0
   recipe:
   - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
-  - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}
   - {fileID: 11400000, guid: 991046617da6aa74fb2f34ec2761899a, type: 2}
+  - {fileID: 11400000, guid: 7635ec658e4ae994a82d5c5779bf22f8, type: 2}
