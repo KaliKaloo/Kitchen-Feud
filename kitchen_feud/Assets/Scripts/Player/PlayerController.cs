@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
 		// If we press left mouse
 		if (view.IsMine)
         {
+
 			if(Input.GetMouseButtonDown(0) && playerHold.items.Count!=0){
 
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -90,7 +91,10 @@ public class PlayerController : MonoBehaviour
 						if (isStove) stove.Cook();
 						else if (canPickUp) playerHold.pickUpItem();
 					}
+
+					
 				}
+				
 			}
 		
             if (Input.GetKey(KeyCode.A))

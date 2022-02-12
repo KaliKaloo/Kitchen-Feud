@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/stoveMinigame.unity
     guid: 1d58f2c0118544e2bb2ca450ab0f74a1
+  - enabled: 1
+    path: Assets/Scenes/gameOver.unity
+    guid: 7443b865e1187a842a4a04533276e0d2
   m_configObjects: {}

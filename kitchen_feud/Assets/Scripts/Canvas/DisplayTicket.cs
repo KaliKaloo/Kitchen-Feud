@@ -10,17 +10,20 @@ public class DisplayTicket : MonoBehaviour
     public Text orderSideText;
     public Text orderDrinkText;
 
-    public void DisplayNewRandomOrder()
-    {
-       SetUI(Database.GetRandomOrder());
-    }
+    public string orderid;
 
+   
     //method to update the UI
     public void SetUI(Order o)
     {
         orderNumberText.text = o.orderNumber.ToString();
-        orderMainText.text = o.orderMain;
-        orderSideText.text = o.orderSide;
-        orderDrinkText.text = o.orderDrink;
+        int size = o.dishes.Count;
+        orderMainText.text = o.dishes[0].name;
+        if(size > 1 ) orderSideText.text = o.dishes[1].name;
+        else if(size == 3 ) orderDrinkText.text = o.dishes[2].name;
+
+        orderid = o.orderID;
+
+
     }
 }

@@ -9,7 +9,7 @@ public class Stove : Interactable
     public Stove stove;
     GameObject clickedObj;
     //PlayerHolding playerHold;
-    Item item;
+    //Item item;
     public GameObject inputObj;
     public List<pickableItem> itemsOnTheStove = new List<pickableItem>();
 
