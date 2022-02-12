@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
  	PlayerHolding playerHold;
 	Stove stove;
 
+	public static bool playerAlreadyExists;
+
 	PhotonView view;
 
 	// Get references
@@ -29,7 +31,15 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
-			DontDestroyOnLoad(gameObject);
+			if (!playerAlreadyExists) {
+				playerAlreadyExists = true;
+				DontDestroyOnLoad(gameObject);
+
+			}
+			else {
+				Destroy(gameObject);
+			}
+			
 		}
 	}
 
@@ -148,6 +158,10 @@ public class PlayerController : MonoBehaviour
 
 		focus = null;
 	}
+
+	/*public bool PlayerAlreadyExists() {
+
+	}*/
 
 	
 }
