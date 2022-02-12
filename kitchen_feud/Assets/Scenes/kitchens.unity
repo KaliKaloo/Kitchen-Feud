@@ -5618,8 +5618,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824f71f6caa084a48a90f45888e231d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 152719922}
+  canPickUp: 1
   item: {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
 --- !u!65 &152719924
 BoxCollider:
@@ -6166,19 +6168,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 211369744}
-  - component: {fileID: 211369748}
-  - component: {fileID: 211369747}
-  - component: {fileID: 211369746}
-  - component: {fileID: 211369745}
-  - component: {fileID: 211369749}
-  m_Layer: 3
-  m_Name: Stove 1
   - component: {fileID: 186777589}
   - component: {fileID: 186777591}
   - component: {fileID: 186777590}
-  m_Layer: 5
-  m_Name: Timer
+  m_Layer: 3
+  m_Name: Stove 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6334,6 +6328,7 @@ GameObject:
   - component: {fileID: 211369747}
   - component: {fileID: 211369746}
   - component: {fileID: 211369745}
+  - component: {fileID: 211369749}
   m_Layer: 3
   m_Name: Stove 1
   m_TagString: Untagged
@@ -6948,9 +6943,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 211369744}
   stove: {fileID: 211369749}
+  itemsOnTheStove: []
 --- !u!1 &232374659
 GameObject:
   m_ObjectHideFlags: 0
@@ -17014,7 +17011,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98738
+  m_Name: pb_Mesh33838
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20018,9 +20015,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 732456129}
-  stove: {fileID: 0}
+  stove: {fileID: 732456134}
+  itemsOnTheStove: []
 --- !u!43 &733326745
 Mesh:
   m_ObjectHideFlags: 0
@@ -20233,8 +20232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824f71f6caa084a48a90f45888e231d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 765190019}
+  canPickUp: 1
   item: {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
 --- !u!65 &765190021
 BoxCollider:
@@ -36932,8 +36933,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824f71f6caa084a48a90f45888e231d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 1541998677}
+  canPickUp: 1
   item: {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
 --- !u!65 &1541998679
 BoxCollider:
@@ -40690,9 +40693,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStove: 0
   radius: 1.4
   interactionTransform: {fileID: 1662441420}
-  stove: {fileID: 0}
+  stove: {fileID: 1662441425}
+  itemsOnTheStove: []
 --- !u!1 &1666933853
 GameObject:
   m_ObjectHideFlags: 0
@@ -43469,7 +43474,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21478
+  m_Name: pb_Mesh33216
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
