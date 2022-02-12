@@ -23,7 +23,7 @@ public class Stove : Interactable
         //lock the stove! One player interacting with it at a time
         //lock player movement when in minigame
         //after finishing game, instantiate new gameobject dish
-
+        checkForDish();
         if(foundMatchingDish){
             // display the type of dish found
             // display a "cook <dish name>" ui button 
@@ -40,7 +40,6 @@ public class Stove : Interactable
         itemsOnTheStove.Add(heldObjArgItem.item);
 		playerHold.dropItem(); 
         Destroy(heldObjArg);
-        checkForDish();
     }
 
     public void checkForDish(){
