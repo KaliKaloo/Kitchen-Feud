@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 					// Drop only on counters, stove etcc
 					else {
         				PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-						playerHold.dropItem();
+						if(playerHold.items.Count !=0 ) playerHold.dropItem();
 						RemoveFocus();
 					}
 					// -------------------------------------------------------------------------
