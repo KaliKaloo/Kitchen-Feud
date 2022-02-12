@@ -15,6 +15,6 @@ public Button yourButton;
 
 	void TaskOnClick(){
 		Debug.Log ("You have clicked the button!");
-        SceneManager.LoadScene("kitchens");
+        SceneManager.LoadScene("kitchens_miniGame");
 	}
 }
