@@ -7,22 +7,17 @@ public class PlayerController : MonoBehaviour
 {
  	public Rigidbody player;
     public float m_speed, rotatespeed;
-	public Interactable focus;  // Our current focus: Item, Enemy etc.
-	[SerializeField] private Camera cam;         // Reference to our camera
+	public Interactable focus; 
+	[SerializeField] private Camera cam; 
  	PlayerHolding playerHold;
-
 	PhotonView view;
 
 	void Start()
 	{
         if(PhotonNetwork.IsConnected) {
-			// cam = Camera.main;
 			view = GetComponent<PhotonView>();
 			player = GetComponent<Rigidbody>();
 			playerHold = GetComponent<PlayerHolding>();
-			//not sure if correct, will work only for one stove so prob not
-			// stove = GameObject.Find("Stove 1").GetComponent<Stove>();
-
 			if (!view.IsMine)
 			{
 				cam.enabled = false;
