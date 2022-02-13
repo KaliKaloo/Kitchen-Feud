@@ -111,5 +111,16 @@ public class Database : MonoBehaviour
 
     }
 
+    public static DishSO GetDishByID(string ID)
+    {
+        //return instance.orders.allOrders.FirstOrDefault(i => i.orderID == ID);
+        foreach (DishSO dish in dishInstance.dishes.allDishes)
+        {
+            if (dish.dishID == ID)
+                return dish;
+        }
+        return null;
+    }
+
 
 }

@@ -13,6 +13,8 @@ public class Stove : Interactable
     public GameObject inputObj;
     public List<pickableItem> itemsOnTheStove = new List<pickableItem>();
 
+    public string workingID;
+
 //questionable
     void Start()
 	{
@@ -38,13 +40,30 @@ public class Stove : Interactable
 	}
 
     public void Cook(GameObject heldObjArg, PlayerHolding playerHold) {
-        //null reference
+
         Debug.Log(heldObjArg + "is on the stove"); 
         pickableItem heldObjArgItem = heldObjArg.GetComponent<pickableItem>();
         itemsOnTheStove.Add(heldObjArgItem);
+        //get ingredient id
+        //IngredientSO ingredient = heldObjArg.GetComponent<IngredientSO>();
+        IngredientSO ingredient = heldObjArg;
+        if (ingredient == null) {
+            Debug.Log("it's not an ingredient!");
+        }
+        else {
+            if (workingID != null) {
+                Debug.Log(Database.GetDishByID("DI" + workingID));
+            }
+            else {
+                workingID = workingID + ingredient.ingredientID;
+                Debug.Log(Database.GetDishByID("DI" + workingID));
+            }  
+        }
+
         Debug.Log(itemsOnTheStove);
         playerHold.dropItem();
         Destroy(heldObjArg);
+
     }
 
     public bool isStoveFunction(GameObject obj) {
