@@ -28,6 +28,9 @@ public class Stove : Interactable
             // display the type of dish found
             // display a "cook <dish name>" ui button 
             Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
+            //meant to allow CookingBar to use foundDish in the StoveMinigame scene
+            //idk if it's gonna work
+            DontDestroyOnLoad(foundDish);
             EnterScene("stoveMinigame");
         }
         else{
