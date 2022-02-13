@@ -11,12 +11,11 @@ using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
-	public bool isStove;
-	public float radius = 1.4f;              
+             
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
-	bool isFocus = false;  
-	Transform player;      
+	public bool isFocus = false;  
+	public Transform player;      
 
 	bool hasInteracted = false; 
 
@@ -30,13 +29,8 @@ public class Interactable : MonoBehaviour
 	{
 		if (isFocus && !hasInteracted)
 		{
-			// If we are close enough
-			float distance = Vector3.Distance(player.position, interactionTransform.position);
-			if (distance <= radius)
-			{
-				Interact();
-				hasInteracted = true;
-			}
+			Interact();
+			hasInteracted = true;
 		}
 	}
 
@@ -52,16 +46,6 @@ public class Interactable : MonoBehaviour
 		isFocus = false;
 		player = null;
 		hasInteracted = false;
-	}
-
-	// Draw our radius in the editor
-	void OnDrawGizmosSelected()
-	{
-		if (interactionTransform == null)
-			interactionTransform = transform;
-
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawWireSphere(interactionTransform.position, radius);
 	}
 
 	public void EnterScene(string sceneName) {

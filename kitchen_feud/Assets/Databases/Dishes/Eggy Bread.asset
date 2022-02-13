@@ -17,7 +17,7 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
-  dishID: DI0306
+  dishID: DI36
   maxScore: 100
   cookingTime: 10
   toCook: Stove

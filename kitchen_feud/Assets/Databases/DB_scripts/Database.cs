@@ -9,8 +9,8 @@ public class Database : MonoBehaviour
     public DishDatabase dishes;
     public IngredientDatabase ingredients;
 
-    public IngredientSO in1;
-    public IngredientSO in2;
+    // public IngredientSO in1;
+    // public IngredientSO in2;
 
     //make sure only one instance of our database is active
     private static Database orderInstance;
@@ -58,23 +58,31 @@ public class Database : MonoBehaviour
     //just to see if it works
     void Start()
     {
-        GetDishFromIngredients(in1, in2);
+        // GetDishFromIngredients(in1, in2);
     }
 
-    //given 2 ingredientSO (or their IDs?) return the dish
-    public static DishSO GetDishFromIngredients(IngredientSO ID_1, IngredientSO ID_2)
+    public static DishSO GetDishFromIngredients(List<IngredientSO> ingredients)
     {
-        string id_1 = ID_1.ingredientID;
-        string id_2 = ID_2.ingredientID;
+        string madeDishID = "DI";
+        List<string> ingredientIDs_string = new List<string>();
+        foreach( IngredientSO i in ingredients){
+            ingredientIDs_string.Add(i.ingredientID);
+        }
+        List<int> ingredientIDs_int = ingredientIDs_string.ConvertAll(int.Parse);
+        ingredientIDs_int.Sort();
 
-        string madeDishID = "DI" + id_1 + id_2;
-        
+        foreach( int i in ingredientIDs_int){
+            madeDishID = madeDishID + i.ToString(); 
+        }
+
         foreach (DishSO madeDish in dishInstance.dishes.allDishes)
         {
             if (madeDish.dishID == madeDishID)
             {
-                Debug.Log(madeDish.name);
                 return madeDish;
+            }
+            else{
+                continue;
             }
         }
         return null;

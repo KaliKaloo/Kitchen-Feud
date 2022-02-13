@@ -152,7 +152,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         //PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("kitchens");
+        PhotonNetwork.LoadLevel("kitchens_miniGame");
         // PhotonNetwork.LoadLevel("kitchens (with score)");
     }
 

@@ -10,44 +10,13 @@ public class PlayerHolding : MonoBehaviour
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    BaseFood item;
+    // BaseFood item;
 	PhotonView view;
 
-    // void update(){
-    //     if (clickedObj == null){
-    //         clickedObj = null;
-    //         heldObj = null;
-    //         item=null;
-    //         items.Clear();
-    //     }
-    // }
-
-
-    public bool canPickUp(GameObject obj){
-        pickableItem PickableItem = obj.GetComponent<pickableItem>();
-        if (PickableItem == null) {
-            //Debug.Log("null Pickableitem");
-            return false;
-        }
-        else if(PickableItem.item.canPickUp){
-            item = PickableItem.item;
-            clickedObj = obj;
-            return true;
-        } 
-        else{
-            //Debug.Log("cannot pickup item");
-            return false;
-        }
-    }
-
-    public void pickUpItem(){
-        
-        // if(items.Count >= holdingLimit){
-        //     Debug.Log("You are already holding an item. Please drop it first.");
-        //     return;
-        // }
+    public void pickUpItem(GameObject obj, BaseFood item){
+ 
         items.Add(item);
-        heldObj = clickedObj;
+        heldObj = obj;
         // move object to slot
 		Debug.Log("Pick up item: "+ items[0].name);
         if(heldObj.GetComponent<Rigidbody>()){
