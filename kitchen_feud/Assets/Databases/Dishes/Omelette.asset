@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Omelette
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6998398168430758222, guid: 87ffbcad9ceb24eaa9b0e7f636887ca1, type: 3}
   Type: 0
   canPickUp: 1
   dishID: DI67

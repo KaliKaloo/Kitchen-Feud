@@ -7154,6 +7154,8 @@ MonoBehaviour:
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1428590813}
   minigameCanvas: {fileID: 1051272516}
+  cookedDish: {fileID: 0}
+  slider: {fileID: 0}
   cookingBar: {fileID: 1442470950}
 --- !u!1 &219150144
 GameObject:
@@ -13384,7 +13386,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37384
+  m_Name: pb_Mesh109566
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20345,7 +20347,9 @@ MonoBehaviour:
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1428590813}
   minigameCanvas: {fileID: 1051272516}
-  cookingBar: {fileID: 0}
+  cookedDish: {fileID: 0}
+  slider: {fileID: 1442470951}
+  cookingBar: {fileID: 1442470950}
 --- !u!43 &733326745
 Mesh:
   m_ObjectHideFlags: 0
@@ -38763,7 +38767,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh97060
+  m_Name: pb_Mesh110582
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -42224,6 +42228,8 @@ MonoBehaviour:
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1428590813}
   minigameCanvas: {fileID: 1051272516}
+  cookedDish: {fileID: 0}
+  slider: {fileID: 0}
   cookingBar: {fileID: 0}
 --- !u!1 &1666933853
 GameObject:
@@ -45073,7 +45079,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh104378
+  m_Name: pb_Mesh125006
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

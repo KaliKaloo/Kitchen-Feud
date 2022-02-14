@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sandwich
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5786816335962581795, guid: 904ba837f535e4597a0d795a23b65604, type: 3}
   Type: 1
   canPickUp: 1
   dishID: DI3910

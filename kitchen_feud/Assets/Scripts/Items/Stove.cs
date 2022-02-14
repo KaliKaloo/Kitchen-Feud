@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; 
+using UnityEngine.UI;
 
 public class Stove : Interactable
 {
@@ -11,10 +12,15 @@ public class Stove : Interactable
     bool foundMatchingDish = false;
     public DishSO foundDish;
     public Dish dishOfFoundDish;
+
+    //the canvases shouldn't be set through inspector, we should get them in the script
+    //especially the minigameCanvas
     public GameObject canvas;
     public GameObject minigameCanvas;
 
 
+    public GameObject cookedDish;
+    public Slider slider;
     public CookingBar cookingBar;
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
@@ -39,10 +45,15 @@ public class Stove : Interactable
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
 
-            //the problem
-            //foundDish.finalScore = (int) cookingBar.cookedLevel;
-            //dishOfFoundDish = foundDish.Prefab.GetComponent<Dish>();
-            //dishOfFoundDish.points = 
+            //this shouldn't work but it does lmao
+            Vector3 playerPosition = player.transform.position;
+            Vector3 offset = new Vector3(1,0,1);
+
+            //create the cooked dish and spawn in the player's hand
+            cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
+            dishOfFoundDish = cookedDish.GetComponent<Dish>();
+            cookingBar = slider.GetComponent<CookingBar>();
+            dishOfFoundDish.points = cookingBar.cookedLevel;
 
         }
         else{

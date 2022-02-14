@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Salad
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1622114925428501291, guid: d48cdf38c00a34023a5486c3222ea179, type: 3}
   Type: 1
   canPickUp: 1
   dishID: DI89
