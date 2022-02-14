@@ -62,7 +62,7 @@ public class TrayController : MonoBehaviour
         HashSet<BaseFood> orderHash = new HashSet<BaseFood>(o.dishes);
 
         // Compares two dishes without order mattering
-        
+
         if (orderHash.SetEquals(trayHash)) {
 
             // IF PLAYER PART OF TEAM 1
@@ -75,7 +75,7 @@ public class TrayController : MonoBehaviour
             // {
             //     scores.AddScore2(GetDishScore(o.dishes));
             // }
-        } 
+        }
     }
 
     private void OnApplicationQuit() {

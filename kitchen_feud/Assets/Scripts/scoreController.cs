@@ -5,6 +5,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public class GlobalTimer {
+    private static int timer = 0;
+    private static bool started = false;
+
+    // set the timer amount here 
+    public void InitializeTimer() {
+
+        // how long the timer will last in seconds
+        int seconds = 10;
+
+        if (!started) {
+            
+            timer = seconds;
+            started = true;
+        }
+    }
+
+    public void RestartTimer() {
+        started = false;
+    }
+
+    // get current time from timer
+    public int GetTime() {
+        return timer;
+    }
+
+    // decrement timer
+    public void Decrement() {
+        timer -= 1;
+    }
+}
+
 public class ParseScore
 {
     private static int score1 = 0;
@@ -44,9 +76,6 @@ public class scoreController : MonoBehaviour
 
     [SerializeField] private Text timerText;
 
-    // How long the game lasts in seconds
-    private int timer = 100;
-
     private int score1 = 0;
     private int score2 = 0;
     float elapsed = 0f;
@@ -54,13 +83,19 @@ public class scoreController : MonoBehaviour
     // updates end scores to compare in game over scene
     private static ParseScore endScores = new ParseScore();
 
+    // global timer
+    private static GlobalTimer timer = new GlobalTimer();
+
     // Start is called before the first frame update
     void Start()
     {
         // start scores at 0
         score1Text.text = ConvertScoreToString(score1);
         score2Text.text = ConvertScoreToString(score2);
-        timerText.text = ConvertSecondToMinutes(timer);
+
+        // start timer if not started yet
+        timer.InitializeTimer();
+        timerText.text = ConvertSecondToMinutes(timer.GetTime());
     }
 
     // Converts an integer to a string with proper comma notation
@@ -98,17 +133,20 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
-        if (timer != 0)
+        if (timer.GetTime() > 0)
         {
             // updates timer and text in timer
-            timer = timer - 1;
-            timerText.text = ConvertSecondToMinutes(timer);
+            timer.Decrement();
+            timerText.text = ConvertSecondToMinutes(timer.GetTime());
         }
         else
         {
             // load game over screen and send final scores
             endScores.UpdateScores(score1, score2);
+
+            timer.RestartTimer();
             SceneManager.LoadScene("gameOver");
+
         }
     }
 }
