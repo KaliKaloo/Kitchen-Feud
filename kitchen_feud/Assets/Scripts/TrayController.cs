@@ -52,15 +52,20 @@ public class TrayController : MonoBehaviour
         return total;
     }
 
-    private int CompareIngredients(List<BaseFood> tray, List<BaseFood> orderDish)
+
+    // returns -points based on how many raw ingredients on tray
+    private int IngredientDeduction(List<BaseFood> tray)
     {
-        List<BaseFood> orderIngredients;
-        foreach (BaseFood food in orderDish)
+        int total = 0;
+
+        foreach (BaseFood food in tray)
         {
-            // NEED ACCESS TO RECIPE
-            //food.item
+            if (food.Type == ItemType.Ingredient)
+            {
+                total += food.maxScore;
+            }
         }
-        return 0;
+        return total;
     }
 
     // compares a tray to an orderid
@@ -75,15 +80,8 @@ public class TrayController : MonoBehaviour
 
             currentScore += GetDishScore(tray);
         }
-        // if contains 100% of ingredients only then multiply dish score by 0.25
-        else if (CompareIngredients(tray, o.dishes) == 2)
-        {
-            currentScore += (int)(GetDishScore(tray) * 0.25);
-        } // if less than 100% of ingredients only then multiply dish score by 0.1
-        else if (CompareIngredients(tray, o.dishes) == 1)
-        {
-            currentScore += (int)(GetDishScore(tray) * 0.1);
-        }
+        // deduct scores if they contain raw ingredients
+        currentScore += IngredientDeduction(tray);
 
         // IF PLAYER PART OF TEAM 1
         if (true)
