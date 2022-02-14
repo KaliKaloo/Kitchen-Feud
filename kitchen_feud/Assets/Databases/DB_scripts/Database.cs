@@ -119,11 +119,6 @@ public class Database : MonoBehaviour
 
     }
 
-    public static Order GetMushroomSoup()
-    {
-        return orderInstance.orders.allOrders[0];
-    }
-
     public static DishSO GetDishByID(string ID)
     {
         //return instance.orders.allOrders.FirstOrDefault(i => i.orderID == ID);

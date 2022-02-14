@@ -93,8 +93,8 @@ public class CanvasController : MonoBehaviour
         string orderID = o.orderID;
 
         // TEST :: for testing always generate mushroom soup
-        //Order o = Database.GetMushroomSoup();
-        //string orderID = o.orderID;
+        // Order o = Database.GetMushroomSoup();
+        // string orderID = o.orderID;
        
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);
