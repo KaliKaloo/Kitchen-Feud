@@ -9,7 +9,13 @@ public class Stove : Interactable
     public GameObject inputObj;
     public List<IngredientSO> itemsOnTheStove = new List<IngredientSO>();
     bool foundMatchingDish = false;
-    DishSO foundDish;
+    public DishSO foundDish;
+    public Dish dishOfFoundDish;
+    public GameObject canvas;
+    public GameObject minigameCanvas;
+
+
+    public CookingBar cookingBar;
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         if(playerHold.items.Count!=0){
@@ -28,10 +34,16 @@ public class Stove : Interactable
             // display the type of dish found
             // display a "cook <dish name>" ui button 
             Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
-            //meant to allow CookingBar to use foundDish in the StoveMinigame scene
-            //idk if it's gonna work
-            DontDestroyOnLoad(foundDish);
-            EnterScene("stoveMinigame");
+
+            //EnterScene("stoveMinigame");
+            canvas.gameObject.SetActive(false);
+            minigameCanvas.gameObject.SetActive(true);
+
+            //the problem
+            //foundDish.finalScore = (int) cookingBar.cookedLevel;
+            //dishOfFoundDish = foundDish.Prefab.GetComponent<Dish>();
+            //dishOfFoundDish.points = 
+
         }
         else{
             Debug.Log("Ingredients given do not make a dish");

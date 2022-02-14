@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
-public Button yourButton;
+	public Button yourButton;
+	//to change, access canvas from stove
+	public GameObject canvas;
+    public GameObject minigameCanvas;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -15,6 +18,8 @@ public Button yourButton;
 
 	void TaskOnClick(){
 		Debug.Log ("You have clicked the button!");
-        SceneManager.LoadScene("kitchens_miniGame");
+        //SceneManager.LoadScene("kitchens_miniGame");
+		canvas.gameObject.SetActive(true);
+        minigameCanvas.gameObject.SetActive(false);
 	}
 }

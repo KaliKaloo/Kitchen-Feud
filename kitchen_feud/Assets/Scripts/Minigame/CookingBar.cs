@@ -9,6 +9,7 @@ public class CookingBar : MonoBehaviour
     public float step;
     private bool keyHeld;
     private bool done;
+    public float cookedLevel;
 
     //public DishSO foundDish;
 
@@ -23,7 +24,6 @@ public class CookingBar : MonoBehaviour
         done = false;
     }
 
-    //how do we setCookedLevel?
     //isFoundDish carried across scenes?
     void Update() {
         if (Input.GetKey(KeyCode.X) && done == false) {
@@ -31,14 +31,14 @@ public class CookingBar : MonoBehaviour
             keyHeld = true;
         }
         else if(keyHeld == true && !Input.GetKey(KeyCode.X) && done == false) {
-            //SetCookedLevel(slider.value);
-            Debug.Log(100 - abs(slider.value));
+            SetCookedLevel(slider.value);
+            Debug.Log(100f - abs(slider.value));
             done = true;
             
         }
     }
-    public void SetCookedLevel(int value)
+    public void SetCookedLevel(float value)
     {
-        //foundDish.finalScore = 100 - abs(slider.value);
+        cookedLevel = 100f - abs(slider.value);
     }
 }

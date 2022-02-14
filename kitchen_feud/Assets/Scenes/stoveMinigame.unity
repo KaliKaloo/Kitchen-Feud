@@ -952,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1404669827}
   step: 1
+  cookedLevel: 0
 --- !u!114 &1404669827
 MonoBehaviour:
   m_ObjectHideFlags: 0
