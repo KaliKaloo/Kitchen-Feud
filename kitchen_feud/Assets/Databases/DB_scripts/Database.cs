@@ -111,5 +111,10 @@ public class Database : MonoBehaviour
 
     }
 
+    public static Order GetMushroomSoup()
+    {
+        return orderInstance.orders.allOrders[0];
+    }
+
 
 }

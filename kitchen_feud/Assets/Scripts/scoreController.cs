@@ -4,21 +4,27 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 public class GlobalTimer {
     private static int timer = 0;
     private static bool started = false;
 
     // set the timer amount here 
     public void InitializeTimer() {
+        int seconds;
+        if(PhotonNetwork.IsMasterClient){
 
         // how long the timer will last in seconds
-        int seconds = 100;
+        seconds = 100;
 
-        if (!started) {
+       // if (!started) {
             
             timer = seconds;
-            started = true;
+           // started = true;
+       // }
+        }
+        else{
+            //timer = seconds;
         }
     }
 
@@ -133,6 +139,7 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
+        if(PhotonNetwork.IsMasterClient){
         if (timer.GetTime() > 0)
         {
             // updates timer and text in timer
@@ -148,5 +155,6 @@ public class scoreController : MonoBehaviour
             SceneManager.LoadScene("gameOver");
 
         }
+    }
     }
 }

@@ -58,12 +58,16 @@ public class TrayController : MonoBehaviour
         // change lists to hash sets so order doesn't matter
         // RIGHT NOW TRAY AND DISH ARE DIFFERENT TYPES
         // CANNOT COMPARE
-        HashSet<BaseFood> trayHash = new HashSet<BaseFood>(tray);
-        HashSet<BaseFood> orderHash = new HashSet<BaseFood>(o.dishes);
+        List<BaseFood> trayList = new List<BaseFood>(tray);
+        List<BaseFood> orderList = new List<BaseFood>(o.dishes);
+        trayList.Sort();
+        orderList.Sort();
+        print(trayList);
+        print(orderList);
 
         // Compares two dishes without order mattering
 
-        if (orderHash.SetEquals(trayHash)) {
+        if (orderList.Equals(trayList)) {
 
             // IF PLAYER PART OF TEAM 1
             if (true)
@@ -71,10 +75,10 @@ public class TrayController : MonoBehaviour
                 scores.AddScore1(GetDishScore(tray));
             }
             // IF PLAYER PART OF TEAM 2
-            else if (false)
-            {
-                scores.AddScore2(GetDishScore(o.dishes));
-            }
+            //else if (false)
+            //{
+            //    scores.AddScore2(GetDishScore(o.dishes));
+            //}
         }
     }
 
