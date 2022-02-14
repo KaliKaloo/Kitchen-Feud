@@ -13,7 +13,7 @@ public class GlobalTimer {
     public void InitializeTimer() {
 
         // how long the timer will last in seconds
-        int seconds = 10;
+        int seconds = 100;
 
         if (!started) {
             

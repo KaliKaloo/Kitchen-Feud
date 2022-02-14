@@ -71,10 +71,10 @@ public class TrayController : MonoBehaviour
                 scores.AddScore1(GetDishScore(tray));
             }
             // IF PLAYER PART OF TEAM 2
-            // else if (false)
-            // {
-            //     scores.AddScore2(GetDishScore(o.dishes));
-            // }
+            else if (false)
+            {
+                scores.AddScore2(GetDishScore(o.dishes));
+            }
         }
     }
 
