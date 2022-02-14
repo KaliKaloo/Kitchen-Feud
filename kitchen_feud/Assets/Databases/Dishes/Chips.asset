@@ -17,7 +17,7 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
-  dishID: DI02
+  dishID: DI2
   maxScore: 50
   cookingTime: 10
   toCook: Fryer

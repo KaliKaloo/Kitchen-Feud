@@ -442,7 +442,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh49248
+  m_Name: pb_Mesh39924
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5655,7 +5655,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48962
+  m_Name: pb_Mesh39638
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5824,8 +5824,8 @@ GameObject:
   - component: {fileID: 186777589}
   - component: {fileID: 186777591}
   - component: {fileID: 186777590}
-  m_Layer: 3
-  m_Name: Stove 1
+  m_Layer: 5
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5981,7 +5981,6 @@ GameObject:
   - component: {fileID: 211369747}
   - component: {fileID: 211369746}
   - component: {fileID: 211369745}
-  - component: {fileID: 211369749}
   m_Layer: 3
   m_Name: Stove 1
   m_TagString: Untagged
@@ -6584,27 +6583,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &211369749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211369743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 211369744}
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!1 &232374659
 GameObject:
   m_ObjectHideFlags: 0
@@ -12630,7 +12608,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh49402
+  m_Name: pb_Mesh40078
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16218,8 +16196,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577034016}
-  - component: {fileID: 577034018}
-  - component: {fileID: 577034017}
   m_Layer: 0
   m_Name: Pantry
   m_TagString: Untagged
@@ -16242,32 +16218,6 @@ Transform:
   m_Father: {fileID: 146931391}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &577034017
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577034015}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &577034018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577034015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc47c2d3a9015640b74b7038667e607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  container: {fileID: 11400000, guid: 3f99f46d9cc805f41913027930eea05d, type: 2}
 --- !u!1 &578797018
 GameObject:
   m_ObjectHideFlags: 0
@@ -19395,7 +19345,6 @@ GameObject:
   - component: {fileID: 732456132}
   - component: {fileID: 732456131}
   - component: {fileID: 732456130}
-  - component: {fileID: 732456134}
   m_Layer: 3
   m_Name: Stove 2
   m_TagString: Untagged
@@ -19998,34 +19947,13 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &732456134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732456128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 732456129}
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!43 &733326745
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh49012
+  m_Name: pb_Mesh39688
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20231,10 +20159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824f71f6caa084a48a90f45888e231d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 1.4
   interactionTransform: {fileID: 765190019}
   player: {fileID: 0}
-  canPickUp: 1
   item: {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
+  p: {fileID: 0}
 --- !u!65 &765190021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34756,7 +34685,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48660
+  m_Name: pb_Mesh39340
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36317,36 +36246,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1530016494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1530016495}
-  m_Layer: 0
-  m_Name: Burger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1530016495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530016494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1442416, y: 2.6592958, z: -9.119734}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532436851
 GameObject:
   m_ObjectHideFlags: 0
@@ -37115,10 +37014,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824f71f6caa084a48a90f45888e231d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 1.4
   interactionTransform: {fileID: 1541998677}
   player: {fileID: 0}
-  canPickUp: 1
   item: {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
+  p: {fileID: 0}
 --- !u!65 &1541998679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38086,6 +37986,8 @@ MonoBehaviour:
   orders: {fileID: 11400000, guid: 6597be60adf55e94f883309c85182601, type: 2}
   dishes: {fileID: 11400000, guid: 5327b73f46d58274fac74e0fe5f4973e, type: 2}
   ingredients: {fileID: 11400000, guid: 113bed25c538941499ae56e0e9f77d66, type: 2}
+  in1: {fileID: 0}
+  in2: {fileID: 0}
 --- !u!4 &1583869179
 Transform:
   m_ObjectHideFlags: 0
@@ -40251,7 +40153,6 @@ GameObject:
   - component: {fileID: 1662441423}
   - component: {fileID: 1662441422}
   - component: {fileID: 1662441421}
-  - component: {fileID: 1662441425}
   m_Layer: 3
   m_Name: Stove 3
   m_TagString: Untagged
@@ -40860,27 +40761,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &1662441425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662441419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 1662441420}
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!1 &1666933853
 GameObject:
   m_ObjectHideFlags: 0
@@ -45128,7 +45008,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48524
+  m_Name: pb_Mesh39204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -47402,7 +47282,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48492
+  m_Name: pb_Mesh39172
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

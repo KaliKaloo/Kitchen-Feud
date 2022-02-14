@@ -10,82 +10,51 @@ public class PlayerHolding : MonoBehaviour
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
-    BaseFood item;
-    public PhotonView view;
-
-    // void update(){
-    //     if (clickedObj == null){
-    //         clickedObj = null;
-    //         heldObj = null;
-    //         item=null;
-    //         items.Clear();
-    //     }
-    // }
+    // BaseFood item;
+	public PhotonView view;
 
 
-    public bool canPickUp(GameObject obj){
-        pickableItem PickableItem = obj.GetComponent<pickableItem>();
-        if(PickableItem.item.canPickUp){
-            item = PickableItem.item;
-            clickedObj = obj;
-            return true;
-        } 
-        else{
-            Debug.Log("cannot pickup item");
-            return false;
-        }
-    }
 
-    public void pickUpItem(){
-
-        // if(items.Count >= holdingLimit){
-        //     Debug.Log("You are already holding an item. Please drop it first.");
-        //     return;
-        // }
+    public void pickUpItem(GameObject obj, BaseFood item){
         if (view.IsMine)
         {
-            if (clickedObj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            items.Add(item);
-            heldObj = clickedObj;
-            // move object to slot
-            Debug.Log("Pick up item: " + items[0].name);
-            if (heldObj.GetComponent<Rigidbody>())
+            if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
-                Collider objcol = heldObj.GetComponent<Collider>();
+ 
+                items.Add(item);
+                heldObj = obj;
+                // move object to slot
+                Debug.Log("Pick up item: "+ items[0].name);
+                if(heldObj.GetComponent<Rigidbody>()){
 
-                
+                    Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
+                    Collider objcol = heldObj.GetComponent<Collider>();
+
                     heldObj.GetComponent<PhotonView>().RPC("SetPlatformAsParent", RpcTarget.Others);
                     heldObj.transform.SetParent(slot.transform);
                     heldObj.transform.localPosition = Vector3.zero;
                     heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                    heldObj.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX |
-                        RigidbodyConstraints.FreezePositionZ;
+                 
                     objRig.isKinematic = true;
                     objcol.isTrigger = true;
-                
+                }
             }
-        }
-        else
-        {
-            clickedObj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-            items.Add(item);
-            heldObj = clickedObj;
-            // move object to slot
-            Debug.Log("Pick up item: " + items[0].name);
-            if (heldObj.GetComponent<Rigidbody>())
+            else
             {
-                Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
-                Collider objcol = heldObj.GetComponent<Collider>();
-
+                obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+                items.Add(item);
+                heldObj = obj;
+                // move object to slot
+                Debug.Log("Pick up item: " + items[0].name);
+                if (heldObj.GetComponent<Rigidbody>())
+                {
+                    Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
+                    Collider objcol = heldObj.GetComponent<Collider>();
                
                     heldObj.GetComponent<PhotonView>().RPC("SetPlatformAsParent", RpcTarget.Others);
                     heldObj.transform.SetParent(slot.transform);
                     heldObj.transform.localPosition = Vector3.zero;
                     heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                    heldObj.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX |
-                        RigidbodyConstraints.FreezePositionZ;
                     objRig.isKinematic = true;
                     objcol.isTrigger = true;
                 }
