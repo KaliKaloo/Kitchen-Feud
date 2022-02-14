@@ -68,6 +68,8 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         if (gameOver.IsInitialized())
         {
             gameOver.Beginning();
