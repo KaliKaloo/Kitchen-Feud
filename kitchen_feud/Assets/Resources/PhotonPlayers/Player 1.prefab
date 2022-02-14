@@ -229,6 +229,7 @@ MonoBehaviour:
   items: []
   slot: {fileID: 5725064515487422948}
   heldObj: {fileID: 0}
+  view: {fileID: 8876107304136392510}
 --- !u!1 &2315640761002977291
 GameObject:
   m_ObjectHideFlags: 0

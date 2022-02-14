@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
 	bool isFocus = false;  
-	Transform player;      
+	public Transform player;      
 
 	bool hasInteracted = false; 
 
