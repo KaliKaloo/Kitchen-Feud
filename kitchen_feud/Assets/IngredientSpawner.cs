@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class IngredientSpawner : Interactable
 {
-    public GameObject ingredientPrefab;
+    //public GameObject ingredientPrefab;
 
 
 
-    void Interact()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.Instantiate(ingredientPrefab.name, randomPosition, Quaternion.identity);
-        }
-    }
+    //void Interact()
+    //{
+    //    if (PhotonNetwork.IsMasterClient)
+    //    {
+    //        PhotonNetwork.Instantiate(ingredientPrefab.name, randomPosition, Quaternion.identity);
+    //    }
+    //}
 }
