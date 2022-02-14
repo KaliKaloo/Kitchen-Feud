@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class TrayController : MonoBehaviour
 {
@@ -55,19 +56,9 @@ public class TrayController : MonoBehaviour
     private void CompareOrder(List<BaseFood> tray, string orderid)
     {
         Order o = Database.GetOrderByID(orderid);
-        // change lists to hash sets so order doesn't matter
-        // RIGHT NOW TRAY AND DISH ARE DIFFERENT TYPES
-        // CANNOT COMPARE
-        List<BaseFood> trayList = new List<BaseFood>(tray);
-        List<BaseFood> orderList = new List<BaseFood>(o.dishes);
-        trayList.Sort();
-        orderList.Sort();
-        print(trayList);
-        print(orderList);
 
-        // Compares two dishes without order mattering
-
-        if (orderList.Equals(trayList)) {
+        // Compares two dishes without order mattering (now checks for duplicates too)
+        if (Enumerable.SequenceEqual(tray.OrderBy(t => t), o.dishes.OrderBy(t => t))) {
 
             // IF PLAYER PART OF TEAM 1
             if (true)
