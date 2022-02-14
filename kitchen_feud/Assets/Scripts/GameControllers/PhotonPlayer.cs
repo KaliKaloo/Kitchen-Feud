@@ -9,9 +9,6 @@ public class PhotonPlayer : MonoBehaviour
     public PhotonView PV;
     public GameObject myAvatar;
     public int myTeam;
-    public GameObject tmp;
-    public GameObject tmp1;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +34,6 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                    tmp = myAvatar;
                 }
             }
             else
@@ -47,7 +43,6 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                    tmp1 = myAvatar;
                 }
             }
         }
