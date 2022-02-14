@@ -52,25 +52,49 @@ public class TrayController : MonoBehaviour
         return total;
     }
 
+    private int CompareIngredients(List<BaseFood> tray, List<BaseFood> orderDish)
+    {
+        List<BaseFood> orderIngredients;
+        foreach (BaseFood food in orderDish)
+        {
+            // NEED ACCESS TO RECIPE
+            //food.item
+        }
+        return 0;
+    }
+
     // compares a tray to an orderid
     private void CompareOrder(List<BaseFood> tray, string orderid)
     {
         Order o = Database.GetOrderByID(orderid);
+        int currentScore = 0;
 
         // Compares two dishes without order mattering (now checks for duplicates too)
-        if (Enumerable.SequenceEqual(tray.OrderBy(t => t), o.dishes.OrderBy(t => t))) {
+        if (Enumerable.SequenceEqual(tray.OrderBy(t => t), o.dishes.OrderBy(t => t)))
+        {
 
-            // IF PLAYER PART OF TEAM 1
-            if (true)
-            {
-                scores.AddScore1(GetDishScore(tray));
-            }
-            // IF PLAYER PART OF TEAM 2
-            //else if (false)
-            //{
-            //    scores.AddScore2(GetDishScore(o.dishes));
-            //}
+            currentScore += GetDishScore(tray);
         }
+        // if contains 100% of ingredients only then multiply dish score by 0.25
+        else if (CompareIngredients(tray, o.dishes) == 2)
+        {
+            currentScore += (int)(GetDishScore(tray) * 0.25);
+        } // if less than 100% of ingredients only then multiply dish score by 0.1
+        else if (CompareIngredients(tray, o.dishes) == 1)
+        {
+            currentScore += (int)(GetDishScore(tray) * 0.1);
+        }
+
+        // IF PLAYER PART OF TEAM 1
+        if (true)
+        {
+            scores.AddScore1(currentScore);
+        }
+        // IF PLAYER PART OF TEAM 2
+        //else if (false)
+        //{
+        //    scores.AddScore2(GetDishScore(o.dishes));
+        //}
     }
 
     private void OnApplicationQuit() {

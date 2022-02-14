@@ -14,6 +14,11 @@ public class DishSO : BaseFood
     // public int finalScore;
     public List<IngredientSO> recipe = new List<IngredientSO>();
 
+    public List<IngredientSO> GetIngredients()
+    {
+        return recipe;
+    }
+
     // public GameObject ticket;
 
 }
