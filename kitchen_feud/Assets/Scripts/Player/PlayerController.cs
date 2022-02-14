@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
  	PlayerHolding playerHold;
 	public static bool playerAlreadyExists;
 
-	PhotonView view;
+	public PhotonView view;
 
 	void Start()
 	{

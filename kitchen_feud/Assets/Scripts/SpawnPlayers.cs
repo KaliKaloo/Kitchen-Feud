@@ -17,8 +17,11 @@ public class SpawnPlayers : MonoBehaviour
     private void Start()
     {
         //PhotonNetwork.IsMessageQueueRunning = true;
-        Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
-        PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+            PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        }
         //DontDestroyOnLoad(this.gameObject);
     }
 }
