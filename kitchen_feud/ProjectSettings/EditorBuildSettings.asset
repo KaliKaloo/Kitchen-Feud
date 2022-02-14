@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 1
-    path: Assets/Scenes/kitchens_miniGame.unity
-    guid: d45b079c6414ef346ac6960a679163e4
+    path: Assets/Scenes/kitchensScore.unity
+    guid: 126fd8c7c6ea30044853bf9bfdb5c079
   - enabled: 0
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
   - enabled: 0
-    path: Assets/Scenes/stoveMinigame.unity
-    guid: 1d58f2c0118544e2bb2ca450ab0f74a1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2

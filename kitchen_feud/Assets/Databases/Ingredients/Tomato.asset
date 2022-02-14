@@ -17,6 +17,6 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Type: 0
   canPickUp: 1
-  ingredientID: 8
+  ingredientID: 08
   canFry: 0
   canCut: 0
