@@ -17,12 +17,10 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
-  maxsScore: 100
-  finalsScore: 0
-  dishID: DI0102
-  toCook: Stove
-  cookingTime: 20
+  dishID: DI12
   maxScore: 100
+  cookingTime: 20
+  toCook: Stove
   finalScore: 0
   recipe:
   - {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
