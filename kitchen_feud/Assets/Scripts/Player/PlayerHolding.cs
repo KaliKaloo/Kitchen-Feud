@@ -82,7 +82,7 @@ public class PlayerHolding : MonoBehaviour
         {
             Debug.Log("Drop item: " + items[0].name);
             items.Clear();
-            heldObj.GetComponent<PhotonView>().RPC("SetNullAsParent", RpcTarget.Others);
+           // heldObj.GetComponent<PhotonView>().RPC("SetNullAsParent", RpcTarget.Others);
             Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
             Collider objcol = heldObj.GetComponent<Collider>();
             heldObj.transform.SetParent(null);
