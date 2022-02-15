@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 2370544356775548293}
   isFocus: 0
-  player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
+  player: {fileID: 0}
   canPickUp: 1
   item: {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
 --- !u!114 &2370544356775548301

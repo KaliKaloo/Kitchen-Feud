@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 	public Interactable focus;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
-	PhotonView view;
+	public PhotonView view;
 
 	void Start()
 	{
