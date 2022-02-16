@@ -1,44 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 public class CookingBar : MonoBehaviour
 {
     public Slider slider;
     public float step;
-    private bool keyHeld;
-    private bool done;
+    public bool keyHeld;
+    public bool done;
     public float cookedLevel;
-
-    //public DishSO foundDish;
-
-    public float abs(float x) {
-       float result = x < 0 ? -x : x;
-       return result;
-    }
+    public Stove stove;
 
     void Start () {
         slider.value = -30;
         keyHeld = false;
         done = false;
+
+        //slider.onValueChanged.AddListener(delegate { UpdateDishPoints();});
+
     }
 
-    //isFoundDish carried across scenes?
+    //GET RID OF THE UPDATE FUNCTION
     void Update() {
         if (Input.GetKey(KeyCode.X) && done == false) {
             slider.value = slider.value + step;
             keyHeld = true;
         }
         else if(keyHeld == true && !Input.GetKey(KeyCode.X) && done == false) {
-            SetCookedLevel(slider.value);
-            Debug.Log(100f - abs(slider.value));
+            //CUSTOM EVENT SYSTEM: EMIT AN EVENT WHEN SET VALUE
+            cookedLevel = SetCookedLevel(slider.value);
             done = true;
+            GameEvents.current.assignPointsEventFunction();
             
         }
     }
-    public void SetCookedLevel(float value)
+/*
+    //sets back to 70 too! I think it counts the reset as a value change
+    public void UpdateDishPoints() {
+        cookedLevel = SetCookedLevel(slider.value);
+        stove.dishOfFoundDish.points = cookedLevel;
+        Debug.Log(stove.dishOfFoundDish.points);
+    }*/
+
+    public float SetCookedLevel(float value)
     {
-        cookedLevel = 100f - abs(slider.value);
+        return 100f - abs(value);
+    }
+
+    public float abs(float x) {
+       float result = x < 0 ? -x : x;
+       return result;
     }
 }

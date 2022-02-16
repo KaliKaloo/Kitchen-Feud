@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; 
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Stove : Interactable
 {
@@ -12,48 +14,55 @@ public class Stove : Interactable
     bool foundMatchingDish = false;
     public DishSO foundDish;
     public Dish dishOfFoundDish;
-
-    //the canvases shouldn't be set through inspector, we should get them in the script
-    //especially the minigameCanvas
     public GameObject canvas;
     public GameObject minigameCanvas;
-
-
     public GameObject cookedDish;
     public Slider slider;
     public CookingBar cookingBar;
+
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+        PhotonView pv = PhotonView.Get(player);
+        cookingBar = slider.GetComponent<CookingBar>();
+
+        //MAKE A CUSTOM EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+        GameEvents.current.assignPoints += UpdateDishPoints;
+        //slider.onValueChanged.AddListener(delegate { UpdateDishPoints();});
         if(playerHold.items.Count!=0){
             addItem(playerHold.heldObj, playerHold);
         }else{
-            cookDish();
+            //not sure if that's how and where it's done
+            if(pv.IsMine) {
+                cookDish();
+            }
+            
         }
     }
     public void cookDish(){
-        //popup of the 2d game or popup UI
-        //lock the stove! One player interacting with it at a time
-        //lock player movement when in minigame
-        //after finishing game, instantiate new gameobject dish
         checkForDish();
         if(foundMatchingDish){
-            // display the type of dish found
-            // display a "cook <dish name>" ui button 
+
             Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
 
-            //EnterScene("stoveMinigame");
+            //open the minigame canvas
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
 
-            //this shouldn't work but it does lmao
+            //the position the dish will be instantiated at
             Vector3 playerPosition = player.transform.position;
-            Vector3 offset = new Vector3(1,0,1);
+            Vector3 offset = new Vector3(0.5f,0,0);
 
-            //create the cooked dish and spawn in the player's hand
+            //instantiate the cooked dish
             cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
             dishOfFoundDish = cookedDish.GetComponent<Dish>();
-            cookingBar = slider.GetComponent<CookingBar>();
-            dishOfFoundDish.points = cookingBar.cookedLevel;
+            
+            //cookingBar.UpdateDishPoints();
+            Debug.Log(cookingBar.cookedLevel);
+            //dishOfFoundDish.points = cookingBar.cookedLevel;
+            Debug.Log(dishOfFoundDish.points);
+
+            //delete the items the dish was cooked from
+            itemsOnTheStove.Clear();
 
         }
         else{
@@ -73,5 +82,12 @@ public class Stove : Interactable
         foundDish = Database.GetDishFromIngredients(itemsOnTheStove);
         if(foundDish != null)
             foundMatchingDish = true;
+    }
+
+    //sets back to 70 too! I think it counts the reset as a value change
+    public void UpdateDishPoints() {
+        //cookedLevel = SetCookedLevel(slider.value);
+        dishOfFoundDish.points = cookingBar.cookedLevel;
+        //Debug.Log(dishOfFoundDish.points);
     }
 }
