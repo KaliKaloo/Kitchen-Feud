@@ -27,6 +27,11 @@ public class Dish : MonoBehaviour
         r.enabled = true;
 
     }
+    [PunRPC]
+    void pointSync(int point)
+    {
+        this.points = point;
+    }
 
 }
 

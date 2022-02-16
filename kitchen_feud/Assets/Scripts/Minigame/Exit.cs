@@ -25,6 +25,6 @@ public class Exit : MonoBehaviour
 		
 		stove.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
 		stove.r.enabled = true;
-		stove.playerController.enabled = true;
+		//stove.playerController.enabled = true;
 	}
 }

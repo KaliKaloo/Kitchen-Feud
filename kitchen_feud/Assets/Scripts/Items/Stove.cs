@@ -58,8 +58,8 @@ public class Stove : Interactable
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
 
-            playerController = player.GetComponent<PlayerController>();
-            playerController.enabled = false;
+           // playerController = player.GetComponent<PlayerController>();
+           // playerController.enabled = false;
 
             //the position the dish will be instantiated at
             Vector3 playerPosition = player.transform.position;
@@ -97,6 +97,7 @@ public class Stove : Interactable
 
     //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPoints() {
+        dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
         dishOfFoundDish.points = cookingBar.cookedLevel;
         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
     }
