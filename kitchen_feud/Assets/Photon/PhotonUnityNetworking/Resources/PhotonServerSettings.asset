@@ -43,6 +43,8 @@ MonoBehaviour:
   - RPC_SentTeam
   - SetNullAsParent
   - SetPlatformAsParent
+  - DisableView
+  - EnView
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

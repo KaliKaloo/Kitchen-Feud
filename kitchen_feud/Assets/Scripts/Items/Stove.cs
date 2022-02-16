@@ -20,7 +20,7 @@ public class Stove : Interactable
     public Slider slider;
     public CookingBar cookingBar;
     public bool isBeingInteractedWith = false;
-    public Renderer renderer;
+    public Renderer r;
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
@@ -62,8 +62,9 @@ public class Stove : Interactable
 
             //instantiate the cooked dish
             cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
-            renderer = cookedDish.GetComponent<Renderer>();
-            renderer.enabled = false;
+            r = cookedDish.GetComponent<Renderer>();
+            cookedDish.GetComponent<PhotonView>().RPC("DisableView", RpcTarget.Others);
+            r.enabled = false;
             dishOfFoundDish = cookedDish.GetComponent<Dish>();
 
             //delete the items the dish was cooked from
@@ -94,4 +95,5 @@ public class Stove : Interactable
         dishOfFoundDish.points = cookingBar.cookedLevel;
         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
     }
+
 }

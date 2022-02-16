@@ -31,6 +31,7 @@ public class CookingBar : MonoBehaviour
             done = true;
             GameEvents.current.assignPointsEventFunction();
             
+            
         }
     }
 

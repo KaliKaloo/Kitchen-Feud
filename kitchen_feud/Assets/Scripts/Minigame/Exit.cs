@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class Exit : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Exit : MonoBehaviour
 		canvas.gameObject.SetActive(true);
         minigameCanvas.gameObject.SetActive(false);
 		stove.isBeingInteractedWith = false;
-		stove.renderer.enabled = true;
+		stove.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
+		stove.r.enabled = true;
 	}
 }
