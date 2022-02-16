@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:kitchen_feud/Assets/Scenes/kitchensUI.unity.meta
 guid: f7b7787df6cb84a4c95515a4d1f8eb88
+========
+guid: 0dbac435bb0a12a77886a2e9b40bd363
+folderAsset: yes
+>>>>>>>> dev:kitchen_feud/Assets/Scripts/Minigame.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
