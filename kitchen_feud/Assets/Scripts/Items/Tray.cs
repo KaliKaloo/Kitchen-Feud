@@ -23,11 +23,9 @@ public class Tray : Interactable
             if (tray.ServingTray.Count < 4)
             {
                 foreach (Transform slot in slots)
-                {
-                    Debug.Log(slot.transform.childCount);
+                { 
                     if (slot.transform.childCount == 0)
                     {
-                        Debug.Log("slot found");
                         playerHold.dropItem();
                         objectHolding.transform.parent = slot;
                         objectHolding.transform.localPosition = Vector3.zero;
