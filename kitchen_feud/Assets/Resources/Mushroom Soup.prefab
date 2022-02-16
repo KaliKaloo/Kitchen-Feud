@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 7444644692714486487}
+  isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
 --- !u!114 &7444644692714486495

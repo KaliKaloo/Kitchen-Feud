@@ -15,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
   - enabled: 0
-    path: Assets/Scenes/stoveMinigame.unity
-    guid: 1d58f2c0118544e2bb2ca450ab0f74a1
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/score (merge with kitchen).unity
+    guid: 500ece1e38869a74c885ec8aa8a68278
+  - enabled: 0
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
   m_configObjects: {}
