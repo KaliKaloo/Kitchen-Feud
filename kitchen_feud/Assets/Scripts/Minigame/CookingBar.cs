@@ -18,11 +18,8 @@ public class CookingBar : MonoBehaviour
         keyHeld = false;
         done = false;
 
-        //slider.onValueChanged.AddListener(delegate { UpdateDishPoints();});
-
     }
 
-    //GET RID OF THE UPDATE FUNCTION
     void Update() {
         if (Input.GetKey(KeyCode.X) && done == false) {
             slider.value = slider.value + step;
@@ -36,13 +33,6 @@ public class CookingBar : MonoBehaviour
             
         }
     }
-/*
-    //sets back to 70 too!
-    public void UpdateDishPoints() {
-        cookedLevel = SetCookedLevel(slider.value);
-        stove.dishOfFoundDish.points = cookedLevel;
-        Debug.Log(stove.dishOfFoundDish.points);
-    }*/
 
     public float SetCookedLevel(float value)
     {

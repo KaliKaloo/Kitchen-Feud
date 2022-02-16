@@ -19,10 +19,6 @@ public class Exit : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		/*slider.value = -30;
-        cookingBar.keyHeld = false;
-        cookingBar.done = false;*/
-
 		canvas.gameObject.SetActive(true);
         minigameCanvas.gameObject.SetActive(false);
 	}

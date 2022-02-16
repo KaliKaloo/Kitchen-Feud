@@ -16,6 +16,14 @@ public class pickableItem : Interactable
 
         if(playerHold.items.Count==0){
             playerHold.pickUpItem(gameObject, item);
+			
+			//if it's a dish print out its points
+			Dish dish = gameObject.GetComponent<Dish>();
+			if(dish != null) {
+				Debug.Log("points: " + dish.points);
+			}
+
+
         }
         else{
             playerHold.dropItem();

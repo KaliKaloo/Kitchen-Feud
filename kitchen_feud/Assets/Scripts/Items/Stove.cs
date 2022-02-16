@@ -29,8 +29,6 @@ public class Stove : Interactable
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         GameEvents.current.assignPoints += UpdateDishPoints;
 
-        //slider.onValueChanged.AddListener(delegate { UpdateDishPoints();});
-
         if(playerHold.items.Count!=0){
             addItem(playerHold.heldObj, playerHold);
         }else{
@@ -61,12 +59,6 @@ public class Stove : Interactable
             //instantiate the cooked dish
             cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
             dishOfFoundDish = cookedDish.GetComponent<Dish>();
-
-            //THIS SHOULD SOMEHOW WAIT FOR THE EVENT
-
-            //seem not to get called at all    
-            Debug.Log("cookingBar: " + cookingBar.cookedLevel);
-            Debug.Log("dishofFoundDish.points: " + dishOfFoundDish.points);
 
             //delete the items the dish was cooked from
             itemsOnTheStove.Clear();
