@@ -11,13 +11,12 @@ using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
-             
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
-	bool isFocus = false;  
-	public Transform player;      
+	public bool isFocus = false;
+	public Transform player;
 
-	bool hasInteracted = false; 
+	bool hasInteracted = false;
 
 	public virtual void Interact()
 	{
@@ -48,12 +47,14 @@ public class Interactable : MonoBehaviour
 		hasInteracted = false;
 	}
 
-	public void EnterScene(string sceneName) {
+	public void EnterScene(string sceneName)
+	{
 		SceneManager.LoadScene(sceneName);
 	}
 
 	//allow only one player at a time to interact with the object
-	public void LockInteraction() {
+	public void LockInteraction()
+	{
 
 	}
 
