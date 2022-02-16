@@ -10,7 +10,8 @@ public class Exit : MonoBehaviour
 	public Button yourButton;
 	public GameObject canvas;
     public GameObject minigameCanvas;
-	public Stove stove;
+	public List<Stove> stoves = new List<Stove>();
+	//public Stove stove;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -18,13 +19,18 @@ public class Exit : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		canvas.gameObject.SetActive(true);
-        minigameCanvas.gameObject.SetActive(false);
-		stove.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.Others);
-		stove.isBeingInteractedWith = false;
-		
-		stove.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
-		stove.r.enabled = true;
+		for (int i = 0; i < stoves.Capacity; i++)
+		{
+			if (stoves[i].cookedDish != null)
+			{
+				canvas.gameObject.SetActive(true);
+				minigameCanvas.gameObject.SetActive(false);
+				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.Others);
+				stoves[i].isBeingInteractedWith = false;
+				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
+				stoves[i].r.enabled = true;
+			}
+		}
 		//stove.playerController.enabled = true;
 	}
 }
