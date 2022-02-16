@@ -54,7 +54,7 @@ public class Interactable : MonoBehaviour
 
 	//allow only one player at a time to interact with the object
 	public void LockInteraction() {
-		
+
 	}
 
 }
