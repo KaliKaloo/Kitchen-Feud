@@ -24,13 +24,18 @@ public class Tray : Interactable
             {
                 foreach (Transform slot in slots)
                 {
-
+                    Debug.Log(slot.transform.GetChildCount());
                     if (slot.transform.GetChildCount() == 0)
                     {
-                        objectHolding.transform.parent = slot;
-                        objectHolding.transform.localPosition = Vector3.zero;
-                        objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                        if (objectHolding.GetComponent<Rigidbody>())
+                        {
+                            objectHolding.transform.parent = slot;
+                            objectHolding.transform.localPosition = Vector3.zero;
+                            objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                        }
+
                     }
+                    break;
                 }
 
                 //add basefood item to list of foods of the tray
