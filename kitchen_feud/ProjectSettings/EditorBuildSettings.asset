@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
   - enabled: 0
-    path: Assets/Scenes/kitchens UI.unity
+    path: Assets/Scenes/kitchensUI.unity
     guid: f7b7787df6cb84a4c95515a4d1f8eb88
   - enabled: 1
     path: Assets/Scenes/score (merge with kitchen).unity
