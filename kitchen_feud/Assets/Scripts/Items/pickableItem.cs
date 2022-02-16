@@ -1,41 +1,27 @@
-
 using UnityEngine;
 using Photon.Pun;
 
 public class pickableItem : Interactable
 {
-    public BaseFood item;
-	public PhotonPlayer p;
-    // public IngredientSO ingredient;
-    // public DishSO dish;
-
-    public override void Interact()
+	//public Item item;
+	//public bool canPickUp = true;
+	public BaseFood item;
+	PlayerHolding playerHold;
+	// public GameObject obj;
+	public override void Interact()
 	{
-		base.Interact();
-       
-	}
+		// base.Interact();
+		playerHold = player.GetComponent<PlayerHolding>();
 
-	[PunRPC]
-	private void SetPlatformAsParent()
-	{
-		
+		if (playerHold.items.Count == 0)
 		{
-			/*
-			
-			this.transform.parent = p.myAvatar.transform;
-			this.transform.localPosition = Vector3.zero;
-			this.transform.localRotation = Quaternion.Euler(Vector3.zero);
-			this.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX |
-				RigidbodyConstraints.FreezePositionZ;
-			
-			Debug.Log(p.name);
-			*/
+			playerHold.pickUpItem(gameObject, item);
 		}
-		
-	}
-	[PunRPC]
-	private void SetNullAsParent()
-	{
-		this.transform.parent = null;
+		else
+		{
+			playerHold.dropItem();
+			playerHold.pickUpItem(gameObject, item);
+		}
+
 	}
 }
