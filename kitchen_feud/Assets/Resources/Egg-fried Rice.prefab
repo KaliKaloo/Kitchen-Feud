@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4460004903174343543}
   - component: {fileID: 4460004903174343550}
   - component: {fileID: 4460004903174343549}
-  - component: {fileID: 4848688239153998357}
+  - component: {fileID: 3825670957840269763}
   m_Layer: 0
   m_Name: Egg-fried Rice
   m_TagString: Untagged
@@ -346,9 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 4460004903174343542}
-  isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
-  canPickUp: 1
   item: {fileID: 11400000, guid: 5aae169e82c010f4b8ce4655d91e25ed, type: 2}
 --- !u!114 &4460004903174343550
 MonoBehaviour:
@@ -389,7 +387,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &4848688239153998357
+--- !u!114 &3825670957840269763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,7 +396,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4460004903174343541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96c1438c9ccff4547a1860deee892575, type: 3}
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   points: 0

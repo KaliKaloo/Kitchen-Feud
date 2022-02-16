@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom Soup
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 7444644692714486484, guid: 666d2c47897fe4e378bce3fd53123081, type: 3}
   Type: 1
   canPickUp: 1
-  dishID: DI0102
+  dishID: DI12
   maxScore: 100
   cookingTime: 20
   toCook: Stove

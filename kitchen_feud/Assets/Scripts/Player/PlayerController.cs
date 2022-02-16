@@ -23,7 +23,11 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
+			
 			DontDestroyOnLoad(gameObject);
+
+		
+			
 		}
 	}
 
@@ -120,6 +124,5 @@ public class PlayerController : MonoBehaviour
 			focus = null;
 		}
 	}
-
 
 }

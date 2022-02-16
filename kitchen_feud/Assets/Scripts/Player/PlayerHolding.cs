@@ -13,14 +13,7 @@ public class PlayerHolding : MonoBehaviour
     public GameObject heldObj;
     public PhotonView view;
 
-    // void update(){
-    //     if (clickedObj == null){
-    //         clickedObj = null;
-    //         heldObj = null;
-    //         item=null;
-    //         items.Clear();
-    //     }
-    // }
+    // BaseFood item;
 
 
 

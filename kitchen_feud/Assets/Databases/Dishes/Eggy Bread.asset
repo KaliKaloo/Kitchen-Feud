@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Eggy Bread
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2416341045423979098, guid: 6ad974da1820b4f63bf7be848f35d60b, type: 3}
   Type: 1
   canPickUp: 1
-  dishID: DI0306
+  dishID: DI36
   maxScore: 100
   cookingTime: 10
   toCook: Stove

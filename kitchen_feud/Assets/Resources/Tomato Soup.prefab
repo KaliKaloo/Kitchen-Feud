@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4307230979839467954}
   - component: {fileID: 4307230979839467963}
   - component: {fileID: 4307230979839467960}
-  - component: {fileID: -3367312131443953662}
+  - component: {fileID: 6626711080517108647}
   m_Layer: 0
   m_Name: Tomato Soup
   m_TagString: Untagged
@@ -346,9 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 4307230979839467955}
-  isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
-  canPickUp: 1
   item: {fileID: 11400000, guid: e52fb280f1f0e374ba507be57a481957, type: 2}
 --- !u!114 &4307230979839467963
 MonoBehaviour:
@@ -389,7 +387,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &-3367312131443953662
+--- !u!114 &6626711080517108647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,7 +396,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4307230979839467952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96c1438c9ccff4547a1860deee892575, type: 3}
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   points: 0
