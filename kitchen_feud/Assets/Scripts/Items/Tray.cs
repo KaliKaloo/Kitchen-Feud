@@ -24,18 +24,16 @@ public class Tray : Interactable
             {
                 foreach (Transform slot in slots)
                 {
-                    Debug.Log(slot.transform.GetChildCount());
-                    if (slot.transform.GetChildCount() == 0)
+                    Debug.Log(slot.transform.childCount);
+                    if (slot.transform.childCount == 0)
                     {
-                        if (objectHolding.GetComponent<Rigidbody>())
-                        {
-                            objectHolding.transform.parent = slot;
-                            objectHolding.transform.localPosition = Vector3.zero;
-                            objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                        }
-
+                        Debug.Log("slot found");
+                        playerHold.dropItem();
+                        objectHolding.transform.parent = slot;
+                        objectHolding.transform.localPosition = Vector3.zero;
+                        objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                        break;
                     }
-                    break;
                 }
 
                 //add basefood item to list of foods of the tray
@@ -44,7 +42,6 @@ public class Tray : Interactable
                 tray.ServingTray.Add(pickable.item);
                 pickable.Tray = tray;
                 Debug.Log(tray.ServingTray.Count);
-                playerHold.dropItem();
             }
 
             else

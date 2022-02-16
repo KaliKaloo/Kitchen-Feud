@@ -345,9 +345,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 1674085944443780883}
+  isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
-  p: {fileID: 4497627996167492564, guid: eea8078eb9b764be280538c6cc2555ca, type: 3}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!114 &1674085944443780891
 MonoBehaviour:
   m_ObjectHideFlags: 0
