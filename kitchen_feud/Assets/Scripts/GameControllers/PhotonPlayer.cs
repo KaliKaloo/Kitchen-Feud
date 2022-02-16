@@ -11,7 +11,8 @@ public class PhotonPlayer : MonoBehaviour
     public int myTeam;
     public GameObject tmp;
     public GameObject tmp1;
-    
+    GameObject Team1;
+    GameObject Team2;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,9 @@ public class PhotonPlayer : MonoBehaviour
         if (PV.IsMine)
         {
             PV.RPC("RPC_GetTeam", RpcTarget.MasterClient);
+            Team1 = GameObject.FindGameObjectWithTag("Team1");
+            Team2 = GameObject.FindWithTag("Team2");
         }
-   
-
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class PhotonPlayer : MonoBehaviour
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
                     tmp = myAvatar;
+                    Team2.SetActive(false);
                 }
             }
             else
@@ -48,6 +50,9 @@ public class PhotonPlayer : MonoBehaviour
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player 1"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
                     tmp1 = myAvatar;
+                    Team1.SetActive(false);
+
+
                 }
             }
         }
