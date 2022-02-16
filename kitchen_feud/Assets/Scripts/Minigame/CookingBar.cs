@@ -29,7 +29,7 @@ public class CookingBar : MonoBehaviour
             keyHeld = true;
         }
         else if(keyHeld == true && !Input.GetKey(KeyCode.X) && done == false) {
-            //CUSTOM EVENT SYSTEM: EMIT AN EVENT WHEN SET VALUE
+            //EVENT SYSTEM: EMIT AN EVENT WHEN SET VALUE
             cookedLevel = SetCookedLevel(slider.value);
             done = true;
             GameEvents.current.assignPointsEventFunction();
@@ -37,7 +37,7 @@ public class CookingBar : MonoBehaviour
         }
     }
 /*
-    //sets back to 70 too! I think it counts the reset as a value change
+    //sets back to 70 too!
     public void UpdateDishPoints() {
         cookedLevel = SetCookedLevel(slider.value);
         stove.dishOfFoundDish.points = cookedLevel;

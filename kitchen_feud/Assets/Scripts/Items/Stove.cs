@@ -22,16 +22,19 @@ public class Stove : Interactable
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+         //view control
         PhotonView pv = PhotonView.Get(player);
         cookingBar = slider.GetComponent<CookingBar>();
 
-        //MAKE A CUSTOM EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         GameEvents.current.assignPoints += UpdateDishPoints;
+
         //slider.onValueChanged.AddListener(delegate { UpdateDishPoints();});
+
         if(playerHold.items.Count!=0){
             addItem(playerHold.heldObj, playerHold);
         }else{
-            //not sure if that's how and where it's done
+            //view control
             if(pv.IsMine) {
                 cookDish();
             }
@@ -45,6 +48,9 @@ public class Stove : Interactable
             Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
 
             //open the minigame canvas
+            slider.value = -30;
+            cookingBar.keyHeld = false;
+            cookingBar.done = false;
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
 
@@ -55,11 +61,12 @@ public class Stove : Interactable
             //instantiate the cooked dish
             cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
             dishOfFoundDish = cookedDish.GetComponent<Dish>();
-            
-            //cookingBar.UpdateDishPoints();
-            Debug.Log(cookingBar.cookedLevel);
-            //dishOfFoundDish.points = cookingBar.cookedLevel;
-            Debug.Log(dishOfFoundDish.points);
+
+            //THIS SHOULD SOMEHOW WAIT FOR THE EVENT
+
+            //seem not to get called at all    
+            Debug.Log("cookingBar: " + cookingBar.cookedLevel);
+            Debug.Log("dishofFoundDish.points: " + dishOfFoundDish.points);
 
             //delete the items the dish was cooked from
             itemsOnTheStove.Clear();
@@ -84,10 +91,9 @@ public class Stove : Interactable
             foundMatchingDish = true;
     }
 
-    //sets back to 70 too! I think it counts the reset as a value change
+    //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPoints() {
-        //cookedLevel = SetCookedLevel(slider.value);
         dishOfFoundDish.points = cookingBar.cookedLevel;
-        //Debug.Log(dishOfFoundDish.points);
+        Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
     }
 }
