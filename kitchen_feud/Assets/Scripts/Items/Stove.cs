@@ -30,15 +30,15 @@ public class Stove : Interactable
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         GameEvents.current.assignPoints += UpdateDishPoints;
-
-        if(playerHold.items.Count!=0){
-            addItem(playerHold.heldObj, playerHold);
-        }else{
-            //view control
-            if(pv.IsMine) {
-                cookDish();
+        if (!isBeingInteractedWith) {
+            if(playerHold.items.Count!=0){
+                addItem(playerHold.heldObj, playerHold);
+            }else{
+                //view control
+                if(pv.IsMine) {
+                    cookDish();
+                }
             }
-            
         }
     }
     public void cookDish(){
