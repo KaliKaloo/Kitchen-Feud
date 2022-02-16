@@ -8,7 +8,9 @@ using Photon.Pun;
 public class GlobalTimer {
     private static int timer = 0;
     private static bool started = false;
-
+    PhotonRoom room;
+    
+    
     // set the timer amount here 
     public void InitializeTimer() {
         int seconds;
@@ -16,15 +18,14 @@ public class GlobalTimer {
 
         // how long the timer will last in seconds
         seconds = 100;
+        timer = seconds;
+        ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
+        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
 
-       // if (!started) {
-            
-            timer = seconds;
-           // started = true;
-       // }
         }
         else{
-            //timer = seconds;
+
+            timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
         }
     }
 
@@ -39,7 +40,13 @@ public class GlobalTimer {
 
     // decrement timer
     public void Decrement() {
+        // timer -= 1;
         timer -= 1;
+        ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        ht.Remove("Time");
+        ht.Add("Time", timer);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+       
     }
 }
 
@@ -139,7 +146,7 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
-        if(PhotonNetwork.IsMasterClient){
+        
         if (timer.GetTime() > 0)
         {
             // updates timer and text in timer
@@ -156,5 +163,5 @@ public class scoreController : MonoBehaviour
 
         }
     }
-    }
+    
 }
