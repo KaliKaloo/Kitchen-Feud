@@ -33,6 +33,14 @@ public class TrayController : MonoBehaviour
                 // call method to compare dishes to count points
 
                 ts.tray.ServingTray.Clear();
+                foreach (Transform slot in t.transform){
+                    Debug.Log(slot.name);
+
+                    foreach(Transform child in slot){
+                        Destroy(child.gameObject);
+                    }
+                    
+                }
                 break;
             }
         }
