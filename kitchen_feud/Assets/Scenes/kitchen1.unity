@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18003531, g: 0.22541359, b: 0.3067661, a: 1}
+  m_IndirectSpecularColor: {r: 0.18003547, g: 0.22541417, b: 0.30676678, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5457,7 +5457,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19984
+  m_Name: pb_Mesh82578
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6167,6 +6167,7 @@ GameObject:
   - component: {fileID: 798790000}
   - component: {fileID: 798789999}
   - component: {fileID: 798789998}
+  - component: {fileID: 798790002}
   m_Layer: 0
   m_Name: Stove 1
   m_TagString: Untagged
@@ -6769,6 +6770,23 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &798790002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798789996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.4
+  interactionTransform: {fileID: 798789997}
+  stove: {fileID: 798790002}
+  canPickUp: 0
+  isStove: 1
 --- !u!1 &886148055
 GameObject:
   m_ObjectHideFlags: 0
