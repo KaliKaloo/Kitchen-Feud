@@ -21,6 +21,7 @@ public class Stove : Interactable
     public CookingBar cookingBar;
     public bool isBeingInteractedWith = false;
     public Renderer r;
+    public PlayerController playerController;
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
@@ -55,6 +56,9 @@ public class Stove : Interactable
             isBeingInteractedWith = true;
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
+
+            playerController = player.GetComponent<PlayerController>();
+            playerController.enabled = false;
 
             //the position the dish will be instantiated at
             Vector3 playerPosition = player.transform.position;
