@@ -23,4 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/kitchens_foodSystem.unity
     guid: 557ba63e77d84ea419fffdb974e2b1c2
+    path: Assets/Scenes/kitchens_Copy.unity
+    guid: de6b69f019dbf844398457a1c991dab7
   m_configObjects: {}

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +34,11 @@ public class PlayerHolding : MonoBehaviour
         if (view.IsMine)
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+<<<<<<< HEAD
             {
+=======
+        {
+>>>>>>> dev
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot
@@ -51,9 +56,15 @@ public class PlayerHolding : MonoBehaviour
                     objcol.isTrigger = true;
                 }
             }
+<<<<<<< HEAD
             else
             {
                 obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+=======
+        else
+        {
+            obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+>>>>>>> dev
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot
@@ -70,7 +81,11 @@ public class PlayerHolding : MonoBehaviour
                     objRig.isKinematic = true;
                     objcol.isTrigger = true;
                 }
+<<<<<<< HEAD
 
+=======
+               
+>>>>>>> dev
             }
 
         }
@@ -82,7 +97,11 @@ public class PlayerHolding : MonoBehaviour
         {
             Debug.Log("Drop item: " + items[0].name);
             items.Clear();
+<<<<<<< HEAD
             // heldObj.GetComponent<PhotonView>().RPC("SetNullAsParent", RpcTarget.Others);
+=======
+           // heldObj.GetComponent<PhotonView>().RPC("SetNullAsParent", RpcTarget.Others);
+>>>>>>> dev
             Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
             Collider objcol = heldObj.GetComponent<Collider>();
             heldObj.transform.SetParent(null);

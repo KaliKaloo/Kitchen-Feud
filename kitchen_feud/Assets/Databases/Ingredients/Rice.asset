@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aaea3fc1d506df4388ec268bcb2f0ae, type: 3}
   m_Name: Rice
   m_EditorClassIdentifier: 
-  name: New Item
+  name: Rice
   location: 3
   Prefab: {fileID: 0}
   Type: 0

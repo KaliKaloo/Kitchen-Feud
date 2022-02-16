@@ -213,7 +213,7 @@ MonoBehaviour:
   rotatespeed: 90
   focus: {fileID: 0}
   cam: {fileID: 529380843882259817}
-  view: {fileID: 0}
+  view: {fileID: 8876107304136392510}
 --- !u!114 &-8133205025873562219
 MonoBehaviour:
   m_ObjectHideFlags: 0
