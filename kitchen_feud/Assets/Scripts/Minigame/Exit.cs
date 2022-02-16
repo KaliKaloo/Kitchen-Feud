@@ -20,7 +20,9 @@ public class Exit : MonoBehaviour
 	void TaskOnClick(){
 		canvas.gameObject.SetActive(true);
         minigameCanvas.gameObject.SetActive(false);
+		stove.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.Others);
 		stove.isBeingInteractedWith = false;
+		
 		stove.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
 		stove.r.enabled = true;
 		stove.playerController.enabled = true;

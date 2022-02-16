@@ -52,8 +52,9 @@ public class Stove : Interactable
             slider.value = -30;
             cookingBar.keyHeld = false;
             cookingBar.done = false;
-
+            this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.Others);
             isBeingInteractedWith = true;
+            
             canvas.gameObject.SetActive(false);
             minigameCanvas.gameObject.SetActive(true);
 
@@ -76,7 +77,7 @@ public class Stove : Interactable
 
         }
         else{
-            Debug.Log("Ingredients given do not make a dish");
+            Debug.LogError("Ingredients given do not make a dish");
         }
 	}
 
@@ -98,6 +99,21 @@ public class Stove : Interactable
     public void UpdateDishPoints() {
         dishOfFoundDish.points = cookingBar.cookedLevel;
         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+    }
+    [PunRPC]
+    void SetToTrue(bool isEnabled)
+    {
+        isEnabled = true;
+    }
+    [PunRPC]
+    void SetToTrue()
+    {
+        this.isBeingInteractedWith = true;
+    }
+    [PunRPC]
+    void SetToFalse()
+    {
+        this.isBeingInteractedWith = false;
     }
 
 }
