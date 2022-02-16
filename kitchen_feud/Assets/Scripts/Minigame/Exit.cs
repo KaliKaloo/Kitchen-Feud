@@ -9,17 +9,17 @@ public class Exit : MonoBehaviour
 	public Button yourButton;
 	public GameObject canvas;
     public GameObject minigameCanvas;
-	public CookingBar cookingBar;
-	public Slider slider;
+	public Stove stove;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
-		cookingBar = slider.GetComponent<CookingBar>();
 	}
 
 	void TaskOnClick(){
 		canvas.gameObject.SetActive(true);
         minigameCanvas.gameObject.SetActive(false);
+		stove.isBeingInteractedWith = false;
+		stove.renderer.enabled = true;
 	}
 }
