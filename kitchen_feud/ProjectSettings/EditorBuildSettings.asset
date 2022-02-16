@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/kitchensUI.unity
     guid: f7b7787df6cb84a4c95515a4d1f8eb88
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/kitchens_foodSystem.unity
     guid: 557ba63e77d84ea419fffdb974e2b1c2
   - enabled: 0
