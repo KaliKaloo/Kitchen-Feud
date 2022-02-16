@@ -24,7 +24,7 @@ public class Tray : Interactable
             {
                 foreach (Transform slot in slots)
                 {
-                    
+
                     if (slot.transform.GetChildCount() == 0)
                     {
                         objectHolding.transform.parent = slot;
@@ -35,9 +35,11 @@ public class Tray : Interactable
 
                 //add basefood item to list of foods of the tray
                 pickable = objectHolding.GetComponent<pickableItem>();
+                pickable.onTray = true;
                 tray.ServingTray.Add(pickable.item);
+                pickable.Tray = tray;
                 Debug.Log(tray.ServingTray.Count);
-
+                playerHold.dropItem();
             }
 
             else
@@ -47,11 +49,11 @@ public class Tray : Interactable
 
             }
         }
-       
-        //if player isnt holding anything and the object clicked on is on the tray, pickup item and subtract from the count and list
-        
 
 
     }
+
+   
+
 }
  
