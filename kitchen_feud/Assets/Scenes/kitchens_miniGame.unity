@@ -5638,6 +5638,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 0}
   item: {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!65 &152719924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16350,6 +16352,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 0}
   item: {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!54 &520410156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18182,6 +18186,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 0}
   item: {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!54 &612495543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21566,6 +21572,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 0}
   item: {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!65 &765190021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28489,7 +28497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e0420b7b63b2419739f5dd62ed27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTransform: {fileID: 0}
+  isFocus: 0
+  player: {fileID: 0}
   tray: {fileID: 11400000, guid: f2b52146a400802468db048176bc7f62, type: 2}
+  item: {fileID: 0}
+  objectHolding: {fileID: 0}
+  slots: []
+  pickable: {fileID: 0}
 --- !u!65 &1155015239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39322,6 +39337,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 0}
   item: {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!65 &1541998679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41486,7 +41503,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e0420b7b63b2419739f5dd62ed27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTransform: {fileID: 0}
+  isFocus: 0
+  player: {fileID: 0}
   tray: {fileID: 11400000, guid: 43d2dd7364a5ac34bb3e0e4e186cd853, type: 2}
+  item: {fileID: 0}
+  objectHolding: {fileID: 0}
+  slots: []
+  pickable: {fileID: 0}
 --- !u!65 &1643212642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51351,7 +51375,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e0420b7b63b2419739f5dd62ed27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTransform: {fileID: 0}
+  isFocus: 0
+  player: {fileID: 0}
   tray: {fileID: 11400000, guid: 3be5e0de64e382b4aa20694c2b47d2f9, type: 2}
+  item: {fileID: 0}
+  objectHolding: {fileID: 0}
+  slots: []
+  pickable: {fileID: 0}
 --- !u!1 &2034119840
 GameObject:
   m_ObjectHideFlags: 0
