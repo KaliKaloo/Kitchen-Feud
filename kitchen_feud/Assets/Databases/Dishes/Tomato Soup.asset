@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tomato Soup
   location: 0
-  Prefab: {fileID: 4307230979839467952, guid: 263eb989f312a4bb6ac0f7d2cbe04560, type: 3}
+  Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
   maxsScore: 100

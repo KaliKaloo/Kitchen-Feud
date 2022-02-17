@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom Soup
   location: 0
-  Prefab: {fileID: 7444644692714486484, guid: 666d2c47897fe4e378bce3fd53123081, type: 3}
+  Prefab: {fileID: 0}
   Type: 1
   canPickUp: 1
   maxsScore: 100

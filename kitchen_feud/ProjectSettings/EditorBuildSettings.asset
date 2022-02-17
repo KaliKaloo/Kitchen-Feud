@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
-  - enabled: 0
-    path: Assets/Scenes/kitchens_miniGame.unity
-    guid: d45b079c6414ef346ac6960a679163e4
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
@@ -23,9 +20,6 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/score (merge with kitchen).unity
-    guid: 500ece1e38869a74c885ec8aa8a68278
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

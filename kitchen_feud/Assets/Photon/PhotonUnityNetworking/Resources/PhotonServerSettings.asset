@@ -41,13 +41,11 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_GetTeam
   - RPC_SentTeam
-  - SetNullAsParent
-  - SetPlatformAsParent
-  - DisableView
-  - EnView
-  - SetToTrue
-  - SetToFalse
-  - pointSync
+  - UpdateScores
+  - UpdateScore1
+  - UpdateScore2
+  - Setting
+  - UpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 3009110635441175320}
   - component: {fileID: 3009110635441175313}
   - component: {fileID: 3009110635441175314}
-  - component: {fileID: 8997743239005439784}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Untagged
@@ -349,6 +348,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!114 &3009110635441175313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,16 +389,3 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8997743239005439784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3009110635441175322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825ad979be902e4488b476a1ba8f5d25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
