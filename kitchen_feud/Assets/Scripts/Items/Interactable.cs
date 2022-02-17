@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 
 /*	
@@ -10,14 +11,12 @@ using Photon.Pun;
 
 public class Interactable : MonoBehaviour
 {
-
-	public float radius = 1.4f;              
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
-	bool isFocus = false;  
-	Transform player;      
+	public bool isFocus = false;
+	public Transform player;
 
-	bool hasInteracted = false; 
+	bool hasInteracted = false;
 
 	public virtual void Interact()
 	{
@@ -29,13 +28,8 @@ public class Interactable : MonoBehaviour
 	{
 		if (isFocus && !hasInteracted)
 		{
-			// If we are close enough
-			float distance = Vector3.Distance(player.position, interactionTransform.position);
-			if (distance <= radius)
-			{
-				Interact();
-				hasInteracted = true;
-			}
+			Interact();
+			hasInteracted = true;
 		}
 	}
 
@@ -53,14 +47,15 @@ public class Interactable : MonoBehaviour
 		hasInteracted = false;
 	}
 
-	// Draw our radius in the editor
-	void OnDrawGizmosSelected()
+	public void EnterScene(string sceneName)
 	{
-		if (interactionTransform == null)
-			interactionTransform = transform;
+		SceneManager.LoadScene(sceneName);
+	}
 
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawWireSphere(interactionTransform.position, radius);
+	//allow only one player at a time to interact with the object
+	public void LockInteraction()
+	{
+
 	}
 
 }

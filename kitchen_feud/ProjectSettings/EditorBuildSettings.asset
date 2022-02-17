@@ -9,17 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 1
-    path: Assets/Scenes/kitchensScore.unity
-    guid: 126fd8c7c6ea30044853bf9bfdb5c079
-  - enabled: 0
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/kitchensUI.unity
+    guid: f7b7787df6cb84a4c95515a4d1f8eb88
+  - enabled: 0
+    path: Assets/Scenes/kitchens_foodSystem.unity
+    guid: 557ba63e77d84ea419fffdb974e2b1c2
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/score (merge with kitchen).unity
+    guid: 500ece1e38869a74c885ec8aa8a68278
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2

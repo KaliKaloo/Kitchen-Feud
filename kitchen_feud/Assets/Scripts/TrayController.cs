@@ -17,7 +17,8 @@ public class TrayController : MonoBehaviour
         foreach (GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
             string trayID = ts.tray.trayID;
-            if(ts.tray.trayID == ""){
+            if (ts.tray.trayID == "")
+            {
                 ts.tray.trayID = orderID;
                 Debug.Log(ts.tray.trayID);
                 break;
@@ -25,17 +26,28 @@ public class TrayController : MonoBehaviour
         }
     }
 
-    public void resetTray(string orderid){
-        foreach(GameObject t in trays){
+    public void resetTray(string orderid)
+    {
+        foreach (GameObject t in trays)
+        {
             Tray ts = t.GetComponent<Tray>();
 
-            if(ts.tray.trayID == orderid){
+            if (ts.tray.trayID == orderid)
+            {
                 ts.tray.trayID = "";
 
                 // if tray matches order add to score
                 CompareOrder(ts.tray.ServingTray, orderid);
 
                 ts.tray.ServingTray.Clear();
+                foreach (Transform slot in t.transform){
+                    Debug.Log(slot.name);
+
+                    foreach(Transform child in slot){
+                        Destroy(child.gameObject);
+                    }
+                    
+                }
                 break;
             }
         }
