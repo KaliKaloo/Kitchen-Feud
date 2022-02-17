@@ -7,7 +7,12 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 public class GlobalTimer
 {
-    private static int timer = 100;
+
+    // SET TIMER HERE !!!!!!
+    private static readonly int time = 100;
+
+
+    private static int timer = time;
     private static bool started = false;
     PhotonRoom room;
 
@@ -15,21 +20,25 @@ public class GlobalTimer
     // set the timer amount here 
     public void InitializeTimer()
     {
-        int seconds;
         if (PhotonNetwork.IsMasterClient)
         {
 
             // how long the timer will last in seconds
-            seconds = 100;
-            timer = seconds;
+            timer = time;
             ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
             PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
 
         }
         else
         {
-
-            timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+            // temporary fix
+            try
+            {
+                timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+            } catch
+            {
+                timer = time;
+            }
         }
     }
 
@@ -41,7 +50,16 @@ public class GlobalTimer
     // get current time from timer
     public int GetTime()
     {
-        return timer;
+        int currentTime;
+        try
+        {
+            currentTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+        }
+        catch
+        {
+            currentTime = timer;
+        }
+        return currentTime;
     }
 
     // decrement timer
@@ -52,7 +70,6 @@ public class GlobalTimer
         ht.Remove("Time");
         ht.Add("Time", timer);
         PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
-
     }
 }
 

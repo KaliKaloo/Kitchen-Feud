@@ -14,6 +14,8 @@ public class CanvasController : MonoBehaviour
     public Button serve;
     public GameObject justClicked;
 
+    private static GlobalTimer timer = new GlobalTimer();
+
     void Start()
     {
         ticket1.SetActive(false);
