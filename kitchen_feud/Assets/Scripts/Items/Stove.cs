@@ -25,14 +25,17 @@ public class Stove : Interactable
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-         //view control
-        PhotonView pv = PhotonView.Get(player);
+
+        //view control
+        PhotonView pv = player.GetComponent<PhotonView>();
         cookingBar = slider.GetComponent<CookingBar>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         GameEvents.current.assignPoints += UpdateDishPoints;
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
+                Debug.LogError(playerHold.items);
+                Debug.LogError(playerHold.heldObj.name);
                 addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control

@@ -28,6 +28,7 @@ public class PlayerHolding : MonoBehaviour
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
         {
+                Debug.Log("IM HEREE");
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot
