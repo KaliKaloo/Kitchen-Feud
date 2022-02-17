@@ -23,14 +23,9 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
-			
-			DontDestroyOnLoad(gameObject);
-
-		
-			
+		DontDestroyOnLoad(gameObject);
 		}
 	}
-
 	void Update()
 	{
 		if (view.IsMine)

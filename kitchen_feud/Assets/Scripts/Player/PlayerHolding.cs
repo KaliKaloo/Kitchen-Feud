@@ -71,7 +71,8 @@ public class PlayerHolding : MonoBehaviour
         }
     }
 
-    public void dropItem(){
+    public void dropItem()
+    {
         if (view.IsMine)
         {
             Debug.Log("Drop item: " + items[0].name);

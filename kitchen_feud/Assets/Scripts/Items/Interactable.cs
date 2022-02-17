@@ -11,7 +11,6 @@ using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
-
 	public Transform interactionTransform;  // The transform from where we interact in case you want to offset it
 
 	public bool isFocus = false;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Photon.Pun;
 
 public class pickableItem : Interactable
 {
@@ -7,6 +6,8 @@ public class pickableItem : Interactable
     //public bool canPickUp = true;
     public BaseFood item;
     PlayerHolding playerHold;
+	public bool onTray = false;
+	public TraySO Tray;
     // public GameObject obj;
     public override void Interact()
     {
@@ -15,6 +16,9 @@ public class pickableItem : Interactable
 
         if (playerHold.items.Count == 0) {
             playerHold.pickUpItem(gameObject, item);
+			if (onTray == true){
+				removeFromTray(Tray);
+			}
 
             //if it's a dish print out its points
             Dish dish = gameObject.GetComponent<Dish>();
@@ -31,5 +35,10 @@ public class pickableItem : Interactable
         }
 
     }
+		public void removeFromTray(TraySO tray)
+	{
+		tray.ServingTray.Remove(item);
+		onTray = false;
+	}
   
 }
