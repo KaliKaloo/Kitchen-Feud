@@ -851,6 +851,7 @@ GameObject:
   - component: {fileID: 87785476}
   - component: {fileID: 87785474}
   - component: {fileID: 87785475}
+  - component: {fileID: 87785477}
   m_Layer: 5
   m_Name: Team1OrderController
   m_TagString: Untagged
@@ -893,6 +894,7 @@ MonoBehaviour:
   - {fileID: 645987259}
   - {fileID: 1358449701}
   - {fileID: 1404734626}
+  teamNumber: 1
 --- !u!224 &87785476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -912,6 +914,28 @@ RectTransform:
   m_AnchoredPosition: {x: -39.902466, y: -90.60144}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &87785477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87785473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 50
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &89022155
 GameObject:
   m_ObjectHideFlags: 0
@@ -8679,16 +8703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 211369744}
-  isFocus: 0
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!1 &213245771
 GameObject:
   m_ObjectHideFlags: 0
@@ -15284,6 +15298,7 @@ GameObject:
   - component: {fileID: 359947017}
   - component: {fileID: 359947015}
   - component: {fileID: 359947016}
+  - component: {fileID: 359947018}
   m_Layer: 5
   m_Name: Team2OrderController
   m_TagString: Untagged
@@ -15326,6 +15341,7 @@ MonoBehaviour:
   - {fileID: 924149732}
   - {fileID: 1510220288}
   - {fileID: 225396944}
+  teamNumber: 2
 --- !u!224 &359947017
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15345,6 +15361,28 @@ RectTransform:
   m_AnchoredPosition: {x: -39.902466, y: -90.60144}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &359947018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359947014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 51
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!43 &360995464
 Mesh:
   m_ObjectHideFlags: 0
@@ -25011,16 +25049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 732456129}
-  isFocus: 0
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!1 &748162731
 GameObject:
   m_ObjectHideFlags: 0
@@ -54184,6 +54212,8 @@ MonoBehaviour:
   orders: {fileID: 11400000, guid: 6597be60adf55e94f883309c85182601, type: 2}
   dishes: {fileID: 11400000, guid: 5327b73f46d58274fac74e0fe5f4973e, type: 2}
   ingredients: {fileID: 11400000, guid: 113bed25c538941499ae56e0e9f77d66, type: 2}
+  in1: {fileID: 0}
+  in2: {fileID: 0}
 --- !u!4 &1583869179
 Transform:
   m_ObjectHideFlags: 0
@@ -57448,16 +57478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f463df9c7c0a7aceba4ddb4f44956335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 1662441420}
-  isFocus: 0
-  player: {fileID: 0}
-  inputObj: {fileID: 0}
-  itemsOnTheStove: []
-  foundDish: {fileID: 0}
-  dishOfFoundDish: {fileID: 0}
-  canvas: {fileID: 0}
-  minigameCanvas: {fileID: 0}
-  cookingBar: {fileID: 0}
 --- !u!1 &1666933853
 GameObject:
   m_ObjectHideFlags: 0
@@ -59274,7 +59294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80255c67b7a794319b06b52631cbb93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2370544356775548294, guid: 8784e1fb027ea466a907a2653112ff8c, type: 3}
+  playerPrefab: {fileID: 2370544356775548294, guid: 55d7891b75519614792b6fa304b94756, type: 3}
   minX: 1.174324
   minY: 0.8289948
   minZ: -3.944

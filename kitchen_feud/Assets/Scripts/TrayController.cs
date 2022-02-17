@@ -11,7 +11,7 @@ public class TrayController : MonoBehaviour
 
     private static ParseScore scores = new ParseScore();
 
-    public PhotonPlayer player_random;
+    public int teamNumber;
 
     public void makeTray(string orderID){
         foreach (GameObject t in trays){
@@ -100,16 +100,14 @@ public class TrayController : MonoBehaviour
 
         currentScore = 100;
 
-        Debug.LogError(player_random.myTeam);
+        Debug.LogError(teamNumber);
 
-        if (player_random.myTeam == 0)
+        if (teamNumber == 1)
         {
-            this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.Others, currentScore);
-            scores.AddScore1(currentScore);
-        } else
+            this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);
+        } else if (teamNumber == 2)
         {
-            this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.Others, currentScore);
-            scores.AddScore2(currentScore);
+            this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
         }
         
     }

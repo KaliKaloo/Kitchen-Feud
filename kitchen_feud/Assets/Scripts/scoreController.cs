@@ -5,47 +5,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-public class GlobalTimer {
-    private static int timer = 0;
+public class GlobalTimer
+{
+    private static int timer = 100;
     private static bool started = false;
     PhotonRoom room;
-    
-    
-    // set the timer amount here 
-    public void InitializeTimer() {
-        int seconds;
-        if(PhotonNetwork.IsMasterClient){
 
-        // how long the timer will last in seconds
-        seconds = 100;
-        timer = seconds;
-        ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
-        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+
+    // set the timer amount here 
+    public void InitializeTimer()
+    {
+        int seconds;
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            // how long the timer will last in seconds
+            seconds = 100;
+            timer = seconds;
+            ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
+            PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
 
         }
-        else{
+        else
+        {
 
             timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
         }
     }
 
-    public void RestartTimer() {
+    public void RestartTimer()
+    {
         started = false;
     }
 
     // get current time from timer
-    public int GetTime() {
+    public int GetTime()
+    {
         return timer;
     }
 
     // decrement timer
-    public void Decrement() {
+    public void Decrement()
+    {
         timer -= 1;
         ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
         ht.Remove("Time");
         ht.Add("Time", timer);
         PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
-       
+
     }
 }
 
@@ -89,7 +96,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text timerText;
 
     float elapsed = 0f;
-    
+
     // updates end scores to compare in game over scene
     private static ParseScore scores = new ParseScore();
 
@@ -140,7 +147,7 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
-        
+
         if (timer.GetTime() > 0)
         {
             // updates timer and text in timer
