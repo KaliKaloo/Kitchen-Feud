@@ -11,11 +11,14 @@ public class Exit : MonoBehaviour
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public List<Stove> stoves = new List<Stove>();
+
 	//public Stove stove;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
+		
+	
 	}
 
 	void TaskOnClick(){

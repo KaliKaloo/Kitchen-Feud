@@ -521,6 +521,8 @@ MonoBehaviour:
   - {fileID: 211369749}
   - {fileID: 732456134}
   - {fileID: 1662441425}
+  player: {fileID: 1242614080712157134, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
+  PV: {fileID: 0}
 --- !u!114 &10168022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22733,7 +22735,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh264868
+  m_Name: pb_Mesh49822
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25513,7 +25515,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 111
@@ -58466,7 +58468,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 112
@@ -63400,7 +63402,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh348196
+  m_Name: pb_Mesh32172
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
