@@ -98,8 +98,6 @@ public class TrayController : MonoBehaviour
         // deduct scores if they contain raw ingredients
         currentScore += IngredientDeduction(tray);
 
-        currentScore = 100;
-
         Debug.LogError(teamNumber);
 
         if (teamNumber == 1)
