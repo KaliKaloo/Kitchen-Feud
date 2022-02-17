@@ -14236,6 +14236,7 @@ GameObject:
   - component: {fileID: 465501901}
   - component: {fileID: 465501900}
   - component: {fileID: 465501902}
+  - component: {fileID: 465501903}
   m_Layer: 5
   m_Name: OrderController
   m_TagString: Untagged
@@ -14297,6 +14298,29 @@ MonoBehaviour:
   - {fileID: 2030342702}
   - {fileID: 1643212639}
   - {fileID: 1155015236}
+  player_random: {fileID: 4497627996167492564, guid: eea8078eb9b764be280538c6cc2555ca, type: 3}
+--- !u!114 &465501903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465501899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 69
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &478655463
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class TrayController : MonoBehaviour
 
     private static ParseScore scores = new ParseScore();
 
+    public PhotonPlayer player_random;
+
     public void makeTray(string orderID){
         foreach (GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
@@ -84,18 +86,20 @@ public class TrayController : MonoBehaviour
         // deduct scores if they contain raw ingredients
         currentScore += IngredientDeduction(tray);
 
-        // IF PLAYER PART OF TEAM 1
-        if (true)
-        {
-            currentScore = 100;
-            scores.AddScore1(currentScore);
-        }
-        // IF PLAYER PART OF TEAM 2
-        //else if (false)
-        //{
-        //    scores.AddScore2(GetDishScore(o.dishes));
-        //}
+        currentScore = 100;
 
+        Debug.LogError(player_random.myTeam);
+
+        if (player_random.myTeam == 0)
+        {
+            this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.Others, currentScore);
+            scores.AddScore1(currentScore);
+        } else
+        {
+            this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.Others, currentScore);
+            scores.AddScore2(currentScore);
+        }
+        
     }
 
     private void OnApplicationQuit() {
@@ -104,5 +108,17 @@ public class TrayController : MonoBehaviour
             ts.tray.trayID = "";
             ts.tray.ServingTray.Clear();
         }
+    }
+
+    [PunRPC]
+    void UpdateScore1(int score)
+    {
+        scores.AddScore1(score);
+    }
+
+    [PunRPC]
+    void UpdateScore2(int score)
+    {
+        scores.AddScore2(score);
     }
 }

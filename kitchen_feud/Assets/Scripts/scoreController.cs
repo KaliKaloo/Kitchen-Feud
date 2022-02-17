@@ -125,7 +125,6 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        this.GetComponent<PhotonView>().RPC("UpdateScores", RpcTarget.Others, scores.GetScore1(), scores.GetScore2());
         score1Text.text = ConvertScoreToString(scores.GetScore1());
         score2Text.text = ConvertScoreToString(scores.GetScore2());
 
@@ -155,13 +154,5 @@ public class scoreController : MonoBehaviour
             SceneManager.LoadScene("gameOver");
 
         }
-    }
-
-
-    [PunRPC]
-    void UpdateScores(int scores1, int scores2)
-    {
-        scores1 = scores.GetScore1();
-        scores2 = scores.GetScore2();
     }
 }
