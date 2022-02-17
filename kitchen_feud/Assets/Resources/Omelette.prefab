@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6998398168430758220}
   - component: {fileID: 6998398168430758213}
   - component: {fileID: 6998398168430758214}
+  - component: {fileID: 8722941574321890573}
   m_Layer: 0
   m_Name: Omelette
   m_TagString: Untagged
@@ -348,8 +349,6 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: 5f3e64a12ab083946ad39bea94b2dcb4, type: 2}
-  onTray: 0
-  Tray: {fileID: 0}
 --- !u!114 &6998398168430758213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,3 +388,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8722941574321890573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998398168430758222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
