@@ -32,13 +32,7 @@ public class GlobalTimer
         else
         {
             // temporary fix
-            try
-            {
-                timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-            } catch
-            {
-                timer = time;
-            }
+            timer = TryTime();
         }
     }
 
@@ -47,8 +41,8 @@ public class GlobalTimer
         started = false;
     }
 
-    // get current time from timer
-    public int GetTime()
+    // avoiding trying to access hashmap without master client loading
+    private int TryTime()
     {
         int currentTime;
         try
@@ -60,6 +54,25 @@ public class GlobalTimer
             currentTime = timer;
         }
         return currentTime;
+    }
+
+    // get current time from timer
+    public int GetTime()
+    {
+        return TryTime();
+    }
+
+    public bool OrderInterval()
+    {
+        int currentTime = TryTime();
+        int interval = currentTime % 20;
+        if (interval == 0)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     // decrement timer

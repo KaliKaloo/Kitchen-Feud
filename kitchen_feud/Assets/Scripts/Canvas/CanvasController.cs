@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 public class CanvasController : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class CanvasController : MonoBehaviour
         ticket2.SetActive(false);
         ticket3.SetActive(false);
         orderMenu.SetActive(false);
+
+        // 1st parameter is how long till 1st order added
+        // 2nd parameter is how many seconds till another order is added
+        InvokeRepeating("UpdateOrders", 0, 5);
 
         Button btn = serve.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
@@ -86,6 +91,37 @@ public class CanvasController : MonoBehaviour
         }
 
        
+    }
+
+    private bool CheckIfTicketsFull()
+    {
+        if (ticket1.activeInHierarchy && ticket2.activeInHierarchy && ticket3.activeInHierarchy)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
+    private void UpdateOrders()
+    {
+        // LEADER OF TEAM 1
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (CheckIfTicketsFull())
+            {
+                ShowNewTicket();
+            }
+        } 
+        // IF USER IS LEADER OF TEAM 2
+        else if (false)
+        {
+            if (CheckIfTicketsFull())
+            {
+                ShowNewTicket();
+            }
+        }
     }
 
     public void DisplayNewRandomOrder(DisplayTicket ticket)
