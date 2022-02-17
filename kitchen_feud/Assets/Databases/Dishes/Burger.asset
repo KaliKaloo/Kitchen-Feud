@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Burger
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 8106170845869271003, guid: 5c6aece0e8daa49088f7898df46ba2d2, type: 3}
   Type: 1
   canPickUp: 1
   maxsScore: 100
