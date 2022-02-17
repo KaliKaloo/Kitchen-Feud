@@ -34,8 +34,8 @@ public class Stove : Interactable
         GameEvents.current.assignPoints += UpdateDishPoints;
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
-                Debug.LogError(playerHold.items);
-                Debug.LogError(playerHold.heldObj.name);
+                // Debug.LogError(playerHold.items);
+                // Debug.LogError(playerHold.heldObj.name);
                 addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control
@@ -94,6 +94,9 @@ public class Stove : Interactable
 
     public void checkForDish(){
         foundDish = Database.GetDishFromIngredients(itemsOnTheStove);
+        foreach( IngredientSO t in itemsOnTheStove){
+            Debug.Log(t.name);
+        }
         if(foundDish != null)
             foundMatchingDish = true;
     }

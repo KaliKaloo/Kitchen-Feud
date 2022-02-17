@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Burger
   location: 0
-  Prefab: {fileID: 8106170845869271003, guid: 5c6aece0e8daa49088f7898df46ba2d2, type: 3}
+  Prefab: {fileID: 8106170845869271003, guid: 0277eb092d45f6045829713ec3dbf776, type: 3}
   Type: 1
   canPickUp: 1
-  maxsScore: 100
-  finalsScore: 0
-  dishID: DI0405
-  toCook: Stove
-  cookingTime: 20
   maxScore: 100
   finalScore: 0
+  dishID: DI45
+  toCook: Stove
+  cookingTime: 20
   recipe:
   - {fileID: 11400000, guid: 18c34fc074c4cb449aa54d5fa708e293, type: 2}
   - {fileID: 11400000, guid: 7d0e5ef30cc9aa848b9c1dfa1f726a4e, type: 2}

@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tomato Soup
   location: 0
-  Prefab: {fileID: 4307230979839467952, guid: 263eb989f312a4bb6ac0f7d2cbe04560, type: 3}
+  Prefab: {fileID: 4307230979839467952, guid: 0282da78817964f4bb9d77a01afd5b1f, type: 3}
   Type: 1
   canPickUp: 1
-  maxsScore: 100
-  finalsScore: 0
-  dishID: DI0203
-  toCook: Stove
-  cookingTime: 20
   maxScore: 100
   finalScore: 0
+  dishID: DI23
+  toCook: Stove
+  cookingTime: 20
   recipe:
   - {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
   - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}

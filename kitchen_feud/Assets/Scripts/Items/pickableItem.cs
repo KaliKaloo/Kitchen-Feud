@@ -24,7 +24,7 @@ public class pickableItem : Interactable
             Dish dish = gameObject.GetComponent<Dish>();
             if (dish != null) {
                
-                Debug.LogError("points: " + dish.points);
+                Debug.Log("points: " + dish.points);
             }
 
 

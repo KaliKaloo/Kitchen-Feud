@@ -89,11 +89,7 @@ public class CanvasController : MonoBehaviour
     public void DisplayNewRandomOrder(DisplayTicket ticket)
     {  
         // RANDOM ORDER
-        //Order o = Database.GetRandomOrder();
-        //string orderID = o.orderID;
-
-        // TEST :: for testing always generate mushroom soup
-        Order o = Database.GetMushroomSoup();
+        Order o = Database.GetRandomOrder();
         string orderID = o.orderID;
        
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();

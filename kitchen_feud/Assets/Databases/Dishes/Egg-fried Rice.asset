@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Egg-fried Rice
   location: 0
-  Prefab: {fileID: 4460004903174343541, guid: a0b92b5042ac340c9832856720eb188e, type: 3}
+  Prefab: {fileID: 4460004903174343541, guid: 4a39516edfa247944b46a772f7fb85bb, type: 3}
   Type: 1
   canPickUp: 1
-  maxsScore: 100
-  finalsScore: 0
-  dishID: DI0611
-  toCook: Stove
-  cookingTime: 20
   maxScore: 100
   finalScore: 0
+  dishID: DI611
+  toCook: Stove
+  cookingTime: 20
   recipe:
   - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
   - {fileID: 11400000, guid: 2e52c90c96e8b2742aba22e28f9b8c57, type: 2}

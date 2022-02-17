@@ -90,15 +90,12 @@ public class TrayController : MonoBehaviour
         int currentScore = 0;
 
         // Compares two dishes without order mattering (now checks for duplicates too)
-        if (Enumerable.SequenceEqual(tray.OrderBy(t => t), o.dishes.OrderBy(t => t)))
+        if (Enumerable.SequenceEqual(tray.OrderBy(t => t.name), o.dishes.OrderBy(t => t.name)))
         {
-
             currentScore += GetDishScore(tray);
         }
         // deduct scores if they contain raw ingredients
         currentScore += IngredientDeduction(tray);
-
-        Debug.LogError(teamNumber);
 
         if (teamNumber == 1)
         {

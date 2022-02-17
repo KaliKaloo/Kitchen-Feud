@@ -274,7 +274,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3ae58426886e465490a21d6de45e328, type: 2}
+  - {fileID: 2100000, guid: d0bb3ed6122229349bd92596c1a722f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,6 +349,8 @@ MonoBehaviour:
   isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: 18c34fc074c4cb449aa54d5fa708e293, type: 2}
+  onTray: 0
+  Tray: {fileID: 0}
 --- !u!114 &4036615515797736677
 MonoBehaviour:
   m_ObjectHideFlags: 0

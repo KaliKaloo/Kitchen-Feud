@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sandwitch
   location: 0
-  Prefab: {fileID: 5786816335962581795, guid: 904ba837f535e4597a0d795a23b65604, type: 3}
+  Prefab: {fileID: 5786816335962581795, guid: 37106aa182499eb488e2d5c94d17753b, type: 3}
   Type: 1
   canPickUp: 1
-  maxsScore: 50
-  finalsScore: 0
-  dishID: DI030910
-  toCook: Counter
-  cookingTime: 10
   maxScore: 50
   finalScore: 0
+  dishID: DI3910
+  toCook: Counter
+  cookingTime: 10
   recipe:
   - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
   - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}
