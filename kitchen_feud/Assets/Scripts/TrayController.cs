@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Photon.Pun;
 
 public class TrayController : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class TrayController : MonoBehaviour
         // IF PLAYER PART OF TEAM 1
         if (true)
         {
+            currentScore = 100;
             scores.AddScore1(currentScore);
         }
         // IF PLAYER PART OF TEAM 2
@@ -93,6 +95,7 @@ public class TrayController : MonoBehaviour
         //{
         //    scores.AddScore2(GetDishScore(o.dishes));
         //}
+
     }
 
     private void OnApplicationQuit() {

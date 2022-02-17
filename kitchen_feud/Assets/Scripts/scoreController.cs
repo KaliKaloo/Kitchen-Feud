@@ -40,7 +40,6 @@ public class GlobalTimer {
 
     // decrement timer
     public void Decrement() {
-        // timer -= 1;
         timer -= 1;
         ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
         ht.Remove("Time");
@@ -89,12 +88,10 @@ public class scoreController : MonoBehaviour
 
     [SerializeField] private Text timerText;
 
-    private int score1 = 0;
-    private int score2 = 0;
     float elapsed = 0f;
     
     // updates end scores to compare in game over scene
-    private static ParseScore endScores = new ParseScore();
+    private static ParseScore scores = new ParseScore();
 
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
@@ -103,8 +100,8 @@ public class scoreController : MonoBehaviour
     void Start()
     {
         // start scores at 0
-        score1Text.text = ConvertScoreToString(score1);
-        score2Text.text = ConvertScoreToString(score2);
+        score1Text.text = ConvertScoreToString(scores.GetScore1());
+        score2Text.text = ConvertScoreToString(scores.GetScore2());
 
         // start timer if not started yet
         timer.InitializeTimer();
@@ -128,12 +125,9 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        this.GetComponent<PhotonView>().RPC("UpdateScores", RpcTarget.Others,score1, score2);
-        score1 = endScores.GetScore1();
-        score2 = endScores.GetScore2();
-
-        score1Text.text = ConvertScoreToString(score1);
-        score2Text.text = ConvertScoreToString(score2);
+        this.GetComponent<PhotonView>().RPC("UpdateScores", RpcTarget.Others, scores.GetScore1(), scores.GetScore2());
+        score1Text.text = ConvertScoreToString(scores.GetScore1());
+        score2Text.text = ConvertScoreToString(scores.GetScore2());
 
         // increment every second
         elapsed += Time.deltaTime;
@@ -157,20 +151,17 @@ public class scoreController : MonoBehaviour
         else
         {
             // load game over screen and send final scores
-            endScores.UpdateScores(score1, score2);
-
             timer.RestartTimer();
             SceneManager.LoadScene("gameOver");
 
         }
     }
- 
-    
+
+
     [PunRPC]
     void UpdateScores(int scores1, int scores2)
     {
-        scores1 = endScores.GetScore1();
-        scores2 = endScores.GetScore2(); 
+        scores1 = scores.GetScore1();
+        scores2 = scores.GetScore2();
     }
-    
 }
