@@ -107,7 +107,7 @@ public class TrayController : MonoBehaviour
         print(String.Join("; ", trayNames));
         print(String.Join("; ", dishNames));
 
-        if (trayNames.Equals(dishNames))
+        if (trayNames.SequenceEqual(dishNames))
             return true;
         else
             return false;
@@ -120,14 +120,14 @@ public class TrayController : MonoBehaviour
         int currentScore = 0;
 
         // Compares two dishes without order mattering (now checks for duplicates too)
-        if (CompareDishNames(tray, o.dishes))
+        bool temp = CompareDishNames(tray, o.dishes);
+        print(temp);
+        if (temp)
         {
             currentScore += GetDishScore(onTray);
         }
         // deduct scores if they contain raw ingredients
-
-        Debug.Log(currentScore);
-        currentScore += IngredientDeduction(tray);
+        //currentScore += IngredientDeduction(tray);
 
         if (teamNumber == 1)
         {
