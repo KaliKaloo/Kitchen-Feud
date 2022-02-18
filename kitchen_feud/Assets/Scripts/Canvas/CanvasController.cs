@@ -15,6 +15,9 @@ public class CanvasController : MonoBehaviour
     public Button serve;
     public GameObject justClicked;
 
+
+    private int orderNum;
+
     private static GlobalTimer timer = new GlobalTimer();
 
     void Start()
@@ -141,6 +144,7 @@ public class CanvasController : MonoBehaviour
        
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);
+        o.orderNumber  = ++orderNum;
         ticket.SetUI(o);
 
     }
