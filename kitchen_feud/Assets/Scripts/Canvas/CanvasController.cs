@@ -102,7 +102,6 @@ public class CanvasController : MonoBehaviour
     {
         if (ticket1.activeSelf && ticket2.activeSelf && ticket3.activeSelf)
         {
-            Debug.Log("THIS IS FALSE");
             //this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
             return false;
         }

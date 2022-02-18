@@ -10,12 +10,17 @@ public class Exit : MonoBehaviour
 	public Button yourButton;
 	public GameObject canvas;
     public GameObject minigameCanvas;
+	public GameObject player;
+	//private PhotonView view;
 	public List<Stove> stoves = new List<Stove>();
+	int theOne;
 
 	//public Stove stove;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
+		player = GetComponent<GameObject>();
+		
 		btn.onClick.AddListener(TaskOnClick);
 		
 	
@@ -32,12 +37,28 @@ public class Exit : MonoBehaviour
 				stoves[i].isBeingInteractedWith = false;
 				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
 				stoves[i].r.enabled = true;
-
-				stoves[i].itemsOnTheStove.Clear();
+				PhotonView	view = stoves[i].player.GetComponent<PhotonView>();
+				
+				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+				
+				stoves[i].playerController.enabled = true;
+				stoves[i].playerRigidbody.isKinematic = false;
+				theOne = i;
                 GameEvents.current.assignPoints -= stoves[i].UpdateDishPoints;
-
 			}
 		}
-		//stove.playerController.enabled = true;
+		Debug.Log(stoves[theOne].transform.position);
+		
+		/*stoves[theOne].playerRigidbody.GetComponent<PhotonView>().RPC("EnablePushing", RpcTarget.Others);
+		stoves[theOne].playerRigidbody.isKinematic = false;
+		stoves[theOne].playerRigidbody.detectCollisions = true;*/
+		//stoves[theOne].playerRigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 	}
+
+	/*[PunRPC]
+    void EnablePushing()
+    {
+        stoves[theOne].playerRigidbody.isKinematic = true;
+        stoves[theOne].playerRigidbody.detectCollisions = false;
+    }*/
 }
