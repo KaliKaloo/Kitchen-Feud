@@ -50,6 +50,8 @@ MonoBehaviour:
   - pointSync
   - UpdateScore1
   - UpdateScore2
+  - showT
+  - Showing
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

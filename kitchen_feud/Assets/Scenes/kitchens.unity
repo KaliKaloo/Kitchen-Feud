@@ -20932,6 +20932,7 @@ GameObject:
   - component: {fileID: 555048729}
   - component: {fileID: 555048728}
   - component: {fileID: 555048727}
+  - component: {fileID: 555048731}
   m_Layer: 5
   m_Name: ticket3-1
   m_TagString: Untagged
@@ -21073,6 +21074,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555048725}
   m_CullTransparentMesh: 1
+--- !u!114 &555048731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555048725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 556
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &559111354
 GameObject:
   m_ObjectHideFlags: 0
@@ -30583,6 +30606,7 @@ GameObject:
   - component: {fileID: 909003757}
   - component: {fileID: 909003756}
   - component: {fileID: 909003755}
+  - component: {fileID: 909003760}
   m_Layer: 5
   m_Name: ticket2-1
   m_TagString: Untagged
@@ -30724,6 +30748,28 @@ RectTransform:
   m_AnchoredPosition: {x: -197.2, y: 87.09999}
   m_SizeDelta: {x: 200.602, y: 326.808}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &909003760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909003754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 555
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!43 &916719829
 Mesh:
   m_ObjectHideFlags: 0
@@ -45825,6 +45871,7 @@ GameObject:
   - component: {fileID: 1350123466}
   - component: {fileID: 1350123465}
   - component: {fileID: 1350123464}
+  - component: {fileID: 1350123468}
   m_Layer: 5
   m_Name: ticket3-2
   m_TagString: Untagged
@@ -45966,6 +46013,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350123462}
   m_CullTransparentMesh: 1
+--- !u!114 &1350123468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350123462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 335
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1355602346
 GameObject:
   m_ObjectHideFlags: 0
@@ -51543,6 +51612,7 @@ GameObject:
   - component: {fileID: 1465754448}
   - component: {fileID: 1465754447}
   - component: {fileID: 1465754446}
+  - component: {fileID: 1465754451}
   m_Layer: 5
   m_Name: ticket2-2
   m_TagString: Untagged
@@ -51684,6 +51754,28 @@ RectTransform:
   m_AnchoredPosition: {x: -202.90247, y: 87.09999}
   m_SizeDelta: {x: 200.602, y: 326.808}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1465754451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465754445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 334
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1470677446
 GameObject:
   m_ObjectHideFlags: 0
@@ -53001,6 +53093,7 @@ GameObject:
   - component: {fileID: 1505175454}
   - component: {fileID: 1505175453}
   - component: {fileID: 1505175452}
+  - component: {fileID: 1505175457}
   m_Layer: 5
   m_Name: ticket1-2
   m_TagString: Untagged
@@ -53142,6 +53235,28 @@ RectTransform:
   m_AnchoredPosition: {x: -274.50247, y: 87.1}
   m_SizeDelta: {x: 206.066, y: 308.24}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1505175457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505175451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 333
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1510220288
 GameObject:
   m_ObjectHideFlags: 0
@@ -67943,6 +68058,7 @@ GameObject:
   - component: {fileID: 1934012828}
   - component: {fileID: 1934012827}
   - component: {fileID: 1934012826}
+  - component: {fileID: 1934012831}
   m_Layer: 5
   m_Name: ticket1-1
   m_TagString: Untagged
@@ -68084,6 +68200,28 @@ RectTransform:
   m_AnchoredPosition: {x: -275.3, y: 87.1}
   m_SizeDelta: {x: 206.066, y: 308.24}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1934012831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934012825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 125
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1942011077
 GameObject:
   m_ObjectHideFlags: 0

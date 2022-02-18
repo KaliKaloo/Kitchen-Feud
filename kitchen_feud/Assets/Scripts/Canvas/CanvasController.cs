@@ -68,17 +68,21 @@ public class CanvasController : MonoBehaviour
         if (ticket1.activeInHierarchy == true)
         {
            if (ticket2.activeInHierarchy == true)
-            { 
-                ticket3.SetActive(true);
+            {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
+                Debug.LogError("Well you're here");
+                ticket3.SetActive(true);            
                 DisplayNewRandomOrder(Ticket3);
                 
             }
             
             else
-            { 
-                ticket2.SetActive(true);
+            {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
+                Debug.LogError("Well you're here");
+                ticket2.SetActive(true);
+                
+                
                 DisplayNewRandomOrder(Ticket2);
             }
         }
@@ -86,6 +90,7 @@ public class CanvasController : MonoBehaviour
         else
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
+            Debug.LogError("Well you're here");
             ticket1.SetActive(true);
             DisplayNewRandomOrder(Ticket1);
         }
@@ -97,6 +102,8 @@ public class CanvasController : MonoBehaviour
     {
         if (ticket1.activeInHierarchy && ticket2.activeInHierarchy && ticket3.activeInHierarchy)
         {
+            this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
+           
             return false;
         } else
         {
@@ -111,6 +118,7 @@ public class CanvasController : MonoBehaviour
         {
             if (CheckIfTicketsFull())
             {
+                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
                 ShowNewTicket();
             }
         } 
@@ -119,6 +127,7 @@ public class CanvasController : MonoBehaviour
         {
             if (CheckIfTicketsFull())
             {
+                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
                 ShowNewTicket();
             }
         }
@@ -135,6 +144,20 @@ public class CanvasController : MonoBehaviour
         ticket.SetUI(o);
 
     }
- 
 
+    [PunRPC]
+    void showT(int x,int y, int z){
+        PhotonView.Find(x).gameObject.SetActive(true);
+        //PhotonView.Find(x).GetComponent<DisplayTicket>().SetUI(PhotonView.Find(x).GetComponent<DisplayTicket>().order1);
+        PhotonView.Find(y).gameObject.SetActive(true);
+        PhotonView.Find(z).gameObject.SetActive(true);
+        //DisplayNewRandomOrder(PhotonView.Find(y).GetComponent<DisplayTicket>());
+
+    }
+    [PunRPC]
+    void Showing()
+    {
+        ShowNewTicket();
+    }
+   
 }
