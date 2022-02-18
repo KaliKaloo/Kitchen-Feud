@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -56,6 +57,9 @@ public class gameOverMenu : MonoBehaviour
     public void PlayAgain()
     {
         gameOver.End();
+        PhotonNetwork.DestroyAll();
+        PhotonNetwork.LeaveRoom();
+
         SceneManager.LoadScene("mainMenu");
     }
 

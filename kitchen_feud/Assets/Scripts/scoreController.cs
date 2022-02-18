@@ -9,7 +9,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static readonly int time = 100;
+    private static readonly int time = 10;
 
 
     private static int timer = time;
@@ -192,4 +192,6 @@ public class scoreController : MonoBehaviour
 
         }
     }
+
+    
 }
