@@ -38,6 +38,7 @@ public class Tray : Interactable
                 pickable = objectHolding.GetComponent<pickableItem>();
                 pickable.onTray = true;
                 tray.ServingTray.Add(pickable.item);
+                tray.objectsOnTray.Add(objectHolding);
                 pickable.Tray = tray;
                 Debug.Log(tray.ServingTray.Count);
             }

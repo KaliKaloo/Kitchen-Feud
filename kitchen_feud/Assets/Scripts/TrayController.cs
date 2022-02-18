@@ -37,9 +37,10 @@ public class TrayController : MonoBehaviour
                 ts.tray.trayID = "";
 
                 // if tray matches order add to score
-                CompareOrder(ts.tray.ServingTray, orderid);
+                CompareOrder(ts.tray.ServingTray, ts.tray.objectsOnTray, orderid);
 
                 ts.tray.ServingTray.Clear();
+                ts.tray.objectsOnTray.Clear();
                 foreach (Transform slot in t.transform){
                     Debug.Log(slot.name);
 
@@ -54,14 +55,16 @@ public class TrayController : MonoBehaviour
     }
 
     // gets the full max score of an order
-    private int GetDishScore(List<BaseFood> trayDishes)
+    private int GetDishScore(List<GameObject> trayDishes)
     {
         int total = 0;
 
-        foreach(BaseFood dish in trayDishes)
+        foreach(GameObject dish in trayDishes)
         {
             // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
-            total += dish.maxScore;
+            Dish dishComponent = dish.GetComponent<Dish>();
+            total += (int)dishComponent.points;
+            Debug.Log(dishComponent.points);
         }
 
         return total;
@@ -80,11 +83,11 @@ public class TrayController : MonoBehaviour
                 total += food.maxScore;
             }
         }
-        return total;
+        return total; 
     }
 
     // compares a tray to an orderid
-    private void CompareOrder(List<BaseFood> tray, string orderid)
+    private void CompareOrder(List<BaseFood> tray, List<GameObject> onTray, string orderid)
     {
         Order o = Database.GetOrderByID(orderid);
         int currentScore = 0;
@@ -92,7 +95,7 @@ public class TrayController : MonoBehaviour
         // Compares two dishes without order mattering (now checks for duplicates too)
         if (Enumerable.SequenceEqual(tray.OrderBy(t => t.name), o.dishes.OrderBy(t => t.name)))
         {
-            currentScore += GetDishScore(tray);
+            currentScore += GetDishScore(onTray);
         }
         // deduct scores if they contain raw ingredients
         currentScore += IngredientDeduction(tray);
