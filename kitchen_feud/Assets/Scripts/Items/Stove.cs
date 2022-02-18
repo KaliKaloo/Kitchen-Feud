@@ -76,6 +76,7 @@ public class Stove : Interactable
 
             //delete the items the dish was cooked from
             itemsOnTheStove.Clear();
+            foundMatchingDish = false;
 
         }
         else{
