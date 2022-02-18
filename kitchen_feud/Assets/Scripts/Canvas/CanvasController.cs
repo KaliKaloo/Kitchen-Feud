@@ -5,6 +5,36 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Photon.Pun;
 
+
+// Stops CanvasController invoking repeat show order function twice
+class RepeatLock
+{
+    static bool repeat = false;
+    static int count = 1;
+
+    public void AddCount()
+    {
+        repeat = false;
+
+        if (count >= 2)
+            count -= 1;
+        else
+            count += 1;
+
+        Debug.Log(count);
+        if (count >= 2)
+        {
+            repeat = true;
+        }
+    }
+
+    public bool GetLockVal()
+    {
+        return repeat;
+    }
+
+}
+
 public class CanvasController : MonoBehaviour
 {
     //public GameObject makeTicket;
@@ -20,6 +50,7 @@ public class CanvasController : MonoBehaviour
     private int orderNum;
 
     private static GlobalTimer timer = new GlobalTimer();
+    private static RepeatLock rLock = new RepeatLock();
 
     void Start()
     {
@@ -94,8 +125,6 @@ public class CanvasController : MonoBehaviour
             ticket1.SetActive(true);
             DisplayNewRandomOrder(Ticket1);
         }
-
-       
     }
 
     private bool CheckIfTicketsNotFull()
@@ -115,30 +144,35 @@ public class CanvasController : MonoBehaviour
 
     private void UpdateOrders()
     {
-        // LEADER OF TEAM 1
-        if (CheckIfTicketsNotFull())
+        rLock.AddCount();
+        if (rLock.GetLockVal())
         {
-            this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
-        }
-        /*
-        if (TC.teamNumber == 1)
-        {
+            // LEADER OF TEAM 1
             if (CheckIfTicketsNotFull())
             {
                 this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
-                //ShowNewTicket();
             }
-        } 
-        // IF USER IS LEADER OF TEAM 2
-        else 
-        {
-            if (CheckIfTicketsNotFull())
+
+            /*
+            if (TC.teamNumber == 1)
             {
-                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
-                //ShowNewTicket();
+                if (CheckIfTicketsNotFull())
+                {
+                    this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+                    //ShowNewTicket();
+                }
+            } 
+            // IF USER IS LEADER OF TEAM 2
+            else 
+            {
+                if (CheckIfTicketsNotFull())
+                {
+                    this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+                    //ShowNewTicket();
+                }
             }
+            */
         }
-        */
     }
 
     public void DisplayNewRandomOrder(DisplayTicket ticket)
@@ -146,6 +180,8 @@ public class CanvasController : MonoBehaviour
         // RANDOM ORDER
         Order o = Database.GetRandomOrder();
         string orderID = o.orderID;
+
+        print(orderID);
        
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);

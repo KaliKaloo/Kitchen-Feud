@@ -20,7 +20,7 @@ public class TrayController : MonoBehaviour
             if (ts.tray.trayID == "")
             {
                 ts.tray.trayID = orderID;
-                Debug.Log(ts.tray.trayID);
+                //Debug.Log(ts.tray.trayID);
                 break;
             }
         }
@@ -86,6 +86,7 @@ public class TrayController : MonoBehaviour
         return total; 
     }
 
+    // purely compares an order and a tray based on their names
     private bool CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
     {
         List<string> trayNames = new List<string>();
@@ -99,6 +100,7 @@ public class TrayController : MonoBehaviour
         {
             dishNames.Add(food.name);
         }
+        // sort dishes alphabetically
         trayNames = trayNames.OrderBy(q => q).ToList();
         dishNames = dishNames.OrderBy(q => q).ToList();
 
@@ -116,12 +118,6 @@ public class TrayController : MonoBehaviour
     {
         Order o = Database.GetOrderByID(orderid);
         int currentScore = 0;
-
-        List<string> trayNames = new List<string>();
-        foreach (BaseFood food in tray)
-        {
-            trayNames.Add(food.name);
-        }
 
         // Compares two dishes without order mattering (now checks for duplicates too)
         if (CompareDishNames(tray, o.dishes))
