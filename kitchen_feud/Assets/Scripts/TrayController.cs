@@ -42,7 +42,7 @@ public class TrayController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
                 foreach (Transform slot in t.transform){
-                    Debug.Log(slot.name);
+                    //Debug.Log(slot.name);
 
                     foreach(Transform child in slot){
                         Destroy(child.gameObject);
@@ -86,18 +86,51 @@ public class TrayController : MonoBehaviour
         return total; 
     }
 
+    private bool CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
+    {
+        List<string> trayNames = new List<string>();
+        List<string> dishNames = new List<string>();
+
+        foreach (BaseFood food in tray)
+        {
+            trayNames.Add(food.name);
+        }
+        foreach (BaseFood food in orderDish)
+        {
+            dishNames.Add(food.name);
+        }
+        trayNames = trayNames.OrderBy(q => q).ToList();
+        dishNames = dishNames.OrderBy(q => q).ToList();
+
+        print(String.Join("; ", trayNames));
+        print(String.Join("; ", dishNames));
+
+        if (trayNames.Equals(dishNames))
+            return true;
+        else
+            return false;
+    }
+
     // compares a tray to an orderid
     private void CompareOrder(List<BaseFood> tray, List<GameObject> onTray, string orderid)
     {
         Order o = Database.GetOrderByID(orderid);
         int currentScore = 0;
 
+        List<string> trayNames = new List<string>();
+        foreach (BaseFood food in tray)
+        {
+            trayNames.Add(food.name);
+        }
+
         // Compares two dishes without order mattering (now checks for duplicates too)
-        if (Enumerable.SequenceEqual(tray.OrderBy(t => t.name), o.dishes.OrderBy(t => t.name)))
+        if (CompareDishNames(tray, o.dishes))
         {
             currentScore += GetDishScore(onTray);
         }
         // deduct scores if they contain raw ingredients
+
+        Debug.Log(currentScore);
         currentScore += IngredientDeduction(tray);
 
         if (teamNumber == 1)
