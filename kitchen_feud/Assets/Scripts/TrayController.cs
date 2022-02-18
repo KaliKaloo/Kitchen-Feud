@@ -20,7 +20,7 @@ public class TrayController : MonoBehaviour
             if (ts.tray.trayID == "")
             {
                 ts.tray.trayID = orderID;
-                //Debug.Log(ts.tray.trayID);
+                Debug.Log(ts.tray.trayID);
                 break;
             }
         }

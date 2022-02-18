@@ -21,7 +21,6 @@ class RepeatLock
         else
             count += 1;
 
-        Debug.Log(count);
         if (count >= 2)
         {
             repeat = true;
@@ -180,8 +179,6 @@ public class CanvasController : MonoBehaviour
         // RANDOM ORDER
         Order o = Database.GetRandomOrder();
         string orderID = o.orderID;
-
-        print(orderID);
        
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);
