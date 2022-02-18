@@ -43,6 +43,17 @@ MonoBehaviour:
   - RPC_SentTeam
   - SetNullAsParent
   - SetPlatformAsParent
+  - DisableView
+  - EnView
+  - SetToTrue
+  - SetToFalse
+  - pointSync
+  - UpdateScore1
+  - UpdateScore2
+  - showT
+  - Showing
+  - DisablePushing
+  - EnablePushing
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

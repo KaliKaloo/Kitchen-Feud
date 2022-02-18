@@ -1,6 +1,4 @@
-
 using UnityEngine;
-
 public enum ItemType{
     Ingredient,
     Dish
@@ -18,8 +16,9 @@ public abstract class BaseFood : ScriptableObject
 {
     new public string name = "New Item";
     public Location location;
-
     public GameObject Prefab;
     public ItemType Type;
     public bool canPickUp = true;
+    public int maxScore;
+    public int finalScore;
 }

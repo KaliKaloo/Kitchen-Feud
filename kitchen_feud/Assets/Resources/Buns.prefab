@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4036615515797736684}
   - component: {fileID: 4036615515797736677}
   - component: {fileID: 4036615515797736678}
+  - component: {fileID: 7377965521619145601}
   m_Layer: 0
   m_Name: Buns
   m_TagString: Untagged
@@ -273,7 +274,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3ae58426886e465490a21d6de45e328, type: 2}
+  - {fileID: 2100000, guid: d0bb3ed6122229349bd92596c1a722f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,3 +390,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &7377965521619145601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4036615515797736686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ad979be902e4488b476a1ba8f5d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 18c34fc074c4cb449aa54d5fa708e293, type: 2}

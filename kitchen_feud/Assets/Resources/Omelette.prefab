@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6998398168430758220}
   - component: {fileID: 6998398168430758213}
   - component: {fileID: 6998398168430758214}
+  - component: {fileID: 8722941574321890573}
   m_Layer: 0
   m_Name: Omelette
   m_TagString: Untagged
@@ -273,7 +274,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9eeb489f2e53047eebd22192a4bf6acc, type: 2}
+  - {fileID: 2100000, guid: d0bb3ed6122229349bd92596c1a722f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,3 +390,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8722941574321890573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998398168430758222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0

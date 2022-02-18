@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8106170845869271001}
   - component: {fileID: 8106170845869270992}
   - component: {fileID: 8106170845869270995}
+  - component: {fileID: -1061383445851180630}
   m_Layer: 0
   m_Name: Burger
   m_TagString: Untagged
@@ -273,7 +274,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d96e1b7d74c07467a9a88c826c5f8a25, type: 2}
+  - {fileID: 2100000, guid: d0bb3ed6122229349bd92596c1a722f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,3 +390,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-1061383445851180630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8106170845869271003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0

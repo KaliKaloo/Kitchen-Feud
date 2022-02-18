@@ -4,6 +4,87 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+public class GlobalTimer
+{
+
+    // SET TIMER HERE !!!!!!
+    private static readonly int time = 600;
+
+
+    private static int timer = time;
+    private static bool started = false;
+    PhotonRoom room;
+
+
+    // set the timer amount here 
+    public void InitializeTimer()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            // how long the timer will last in seconds
+            timer = time;
+            ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
+            PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+
+        }
+        else
+        {
+            // temporary fix
+            timer = TryTime();
+        }
+    }
+
+    public void RestartTimer()
+    {
+        started = false;
+    }
+
+    // avoiding trying to access hashmap without master client loading
+    private int TryTime()
+    {
+        int currentTime;
+        try
+        {
+            currentTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+        }
+        catch
+        {
+            currentTime = timer;
+        }
+        return currentTime;
+    }
+
+    // get current time from timer
+    public int GetTime()
+    {
+        return TryTime();
+    }
+
+    public bool OrderInterval()
+    {
+        int currentTime = TryTime();
+        int interval = currentTime % 20;
+        if (interval == 0)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    // decrement timer
+    public void Decrement()
+    {
+        timer -= 1;
+        ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
+        ht.Remove("Time");
+        ht.Add("Time", timer);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+    }
+}
 
 public class ParseScore
 {
@@ -14,6 +95,16 @@ public class ParseScore
     {
         score1 = newScore1;
         score2 = newScore2;
+    }
+
+    public void AddScore1(int newScore1)
+    {
+        score1 += newScore1;
+    }
+
+    public void AddScore2(int newScore2)
+    {
+        score2 += newScore2;
     }
 
     public int GetScore1()
@@ -27,105 +118,31 @@ public class ParseScore
     }
 }
 
-public class FoodModifier
-{
-    int currentScore = 0;
-
-    // default base score = 100;
-    int baseScore = 100;
-    int ingredients = 0;
-
-    public FoodModifier(int passedBaseScore)
-    {
-        baseScore = passedBaseScore;
-    }
-
-    public int GetBaseScore()
-    {
-        return 1000;
-    }
-
-    // adds base ingredient
-    public void AddIngredientToDish()
-    {
-        if (ingredients <= 2) {
-            ingredients += 1;
-            currentScore += AlterScore((int)(baseScore * 0.05));
-        }
-    }
-
-    public void OvercookDish()
-    {
-        currentScore = AlterScore((int)(baseScore * 0.9));
-    }
-
-    public void UndercookDish()
-    {
-        currentScore = AlterScore((int)(baseScore * 0.8));
-    }
-
-    public void CookDishProperly()
-    {
-        currentScore = AlterScore(baseScore);
-    }
-
-    // based on how many ingredients there are modifys score
-    private int AlterScore(int score)
-    {
-        if (ingredients == 0)
-        {
-            return 0;
-        } else if (ingredients == 1)
-        {
-            return (int)(score * 0.5);
-        } else
-        {
-            return score;
-        }
-    }
-
-    public int GetCurrentScore()
-    {
-        return AlterScore(currentScore);
-    }
-
-    public void ResetScore()
-    {
-        currentScore = 0;
-    }
-
-}
-
 public class scoreController : MonoBehaviour
 {
     [SerializeField] private Text score1Text;
     [SerializeField] private Text score2Text;
 
-    // [SerializeField] private Text foodRating1;
-    // [SerializeField] private Text foodRating2;
-
     [SerializeField] private Text timerText;
 
-    // How long the game lasts in seconds
-    private int timer = 1000;
-
-    private int score1 = 0;
-    private int score2 = 0;
     float elapsed = 0f;
-    
-    // updates end scores to compare in game over scene
-    private static ParseScore endScores = new ParseScore();
 
-    private FoodModifier mushroomSoup1 = new FoodModifier(1000);
-    private FoodModifier mushroomSoup2 = new FoodModifier(1000);
+    // updates end scores to compare in game over scene
+    private static ParseScore scores = new ParseScore();
+
+    // global timer
+    private static GlobalTimer timer = new GlobalTimer();
 
     // Start is called before the first frame update
     void Start()
     {
         // start scores at 0
-        score1Text.text = ConvertScoreToString(score1);
-        score2Text.text = ConvertScoreToString(score2);
-        timerText.text = ConvertSecondToMinutes(timer);
+        score1Text.text = ConvertScoreToString(scores.GetScore1());
+        score2Text.text = ConvertScoreToString(scores.GetScore2());
+
+        // start timer if not started yet
+        timer.InitializeTimer();
+        timerText.text = ConvertSecondToMinutes(timer.GetTime());
     }
 
     // Converts an integer to a string with proper comma notation
@@ -141,74 +158,12 @@ public class scoreController : MonoBehaviour
         return str;
     }
 
-    public void AddToDish1()
-    {
-        mushroomSoup1.AddIngredientToDish();
-    }
-
-    public void CookDish1()
-    {
-        mushroomSoup1.CookDishProperly();
-    }
-
-    public void OvercookDish1()
-    {
-        mushroomSoup1.OvercookDish();
-    }
-
-    public void UndercookDish1()
-    {
-        mushroomSoup1.UndercookDish();
-    }
-
-    public void AddDishToScore1()
-    {
-        score1 += mushroomSoup1.GetCurrentScore();
-    }
-
-    public void AddToDish2()
-    {
-        mushroomSoup2.AddIngredientToDish();
-    }
-
-    public void CookDish2()
-    {
-        mushroomSoup2.CookDishProperly();
-    }
-
-    public void OvercookDish2()
-    {
-        mushroomSoup2.OvercookDish();
-    }
-
-    public void UndercookDish2()
-    {
-        mushroomSoup2.UndercookDish();
-    }
-
-    public void AddDishToScore2()
-    {
-        score2 += mushroomSoup2.GetCurrentScore();
-    }
-
-    public void Add100ToScore1()
-    {
-            score1 += 100;
-    }
-
-    public void Add100ToScore2()
-    {
-        score2 += 100;
-    }
-
     // Update is called once per frame
     void Update()
     {
         // update scores every frame
-        score1Text.text = ConvertScoreToString(score1);
-        score2Text.text = ConvertScoreToString(score2);
-        //foodRating1.text = mushroomSoup1.GetCurrentScore().ToString();
-        //foodRating2.text = mushroomSoup2.GetCurrentScore().ToString();
+        score1Text.text = ConvertScoreToString(scores.GetScore1());
+        score2Text.text = ConvertScoreToString(scores.GetScore2());
 
         // increment every second
         elapsed += Time.deltaTime;
@@ -222,17 +177,21 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
-        if (timer != 0)
+
+        if (timer.GetTime() > 0)
         {
             // updates timer and text in timer
-            timer = timer - 1;
-            timerText.text = ConvertSecondToMinutes(timer);
+            timer.Decrement();
+            timerText.text = ConvertSecondToMinutes(timer.GetTime());
         }
         else
         {
             // load game over screen and send final scores
-            endScores.UpdateScores(score1, score2);
+            timer.RestartTimer();
             SceneManager.LoadScene("gameOver");
+
         }
     }
+
+    
 }

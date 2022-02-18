@@ -13,14 +13,7 @@ public class PlayerHolding : MonoBehaviour
     public GameObject heldObj;
     public PhotonView view;
 
-    // void update(){
-    //     if (clickedObj == null){
-    //         clickedObj = null;
-    //         heldObj = null;
-    //         item=null;
-    //         items.Clear();
-    //     }
-    // }
+    // BaseFood item;
 
 
 
@@ -35,6 +28,7 @@ public class PlayerHolding : MonoBehaviour
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
         {
+                
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot

@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
-			DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(gameObject);
 		}
 	}
-
 	void Update()
 	{
 		if (view.IsMine)
@@ -120,6 +119,18 @@ public class PlayerController : MonoBehaviour
 			focus = null;
 		}
 	}
+    [PunRPC]
+    void DisablePushing(int viewID)
+    {
+        Rigidbody r = PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>();
+        r.isKinematic = true;
+    }
 
+    [PunRPC]
+    public void EnablePushing(int viewID)
+    {
+		Rigidbody r = PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>();
+        r.isKinematic = false;
+    }
 
 }

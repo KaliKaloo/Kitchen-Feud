@@ -8,5 +8,6 @@ public class TraySO : ScriptableObject
 {
     public string trayID;
     public List<BaseFood> ServingTray = new List<BaseFood>();
+    public List<GameObject> objectsOnTray = new List<GameObject>();
 }
-  
+   

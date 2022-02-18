@@ -74,7 +74,7 @@ public class Database : MonoBehaviour
         foreach( int i in ingredientIDs_int){
             madeDishID = madeDishID + i.ToString(); 
         }
-
+        Debug.Log(madeDishID);
         foreach (DishSO madeDish in dishInstance.dishes.allDishes)
         {
             if (madeDish.dishID == madeDishID)

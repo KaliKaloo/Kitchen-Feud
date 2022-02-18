@@ -13,7 +13,7 @@ public class IngredientSpawner : Interactable
         Debug.Log("interacted with spawner");
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         Transform slot = playerHold.slot;
-        if (playerHold.heldObj == null || playerHold.heldObj.transform.parent == null){
+        if (playerHold.items.Count ==0){
             var obj = PhotonNetwork.Instantiate(ingredientPrefab.name, slot.position, Quaternion.identity);
             pickableItem item = obj.GetComponent<pickableItem>();
             playerHold.pickUpItem(obj, item.item);

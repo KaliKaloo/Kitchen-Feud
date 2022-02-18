@@ -7,7 +7,7 @@ public class Order : ScriptableObject
 {
     public string orderID;
     public int orderNumber;
-    public List<DishSO> dishes = new List<DishSO>();
+    public List<BaseFood> dishes = new List<BaseFood>();
     
     // public GameObject ticket;
 
