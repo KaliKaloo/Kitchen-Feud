@@ -11,7 +11,7 @@ public class Stove : Interactable
     GameObject clickedObj;
     public GameObject inputObj;
     public List<IngredientSO> itemsOnTheStove = new List<IngredientSO>();
-    bool foundMatchingDish = false;
+    public bool foundMatchingDish = false;
     public DishSO foundDish;
     public Dish dishOfFoundDish;
     public GameObject canvas;
@@ -31,7 +31,6 @@ public class Stove : Interactable
         cookingBar = slider.GetComponent<CookingBar>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        GameEvents.current.assignPoints += UpdateDishPoints;
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
                
@@ -39,48 +38,54 @@ public class Stove : Interactable
             }else{
                 //view control
                 if(pv.IsMine) {
+                    GameEvents.current.assignPoints += UpdateDishPoints;
+                    
                     cookDish();
                 }
             }
         }
     }
     public void cookDish(){
-        checkForDish();
-        if(foundMatchingDish){
+        if(itemsOnTheStove.Count !=0){
+            checkForDish();
+        
+            if(foundMatchingDish){
 
-            Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
+                Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
 
-            //open the minigame canvas
-            slider.value = -30;
-            cookingBar.keyHeld = false;
-            cookingBar.done = false;
-            this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.Others);
-            isBeingInteractedWith = true;
-            
-            canvas.gameObject.SetActive(false);
-            minigameCanvas.gameObject.SetActive(true);
+                //open the minigame canvas
+                slider.value = -30;
+                cookingBar.keyHeld = false;
+                cookingBar.done = false;
+                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.Others);
+                isBeingInteractedWith = true;
+                
+                canvas.gameObject.SetActive(false);
+                minigameCanvas.gameObject.SetActive(true);
 
-           // playerController = player.GetComponent<PlayerController>();
-           // playerController.enabled = false;
+            // playerController = player.GetComponent<PlayerController>();
+            // playerController.enabled = false;
 
-            //the position the dish will be instantiated at
-            Vector3 playerPosition = player.transform.position;
-            Vector3 offset = new Vector3(0.5f,0,0);
+                //the position the dish will be instantiated at
+                Vector3 playerPosition = player.transform.position;
+                Vector3 offset = new Vector3(0.5f,0,0);
 
-            //instantiate the cooked dish
-            cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
-            r = cookedDish.GetComponent<Renderer>();
-            cookedDish.GetComponent<PhotonView>().RPC("DisableView", RpcTarget.Others);
-            r.enabled = false;
-            dishOfFoundDish = cookedDish.GetComponent<Dish>();
+                //instantiate the cooked dish
+                cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, playerPosition + offset, Quaternion.identity);
+                r = cookedDish.GetComponent<Renderer>();
+                cookedDish.GetComponent<PhotonView>().RPC("DisableView", RpcTarget.Others);
+                dishOfFoundDish = cookedDish.GetComponent<Dish>();
+                r.enabled = false;
+                
 
-            //delete the items the dish was cooked from
-            itemsOnTheStove.Clear();
-            foundMatchingDish = false;
+                //delete the items the dish was cooked from
+                // itemsOnTheStove.Clear();
+                // foundMatchingDish = false;
 
-        }
-        else{
-            Debug.Log("Ingredients given do not make a dish");
+            }
+            else{
+                Debug.Log("Ingredients given do not make a dish");
+            }
         }
 	}
 
@@ -103,8 +108,10 @@ public class Stove : Interactable
 
     //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPoints() {
+        Debug.Log("hello: "+dishOfFoundDish);
         dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
         dishOfFoundDish.points = cookingBar.cookedLevel;
+        // Debug.Log("points");
         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
     }
     [PunRPC]

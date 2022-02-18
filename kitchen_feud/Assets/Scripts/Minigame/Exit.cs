@@ -32,6 +32,10 @@ public class Exit : MonoBehaviour
 				stoves[i].isBeingInteractedWith = false;
 				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
 				stoves[i].r.enabled = true;
+
+				stoves[i].itemsOnTheStove.Clear();
+                GameEvents.current.assignPoints -= stoves[i].UpdateDishPoints;
+
 			}
 		}
 		//stove.playerController.enabled = true;
