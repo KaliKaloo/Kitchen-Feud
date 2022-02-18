@@ -108,8 +108,12 @@ public class Stove : Interactable
 
     public void checkForDish(){
         foundDish = Database.GetDishFromIngredients(itemsOnTheStove);
-        if(foundDish != null)
+        if(foundDish != null){
             foundMatchingDish = true;
+        }
+        else{
+            foundMatchingDish = false;
+        }
     }
 
     //CALLED BY THE EVENT SYSTEM

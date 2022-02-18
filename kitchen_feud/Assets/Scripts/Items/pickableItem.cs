@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class pickableItem : Interactable
 {
@@ -40,5 +41,10 @@ public class pickableItem : Interactable
 		tray.ServingTray.Remove(item);
 		onTray = false;
 	}
-  
+
+    [PunRPC]
+    void SetGrav()
+    {
+        this.GetComponent<Rigidbody>().useGravity = true;
+    }
 }
