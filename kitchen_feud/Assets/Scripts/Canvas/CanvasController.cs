@@ -73,7 +73,6 @@ public class CanvasController : MonoBehaviour
            if (ticket2.activeInHierarchy == true)
             {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-              
                 ticket3.SetActive(true);            
                 DisplayNewRandomOrder(Ticket3);
                 
@@ -82,10 +81,7 @@ public class CanvasController : MonoBehaviour
             else
             {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-             
                 ticket2.SetActive(true);
-                
-                
                 DisplayNewRandomOrder(Ticket2);
             }
         }
@@ -93,7 +89,6 @@ public class CanvasController : MonoBehaviour
         else
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
-         
             ticket1.SetActive(true);
             DisplayNewRandomOrder(Ticket1);
         }
@@ -101,17 +96,15 @@ public class CanvasController : MonoBehaviour
        
     }
 
-    private bool CheckIfTicketsFull()
+    private bool CheckIfTicketsNotFull()
     {
         if (ticket1.activeInHierarchy && ticket2.activeInHierarchy && ticket3.activeInHierarchy)
         {
             this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
-           
             return false;
-        } else
-        {
-            return true;
         }
+
+        return true;
     }
 
     private void UpdateOrders()
@@ -119,7 +112,7 @@ public class CanvasController : MonoBehaviour
         // LEADER OF TEAM 1
         if (PhotonNetwork.IsMasterClient)
         {
-            if (CheckIfTicketsFull())
+            if (CheckIfTicketsNotFull())
             {
                 this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
                 ShowNewTicket();
@@ -128,7 +121,7 @@ public class CanvasController : MonoBehaviour
         // IF USER IS LEADER OF TEAM 2
         else if (false)
         {
-            if (CheckIfTicketsFull())
+            if (CheckIfTicketsNotFull())
             {
                 this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
                 ShowNewTicket();
