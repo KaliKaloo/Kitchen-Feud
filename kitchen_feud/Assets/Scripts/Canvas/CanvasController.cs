@@ -70,7 +70,7 @@ public class CanvasController : MonoBehaviour
            if (ticket2.activeInHierarchy == true)
             {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                Debug.LogError("Well you're here");
+              
                 ticket3.SetActive(true);            
                 DisplayNewRandomOrder(Ticket3);
                 
@@ -79,7 +79,7 @@ public class CanvasController : MonoBehaviour
             else
             {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-                Debug.LogError("Well you're here");
+             
                 ticket2.SetActive(true);
                 
                 
@@ -90,7 +90,7 @@ public class CanvasController : MonoBehaviour
         else
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
-            Debug.LogError("Well you're here");
+         
             ticket1.SetActive(true);
             DisplayNewRandomOrder(Ticket1);
         }

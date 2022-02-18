@@ -34,8 +34,7 @@ public class Stove : Interactable
         GameEvents.current.assignPoints += UpdateDishPoints;
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
-                // Debug.LogError(playerHold.items);
-                // Debug.LogError(playerHold.heldObj.name);
+               
                 addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control
@@ -80,7 +79,7 @@ public class Stove : Interactable
 
         }
         else{
-            Debug.LogError("Ingredients given do not make a dish");
+            Debug.Log("Ingredients given do not make a dish");
         }
 	}
 
