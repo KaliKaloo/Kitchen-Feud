@@ -4,48 +4,6 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
-// basically global class which can be accessed from other scenes
-// j = 0 means not initialized 
-// j = 1 beginning has been initialized
-// j = 2 game has ended and user wants to play again (i.e. skip username menu)
-public class CheckEnd
-{
-    static int j = 0;
-
-    public void Beginning()
-    {
-        j = 1;
-    }
-
-    public void End()
-    {
-        j = 2;
-    }
-
-    public bool IsBeginning()
-    {
-        if (j == 1) return true;
-        else return false;
-    }
-
-    public bool IsEnd()
-    {
-        if (j == 2) return true;
-        else return false;
-    }
-
-    public bool IsInitialized()
-    {
-        if ((j == 1) || (j == 2)) return false;
-        else return true;
-    }
-
-    public string ReturnString()
-    {
-        return j.ToString();
-    }
-}
-
 public class menuController : MonoBehaviourPunCallbacks
 {
    
@@ -64,19 +22,16 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text playerList;
     [SerializeField] private Text lobbyError;
 
-    private static CheckEnd gameOver = new CheckEnd();
-
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
 
-        if (gameOver.IsInitialized())
+        if (!PhotonNetwork.IsConnected)
         {
-            gameOver.Beginning();
             PhotonNetwork.ConnectUsingSettings();
             usernameMenu.SetActive(true);
         } 
-        else if (gameOver.IsEnd())
+        else
         {
             // NEED TO ADD CURRENT USERNAME HERE
             // greetingMenu.text = "Welcome " + usernameInput.text + "!";

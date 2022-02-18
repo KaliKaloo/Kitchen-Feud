@@ -188,8 +188,7 @@ public class scoreController : MonoBehaviour
         {
             // load game over screen and send final scores
             timer.RestartTimer();
-            SceneManager.LoadScene("gameOver");
-
+            PhotonNetwork.LoadLevel("gameOver");
         }
     }
 

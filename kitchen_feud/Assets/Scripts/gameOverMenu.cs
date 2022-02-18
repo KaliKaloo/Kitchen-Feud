@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameOverMenu : MonoBehaviour
+
+public class gameOverMenu : MonoBehaviourPunCallbacks
 {
     // SCORES GO HERE
     private int team1Score = 0;
@@ -16,8 +17,6 @@ public class gameOverMenu : MonoBehaviour
     [SerializeField] private Text team2UIScore;
 
     [SerializeField] private Text winnerText;
-
-    private static CheckEnd gameOver = new CheckEnd();
 
     // receives scores from score screen
     private static ParseScore endScores = new ParseScore();
@@ -56,11 +55,14 @@ public class gameOverMenu : MonoBehaviour
     // alters global variable and returns straight to lobby menu
     public void PlayAgain()
     {
-        gameOver.End();
-        PhotonNetwork.DestroyAll();
         PhotonNetwork.LeaveRoom();
 
-        SceneManager.LoadScene("mainMenu");
+        PhotonNetwork.Destroy(GameObject.Find("RoomController"));
+    }
+
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.LoadLevel(0);
     }
 
 
