@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class CanvasController : MonoBehaviour
 {
-    public GameObject makeTicket;
+    //public GameObject makeTicket;
     public GameObject ticket1;
     public GameObject ticket2;
     public GameObject ticket3;
@@ -48,7 +48,7 @@ public class CanvasController : MonoBehaviour
     {
         justClicked.SetActive(false);
         orderMenu.SetActive(false);
-        makeTicket.SetActive(true);
+        //makeTicket.SetActive(true);
 
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
@@ -62,7 +62,7 @@ public class CanvasController : MonoBehaviour
         if ((ticket3.activeInHierarchy == true) && (ticket1.activeInHierarchy == true) && (ticket2.activeInHierarchy == true))
         {
             //disable button
-            makeTicket.SetActive(false);
+            //makeTicket.SetActive(false);
         }
 
         if (ticket1.activeInHierarchy == true)
