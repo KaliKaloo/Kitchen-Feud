@@ -794,6 +794,7 @@ MonoBehaviour:
   orderMenu: {fileID: 1116502775}
   serve: {fileID: 878308852}
   justClicked: {fileID: 0}
+  TC: {fileID: 87785475}
 --- !u!114 &87785475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8446,6 +8447,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputObj: {fileID: 0}
   itemsOnTheStove: []
+  foundMatchingDish: 0
   foundDish: {fileID: 0}
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1991528354}
@@ -11058,6 +11060,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputObj: {fileID: 0}
   itemsOnTheStove: []
+  foundMatchingDish: 0
   foundDish: {fileID: 0}
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1991528354}
@@ -15104,6 +15107,7 @@ MonoBehaviour:
   orderMenu: {fileID: 42353206}
   serve: {fileID: 1756802052}
   justClicked: {fileID: 0}
+  TC: {fileID: 359947016}
 --- !u!114 &359947016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24850,6 +24854,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputObj: {fileID: 0}
   itemsOnTheStove: []
+  foundMatchingDish: 0
   foundDish: {fileID: 0}
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1991528354}
@@ -56983,6 +56988,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputObj: {fileID: 0}
   itemsOnTheStove: []
+  foundMatchingDish: 0
   foundDish: {fileID: 0}
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1991528354}
@@ -58221,6 +58227,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inputObj: {fileID: 0}
   itemsOnTheStove: []
+  foundMatchingDish: 0
   foundDish: {fileID: 0}
   dishOfFoundDish: {fileID: 0}
   canvas: {fileID: 1991528354}

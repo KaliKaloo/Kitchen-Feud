@@ -14,6 +14,7 @@ public class CanvasController : MonoBehaviour
     public GameObject orderMenu;
     public Button serve;
     public GameObject justClicked;
+    public TrayController TC;
 
 
     private int orderNum;
@@ -22,6 +23,7 @@ public class CanvasController : MonoBehaviour
 
     void Start()
     {
+        TC = GetComponent<TrayController>();
         ticket1.SetActive(false);
         ticket2.SetActive(false);
         ticket3.SetActive(false);
@@ -62,15 +64,15 @@ public class CanvasController : MonoBehaviour
 
     public void ShowNewTicket()
     {
-        if ((ticket3.activeInHierarchy == true) && (ticket1.activeInHierarchy == true) && (ticket2.activeInHierarchy == true))
+        if ((ticket3.activeSelf == true) && (ticket1.activeSelf == true) && (ticket2.activeSelf == true))
         {
             //disable button
             //makeTicket.SetActive(false);
         }
 
-        if (ticket1.activeInHierarchy == true)
+        if (ticket1.activeSelf == true)
         {
-           if (ticket2.activeInHierarchy == true)
+           if (ticket2.activeSelf == true)
             {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
                 ticket3.SetActive(true);            
@@ -98,35 +100,46 @@ public class CanvasController : MonoBehaviour
 
     private bool CheckIfTicketsNotFull()
     {
-        if (ticket1.activeInHierarchy && ticket2.activeInHierarchy && ticket3.activeInHierarchy)
+        if (ticket1.activeSelf && ticket2.activeSelf && ticket3.activeSelf)
         {
-            this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
+            Debug.Log("THIS IS FALSE");
+            //this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
             return false;
         }
+        else
+        {
+            return true;
+        }
 
-        return true;
+        
     }
 
     private void UpdateOrders()
     {
         // LEADER OF TEAM 1
-        if (PhotonNetwork.IsMasterClient)
+        if (CheckIfTicketsNotFull())
+        {
+            this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+        }
+        /*
+        if (TC.teamNumber == 1)
         {
             if (CheckIfTicketsNotFull())
             {
-                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
-                ShowNewTicket();
+                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+                //ShowNewTicket();
             }
         } 
         // IF USER IS LEADER OF TEAM 2
-        else if (false)
+        else 
         {
             if (CheckIfTicketsNotFull())
             {
-                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.Others);
-                ShowNewTicket();
+                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+                //ShowNewTicket();
             }
         }
+        */
     }
 
     public void DisplayNewRandomOrder(DisplayTicket ticket)
