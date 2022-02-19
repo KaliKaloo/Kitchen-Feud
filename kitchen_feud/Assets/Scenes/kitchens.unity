@@ -795,6 +795,7 @@ MonoBehaviour:
   serve: {fileID: 878308852}
   justClicked: {fileID: 0}
   TC: {fileID: 87785475}
+  teamNumber: 1
 --- !u!114 &87785475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15108,6 +15109,7 @@ MonoBehaviour:
   serve: {fileID: 1756802052}
   justClicked: {fileID: 0}
   TC: {fileID: 359947016}
+  teamNumber: 2
 --- !u!114 &359947016
 MonoBehaviour:
   m_ObjectHideFlags: 0

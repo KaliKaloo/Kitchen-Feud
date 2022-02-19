@@ -20,7 +20,6 @@ public class TrayController : MonoBehaviour
             if (ts.tray.trayID == "")
             {
                 ts.tray.trayID = orderID;
-                Debug.Log(ts.tray.trayID);
                 break;
             }
         }
@@ -42,7 +41,7 @@ public class TrayController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
                 foreach (Transform slot in t.transform){
-                    Debug.Log(slot.name);
+                  
 
                     foreach(Transform child in slot){
                         Destroy(child.gameObject);
@@ -64,7 +63,7 @@ public class TrayController : MonoBehaviour
             // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
             Dish dishComponent = dish.GetComponent<Dish>();
             total += (int)dishComponent.points;
-            Debug.Log(dishComponent.points);
+           
         }
 
         return total;
@@ -86,6 +85,30 @@ public class TrayController : MonoBehaviour
         return total; 
     }
 
+    // purely compares an order and a tray based on their names
+    private bool CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
+    {
+        List<string> trayNames = new List<string>();
+        List<string> dishNames = new List<string>();
+
+        foreach (BaseFood food in tray)
+        {
+            trayNames.Add(food.name);
+        }
+        foreach (BaseFood food in orderDish)
+        {
+            dishNames.Add(food.name);
+        }
+        // sort dishes alphabetically
+        trayNames = trayNames.OrderBy(q => q).ToList();
+        dishNames = dishNames.OrderBy(q => q).ToList();
+
+        if (trayNames.SequenceEqual(dishNames))
+            return true;
+        else
+            return false;
+    }
+
     // compares a tray to an orderid
     private void CompareOrder(List<BaseFood> tray, List<GameObject> onTray, string orderid)
     {
@@ -93,12 +116,14 @@ public class TrayController : MonoBehaviour
         int currentScore = 0;
 
         // Compares two dishes without order mattering (now checks for duplicates too)
-        if (Enumerable.SequenceEqual(tray.OrderBy(t => t.name), o.dishes.OrderBy(t => t.name)))
+        bool temp = CompareDishNames(tray, o.dishes);
+     
+        if (temp)
         {
             currentScore += GetDishScore(onTray);
         }
         // deduct scores if they contain raw ingredients
-        currentScore += IngredientDeduction(tray);
+        //currentScore += IngredientDeduction(tray);
 
         if (teamNumber == 1)
         {
@@ -128,5 +153,14 @@ public class TrayController : MonoBehaviour
     void UpdateScore2(int score)
     {
         scores.AddScore2(score);
+    }
+    [PunRPC]
+    void makeTrayAcross(string orderID) {
+        makeTray(orderID);
+    }
+    [PunRPC]
+    void resetAcross(string orderID)
+    {
+        resetTray(orderID);
     }
 }

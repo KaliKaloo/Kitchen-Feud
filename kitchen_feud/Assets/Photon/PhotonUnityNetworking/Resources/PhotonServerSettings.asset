@@ -54,6 +54,16 @@ MonoBehaviour:
   - Showing
   - DisablePushing
   - EnablePushing
+  - SetGrav
+  - ShowingWithOrder
+  - ShowingWithOrderTeam1
+  - ShowingWithOrderTeam2
+  - ShowClientTicket
+  - SetToF
+  - makeTrayAcross
+  - resetAcross
+  - ServeAll
+  - clearAll
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

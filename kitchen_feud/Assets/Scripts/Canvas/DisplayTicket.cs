@@ -12,6 +12,7 @@ public class DisplayTicket : MonoBehaviour
     public Text orderDrinkText;
 
     public string orderid;
+    public int orderNumber;
 
     //method to update the UI
     public void SetUI(Order o)
@@ -27,5 +28,21 @@ public class DisplayTicket : MonoBehaviour
 
 
     }
-   
+
+    [PunRPC]
+    void SetToF(int viewID)
+    {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
+    }
+    [PunRPC]
+    void clearAll()
+    {
+        this.orderDrinkText.text = "";
+        this.orderMainText.text = "";
+        this.orderNumberText.text = "";
+        this.orderSideText.text = "";
+
+           
+    }
 }
+

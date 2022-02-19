@@ -40,13 +40,13 @@ public class Tray : Interactable
                 tray.ServingTray.Add(pickable.item);
                 tray.objectsOnTray.Add(objectHolding);
                 pickable.Tray = tray;
-                Debug.Log(tray.ServingTray.Count);
+                //Debug.Log(tray.ServingTray.Count);
             }
 
             else
             {
                 //do nothing because there are no empty slots
-                Debug.Log("this tray is full");
+              
 
             }
         }
