@@ -193,7 +193,6 @@ public class CanvasController : MonoBehaviour
             {
                 // OTHERS PART OF TEAM 2
                 Order leaderOrder2 = GetNewRandomOrder();
-                ShowNewTicketWithID(leaderOrder2);
 
                 // ONLY DO THIS TO TEAM 2
                 this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder2);
