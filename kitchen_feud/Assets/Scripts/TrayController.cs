@@ -20,7 +20,6 @@ public class TrayController : MonoBehaviour
             if (ts.tray.trayID == "")
             {
                 ts.tray.trayID = orderID;
-                Debug.Log(ts.tray.trayID);
                 break;
             }
         }
@@ -42,7 +41,7 @@ public class TrayController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
                 foreach (Transform slot in t.transform){
-                    //Debug.Log(slot.name);
+                  
 
                     foreach(Transform child in slot){
                         Destroy(child.gameObject);
@@ -64,7 +63,7 @@ public class TrayController : MonoBehaviour
             // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
             Dish dishComponent = dish.GetComponent<Dish>();
             total += (int)dishComponent.points;
-            Debug.Log(dishComponent.points);
+           
         }
 
         return total;
@@ -104,9 +103,6 @@ public class TrayController : MonoBehaviour
         trayNames = trayNames.OrderBy(q => q).ToList();
         dishNames = dishNames.OrderBy(q => q).ToList();
 
-        print(String.Join("; ", trayNames));
-        print(String.Join("; ", dishNames));
-
         if (trayNames.SequenceEqual(dishNames))
             return true;
         else
@@ -121,7 +117,7 @@ public class TrayController : MonoBehaviour
 
         // Compares two dishes without order mattering (now checks for duplicates too)
         bool temp = CompareDishNames(tray, o.dishes);
-        print(temp);
+     
         if (temp)
         {
             currentScore += GetDishScore(onTray);

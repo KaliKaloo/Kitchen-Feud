@@ -10,7 +10,7 @@ public class IngredientSpawner : Interactable
 
     public override void Interact()
     {
-        Debug.Log("interacted with spawner");
+        
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         Transform slot = playerHold.slot;
         if (playerHold.items.Count ==0){

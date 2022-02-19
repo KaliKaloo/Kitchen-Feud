@@ -46,7 +46,7 @@ public class Tray : Interactable
             else
             {
                 //do nothing because there are no empty slots
-                Debug.Log("this tray is full");
+              
 
             }
         }

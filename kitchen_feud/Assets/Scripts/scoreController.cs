@@ -9,7 +9,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static readonly int time = 600;
+    private static readonly int time = 180;
 
 
     private static int timer = time;
