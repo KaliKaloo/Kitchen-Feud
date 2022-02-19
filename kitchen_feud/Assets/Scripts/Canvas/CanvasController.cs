@@ -221,14 +221,14 @@ public class CanvasController : MonoBehaviour
                     this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
                 }*/
             }
-            if (CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient == false)
+            if (CheckIfTicketsNotFull() && teamNumber == 2)
             {
                 Order leaderOrder1 = GetNewRandomOrder();
 
                 // ONLY DO THIS TO TEAM 2
-                
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.Others, leaderOrder1.orderID);
-                    ShowNewTicketWithID(leaderOrder1.orderID);
+                    Debug.Log("This is T2 order: " + leaderOrder1.orderID);
+                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
+                    //ShowNewTicketWithID(leaderOrder1.orderID);
 
             }
 
