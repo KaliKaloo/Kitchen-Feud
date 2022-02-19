@@ -54,6 +54,7 @@ MonoBehaviour:
   - Showing
   - DisablePushing
   - EnablePushing
+  - SetGrav
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

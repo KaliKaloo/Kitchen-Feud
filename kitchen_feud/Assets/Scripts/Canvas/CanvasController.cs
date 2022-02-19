@@ -126,6 +126,40 @@ public class CanvasController : MonoBehaviour
         }
     }
 
+    public void ShowNewTicketWithID(Order order)
+    {
+        if ((ticket3.activeSelf == true) && (ticket1.activeSelf == true) && (ticket2.activeSelf == true))
+        {
+            //disable button
+            //makeTicket.SetActive(false);
+        }
+
+        if (ticket1.activeSelf == true)
+        {
+            if (ticket2.activeSelf == true)
+            {
+                DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
+                ticket3.SetActive(true);
+                DisplayOrderFromID(Ticket3, order);
+
+            }
+
+            else
+            {
+                DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
+                ticket2.SetActive(true);
+                DisplayOrderFromID(Ticket2, order);
+            }
+        }
+
+        else
+        {
+            DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
+            ticket1.SetActive(true);
+            DisplayOrderFromID(Ticket1, order);
+        }
+    }
+
     private bool CheckIfTicketsNotFull()
     {
         if (ticket1.activeSelf && ticket2.activeSelf && ticket3.activeSelf)
@@ -137,8 +171,6 @@ public class CanvasController : MonoBehaviour
         {
             return true;
         }
-
-        
     }
 
     private void UpdateOrders()
@@ -149,28 +181,23 @@ public class CanvasController : MonoBehaviour
             // LEADER OF TEAM 1
             if (CheckIfTicketsNotFull())
             {
-                this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
+                // OTHERS PART OF TEAM 1
+                Order leaderOrder = GetNewRandomOrder();
+
+                // ONLY DO THIS TO TEAM 1
+                this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder);
             }
 
-            /*
-            if (TC.teamNumber == 1)
+            // LEADER OF TEAM 2
+            if (CheckIfTicketsNotFull())
             {
-                if (CheckIfTicketsNotFull())
-                {
-                    this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
-                    //ShowNewTicket();
-                }
-            } 
-            // IF USER IS LEADER OF TEAM 2
-            else 
-            {
-                if (CheckIfTicketsNotFull())
-                {
-                    this.GetComponent<PhotonView>().RPC("Showing", RpcTarget.All);
-                    //ShowNewTicket();
-                }
+                // OTHERS PART OF TEAM 2
+                Order leaderOrder2 = GetNewRandomOrder();
+                ShowNewTicketWithID(leaderOrder2);
+
+                // ONLY DO THIS TO TEAM 2
+                this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder2);
             }
-            */
         }
     }
 
@@ -184,6 +211,23 @@ public class CanvasController : MonoBehaviour
         tray_Controller.makeTray(orderID);
         o.orderNumber  = ++orderNum;
         ticket.SetUI(o);
+
+    }
+
+    public Order GetNewRandomOrder()
+    {
+        // RANDOM ORDER
+        return Database.GetRandomOrder();
+    }
+
+    public void DisplayOrderFromID(DisplayTicket ticket, Order order)
+    {
+        string orderID = order.orderID;
+
+        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        tray_Controller.makeTray(orderID);
+        order.orderNumber = ++orderNum;
+        ticket.SetUI(order);
 
     }
 
@@ -201,5 +245,11 @@ public class CanvasController : MonoBehaviour
     {
         ShowNewTicket();
     }
-   
+
+    [PunRPC]
+    void ShowingWithOrder(Order o)
+    {
+        ShowNewTicketWithID(o);
+    }
+
 }

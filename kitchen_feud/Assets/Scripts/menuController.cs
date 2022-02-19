@@ -124,6 +124,7 @@ public class menuController : MonoBehaviourPunCallbacks
         connectPanel.SetActive(true);
         usernameMenu.SetActive(false);
     }
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         lobbyError.text = "Lobby does not exist!";
@@ -134,12 +135,10 @@ public class menuController : MonoBehaviourPunCallbacks
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
-    public override void OnPlayerLeftRoom(Player newPlayer)
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
-
-
 }
 
 
