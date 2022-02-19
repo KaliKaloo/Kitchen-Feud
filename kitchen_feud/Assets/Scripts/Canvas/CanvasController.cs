@@ -303,9 +303,6 @@ public class CanvasController : MonoBehaviour
         ServeClient(name);
     }
 
-    [PunRPC]
-    void SetToF(int viewID) {
-        PhotonView.Find(viewID).gameObject.SetActive(false);
-    }
+    
 
 }

@@ -28,5 +28,11 @@ public class DisplayTicket : MonoBehaviour
 
 
     }
-   
+
+    [PunRPC]
+    void SetToF(int viewID)
+    {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
+    }
 }
+
