@@ -158,4 +158,8 @@ public class TrayController : MonoBehaviour
     {
         scores.AddScore2(score);
     }
+    [PunRPC]
+    void makeTrayAcross(string orderID) {
+        makeTray(orderID);
+    }
 }

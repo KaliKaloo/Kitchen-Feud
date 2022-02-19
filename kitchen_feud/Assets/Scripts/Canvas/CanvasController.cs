@@ -256,8 +256,10 @@ public class CanvasController : MonoBehaviour
         Order o = Database.GetOrderByID(order);
         string orderID = o.orderID;
 
-        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
-        tray_Controller.makeTray(orderID);
+        //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        TC.GetComponent<PhotonView>().RPC("makeTrayAcross", RpcTarget.Others, orderID);
+        TC.makeTray(orderID);
+
         o.orderNumber = ++orderNum;
         ticket.SetUI(o);
 
