@@ -45,7 +45,7 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
 
-
+    public int teamNumber;
     private int orderNum;
 
     private static GlobalTimer timer = new GlobalTimer();
@@ -126,7 +126,7 @@ public class CanvasController : MonoBehaviour
         }
     }
 
-    public void ShowNewTicketWithID(Order order)
+    public void ShowNewTicketWithID(string order)
     {
         if ((ticket3.activeSelf == true) && (ticket1.activeSelf == true) && (ticket2.activeSelf == true))
         {
@@ -179,24 +179,30 @@ public class CanvasController : MonoBehaviour
         if (rLock.GetLockVal())
         {
             // LEADER OF TEAM 1
-            if (CheckIfTicketsNotFull())
+            if (CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient)
             {
                 // OTHERS PART OF TEAM 1
                 Order leaderOrder = GetNewRandomOrder();
 
                 // ONLY DO THIS TO TEAM 1
-                this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder);
+                if (teamNumber == 1)
+                {
+                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
+                } else if (teamNumber == 2)
+                {
+                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
+                }
             }
 
             // LEADER OF TEAM 2
-            if (CheckIfTicketsNotFull())
-            {
+            //if (CheckIfTicketsNotFull())
+            //{
                 // OTHERS PART OF TEAM 2
-                Order leaderOrder2 = GetNewRandomOrder();
+                //Order leaderOrder2 = GetNewRandomOrder();
 
                 // ONLY DO THIS TO TEAM 2
-                this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder2);
-            }
+                //this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder2);
+            //}
         }
     }
 
@@ -219,14 +225,15 @@ public class CanvasController : MonoBehaviour
         return Database.GetRandomOrder();
     }
 
-    public void DisplayOrderFromID(DisplayTicket ticket, Order order)
+    public void DisplayOrderFromID(DisplayTicket ticket, string order)
     {
-        string orderID = order.orderID;
+        Order o = Database.GetOrderByID(order);
+        string orderID = o.orderID;
 
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);
-        order.orderNumber = ++orderNum;
-        ticket.SetUI(order);
+        o.orderNumber = ++orderNum;
+        ticket.SetUI(o);
 
     }
 
@@ -246,7 +253,13 @@ public class CanvasController : MonoBehaviour
     }
 
     [PunRPC]
-    void ShowingWithOrder(Order o)
+    void ShowingWithOrderTeam1(string o)
+    {
+        ShowNewTicketWithID(o);
+    }
+
+    [PunRPC]
+    void ShowingWithOrderTeam2(string o)
     {
         ShowNewTicketWithID(o);
     }
