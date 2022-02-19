@@ -297,7 +297,7 @@ public class CanvasController : MonoBehaviour
     [PunRPC]
     void ShowClientTicket(string name)
     {
-        ServeClient();
+        ServeClient(name);
     }
 
 }
