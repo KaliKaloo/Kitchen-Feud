@@ -255,13 +255,19 @@ public class CanvasController : MonoBehaviour
     [PunRPC]
     void ShowingWithOrderTeam1(string o)
     {
-        ShowNewTicketWithID(o);
+        if (teamNumber == 1)
+        {
+            ShowNewTicketWithID(o);
+        }
     }
 
     [PunRPC]
     void ShowingWithOrderTeam2(string o)
     {
-        ShowNewTicketWithID(o);
+        if (teamNumber == 2)
+        {
+            ShowNewTicketWithID(o);
+        }
     }
 
 }
