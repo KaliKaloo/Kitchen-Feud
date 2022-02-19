@@ -34,5 +34,15 @@ public class DisplayTicket : MonoBehaviour
     {
         PhotonView.Find(viewID).gameObject.SetActive(false);
     }
+    [PunRPC]
+    void clearAll()
+    {
+        this.orderDrinkText.text = "";
+        this.orderMainText.text = "";
+        this.orderNumberText.text = "";
+        this.orderSideText.text = "";
+
+           
+    }
 }
 

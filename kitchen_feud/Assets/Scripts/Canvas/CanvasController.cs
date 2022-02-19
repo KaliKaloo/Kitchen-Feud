@@ -6,33 +6,7 @@ using UnityEngine.EventSystems;
 using Photon.Pun;
 
 
-// Stops CanvasController invoking repeat show order function twice
-class RepeatLock
-{
-    static bool repeat = false;
-    static int count = 1;
 
-    public void AddCount()
-    {
-        repeat = false;
-
-        if (count >= 2)
-            count -= 1;
-        else
-            count += 1;
-
-        if (count >= 2)
-        {
-            repeat = true;
-        }
-    }
-
-    public bool GetLockVal()
-    {
-        return repeat;
-    }
-
-}
 
 public class CanvasController : MonoBehaviour
 {
@@ -49,19 +23,21 @@ public class CanvasController : MonoBehaviour
     private int orderNum;
 
     private static GlobalTimer timer = new GlobalTimer();
-    private static RepeatLock rLock = new RepeatLock();
+    //private static RepeatLock rLock = new RepeatLock();
 
     void Start()
     {
-        TC = GetComponent<TrayController>();
-        ticket1.SetActive(false);
-        ticket2.SetActive(false);
-        ticket3.SetActive(false);
-        orderMenu.SetActive(false);
+       
+            TC = GetComponent<TrayController>();
+            ticket1.SetActive(false);
+            ticket2.SetActive(false);
+            ticket3.SetActive(false);
+            orderMenu.SetActive(false);
+       
 
         // 1st parameter is how long till 1st order added
         // 2nd parameter is how many seconds till another order is added
-        InvokeRepeating("UpdateOrders", 0, 5);
+        InvokeRepeating("UpdateOrders", 5, 5);
 
         Button btn = serve.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
@@ -81,19 +57,21 @@ public class CanvasController : MonoBehaviour
     
     public void Serve(GameObject justClicked)
     {
-        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.Others,
+        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
             justClicked.GetComponent<PhotonView>().ViewID);
-        justClicked.SetActive(false);
+        
+        //justClicked.SetActive(false);
         orderMenu.SetActive(false);
         //makeTicket.SetActive(true);
 
         //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
+        
 
-
-        TC.resetTray(d_ticket.orderid);
-        Debug.Log("This is sending over network" + d_ticket.orderid);
-        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
+        //TC.resetTray(d_ticket.orderid);
+       
+        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, d_ticket.orderid);
+        d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
         
     }
 
@@ -191,7 +169,7 @@ public class CanvasController : MonoBehaviour
     {
         if (ticket1.activeSelf && ticket2.activeSelf && ticket3.activeSelf)
         {
-            //this.GetComponent<PhotonView>().RPC("showT", RpcTarget.Others, ticket1.GetComponent<PhotonView>().ViewID, ticket2.GetComponent<PhotonView>().ViewID, ticket3.GetComponent<PhotonView>().ViewID);
+            
             return false;
         }
         else
@@ -202,9 +180,7 @@ public class CanvasController : MonoBehaviour
 
     private void UpdateOrders()
     {
-        rLock.AddCount();
-        if (rLock.GetLockVal())
-        {
+
             // LEADER OF TEAM 1
             if (CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient)
             {
@@ -216,32 +192,25 @@ public class CanvasController : MonoBehaviour
                 {
                     this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
                 }
-                /*else if (teamNumber == 2)
-                {
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
-                }*/
+              
+               
             }
-            else if (CheckIfTicketsNotFull() && !PhotonNetwork.IsMasterClient)
+            else if (CheckIfTicketsNotFull() && PhotonNetwork.PlayerList.GetValue(1).Equals(PhotonNetwork.LocalPlayer))
             {
                 Order leaderOrder1 = GetNewRandomOrder();
 
-                // ONLY DO THIS TO TEAM 2
-                    Debug.Log("This is T2 order: " + leaderOrder1.orderID);
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
-                    //ShowNewTicketWithID(leaderOrder1.orderID);
+            // ONLY DO THIS TO TEAM 2
+            if (teamNumber == 2)
+            {
+               
+                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
+            }
+                   
 
             }
 
-            // LEADER OF TEAM 2
-            //if (CheckIfTicketsNotFull())
-            //{
-            // OTHERS PART OF TEAM 2
-            //Order leaderOrder2 = GetNewRandomOrder();
-
-                // ONLY DO THIS TO TEAM 2
-                //this.GetComponent<PhotonView>().RPC("ShowNewTicketWithID", RpcTarget.Others, leaderOrder2);
-                //}
-        }
+      
+        
     }
 
     public void DisplayNewRandomOrder(DisplayTicket ticket)
@@ -268,8 +237,6 @@ public class CanvasController : MonoBehaviour
         Order o = Database.GetOrderByID(order);
         string orderID = o.orderID;
 
-        //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
-        //TC.GetComponent<PhotonView>().RPC("makeTrayAcross", RpcTarget.Others, orderID);
         TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
@@ -277,20 +244,6 @@ public class CanvasController : MonoBehaviour
 
     }
 
-    [PunRPC]
-    void showT(int x,int y, int z){
-        PhotonView.Find(x).gameObject.SetActive(true);
-        //PhotonView.Find(x).GetComponent<DisplayTicket>().SetUI(PhotonView.Find(x).GetComponent<DisplayTicket>().order1);
-        PhotonView.Find(y).gameObject.SetActive(true);
-        PhotonView.Find(z).gameObject.SetActive(true);
-        //DisplayNewRandomOrder(PhotonView.Find(y).GetComponent<DisplayTicket>());
-
-    }
-    [PunRPC]
-    void Showing()
-    {
-        ShowNewTicket();
-    }
 
     [PunRPC]
     void ShowingWithOrderTeam1(string o)
