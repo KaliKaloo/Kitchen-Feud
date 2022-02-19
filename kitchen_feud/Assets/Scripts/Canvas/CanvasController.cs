@@ -95,12 +95,12 @@ public class CanvasController : MonoBehaviour
 
     public void ServeClient(string name)
     {
-        justClicked.SetActive(false);
         orderMenu.SetActive(false);
         //makeTicket.SetActive(true);
 
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = GameObject.Find(name).GetComponent<DisplayTicket>();
+        GameObject.Find(name).SetActive(false);
 
         tray_Controller.resetTray(d_ticket.orderid);
     }
