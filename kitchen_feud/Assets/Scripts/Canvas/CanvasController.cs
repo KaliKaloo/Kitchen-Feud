@@ -70,6 +70,7 @@ public class CanvasController : MonoBehaviour
 
     public void TaskOnClick()
     {
+        this.GetComponent<PhotonView>().RPC("ServeAll", RpcTarget.Others, justClicked.GetComponent<PhotonView>().ViewID);
         Serve(justClicked);
     }
 
@@ -81,8 +82,8 @@ public class CanvasController : MonoBehaviour
     
     public void Serve(GameObject justClicked)
     {
-        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.Others,
-            justClicked.GetComponent<PhotonView>().ViewID);
+        /*justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.Others,
+            justClicked.GetComponent<PhotonView>().ViewID);*/
         justClicked.SetActive(false);
         orderMenu.SetActive(false);
         //makeTicket.SetActive(true);
@@ -93,7 +94,7 @@ public class CanvasController : MonoBehaviour
 
         TC.resetTray(d_ticket.orderid);
         Debug.Log("This is sending over network" + d_ticket.orderid);
-        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
+        //TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
         
     }
 
@@ -304,6 +305,11 @@ public class CanvasController : MonoBehaviour
     void ShowClientTicket(string name)
     {
         ServeClient(name);
+    }
+    [PunRPC]
+    void ServeAll(int viewID)
+    {
+        Serve(PhotonView.Find(viewID).gameObject);
     }
 
     
