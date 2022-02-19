@@ -91,9 +91,10 @@ public class CanvasController : MonoBehaviour
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
 
-
-        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
         TC.resetTray(d_ticket.orderid);
+        Debug.Log("This is sending over network" + d_ticket.orderid);
+        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
+        
     }
 
     public void ServeClient(string name)
