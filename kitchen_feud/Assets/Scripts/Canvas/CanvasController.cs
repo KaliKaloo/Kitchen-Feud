@@ -226,10 +226,10 @@ public class CanvasController : MonoBehaviour
                 Order leaderOrder1 = GetNewRandomOrder();
 
                 // ONLY DO THIS TO TEAM 2
-                if (teamNumber == 2)
-                {
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
-                }
+                
+                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.Others, leaderOrder1.orderID);
+                    ShowNewTicketWithID(leaderOrder1.orderID);
+
             }
 
             // LEADER OF TEAM 2
@@ -304,10 +304,9 @@ public class CanvasController : MonoBehaviour
     [PunRPC]
     void ShowingWithOrderTeam2(string o)
     {
-        if (teamNumber == 2)
-        {
+      
             ShowNewTicketWithID(o);
-        }
+        
     }
 
 
