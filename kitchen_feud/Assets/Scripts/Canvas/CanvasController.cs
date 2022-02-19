@@ -70,7 +70,7 @@ public class CanvasController : MonoBehaviour
 
     public void TaskOnClick()
     {
-        this.GetComponent<PhotonView>().RPC("ServeAll", RpcTarget.Others, justClicked.GetComponent<PhotonView>().ViewID);
+        gameObject.GetComponent<PhotonView>().RPC("ServeAll", RpcTarget.Others, justClicked.GetComponent<PhotonView>().ViewID);
         Serve(justClicked);
     }
 
