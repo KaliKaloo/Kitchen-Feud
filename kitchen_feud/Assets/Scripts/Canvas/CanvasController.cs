@@ -258,7 +258,7 @@ public class CanvasController : MonoBehaviour
         string orderID = o.orderID;
 
         //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
-        TC.GetComponent<PhotonView>().RPC("makeTrayAcross", RpcTarget.Others, orderID);
+        //TC.GetComponent<PhotonView>().RPC("makeTrayAcross", RpcTarget.Others, orderID);
         TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
