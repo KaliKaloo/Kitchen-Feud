@@ -90,6 +90,7 @@ public class Stove : Interactable
                 dishOfFoundDish = cookedDish.GetComponent<Dish>();
 
                 //delete the items the dish was cooked from
+                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others);
                 itemsOnTheStove.Clear();
 
             }
@@ -150,6 +151,11 @@ public class Stove : Interactable
     void addItemRPC(int viewID,int viewID1)
     {
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
+    }
+    [PunRPC]
+    void clearItems()
+    {
+        itemsOnTheStove.Clear();
     }
 
 }
