@@ -81,6 +81,8 @@ public class CanvasController : MonoBehaviour
     
     public void Serve(GameObject justClicked)
     {
+        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.Others,
+            justClicked.GetComponent<PhotonView>().ViewID);
         justClicked.SetActive(false);
         orderMenu.SetActive(false);
         //makeTicket.SetActive(true);
@@ -88,7 +90,8 @@ public class CanvasController : MonoBehaviour
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
-        string name = d_ticket.name;
+        
+        
 
         tray_Controller.resetTray(d_ticket.orderid);
     }
@@ -298,6 +301,11 @@ public class CanvasController : MonoBehaviour
     void ShowClientTicket(string name)
     {
         ServeClient(name);
+    }
+
+    [PunRPC]
+    void SetToF(int viewID) {
+        PhotonView.Find(viewID).gameObject.SetActive(false);
     }
 
 }
