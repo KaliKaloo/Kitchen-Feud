@@ -88,6 +88,20 @@ public class CanvasController : MonoBehaviour
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
+        string name = d_ticket.name;
+
+        tray_Controller.resetTray(d_ticket.orderid);
+    }
+
+    public void ServeClient(string name)
+    {
+        justClicked.SetActive(false);
+        orderMenu.SetActive(false);
+        //makeTicket.SetActive(true);
+
+        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        DisplayTicket d_ticket = GameObject.Find(name).GetComponent<DisplayTicket>();
+
         tray_Controller.resetTray(d_ticket.orderid);
     }
 
@@ -105,7 +119,8 @@ public class CanvasController : MonoBehaviour
            if (ticket2.activeSelf == true)
             {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                ticket3.SetActive(true);            
+                ticket3.SetActive(true);
+                Ticket3.orderNumber = 3;
                 DisplayNewRandomOrder(Ticket3);
                 
             }
@@ -114,6 +129,7 @@ public class CanvasController : MonoBehaviour
             {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
                 ticket2.SetActive(true);
+                Ticket2.orderNumber = 2;
                 DisplayNewRandomOrder(Ticket2);
             }
         }
@@ -122,6 +138,7 @@ public class CanvasController : MonoBehaviour
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
             ticket1.SetActive(true);
+            Ticket1.orderNumber = 1;
             DisplayNewRandomOrder(Ticket1);
         }
     }
@@ -140,6 +157,8 @@ public class CanvasController : MonoBehaviour
             {
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
                 ticket3.SetActive(true);
+                Ticket3.orderNumber = 3;
+
                 DisplayOrderFromID(Ticket3, order);
 
             }
@@ -148,6 +167,8 @@ public class CanvasController : MonoBehaviour
             {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
                 ticket2.SetActive(true);
+                Ticket2.orderNumber = 2;
+
                 DisplayOrderFromID(Ticket2, order);
             }
         }
@@ -156,6 +177,8 @@ public class CanvasController : MonoBehaviour
         {
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
             ticket1.SetActive(true);
+            Ticket1.orderNumber = 1;
+
             DisplayOrderFromID(Ticket1, order);
         }
     }
@@ -268,6 +291,13 @@ public class CanvasController : MonoBehaviour
         {
             ShowNewTicketWithID(o);
         }
+    }
+
+
+    [PunRPC]
+    void ShowClientTicket(string name)
+    {
+        ServeClient();
     }
 
 }

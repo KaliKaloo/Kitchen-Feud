@@ -12,6 +12,7 @@ public class DisplayTicket : MonoBehaviour
     public Text orderDrinkText;
 
     public string orderid;
+    public int orderNumber;
 
     //method to update the UI
     public void SetUI(Order o)
