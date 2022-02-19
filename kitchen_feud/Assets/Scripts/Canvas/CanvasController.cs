@@ -87,13 +87,13 @@ public class CanvasController : MonoBehaviour
         orderMenu.SetActive(false);
         //makeTicket.SetActive(true);
 
-        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
-        
-        
 
-        tray_Controller.resetTray(d_ticket.orderid);
+
+        TC.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.Others, d_ticket.orderid);
+        TC.resetTray(d_ticket.orderid);
     }
 
     public void ServeClient(string name)

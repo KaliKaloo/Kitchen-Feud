@@ -162,4 +162,9 @@ public class TrayController : MonoBehaviour
     void makeTrayAcross(string orderID) {
         makeTray(orderID);
     }
+    [PunRPC]
+    void resetAcross(string orderID)
+    {
+        resetTray(orderID);
+    }
 }
