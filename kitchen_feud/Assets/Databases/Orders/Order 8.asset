@@ -16,5 +16,4 @@ MonoBehaviour:
   orderNumber: 0
   dishes:
   - {fileID: 11400000, guid: 5aae169e82c010f4b8ce4655d91e25ed, type: 2}
-  - {fileID: 11400000, guid: df36444ca950c5d44993c38ff0de26e5, type: 2}
-  - {fileID: 11400000, guid: 14830925f81f13943b928fc5c939196b, type: 2}
+  - {fileID: 11400000, guid: e52fb280f1f0e374ba507be57a481957, type: 2}

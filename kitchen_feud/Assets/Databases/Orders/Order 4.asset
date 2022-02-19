@@ -17,4 +17,3 @@ MonoBehaviour:
   dishes:
   - {fileID: 11400000, guid: 0fc96ab0824a7444d932df0b0fdba016, type: 2}
   - {fileID: 11400000, guid: 5f3e64a12ab083946ad39bea94b2dcb4, type: 2}
-  - {fileID: 11400000, guid: d0c2151100cfd7144acf5dbe2582a9b6, type: 2}
