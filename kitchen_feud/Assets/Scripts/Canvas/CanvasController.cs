@@ -221,7 +221,7 @@ public class CanvasController : MonoBehaviour
                     this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
                 }*/
             }
-            if (CheckIfTicketsNotFull() && teamNumber == 2)
+            if (TC.teamNumber == 2)
             {
                 Order leaderOrder1 = GetNewRandomOrder();
 
