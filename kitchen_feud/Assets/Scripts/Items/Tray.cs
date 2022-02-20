@@ -12,7 +12,7 @@ public class Tray : Interactable
 
     PlayerHolding playerHold;
     public pickableItem pickable;
-    // public GameObject obj;
+    
     public override void Interact()
     {
         playerHold = player.GetComponent<PlayerHolding>();
