@@ -35,9 +35,9 @@ public class Stove : Interactable
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
-                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.Others, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                     player.GetComponent<PhotonView>().ViewID);
-                addItem(playerHold.heldObj, playerHold);
+                //addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control
                 if(pv.IsMine) {
