@@ -40,11 +40,14 @@ public class Tray : Interactable
                 }
 
                 //add basefood item to list of foods of the tray
+
                 pickable = objectHolding.GetComponent<pickableItem>();
-                pickable.onTray = true;
-                tray.ServingTray.Add(pickable.item);
-                tray.objectsOnTray.Add(objectHolding);
-                pickable.Tray = tray;
+                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
+                //pickable.onTray = true;
+                this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All);
+                //tray.ServingTray.Add(pickable.item);
+                //tray.objectsOnTray.Add(objectHolding);
+                //pickable.Tray = tray;
                 //Debug.Log(tray.ServingTray.Count);
             }
 
@@ -58,7 +61,13 @@ public class Tray : Interactable
 
 
     }
+    [PunRPC]
+    void addComps()
+    {
+        tray.ServingTray.Add(pickable.item);
+        tray.objectsOnTray.Add(objectHolding);
 
+    }
    
 
 }
