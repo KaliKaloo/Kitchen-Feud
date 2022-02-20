@@ -92,7 +92,7 @@ public class PlayerHolding : MonoBehaviour
     }
     [PunRPC]
     void SetParentAsSlot(int viewID) {
-        PhotonView.Find(viewID).gameObject.transform.parent = this.transform.GetChild(2).transform;
+        PhotonView.Find(viewID).gameObject.transform.SetParent( this.transform.GetChild(2).transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
         PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -101,7 +101,7 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
-        PhotonView.Find(viewID).gameObject.transform.parent = null;
+        PhotonView.Find(viewID).gameObject.transform.SetParent(null);
         //PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
        // PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
