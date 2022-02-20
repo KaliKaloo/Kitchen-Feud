@@ -102,10 +102,14 @@ public class Stove : Interactable
 	}
 
     public void addItem(GameObject heldObjArg, PlayerHolding playerHold) {
-        IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
-        itemsOnTheStove.Add(heldObjArgItem.item);
-		playerHold.dropItem(); 
-        Destroy(heldObjArg);
+        if (heldObjArg.GetComponent<IngredientItem>())
+        {
+            IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
+            itemsOnTheStove.Add(heldObjArgItem.item);
+            playerHold.dropItem();
+            Destroy(heldObjArg);
+        }
+        else { Debug.Log("Can't put a cooked dish in a stove."); }
 
     }
 
