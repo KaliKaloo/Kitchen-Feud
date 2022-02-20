@@ -62,13 +62,15 @@ public class Tray : Interactable
 
     }
     [PunRPC]
-    void addComps()
+    void addComps(int viewID, int objID)
     {
-        tray.ServingTray.Add(pickable.item);
-        tray.objectsOnTray.Add(objectHolding);
+        PhotonView.Find(viewID).GetComponent<Tray>().tray.ServingTray.Add(PhotonView.Find(objID).GetComponent<pickableItem>().item);
+       // tray.ServingTray.Add(pickable.item);
+        PhotonView.Find(viewID).GetComponent<Tray>().tray.objectsOnTray.Add(PhotonView.Find(objID).gameObject);
+       // tray.objectsOnTray.Add(objectHolding);
 
     }
    
 
-}
+} 
  
