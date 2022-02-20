@@ -12,6 +12,7 @@ public class PlayerHolding : MonoBehaviour
     GameObject clickedObj;
     public GameObject heldObj;
     public PhotonView view;
+    public bool itemdropped = false;
 
     // BaseFood item;
 
@@ -111,6 +112,7 @@ public class PlayerHolding : MonoBehaviour
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
+            itemdropped = true;
         }
     }
 
