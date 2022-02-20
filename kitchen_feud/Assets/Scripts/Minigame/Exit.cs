@@ -33,10 +33,10 @@ public class Exit : MonoBehaviour
 			{
 				canvas.gameObject.SetActive(true);
 				minigameCanvas.gameObject.SetActive(false);
-				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.Others);
-				stoves[i].isBeingInteractedWith = false;
-				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
-				stoves[i].r.enabled = true;
+				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+				
+				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
+				
 				PhotonView	view = stoves[i].player.GetComponent<PhotonView>();
 				
 				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
