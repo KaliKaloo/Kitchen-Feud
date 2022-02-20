@@ -42,7 +42,7 @@ public class Exit : MonoBehaviour
 				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 				
 				stoves[i].playerController.enabled = true;
-				stoves[i].playerRigidbody.isKinematic = false;
+				//stoves[i].playerRigidbody.isKinematic = false;
 				theOne = i;
                 GameEvents.current.assignPoints -= stoves[i].UpdateDishPoints;
 			}
