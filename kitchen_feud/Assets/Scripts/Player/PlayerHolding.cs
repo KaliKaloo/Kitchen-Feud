@@ -37,7 +37,8 @@ public class PlayerHolding : MonoBehaviour
                 {
                     Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
                     Collider objcol = heldObj.GetComponent<Collider>();
-                    //heldObj.GetComponent<PhotonView>().RPC("SetPlatformAsParent", RpcTarget.Others);
+                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.Others,
+                        heldObj.GetComponent<PhotonView>().ViewID);
                     heldObj.transform.parent = slot;
                     heldObj.transform.localPosition = Vector3.zero;
                     heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -57,7 +58,8 @@ public class PlayerHolding : MonoBehaviour
                 {
                     Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
                     Collider objcol = heldObj.GetComponent<Collider>();
-                    //heldObj.GetComponent<PhotonView>().RPC("SetPlatformAsParent", RpcTarget.Others);
+                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.Others,
+                        heldObj.GetComponent<PhotonView>().ViewID);
                     heldObj.transform.parent = slot;
                     heldObj.transform.localPosition = Vector3.zero;
                     heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -77,7 +79,8 @@ public class PlayerHolding : MonoBehaviour
         {
             Debug.Log("Drop item: " + items[0].name);
             items.Clear();
-           // heldObj.GetComponent<PhotonView>().RPC("SetNullAsParent", RpcTarget.Others);
+            this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.Others,
+                         heldObj.GetComponent<PhotonView>().ViewID);
             Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
             Collider objcol = heldObj.GetComponent<Collider>();
             heldObj.transform.SetParent(null);
@@ -86,4 +89,23 @@ public class PlayerHolding : MonoBehaviour
             objRig.useGravity = true;
         }
     }
+    [PunRPC]
+    void SetParentAsSlot(int viewID) {
+        PhotonView.Find(viewID).gameObject.transform.parent = this.transform.GetChild(2).transform;
+        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = true;
+    }
+    [PunRPC]
+    void SetParentAsNull(int viewID)
+    {
+        PhotonView.Find(viewID).gameObject.transform.parent = null;
+        //PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+       // PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
+    }
+
 }
