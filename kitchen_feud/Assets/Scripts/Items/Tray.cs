@@ -44,7 +44,7 @@ public class Tray : Interactable
                 pickable = objectHolding.GetComponent<pickableItem>();
                 pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
                 //pickable.onTray = true;
-                this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All);
+                this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All,this.GetComponent<PhotonView>().ViewID,objectHolding.GetComponent<PhotonView>().ViewID);
                 //tray.ServingTray.Add(pickable.item);
                 //tray.objectsOnTray.Add(objectHolding);
                 //pickable.Tray = tray;
