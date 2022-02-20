@@ -1,6 +1,14 @@
 name: Actions 😎
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - dev
+      - main
+  pull_request:
+    branches:
+      - dev
+      - main
 
 jobs:
   build:
