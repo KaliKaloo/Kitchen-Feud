@@ -110,7 +110,7 @@ public class Stove : Interactable
             playerHold.dropItem();
             
             //Destroy(heldObjArg, 4.0f);
-            //if (playerHold.itemdropped == true)
+            if (playerHold.itemdropped == true)
             {
                 PhotonNetwork.Destroy(heldObjArg);
             }
