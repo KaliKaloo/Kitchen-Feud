@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -34,7 +33,7 @@ public class menuController : MonoBehaviourPunCallbacks
         else
         {
             // NEED TO ADD CURRENT USERNAME HERE
-            // greetingMenu.text = "Welcome " + usernameInput.text + "!";
+            greetingMenu.text = "Welcome back " + PhotonNetwork.LocalPlayer.NickName + "!";
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }

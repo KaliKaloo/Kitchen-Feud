@@ -35,6 +35,8 @@ public class Stove : Interactable
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
+                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.Others, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                    player.GetComponent<PhotonView>().ViewID);
                 addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control
@@ -88,6 +90,7 @@ public class Stove : Interactable
                 dishOfFoundDish = cookedDish.GetComponent<Dish>();
 
                 //delete the items the dish was cooked from
+                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others);
                 itemsOnTheStove.Clear();
 
             }
@@ -144,6 +147,15 @@ public class Stove : Interactable
         this.isBeingInteractedWith = false;
     }
   
-
+    [PunRPC]
+    void addItemRPC(int viewID,int viewID1)
+    {
+        addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
+    }
+    [PunRPC]
+    void clearItems()
+    {
+        itemsOnTheStove.Clear();
+    }
 
 }

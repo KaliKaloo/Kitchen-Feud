@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Tray : Interactable
 {
@@ -22,12 +23,16 @@ public class Tray : Interactable
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
             {
-                foreach (Transform slot in slots)
+                //foreach (Transform slot in slots)
+                for (int i =0;i<slots.Count;i++)
                 { 
-                    if (slot.transform.childCount == 0)
+                    if (slots[i].transform.childCount == 0)
                     {
                         playerHold.dropItem();
-                        objectHolding.transform.parent = slot;
+                        
+                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.Others,
+                            objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                        objectHolding.transform.parent = slots[i];
                         objectHolding.transform.localPosition = Vector3.zero;
                         objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
                         break;

@@ -1,5 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections.Generic;
+
 
 public class pickableItem : Interactable
 {
@@ -9,6 +11,7 @@ public class pickableItem : Interactable
     PlayerHolding playerHold;
 	public bool onTray = false;
 	public TraySO Tray;
+   
     // public GameObject obj;
     public override void Interact()
     {
@@ -34,6 +37,7 @@ public class pickableItem : Interactable
             playerHold.dropItem();
             playerHold.pickUpItem(gameObject, item);
         }
+      
 
     }
 		public void removeFromTray(TraySO tray)
@@ -46,5 +50,13 @@ public class pickableItem : Interactable
     void SetGrav()
     {
         this.GetComponent<Rigidbody>().useGravity = true;
+    }
+    [PunRPC]
+    void setParent(int viewID,int viewID1)
+    {
+        PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
+        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+
     }
 }
