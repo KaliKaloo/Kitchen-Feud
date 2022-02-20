@@ -101,8 +101,8 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
-        Debug.Log("This is the view ID: " + viewID);
-        if (PhotonView.Find(viewID).GetComponent<GameObject>() != null)
+        Debug.Log("This is the view ID: " + viewID + "This is the name: " + PhotonView.Find(viewID).gameObject.name);
+       
         {
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
 
