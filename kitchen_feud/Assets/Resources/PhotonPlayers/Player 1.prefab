@@ -198,6 +198,7 @@ MonoBehaviour:
   slot: {fileID: 5725064515487422948}
   heldObj: {fileID: 0}
   view: {fileID: 8876107304136392510}
+  itemdropped: 0
 --- !u!114 &1194199829187532428
 MonoBehaviour:
   m_ObjectHideFlags: 0

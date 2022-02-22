@@ -106,9 +106,11 @@ public class Stove : Interactable
         {
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheStove.Add(heldObjArgItem.item);
-           // Debug.Log(playerHold.itemdropped);
-            this.player.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All,this.player.GetComponent<PhotonView>().ViewID);
-            
+            // Debug.Log(playerHold.itemdropped);
+            Debug.Log(playerHold.name);
+            {
+                playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+            }
             //Destroy(heldObjArg, 4.0f);
             if (playerHold.items.Count == 0)
             {
