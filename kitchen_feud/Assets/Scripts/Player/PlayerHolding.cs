@@ -105,6 +105,7 @@ public class PlayerHolding : MonoBehaviour
         Debug.Log("This is the view ID: " + viewID + "This is the name: " + PhotonView.Find(viewID).gameObject.name);
        
         {
+            this.items.Clear();
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
 
             //PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
@@ -114,6 +115,12 @@ public class PlayerHolding : MonoBehaviour
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
             itemdropped = true;
         }
+    }
+
+    [PunRPC]
+    void clearItems(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<PlayerHolding>().items.Clear();
     }
 
 }
