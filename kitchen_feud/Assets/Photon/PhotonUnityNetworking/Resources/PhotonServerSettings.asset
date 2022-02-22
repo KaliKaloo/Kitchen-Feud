@@ -67,6 +67,8 @@ MonoBehaviour:
   - setParent
   - addItemRPC
   - clearItems
+  - addComps
+  - trayBool
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

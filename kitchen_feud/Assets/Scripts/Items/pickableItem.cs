@@ -59,4 +59,10 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }
+    [PunRPC]
+    void trayBool(int viewID,int trayID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().onTray = true;
+        PhotonView.Find(viewID).GetComponent<pickableItem>().Tray = PhotonView.Find(trayID).GetComponent<Tray>().tray;
+    }
 }
