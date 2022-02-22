@@ -76,7 +76,7 @@ public class Stove : Interactable
                 //the position the dish will be instantiated at
                 Vector3 playerPosition = player.transform.position;
                 Vector3 offset = new Vector3(0,1f,0);
-                Debug.Log(transform.position);
+                
 
                 //instantiate the cooked dish
                 cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0,1,0),transform.rotation);
@@ -106,18 +106,17 @@ public class Stove : Interactable
         {
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheStove.Add(heldObjArgItem.item);
-            // Debug.Log(playerHold.itemdropped);
-            Debug.Log(playerHold.name);
-            {
-                playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
-            }
+           
+           
+            
+             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+            
             //Destroy(heldObjArg, 4.0f);
             if (playerHold.items.Count == 0)
             {
              Destroy(heldObjArg);
             }
-           // Debug.Log("2 " + playerHold.itemdropped);
-            //PhotonNetwork.Destroy(heldObjArg);
+       
         }
         else { Debug.Log("Can't put a cooked dish in a stove."); }
 

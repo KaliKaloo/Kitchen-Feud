@@ -49,16 +49,7 @@ public class Exit : MonoBehaviour
 		}
 		Debug.Log(stoves[theOne].transform.position);
 		
-		/*stoves[theOne].playerRigidbody.GetComponent<PhotonView>().RPC("EnablePushing", RpcTarget.Others);
-		stoves[theOne].playerRigidbody.isKinematic = false;
-		stoves[theOne].playerRigidbody.detectCollisions = true;*/
-		//stoves[theOne].playerRigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 	}
 
-	/*[PunRPC]
-    void EnablePushing()
-    {
-        stoves[theOne].playerRigidbody.isKinematic = true;
-        stoves[theOne].playerRigidbody.detectCollisions = false;
-    }*/
+
 }

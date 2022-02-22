@@ -21,10 +21,7 @@ public class PlayerHolding : MonoBehaviour
     public void pickUpItem(GameObject obj, BaseFood item)
     {
 
-        // if(items.Count >= holdingLimit){
-        //     Debug.Log("You are already holding an item. Please drop it first.");
-        //     return;
-        // }
+    
         if (view.IsMine)
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
@@ -33,20 +30,13 @@ public class PlayerHolding : MonoBehaviour
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot
-                Debug.Log("Pick up item: " + items[0].name);
+                
                 if (heldObj.GetComponent<Rigidbody>())
                 {
-                    //Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
-                    //Collider objcol = heldObj.GetComponent<Collider>();
+         
                     this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
                         heldObj.GetComponent<PhotonView>().ViewID);
-                   /* heldObj.transform.parent = slot;
-                    heldObj.transform.localPosition = Vector3.zero;
-                    heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-
-                    objRig.isKinematic = true;
-                    objcol.isTrigger = true;
-                   */
+                
                 }
             }
         else
@@ -55,19 +45,13 @@ public class PlayerHolding : MonoBehaviour
                 items.Add(item);
                 heldObj = obj;
                 // move object to slot
-                Debug.Log("Pick up item: " + items[0].name);
+               
                 if (heldObj.GetComponent<Rigidbody>())
                 {
-                   // Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
-                   // Collider objcol = heldObj.GetComponent<Collider>();
+       
                     this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
                         heldObj.GetComponent<PhotonView>().ViewID);
-                   /* heldObj.transform.parent = slot;
-                    heldObj.transform.localPosition = Vector3.zero;
-                    heldObj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-
-                    objRig.isKinematic = true;
-                    objcol.isTrigger = true;*/
+           
                 }
                
             }
@@ -102,7 +86,7 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
-        Debug.Log("This is the view ID: " + viewID + "This is the name: " + PhotonView.Find(viewID).gameObject.name);
+      
        
         {
             this.items.Clear();
