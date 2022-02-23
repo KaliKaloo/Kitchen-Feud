@@ -8,6 +8,7 @@ using Photon.Pun;
 public class TrayController : MonoBehaviour
 {
     public List<GameObject> trays = new List<GameObject>();
+    public List<GameObject> otherTrays = new List<GameObject>();
 
     private static ParseScore scores = new ParseScore();
 
@@ -141,12 +142,24 @@ public class TrayController : MonoBehaviour
     }
 
     private void OnApplicationQuit() {
-        foreach(GameObject t in trays){
+        for(int i = 0; i< trays.Count; i++)
+        {
+            Tray ts = trays[i].GetComponent<Tray>();
+            Tray oTs = otherTrays[i].GetComponent<Tray>();
+            ts.tray.trayID = null;
+            ts.tray.ServingTray.Clear();
+            ts.tray.objectsOnTray.Clear();
+            oTs.tray.trayID = null;
+            oTs.tray.ServingTray.Clear();
+            oTs.tray.objectsOnTray.Clear();
+        }
+     /*   foreach(GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
             ts.tray.trayID = null;
             ts.tray.ServingTray.Clear();
             ts.tray.objectsOnTray.Clear();
         }
+     */
     }
 
     [PunRPC]
