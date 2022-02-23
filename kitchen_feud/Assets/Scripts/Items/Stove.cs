@@ -35,9 +35,9 @@ public class Stove : Interactable
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         if (!isBeingInteractedWith) {
             if(playerHold.items.Count!=0){
-                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.Others, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                     player.GetComponent<PhotonView>().ViewID);
-                addItem(playerHold.heldObj, playerHold);
+                //addItem(playerHold.heldObj, playerHold);
             }else{
                 //view control
                 if(pv.IsMine) {
@@ -76,7 +76,7 @@ public class Stove : Interactable
                 //the position the dish will be instantiated at
                 Vector3 playerPosition = player.transform.position;
                 Vector3 offset = new Vector3(0,1f,0);
-                Debug.Log(transform.position);
+                
 
                 //instantiate the cooked dish
                 cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0,1,0),transform.rotation);
@@ -102,10 +102,23 @@ public class Stove : Interactable
 	}
 
     public void addItem(GameObject heldObjArg, PlayerHolding playerHold) {
-        IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
-        itemsOnTheStove.Add(heldObjArgItem.item);
-		playerHold.dropItem(); 
-        Destroy(heldObjArg);
+        if (heldObjArg.GetComponent<IngredientItem>())
+        {
+            IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
+            itemsOnTheStove.Add(heldObjArgItem.item);
+           
+           
+            
+             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+            
+            //Destroy(heldObjArg, 4.0f);
+            if (playerHold.items.Count == 0)
+            {
+             Destroy(heldObjArg);
+            }
+       
+        }
+        else { Debug.Log("Can't put a cooked dish in a stove."); }
 
     }
 

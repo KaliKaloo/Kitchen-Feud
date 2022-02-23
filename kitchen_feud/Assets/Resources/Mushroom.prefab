@@ -351,6 +351,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
   onTray: 0
   Tray: {fileID: 0}
+  tray2: {fileID: 0}
 --- !u!114 &2370544356775548301
 MonoBehaviour:
   m_ObjectHideFlags: 0

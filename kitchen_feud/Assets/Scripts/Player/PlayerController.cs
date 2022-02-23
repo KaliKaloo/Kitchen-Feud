@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void EnablePushing(int viewID)
+     void EnablePushing(int viewID)
     {
 		Rigidbody r = PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>();
         r.isKinematic = false;

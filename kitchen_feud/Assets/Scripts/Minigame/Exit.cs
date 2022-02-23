@@ -33,32 +33,26 @@ public class Exit : MonoBehaviour
 			{
 				canvas.gameObject.SetActive(true);
 				minigameCanvas.gameObject.SetActive(false);
-				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.Others);
-				stoves[i].isBeingInteractedWith = false;
-				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.Others);
-				stoves[i].r.enabled = true;
+				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+
+				
+				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
+				
+				
+
 				PhotonView	view = stoves[i].player.GetComponent<PhotonView>();
 				
 				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 				
 				stoves[i].playerController.enabled = true;
-				stoves[i].playerRigidbody.isKinematic = false;
+				//stoves[i].playerRigidbody.isKinematic = false;
 				theOne = i;
                 GameEvents.current.assignPoints -= stoves[i].UpdateDishPoints;
 			}
 		}
 		Debug.Log(stoves[theOne].transform.position);
 		
-		/*stoves[theOne].playerRigidbody.GetComponent<PhotonView>().RPC("EnablePushing", RpcTarget.Others);
-		stoves[theOne].playerRigidbody.isKinematic = false;
-		stoves[theOne].playerRigidbody.detectCollisions = true;*/
-		//stoves[theOne].playerRigidbody.constraints &= ~RigidbodyConstraints.FreezePosition;
 	}
 
-	/*[PunRPC]
-    void EnablePushing()
-    {
-        stoves[theOne].playerRigidbody.isKinematic = true;
-        stoves[theOne].playerRigidbody.detectCollisions = false;
-    }*/
+
 }
