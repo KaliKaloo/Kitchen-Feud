@@ -9,11 +9,10 @@ public class TrayController : MonoBehaviour
 {
     public List<GameObject> trays = new List<GameObject>();
     public List<GameObject> otherTrays = new List<GameObject>();
-
+    //public GlobalTimer timer;
     private static ParseScore scores = new ParseScore();
 
     public int teamNumber;
-
     public void makeTray(string orderID){
         foreach (GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
@@ -144,6 +143,7 @@ public class TrayController : MonoBehaviour
     private void OnApplicationQuit() {
         for(int i = 0; i< trays.Count; i++)
         {
+            //PhotonNetwork.Disconnect();   
             Tray ts = trays[i].GetComponent<Tray>();
             Tray oTs = otherTrays[i].GetComponent<Tray>();
             ts.tray.trayID = null;
@@ -161,6 +161,7 @@ public class TrayController : MonoBehaviour
         }
      */
     }
+   
 
     [PunRPC]
     void UpdateScore1(int score)
