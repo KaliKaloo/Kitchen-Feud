@@ -121,9 +121,11 @@ public class menuController : MonoBehaviourPunCallbacks
     // Load level once game is started
     public void StartGame()
     {
-        //PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel(1);
-        // PhotonNetwork.LoadLevel("kitchens (with score)");
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
+            PhotonNetwork.LoadLevel(1);
+        else
+            // change this to load larger kitchen if > 4 players!!!!!
+            PhotonNetwork.LoadLevel(1);
     }
 
     public override void OnJoinedRoom()
