@@ -70,7 +70,13 @@ public class Tray : Interactable
        // tray.objectsOnTray.Add(objectHolding);
 
     }
-   
+   [PunRPC]
+   void removeFromTray(int viewID)
+    {
+        this.tray.ServingTray.Remove(PhotonView.Find(viewID).GetComponent<pickableItem>().item);
+        this.tray.objectsOnTray.Remove(PhotonView.Find(viewID).gameObject);
+
+    }
 
 } 
  

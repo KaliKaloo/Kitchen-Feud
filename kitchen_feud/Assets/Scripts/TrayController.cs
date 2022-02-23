@@ -41,11 +41,13 @@ public class TrayController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
                 foreach (Transform slot in t.transform){
-                  
-
-                    foreach(Transform child in slot){
-                        Destroy(child.gameObject);
+                    if (slot.childCount != 0)
+                    {
+                        Destroy(slot.GetChild(0).gameObject);
                     }
+                    /*foreach(Transform child in slot){
+                        Destroy(child.gameObject);
+                    }*/
                     
                 }
                 break;
@@ -138,8 +140,9 @@ public class TrayController : MonoBehaviour
     private void OnApplicationQuit() {
         foreach(GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
-            ts.tray.trayID = "";
+            ts.tray.trayID = null;
             ts.tray.ServingTray.Clear();
+            ts.tray.objectsOnTray.Clear();
         }
     }
 

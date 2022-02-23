@@ -38,6 +38,7 @@ public class Exit : MonoBehaviour
 				
 				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 				
+				
 
 				PhotonView	view = stoves[i].player.GetComponent<PhotonView>();
 				

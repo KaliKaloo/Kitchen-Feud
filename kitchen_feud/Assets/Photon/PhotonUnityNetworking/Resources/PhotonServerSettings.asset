@@ -69,6 +69,10 @@ MonoBehaviour:
   - clearItems
   - addComps
   - trayBool
+  - SetParentAsNull
+  - SetParentAsSlot
+  - removeFromTray
+  - onTrayF
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
