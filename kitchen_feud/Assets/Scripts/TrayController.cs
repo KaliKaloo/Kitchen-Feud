@@ -25,32 +25,17 @@ public class TrayController : MonoBehaviour
         }
     }
 
-    public void resetTray(string orderid)
+    public void resetTray(Tray ts)
     {
-        foreach (GameObject t in trays)
+        ts.tray.trayID = "";
+
+        ts.tray.ServingTray.Clear();
+        ts.tray.objectsOnTray.Clear();
+        foreach (Transform slot in ts.transform)
         {
-            Tray ts = t.GetComponent<Tray>();
-
-            if (ts.tray.trayID == orderid)
+            if (slot.childCount != 0)
             {
-                ts.tray.trayID = "";
-
-                // if tray matches order add to score
-                CompareOrder(ts.tray.ServingTray, ts.tray.objectsOnTray, orderid);
-
-                ts.tray.ServingTray.Clear();
-                ts.tray.objectsOnTray.Clear();
-                foreach (Transform slot in t.transform){
-                    if (slot.childCount != 0)
-                    {
-                        Destroy(slot.GetChild(0).gameObject);
-                    }
-                    /*foreach(Transform child in slot){
-                        Destroy(child.gameObject);
-                    }*/
-                    
-                }
-                break;
+                Destroy(slot.GetChild(0).gameObject);
             }
         }
     }
@@ -112,27 +97,43 @@ public class TrayController : MonoBehaviour
     }
 
     // compares a tray to an orderid
-    private void CompareOrder(List<BaseFood> tray, List<GameObject> onTray, string orderid)
+    public void CompareOrder(string orderid)
     {
-        Order o = Database.GetOrderByID(orderid);
-        int currentScore = 0;
+        foreach (GameObject t in trays)
+        {
+            Tray ts = t.GetComponent<Tray>();
 
-        // Compares two dishes without order mattering (now checks for duplicates too)
-        bool temp = CompareDishNames(tray, o.dishes);
-     
-        if (temp)
-        {
-            currentScore += GetDishScore(onTray);
-        }
-        // deduct scores if they contain raw ingredients
-        //currentScore += IngredientDeduction(tray);
+            if (ts.tray.trayID == orderid)
+            {
+                List<BaseFood> tray = ts.tray.ServingTray;
+                List<GameObject> onTray = ts.tray.objectsOnTray;
 
-        if (teamNumber == 1)
-        {
-            this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);
-        } else if (teamNumber == 2)
-        {
-            this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
+                Order o = Database.GetOrderByID(orderid);
+                int currentScore = 0;
+
+                // Compares two dishes without order mattering (now checks for duplicates too)
+                bool temp = CompareDishNames(tray, o.dishes);
+
+                if (temp)
+                {
+                    currentScore += GetDishScore(onTray);
+                }
+                // deduct scores if they contain raw ingredients
+                //currentScore += IngredientDeduction(tray);
+
+                if (teamNumber == 1)
+                {
+                    this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);
+                }
+                else if (teamNumber == 2)
+                {
+                    this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
+                }
+                // resetTray(orderid);
+            }
+
+            this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+            break;
         }
         
     }
@@ -162,8 +163,8 @@ public class TrayController : MonoBehaviour
         makeTray(orderID);
     }
     [PunRPC]
-    void resetAcross(string orderID)
+    void resetAcross(int viewID)
     {
-        resetTray(orderID);
+        resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
     }
 }
