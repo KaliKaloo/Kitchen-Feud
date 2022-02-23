@@ -633,6 +633,9 @@ MonoBehaviour:
   usernameMenu: {fileID: 2144464987}
   connectPanel: {fileID: 1505998624}
   lobbyMenu: {fileID: 1696240646}
+  changeTeam1: {fileID: 1666285669}
+  changeTeam2: {fileID: 1899941316}
+  startLobbyButton: {fileID: 703242519}
   usernameInput: {fileID: 486742168}
   createGameInput: {fileID: 39170214}
   joinGameInput: {fileID: 1633344294}
@@ -640,6 +643,7 @@ MonoBehaviour:
   greetingMenu: {fileID: 541803686}
   lobbyName: {fileID: 1128710765}
   playerList: {fileID: 1165276994}
+  playerList2: {fileID: 1129081312}
   lobbyError: {fileID: 2128544199}
 --- !u!1 &435167004
 GameObject:
@@ -2000,7 +2004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00093079, y: 29}
+  m_AnchoredPosition: {x: 0.000018879, y: 32}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989171785
@@ -2722,7 +2726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1505998625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3316,7 +3320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1696240647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3440,7 +3444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728171180

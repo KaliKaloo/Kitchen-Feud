@@ -9,6 +9,11 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
+    [SerializeField] private GameObject changeTeam1;
+    [SerializeField] private GameObject changeTeam2;
+
+    [SerializeField] private GameObject startLobbyButton;
+
 
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
@@ -19,6 +24,8 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text greetingMenu;
     [SerializeField] private Text lobbyName;
     [SerializeField] private Text playerList;
+    [SerializeField] private Text playerList2;
+
     [SerializeField] private Text lobbyError;
 
     private void Start()
@@ -43,7 +50,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // gets list of players in the lobby in string
     private string GetPlayers()
     {
-        string players = "Players:" + System.Environment.NewLine;
+        string players = "Team 1:" + System.Environment.NewLine;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             players += player.NickName + System.Environment.NewLine;
@@ -57,6 +64,10 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
         playerList.text = GetPlayers();
+        playerList2.text = GetPlayers();
+        if (!PhotonNetwork.IsMasterClient) {
+            startLobbyButton.SetActive(false);
+        }
     }
    
     public override void OnConnectedToMaster()
@@ -137,6 +148,17 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+        
+    // Update is called once per frame
+    void Update()
+    {
+        if (lobbyMenu.activeSelf) {
+            if (PhotonNetwork.IsMasterClient) {
+                changeTeam1.SetActive(false);
+                changeTeam2.SetActive(false);
+            }
+        }
     }
 }
 
