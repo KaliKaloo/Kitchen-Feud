@@ -130,10 +130,12 @@ public class TrayController : MonoBehaviour
                     this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
                 }
                 // resetTray(orderid);
+                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+                break;
             }
 
-            this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
-            break;
+            
+           
         }
         
     }
