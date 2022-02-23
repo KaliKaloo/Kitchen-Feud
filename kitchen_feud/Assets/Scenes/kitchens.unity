@@ -569,7 +569,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh290286
+  m_Name: pb_Mesh52452
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -999,6 +999,10 @@ MonoBehaviour:
   - {fileID: 645987259}
   - {fileID: 1358449701}
   - {fileID: 1404734626}
+  otherTrays:
+  - {fileID: 924149732}
+  - {fileID: 1510220288}
+  - {fileID: 225396944}
   teamNumber: 1
 --- !u!224 &87785476
 RectTransform:
@@ -9259,6 +9263,7 @@ GameObject:
   - component: {fileID: 225396947}
   - component: {fileID: 225396946}
   - component: {fileID: 225396945}
+  - component: {fileID: 225396951}
   m_Layer: 0
   m_Name: Tray3
   m_TagString: Untagged
@@ -9587,6 +9592,28 @@ Transform:
   m_Father: {fileID: 213822249}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &225396951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225396944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 782
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &229645543
 GameObject:
   m_ObjectHideFlags: 0
@@ -12222,7 +12249,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh288592
+  m_Name: pb_Mesh50716
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12386,7 +12413,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh290058
+  m_Name: pb_Mesh52216
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15569,6 +15596,10 @@ MonoBehaviour:
   - {fileID: 924149732}
   - {fileID: 1510220288}
   - {fileID: 225396944}
+  otherTrays:
+  - {fileID: 645987259}
+  - {fileID: 1358449701}
+  - {fileID: 1404734626}
   teamNumber: 2
 --- !u!224 &359947017
 RectTransform:
@@ -22797,6 +22828,7 @@ GameObject:
   - component: {fileID: 645987263}
   - component: {fileID: 645987262}
   - component: {fileID: 645987261}
+  - component: {fileID: 645987267}
   m_Layer: 0
   m_Name: Tray1
   m_TagString: Untagged
@@ -23138,6 +23170,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &645987267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645987259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 777
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &648881702
 GameObject:
   m_ObjectHideFlags: 0
@@ -30269,6 +30323,7 @@ GameObject:
   - component: {fileID: 924149736}
   - component: {fileID: 924149735}
   - component: {fileID: 924149734}
+  - component: {fileID: 924149740}
   m_Layer: 0
   m_Name: Tray1
   m_TagString: Untagged
@@ -30610,6 +30665,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &924149740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924149732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 780
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &926960444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32472,7 +32549,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh290116
+  m_Name: pb_Mesh52280
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33123,7 +33200,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh289062
+  m_Name: pb_Mesh51192
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33930,7 +34007,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh289370
+  m_Name: pb_Mesh51508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -41445,6 +41522,13 @@ MonoBehaviour:
   score1Text: {fileID: 975011567}
   score2Text: {fileID: 2085446951}
   timerText: {fileID: 877225263}
+  trays:
+  - {fileID: 645987259}
+  - {fileID: 1358449701}
+  - {fileID: 1404734626}
+  - {fileID: 924149732}
+  - {fileID: 1510220288}
+  - {fileID: 225396944}
 --- !u!4 &1279054428
 Transform:
   m_ObjectHideFlags: 0
@@ -45748,6 +45832,7 @@ GameObject:
   - component: {fileID: 1358449705}
   - component: {fileID: 1358449704}
   - component: {fileID: 1358449703}
+  - component: {fileID: 1358449708}
   m_Layer: 0
   m_Name: Tray2
   m_TagString: Untagged
@@ -46076,6 +46161,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &1358449708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358449701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 778
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1358586469
 GameObject:
   m_ObjectHideFlags: 0
@@ -48142,6 +48249,7 @@ GameObject:
   - component: {fileID: 1404734630}
   - component: {fileID: 1404734629}
   - component: {fileID: 1404734628}
+  - component: {fileID: 1404734633}
   m_Layer: 0
   m_Name: Tray3
   m_TagString: Untagged
@@ -48470,6 +48578,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &1404734633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404734626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 779
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1406816529
 GameObject:
   m_ObjectHideFlags: 0
@@ -52360,6 +52490,7 @@ GameObject:
   - component: {fileID: 1510220292}
   - component: {fileID: 1510220291}
   - component: {fileID: 1510220290}
+  - component: {fileID: 1510220295}
   m_Layer: 0
   m_Name: Tray2
   m_TagString: Untagged
@@ -52688,6 +52819,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &1510220295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510220288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 781
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!43 &1521338334
 Mesh:
   m_ObjectHideFlags: 0

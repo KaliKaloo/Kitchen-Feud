@@ -10,7 +10,7 @@ public class GlobalTimer
 
     // SET TIMER HERE !!!!!!
     private static readonly int time = 180;
-
+    
 
     private static int timer = time;
     private static bool started = false;
@@ -124,7 +124,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text score2Text;
 
     [SerializeField] private Text timerText;
-
+    public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
 
     // updates end scores to compare in game over scene
@@ -187,9 +187,17 @@ public class scoreController : MonoBehaviour
         else
         {
             // load game over screen and send final scores
-            timer.RestartTimer();
+            for (int i = 0; i < trays.Count; i++)
+            {
+                Tray ts = trays[i].GetComponent<Tray>();
+                ts.tray.trayID = null;
+                ts.tray.ServingTray.Clear();
+                ts.tray.objectsOnTray.Clear();
+            }
+                timer.RestartTimer();
             PhotonNetwork.LoadLevel("gameOver");
         }
+
     }
 
     

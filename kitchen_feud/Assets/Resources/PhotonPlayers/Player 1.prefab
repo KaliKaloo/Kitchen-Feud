@@ -112,6 +112,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1194199829187532428}
+  - {fileID: 5950949770074864637}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -199,6 +200,7 @@ MonoBehaviour:
   slot: {fileID: 5725064515487422948}
   heldObj: {fileID: 0}
   view: {fileID: 8876107304136392510}
+  itemdropped: 0
 --- !u!114 &1194199829187532428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6179868925963400125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.636, y: 0.52, z: 0.12}
+  m_LocalPosition: {x: -0.34, y: 0.22, z: 0.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1242614080712157140}
@@ -401,7 +403,7 @@ GameObject:
   - component: {fileID: 3315102292968712320}
   - component: {fileID: 529380843882259817}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,13 +416,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7392926374472386214}
-  m_LocalRotation: {x: 0.2670209, y: -0.002606928, z: -0.00072233373, w: 0.963687}
-  m_LocalPosition: {x: 0.05, y: 1.66, z: -2.06}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: 0.7, z: -0.02}
   m_LocalScale: {x: 1.4285711, y: 1, z: 1.4285711}
   m_Children: []
   m_Father: {fileID: 1242614080712157140}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30.974, y: -0.362, z: -0.186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &529380843882259817
 Camera:
   m_ObjectHideFlags: 0

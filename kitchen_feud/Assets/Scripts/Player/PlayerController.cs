@@ -55,11 +55,11 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 
-			if (Input.GetKey(KeyCode.A))
+			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
 			{
 				transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
 			}
-			if (Input.GetKey(KeyCode.D))
+			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 			{
 				transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
 			}
@@ -69,11 +69,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if (view.IsMine)
 		{
-			if (Input.GetKey(KeyCode.W))
+			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
 				player.velocity = transform.forward * m_speed * Time.deltaTime;
 			}
-			if (Input.GetKey(KeyCode.S))
+			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
 				player.velocity = -transform.forward * m_speed * Time.deltaTime;
 			}
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void EnablePushing(int viewID)
+     void EnablePushing(int viewID)
     {
 		Rigidbody r = PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>();
         r.isKinematic = false;
