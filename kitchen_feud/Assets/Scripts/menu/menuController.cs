@@ -54,7 +54,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private void SetTeam(int teamNumber)
     {
         customProperties["Team"] = teamNumber;
-        PhotonNetwork.LocalPlayer.CustomProperties = customProperties;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
     }
 
     private int GetAmountOfPlayers(int team)
@@ -115,10 +115,10 @@ public class menuController : MonoBehaviourPunCallbacks
         // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-                if ((int)player.CustomProperties["Team"] == team)
-                {
-                    players += player.NickName + System.Environment.NewLine;
-                }
+            if ((int)player.CustomProperties["Team"] == team)
+            {
+                players += player.NickName + System.Environment.NewLine;
+            }
         }
         return players;
     }
@@ -248,7 +248,13 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         // WIP ASSIGN CORRECT TEAM ON JOIN
 
-        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+        int teamBalance = CheckTeamBalance();
+        if (teamBalance == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+            SetTeam(2);
+        }
+
+        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
     }
 
     public override void OnLeftRoom()
@@ -286,25 +292,24 @@ public class menuController : MonoBehaviourPunCallbacks
     public void SwitchToTeam1() {
         // CHANGE USER TO TEAM 1 HERE
         SetTeam(1);
-        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
+        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
     }
 
     public void SwitchToTeam2()
     {
         SetTeam(2);
-        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
+        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
     }
 
     // 0 means both balanced, 1 means team 1 can be joined only, 2 means team 2 can be joined only
     private int CheckTeamBalance()
     {
-        int team1Added = GetAmountOfPlayers(1) + 2;
-        int team2Added = GetAmountOfPlayers(2) + 2;
+        int team1Amount = GetAmountOfPlayers(1);
+        int team2Amount = GetAmountOfPlayers(2);
         // if part of team 1 and space in team 2 return 2
-        if (((team1Added % team2Added) >= 1) && (team1Added > team2Added))
+        if (team1Amount > team2Amount && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
             return 2;
-        // if part of team 2 and space in team 1 return 1
-        else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added))
+        else if (team2Amount > team1Amount && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
             return 1;
         else
             return 0;
@@ -335,14 +340,14 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (lobbyMenu.activeSelf)
         {
-            InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+            //InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
         }
     }
 
     [PunRPC]
-    void UpdateLobby()
+    void UpdateLobby(string roomName)
     {
-        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+        InitializeLobby(roomName);
     }
 
     [PunRPC]
