@@ -58,9 +58,21 @@ public class menuController : MonoBehaviourPunCallbacks
 
 
     // gets list of players in the lobby in string
-    private string GetPlayers()
+    private string GetPlayers1()
     {
         string players = "Team 1:" + System.Environment.NewLine;
+        // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            players += player.NickName + System.Environment.NewLine;
+        }
+        return players;
+    }
+
+    private string GetPlayers2()
+    {
+        string players = "Team 2:" + System.Environment.NewLine;
+        // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 2
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             players += player.NickName + System.Environment.NewLine;
@@ -75,8 +87,8 @@ public class menuController : MonoBehaviourPunCallbacks
         settingsMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
-        playerList.text = GetPlayers();
-        playerList2.text = GetPlayers();
+        playerList.text = GetPlayers1();
+        playerList2.text = GetPlayers2();
 
         // won't allow normal user to start/edit game settings
         if (!PhotonNetwork.IsMasterClient) {
