@@ -17,7 +17,7 @@ public class GlobalTimer
     PhotonRoom room;
 
     // changes original starting time, only do before game starts!
-    public int ChangeTimerValue(int newTime)
+    public int AddSubtractTimerValue(int newTime)
     {
         int intermediateTime = time + newTime;
         if (intermediateTime < 60)
@@ -31,7 +31,11 @@ public class GlobalTimer
             timer = time = intermediateTime;
             return 0;
         }
+    }
 
+    public void ChangeTimerValue(int newTime)
+    {
+        timer = time = newTime;
     }
 
     public int GetCurrentTime()

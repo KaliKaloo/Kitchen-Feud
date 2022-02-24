@@ -115,6 +115,9 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LoadBackToLobbyMenu()
     {
         timerError.text = "";
+
+        // updates all users' timers based on changed settings from master
+        this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetCurrentTime());
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
@@ -122,7 +125,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void IncreaseTimer()
     {
         timerError.text = "";
-        int timerCheck = timer.ChangeTimerValue(60);
+        int timerCheck = timer.AddSubtractTimerValue(60);
         if (timerCheck == 2)
             timerError.text = "Too long!";
         else
@@ -133,7 +136,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void DecreaseTimer()
     {
         timerError.text = "";
-        int timerCheck = timer.ChangeTimerValue(-60);
+        int timerCheck = timer.AddSubtractTimerValue(-60);
         if (timerCheck == 1)
             timerError.text = "Too short!";
         else
@@ -288,6 +291,12 @@ public class menuController : MonoBehaviourPunCallbacks
     void UpdateLobby()
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+
+    [PunRPC]
+    void UpdateTimer(int newTime)
+    {
+        timer.ChangeTimerValue(newTime);
     }
 }
 
