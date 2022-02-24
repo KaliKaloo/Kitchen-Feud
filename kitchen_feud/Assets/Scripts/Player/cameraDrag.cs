@@ -20,7 +20,7 @@ public class cameraDrag : MonoBehaviour
             transform.localRotation = currentRotation;
         }
 
-        if (Input.GetMouseButton(2)){
+        if (Input.GetKey(KeyCode.R)){
             transform.localRotation = Quaternion.identity;
         }
     }
