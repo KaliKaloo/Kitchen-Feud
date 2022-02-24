@@ -10,6 +10,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject findLobbyMenu;
     [SerializeField] private GameObject changeTeam1;
     [SerializeField] private GameObject changeTeam2;
 
@@ -54,6 +55,16 @@ public class menuController : MonoBehaviourPunCallbacks
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }
+    }
+
+    public void BackToMainMenu()
+    {
+        findLobbyMenu.SetActive(false);
+    }
+
+    public void FindLobby()
+    {
+        findLobbyMenu.SetActive(true);
     }
 
 
@@ -152,13 +163,9 @@ public class menuController : MonoBehaviourPunCallbacks
     public void ChangeUsernameInput()
     {
         if (usernameInput.text.Length >= 1 && usernameInput.text.Length <= 9)
-        {
             startButton.SetActive(true);
-        }
         else
-        {
             startButton.SetActive(false);
-        }
     }
 
     public void SetUsername()
@@ -232,8 +239,6 @@ public class menuController : MonoBehaviourPunCallbacks
         // JUST TEST DELETE AFTER
         team2 -= 1;
         team1 += 1;
-        print(team1);
-        print(team2);
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
     }
 
@@ -245,8 +250,6 @@ public class menuController : MonoBehaviourPunCallbacks
         // JUST TEST DELETE AFTER
         team1 -= 1;
         team2 += 1;
-        print(team1);
-        print(team2);
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
     }
 
@@ -258,9 +261,9 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         int team1Added = team1 + 2;
         int team2Added = team2 + 2;
-        if (((team1Added % team2Added) >= 1) && (team1Added > team2Added))
+        if (((team1Added % team2Added) >= 1) && (team1Added > team2Added) && currentTeam == 1)
             return 2;
-        else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added))
+        else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added) && currentTeam == 2)
             return 1;
         else
             return 0;
