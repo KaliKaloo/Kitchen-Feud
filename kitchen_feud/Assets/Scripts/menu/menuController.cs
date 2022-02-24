@@ -2,9 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Collections.Generic;
+using Photon.Realtime;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
+
+    public static menuController Instance;
    
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
@@ -16,6 +20,8 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject startLobbyButton;
     [SerializeField] private GameObject settingsButton;
+
+    [SerializeField] private GameObject roomListItemPrefab;
 
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
@@ -33,11 +39,18 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text lobbyError;
 
+    [SerializeField] private Transform roomListContent;
+
     private int team1 = 2;
     private int team2 = 1;
     private int currentTeam = 1;
 
     private static GlobalTimer timer = new GlobalTimer();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -96,6 +109,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         connectPanel.SetActive(false);
         settingsMenu.SetActive(false);
+        findLobbyMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
         playerList.text = GetPlayers1();
@@ -195,6 +209,11 @@ public class menuController : MonoBehaviourPunCallbacks
       PhotonNetwork.JoinRoom(joinGameInput.text);
     }
 
+    public void JoinGameWithInfo(RoomInfo info)
+    {
+        PhotonNetwork.JoinRoom(info.Name);
+    }
+
     // Load level once game is started
     public void StartGame()
     {
@@ -230,6 +249,16 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (Transform trans in roomListContent) {
+            Destroy(trans.gameObject);
+        }
+        for (int i = 0; i < roomList.Count; i++) {
+            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+        }
     }
 
     public void SwitchToTeam1() {
