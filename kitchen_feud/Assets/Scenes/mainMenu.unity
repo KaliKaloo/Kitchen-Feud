@@ -713,17 +713,22 @@ MonoBehaviour:
   usernameMenu: {fileID: 2144464987}
   connectPanel: {fileID: 1505998624}
   lobbyMenu: {fileID: 1696240646}
+  settingsMenu: {fileID: 1427455178}
   changeTeam1: {fileID: 1666285669}
   changeTeam2: {fileID: 1899941316}
   startLobbyButton: {fileID: 703242519}
+  settingsButton: {fileID: 989171783}
   usernameInput: {fileID: 486742168}
   createGameInput: {fileID: 39170214}
   joinGameInput: {fileID: 1633344294}
   startButton: {fileID: 1572508061}
   greetingMenu: {fileID: 541803686}
   lobbyName: {fileID: 1128710765}
+  lobbyNameSettings: {fileID: 1039936788}
   playerList: {fileID: 1165276994}
   playerList2: {fileID: 1129081312}
+  timerError: {fileID: 1571900657}
+  currentTime: {fileID: 22218673}
   lobbyError: {fileID: 2128544199}
 --- !u!114 &273502801
 MonoBehaviour:
@@ -1224,7 +1229,6 @@ RectTransform:
   m_LocalScale: {x: 1.9149998, y: 1.9149998, z: 1.9149998}
   m_Children:
   - {fileID: 1347588562}
-  - {fileID: 1571900656}
   m_Father: {fileID: 1427455179}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1277,9 +1281,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 273502800}
         m_TargetAssemblyTypeName: menuController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: IncreaseTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1900,7 +1904,7 @@ GameObject:
   - component: {fileID: 873208091}
   - component: {fileID: 873208090}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MadeByText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1918,7 +1922,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1065241601}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2287,9 +2291,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 273502800}
         m_TargetAssemblyTypeName: menuController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: LoadSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2420,9 +2424,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 273502800}
         m_TargetAssemblyTypeName: menuController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: LoadBackToLobbyMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2719,9 +2723,9 @@ RectTransform:
   - {fileID: 1505998625}
   - {fileID: 2144464988}
   - {fileID: 1696240647}
+  - {fileID: 1427455179}
   - {fileID: 873208089}
   - {fileID: 2079690111}
-  - {fileID: 1427455179}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3161,9 +3165,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 273502800}
         m_TargetAssemblyTypeName: menuController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: DecreaseTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3387,7 +3391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1427455179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3405,8 +3409,9 @@ RectTransform:
   - {fileID: 1500102592}
   - {fileID: 577891670}
   - {fileID: 1242799993}
+  - {fileID: 1571900656}
   m_Father: {fileID: 1065241601}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3722,7 +3727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1505998625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3822,7 +3827,7 @@ GameObject:
   - component: {fileID: 1571900658}
   - component: {fileID: 1571900657}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TimerErrorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3835,16 +3840,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571900655}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.9149998, y: 1.9149998, z: 1.9149998}
   m_Children: []
-  m_Father: {fileID: 577891670}
-  m_RootOrder: 1
+  m_Father: {fileID: 1427455179}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -73.98937, y: -32.955}
+  m_AnchoredPosition: {x: -0.6895981, y: -80.078804}
   m_SizeDelta: {x: 189.3787, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571900657
@@ -5348,7 +5353,7 @@ GameObject:
   - component: {fileID: 2079690113}
   - component: {fileID: 2079690112}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: WIPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5366,7 +5371,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1065241601}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

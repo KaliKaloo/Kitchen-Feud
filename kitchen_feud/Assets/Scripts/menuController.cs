@@ -9,10 +9,12 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject changeTeam1;
     [SerializeField] private GameObject changeTeam2;
 
     [SerializeField] private GameObject startLobbyButton;
+    [SerializeField] private GameObject settingsButton;
 
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
@@ -22,14 +24,19 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text greetingMenu;
     [SerializeField] private Text lobbyName;
+    [SerializeField] private Text lobbyNameSettings;
     [SerializeField] private Text playerList;
     [SerializeField] private Text playerList2;
+    [SerializeField] private Text timerError;
+    [SerializeField] private Text currentTime;
 
     [SerializeField] private Text lobbyError;
 
     private int team1 = 2;
     private int team2 = 1;
     private int currentTeam = 1;
+
+    private static GlobalTimer timer = new GlobalTimer();
 
     private void Start()
     {
@@ -61,18 +68,66 @@ public class menuController : MonoBehaviourPunCallbacks
         return players;
     }
 
+    // Initializes/reinitializes all lobby variables
     private void InitializeLobby(string name)
     {
         connectPanel.SetActive(false);
+        settingsMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
         playerList.text = GetPlayers();
         playerList2.text = GetPlayers();
+
+        // won't allow normal user to start/edit game settings
         if (!PhotonNetwork.IsMasterClient) {
             startLobbyButton.SetActive(false);
+            settingsButton.SetActive(false);
         }
     }
-   
+
+    // Loads canvas for settings allowing master user to change game timer
+    public void LoadSettingsMenu()
+    {
+        // double check to make sure somehow non-master user can't access settings menu
+        if (PhotonNetwork.IsMasterClient)
+        {
+            lobbyMenu.SetActive(false);
+            settingsMenu.SetActive(true);
+            timerError.text = "";
+            lobbyNameSettings.text = PhotonNetwork.CurrentRoom.ToString();
+            currentTime.text = timer.GetCurrentTimeString();
+        }
+    }
+
+    // after leaving settings menu loads lobby back up for master user
+    public void LoadBackToLobbyMenu()
+    {
+        timerError.text = "";
+        InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+
+    // increases timer by 1 minute and updates text
+    public void IncreaseTimer()
+    {
+        timerError.text = "";
+        int timerCheck = timer.ChangeTimerValue(60);
+        if (timerCheck == 2)
+            timerError.text = "Too long!";
+        else
+            currentTime.text = timer.GetCurrentTimeString();
+    }
+
+    // decreases timer by 1 minute and updates text
+    public void DecreaseTimer()
+    {
+        timerError.text = "";
+        int timerCheck = timer.ChangeTimerValue(-60);
+        if (timerCheck == 1)
+            timerError.text = "Too short!";
+        else
+            currentTime.text = timer.GetCurrentTimeString();
+    }
+
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
