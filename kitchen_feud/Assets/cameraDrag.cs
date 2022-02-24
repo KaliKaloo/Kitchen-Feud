@@ -5,10 +5,14 @@ using UnityEngine;
 public class cameraDrag : MonoBehaviour
 {
     float speed = 5.0f, yaw = 0.0f, pitch = 0.0f;
-    private Vector3 camReset;
+
+    Quaternion currentRotation;
+    Vector3 currentEulerAngles;
 
     void Start()
     {
+        ResetCamera = Camera.main.transform.eulerAngles;
+        Debug.Log(ResetCamera);
         
     }
 
@@ -17,17 +21,17 @@ public class cameraDrag : MonoBehaviour
     {
          if (Input.GetMouseButton(1)) //start dragging
         {
-            camReset = transform.rotation.eulerAngles;
             yaw += speed * Input.GetAxis("Mouse X");
             pitch -= speed * Input.GetAxis("Mouse Y");
-            transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+            transform.eulerAngles = new Vector3(pitch, yaw, 0f);
+            // transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
+            // currentRotation.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+            // transform.rotation = currentRotation;
         }
 
         if (Input.GetMouseButton(2)){
-            transform.eulerAngles = new Vector3(0.0f,0.0f,0.0f);
-            yaw = 0.0f;
-            pitch = 0.0f;
-            Debug.Log(transform.eulerAngles);
+            transform.localRotation = Quaternion.identity;
+
         }
     }
 }
