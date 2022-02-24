@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using System.Collections.Generic;
 using Photon.Realtime;
+using System.Collections;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -46,10 +47,38 @@ public class menuController : MonoBehaviourPunCallbacks
     private int currentTeam = 1;
 
     private static GlobalTimer timer = new GlobalTimer();
+    private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void SetTeam(int teamNumber)
+    {
+        customProperties["Team"] = teamNumber;
+        PhotonNetwork.LocalPlayer.CustomProperties = customProperties;
+    }
+
+    private int GetAmountOfPlayers(int team)
+    {
+        int total = 0;
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            try
+            {
+                if ((int)player.CustomProperties["Team"] == team)
+                {
+                    total += 1;
+                }
+            }
+            catch
+            {
+                // do nothing if no players exist in that team   
+            }
+        }
+        return total;
     }
 
     private void Start()
@@ -82,24 +111,21 @@ public class menuController : MonoBehaviourPunCallbacks
 
 
     // gets list of players in the lobby in string
-    private string GetPlayers1()
+    private string GetPlayers(int team)
     {
-        string players = "Team 1:" + System.Environment.NewLine;
+        string players = "Team " + team + ":"  + System.Environment.NewLine;
         // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            players += player.NickName + System.Environment.NewLine;
-        }
-        return players;
-    }
-
-    private string GetPlayers2()
-    {
-        string players = "Team 2:" + System.Environment.NewLine;
-        // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 2
-        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
-        {
-            players += player.NickName + System.Environment.NewLine;
+            try {
+                if ((int)player.CustomProperties["Team"] == team)
+                {
+                    players += player.NickName + System.Environment.NewLine;
+                }
+            } catch
+            {
+               // do nothing if no players exist in that team   
+            }
         }
         return players;
     }
@@ -112,8 +138,9 @@ public class menuController : MonoBehaviourPunCallbacks
         findLobbyMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
-        playerList.text = GetPlayers1();
-        playerList2.text = GetPlayers2();
+        UpdateTeamButtons();
+        playerList.text = GetPlayers(1);
+        playerList2.text = GetPlayers(2);
 
         // won't allow normal user to start/edit game settings
         if (!PhotonNetwork.IsMasterClient) {
@@ -225,7 +252,16 @@ public class menuController : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinedRoom()
-    {   
+    {
+        // ASSIGN CORRECT TEAM ON JOIN
+        int teamCheck = CheckTeamBalance();
+        if (PhotonNetwork.IsMasterClient)
+            SetTeam(1);
+        else if (teamCheck == 2)
+            SetTeam(2);
+        else
+            SetTeam(1);
+
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
@@ -263,60 +299,55 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void SwitchToTeam1() {
         // CHANGE USER TO TEAM 1 HERE
-        currentTeam = 1;
-
-        // JUST TEST DELETE AFTER
-        team2 -= 1;
-        team1 += 1;
+        SetTeam(1);
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
     }
 
     public void SwitchToTeam2()
     {
-        // CHANGE USER TO TEAM 2 HERE
-        currentTeam = 2;
-
-        // JUST TEST DELETE AFTER
-        team1 -= 1;
-        team2 += 1;
+        SetTeam(2);
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All);
     }
-
-
-
 
     // 0 means both balanced, 1 means team 1 can be joined only, 2 means team 2 can be joined only
     private int CheckTeamBalance()
     {
-        int team1Added = team1 + 2;
-        int team2Added = team2 + 2;
+        int team1Added = GetAmountOfPlayers(1) + 2;
+        int team2Added = GetAmountOfPlayers(2) + 2;
+        // if part of team 1 and space in team 2 return 2
         if (((team1Added % team2Added) >= 1) && (team1Added > team2Added) && currentTeam == 1)
             return 2;
+        // if part of team 2 and space in team 1 return 1
         else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added) && currentTeam == 2)
             return 1;
         else
             return 0;
     }
+
+    private void UpdateTeamButtons()
+    {
+        int balance = CheckTeamBalance();
+        if (balance == 2)
+        {
+            changeTeam1.SetActive(false);
+            changeTeam2.SetActive(true);
+        }
+        else if (balance == 1)
+        {
+            changeTeam1.SetActive(true);
+            changeTeam2.SetActive(false);
+        }
+        else
+        {
+            changeTeam1.SetActive(false);
+            changeTeam2.SetActive(false);
+        }
+    }
         
     // Update is called once per frame
     void Update()
     {
-        if (lobbyMenu.activeSelf) {
-            int balance = CheckTeamBalance();
-            if (balance == 2)
-            {
-                changeTeam1.SetActive(false);
-                changeTeam2.SetActive(true);
-            } else if (balance == 1)
-            {
-                changeTeam1.SetActive(true);
-                changeTeam2.SetActive(false);
-            } else
-            {
-                changeTeam1.SetActive(false);
-                changeTeam2.SetActive(false);
-            }
-        }
+
     }
 
     [PunRPC]
