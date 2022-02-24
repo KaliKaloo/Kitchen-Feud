@@ -58,6 +58,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.buildIndex;
+        Debug.Log(currentScene);
         if(currentScene == 1)
         {
             CreatePlayer();

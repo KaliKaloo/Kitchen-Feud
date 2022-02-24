@@ -2,10 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using agora_gaming_rtc;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
-   
+    IRtcEngine rtcEngine;
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
@@ -20,9 +21,38 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text lobbyName;
     [SerializeField] private Text playerList;
     [SerializeField] private Text lobbyError;
+    public static menuController Instance;
+    string appId = "906fd9f2074e4b0491fcde55c280b9e5";
+
+    private void Awake()
+    {
+        if (menuController.Instance == null)
+        {
+            menuController.Instance = this;
+        }
+        else
+        {
+            if (menuController.Instance != this)
+            {
+                Destroy(menuController.Instance.gameObject);
+                menuController.Instance = this;
+            }
+        }
+        DontDestroyOnLoad(this.gameObject);
+     
+    }
 
     private void Start()
+
+
     {
+
+        
+        rtcEngine = IRtcEngine.GetEngine(appId);
+        rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
+
+        rtcEngine.OnLeaveChannel += OnleaveChannel;
+        rtcEngine.OnError += OnError;
         PhotonNetwork.AutomaticallySyncScene = true;
 
         if (!PhotonNetwork.IsConnected)
@@ -102,6 +132,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public void JoinGame()
     {
       PhotonNetwork.JoinRoom(joinGameInput.text);
+        
+
     }
 
     // Load level once game is started
@@ -112,16 +144,38 @@ public class menuController : MonoBehaviourPunCallbacks
         // PhotonNetwork.LoadLevel("kitchens (with score)");
     }
 
+
+
+    void OnError(int error, string msg)
+    {
+        Debug.Log("Error with Agora: " + error + "This is the message: " + msg);
+    }
+
+    private void OnleaveChannel(RtcStats stats)
+    {
+        Debug.Log("Left channel with duration" + stats.duration);
+    }
+
+    private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
+    {
+        Debug.LogError("Joined channe: " + channelName);
+    }
     public override void OnJoinedRoom()
     {   
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+        rtcEngine.JoinChannel(PhotonNetwork.CurrentRoom.Name);
     }
 
+    private void OnDestroy()
+    {
+        IRtcEngine.Destroy();
+    }
     public override void OnLeftRoom()
     {
         lobbyMenu.SetActive(false);
         connectPanel.SetActive(true);
         usernameMenu.SetActive(false);
+        //rtcEngine.LeaveChannel();
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
