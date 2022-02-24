@@ -340,7 +340,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (lobbyMenu.activeSelf)
         {
-            //InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+            InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
         }
     }
 

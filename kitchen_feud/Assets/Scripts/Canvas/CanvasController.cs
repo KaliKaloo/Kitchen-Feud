@@ -189,7 +189,7 @@ public class CanvasController : MonoBehaviour
                 Order leaderOrder = GetNewRandomOrder();
 
                 // ONLY DO THIS TO TEAM 1
-                if (teamNumber == 1)
+                if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
                 }
@@ -201,7 +201,7 @@ public class CanvasController : MonoBehaviour
                 Order leaderOrder1 = GetNewRandomOrder();
 
             // ONLY DO THIS TO TEAM 2
-            if (teamNumber == 2)
+            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
             {
                
                 this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
