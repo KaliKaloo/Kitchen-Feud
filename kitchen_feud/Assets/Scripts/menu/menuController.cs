@@ -340,6 +340,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (lobbyMenu.activeSelf)
         {
+            UpdateTeamButtons();
             InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
         }
     }
