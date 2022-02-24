@@ -42,10 +42,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Transform roomListContent;
 
-    private int team1 = 2;
-    private int team2 = 1;
-    private int currentTeam = 1;
-
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
 
@@ -78,6 +74,7 @@ public class menuController : MonoBehaviourPunCallbacks
                 // do nothing if no players exist in that team   
             }
         }
+        //print("Team " + team + " has " + total + " members.");
         return total;
     }
 
@@ -88,6 +85,7 @@ public class menuController : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
+            SetTeam(1);
             usernameMenu.SetActive(true);
         } 
         else
@@ -117,15 +115,10 @@ public class menuController : MonoBehaviourPunCallbacks
         // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            try {
                 if ((int)player.CustomProperties["Team"] == team)
                 {
                     players += player.NickName + System.Environment.NewLine;
                 }
-            } catch
-            {
-               // do nothing if no players exist in that team   
-            }
         }
         return players;
     }
@@ -138,7 +131,7 @@ public class menuController : MonoBehaviourPunCallbacks
         findLobbyMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
-        UpdateTeamButtons();
+        //UpdateTeamButtons();
         playerList.text = GetPlayers(1);
         playerList2.text = GetPlayers(2);
 
@@ -253,14 +246,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        // ASSIGN CORRECT TEAM ON JOIN
-        int teamCheck = CheckTeamBalance();
-        if (PhotonNetwork.IsMasterClient)
-            SetTeam(1);
-        else if (teamCheck == 2)
-            SetTeam(2);
-        else
-            SetTeam(1);
+        // WIP ASSIGN CORRECT TEAM ON JOIN
 
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
@@ -315,10 +301,10 @@ public class menuController : MonoBehaviourPunCallbacks
         int team1Added = GetAmountOfPlayers(1) + 2;
         int team2Added = GetAmountOfPlayers(2) + 2;
         // if part of team 1 and space in team 2 return 2
-        if (((team1Added % team2Added) >= 1) && (team1Added > team2Added) && currentTeam == 1)
+        if (((team1Added % team2Added) >= 1) && (team1Added > team2Added))
             return 2;
         // if part of team 2 and space in team 1 return 1
-        else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added) && currentTeam == 2)
+        else if (((team2Added % team1Added) >= 1) && (team2Added > team1Added))
             return 1;
         else
             return 0;
@@ -347,7 +333,10 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-
+        if (lobbyMenu.activeSelf)
+        {
+            InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+        }
     }
 
     [PunRPC]
