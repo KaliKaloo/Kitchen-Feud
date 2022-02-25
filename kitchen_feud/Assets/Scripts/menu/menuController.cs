@@ -5,6 +5,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -42,9 +43,13 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Transform roomListContent;
 
+
+    [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject loadingBarCanvas;
+    [SerializeField] private Slider loadingBar;
+
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
-
 
     private void Awake()
     {
@@ -84,8 +89,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.IsConnected)
         {
+            loadingScreen.SetActive(true);
             PhotonNetwork.ConnectUsingSettings();
             SetTeam(1);
+            loadingScreen.SetActive(false);
             usernameMenu.SetActive(true);
         } 
         else
@@ -213,6 +220,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Create room here
     public void CreateGame()
     {
+        loadingScreen.SetActive(true);
         PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
     }
 
@@ -220,17 +228,21 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LeaveGame()
     {
         lobbyError.text = "";
-        PhotonNetwork.LeaveRoom(false);
+        loadingScreen.SetActive(true);
+        PhotonNetwork.LeaveRoom();
+        loadingScreen.SetActive(false);
     }
 
     // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
-      PhotonNetwork.JoinRoom(joinGameInput.text);
+        loadingScreen.SetActive(true);
+        PhotonNetwork.JoinRoom(joinGameInput.text);
     }
 
     public void JoinGameWithInfo(RoomInfo info)
     {
+        loadingScreen.SetActive(true);
         PhotonNetwork.JoinRoom(info.Name);
     }
 
@@ -238,14 +250,16 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            PhotonNetwork.LoadLevel(1);
+            LoadScene(1);
         else
             // change this to load larger kitchen if > 4 players!!!!!
-            PhotonNetwork.LoadLevel(1);
+            LoadScene(1);
     }
 
     public override void OnJoinedRoom()
     {
+        loadingScreen.SetActive(false);
+
         // WIP ASSIGN CORRECT TEAM ON JOIN
 
         int teamBalance = CheckTeamBalance();
@@ -266,6 +280,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        loadingScreen.SetActive(false);
         lobbyError.text = "Lobby does not exist!";
     }
 
@@ -277,6 +292,11 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
+    }
+
+    public override void OnCreatedRoom()
+    {
+        loadingScreen.SetActive(false);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -345,6 +365,24 @@ public class menuController : MonoBehaviourPunCallbacks
             UpdateTeamButtons();
         }
 
+    }
+
+    public void LoadScene(int levelIndex)
+    {
+        StartCoroutine(LoadSceneAsynchronously(levelIndex));
+    }
+
+    IEnumerator LoadSceneAsynchronously(int levelIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        loadingScreen.SetActive(true);
+        loadingBarCanvas.SetActive(true);
+        while (!operation.isDone)
+        {
+            loadingBar.value = operation.progress;
+            yield return null;
+        }
+        loadingBarCanvas.SetActive(false);
     }
 
     // Update is called once per frame
