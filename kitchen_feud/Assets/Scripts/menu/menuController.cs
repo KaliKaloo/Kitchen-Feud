@@ -334,15 +334,23 @@ public class menuController : MonoBehaviourPunCallbacks
             changeTeam2.SetActive(false);
         }
     }
-        
-    // Update is called once per frame
-    void Update()
+    
+    // Updates the lobby parts which need to be updated every frame
+    void UpdateLobby()
     {
         if (lobbyMenu.activeSelf)
         {
+            playerList.text = GetPlayers(1);
+            playerList2.text = GetPlayers(2);
             UpdateTeamButtons();
-            InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
         }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateLobby();
     }
 
     [PunRPC]
