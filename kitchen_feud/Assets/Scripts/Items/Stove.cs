@@ -118,6 +118,7 @@ public class Stove : Interactable
             {
                 
                 //Destroy(heldObjArg);
+                //throws a nullref, idk why
                 stoveSlotsController.PutOnStove(heldObjArg, playerHold);
 
             }

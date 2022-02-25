@@ -13,8 +13,6 @@ public class StoveSlotsController : MonoBehaviour {
     private int fullnessCount = 0;
 
     public void PutOnStove(GameObject heldObjArg, PlayerHolding playerHold) {
-        /*if there's an empty slot
-            add item into slot*/
         if(fullnessCount < 3) {
             for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount == 0) {
@@ -35,8 +33,11 @@ public class StoveSlotsController : MonoBehaviour {
     public void ClearStove() {
         for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount != 0) {
+                    //make the destroying multiplayer!!!!
                     GameObject objectInSlot = slots[i].GetChild(0).gameObject;
+                    objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.Others);
                     Destroy(objectInSlot);
+                    
                     fullnessCount--;
                 }
             }

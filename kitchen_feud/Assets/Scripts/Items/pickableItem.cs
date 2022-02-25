@@ -78,4 +78,14 @@ public class pickableItem : Interactable
     {
         this.onTray = false;
     }
+
+    [PunRPC]
+    void DisableIngredientView()
+    {
+        Renderer r = GetComponent<Renderer>();
+   
+        
+            r.enabled = !r.enabled;
+        
+    }
 }
