@@ -100,7 +100,26 @@ public class TrayController : MonoBehaviour
         if (holdCommon.Count() > 0)
                 holdCommon.ToList().ForEach(t => commonNames.Add(t));
 
-        return (commonNames.Count()/dishNames.Count());
+        return ((float)commonNames.Count()/(float)dishNames.Count());
+    }
+
+    private int calcScore(List<GameObject> trayDishes, List<BaseFood> trayItems, List<BaseFood> orderDish){
+        int total = 0;
+        List<BaseFood> tempOrderDish = orderDish;
+
+        for(int i =0; i<trayItems.Count(); i++)
+        {
+            if (trayItems[i].Type == ItemType.Ingredient)
+            {
+                total += trayItems[i].maxScore;
+            }
+            else if (tempOrderDish.Any(dish => dish.name == trayItems[i].name)){
+                Dish dishComponent = trayDishes[i].GetComponent<Dish>();
+                total += (int)dishComponent.points;
+                tempOrderDish.Remove(trayItems[i]);
+            }
+        }
+        return total; 
     }
 
     // compares a tray to an orderid
@@ -119,14 +138,11 @@ public class TrayController : MonoBehaviour
                 int currentScore = 0;
 
                 // Compares two dishes without order mattering (now checks for duplicates too)
-                float dishMultiplier = CompareDishNames(tray, o.dishes);
+                // float dishMultiplier = CompareDishNames(tray, o.dishes);
+                // float totalPoints = GetDishScore(onTray, tray) * dishMultiplier;
+                // currentScore += (int)totalPoints;
 
-                float totalPoints = GetDishScore(onTray, tray) * dishMultiplier;
-                Debug.Log(dishMultiplier);
-
-                currentScore += (int)totalPoints;
-
-                // deduct scores if they contain raw ingredients
+                currentScore += calcScore(onTray, tray, o.dishes);
 
                 if (teamNumber == 1)
                 {

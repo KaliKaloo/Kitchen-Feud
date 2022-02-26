@@ -31,7 +31,7 @@ public class Tray : Interactable
                         playerHold.dropItem();
                         
                         objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.Others,
-                            objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                        objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                         objectHolding.transform.parent = slots[i];
                         objectHolding.transform.localPosition = Vector3.zero;
                         objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
