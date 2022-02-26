@@ -99,12 +99,14 @@ public class ParseScore
 
     public void AddScore1(int newScore1)
     {
-        score1 += newScore1;
+        if ((score1 + newScore1) >= 0)
+            score1 += newScore1;
     }
 
     public void AddScore2(int newScore2)
     {
-        score2 += newScore2;
+        if ((score2 + newScore2) >= 0)
+            score2 += newScore2;
     }
 
     public int GetScore1()
