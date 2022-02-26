@@ -119,6 +119,10 @@ public class TrayController : MonoBehaviour
                 tempOrderDish.Remove(trayItems[i]);
             }
         }
+        float difference = trayItems.Count() - orderDish.Count();
+        if(difference>0){
+            total = (int)(total * (difference*0.1f));
+        }
         return total; 
     }
 
