@@ -119,7 +119,7 @@ public class TrayController : MonoBehaviour
                     currentScore += GetDishScore(onTray);
                 }
                 // deduct scores if they contain raw ingredients
-                //currentScore += IngredientDeduction(tray);
+                currentScore += IngredientDeduction(tray);
 
                 if (teamNumber == 1)
                 {
@@ -134,8 +134,6 @@ public class TrayController : MonoBehaviour
                 break;
             }
 
-            
-           
         }
         
     }
