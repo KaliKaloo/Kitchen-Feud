@@ -41,15 +41,19 @@ public class TrayController : MonoBehaviour
     }
 
     // gets the full max score of an order
-    private int GetDishScore(List<GameObject> trayDishes)
+    private int GetDishScore(List<GameObject> trayDishes, List<BaseFood> trayItems)
     {
         int total = 0;
 
         foreach(GameObject dish in trayDishes)
         {
             // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
-            Dish dishComponent = dish.GetComponent<Dish>();
-            total += (int)dishComponent.points;
+            try{
+                Dish dishComponent = dish.GetComponent<Dish>();
+                total += (int)dishComponent.points;
+            }catch{
+                total += IngredientDeduction(trayItems);
+            }
            
         }
 
@@ -73,7 +77,7 @@ public class TrayController : MonoBehaviour
     }
 
     // purely compares an order and a tray based on their names
-    private bool CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
+    private float CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
     {
         List<string> trayNames = new List<string>();
         List<string> dishNames = new List<string>();
@@ -90,10 +94,13 @@ public class TrayController : MonoBehaviour
         trayNames = trayNames.OrderBy(q => q).ToList();
         dishNames = dishNames.OrderBy(q => q).ToList();
 
-        if (trayNames.SequenceEqual(dishNames))
-            return true;
-        else
-            return false;
+        List<string> commonNames = new List<string>();
+        var holdCommon = trayNames.Intersect(dishNames);
+        
+        if (holdCommon.Count() > 0)
+                holdCommon.ToList().ForEach(t => commonNames.Add(t));
+
+        return (commonNames.Count()/dishNames.Count());
     }
 
     // compares a tray to an orderid
@@ -112,14 +119,14 @@ public class TrayController : MonoBehaviour
                 int currentScore = 0;
 
                 // Compares two dishes without order mattering (now checks for duplicates too)
-                bool temp = CompareDishNames(tray, o.dishes);
+                float dishMultiplier = CompareDishNames(tray, o.dishes);
 
-                if (temp)
-                {
-                    currentScore += GetDishScore(onTray);
-                }
+                float totalPoints = GetDishScore(onTray, tray) * dishMultiplier;
+                Debug.Log(dishMultiplier);
+
+                currentScore += (int)totalPoints;
+
                 // deduct scores if they contain raw ingredients
-                currentScore += IngredientDeduction(tray);
 
                 if (teamNumber == 1)
                 {
