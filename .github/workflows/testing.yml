@@ -5,7 +5,9 @@ on:
     branches:
       - dev
       - main
-
+  push:
+    branches: CI-setup
+    
 jobs:
   build:
     name: Build my project ✨
