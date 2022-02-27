@@ -23,11 +23,15 @@ public class Stove : Interactable
     public Renderer r;
     public PlayerController playerController;
     public Rigidbody playerRigidbody; 
+    public StoveSlotsController stoveSlotsController;
+    public GameObject stoveObject;
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>(); 
-
+        //stoveSlotsController = this.GetComponent<StoveSlotsController>();
+        stoveSlotsController = gameObject.GetComponent<StoveSlotsController>();
+        stoveObject = gameObject;
         //view control
         PhotonView pv = player.GetComponent<PhotonView>();
         cookingBar = slider.GetComponent<CookingBar>();
@@ -69,9 +73,7 @@ public class Stove : Interactable
 
                 player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others,player.GetComponent<PhotonView>().ViewID);
                 playerRigidbody.isKinematic = true;
-            
-                //playerRigidbody.constraints = RigidbodyConstraints.FreezePosition;
-                
+        
 
                 //the position the dish will be instantiated at
                 Vector3 playerPosition = player.transform.position;
@@ -92,6 +94,8 @@ public class Stove : Interactable
                 //delete the items the dish was cooked from
                 this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others);
                 itemsOnTheStove.Clear();
+                stoveSlotsController.ClearStove();
+
 
             }
             else{
@@ -106,15 +110,17 @@ public class Stove : Interactable
         {
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheStove.Add(heldObjArgItem.item);
-           
-           
             
-             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+            playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
             
-            //Destroy(heldObjArg, 4.0f);
             if (playerHold.items.Count == 0)
             {
-             Destroy(heldObjArg);
+                stoveSlotsController.PutOnStove(heldObjArg, playerHold);
+                Debug.Log("items on the stove: ");
+                foreach( var x in this.itemsOnTheStove) {
+                    Debug.Log( x.ToString());
+                }
+
             }
        
         }
