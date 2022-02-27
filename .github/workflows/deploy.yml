@@ -18,9 +18,10 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.7
         with:
-          path: Library
+          path: kitchen_feud/Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
+            Library-kitchen_feud-
             Library-
 
       # Build
