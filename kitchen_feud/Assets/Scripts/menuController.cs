@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using agora_gaming_rtc;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -14,6 +15,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
     [SerializeField] private InputField joinGameInput;
+    public int myChannel = 0;
 
     [SerializeField] private GameObject startButton;
 
@@ -22,7 +24,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text playerList;
     [SerializeField] private Text lobbyError;
     public static menuController Instance;
-    string appId = "906fd9f2074e4b0491fcde55c280b9e5";
+    public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class menuController : MonoBehaviourPunCallbacks
             }
         }
         DontDestroyOnLoad(this.gameObject);
-     
+
     }
 
     private void Start()
@@ -47,19 +49,20 @@ public class menuController : MonoBehaviourPunCallbacks
 
     {
 
-        
+
         rtcEngine = IRtcEngine.GetEngine(appId);
         rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
-
         rtcEngine.OnLeaveChannel += OnleaveChannel;
         rtcEngine.OnError += OnError;
+        rtcEngine.EnableSoundPositionIndication(true);
         PhotonNetwork.AutomaticallySyncScene = true;
+        
 
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
             usernameMenu.SetActive(true);
-        } 
+        }
         else
         {
             // NEED TO ADD CURRENT USERNAME HERE
@@ -67,6 +70,11 @@ public class menuController : MonoBehaviourPunCallbacks
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }
+
+
+       
+
+
     }
 
 
@@ -88,7 +96,7 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyName.text = name;
         playerList.text = GetPlayers();
     }
-   
+
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
@@ -118,7 +126,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Create room here
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+        PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8 }, null);
     }
 
     // Leave existing lobby
@@ -131,8 +139,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
-      PhotonNetwork.JoinRoom(joinGameInput.text);
-        
+        PhotonNetwork.JoinRoom(joinGameInput.text);
+
 
     }
 
@@ -158,12 +166,50 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
     {
-        Debug.LogError("Joined channe: " + channelName);
+        Debug.LogError("Joined channel: " + channelName);
+
+        Hashtable hash = new Hashtable();
+        hash.Add("agoraID", uid.ToString());
+        PhotonNetwork.SetPlayerCustomProperties(hash);
+
     }
     public override void OnJoinedRoom()
-    {   
+    {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
-        rtcEngine.JoinChannel(PhotonNetwork.CurrentRoom.Name);
+        rtcEngine.JoinChannel("Lobby");
+       
+        /*
+        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("HEYY");
+            
+            rtcEngine.JoinChannel("Team1");
+            Debug.LogError(PhotonRoom.room.x.GetComponent<PhotonPlayer>().myTeam);
+        }
+        else
+        {
+            if (PhotonNetwork.CurrentRoom.Players.Count > 1 && PhotonNetwork.PlayerList.GetValue(1).Equals(PhotonNetwork.LocalPlayer))
+            {
+                //   Debug.Log(PhotonNetwork.CurrentRoom.Players[1].NickName);
+                
+                rtcEngine.JoinChannel("Team2");
+                myChannel = 2;
+            }else if(PhotonNetwork.CurrentRoom.Players.Count > 1 && PhotonNetwork.PlayerList.GetValue(2).Equals(PhotonNetwork.LocalPlayer))
+            {
+                myChannel = 1;
+                rtcEngine.JoinChannel("Team1");
+            }
+        }
+        */
+
+        Debug.Log(PhotonNetwork.PlayerList[0].NickName);
+    }
+
+    public IRtcEngine GetRtcEngine()
+    {
+        return rtcEngine;
+        
     }
 
     private void OnDestroy()
@@ -193,5 +239,3 @@ public class menuController : MonoBehaviourPunCallbacks
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 }
-
-

@@ -11,6 +11,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     public static PhotonRoom room;
     private PhotonView PV;
     private int currentScene;
+    public GameObject x;
 
     private void Awake()
     {
@@ -67,7 +68,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     private void CreatePlayer()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Cube"), new Vector3(5,1,-4), Quaternion.identity);
+       x =  PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Cube"), new Vector3(5,1,-4), Quaternion.identity);
     }
 
 
