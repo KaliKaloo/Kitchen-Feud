@@ -1,0 +1,47 @@
+name: Deploy 😎
+
+on:
+  push: { branches: [main] }
+
+jobs:
+  build:
+    name: Build my project ✨
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository 👀
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+       - name: Cache
+        uses: actions/cache@v2.1.7
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          projectPath: kitchen_feud
+          targetPlatform: WebGL
+
+
+      - name: Deploy 🚀
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "build/WebGL/WebGL"
+          target: "."
+          rm: true
