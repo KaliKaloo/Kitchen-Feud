@@ -25,12 +25,15 @@ public class pickableItem : Interactable
     public override void Interact()
     {
         // base.Interact();
-        //playerHold.pickUpItem(gameObject, item); should be here!!! It broke everything
+        
         playerHold = player.GetComponent<PlayerHolding>();
 
         if (playerHold.items.Count == 0) {
-            
-			if (onTray == true){
+            //playerHold.pickUpItem(gameObject, item); should be here!!! It broke everything
+            if (onStove == false && onTray == false) {
+                playerHold.pickUpItem(gameObject, item);
+            }
+			else if (onTray == true){
                 //not here!!!
                 playerHold.pickUpItem(gameObject, item);
                 tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
@@ -49,22 +52,17 @@ public class pickableItem : Interactable
                         for (int j=0;j<ssc.slots.Count;j++) {
                             if(ssc.slots[j] == gameObject.transform.parent) {
                                 stove = stoves[i].GetComponent<Stove>();
+                                stoveSlots = ssc;
                                 break;
                             }
                         }
-                    }
-                    
-                }
-                
-				stoveSlots = stove.gameObject.GetComponent<StoveSlotsController>();
+                    }    
+                }    
+				//stoveSlots = stove.gameObject.GetComponent<StoveSlotsController>();
                 stoveSlots.RemoveFromStove(gameObject);
                 playerHold.pickUpItem(gameObject, item);
-
 			}
-            //not here!!!
-            else {
-                playerHold.pickUpItem(gameObject, item);
-            }
+            
             //if it's a dish print out its points
             Dish dish = gameObject.GetComponent<Dish>();
             if (dish != null) {
