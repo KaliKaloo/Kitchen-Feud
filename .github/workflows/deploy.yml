@@ -1,7 +1,7 @@
 name: Deploy 😎
 
 on:
-  push: { branches: [main] }
+  push: { branches: [main, CI-setup] }
 
 jobs:
   build:
