@@ -46,6 +46,7 @@ public class pickableItem : Interactable
             else if (onStove == true){
                 //null!
                 stoves.AddRange(GameObject.FindGameObjectsWithTag("Stove"));
+                Debug.Log(stoves.Capacity);
                 for (int i = 0; i < stoves.Capacity; i++) {
                     StoveSlotsController ssc = stoves[i].GetComponent<StoveSlotsController>();
                     if (ssc.slots != null) {
@@ -57,7 +58,8 @@ public class pickableItem : Interactable
                             }
                         }
                     }    
-                }    
+                }  
+                stoves.Clear();  
 				//stoveSlots = stove.gameObject.GetComponent<StoveSlotsController>();
                 stoveSlots.RemoveFromStove(gameObject);
                 playerHold.pickUpItem(gameObject, item);

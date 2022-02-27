@@ -34,7 +34,6 @@ public class StoveSlotsController : MonoBehaviour {
     public void ClearStove() {
         for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount != 0) {
-                    //make the destroying multiplayer!!!!
                     GameObject objectInSlot = slots[i].GetChild(0).gameObject;
                     objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.Others);
                     Destroy(objectInSlot);
@@ -52,6 +51,7 @@ public class StoveSlotsController : MonoBehaviour {
         foreach( var x in stove.itemsOnTheStove) {
             Debug.Log( x.ToString());
         }
+        fullnessCount--;
 
     }
 
