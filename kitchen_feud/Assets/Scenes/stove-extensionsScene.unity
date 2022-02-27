@@ -8092,7 +8092,7 @@ GameObject:
   - component: {fileID: 211369751}
   m_Layer: 3
   m_Name: Stove 1
-  m_TagString: Untagged
+  m_TagString: Stove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8724,6 +8724,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
   stoveSlotsController: {fileID: 0}
+  stoveObject: {fileID: 0}
 --- !u!114 &211369750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10906,9 +10907,10 @@ GameObject:
   - component: {fileID: 292613529}
   - component: {fileID: 292613534}
   - component: {fileID: 292613533}
+  - component: {fileID: 292613535}
   m_Layer: 3
   m_Name: Stove 2
-  m_TagString: Untagged
+  m_TagString: Stove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11565,6 +11567,21 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
   stoveSlotsController: {fileID: 0}
+  stoveObject: {fileID: 0}
+--- !u!114 &292613535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292613527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e461fe60147f12448ebd87c9bbd72d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  stove: {fileID: 0}
 --- !u!43 &297165670
 Mesh:
   m_ObjectHideFlags: 0
@@ -16892,7 +16909,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28696
+  m_Name: pb_Mesh174672
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17663,7 +17680,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28806
+  m_Name: pb_Mesh190050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22514,7 +22531,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30662
+  m_Name: pb_Mesh191924
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24542,6 +24559,7 @@ GameObject:
   - component: {fileID: 732456130}
   - component: {fileID: 732456134}
   - component: {fileID: 732456135}
+  - component: {fileID: 732456136}
   m_Layer: 3
   m_Name: Stove 2
   m_TagString: Untagged
@@ -25173,6 +25191,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
   stoveSlotsController: {fileID: 0}
+  stoveObject: {fileID: 0}
 --- !u!114 &732456135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25195,6 +25214,20 @@ MonoBehaviour:
   sceneViewId: 111
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &732456136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732456128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e461fe60147f12448ebd87c9bbd72d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  stove: {fileID: 0}
 --- !u!1 &748162731
 GameObject:
   m_ObjectHideFlags: 0
@@ -36292,7 +36325,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30712
+  m_Name: pb_Mesh191974
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -57216,9 +57249,10 @@ GameObject:
   - component: {fileID: 1662441421}
   - component: {fileID: 1662441425}
   - component: {fileID: 1662441426}
+  - component: {fileID: 1662441427}
   m_Layer: 3
   m_Name: Stove 3
-  m_TagString: Untagged
+  m_TagString: Stove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57853,6 +57887,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
   stoveSlotsController: {fileID: 0}
+  stoveObject: {fileID: 0}
 --- !u!114 &1662441426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57875,6 +57910,20 @@ MonoBehaviour:
   sceneViewId: 123
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1662441427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662441419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e461fe60147f12448ebd87c9bbd72d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  stove: {fileID: 0}
 --- !u!1 &1666933853
 GameObject:
   m_ObjectHideFlags: 0
@@ -58457,9 +58506,10 @@ GameObject:
   - component: {fileID: 1684286204}
   - component: {fileID: 1684286209}
   - component: {fileID: 1684286208}
+  - component: {fileID: 1684286210}
   m_Layer: 3
   m_Name: Stove 1
-  m_TagString: Untagged
+  m_TagString: Stove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59116,6 +59166,21 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerRigidbody: {fileID: 0}
   stoveSlotsController: {fileID: 0}
+  stoveObject: {fileID: 0}
+--- !u!114 &1684286210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684286202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e461fe60147f12448ebd87c9bbd72d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  stove: {fileID: 0}
 --- !u!1 &1689536578
 GameObject:
   m_ObjectHideFlags: 0
@@ -62689,7 +62754,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29294
+  m_Name: pb_Mesh190538
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

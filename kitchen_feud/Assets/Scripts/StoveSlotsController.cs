@@ -16,13 +16,14 @@ public class StoveSlotsController : MonoBehaviour {
         if(fullnessCount < 3) {
             for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount == 0) {
-
                     heldObjArg.GetComponent<PhotonView>().RPC("setParent", RpcTarget.Others,
                     heldObjArg.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                     heldObjArg.transform.parent = slots[i];
                     heldObjArg.transform.localPosition = Vector3.zero;
                     heldObjArg.transform.localRotation = Quaternion.Euler(Vector3.zero);
                     fullnessCount++;
+                    pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
+                    pickable.onStove = true;
 
                     break;
                 }
@@ -42,5 +43,17 @@ public class StoveSlotsController : MonoBehaviour {
                 }
             }
     }
+
+    public void RemoveFromStove(GameObject heldObjArg) {
+        stove.itemsOnTheStove.Remove(heldObjArg.GetComponent<IngredientItem>().item);
+        pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
+        pickable.onStove = false;
+        Debug.Log("items on the stove: ");
+        foreach( var x in stove.itemsOnTheStove) {
+            Debug.Log( x.ToString());
+        }
+
+    }
+
 
 }
