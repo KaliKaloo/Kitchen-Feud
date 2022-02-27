@@ -16,8 +16,6 @@ public class PlayerHolding : MonoBehaviour
 
     // BaseFood item;
 
-
-
     public void pickUpItem(GameObject obj, BaseFood item)
     {
 

@@ -11,6 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/kitchens_minigames.unity
     guid: d2264c7ae97ae64478041e541bacd98a
+    path: Assets/Scenes/stove-extensionsScene.unity
+    guid: cd9d20bac6e110824b6c2b2657b63e20
   - enabled: 0
     path: Assets/Scenes/kitchens.unity
     guid: 57d20b0014fac2b43a26a0eb854afc66
