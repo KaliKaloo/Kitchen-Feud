@@ -1,4 +1,4 @@
-name: Deploy 😎
+name: Deploy 🚀
 
 on:
   push: { branches: [main, CI-setup] }
