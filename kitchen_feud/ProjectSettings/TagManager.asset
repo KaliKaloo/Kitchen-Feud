@@ -7,6 +7,8 @@ TagManager:
   - Team1
   - Team2
   - Stove
+  - Sandwich Station
+  - Cutting Board
   layers:
   - Default
   - TransparentFX

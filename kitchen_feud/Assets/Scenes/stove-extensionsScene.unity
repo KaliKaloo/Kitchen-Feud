@@ -8168,7 +8168,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -24562,7 +24562,7 @@ GameObject:
   - component: {fileID: 732456136}
   m_Layer: 3
   m_Name: Stove 2
-  m_TagString: Untagged
+  m_TagString: Stove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62754,7 +62754,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh190538
+  m_Name: pb_Mesh391924
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
