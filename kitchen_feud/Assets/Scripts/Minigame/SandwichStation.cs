@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SandwichStation : MonoBehaviour
+public class SandwichStation: Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject canvas;
+    public GameObject minigameCanvas;
+
+    public override void Interact()
     {
-        
+        canvas.gameObject.SetActive(false);
+        minigameCanvas.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
