@@ -75,6 +75,8 @@ MonoBehaviour:
   - onTrayF
   - UpdateLobby
   - UpdateTimer
+  - loadS
+  - DisableIngredientView
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

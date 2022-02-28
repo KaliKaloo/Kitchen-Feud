@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if(PhotonRoom.room == null)
+        if (PhotonRoom.room == null)
         {
             PhotonRoom.room = this;
         }
@@ -46,21 +47,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     }
 
-   /* public override void OnJoinedRoom() {
-        base.OnJoinedRoom();
-        
-     
-        startGame();
-    }
-    void startGame()
-    {
-        PhotonNetwork.LoadLevel(1);
-    }*/
+    /* public override void OnJoinedRoom() {
+         base.OnJoinedRoom();
+
+
+         startGame();
+     }
+     void startGame()
+     {
+         PhotonNetwork.LoadLevel(1);
+     }*/
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.buildIndex;
         Debug.Log(currentScene);
-        if(currentScene == 1)
+        if (currentScene == 1)
         {
             CreatePlayer();
         }
@@ -68,7 +69,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     private void CreatePlayer()
     {
-       x =  PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Cube"), new Vector3(5,1,-4), Quaternion.identity);
+        x = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Cube"), new Vector3(5, 1, -4), Quaternion.identity);
     }
 
 
