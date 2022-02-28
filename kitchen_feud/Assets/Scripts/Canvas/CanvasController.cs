@@ -188,22 +188,24 @@ public class CanvasController : MonoBehaviour
                 // OTHERS PART OF TEAM 1
                 Order leaderOrder = GetNewRandomOrder();
 
-                // ONLY DO THIS TO TEAM 1
-                if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+            // ONLY DO THIS TO TEAM 1
+            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
-                }
+                } else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+            {
+                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
+            }
               
                
             }
-            else if (CheckIfTicketsNotFull() && PhotonNetwork.PlayerList.GetValue(1).Equals(PhotonNetwork.LocalPlayer))
+            else if (CheckIfTicketsNotFull() && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
             {
                 Order leaderOrder1 = GetNewRandomOrder();
 
             // ONLY DO THIS TO TEAM 2
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
             {
-               
                 this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
             }
                    

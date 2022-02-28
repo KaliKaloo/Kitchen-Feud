@@ -228,6 +228,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LeaveGame()
     {
         lobbyError.text = "";
+        connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
         PhotonNetwork.LeaveRoom();
         loadingScreen.SetActive(false);
@@ -236,6 +237,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
+        connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
         PhotonNetwork.JoinRoom(joinGameInput.text);
     }
