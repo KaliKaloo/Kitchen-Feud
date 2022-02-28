@@ -14,7 +14,7 @@ public class RoomListItem : MonoBehaviour
     public void SetUp(RoomInfo currentInfo)
     {
         info = currentInfo;
-        name.text = currentInfo.Name;
+        name.text = currentInfo.Name + " : " + currentInfo.PlayerCount + "/" + currentInfo.MaxPlayers;
     }
 
     public void OnClick()

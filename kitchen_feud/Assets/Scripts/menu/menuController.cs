@@ -277,13 +277,13 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         lobbyMenu.SetActive(false);
         connectPanel.SetActive(true);
-        usernameMenu.SetActive(false);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         loadingScreen.SetActive(false);
         lobbyError.text = "Lobby does not exist!";
+        connectPanel.SetActive(true);
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
