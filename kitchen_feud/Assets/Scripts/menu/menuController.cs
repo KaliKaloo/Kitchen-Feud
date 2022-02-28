@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Photon.Realtime;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using agora_gaming_rtc;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class menuController : MonoBehaviourPunCallbacks
 {
@@ -40,6 +42,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text currentTime;
 
     [SerializeField] private Text lobbyError;
+    IRtcEngine rtcEngine;
 
     [SerializeField] private Transform roomListContent;
 
@@ -47,13 +50,19 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
+  
 
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+    //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
     {
+        //rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+
         Instance = this;
+       // DontDestroyOnLoad(this.gameObject);
+
     }
 
     private void SetTeam(int teamNumber)
@@ -85,6 +94,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+
+
+
+        rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         PhotonNetwork.AutomaticallySyncScene = true;
 
         if (!PhotonNetwork.IsConnected)
@@ -252,7 +265,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            LoadScene(1);
+            //LoadScene(1);
+            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
         else
             // change this to load larger kitchen if > 4 players!!!!!
             LoadScene(1);
@@ -260,6 +274,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        
         loadingScreen.SetActive(false);
 
         // WIP ASSIGN CORRECT TEAM ON JOIN
@@ -271,6 +286,7 @@ public class menuController : MonoBehaviourPunCallbacks
         }
 
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
+       
     }
 
     public override void OnLeftRoom()
@@ -377,6 +393,7 @@ public class menuController : MonoBehaviourPunCallbacks
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
         while (!operation.isDone)
@@ -393,6 +410,9 @@ public class menuController : MonoBehaviourPunCallbacks
         UpdateLobby();
     }
 
+
+
+
     [PunRPC]
     void UpdateLobby(string roomName)
     {
@@ -403,6 +423,11 @@ public class menuController : MonoBehaviourPunCallbacks
     void UpdateTimer(int newTime)
     {
         timer.ChangeTimerValue(newTime);
+    }
+    [PunRPC]
+    void loadS(int levelIndex)
+    {
+        StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
 }
 
