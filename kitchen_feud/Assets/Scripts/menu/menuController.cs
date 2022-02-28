@@ -59,19 +59,8 @@ public class menuController : MonoBehaviourPunCallbacks
     private void Awake()
     {
         //rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-    
-        if (menuController.Instance == null)
-        {
-            menuController.Instance = this;
-        }
-        else
-        {
-            if (menuController.Instance != this)
-            {
-                Destroy(menuController.Instance.gameObject);
-                menuController.Instance = this;
-            }
-        }
+
+        Instance = this;
        // DontDestroyOnLoad(this.gameObject);
 
     }
@@ -403,6 +392,7 @@ public class menuController : MonoBehaviourPunCallbacks
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
         while (!operation.isDone)
