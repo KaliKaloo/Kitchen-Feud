@@ -31,7 +31,7 @@ public class PhotonPlayer : MonoBehaviour
     {
         if (myAvatar == null && myTeam != 0)
         {
-            if (myTeam == 1)
+            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
             {
                 if (PV.IsMine)
                 {

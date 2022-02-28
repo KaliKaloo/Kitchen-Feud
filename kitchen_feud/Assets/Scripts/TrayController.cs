@@ -121,11 +121,11 @@ public class TrayController : MonoBehaviour
                 // deduct scores if they contain raw ingredients
                 //currentScore += IngredientDeduction(tray);
 
-                if (teamNumber == 1)
+                if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);
                 }
-                else if (teamNumber == 2)
+                else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
                 {
                     this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
                 }

@@ -73,6 +73,8 @@ MonoBehaviour:
   - SetParentAsSlot
   - removeFromTray
   - onTrayF
+  - UpdateLobby
+  - UpdateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -9,13 +9,51 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static readonly int time = 180;
+    private static int time = 180;
     
 
     private static int timer = time;
     private static bool started = false;
     PhotonRoom room;
 
+    // changes original starting time, only do before game starts!
+    public int AddSubtractTimerValue(int newTime)
+    {
+        int intermediateTime = time + newTime;
+        if (intermediateTime < 60)
+        {
+            return 1;
+        } else if (intermediateTime > 1200)
+        {
+            return 2;
+        } else
+        {
+            timer = time = intermediateTime;
+            return 0;
+        }
+    }
+
+    public void ChangeTimerValue(int newTime)
+    {
+        timer = time = newTime;
+    }
+
+    public int GetCurrentTime()
+    {
+        return time;
+    }
+
+    public string ConvertSecondToMinutes(int seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        string str = time.ToString(@"mm\:ss");
+        return str;
+    }
+
+    public string GetCurrentTimeString()
+    {
+        return ConvertSecondToMinutes(time);
+    }
 
     // set the timer amount here 
     public void InitializeTimer()
