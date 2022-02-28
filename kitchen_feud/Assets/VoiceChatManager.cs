@@ -49,17 +49,22 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined channel" + channelName);
     }
+
     
-/*
-    public override void OnJoinedRoom()
+        public override void OnJoinedRoom()
+        {
+            Debug.Log(PhotonNetwork.CurrentRoom.Name);
+            rtcEngine.JoinChannel("Lobby");
+
+
+
+        }
+    
+    public IRtcEngine GetRtcEngine()
     {
-        Debug.Log(PhotonNetwork.CurrentRoom.Name);
-        rtcEngine.JoinChannel(PhotonNetwork.CurrentRoom.Name);
-
-
+        return rtcEngine;
 
     }
-*/
 
     public override void OnLeftRoom()
     {

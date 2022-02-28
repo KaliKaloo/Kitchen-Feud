@@ -23,10 +23,10 @@ public class SpatialAudio : MonoBehaviour
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
-        agoraAduioEffects = menuController.Instance.GetRtcEngine().GetAudioEffectManager();
-        engine = menuController.Instance.GetRtcEngine();
+        agoraAduioEffects = VoiceChatManager.Instance.GetRtcEngine().GetAudioEffectManager();
+        engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = PhotonRoom.room.x.GetComponent<PhotonPlayer>().myTeam;
-        myC = menuController.Instance.myChannel;
+        Debug.LogError(myTeam);
         myC = 0;
     
         
