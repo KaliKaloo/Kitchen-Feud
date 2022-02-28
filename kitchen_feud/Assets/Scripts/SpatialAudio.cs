@@ -52,7 +52,7 @@ public class SpatialAudio : MonoBehaviour
         if (!PV.IsMine)
             return;
         
-        if (Vector3.Distance(new Vector3(0.5750442f, 1.09f, -10.0f),transform.position) > 10)
+        if (Vector3.Distance(new Vector3(-3.28f, 1.09f, -14.94f),transform.position) > 10)
         {
             //Debug.LogError("You're too far away");
             //engine.EnableLocalAudio(false);
@@ -80,7 +80,7 @@ public class SpatialAudio : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(new Vector3(25.34f, 1.09f, 5.85f), transform.position) > 10)
+        if (Vector3.Distance(new Vector3(-3.22f, 1.09f,9.4f), transform.position) > 10)
         {
             //Debug.LogError("You're too far away");
             //engine.EnableLocalAudio(false);
