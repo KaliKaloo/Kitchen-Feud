@@ -266,10 +266,11 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
             //LoadScene(1);
-            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-        else
-            // change this to load larger kitchen if > 4 players!!!!!
+            //this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
             LoadScene(1);
+        //else
+            // change this to load larger kitchen if > 4 players!!!!!
+            //LoadScene(1);
     }
 
     public override void OnJoinedRoom()
