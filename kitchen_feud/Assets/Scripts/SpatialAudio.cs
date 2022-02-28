@@ -51,7 +51,7 @@ public class SpatialAudio : MonoBehaviour
 
         if (!PV.IsMine)
             return;
-
+        
         if (Vector3.Distance(new Vector3(0.5750442f, 1.09f, -10.0f),transform.position) > 10)
         {
             //Debug.LogError("You're too far away");
@@ -99,6 +99,9 @@ public class SpatialAudio : MonoBehaviour
                 engine.LeaveChannel();
                 engine.JoinChannel("Team2");
                 myC = 2;
+               
+               
+
             }
 
 
@@ -106,11 +109,12 @@ public class SpatialAudio : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel("Team2");
+                
                 myC = 2;
             }
         }
 
-
+        
 
         /*
                 foreach(Photon.Realtime.Player player in PhotonNetwork.CurrentRoom.Players.Values)
@@ -128,6 +132,7 @@ public class SpatialAudio : MonoBehaviour
                             float pan = GetPan(other.transform.position);
 
                             agoraAduioEffects.SetRemoteVoicePosition(uint.Parse((string)agoraID), pan, gain);
+                        //engine.AdjustUserPlaybackSignalVolume(uint.Parse((string)agoraID),10);
                         }
                         else
                         {
@@ -135,7 +140,8 @@ public class SpatialAudio : MonoBehaviour
                         }
                     }
 
-                }*/
+                }
+        */
     }
 
     float GetGain(Vector3 otherPosition)

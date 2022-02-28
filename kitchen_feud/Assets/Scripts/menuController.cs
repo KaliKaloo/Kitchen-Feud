@@ -55,6 +55,8 @@ public class menuController : MonoBehaviourPunCallbacks
         rtcEngine.OnLeaveChannel += OnleaveChannel;
         rtcEngine.OnError += OnError;
         rtcEngine.EnableSoundPositionIndication(true);
+
+        
         PhotonNetwork.AutomaticallySyncScene = true;
         
 
@@ -177,6 +179,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
         rtcEngine.JoinChannel("Lobby");
+       
        
         /*
         
