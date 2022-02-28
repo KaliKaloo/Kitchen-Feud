@@ -25,7 +25,7 @@ public class SpatialAudio : MonoBehaviour
         PV = GetComponent<PhotonView>();
         agoraAduioEffects = VoiceChatManager.Instance.GetRtcEngine().GetAudioEffectManager();
         engine = VoiceChatManager.Instance.GetRtcEngine();
-        myTeam = PhotonRoom.room.x.GetComponent<PhotonPlayer>().myTeam;
+        myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         Debug.LogError(myTeam);
         myC = 0;
     
