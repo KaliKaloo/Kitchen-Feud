@@ -39,7 +39,7 @@ public class pickableItem : Interactable
 			}
             else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);
-                appliance.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                appliance.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
             
@@ -86,11 +86,17 @@ public class pickableItem : Interactable
 
     }
     [PunRPC]
+    void applianceBool(int viewID,int applianceID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().onAppliance = true;
+        PhotonView.Find(viewID).GetComponent<pickableItem>().appliance = PhotonView.Find(applianceID).GetComponent<Appliance>();
+    }
+    [PunRPC]
     void onTrayF()
     {
         this.onTray = false;
     }
-
+    [PunRPC]
      void onApplianceF()
     {
         this.onAppliance = false;

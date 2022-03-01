@@ -22,15 +22,24 @@ public class Appliance : Interactable
     private Renderer r;
     public PlayerController playerController;
     public Rigidbody playerRigidbody; 
-    public SlotsController SlotsController;
-    public GameObject applianceObject;
+    private SlotsController SlotsController;
+    private int dishPoints;
+
+    public int minigameNum;
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+
+        if(gameObject.GetComponent<stoveMinigame>()){
+            minigameNum = 0;
+        }else if(gameObject.GetComponent<cuttingMinigame>()){
+            minigameNum = 1;
+        }
+
+
         playerRigidbody = player.GetComponent<Rigidbody>(); 
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
         SlotsController = gameObject.GetComponent<SlotsController>();
-        applianceObject = gameObject;
         //view control
         PhotonView pv = player.GetComponent<PhotonView>();
 
@@ -120,6 +129,20 @@ public class Appliance : Interactable
             foundMatchingDish = false;
         }
     }
+
+      //CALLED BY THE EVENT SYSTEM
+    // public void UpdateDishPoints() {
+    //     if(dishOfFoundDish != null){
+            
+    //         dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, dishPoints);
+    //         dishOfFoundDish.points = dishPoints;
+    //         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+    //     }
+    //     else{
+    //         Debug.Log("dishoffounddish is null");
+    //     }
+        
+    // }
 
    
 

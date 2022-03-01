@@ -10,7 +10,8 @@ public class stoveMinigame : MonoBehaviour
 {
     public Slider slider;
     public CookingBar cookingBar;
-    public Appliance appliance;
+    private Appliance appliance;
+    public Exit backbutton;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class stoveMinigame : MonoBehaviour
         slider.value = -30;
         cookingBar.keyHeld = false;
         cookingBar.done = false;
+        backbutton.appliance = GetComponent<Appliance>();
         GameEvents.current.assignPoints += UpdateDishPoints;
 
     }

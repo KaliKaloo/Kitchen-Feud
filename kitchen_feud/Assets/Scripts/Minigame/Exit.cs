@@ -7,12 +7,15 @@ using Photon.Pun;
 
 public class Exit : MonoBehaviour
 {
+	public bool finishedGame = false;
 	public Button yourButton;
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public GameObject player;
+
+	public Appliance appliance;
 	//private PhotonView view;
-	public List<Appliance> appliance = new List<Appliance>();
+	// private List<GameObject> ApplianceObjs = new List<GameObject>();
 	int theOne;
 
 	//public Stove stove;
@@ -20,6 +23,8 @@ public class Exit : MonoBehaviour
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
+		// ApplianceObjs.AddRange(GameObject.FindGameObjectsWithTag("Appliance"));
+
 		
 		btn.onClick.AddListener(TaskOnClick);
 		
@@ -27,31 +32,26 @@ public class Exit : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		for (int i = 0; i < appliance.Capacity; i++)
-		{
-			if (appliance[i].cookedDish != null)
-			{
+				finishedGame = true;
 				canvas.gameObject.SetActive(true);
 				minigameCanvas.gameObject.SetActive(false);
-				appliance[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+				appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+				
+				appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 
-				
-				appliance[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-				
-				
-
-				PhotonView	view = appliance[i].player.GetComponent<PhotonView>();
+				PhotonView	view = appliance.player.GetComponent<PhotonView>();
 				
 				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 				
-				appliance[i].playerController.enabled = true;
-				//stoves[i].playerRigidbody.isKinematic = false;
-				theOne = i;
-                GameEvents.current.assignPoints -= appliance[i].GetComponent<stoveMinigame>().UpdateDishPoints;
-			}
-		}
-		Debug.Log(appliance[theOne].transform.position);
-		
+				appliance.playerController.enabled = true;
+				
+				if(appliance.minigameNum == 0){
+                	GameEvents.current.assignPoints -= appliance.GetComponent<stoveMinigame>().UpdateDishPoints;
+				}
+				else if(appliance.minigameNum == 1){
+                	GameEvents.current.assignPoints -= appliance.GetComponent<cuttingMinigame>().UpdateDishPoints;
+
+				}
 	}
 
 

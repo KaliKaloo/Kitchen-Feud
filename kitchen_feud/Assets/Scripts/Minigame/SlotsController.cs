@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class SlotsController : MonoBehaviour {
     public List<Transform> slots = new List<Transform>();
-    Appliance appliance;
+    // Appliance appliance;
     //might need to set to 0 somwhere else
     private int fullnessCount = 0;
 
@@ -23,8 +23,8 @@ public class SlotsController : MonoBehaviour {
                     heldObjArg.transform.localRotation = Quaternion.Euler(Vector3.zero);
                     fullnessCount++;
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
-                    pickable.onAppliance = true;
 
+                    pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
                     break;
                 }
             }
@@ -43,7 +43,7 @@ public class SlotsController : MonoBehaviour {
             }
     }
 
-    public void RemoveFromAppliance(GameObject heldObjArg) {
+    public void RemoveFromAppliance(Appliance appliance, GameObject heldObjArg) {
         appliance.itemsOnTheAppliance.Remove(heldObjArg.GetComponent<IngredientItem>().item);
         pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
         pickable.onAppliance = false;
@@ -54,9 +54,10 @@ public class SlotsController : MonoBehaviour {
         fullnessCount--;
     }
 
-     void removeFromApplianceRPC(int viewID)
+    [PunRPC]
+     void removeFromApplianceRPC(int appViewID, int objViewID)
     {
-        RemoveFromAppliance(PhotonView.Find(viewID).gameObject);
+        RemoveFromAppliance(PhotonView.Find(appViewID).GetComponent<Appliance>(), PhotonView.Find(objViewID).gameObject);
 
     }
 
