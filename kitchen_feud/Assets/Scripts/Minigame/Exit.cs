@@ -12,7 +12,7 @@ public class Exit : MonoBehaviour
     public GameObject minigameCanvas;
 	public GameObject player;
 	//private PhotonView view;
-	public List<Stove> stoves = new List<Stove>();
+	public List<Appliance> appliance = new List<Appliance>();
 	int theOne;
 
 	//public Stove stove;
@@ -27,30 +27,30 @@ public class Exit : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		for (int i = 0; i < stoves.Capacity; i++)
+		for (int i = 0; i < appliance.Capacity; i++)
 		{
-			if (stoves[i].cookedDish != null)
+			if (appliance[i].cookedDish != null)
 			{
 				canvas.gameObject.SetActive(true);
 				minigameCanvas.gameObject.SetActive(false);
-				stoves[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+				appliance[i].GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
 
 				
-				stoves[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
+				appliance[i].cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 				
 				
 
-				PhotonView	view = stoves[i].player.GetComponent<PhotonView>();
+				PhotonView	view = appliance[i].player.GetComponent<PhotonView>();
 				
 				view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 				
-				stoves[i].playerController.enabled = true;
+				appliance[i].playerController.enabled = true;
 				//stoves[i].playerRigidbody.isKinematic = false;
 				theOne = i;
-                GameEvents.current.assignPoints -= stoves[i].UpdateDishPoints;
+                GameEvents.current.assignPoints -= appliance[i].GetComponent<stoveMinigame>().UpdateDishPoints;
 			}
 		}
-		Debug.Log(stoves[theOne].transform.position);
+		Debug.Log(appliance[theOne].transform.position);
 		
 	}
 

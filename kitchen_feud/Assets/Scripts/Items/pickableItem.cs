@@ -13,13 +13,10 @@ public class pickableItem : Interactable
     
     PlayerHolding playerHold;
 	public bool onTray = false;
-    public bool onStove = false;
+    public bool onAppliance = false;
 	public TraySO Tray;
     public Tray tray2;
-    public Stove stove;
-    public StoveSlotsController stoveSlots;
-    public List<GameObject> stoves = new List<GameObject>();
-    
+    public Appliance appliance;
    
     // public GameObject obj;
     public override void Interact()
@@ -30,7 +27,7 @@ public class pickableItem : Interactable
 
         if (playerHold.items.Count == 0) {
             //playerHold.pickUpItem(gameObject, item); should be here!!! It broke everything
-            if (onStove == false && onTray == false) {
+            if (onAppliance == false && onTray == false) {
                 playerHold.pickUpItem(gameObject, item);
             }
 			else if (onTray == true){
@@ -40,31 +37,10 @@ public class pickableItem : Interactable
                 GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
 				//removeFromTray(Tray);
 			}
-            //same for stove! + removing from the stove list
-            //write rpcs for stove
-            //not multiplayer yet!!!
-            else if (onStove == true){
-                //null!
-                stoves.AddRange(GameObject.FindGameObjectsWithTag("Stove"));
-                Debug.Log(stoves.Count);
-                for (int i = 0; i < stoves.Count; i++) {
-                    StoveSlotsController ssc = stoves[i].GetComponent<StoveSlotsController>();
-                    Debug.LogError("These are the slots: "+ssc.slots.Count);
-                    Debug.LogError("Name of this Stove: " + stoves[i].name);
-                        for (int j=0;j<ssc.slots.Count;j++) {
-                            if(ssc.slots[j] == gameObject.transform.parent) {
-                                stove = stoves[i].GetComponent<Stove>();
-                                stoveSlots = ssc;
-                                break;
-                            }
-                        }
-                    Debug.LogError("Iteration: " + i);
-                }
-                stoves.Clear();
-                  
-				//stoveSlots = stove.gameObject.GetComponent<StoveSlotsController>();
-                stoveSlots.RemoveFromStove(gameObject);
+            else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);
+                appliance.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
             
             //if it's a dish print out its points
@@ -73,15 +49,11 @@ public class pickableItem : Interactable
                
                 Debug.Log("points: " + dish.points);
             }
-
-
         }
         else {
             playerHold.dropItem();
             playerHold.pickUpItem(gameObject, item);
         }
-      
-
     }
 		public void removeFromTray(TraySO tray)
 	{
@@ -117,6 +89,11 @@ public class pickableItem : Interactable
     void onTrayF()
     {
         this.onTray = false;
+    }
+
+     void onApplianceF()
+    {
+        this.onAppliance = false;
     }
 
     [PunRPC]
