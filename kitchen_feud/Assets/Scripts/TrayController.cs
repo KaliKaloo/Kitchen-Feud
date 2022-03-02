@@ -12,6 +12,15 @@ public class TrayController : MonoBehaviour
     //public GlobalTimer timer;
     private static ParseScore scores = new ParseScore();
 
+    private void Start()
+    {
+        for (int i = 0; i < trays.Count; i++) {
+            trays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
+            otherTrays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
+        }
+
+    }
+
     public int teamNumber;
     public void makeTray(string orderID){
         foreach (GameObject t in trays){
