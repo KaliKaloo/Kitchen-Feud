@@ -41,7 +41,6 @@ public class CookingBar : MonoBehaviour
     }
 
     public float abs(float x) {
-       float result = x < 0 ? -x : x;
-       return result;
+       return x < 0 ? -x : x;
     }
 }

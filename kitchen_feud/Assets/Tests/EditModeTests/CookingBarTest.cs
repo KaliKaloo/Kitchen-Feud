@@ -7,25 +7,28 @@ using UnityEngine.TestTools;
 public class CookingBarTest
 {
     CookingBar cookingBar = new CookingBar();
-
    
-    // A Test behaves as an ordinary method
     [Test]
-    public void CookingBarTestSimplePasses()
+    public void TestAbs()
     {
-        // Use the Assert class to test conditions
-         float absolute = cookingBar.abs(-100f);
+        float absolute = cookingBar.abs(-100f);
         Assert.AreEqual(100f, absolute);
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator CookingBarTestWithEnumeratorPasses()
+    [Test]
+    public void NegTestCookedLvl()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        float absolute = cookingBar.SetCookedLevel(-50f);
+        Assert.AreEqual(50f, absolute);
     }
+
+    [Test]
+    public void PosTestCookedLvl()
+    {
+        float absolute = cookingBar.SetCookedLevel(20f);
+        Assert.AreEqual(80f, absolute);
+    }
+
+
 }
 
