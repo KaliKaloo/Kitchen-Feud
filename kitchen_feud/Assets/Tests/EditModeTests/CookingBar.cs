@@ -30,6 +30,13 @@ public class CookingBarTest
         Assert.AreEqual(100f, PosAbs);
     }
 
+    [Test]
+    public void TestZeroAbs()
+    {
+        float zeroAbs = cookingBar.abs(0);
+        Assert.AreEqual(0, zeroAbs);
+    }
+
 
     [Test]
     public void NegTestCookedLvl()
@@ -43,6 +50,13 @@ public class CookingBarTest
     {
         float PosLvl = cookingBar.SetCookedLevel(20f);
         Assert.AreEqual(80f, PosLvl);
+    }
+
+    [Test]
+    public void ZeroTestCookedLvl()
+    {
+        float zeroLvl = cookingBar.SetCookedLevel(0);
+        Assert.AreEqual(100, zeroLvl);
     }
 
 
