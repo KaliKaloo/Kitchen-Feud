@@ -35,7 +35,7 @@ public class SlotsController : MonoBehaviour {
         for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount != 0) {
                     GameObject objectInSlot = slots[i].GetChild(0).gameObject;
-                    objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.Others);
+                    //objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.Others);
                     Destroy(objectInSlot);
                     
                     fullnessCount--;
