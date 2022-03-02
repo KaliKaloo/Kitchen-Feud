@@ -7,26 +7,35 @@ using UnityEngine.TestTools;
 public class CookingBarTest
 {
     CookingBar cookingBar = new CookingBar();
-   
+
     [Test]
-    public void TestAbs()
+    public void TestNegAbs()
     {
-        float absolute = cookingBar.abs(-100f);
-        Assert.AreEqual(100f, absolute);
+        float NegAbs = cookingBar.abs(-100f);
+        Assert.AreEqual(100f, NegAbs);
     }
+
+
+    [Test]
+    public void TestPosAbs()
+    {
+        float PosAbs = cookingBar.abs(-100f);
+        Assert.AreEqual(100f, PosAbs);
+    }
+
 
     [Test]
     public void NegTestCookedLvl()
     {
-        float absolute = cookingBar.SetCookedLevel(-50f);
-        Assert.AreEqual(50f, absolute);
+        float NegLvl = cookingBar.SetCookedLevel(-50f);
+        Assert.AreEqual(50f, NegLvl);
     }
 
     [Test]
     public void PosTestCookedLvl()
     {
-        float absolute = cookingBar.SetCookedLevel(20f);
-        Assert.AreEqual(80f, absolute);
+        float PosLvl = cookingBar.SetCookedLevel(20f);
+        Assert.AreEqual(80f, PosLvl);
     }
 
 
