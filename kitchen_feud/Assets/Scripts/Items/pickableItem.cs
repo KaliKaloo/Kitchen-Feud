@@ -106,12 +106,9 @@ public class pickableItem : Interactable
     }
 
     [PunRPC]
-    void DisableIngredientView()
+    void DisableIngredientView(int viewID)
     {
-        Renderer r = GetComponent<Renderer>();
-   
-        
-            r.enabled = !r.enabled;
-        
+
+        Destroy(PhotonView.Find(viewID).gameObject);
     }
 }
