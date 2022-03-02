@@ -6,7 +6,14 @@ using UnityEngine.TestTools;
 
 public class CookingBarTest
 {
-    CookingBar cookingBar = new CookingBar();
+    CookingBar cookingBar; 
+
+    [OneTimeSetUp]
+    public void SetUp() {
+        GameObject obj = new GameObject();
+        cookingBar = obj.AddComponent<CookingBar>();
+    }
+
 
     [Test]
     public void TestNegAbs()
