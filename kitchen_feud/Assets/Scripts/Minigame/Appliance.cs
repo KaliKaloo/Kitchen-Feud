@@ -56,8 +56,8 @@ public class Appliance : Interactable
                 Debug.Log("Recipe found: "+foundDish.name + " - "+ foundDish.dishID);
 
                 
-                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.Others);
-                isBeingInteractedWith = true;
+                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All,this.GetComponent<PhotonView>().ViewID);
+                //isBeingInteractedWith = true;
                 
                 //open the minigame canvas
                 canvas.gameObject.SetActive(false);
@@ -81,7 +81,7 @@ public class Appliance : Interactable
                 dishOfFoundDish = cookedDish.GetComponent<Dish>();
 
                 //delete the items the dish was cooked from
-                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others);
+                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others,this.GetComponent<PhotonView>().ViewID);
                 itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
 
@@ -125,14 +125,14 @@ public class Appliance : Interactable
     
 
     [PunRPC]
-    void SetToTrue()
+    void SetToTrue(int viewID)
     {
-        this.isBeingInteractedWith = true;
+        PhotonView.Find(viewID).GetComponent<Appliance>().isBeingInteractedWith = true;
     }
     [PunRPC]
-    void SetToFalse()
+    void SetToFalse(int viewID)
     {
-        this.isBeingInteractedWith = false;
+        PhotonView.Find(viewID).GetComponent<Appliance>().isBeingInteractedWith = false;
     }
   
     [PunRPC]
@@ -141,9 +141,9 @@ public class Appliance : Interactable
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
     [PunRPC]
-    void clearItems()
+    void clearItems(int viewID)
     {
-        itemsOnTheAppliance.Clear();
+        PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
     }
 
 }

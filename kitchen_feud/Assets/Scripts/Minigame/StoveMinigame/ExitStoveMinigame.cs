@@ -30,7 +30,7 @@ public class ExitStoveMinigame : MonoBehaviour
         cookingBar.done = false;
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 
