@@ -20,7 +20,7 @@ public class stoveMinigame : MonoBehaviour
 
     void Update(){
         if(appliance.isBeingInteractedWith){
-            if (appliance.player.GetComponent<PhotonView>().IsMine)
+            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
                 backbutton.appliance = GetComponent<Appliance>();
             }
