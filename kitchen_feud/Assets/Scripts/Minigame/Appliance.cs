@@ -23,36 +23,27 @@ public class Appliance : Interactable
     public PlayerController playerController;
     public Rigidbody playerRigidbody; 
     private SlotsController SlotsController;
-    private int dishPoints;
+    public int dishPoints;
 
     public int minigameNum;
+    public PhotonView pv;
 
     public override void Interact(){
  	    PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-
-        if(gameObject.GetComponent<stoveMinigame>()){
-            minigameNum = 0;
-        }else if(gameObject.GetComponent<cuttingMinigame>()){
-            minigameNum = 1;
-        }
-
-
         playerRigidbody = player.GetComponent<Rigidbody>(); 
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
         SlotsController = gameObject.GetComponent<SlotsController>();
         //view control
-        PhotonView pv = player.GetComponent<PhotonView>();
+        pv = player.GetComponent<PhotonView>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
         if (!isBeingInteractedWith) {
-            if(playerHold.items.Count!=0){
-                this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
-                    player.GetComponent<PhotonView>().ViewID);
-                //addItem(playerHold.heldObj, playerHold);
-            }else{
-                //view control
-                if(pv.IsMine) {
-                    cookDish();
+            if(pv.IsMine) {
+                if(playerHold.items.Count!=0){
+                    this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                        player.GetComponent<PhotonView>().ViewID);
+                }else{
+                        cookDish();
                 }
             }
         }
@@ -111,9 +102,9 @@ public class Appliance : Interactable
             
             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
             
-            if (playerHold.items.Count == 0)
+            if (playerHold.items.Count == 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
-                SlotsController.PutOnAppliance(heldObjArg, playerHold);
+                SlotsController.PutOnAppliance(heldObjArg);
             }
         }
         else { Debug.Log("Can't put a cooked dish in a appliance."); }
@@ -130,21 +121,8 @@ public class Appliance : Interactable
         }
     }
 
-      //CALLED BY THE EVENT SYSTEM
-    // public void UpdateDishPoints() {
-    //     if(dishOfFoundDish != null){
-            
-    //         dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, dishPoints);
-    //         dishOfFoundDish.points = dishPoints;
-    //         Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
-    //     }
-    //     else{
-    //         Debug.Log("dishoffounddish is null");
-    //     }
-        
-    // }
 
-   
+    
 
     [PunRPC]
     void SetToTrue()

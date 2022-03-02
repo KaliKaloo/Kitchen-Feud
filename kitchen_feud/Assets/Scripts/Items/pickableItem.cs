@@ -17,6 +17,7 @@ public class pickableItem : Interactable
 	public TraySO Tray;
     public Tray tray2;
     public Appliance appliance;
+    public SlotsController applianceSlots;
    
     // public GameObject obj;
     public override void Interact()
@@ -39,7 +40,7 @@ public class pickableItem : Interactable
 			}
             else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);
-                appliance.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
+                applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
             
@@ -86,10 +87,12 @@ public class pickableItem : Interactable
 
     }
     [PunRPC]
-    void applianceBool(int viewID,int applianceID)
+    void applianceBool(int viewID,int applianceID, int slotsID)
     {
         PhotonView.Find(viewID).GetComponent<pickableItem>().onAppliance = true;
         PhotonView.Find(viewID).GetComponent<pickableItem>().appliance = PhotonView.Find(applianceID).GetComponent<Appliance>();
+        PhotonView.Find(viewID).GetComponent<pickableItem>().applianceSlots = PhotonView.Find(slotsID).GetComponent<SlotsController>();
+    
     }
     [PunRPC]
     void onTrayF()
