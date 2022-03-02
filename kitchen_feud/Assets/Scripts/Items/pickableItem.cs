@@ -7,64 +7,34 @@ using System.Collections;
 
 public class pickableItem : Interactable
 {
-    //public Item item;
-    //public bool canPickUp = true;
     public BaseFood item;
     
     PlayerHolding playerHold;
 	public bool onTray = false;
-    public bool onStove = false;
+    public bool onAppliance = false;
 	public TraySO Tray;
     public Tray tray2;
-    public Stove stove;
-    public StoveSlotsController stoveSlots;
-    public List<GameObject> stoves = new List<GameObject>();
-    
+    public Appliance appliance;
+    public SlotsController applianceSlots;
    
-    // public GameObject obj;
     public override void Interact()
     {
-        // base.Interact();
         
         playerHold = player.GetComponent<PlayerHolding>();
 
         if (playerHold.items.Count == 0) {
-            //playerHold.pickUpItem(gameObject, item); should be here!!! It broke everything
-            if (onStove == false && onTray == false) {
+            if (onAppliance == false && onTray == false) {
                 playerHold.pickUpItem(gameObject, item);
             }
 			else if (onTray == true){
-                //not here!!!
                 playerHold.pickUpItem(gameObject, item);
                 tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
-				//removeFromTray(Tray);
 			}
-            //same for stove! + removing from the stove list
-            //write rpcs for stove
-            //not multiplayer yet!!!
-            else if (onStove == true){
-                //null!
-                stoves.AddRange(GameObject.FindGameObjectsWithTag("Stove"));
-                Debug.Log(stoves.Count);
-                for (int i = 0; i < stoves.Count; i++) {
-                    StoveSlotsController ssc = stoves[i].GetComponent<StoveSlotsController>();
-                    Debug.LogError("These are the slots: "+ssc.slots.Count);
-                    Debug.LogError("Name of this Stove: " + stoves[i].name);
-                        for (int j=0;j<ssc.slots.Count;j++) {
-                            if(ssc.slots[j] == gameObject.transform.parent) {
-                                stove = stoves[i].GetComponent<Stove>();
-                                stoveSlots = ssc;
-                                break;
-                            }
-                        }
-                    Debug.LogError("Iteration: " + i);
-                }
-                stoves.Clear();
-                  
-				//stoveSlots = stove.gameObject.GetComponent<StoveSlotsController>();
-                stoveSlots.RemoveFromStove(gameObject);
+            else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);
+                applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
+                GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
             
             //if it's a dish print out its points
@@ -73,15 +43,11 @@ public class pickableItem : Interactable
                
                 Debug.Log("points: " + dish.points);
             }
-
-
         }
         else {
             playerHold.dropItem();
             playerHold.pickUpItem(gameObject, item);
         }
-      
-
     }
 		public void removeFromTray(TraySO tray)
 	{
@@ -114,18 +80,28 @@ public class pickableItem : Interactable
 
     }
     [PunRPC]
+    void applianceBool(int viewID,int applianceID, int slotsID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().onAppliance = true;
+        PhotonView.Find(viewID).GetComponent<pickableItem>().appliance = PhotonView.Find(applianceID).GetComponent<Appliance>();
+        PhotonView.Find(viewID).GetComponent<pickableItem>().applianceSlots = PhotonView.Find(slotsID).GetComponent<SlotsController>();
+    
+    }
+    [PunRPC]
     void onTrayF()
     {
         this.onTray = false;
     }
+    [PunRPC]
+     void onApplianceF()
+    {
+        this.onAppliance = false;
+    }
 
     [PunRPC]
-    void DisableIngredientView()
+    void DisableIngredientView(int viewID)
     {
-        Renderer r = GetComponent<Renderer>();
-   
-        
-            r.enabled = !r.enabled;
-        
+
+        Destroy(PhotonView.Find(viewID).gameObject);
     }
 }

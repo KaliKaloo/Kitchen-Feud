@@ -29,45 +29,28 @@ public class Tray : Interactable
                     if (slots[i].transform.childCount == 0)
                     {
                         playerHold.dropItem();
-                        
-                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.Others,
+
+                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                        objectHolding.transform.parent = slots[i];
-                        objectHolding.transform.localPosition = Vector3.zero;
-                        objectHolding.transform.localRotation = Quaternion.Euler(Vector3.zero);
                         break;
                     }
                 }
-
-                //add basefood item to list of foods of the tray
-
                 pickable = objectHolding.GetComponent<pickableItem>();
                 pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
-                //pickable.onTray = true;
-                this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All,this.GetComponent<PhotonView>().ViewID,objectHolding.GetComponent<PhotonView>().ViewID);
-                //tray.ServingTray.Add(pickable.item);
-                //tray.objectsOnTray.Add(objectHolding);
-                //pickable.Tray = tray;
-                //Debug.Log(tray.ServingTray.Count);
-            }
-
-            else
-            {
-                //do nothing because there are no empty slots
-              
-
+                if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+                {
+                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                }
             }
         }
-
-
     }
+    
     [PunRPC]
     void addComps(int viewID, int objID)
     {
+
         PhotonView.Find(viewID).GetComponent<Tray>().tray.ServingTray.Add(PhotonView.Find(objID).GetComponent<pickableItem>().item);
-       // tray.ServingTray.Add(pickable.item);
         PhotonView.Find(viewID).GetComponent<Tray>().tray.objectsOnTray.Add(PhotonView.Find(objID).gameObject);
-       // tray.objectsOnTray.Add(objectHolding);
 
     }
    [PunRPC]
@@ -75,7 +58,6 @@ public class Tray : Interactable
     {
         this.tray.ServingTray.Remove(PhotonView.Find(viewID).GetComponent<pickableItem>().item);
         this.tray.objectsOnTray.Remove(PhotonView.Find(viewID).gameObject);
-
     }
 
 } 
