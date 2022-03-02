@@ -50,17 +50,9 @@ public class Tray : Interactable
                 //pickable.Tray = tray;
                 //Debug.Log(tray.ServingTray.Count);
             }
-
-            else
-            {
-                //do nothing because there are no empty slots
-              
-
-            }
         }
-
-
     }
+    
     [PunRPC]
     void addComps(int viewID, int objID)
     {

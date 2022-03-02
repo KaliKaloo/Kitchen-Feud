@@ -11,7 +11,7 @@ public class CookingBar : MonoBehaviour
     public bool keyHeld;
     public bool done;
     public float cookedLevel;
-
+ 
     void Start () {
         slider.value = -30;
         keyHeld = false;
