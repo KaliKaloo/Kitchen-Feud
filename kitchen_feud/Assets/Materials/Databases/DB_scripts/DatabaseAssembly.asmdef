@@ -1,12 +1,7 @@
 {
-    "name": "Main",
+    "name": "DatabaseAssembly",
     "rootNamespace": "",
-    "references": [
-        "GUID:57c32fc907df0f54e8e6e8f0d2488336",
-        "GUID:831409e8f9d13b5479a3baef9822ad34",
-        "GUID:0a8299ee7d4fd2e418497a64dfc3d1eb",
-        "GUID:37459c4f97367034c9465c8e2bffa9b9"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
