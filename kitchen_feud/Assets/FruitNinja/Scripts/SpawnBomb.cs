@@ -19,6 +19,7 @@ public class SpawnBomb : MonoBehaviour
     {
         GameObject newObject = Instantiate(this.prefabToSpawn);
         newObject.transform.position = new Vector2(Random.Range(this.objectMinX, this.objectMaxX), this.objectY);
+        newObject.transform.SetParent(transform);
         //Sprite objectSprite = objectSprites[Random.Range(0, this.objectSprites.Length)];
         newObject.GetComponent<SpriteRenderer>().sprite = objectSprite;
     }
