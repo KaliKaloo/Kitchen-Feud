@@ -35,7 +35,7 @@ public class GlobalTimer
 
     public void ChangeTimerValue(int newTime)
     {
-        timer = time = newTime;
+        timer = time = newTime >= 0 ? newTime : 0;
     }
 
     public int GetCurrentTime()
