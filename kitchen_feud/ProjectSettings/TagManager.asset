@@ -9,6 +9,7 @@ TagManager:
   - Stove
   - Sandwich Station
   - Cutting Board
+  - Appliance
   layers:
   - Default
   - TransparentFX

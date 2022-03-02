@@ -13,7 +13,7 @@ public class GlobalTimer
     
 
     private static int timer = time;
-    private static bool started = false;
+    private static bool started;
     PhotonRoom room;
 
     // changes original starting time, only do before game starts!
