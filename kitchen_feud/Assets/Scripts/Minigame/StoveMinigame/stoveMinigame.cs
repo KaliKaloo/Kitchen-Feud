@@ -36,9 +36,7 @@ public class stoveMinigame : MonoBehaviour
             dishOfFoundDish.points = (int)cookingBar.cookedLevel;
             Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
         }
-        else{
-            Debug.Log("dishoffounddish is null");
-        }
+        
         }
     }
 }
