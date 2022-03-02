@@ -22,6 +22,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
         cookingBar = slider.GetComponent<CookingBar>();
+		
 	}
 
 	void TaskOnClick(){
@@ -39,8 +40,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		
 		appliance.playerController.enabled = true;
-		
-		GameEvents.current.assignPoints -= appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
-	
+
 	}
 }

@@ -354,6 +354,7 @@ MonoBehaviour:
   Tray: {fileID: 0}
   tray2: {fileID: 0}
   appliance: {fileID: 0}
+  applianceSlots: {fileID: 0}
 --- !u!114 &4036615515797736677
 MonoBehaviour:
   m_ObjectHideFlags: 0

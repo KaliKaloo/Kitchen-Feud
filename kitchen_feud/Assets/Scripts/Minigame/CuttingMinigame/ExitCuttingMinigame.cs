@@ -32,8 +32,5 @@ public class ExitCuttingMinigame : MonoBehaviour
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		
 		appliance.playerController.enabled = true;
-		
-		GameEvents.current.assignPoints -= appliance.GetComponent<cuttingMinigame>().UpdateDishPointsCutting;
-	
 	}
 }

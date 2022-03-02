@@ -9,10 +9,10 @@ using UnityEngine.EventSystems;
 public class Appliance : Interactable
 {
     GameObject clickedObj;
-    public GameObject inputObj;
+    private GameObject inputObj;
     public List<IngredientSO> itemsOnTheAppliance = new List<IngredientSO>();
     bool foundMatchingDish = false;
-    public DishSO foundDish;
+    private DishSO foundDish;
     public Dish dishOfFoundDish;
     public GameObject canvas;
     public GameObject minigameCanvas;
@@ -21,11 +21,11 @@ public class Appliance : Interactable
     public bool isBeingInteractedWith = false;
     private Renderer r;
     public PlayerController playerController;
-    public Rigidbody playerRigidbody; 
+    private Rigidbody playerRigidbody; 
     private SlotsController SlotsController;
     public int dishPoints;
 
-    public int minigameNum;
+    
     public PhotonView pv;
 
     public override void Interact(){
@@ -57,6 +57,7 @@ public class Appliance : Interactable
 
                 
                 this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All,this.GetComponent<PhotonView>().ViewID);
+                Debug.LogError(isBeingInteractedWith);
                 //isBeingInteractedWith = true;
                 
                 //open the minigame canvas

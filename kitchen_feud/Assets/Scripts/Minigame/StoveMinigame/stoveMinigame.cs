@@ -24,19 +24,19 @@ public class stoveMinigame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
             }
-
         }
     }
    public void UpdateDishPointsStove() {
-        if(appliance.isBeingInteractedWith){
-             Dish dishOfFoundDish = appliance.dishOfFoundDish;
+       // Debug.Log("Outside");
+        Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
+        if (appliance.isBeingInteractedWith){
+            Debug.Log("Inside");
+            Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
-            
             dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
             dishOfFoundDish.points = (int)cookingBar.cookedLevel;
             Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
         }
-        
         }
     }
 }

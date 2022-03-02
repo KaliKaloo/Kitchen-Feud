@@ -9,7 +9,6 @@ public class TrayController : MonoBehaviour
 {
     public List<GameObject> trays = new List<GameObject>();
     public List<GameObject> otherTrays = new List<GameObject>();
-    //public GlobalTimer timer;
     private static ParseScore scores = new ParseScore();
 
     private void Start()
@@ -49,91 +48,37 @@ public class TrayController : MonoBehaviour
         }
     }
 
-    // OLD SCORE STUFF
-    // private int GetDishScore(List<GameObject> trayDishes, List<BaseFood> trayItems)
-    // {
-    //     int total = 0;
-
-    //     foreach(GameObject dish in trayDishes)
-    //     {
-    //         // Make sure to change to FINAL SCORE after karolina has figured out how to deduct points.
-    //         try{
-    //             Dish dishComponent = dish.GetComponent<Dish>();
-    //             total += (int)dishComponent.points;
-    //         }catch{
-    //             total += IngredientDeduction(trayItems);
-    //         }
-           
-    //     }
-
-    //     return total;
-    // }
-
-
-    // // returns -points based on how many raw ingredients on tray
-    // private int IngredientDeduction(List<BaseFood> tray)
-    // {
-    //     int total = 0;
-
-    //     foreach (BaseFood food in tray)
-    //     {
-    //         if (food.Type == ItemType.Ingredient)
-    //         {
-    //             total += food.maxScore;
-    //         }
-    //     }
-    //     return total; 
-    // }
-
-    // // purely compares an order and a tray based on their names
-    // private float CompareDishNames(List<BaseFood> tray, List<BaseFood> orderDish)
-    // {
-    //     List<string> trayNames = new List<string>();
-    //     List<string> dishNames = new List<string>();
-
-    //     foreach (BaseFood food in tray)
-    //     {
-    //         trayNames.Add(food.name);
-    //     }
-    //     foreach (BaseFood food in orderDish)
-    //     {
-    //         dishNames.Add(food.name);
-    //     }
-    //     // sort dishes alphabetically
-    //     trayNames = trayNames.OrderBy(q => q).ToList();
-    //     dishNames = dishNames.OrderBy(q => q).ToList();
-
-    //     List<string> commonNames = new List<string>();
-    //     var holdCommon = trayNames.Intersect(dishNames);
-        
-    //     if (holdCommon.Count() > 0)
-    //             holdCommon.ToList().ForEach(t => commonNames.Add(t));
-
-    //     return ((float)commonNames.Count()/(float)dishNames.Count());
-    // }
-
     private int calcScore(List<GameObject> trayDishes, List<BaseFood> trayItems, List<BaseFood> orderDish){
         int total = 0;
         List<BaseFood> tempOrderDish = new List<BaseFood>(orderDish);
 
-        for(int i =0; i<trayItems.Count(); i++)
+        for (int i = 0; i < trayItems.Count(); i++)
         {
+
             if (trayItems[i].Type == ItemType.Ingredient)
             {
                 total += trayItems[i].maxScore;
             }
-            else if (tempOrderDish.Any(dish => dish.name == trayItems[i].name)){
+            else if (tempOrderDish.Any(dish => dish.name == trayItems[i].name))
+            {
+
                 Dish dishComponent = trayDishes[i].GetComponent<Dish>();
                 total += (int)dishComponent.points;
-                Debug.Log((int)dishComponent.points);
                 tempOrderDish.Remove(trayItems[i]);
+            }
+            else
+            {
+                Debug.Log("this is the dish" + trayItems[i].name);
+                foreach (BaseFood item in tempOrderDish)
+                {
+                    Debug.Log(item.name);
+                }
             }
         }
         float difference = trayItems.Count() - orderDish.Count();
         if(difference>0){
             total = (int)(total - 3*(difference*0.9f));
         }
-        Debug.Log("Added points: "+total);
         return total; 
     }
 
@@ -151,10 +96,6 @@ public class TrayController : MonoBehaviour
                 Order o = Database.GetOrderByID(orderid);
                 int currentScore = 0;
 
-                // Compares two dishes without order mattering (now checks for duplicates too)
-                // float dishMultiplier = CompareDishNames(tray, o.dishes);
-                // float totalPoints = GetDishScore(onTray, tray) * dishMultiplier;
-                // currentScore += (int)totalPoints;
                 if(tray.Count>0)
                     currentScore += calcScore(onTray, tray, o.dishes);
 
@@ -166,7 +107,7 @@ public class TrayController : MonoBehaviour
                 {
                     this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
                 }
-                // resetTray(orderid);
+     
                 this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
                 break;
             }
@@ -178,7 +119,7 @@ public class TrayController : MonoBehaviour
     private void OnApplicationQuit() {
         for(int i = 0; i< trays.Count; i++)
         {
-            //PhotonNetwork.Disconnect();   
+           
             Tray ts = trays[i].GetComponent<Tray>();
             Tray oTs = otherTrays[i].GetComponent<Tray>();
             ts.tray.trayID = null;
@@ -188,13 +129,7 @@ public class TrayController : MonoBehaviour
             oTs.tray.ServingTray.Clear();
             oTs.tray.objectsOnTray.Clear();
         }
-     /*   foreach(GameObject t in trays){
-            Tray ts = t.GetComponent<Tray>();
-            ts.tray.trayID = null;
-            ts.tray.ServingTray.Clear();
-            ts.tray.objectsOnTray.Clear();
-        }
-     */
+
     }
    
 

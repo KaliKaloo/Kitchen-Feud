@@ -42,7 +42,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     private void OnleaveChannel(RtcStats stats)
     {
-        Debug.Log("Left channel with duration" + stats.duration);
+        //Debug.Log("Left channel with duration" + stats.duration);
     }
 
     private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
@@ -68,7 +68,6 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Debug.Log("BYEEEE");
         rtcEngine.LeaveChannel();
     }
     private void OnDestroy()

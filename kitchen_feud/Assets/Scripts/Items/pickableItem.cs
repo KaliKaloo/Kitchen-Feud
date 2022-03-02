@@ -7,8 +7,6 @@ using System.Collections;
 
 public class pickableItem : Interactable
 {
-    //public Item item;
-    //public bool canPickUp = true;
     public BaseFood item;
     
     PlayerHolding playerHold;
@@ -19,24 +17,19 @@ public class pickableItem : Interactable
     public Appliance appliance;
     public SlotsController applianceSlots;
    
-    // public GameObject obj;
     public override void Interact()
     {
-        // base.Interact();
         
         playerHold = player.GetComponent<PlayerHolding>();
 
         if (playerHold.items.Count == 0) {
-            //playerHold.pickUpItem(gameObject, item); should be here!!! It broke everything
             if (onAppliance == false && onTray == false) {
                 playerHold.pickUpItem(gameObject, item);
             }
 			else if (onTray == true){
-                //not here!!!
                 playerHold.pickUpItem(gameObject, item);
                 tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
-				//removeFromTray(Tray);
 			}
             else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);

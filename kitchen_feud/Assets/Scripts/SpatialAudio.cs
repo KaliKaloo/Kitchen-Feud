@@ -26,7 +26,6 @@ public class SpatialAudio : MonoBehaviour
         agoraAduioEffects = VoiceChatManager.Instance.GetRtcEngine().GetAudioEffectManager();
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        Debug.LogError(myTeam);
         myC = 0;
     
         
@@ -82,8 +81,6 @@ public class SpatialAudio : MonoBehaviour
 
         if (Vector3.Distance(new Vector3(-3.22f, 1.09f,9.4f), transform.position) > 10)
         {
-            //Debug.LogError("You're too far away");
-            //engine.EnableLocalAudio(false);
             if (myTeam == 1 && myC == 2)
             {
                 engine.LeaveChannel();

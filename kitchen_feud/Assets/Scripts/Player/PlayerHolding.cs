@@ -65,12 +65,6 @@ public class PlayerHolding : MonoBehaviour
             items.Clear();
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
-            //Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
-            //Collider objcol = heldObj.GetComponent<Collider>();
-            //heldObj.transform.SetParent(null);
-            //objRig.isKinematic = false;
-            //objcol.isTrigger = false;
-            //objRig.useGravity = true;
         }
     }
     [PunRPC]
@@ -90,9 +84,6 @@ public class PlayerHolding : MonoBehaviour
         {
             this.items.Clear();
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
-
-            //PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
-            // PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;

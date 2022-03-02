@@ -28,8 +28,8 @@ public class CookingBar : MonoBehaviour
             //EVENT SYSTEM: EMIT AN EVENT WHEN SET VALUE
             cookedLevel = SetCookedLevel(slider.value);
             done = true;
-            GameEvents.current.assignPointsEventFunction();
             
+            GameEvents.current.assignPointsEventFunction();
         }
     }
 

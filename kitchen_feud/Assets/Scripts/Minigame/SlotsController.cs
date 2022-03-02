@@ -18,9 +18,6 @@ public class SlotsController : MonoBehaviour {
                 if (slots[i].transform.childCount == 0) {
                     heldObjArg.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
                     heldObjArg.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                    // heldObjArg.transform.parent = slots[i];
-                    // heldObjArg.transform.localPosition = Vector3.zero;
-                    // heldObjArg.transform.localRotation = Quaternion.Euler(Vector3.zero);
                     fullnessCount++;
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
 
@@ -37,8 +34,6 @@ public class SlotsController : MonoBehaviour {
                     GameObject objectInSlot = slots[i].GetChild(0).gameObject;
                     objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.All,
                         objectInSlot.GetComponent<PhotonView>().ViewID);
-                    //Destroy(objectInSlot);
-                    
                     fullnessCount--;
                 }
             }
