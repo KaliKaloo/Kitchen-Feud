@@ -21,8 +21,10 @@ public class cuttingMinigame : MonoBehaviour
     }
      void Update(){
         if(appliance.isBeingInteractedWith){
-            backbutton.appliance = GetComponent<Appliance>();
-
+            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+            {
+                backbutton.appliance = GetComponent<Appliance>();
+            }
         }
     }
 
