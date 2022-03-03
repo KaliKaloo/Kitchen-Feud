@@ -14,9 +14,20 @@ public class CookingBarTest
         cookingBar = obj.AddComponent<CookingBar>();
     }
 
+    [Test]
+    public void keyHeldInit()
+    {
+        Assert.IsFalse(cookingBar.keyHeld);
+    }
 
     [Test]
-    public void TestNegAbs()
+    public void doneInit()
+    {
+        Assert.IsFalse(cookingBar.done);
+    }
+
+    [Test]
+    public void negAbs()
     {
         float NegAbs = cookingBar.abs(-100f);
         Assert.AreEqual(100f, NegAbs);
@@ -24,14 +35,14 @@ public class CookingBarTest
 
 
     [Test]
-    public void TestPosAbs()
+    public void posAbs()
     {
         float PosAbs = cookingBar.abs(-100f);
         Assert.AreEqual(100f, PosAbs);
     }
 
     [Test]
-    public void TestZeroAbs()
+    public void zeroAbs()
     {
         float zeroAbs = cookingBar.abs(0);
         Assert.AreEqual(0, zeroAbs);
@@ -39,26 +50,25 @@ public class CookingBarTest
 
 
     [Test]
-    public void NegTestCookedLvl()
+    public void negCookedLvl()
     {
         float NegLvl = cookingBar.SetCookedLevel(-50f);
         Assert.AreEqual(50f, NegLvl);
     }
 
     [Test]
-    public void PosTestCookedLvl()
+    public void posCookedLvl()
     {
         float PosLvl = cookingBar.SetCookedLevel(20f);
         Assert.AreEqual(80f, PosLvl);
     }
 
     [Test]
-    public void ZeroTestCookedLvl()
+    public void zeroCookedLvl()
     {
         float zeroLvl = cookingBar.SetCookedLevel(0);
         Assert.AreEqual(100, zeroLvl);
     }
-
 
 }
 
