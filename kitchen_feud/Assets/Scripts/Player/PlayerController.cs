@@ -72,11 +72,11 @@ public class PlayerController : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
-				player.velocity = getTransformVelocity();
+				player.velocity = getTransformVelocity(transform.forward);
 			}
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
-				player.velocity = -getTransformVelocity();
+				player.velocity = -getTransformVelocity(transform.forward);
 			}
 		}
 	}
@@ -136,8 +136,8 @@ public class PlayerController : MonoBehaviour
         r.isKinematic = false;
     }	
 	
-	public Vector3 getTransformVelocity(){
-		return transform.forward * m_speed * Time.deltaTime;
+	public Vector3 getTransformVelocity(Vector3 transform){
+		return transform * m_speed * Time.deltaTime;
 	}
 
 }
