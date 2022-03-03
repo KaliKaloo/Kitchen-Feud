@@ -37,7 +37,6 @@ public class stoveMinigame : MonoBehaviour
                 dishOfFoundDish.points = (int)cookingBar.cookedLevel;
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
                 GameObject.Find("Particle System").GetComponent<ParticleSystem>().Play();
-
             }
         }
     }
