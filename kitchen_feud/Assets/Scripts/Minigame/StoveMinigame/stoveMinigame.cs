@@ -33,10 +33,12 @@ public class stoveMinigame : MonoBehaviour
             Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
-            dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
-            dishOfFoundDish.points = (int)cookingBar.cookedLevel;
-            Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
-        }
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
+                dishOfFoundDish.points = (int)cookingBar.cookedLevel;
+                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+                GameObject.Find("Particle System").GetComponent<ParticleSystem>().Play();
+
+            }
         }
     }
 }
