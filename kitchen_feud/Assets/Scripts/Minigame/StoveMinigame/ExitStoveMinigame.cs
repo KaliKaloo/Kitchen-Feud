@@ -47,10 +47,10 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	void smokeEffect(){
+		Debug.Log(slider.maxValue);
 		particleSystem.Play();
-		if (score > 0){ // if overcooked
-			var main = particleSystem.main;
-			main.startSpeed = 0.5f + (0.25f * score/30);
-		}
+		var main = particleSystem.main;
+		main.startSpeed = 0.5f + (0.25f * score/slider.maxValue);
+		
 	}
 }
