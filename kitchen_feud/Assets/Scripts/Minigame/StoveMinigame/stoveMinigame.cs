@@ -26,9 +26,9 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
+
+
    public void UpdateDishPointsStove() {
-       // Debug.Log("Outside");
-        Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
         if (appliance.isBeingInteractedWith){
             Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
@@ -36,7 +36,6 @@ public class stoveMinigame : MonoBehaviour
                 dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
                 dishOfFoundDish.points = (int)cookingBar.cookedLevel;
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
-                GameObject.Find("Particle System").GetComponent<ParticleSystem>().Play();
             }
         }
     }

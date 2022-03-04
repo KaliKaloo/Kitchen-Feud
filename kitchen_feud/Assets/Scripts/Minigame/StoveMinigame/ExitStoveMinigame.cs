@@ -13,8 +13,10 @@ public class ExitStoveMinigame : MonoBehaviour
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public GameObject player;
-
 	public Appliance appliance;
+
+	private ParticleSystem particleSystem;
+	private float score;
 
 
 	void Start () {
@@ -22,24 +24,35 @@ public class ExitStoveMinigame : MonoBehaviour
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
         cookingBar = slider.GetComponent<CookingBar>();
+		particleSystem = GameObject.Find("Particle System").GetComponent<ParticleSystem>();
 		
 	}
 
 	void TaskOnClick(){
+		score = slider.value;
 		slider.value = -30;
         cookingBar.keyHeld = false;
         cookingBar.done = false;
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
-		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
-		
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
-		
 		appliance.playerController.enabled = true;
+		
+		smokeEffect();
 
+	}
+
+
+	void smokeEffect(){
+		Debug.Log(score);
+		particleSystem.Play();
+		if (score > 0){ // if overcooked
+			var main = particleSystem.main;
+			main.startSpeed = 0.75f;
+		}
+		
 	}
 }

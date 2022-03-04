@@ -57,7 +57,7 @@ public class Appliance : Interactable
 
                 
                 this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All,this.GetComponent<PhotonView>().ViewID);
-                Debug.LogError(isBeingInteractedWith);
+                Debug.Log(isBeingInteractedWith);
                 //isBeingInteractedWith = true;
                 
                 //open the minigame canvas
