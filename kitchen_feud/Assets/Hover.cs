@@ -32,7 +32,7 @@ public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             Debug.LogError("Mouse Over");
 
-            text.text = "<sprite=0>" + " + " + "<sprite=0>";
+            text.text = "<sprite=" +0+ ">" + " + " + "<sprite=" + 1 + ">"+ " = " + "<sprite=" + 2 + ">";
             //text.text = "How does this work? Can you pleasee explain this to me?!?!?";
             //float textPadding = 4f;
             //Vector2 backgroundSize = new Vector2(text.preferredWidth + textPadding*2f,text.preferredHeight + textPadding * 2f);

@@ -4,11 +4,15 @@ using UnityEngine;
 using agora_gaming_rtc;
 using Photon.Pun;
 using System;
+using System.Text.RegularExpressions;
+using Random = System.Random;
 
 public class VoiceChatManager : MonoBehaviourPunCallbacks
 {
     private string appID = "906fd9f2074e4b0491fcde55c280b9e5";
+    Random rnd = new Random();
     IRtcEngine rtcEngine;
+    public int x;
 
 
    public static VoiceChatManager Instance;
@@ -24,6 +28,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        x = rnd.Next(11, 101);
 
     }
 
@@ -47,17 +52,14 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
     {
-        Debug.Log("Joined channel" + channelName);
+       
+        Debug.Log("Joined " + channelName.Substring(2));
     }
 
     
         public override void OnJoinedRoom()
         {
-            Debug.Log(PhotonNetwork.CurrentRoom.Name);
-            rtcEngine.JoinChannel("Lobby");
-
-
-
+            rtcEngine.JoinChannel(x.ToString() + "Lobby");
         }
     
     public IRtcEngine GetRtcEngine()

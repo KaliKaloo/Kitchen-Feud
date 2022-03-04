@@ -16,6 +16,8 @@ public class SpatialAudio : MonoBehaviour
     IRtcEngine engine;
     int myTeam;
     int myC;
+    string randomInstance;
+    
   
   
    
@@ -26,6 +28,7 @@ public class SpatialAudio : MonoBehaviour
         agoraAduioEffects = VoiceChatManager.Instance.GetRtcEngine().GetAudioEffectManager();
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+        randomInstance = VoiceChatManager.Instance.x.ToString();
         myC = 0;
     
         
@@ -58,7 +61,7 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 2 && myC == 1)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team2");
+                engine.JoinChannel(randomInstance + "Team2");
                 myC = 2;
             }
 
@@ -68,13 +71,13 @@ public class SpatialAudio : MonoBehaviour
             if(myTeam == 1 && myC == 0)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team1");
+                engine.JoinChannel(randomInstance + "Team1");
                 myC = 1;
             }
 
             if (myTeam == 2 && myC == 2) {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team1");
+                engine.JoinChannel(randomInstance + "Team1");
                 myC = 1;
             }
         }
@@ -84,7 +87,7 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 1 && myC == 2)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team1");
+                engine.JoinChannel(randomInstance + "Team1");
                 myC = 1;
             }
 
@@ -94,7 +97,7 @@ public class SpatialAudio : MonoBehaviour
             if(myTeam == 2 && myC == 0)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team2");
+                engine.JoinChannel(randomInstance + "Team2");
                 myC = 2;
                
                
@@ -105,7 +108,7 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 1 && myC == 1)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel("Team2");
+                engine.JoinChannel(randomInstance + "Team2");
                 
                 myC = 2;
             }
