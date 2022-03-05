@@ -11,11 +11,13 @@ public class cuttingMinigame : MonoBehaviour
 {
     private Appliance appliance;
     public ExitCuttingMinigame backbutton;
-    public cuttingkeypress k;
+    public int finalPoints = 100;
+    //public cuttingkeypress k;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         GameEvents.current.assignPoints += UpdateDishPointsCutting;
         appliance = GetComponent<Appliance>();
     }
@@ -34,8 +36,8 @@ public class cuttingMinigame : MonoBehaviour
              Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
                 
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, k.finalPoints);
-                dishOfFoundDish.points = k.finalPoints;
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, finalPoints);
+                dishOfFoundDish.points = finalPoints;
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
             else{

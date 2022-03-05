@@ -16,14 +16,16 @@ public class CuttableObject : MonoBehaviour
             
             if (!correctIngredient)
             {
-                //cutController hey = GameObject.Find("CutController").transform.GetComponent<cutController>();
-                CutController.Score -= 10;
-                //GameObject.Find("CanvasController").transform.GetComponent<CanvasController>().ScoreText.Score -= 10;
+                     CutController.Score -= 10;
             }
             else
             {
-                //cutController hey = GameObject.Find("CutController").transform.GetComponent<cutController>();
                 CutController.Ingredient += 1;
+                
+                if (CutController.Ingredient == 15)
+                {
+                    CutController.calculateScore();
+                }
             }
         }
     }

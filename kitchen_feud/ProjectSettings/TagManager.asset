@@ -11,6 +11,7 @@ TagManager:
   - Cutting Board
   - Appliance
   - Cut
+  - cutSpawner
   layers:
   - Default
   - TransparentFX
