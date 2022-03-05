@@ -47,21 +47,19 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	void smokeEffect(){
-		Debug.Log(slider.maxValue);
-		particleSystem.Play();
 		var main = particleSystem.main;
-		main.startSpeed = 0.5f + (0.25f * score/slider.maxValue);
-		main.duration = 20 + (10 * score/slider.maxValue);
-
-
-
 		var emission = particleSystem.emission;
+
+		if (particleSystem.isStopped){
+			main.duration = 20 + (10 * score/slider.maxValue);
+		}
+		particleSystem.Play();
+		main.startSpeed = 0.5f + (0.25f * score/slider.maxValue);
 
 		if (score > 0){
 			emission.rateOverTime = 15 + (25 * score/slider.maxValue);
 		}else{
 			emission.rateOverTime = 15;
 		}
-		
 	}
 }
