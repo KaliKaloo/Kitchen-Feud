@@ -17,6 +17,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	private ParticleSystem particleSystem;
 	private float score;
+	private float prevScore;
 
 
 	void Start () {
@@ -29,6 +30,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		prevScore = score;
 		score = slider.value;
 		slider.value = -30;
         cookingBar.keyHeld = false;
@@ -50,16 +52,34 @@ public class ExitStoveMinigame : MonoBehaviour
 		var main = particleSystem.main;
 		var emission = particleSystem.emission;
 
-		if (particleSystem.isStopped){
-			main.duration = 20 + (10 * score/slider.maxValue);
-		}
-		particleSystem.Play();
-		main.startSpeed = 0.5f + (0.25f * score/slider.maxValue);
+		bool isStopped = particleSystem.isStopped;
+		float duration = 20 + (10 * score/slider.maxValue);
 
+		if (isStopped){
+			main.duration = duration;
+		}else if (prevScore != score){
+			particleSystem.Stop();
+			particleSystem.Clear();
+			main.duration = (main.duration + duration)/2 ;
+		}
+		
+		particleSystem.Play();
+
+		float startSpeed = 0.5f + (0.25f * score/slider.maxValue);
+		float rateOverTime;
 		if (score > 0){
-			emission.rateOverTime = 15 + (25 * score/slider.maxValue);
+			rateOverTime = 15 + (25 * score/slider.maxValue);
 		}else{
-			emission.rateOverTime = 15;
+			rateOverTime = 15;
+		}
+
+
+		if (!isStopped){
+			main.startSpeed = (main.startSpeed.constant + startSpeed)/2;
+			emission.rateOverTime = (emission.rateOverTime.constant + rateOverTime)/2;
+		}else{
+			main.startSpeed = startSpeed;
+			emission.rateOverTime = rateOverTime;
 		}
 	}
 }
