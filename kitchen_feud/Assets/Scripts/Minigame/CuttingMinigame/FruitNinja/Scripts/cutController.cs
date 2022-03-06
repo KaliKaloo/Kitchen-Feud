@@ -56,7 +56,6 @@ public class cutController : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("in start game in cutcontroller");
         StartButton.SetActive(false);
       
         //call ingredient spawner with a list od ingredient sprites

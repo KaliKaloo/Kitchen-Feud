@@ -24,8 +24,6 @@ public class ObjectSpawner : MonoBehaviour
     {
         InvokeRepeating("spawnObject", spawnInterval, spawnInterval);
         displaySprites = dishSprites;
-        h = prefabToSpawn.GetComponent<Image>();
-
     }
 
     private void spawnObject()
@@ -33,12 +31,10 @@ public class ObjectSpawner : MonoBehaviour
         GameObject newObject = Instantiate(this.prefabToSpawn);
         newObject.transform.position = new Vector2(Random.Range(this.objectMinX, this.objectMaxX), this.objectY);
         newObject.transform.SetParent(transform);
-        h = newObject.GetComponent<Image>();
 
-        Debug.Log("spawned");
 
         //instantiate a random sprite
-        Debug.Log(displaySprites.Count);
+        h = newObject.GetComponent<Image>();
         Sprite objectSprite = displaySprites[Random.Range(0, displaySprites.Count)];
         h.sprite = objectSprite;
     }
