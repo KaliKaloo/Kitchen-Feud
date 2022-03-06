@@ -20,7 +20,7 @@ MonoBehaviour:
   maxScore: 100
   finalScore: 0
   dishID: DI8914
-  toCook: Counter
+  toCook: Cutting Board
   cookingTime: 10
   recipe:
   - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}

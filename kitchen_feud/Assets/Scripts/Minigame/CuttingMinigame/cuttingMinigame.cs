@@ -9,28 +9,39 @@ using UnityEngine.EventSystems;
 
 public class cuttingMinigame : MonoBehaviour
 {
+    public cutController CutController;
     private Appliance appliance;
     public ExitCuttingMinigame backbutton;
     public int finalPoints = 100;
+    
     //public cuttingkeypress k;
 
     // Start is called before the first frame update
     void Start()
     {
-        
         GameEvents.current.assignPoints += UpdateDishPointsCutting;
         appliance = GetComponent<Appliance>();
+        
     }
      void Update(){
         if(appliance.isBeingInteractedWith){
+            
             if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
                 backbutton.appliance = GetComponent<Appliance>();
+
+                if (appliance.foundDish != null)
+                {
+                    CutController.dish = appliance.foundDish;
+                }
             }
+
         }
     }
 
-   //CALLED BY THE EVENT SYSTEM
+ 
+
+    //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsCutting() {
         if(appliance.isBeingInteractedWith){
              Dish dishOfFoundDish = appliance.dishOfFoundDish;

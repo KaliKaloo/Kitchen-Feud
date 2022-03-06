@@ -19,7 +19,7 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: OR121315
+  dishID: DI123
   toCook: Cutting Board
   cookingTime: 0
   recipe:

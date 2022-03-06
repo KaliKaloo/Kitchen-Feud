@@ -26,6 +26,8 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
+
+
    public void UpdateDishPointsStove() {
        // Debug.Log("Outside");
         Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);

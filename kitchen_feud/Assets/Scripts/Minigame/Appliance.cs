@@ -12,7 +12,7 @@ public class Appliance : Interactable
     private GameObject inputObj;
     public List<IngredientSO> itemsOnTheAppliance = new List<IngredientSO>();
     bool foundMatchingDish = false;
-    private DishSO foundDish;
+    public DishSO foundDish;
     public Dish dishOfFoundDish;
     public GameObject canvas;
     public GameObject minigameCanvas;
@@ -57,7 +57,7 @@ public class Appliance : Interactable
 
                 
                 this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All,this.GetComponent<PhotonView>().ViewID);
-                Debug.LogError(isBeingInteractedWith);
+                //Debug.LogError(isBeingInteractedWith);
                 //isBeingInteractedWith = true;
                 
                 //open the minigame canvas
@@ -114,7 +114,12 @@ public class Appliance : Interactable
 
     public void checkForDish(){
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
-        if(foundDish != null){
+
+        string applianceName = gameObject.tag;
+        string howToCook = foundDish.toCook;
+
+        //if (foundDish != null){
+        if ((foundDish != null) && (applianceName == howToCook)){
             foundMatchingDish = true;
         }
         else{

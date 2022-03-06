@@ -20,7 +20,7 @@ MonoBehaviour:
   maxScore: 50
   finalScore: 0
   dishID: DI2
-  toCook: Fryer
+  toCook: Stove
   cookingTime: 10
   recipe:
   - {fileID: 11400000, guid: 3359c40fb60994243b950b59f3fe2a91, type: 2}
