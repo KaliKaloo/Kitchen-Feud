@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: 11_Pasta
+  m_EditorClassIdentifier: 
+  name: Pasta
+  location: 0
+  Prefab: {fileID: 0}
+  Type: 1
+  canPickUp: 1
+  maxScore: 100
+  finalScore: 0
+  dishID: DI161720
+  toCook: Stove
+  cookingTime: 20
+  recipe:
+  - {fileID: 11400000, guid: 1797d73f097a21441bb8ac515ad3f3f6, type: 2}
+  - {fileID: 11400000, guid: 1cc5e1742dd9f3c46bf6ce3a5b084109, type: 2}
+  - {fileID: 11400000, guid: 9cebb2c4eec98a143a88d0062c49e950, type: 2}
