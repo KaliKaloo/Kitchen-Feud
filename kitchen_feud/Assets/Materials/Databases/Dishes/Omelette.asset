@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: Omelette
+  m_EditorClassIdentifier: 
+  name: Omelette
+  location: 0
+  Prefab: {fileID: 6998398168430758222, guid: 190ed82d6b5eb634086324959b6e15ac, type: 3}
+  Type: 0
+  canPickUp: 1
+  maxScore: 50
+  finalScore: 0
+  dishID: DI67
+  toCook: Stove
+  cookingTime: 10
+  recipe:
+  - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
+  - {fileID: 11400000, guid: 5e76d433ee189f6469c0e00686e9c594, type: 2}
