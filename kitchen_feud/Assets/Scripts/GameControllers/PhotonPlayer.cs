@@ -8,7 +8,6 @@ public class PhotonPlayer : MonoBehaviour
 {
     public PhotonView PV;
     public GameObject myAvatar;
-    public int myTeam;
     public GameObject tmp;
     public GameObject tmp1;
     GameObject Team1;
@@ -20,7 +19,7 @@ public class PhotonPlayer : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-            PV.RPC("RPC_GetTeam", RpcTarget.MasterClient);
+          //  PV.RPC("RPC_GetTeam", RpcTarget.MasterClient);
             Team1 = GameObject.FindGameObjectWithTag("Team1");
             Team2 = GameObject.FindWithTag("Team2");
         }
@@ -29,7 +28,7 @@ public class PhotonPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (myAvatar == null && myTeam != 0)
+        if (myAvatar == null && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] != 0)
         {
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
             {
@@ -58,17 +57,6 @@ public class PhotonPlayer : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    void RPC_GetTeam()
-    {
-        myTeam = GameSetup.GS.nextPlayersTeam;
-        GameSetup.GS.UpdateTeam();
-        PV.RPC("RPC_SentTeam", RpcTarget.OthersBuffered, myTeam);
-    }
-    [PunRPC]
-    void RPC_SentTeam(int whichTeam)
-    {
-        myTeam = whichTeam;
-    }
+
 
 }
