@@ -36,10 +36,10 @@ jobs:
           targetPlatform: WebGL
 
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: main
-          folder: "build/WebGL/WebGL"
-          repository-name: lokhei/CI-kf
-          ssh-key: ${{ secrets.KEY }}
+#       - name: Deploy 🚀
+#         uses: JamesIves/github-pages-deploy-action@v4.2.5
+#         with:
+#           branch: main
+#           folder: "build/WebGL/WebGL"
+#           repository-name: lokhei/CI-kf
+#           ssh-key: ${{ secrets.KEY }}
