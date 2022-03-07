@@ -25,7 +25,10 @@ public class ExitStoveMinigame : MonoBehaviour
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
         cookingBar = slider.GetComponent<CookingBar>();
-		particleSystem = GameObject.Find("Particle System").GetComponent<ParticleSystem>();
+		particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
+		Debug.Log("a " + appliance);
+		Debug.Log("b " + particleSystem);
+
 		
 	}
 
