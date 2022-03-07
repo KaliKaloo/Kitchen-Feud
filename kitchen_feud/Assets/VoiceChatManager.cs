@@ -28,7 +28,8 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        x = rnd.Next(11, 101);
+        
+        
 
     }
 
@@ -55,12 +56,21 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
        
         Debug.Log("Joined " + channelName.Substring(2));
     }
+    public override void OnConnectedToMaster()
+    {
+        //PhotonNetwork.JoinLobby();
 
-    
-        public override void OnJoinedRoom()
+       
+    }
+
+
+
+  /*  public override void OnJoinedRoom()
         {
+            Debug.LogError("THIS IS THE LOBBY: " + x);
             rtcEngine.JoinChannel(x.ToString() + "Lobby");
         }
+  */
     
     public IRtcEngine GetRtcEngine()
     {
@@ -76,4 +86,5 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     {
         IRtcEngine.Destroy();
     }
+  
 }

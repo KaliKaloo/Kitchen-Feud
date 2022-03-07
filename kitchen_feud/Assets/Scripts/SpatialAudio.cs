@@ -28,7 +28,7 @@ public class SpatialAudio : MonoBehaviour
         agoraAduioEffects = VoiceChatManager.Instance.GetRtcEngine().GetAudioEffectManager();
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = VoiceChatManager.Instance.x.ToString();
+        randomInstance = menuController.Instance.x.ToString();
         myC = 0;
     
         
@@ -49,7 +49,6 @@ public class SpatialAudio : MonoBehaviour
 
     private void Update()
     {
-   
 
         if (!PV.IsMine)
             return;
