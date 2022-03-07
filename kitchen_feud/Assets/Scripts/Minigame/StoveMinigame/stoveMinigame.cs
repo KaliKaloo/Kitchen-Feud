@@ -30,7 +30,7 @@ public class stoveMinigame : MonoBehaviour
 
    public void UpdateDishPointsStove() {
        // Debug.Log("Outside");
-        Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
+        //Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
         if (appliance.isBeingInteractedWith){
             Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;

@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4142da0309a83ec4da2e06609dddbec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minXSpeed: -200
-  maxXSpeed: 200
-  minYSpeed: 99
-  maxYSpeed: 100
+  minXSpeed: -100
+  maxXSpeed: 100
+  minYSpeed: 170
+  maxYSpeed: 200
   destroyTime: 5
 --- !u!114 &276869713643333009
 MonoBehaviour:

@@ -38,6 +38,7 @@ public class Knife : MonoBehaviour
         cutInstance.GetComponent<LineRenderer>().SetPosition(0, this.swipeStart);
         cutInstance.GetComponent<LineRenderer>().SetPosition(1, swipeEnd);
         cutInstance.transform.SetParent(transform);
+
         //change how collider of line works
         //the colliders position system is relative to where we start drawing the cut
         Vector2[] colliderPoints = new Vector2[2];

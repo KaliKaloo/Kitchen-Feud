@@ -40,7 +40,6 @@ public class cuttingMinigame : MonoBehaviour
     }
 
  
-
     //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsCutting() {
         if(appliance.isBeingInteractedWith){

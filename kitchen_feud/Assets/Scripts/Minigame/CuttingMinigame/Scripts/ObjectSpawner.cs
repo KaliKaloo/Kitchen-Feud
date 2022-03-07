@@ -16,9 +16,9 @@ public class ObjectSpawner : MonoBehaviour
     public float objectY;
     private Image h;
 
-    public List<Sprite> displaySprites = new List<Sprite>();
+    private List<Sprite> displaySprites = new List<Sprite>();
 
-    public cutController CutController;
+    private cutController CutController;
 
     public void StartSpawn(List<Sprite> dishSprites)
     {

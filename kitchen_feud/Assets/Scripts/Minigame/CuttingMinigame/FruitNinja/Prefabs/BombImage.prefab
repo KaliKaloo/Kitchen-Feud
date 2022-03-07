@@ -94,9 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minXSpeed: -100
   maxXSpeed: 100
-  minYSpeed: 100
-  maxYSpeed: 120
-  destroyTime: 4
+  minYSpeed: 200
+  maxYSpeed: 210
+  destroyTime: 6
 --- !u!114 &7098516748484960589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 33
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
