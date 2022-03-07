@@ -32,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 276869713643333101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 88, y: 88, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.83, y: 1.83}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &276869713643333008
 CanvasRenderer:
@@ -92,11 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4142da0309a83ec4da2e06609dddbec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minXSpeed: 65
-  maxXSpeed: 70
-  minYSpeed: 180
-  maxYSpeed: 200
-  destroyTime: 60
+  minXSpeed: -200
+  maxXSpeed: 200
+  minYSpeed: 99
+  maxYSpeed: 100
+  destroyTime: 5
 --- !u!114 &276869713643333009
 MonoBehaviour:
   m_ObjectHideFlags: 0

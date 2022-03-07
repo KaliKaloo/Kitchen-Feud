@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class cutController : MonoBehaviour
 {
-    //number of lives
     public ObjectSpawner IngredientSpawner;
     public ObjectSpawner BombSpawner;
 
     public DishSO dish;
+
     public List<Sprite> dishSprites = new List<Sprite>();
     public List<Sprite> bombSprites = new List<Sprite>();
 
@@ -22,7 +22,7 @@ public class cutController : MonoBehaviour
 
     public GameObject backButton;
     public GameObject StartButton;
-
+    public int finalScore;
 
     private int score = 0;
     public int Score
@@ -48,6 +48,7 @@ public class cutController : MonoBehaviour
 
     void Start()
     {
+
         dishSprites.Add(dish.recipe[0].img);
         dishSprites.Add(dish.recipe[1].img);
         dishSprites.Add(dish.recipe[2].img);
@@ -57,7 +58,7 @@ public class cutController : MonoBehaviour
     public void StartGame()
     {
         StartButton.SetActive(false);
-      
+        scoreSystem.SetActive(true);
         //call ingredient spawner with a list od ingredient sprites
         IngredientSpawner.StartSpawn(dishSprites);
 
@@ -76,11 +77,14 @@ public class cutController : MonoBehaviour
     public void calculateScore()
     {
         scoreSystem.SetActive(false);
+       
+        
         Debug.Log("Game Over");
         backButton.SetActive(true);
 
-        //dish.finalScore = score;
-        //Debug.Log(dish.finalScore);
-        backButton.SetActive(true);
+        finalScore = Score;
+        Debug.Log(finalScore);
+        GameEvents.current.assignPointsEventFunction();
+
     }
 }
