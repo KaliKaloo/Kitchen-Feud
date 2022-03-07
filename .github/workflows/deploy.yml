@@ -39,7 +39,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          branch: main # The branch the action should deploy to.
-          folder: "build/WebGL/WebGL" # The folder the action should deploy.
+          branch: main
+          folder: "build/WebGL/WebGL"
           repository-name: lokhei/CI-kf
           ssh-key: ${{ secrets.KEY }}
