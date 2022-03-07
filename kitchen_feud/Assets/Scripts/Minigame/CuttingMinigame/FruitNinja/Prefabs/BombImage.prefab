@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8351037696430277866}
   - component: {fileID: 3986206008119258801}
   - component: {fileID: -2668043019746714292}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BombImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,11 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4142da0309a83ec4da2e06609dddbec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minXSpeed: 2
-  maxXSpeed: 2
-  minYSpeed: 10
-  maxYSpeed: 12
-  destroyTime: 2
+  minXSpeed: 100
+  maxXSpeed: 120
+  minYSpeed: 230
+  maxYSpeed: 250
+  destroyTime: 100
 --- !u!114 &7098516748484960589
 MonoBehaviour:
   m_ObjectHideFlags: 0

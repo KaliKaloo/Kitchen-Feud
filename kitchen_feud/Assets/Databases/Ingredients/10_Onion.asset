@@ -20,4 +20,4 @@ MonoBehaviour:
   maxScore: -10
   finalScore: 0
   ingredientID: 14
-  img: {fileID: 0}
+  img: {fileID: 21300000, guid: c3c820beb29364345a827a8a9f355800, type: 3}
