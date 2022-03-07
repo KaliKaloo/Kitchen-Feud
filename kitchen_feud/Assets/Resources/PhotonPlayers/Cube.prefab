@@ -124,6 +124,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PV: {fileID: 1903856893098002475}
   myAvatar: {fileID: 0}
-  myTeam: 0
   tmp: {fileID: 0}
   tmp1: {fileID: 0}

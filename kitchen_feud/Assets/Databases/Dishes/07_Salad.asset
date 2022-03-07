@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: 07_Salad
+  m_EditorClassIdentifier: 
+  name: Salad
+  location: 0
+  Prefab: {fileID: 1622114925428501291, guid: 759f7a426d6fd6a43b56959337aed970, type: 3}
+  Type: 1
+  canPickUp: 1
+  maxScore: 100
+  finalScore: 0
+  dishID: DI8914
+  toCook: Cutting Board
+  cookingTime: 10
+  recipe:
+  - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}
+  - {fileID: 11400000, guid: 991046617da6aa74fb2f34ec2761899a, type: 2}
+  - {fileID: 11400000, guid: 1ba04a9a75a5dd449949d413f0ef2372, type: 2}
