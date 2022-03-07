@@ -25,11 +25,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
         cookingBar = slider.GetComponent<CookingBar>();
-		particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
-		Debug.Log("a " + appliance);
-		Debug.Log("b " + particleSystem);
-
-		
 	}
 
 	void TaskOnClick(){
@@ -52,6 +47,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	void smokeEffect(){
+		particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
 		var main = particleSystem.main;
 		var emission = particleSystem.emission;
 
