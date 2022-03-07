@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
 public class CookingBar : MonoBehaviour
 {
     public Slider slider;
@@ -39,7 +40,6 @@ public class CookingBar : MonoBehaviour
     }
 
     public float abs(float x) {
-       float result = x < 0 ? -x : x;
-       return result;
+       return x < 0 ? -x : x;
     }
 }
