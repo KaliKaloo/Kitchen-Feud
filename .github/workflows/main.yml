@@ -5,7 +5,7 @@ on:
     branches:
       - dev
       - main
-    
+
 jobs:
   build:
     name: Build my project ✨
@@ -21,10 +21,9 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.7
         with:
-          path: kitchen_feud/Library
+          path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
-            Library-kitchen_feud-
             Library-
 
       # Test
@@ -61,4 +60,3 @@ jobs:
         with:
           name: Build
           path: build
-  

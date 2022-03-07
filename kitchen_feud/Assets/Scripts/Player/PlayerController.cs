@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
-			DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(gameObject);
 		}
 	}
-
 	void Update()
 	{
 		if (view.IsMine)
@@ -72,15 +71,14 @@ public class PlayerController : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
-				player.velocity = getTransformVelocity(transform.forward);
+				player.velocity = transform.forward * m_speed * Time.deltaTime;
 			}
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
-				player.velocity = -getTransformVelocity(transform.forward);
+				player.velocity = -transform.forward * m_speed * Time.deltaTime;
 			}
 		}
 	}
-
 
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
@@ -103,7 +101,6 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
-
 
 	void OnDrawGizmosSelected()
 	{
@@ -130,14 +127,10 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-	void EnablePushing(int viewID)
+     void EnablePushing(int viewID)
     {
 		Rigidbody r = PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>();
         r.isKinematic = false;
-    }	
-	
-	public Vector3 getTransformVelocity(Vector3 transform){
-		return transform * m_speed * Time.deltaTime;
-	}
+    }
 
 }

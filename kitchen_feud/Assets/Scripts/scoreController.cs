@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-
-
 public class GlobalTimer
 {
 
@@ -37,7 +35,7 @@ public class GlobalTimer
 
     public void ChangeTimerValue(int newTime)
     {
-        timer = time = newTime >= 0 ? newTime : 0;
+        timer = time = newTime;
     }
 
     public int GetCurrentTime()
