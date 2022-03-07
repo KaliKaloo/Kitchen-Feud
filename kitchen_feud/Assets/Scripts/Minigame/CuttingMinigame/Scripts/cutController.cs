@@ -42,7 +42,7 @@ public class cutController : MonoBehaviour
         set
         {
             num = value;
-            numtext.text = num + "/15";
+            numtext.text = num + "/5";
         }
     }
 

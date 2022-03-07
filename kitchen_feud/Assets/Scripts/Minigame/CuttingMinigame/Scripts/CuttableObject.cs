@@ -22,7 +22,7 @@ public class CuttableObject : MonoBehaviour
             {
                 CutController.Ingredient += 1;
                 
-                if (CutController.Ingredient == 15)
+                if (CutController.Ingredient == 5)
                 {
                     CutController.calculateScore();
                 }

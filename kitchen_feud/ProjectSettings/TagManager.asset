@@ -12,6 +12,7 @@ TagManager:
   - Appliance
   - Cut
   - cutSpawner
+  - Oven
   layers:
   - Default
   - TransparentFX

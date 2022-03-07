@@ -656,7 +656,6 @@ MonoBehaviour:
   objectMinX: -2.5
   objectMaxX: 2.5
   objectY: -5.5
-  dishSprites: []
 --- !u!4 &799212417
 Transform:
   m_ObjectHideFlags: 0
@@ -705,9 +704,6 @@ MonoBehaviour:
   objectMinX: -3
   objectMaxX: 3
   objectY: -5
-  dishSprites:
-  - {fileID: 21300004, guid: 38cd0bf9df062d64898268cdd3eb135b, type: 3}
-  - {fileID: 21300006, guid: 38cd0bf9df062d64898268cdd3eb135b, type: 3}
 --- !u!4 &991711107
 Transform:
   m_ObjectHideFlags: 0
@@ -1122,18 +1118,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IngredientSpawner: {fileID: 0}
   BombSpawner: {fileID: 0}
-  scoreSystem: {fileID: 1539962557}
   dish: {fileID: 11400000, guid: 0fc96ab0824a7444d932df0b0fdba016, type: 2}
+  dishSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bombSprites: []
+  scoreSystem: {fileID: 1539962557}
   Ingredient1: {fileID: 1717014451}
   Ingredient2: {fileID: 273561286}
   Ingredient3: {fileID: 1285568126}
   scoretext: {fileID: 1370069411}
   numtext: {fileID: 239410148}
   backButton: {fileID: 1233076644}
-  dishSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  StartButton: {fileID: 0}
+  finalScore: 0
 --- !u!1 &1792031189
 GameObject:
   m_ObjectHideFlags: 0
