@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameSetup : MonoBehaviour
 {
     public static GameSetup GS;
-    public int nextPlayersTeam;
+   // public int nextPlayersTeam;
     public Transform[] spawnPoints1;
     public Transform[] spawnPoints2;
 
@@ -17,7 +17,7 @@ public class GameSetup : MonoBehaviour
             GameSetup.GS = this;
         }
     }
-
+/*
     public void UpdateTeam()
     {
         if (nextPlayersTeam == 1)
@@ -30,4 +30,5 @@ public class GameSetup : MonoBehaviour
         }
 
     }
+*/
 }
