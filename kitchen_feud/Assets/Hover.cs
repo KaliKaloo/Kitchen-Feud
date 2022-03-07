@@ -34,7 +34,7 @@ public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (mouse_over)
         {
-            Debug.LogError(dishes[dish.text]);
+            //Debug.LogError(dishes[dish.text]);
 
             //text.text = "<sprite=" +0+ ">" + " + " + "<sprite=" + 1 + ">"+ " = " + "<sprite=" + 2 + ">";
             text.text = "<sprite=" + dishes[dish.text] + ">";
