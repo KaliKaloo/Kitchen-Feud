@@ -348,7 +348,7 @@ MonoBehaviour:
   interactionTransform: {fileID: 8654337748906797311}
   isFocus: 0
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
-  item: {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
+  item: {fileID: 11400000, guid: f0d8cd62b5b601c4f951f9415abb8775, type: 2}
   onTray: 0
   onAppliance: 0
   Tray: {fileID: 0}
