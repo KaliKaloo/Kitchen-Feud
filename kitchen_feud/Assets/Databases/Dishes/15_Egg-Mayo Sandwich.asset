@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: 15_Egg-Mayo Sandwich
+  m_EditorClassIdentifier: 
+  name: Egg-Mayo Sandwich
+  location: 0
+  Prefab: {fileID: 0}
+  Type: 1
+  canPickUp: 1
+  maxScore: 100
+  finalScore: 0
+  dishID: DI3622
+  toCook: Sandwich Station
+  cookingTime: 20
+  recipe:
+  - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
+  - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
+  - {fileID: 11400000, guid: 1676e4c96e10f8647b15613c5a016508, type: 2}
