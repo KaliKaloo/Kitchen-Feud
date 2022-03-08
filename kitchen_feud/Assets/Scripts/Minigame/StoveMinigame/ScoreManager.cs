@@ -63,7 +63,23 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public Text errorTextBomb;
     StoveScore stoveScore = new StoveScore();
 
-    void OnTriggerEnter2D(Collider2D target)
+    //void OnTriggerEnter2D(Collider2D target)
+    //{
+    //    Destroy(target.gameObject);
+    //    if (target.tag.ToString() == "Bomb")
+    //    {
+    //        // PLAY BOMB SOUND EFFECT
+    //        StartCoroutine(ShowText("YOU CAUGHT A BOMB"));
+    //        stoveScore.AddBombMultiplier();
+    //    }
+
+    //    if (target.tag.ToString() == "Ingredient")
+    //    {
+    //        stoveScore.AddScore();
+    //    }
+    //}
+
+    void OnTriggerExit2D(Collider2D target)
     {
         Destroy(target.gameObject);
         if (target.tag.ToString() == "Bomb")
