@@ -10,10 +10,15 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject parentCanvas;
 
     public float xBounds, yBound;
+    public List<GameObject> newIngredients;
+    StoveScore stoveScore = new StoveScore();
+
 
     // Start is called before the first frame update
     void Start()
     {
+        stoveScore.SetAmountInitialIngredients(ingredients.Length);
+        newIngredients = new List<GameObject>(ingredients);
         StartCoroutine(SpawnRandomGameObject());
     }
 
@@ -23,17 +28,23 @@ public class Spawner : MonoBehaviour
 
         int randomIngredient = Random.Range(0, 1);
 
-        if (Random.value <= 0.5f)
+        if (newIngredients.Count > 0)
         {
-            Instantiate(ingredients[randomIngredient],
-                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
-                parentCanvas.transform);
-        } else
-        {
-            Instantiate(bomb,
-                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
-                parentCanvas.transform);
+            if (Random.value <= 0.6f)
+            {
+                GameObject currentIngredient = newIngredients[randomIngredient];
+                Instantiate(currentIngredient,
+                    new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
+                    parentCanvas.transform);
+                newIngredients.Remove(currentIngredient);
+            }
+            else
+            {
+                Instantiate(bomb,
+                    new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
+                    parentCanvas.transform);
+            }
+            StartCoroutine(SpawnRandomGameObject());
         }
-        StartCoroutine(SpawnRandomGameObject());
     }
 }

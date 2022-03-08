@@ -11,22 +11,18 @@ public class GroundCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D target)
     {
+        Destroy(target.gameObject);
         if (target.tag.ToString() == "Ingredient")
+        {
             StartCoroutine(ShowText("You let an ingredient fall!"));
             stoveScore.MinusIngredient();
-            if (stoveScore.CheckIfFull())
-            {
-                // EXIT HERE
-            }
-
-        Destroy(target.gameObject);
-
+        }
     }
 
     IEnumerator ShowText(string text)
     {
         errorTextIngredient.text = text;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         errorTextIngredient.text = "";
 
     }

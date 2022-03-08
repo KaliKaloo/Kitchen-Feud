@@ -15,6 +15,8 @@ public class NewStoveMinigame : MonoBehaviour
     //public Image Ingredient3;
     [SerializeField] public Text errorTextBomb;
     [SerializeField] public Text errorTextIngredient;
+    [SerializeField] public GameObject stoveCanvas;
+
 
 
     StoveScore stoveScore = new StoveScore();
@@ -30,12 +32,21 @@ public class NewStoveMinigame : MonoBehaviour
         errorTextBomb.text = "";
         errorTextIngredient.text = "";
 
-        // GET RID OF AFTER
-        stoveScore.SetAmountInitialIngredients(3);
-
         // do this when attached to game
         // stoveScore.SetAmountInitialIngredients(dishSprites.Count)
 
+    }
+
+    private void Update()
+    {
+        if (stoveCanvas.activeSelf)
+        {
+            if (stoveScore.CheckIfFull())
+            {
+                Debug.Log(stoveScore.FinalMultipier().ToString());
+                stoveCanvas.SetActive(false);
+            }
+        }
     }
 
 }
