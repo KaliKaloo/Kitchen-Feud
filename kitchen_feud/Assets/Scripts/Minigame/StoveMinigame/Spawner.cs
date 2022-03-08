@@ -24,13 +24,13 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnRandomGameObject()
     {
-        yield return new WaitForSeconds(Random.Range(2, 4));
+        yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
         int randomIngredient = Random.Range(0, 1);
 
         if (newIngredients.Count > 0)
         {
-            if (Random.value <= 0.6f)
+            if (Random.value <= 0.2f)
             {
                 GameObject currentIngredient = newIngredients[randomIngredient];
                 Instantiate(currentIngredient,
