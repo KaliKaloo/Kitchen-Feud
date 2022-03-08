@@ -13,6 +13,9 @@ TagManager:
   - Cut
   - cutSpawner
   - Oven
+  - Bullet
+  - Ingredient
+  - Bomb
   layers:
   - Default
   - TransparentFX
