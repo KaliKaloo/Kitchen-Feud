@@ -8,13 +8,55 @@ using UnityEngine.EventSystems;
 
 public class SandwichStation: Interactable
 {
-    public GameObject canvas;
-    public GameObject minigameCanvas;
+    private Appliance appliance;
+    public ExitSandwichMinigame backbutton;
+    public int finalScore;
+    public SandwichController SandwichController;
 
-    public override void Interact()
+    void Start()
     {
-        canvas.gameObject.SetActive(false);
-        minigameCanvas.gameObject.SetActive(true);
+        GameEvents.current.assignPoints += UpdateDishPointsSandwich;
+        appliance = GetComponent<Appliance>();
+
+    }
+    void Update()
+    {
+        if (appliance.isBeingInteractedWith)
+        {
+
+            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+            {
+                backbutton.appliance = GetComponent<Appliance>();
+
+                if (appliance.foundDish != null)
+                {
+                    SandwichController.dish = appliance.foundDish;
+                }
+            }
+
+        }
+    }
+
+
+    //CALLED BY THE EVENT SYSTEM
+    public void UpdateDishPointsSandwich()
+    {
+        if (appliance.isBeingInteractedWith)
+        {
+            Dish dishOfFoundDish = appliance.dishOfFoundDish;
+            if (dishOfFoundDish != null)
+            {
+
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, finalScore);
+                dishOfFoundDish.points = finalScore;
+                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+            }
+            else
+            {
+                Debug.Log("dishoffounddish is null");
+            }
+        }
+
     }
 
 
