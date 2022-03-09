@@ -24,7 +24,7 @@ public class ovenMiniGame : MonoBehaviour
     
     void Update()
     {
-        Debug.LogError(appliance.isBeingInteractedWith);
+      
         if (appliance.isBeingInteractedWith)
         {
 
