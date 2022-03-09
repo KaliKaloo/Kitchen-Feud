@@ -11,7 +11,6 @@ public class GlobalTimer
     // SET TIMER HERE !!!!!!
     private static int time = 180;
     
-
     private static int timer = time;
     private static bool started;
     PhotonRoom room;
@@ -36,6 +35,10 @@ public class GlobalTimer
     public void ChangeTimerValue(int newTime)
     {
         timer = time = newTime;
+    }
+
+    public int GetTotalTime(){
+        return timer;
     }
 
     public int GetCurrentTime()
