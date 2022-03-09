@@ -7,6 +7,8 @@ public class GroundCollision : MonoBehaviour
 {
     StoveScore stoveScore = new StoveScore();
     [SerializeField] public Text errorTextIngredient;
+    [SerializeField] public GameObject backbutton;
+
 
 
     void OnTriggerEnter2D(Collider2D target)
@@ -16,6 +18,11 @@ public class GroundCollision : MonoBehaviour
         {
             StartCoroutine(ShowText("You let an ingredient fall!"));
             stoveScore.MinusIngredient();
+        }
+
+        if (stoveScore.CheckIfFull())
+        {
+            backbutton.gameObject.SetActive(true);
         }
     }
 

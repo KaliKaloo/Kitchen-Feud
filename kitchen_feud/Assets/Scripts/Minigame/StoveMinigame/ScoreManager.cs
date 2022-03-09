@@ -11,6 +11,7 @@ public class StoveScore
     public static float score;
     public static float bombMultiplier;
 
+
     public void SetAmountInitialIngredients(int amount)
     {
         initialIngredients = amount;
@@ -20,7 +21,11 @@ public class StoveScore
     public bool CheckIfFull()
     {
         if (currentIngredients <= 0)
+        {
+            Debug.Log(this.FinalMultipier());
+            GameEvents.current.assignPointsEventFunction();
             return true;
+        }
         else
             return false;
     }
@@ -61,6 +66,8 @@ public class StoveScore
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] public Text errorTextBomb;
+    [SerializeField] public GameObject backbutton;
+
     StoveScore stoveScore = new StoveScore();
 
     // ingredients get counted if completely fall through top
@@ -70,6 +77,11 @@ public class ScoreManager : MonoBehaviour
         {
             Destroy(target.gameObject);
             stoveScore.AddScore();
+        }
+
+        if (stoveScore.CheckIfFull())
+        {
+            backbutton.gameObject.SetActive(true);
         }
     }
 

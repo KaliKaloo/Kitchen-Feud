@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 0
-    path: Assets/Scenes/kitchens_minigames_board.unity
-    guid: e7e347c8507d8fe4bb9c15ec99685534
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/kitchens_minigames2.unity
+    guid: 40d254bf32841554aac5fd06813f9455
+  - enabled: 0
     path: Assets/Scenes/kitchens_minigames.unity
     guid: d2264c7ae97ae64478041e541bacd98a
   - enabled: 0
