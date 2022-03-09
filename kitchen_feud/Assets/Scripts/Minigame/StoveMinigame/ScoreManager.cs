@@ -18,6 +18,13 @@ public class StoveScore
         currentIngredients = amount;
     }
 
+    public void ResetValues()
+    {
+        initialIngredients = currentIngredients = 3;
+        score = 0;
+        bombMultiplier = 0;
+    }
+
     public bool CheckIfFull()
     {
         if (currentIngredients <= 0)

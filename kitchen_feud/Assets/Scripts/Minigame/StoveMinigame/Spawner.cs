@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stoveScore.SetAmountInitialIngredients(5);
+        stoveScore.ResetValues();
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
