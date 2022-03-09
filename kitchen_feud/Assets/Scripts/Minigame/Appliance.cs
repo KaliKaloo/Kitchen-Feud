@@ -133,10 +133,13 @@ public class Appliance : Interactable
             itemsOnTheAppliance.Add(heldObjArgItem.item);
             
             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
-            
+
+
             if (playerHold.items.Count == 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
-                SlotsController.PutOnAppliance(heldObjArg);
+                
+                    SlotsController.PutOnAppliance(heldObjArg);
+              
             }
         }
         else { Debug.Log("Can't put a cooked dish in a appliance."); }
