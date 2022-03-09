@@ -45,4 +45,6 @@ jobs:
           publish_dir: "build/WebGL/WebGL"
           deploy_key: ${{ secrets.KEY }}
           enable_jekyll: true
+          user_name: 'KaliKaloo'
+          user_email: 'pragyagurung001@gmail.com'
           
