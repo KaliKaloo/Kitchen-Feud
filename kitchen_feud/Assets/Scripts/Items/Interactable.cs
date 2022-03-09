@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour
 	public Transform player;
 
 	bool hasInteracted = false;
-
+	
 	public virtual void Interact()
 	{
 		// This method is meant to be overwritten
@@ -32,6 +32,7 @@ public class Interactable : MonoBehaviour
 			hasInteracted = true;
 		}
 	}
+	
 
 	public void OnFocused(Transform playerTransform)
 	{
