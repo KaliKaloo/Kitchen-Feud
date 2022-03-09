@@ -8,9 +8,6 @@ using Photon.Pun;
 
 public class stoveMinigame : MonoBehaviour
 {
-
-    [SerializeField] public Text errorTextBomb;
-    [SerializeField] public Text errorTextIngredient;
     [SerializeField] public GameObject stoveCanvas;
     [SerializeField] public GameObject startButton;
 
@@ -26,9 +23,6 @@ public class stoveMinigame : MonoBehaviour
         GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
-
-        errorTextBomb.text = "";
-        errorTextIngredient.text = "";
     }
 
     void Update(){

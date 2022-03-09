@@ -13,6 +13,8 @@ public class ExitStoveMinigame : MonoBehaviour
 	public GameObject player;
 
 	[SerializeField] private Rigidbody2D pot;
+	[SerializeField] private GameObject backButton;
+	[SerializeField] private GameObject startButton;
 
 	public Appliance appliance;
 
@@ -24,8 +26,9 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		pot.transform.position = new Vector2(0, 70);
-
+		pot.transform.position = new Vector2(485, 70);
+		backButton.SetActive(false);
+		startButton.SetActive(true);
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
