@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class DisplayTicket : MonoBehaviour
 {
     public Text orderNumberText;
-    public Text orderMainText;
-    public Text orderSideText;
-    public Text orderDrinkText;
+   
+    public TextMeshProUGUI orderMainText;
+    public TextMeshProUGUI orderSideText;
+    public TextMeshProUGUI orderDrinkText;
 
     public string orderid;
     public int orderNumber;
@@ -19,6 +21,7 @@ public class DisplayTicket : MonoBehaviour
     {
         orderNumberText.text = o.orderNumber.ToString();
         int size = o.dishes.Count;
+        
         orderMainText.text = o.dishes[0].name;
         if (size > 1) orderSideText.text = o.dishes[1].name;
         else if (size == 3) orderDrinkText.text = o.dishes[2].name;

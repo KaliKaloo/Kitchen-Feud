@@ -350,8 +350,11 @@ MonoBehaviour:
   player: {fileID: 1242614080712157140, guid: cf5a776e2f3b34ff38540c3057ebbc50, type: 3}
   item: {fileID: 11400000, guid: 5e76d433ee189f6469c0e00686e9c594, type: 2}
   onTray: 0
+  onAppliance: 0
   Tray: {fileID: 0}
   tray2: {fileID: 0}
+  appliance: {fileID: 0}
+  applianceSlots: {fileID: 0}
 --- !u!114 &3025532761502088962
 MonoBehaviour:
   m_ObjectHideFlags: 0
