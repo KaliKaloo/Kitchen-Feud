@@ -34,12 +34,15 @@ jobs:
         with:
           projectPath: kitchen_feud
           targetPlatform: WebGL
-
-
-#       - name: Deploy 🚀
-#         uses: JamesIves/github-pages-deploy-action@v4.2.5
-#         with:
-#           branch: main
-#           folder: "build/WebGL/WebGL"
-#           repository-name: lokhei/CI-kf
-#           ssh-key: ${{ secrets.KEY }}
+      
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          external_repository: lokhei/CI-kf
+          publish_branch: main  
+          publish_dir: "build/WebGL/WebGL"
+          deploy_key: ${{ secrets.KEY }}
+          enable_jekyll: true
+          
