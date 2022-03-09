@@ -26,8 +26,8 @@ public class ExitStoveMinigame : MonoBehaviour
 		cookingBar = slider.GetComponent<CookingBar>();
 
 	}
-
-	void TaskOnClick()
+  
+    void TaskOnClick()
 	{
 		slider.value = -30;
 		cookingBar.keyHeld = false;

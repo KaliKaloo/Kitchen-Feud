@@ -23,6 +23,7 @@ public class exitOven : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		
 		//canvas.gameObject.SetActive(true);
 	
 		GameEvents.current.assignPointsEventFunction();

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class Appliance : Interactable
     public PhotonView myPv;
     private void Start()
     {
-        minigameCanvas.SetActive(false);
+        //minigameCanvas.SetActive(false);
         myPv = GetComponent<PhotonView>();
     }
 
@@ -80,11 +81,21 @@ public class Appliance : Interactable
                 {
                     //minigameCanvas.gameObject.SetActive(true);
                     //minigameCanvas.transform.parent = this.transform.GetChild(0);
-                    minigameCanvas.transform.position = transform.GetChild(0).position;
-                    myPv.RPC("ovenGame", RpcTarget.All,
-                     minigameCanvas.GetComponent<PhotonView>().ViewID,
-                     myPv.ViewID);
-                    cookedDishLocal = PhotonNetwork.Instantiate(foundDish.Prefab.name, player.transform.GetChild(2).position, transform.rotation);
+                    Debug.LogError(transform.rotation);
+                    if (this.name == "Oven1")
+                    {
+                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
+                    }
+                    else
+                    {
+                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.identity);
+                    }
+                    minigameCanvas.transform.SetParent(transform);
+                    //minigameCanvas.transform.position = transform.GetChild(0).position;
+                    //myPv.RPC("ovenGame", RpcTarget.All,
+                     //minigameCanvas.GetComponent<PhotonView>().ViewID,
+                     //myPv.ViewID);
+                    cookedDishLocal = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.GetChild(0).position, transform.rotation);
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else

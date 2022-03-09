@@ -18,12 +18,16 @@ public class ovenMiniGame : MonoBehaviour
     {
         GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
-        Debug.LogError("These are the points" + timer.score);
 
     }
     
     void Update()
     {
+        if(transform.childCount == 4)
+        {
+            timer = transform.GetChild(3).GetComponent<Timer>();
+            backbutton = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<exitOven>();
+        }
       
         if (appliance.isBeingInteractedWith)
         {
@@ -42,11 +46,9 @@ public class ovenMiniGame : MonoBehaviour
     //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsOven()
     {
-        Debug.LogError("TEST");
         if (appliance.isBeingInteractedWith)
         {
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
-            Debug.LogError("FOUND DISH? " + appliance.dishOfFoundDish.name);
             if (dishOfFoundDish != null)
             {
 
