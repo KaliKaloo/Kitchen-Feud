@@ -10,6 +10,12 @@ TagManager:
   - Sandwich Station
   - Cutting Board
   - Appliance
+  - Cut
+  - cutSpawner
+  - Oven
+  - Bullet
+  - Ingredient
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -17,7 +23,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Cuttable
   - 
   - 
   - 
@@ -46,4 +52,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 2912803297
+    locked: 0
+  - name: forgrpund
+    uniqueID: 2221805617
     locked: 0

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d168d6f905c4409d4262d39416fd2, type: 3}
+  m_Name: 08_Sandwich
+  m_EditorClassIdentifier: 
+  name: Sandwich
+  location: 0
+  Prefab: {fileID: 5786816335962581795, guid: 37106aa182499eb488e2d5c94d17753b, type: 3}
+  Type: 1
+  img: {fileID: 21300000, guid: 72293750ec218514386ae76f2a391cf9, type: 3}
+  canPickUp: 1
+  maxScore: 100
+  finalScore: 0
+  dishID: DI389
+  toCook: Sandwich Station
+  cookingTime: 10
+  recipe:
+  - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
+  - {fileID: 11400000, guid: d41b4221a24dd974589171b91c746572, type: 2}
+  - {fileID: 11400000, guid: 991046617da6aa74fb2f34ec2761899a, type: 2}

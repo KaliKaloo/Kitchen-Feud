@@ -80,6 +80,12 @@ MonoBehaviour:
   - applianceBool
   - onApplianceF
   - removeFromApplianceRPC
+  - setX
+  - ovenGame
+  - doFd
+  - cookedDishG
+  - decCount
+  - resetCount
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

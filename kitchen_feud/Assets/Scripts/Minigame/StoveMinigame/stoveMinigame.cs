@@ -8,21 +8,30 @@ using Photon.Pun;
 
 public class stoveMinigame : MonoBehaviour
 {
-    public Slider slider;
-    public CookingBar cookingBar;
+    [SerializeField] public GameObject stoveCanvas;
+    [SerializeField] public GameObject startButton;
+
+    StoveScore stoveScore = new StoveScore();
+
+    public Spawner spawner;
+
     private Appliance appliance;
     public ExitStoveMinigame backbutton;
+
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
+        backbutton.gameObject.SetActive(false);
     }
 
     void Update(){
-        if(appliance.isBeingInteractedWith){
-            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+        if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+        {
+            backbutton.appliance = GetComponent<Appliance>();
+            if (appliance.foundDish != null)
             {
-                backbutton.appliance = GetComponent<Appliance>();
+                spawner.dishSO = appliance.foundDish;
             }
         }
     }
@@ -30,11 +39,12 @@ public class stoveMinigame : MonoBehaviour
 
    public void UpdateDishPointsStove() {
         if (appliance.isBeingInteractedWith){
-            Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
-            if(dishOfFoundDish != null){
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)cookingBar.cookedLevel);
-                dishOfFoundDish.points = (int)cookingBar.cookedLevel;
+
+            if(dishOfFoundDish != null)
+            {
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, 100);
+                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultipier();
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
         }
