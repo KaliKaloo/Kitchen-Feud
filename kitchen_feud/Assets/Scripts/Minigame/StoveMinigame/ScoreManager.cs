@@ -30,7 +30,6 @@ public class StoveScore
         if (currentIngredients <= 0)
         {
             Debug.Log(this.FinalMultipier());
-            GameEvents.current.assignPointsEventFunction();
             return true;
         }
         else

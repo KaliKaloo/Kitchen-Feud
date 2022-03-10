@@ -62,7 +62,6 @@ public class StoveMinigameCounter
     [SerializeField] public GameObject correctItem;
 
     public DishSO dishSO;
-    private int counter;
 
     public float xBounds, yBound;
     public List<Sprite> newIngredients;

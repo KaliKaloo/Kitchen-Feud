@@ -30,6 +30,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		GameEvents.current.assignPointsEventFunction();
 		pot.transform.position = new Vector2(485, 70);
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
@@ -37,6 +38,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		startButton.SetActive(true);
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
+
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
