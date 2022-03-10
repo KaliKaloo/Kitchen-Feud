@@ -9,7 +9,7 @@ public class GroundCollision : MonoBehaviour
     [SerializeField] public Text errorTextIngredient;
     [SerializeField] public GameObject backbutton;
 
-
+    StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
     void OnTriggerEnter2D(Collider2D target)
     {
@@ -17,12 +17,13 @@ public class GroundCollision : MonoBehaviour
         if (target.tag.ToString() == "Ingredient")
         {
             StartCoroutine(ShowText("You let an ingredient fall!"));
-            stoveScore.MinusIngredient();
+            stoveMinigameCounter.MinusCollisionCounter();
         }
 
-        if (stoveScore.CheckIfFull())
+        if (stoveMinigameCounter.GetGameState() && stoveMinigameCounter.GetCollisionCounter() == 0)
         {
             backbutton.gameObject.SetActive(true);
+            stoveMinigameCounter.StartGame();
         }
     }
 

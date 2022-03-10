@@ -39,23 +39,12 @@ public class StoveScore
 
     public void AddScore()
     {
-        if (initialIngredients == 3) {
-            score += 1;
-        } 
-        else if (initialIngredients == 2)
-        {
-            score += 1.5f;
-        } 
-        else if (initialIngredients == 1)
-        {
-            score += 3;
-        }
-        currentIngredients -= 1;
+        score += 1;
     }
 
-    public void MinusIngredient()
+    public int GetScore()
     {
-        currentIngredients -= 1;
+        return (int)score;
     }
 
     public void AddBombMultiplier()
@@ -65,7 +54,7 @@ public class StoveScore
 
     public float FinalMultipier()
     {
-        return Mathf.Clamp(((score / 6) + 0.5f) * (1 - bombMultiplier), 0.2f, 1);
+        return (score / 15) * (1 - bombMultiplier);
     }
 
 }
@@ -74,8 +63,10 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] public Text errorTextBomb;
     [SerializeField] public GameObject backbutton;
+    [SerializeField] public Text score;
 
     StoveScore stoveScore = new StoveScore();
+    StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
     // ingredients get counted if completely fall through top
     void OnTriggerExit2D(Collider2D target)
@@ -84,11 +75,14 @@ public class ScoreManager : MonoBehaviour
         {
             Destroy(target.gameObject);
             stoveScore.AddScore();
+            stoveMinigameCounter.MinusCollisionCounter();
+            score.text = "Score: " + stoveScore.GetScore() + "/15";
         }
 
-        if (stoveScore.CheckIfFull())
+        if (stoveMinigameCounter.GetGameState() && stoveMinigameCounter.GetCollisionCounter() == 0)
         {
             backbutton.gameObject.SetActive(true);
+            stoveMinigameCounter.StartGame();
         }
     }
 

@@ -15,9 +15,13 @@ public class ExitStoveMinigame : MonoBehaviour
 	[SerializeField] private Rigidbody2D pot;
 	[SerializeField] private GameObject backButton;
 	[SerializeField] private GameObject startButton;
+	[SerializeField] private Text score;
+
 
 	public Appliance appliance;
 	StoveScore stoveScore = new StoveScore();
+	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
+
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -27,6 +31,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	void TaskOnClick(){
 		pot.transform.position = new Vector2(485, 70);
+		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);

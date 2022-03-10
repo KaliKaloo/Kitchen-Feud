@@ -3,7 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class StoveMinigameCounter
+{
+    public static int counter;
+    public static bool end;
+    public static int collisionCounter;
+
+    public void MinusCollisionCounter()
+    {
+        collisionCounter -= 1;
+    }
+
+    public int GetCollisionCounter()
+    {
+        return collisionCounter;
+    }
+
+    public void StartGame()
+    {
+        end = false;
+    }
+    public void EndGame()
+    {
+        end = true;
+    }
+
+    public bool GetGameState()
+    {
+        return end;
+    }
+
+    public void ResetCounter()
+    {
+        counter = 15;
+        collisionCounter = 15;
+    }
+
+    public void MinusCounter()
+    {
+        counter -= 1;
+    }
+
+    public int GetCounter()
+    {
+        return counter;
+    }
+}
+
+
+    public class Spawner : MonoBehaviour
 {
 
     [SerializeField] public GameObject[] ingredients;
@@ -14,15 +62,18 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject correctItem;
 
     public DishSO dishSO;
+    private int counter;
 
     public float xBounds, yBound;
     public List<Sprite> newIngredients;
     StoveScore stoveScore = new StoveScore();
+    StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 
     // Start is called before the first frame update
     void Start()
     {
+        stoveMinigameCounter.StartGame();
         stoveScore.ResetValues();
     }
 
@@ -38,39 +89,49 @@ public class Spawner : MonoBehaviour
 
     public void StartGame()
     {
+        stoveMinigameCounter.StartGame();
+        stoveMinigameCounter.ResetCounter();
         startButton.SetActive(false);
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
 
-        StartCoroutine(SpawnRandomGameObject());
+        StartCoroutine(SpawnCorrectIngredient());
+        StartCoroutine(SpawnBombObject());
     }
 
-    IEnumerator SpawnRandomGameObject()
+    IEnumerator SpawnCorrectIngredient()
     {
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
-        int randomIngredient = Random.Range(0, 1);
+        int randomIngredient = Random.Range(0, newIngredients.Count-1);
 
-        if (newIngredients.Count > 0)
+        if (stoveMinigameCounter.GetCounter() > 0)
         {
-            if (Random.value <= 0.2f)
-            {
-                Sprite currentIngredient = newIngredients[randomIngredient];
-                GameObject obj = Instantiate(correctItem,
-                    new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
-                    parentCanvas.transform);
-                obj.GetComponent<Image>().sprite = currentIngredient;
+            Sprite currentIngredient = newIngredients[randomIngredient];
+            GameObject obj = Instantiate(correctItem,
+                new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
+                parentCanvas.transform);
+            obj.GetComponent<Image>().sprite = currentIngredient;
 
-                newIngredients.Remove(currentIngredient);
-            }
-            else
-            {
-                Instantiate(bomb,
-                    new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
-                    parentCanvas.transform);
-            }
-            StartCoroutine(SpawnRandomGameObject());
+            stoveMinigameCounter.MinusCounter();
+            StartCoroutine(SpawnCorrectIngredient());
+        } else
+        {
+            stoveMinigameCounter.EndGame();
+        }
+    }
+
+    IEnumerator SpawnBombObject()
+    {
+        yield return new WaitForSeconds(Random.Range(1, 2));
+
+        if (stoveMinigameCounter.GetCounter() > 0)
+        {
+            Instantiate(bomb,
+                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
+                parentCanvas.transform);
+            StartCoroutine(SpawnBombObject());
         }
     }
 }
