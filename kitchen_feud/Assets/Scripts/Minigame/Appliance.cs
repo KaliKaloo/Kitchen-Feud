@@ -74,14 +74,11 @@ public class Appliance : Interactable
 
 
                 this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
-                //Debug.LogError(isBeingInteractedWith);
-                //isBeingInteractedWith = true;
 
                 if (this.gameObject.tag == "Oven")
                 {
                     //minigameCanvas.gameObject.SetActive(true);
                     //minigameCanvas.transform.parent = this.transform.GetChild(0);
-                    Debug.LogError(transform.rotation);
                     if (this.name == "Oven1")
                     {
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
@@ -120,8 +117,8 @@ public class Appliance : Interactable
                 Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 
                 //setting gravity of cookedDish
-                cookedDish.GetComponent<PhotonView>().RPC("SetGrav", RpcTarget.Others);
-                dishRigidbody.useGravity = true;
+                //cookedDish.GetComponent<PhotonView>().RPC("SetGrav", RpcTarget.Others);
+                //dishRigidbody.useGravity = true;
                 r = cookedDish.GetComponent<Renderer>();
                 cookedDish.GetComponent<PhotonView>().RPC("DisableView", RpcTarget.Others);
                 r.enabled = false;

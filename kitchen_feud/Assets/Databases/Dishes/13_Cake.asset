@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cake
   location: 0
-  Prefab: {fileID: 5474699693743992035, guid: 7d991142c4117b94e92bb9f771cc48c4, type: 3}
+  Prefab: {fileID: 6265423231405801076, guid: 39d946c295fd44f1d81cbb93b079e772, type: 3}
   Type: 1
   canPickUp: 1
   maxScore: 100

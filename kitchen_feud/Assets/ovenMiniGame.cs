@@ -39,6 +39,7 @@ public class ovenMiniGame : MonoBehaviour
 
             }
 
+
         }
     }
 
@@ -46,7 +47,7 @@ public class ovenMiniGame : MonoBehaviour
     //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsOven()
     {
-        if (appliance.isBeingInteractedWith)
+       if (appliance.isBeingInteractedWith)
         {
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if (dishOfFoundDish != null)
