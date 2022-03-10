@@ -6,25 +6,24 @@ public class SpawnIngredient : MonoBehaviour
 {
     // Start is called before the first frame update
     public int Id;
-    public GameObject BreadTop;
-    public GameObject Ingredient1;
-    public GameObject Ingredient2;
-    public GameObject BreadBottom;
+    public GameObject prefab;
+    public float gridX = 1;
+    public float gridY = 4;
+    public float spacing = 1000;
 
-   /* public void AssignIngredients(DishSO dish)
+    public void StartSpawn()
     {
-        
-        dish.IngredientID = 
-    }*/
-    
-    void Start()
-    {
-        
+
+        for (int y = 0; y < gridY; y++)
+        {
+            for (int x = 0; x < gridX; x++)
+            {
+                Vector3 pos = new Vector3(x, 0, y) * spacing;
+                GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
+                newObject.transform.SetParent(transform);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

@@ -10,24 +10,34 @@ public class SandwichController : MonoBehaviour
     public GameObject StartButton;
     public GameObject GameUI;
     public Image Ingredient;
-    [SerializeField] private Text score;
+
+    public SpawnIngredient spawnIngredient; 
+
+    public Text scoreText;
     //private 
     
+    private int score = 0;
+    public int Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            scoreText.text = "" + score;
+        }
+    }
+
     void Start()
     {
         //set bacground to correct team
-
-    }
-
-    public void Update()
-    {
-        //if click and box collider intersect, get gameobject of box collider and call the StoppedOnClick method for that component
+        //spawnIngredient.StartSpawn();
     }
 
     public void StartGame()
     {
         StartButton.SetActive(false);
         GameUI.SetActive(true);
+        Score = 0;
         DisplayRandomIngredient();
         
         //StartSpawning();
@@ -41,8 +51,4 @@ public class SandwichController : MonoBehaviour
     {
         Ingredient.sprite = dish.recipe[0].img;
     }
-
-    
-
-    
 }
