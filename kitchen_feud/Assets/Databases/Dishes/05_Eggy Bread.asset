@@ -20,7 +20,7 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: DI36
+  dishID: DI1316
   toCook: Stove
   cookingTime: 10
   recipe:
