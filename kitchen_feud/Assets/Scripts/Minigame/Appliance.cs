@@ -117,8 +117,8 @@ public class Appliance : Interactable
                 Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 
                 //setting gravity of cookedDish
-                //cookedDish.GetComponent<PhotonView>().RPC("SetGrav", RpcTarget.Others);
-                //dishRigidbody.useGravity = true;
+                cookedDish.GetComponent<PhotonView>().RPC("SetGrav", RpcTarget.Others);
+                dishRigidbody.useGravity = true;
                 r = cookedDish.GetComponent<Renderer>();
                 cookedDish.GetComponent<PhotonView>().RPC("DisableView", RpcTarget.Others);
                 r.enabled = false;
