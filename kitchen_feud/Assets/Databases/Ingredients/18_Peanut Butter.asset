@@ -20,4 +20,4 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 18
+  ingredientID: 28
