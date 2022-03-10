@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mayo
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5298486475977104413, guid: 319d4fbafd23a6942a646755a31683ae, type: 3}
   Type: 0
+  img: {fileID: 0}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
   ingredientID: 22
-  img: {fileID: 0}
