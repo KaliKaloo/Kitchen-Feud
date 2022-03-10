@@ -8,8 +8,6 @@ public class PhotonPlayer : MonoBehaviour
 {
     public PhotonView PV;
     public GameObject myAvatar;
-    public GameObject tmp;
-    public GameObject tmp1;
     GameObject Team1;
     GameObject Team2;
 
@@ -37,7 +35,8 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                    tmp = myAvatar;
+                    Material newMat = Resources.Load("cat_Red", typeof(Material)) as Material;
+                    myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
                     Team2.SetActive(false);
                 }
             }
@@ -48,7 +47,8 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                    tmp1 = myAvatar;
+                    Material newMat = Resources.Load("cat_Blue", typeof(Material)) as Material;
+                    myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
                     Team1.SetActive(false);
 
 
