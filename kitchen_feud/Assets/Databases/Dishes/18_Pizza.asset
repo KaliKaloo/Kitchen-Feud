@@ -20,7 +20,7 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: DI172325
+  dishID: DI273335
   toCook: Oven
   cookingTime: 20
   recipe:
