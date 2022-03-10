@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Peanut Butter
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 7200173778884193296, guid: c4afe847833d69a48a0c65be9dcb8676, type: 3}
   Type: 0
+  img: {fileID: 0}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
   ingredientID: 18
-  img: {fileID: 0}

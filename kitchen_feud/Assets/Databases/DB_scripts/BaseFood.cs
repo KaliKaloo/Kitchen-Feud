@@ -18,6 +18,8 @@ public abstract class BaseFood : ScriptableObject
     public Location location;
     public GameObject Prefab;
     public ItemType Type;
+    public Sprite img;
+
     public bool canPickUp = true;
     public int maxScore;
     public int finalScore;

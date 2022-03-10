@@ -41,6 +41,6 @@ public class ToolTipManager : MonoBehaviour
             out movePos);
 
         //transform.position = parentCanvas.transform.TransformPoint(movePos)+new Vector3(5,0,5);
-        transform.position = Input.mousePosition + new Vector3(175,5,5);
+        transform.position = Input.mousePosition + new Vector3(220,80,5);
     }
 }
