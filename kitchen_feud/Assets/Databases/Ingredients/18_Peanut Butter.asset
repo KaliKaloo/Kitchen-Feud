@@ -16,7 +16,7 @@ MonoBehaviour:
   location: 3
   Prefab: {fileID: 7200173778884193296, guid: c4afe847833d69a48a0c65be9dcb8676, type: 3}
   Type: 0
-  img: {fileID: 0}
+  img: {fileID: 21300000, guid: 8324fa94a22a7124da01868045e8f8d7, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
