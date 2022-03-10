@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pancakes
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6363084768297464278, guid: 905a5a49dc789ff44bec0e00278c707a, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 7d29cbfaa8eb64f4fa5e53ac54781699, type: 3}
   canPickUp: 1
