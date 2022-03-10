@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	public float m_speed, rotatespeed;
 	public Interactable focus;
 	[SerializeField] private Camera cam;
+	public string matName;
 	PlayerHolding playerHold;
 	public PhotonView view;
 
@@ -28,6 +29,12 @@ public class PlayerController : MonoBehaviour
 	}
 	void Update()
 	{
+		//Debug.LogError(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name);
+		if(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name == "Default-Material (Instance)")
+        {
+			GetComponent<PhotonView>().RPC("syncMat",RpcTarget.All, GetComponent<PhotonView>().ViewID, matName);
+
+		}
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
@@ -133,4 +140,11 @@ public class PlayerController : MonoBehaviour
         r.isKinematic = false;
     }
 
+	[PunRPC]
+	void syncMat(int viewID, string name)
+	{
+		Material newMat = Resources.Load(name, typeof(Material)) as Material;
+		PhotonView.Find(viewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+
+	}
 }
