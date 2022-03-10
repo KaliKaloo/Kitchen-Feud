@@ -19,7 +19,11 @@ public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (mouse_over)
         {
             Image hoverImage = tooltip.GetComponent<Image>();
-            hoverImage.sprite = displayticket.dishes[dish.text];
+            
+            if (displayticket.dishes.ContainsKey(dish.text))
+            {
+                hoverImage.sprite = displayticket.dishes[dish.text];
+            }
             tooltip.SetActive(true);
         }
     }
