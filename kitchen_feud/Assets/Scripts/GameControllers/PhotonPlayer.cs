@@ -35,8 +35,9 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                    Material newMat = Resources.Load("cat_Red", typeof(Material)) as Material;
-                    myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+                    PV.RPC("syncMat", RpcTarget.All, myAvatar.GetComponent<PhotonView>().ViewID, "cat_Red");
+                    //Material newMat = Resources.Load("cat_Red", typeof(Material)) as Material;
+                    //myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
                     Team2.SetActive(false);
                 }
             }
@@ -47,8 +48,9 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                    Material newMat = Resources.Load("cat_Blue", typeof(Material)) as Material;
-                    myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+                    PV.RPC("syncMat", RpcTarget.All, myAvatar.GetComponent<PhotonView>().ViewID, "cat_Blue");
+                   // Material newMat = Resources.Load("cat_Blue", typeof(Material)) as Material;
+                   // myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
                     Team1.SetActive(false);
 
 
@@ -59,4 +61,11 @@ public class PhotonPlayer : MonoBehaviour
 
 
 
+    [PunRPC]
+    void syncMat(int viewID,string name)
+    {
+        Material newMat = Resources.Load(name, typeof(Material)) as Material;
+        PhotonView.Find(viewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+
+    }
 }
