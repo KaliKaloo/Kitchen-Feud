@@ -159,6 +159,7 @@ MonoBehaviour:
   rotatespeed: 90
   focus: {fileID: 0}
   cam: {fileID: 2216191030710823112}
+  matName: 
   view: {fileID: 4338776926646805293}
 --- !u!114 &873649799258480705
 MonoBehaviour:
@@ -1177,7 +1178,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec082d22d8b42884184d894bad088c86, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

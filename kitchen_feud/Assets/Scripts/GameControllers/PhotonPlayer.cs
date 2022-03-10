@@ -8,12 +8,14 @@ public class PhotonPlayer : MonoBehaviour
 {
     public PhotonView PV;
     public GameObject myAvatar;
+    public int playersCount;
     GameObject Team1;
     GameObject Team2;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("players:"+PhotonNetwork.CountOfPlayers);
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
@@ -26,6 +28,7 @@ public class PhotonPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (myAvatar == null && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] != 0)
         {
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
@@ -35,9 +38,7 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                    PV.RPC("syncMat", RpcTarget.All, myAvatar.GetComponent<PhotonView>().ViewID, "cat_Red");
-                    //Material newMat = Resources.Load("cat_Red", typeof(Material)) as Material;
-                    //myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+                    myAvatar.GetComponent<PlayerController>().matName = "cat_Red";
                     Team2.SetActive(false);
                 }
             }
@@ -48,9 +49,7 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                    PV.RPC("syncMat", RpcTarget.All, myAvatar.GetComponent<PhotonView>().ViewID, "cat_Blue");
-                   // Material newMat = Resources.Load("cat_Blue", typeof(Material)) as Material;
-                   // myAvatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+                    myAvatar.GetComponent<PlayerController>().matName = "cat_Blue";
                     Team1.SetActive(false);
 
 
@@ -61,11 +60,6 @@ public class PhotonPlayer : MonoBehaviour
 
 
 
-    [PunRPC]
-    void syncMat(int viewID,string name)
-    {
-        Material newMat = Resources.Load(name, typeof(Material)) as Material;
-        PhotonView.Find(viewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
 
-    }
+
 }
