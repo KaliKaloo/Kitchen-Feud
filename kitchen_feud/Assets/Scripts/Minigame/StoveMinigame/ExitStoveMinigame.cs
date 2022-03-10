@@ -23,7 +23,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 	private ParticleSystem particleSystem;
-	private float score;
+	// private float score;
 	private float prevScore;
 
 
@@ -55,7 +55,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	void smokeEffect(){
-		particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
+		// particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
 		// var main = particleSystem.main;
 		// var emission = particleSystem.emission;
 
@@ -70,7 +70,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		// 	main.duration = (main.duration + duration)/2 ;
 		// }
 		
-		particleSystem.Play();
+		// particleSystem.Play();
 
 		// float startSpeed = 0.5f + (0.25f * score/slider.maxValue);
 		// float rateOverTime;
