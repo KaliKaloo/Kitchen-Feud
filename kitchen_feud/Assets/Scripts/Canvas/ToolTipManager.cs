@@ -33,14 +33,22 @@ public class ToolTipManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movePos;
+        // Vector2 movePos;
+        Vector2 movePos = Input.mousePosition;
+        Vector3 tooltipOffset = new Vector3(7,12,5);
+        Vector2 screenSize = new Vector2(Screen.width, Screen.height);
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            parentCanvas.transform as RectTransform,
-            Input.mousePosition, parentCanvas.worldCamera,
-            out movePos);
+
+        // RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        //     parentCanvas.transform as RectTransform,
+        //     Input.mousePosition, parentCanvas.worldCamera,
+        //     out movePos);
 
         //transform.position = parentCanvas.transform.TransformPoint(movePos)+new Vector3(5,0,5);
-        transform.position = Input.mousePosition + new Vector3(220,80,5);
+        transform.position = new Vector2(movePos.x + (screenSize.x / tooltipOffset.x), movePos.y + (screenSize.y / tooltipOffset.y));
+
+        // transform.position = Input.mousePosition + new Vector3(220,80,5);
+        // transform.position = Input.mousePosition + new Vector3(175,5,5);
+
     }
 }
