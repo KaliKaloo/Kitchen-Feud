@@ -7,28 +7,29 @@ using Photon.Pun;
 
 public class ExitStoveMinigame : MonoBehaviour
 {
-	public Slider slider;
-    public CookingBar cookingBar;
 	public Button yourButton;
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public GameObject player;
 
-	public Appliance appliance;
+	[SerializeField] private Rigidbody2D pot;
+	[SerializeField] private GameObject backButton;
+	[SerializeField] private GameObject startButton;
 
+	public Appliance appliance;
+	StoveScore stoveScore = new StoveScore();
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
-		btn.onClick.AddListener(TaskOnClick);
-        cookingBar = slider.GetComponent<CookingBar>();
-		
+		btn.onClick.AddListener(TaskOnClick);		
 	}
 
 	void TaskOnClick(){
-		slider.value = -30;
-        cookingBar.keyHeld = false;
-        cookingBar.done = false;
+		pot.transform.position = new Vector2(485, 70);
+		stoveScore.ResetValues();
+		backButton.SetActive(false);
+		startButton.SetActive(true);
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);

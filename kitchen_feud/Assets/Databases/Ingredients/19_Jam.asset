@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Jam
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 7896919896942611665, guid: c37ad919fdca23a48b493ce7521c12e6, type: 3}
   Type: 0
+  img: {fileID: 0}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
   ingredientID: 19
-  img: {fileID: 0}

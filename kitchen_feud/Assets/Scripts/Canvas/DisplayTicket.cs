@@ -12,6 +12,7 @@ public class DisplayTicket : MonoBehaviour
     public TextMeshProUGUI orderMainText;
     public TextMeshProUGUI orderSideText;
     public TextMeshProUGUI orderDrinkText;
+    public Dictionary<string, Sprite> dishes = new Dictionary<string, Sprite>();
 
     public string orderid;
     public int orderNumber;
@@ -23,13 +24,16 @@ public class DisplayTicket : MonoBehaviour
         int size = o.dishes.Count;
         
         orderMainText.text = o.dishes[0].name;
-        if (size > 1) orderSideText.text = o.dishes[1].name;
-        else if (size == 3) orderDrinkText.text = o.dishes[2].name;
-
+        if (size > 1) {
+            orderSideText.text = o.dishes[1].name;
+        }
+        else if (size == 3) {
+            orderDrinkText.text = o.dishes[2].name;
+        }
+        foreach (BaseFood d in o.dishes){
+            dishes.Add(d.name, d.img);
+        }
         orderid = o.orderID;
-        
-
-
     }
 
     [PunRPC]
@@ -44,8 +48,7 @@ public class DisplayTicket : MonoBehaviour
         this.orderMainText.text = "";
         this.orderNumberText.text = "";
         this.orderSideText.text = "";
-
-           
+        this.dishes.Clear();
     }
 }
 

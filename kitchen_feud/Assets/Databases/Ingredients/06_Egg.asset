@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Egg
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 3009110635441175322, guid: e9c1d5ba2c154f446a5f96786cf2d467, type: 3}
   Type: 0
+  img: {fileID: 0}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
   ingredientID: 06
-  canFry: 0
-  canCut: 0

@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Marinara
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1224019485222714880, guid: 1083a47adde27f04c91dc7b594ed8a7d, type: 3}
   Type: 0
+  img: {fileID: 0}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
   ingredientID: 
-  canFry: 0
-  canCut: 0
-  img: {fileID: 0}
