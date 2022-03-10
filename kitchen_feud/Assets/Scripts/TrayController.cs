@@ -17,7 +17,6 @@ public class TrayController : MonoBehaviour
             trays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
             otherTrays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
         }
-
     }
 
     public int teamNumber;
