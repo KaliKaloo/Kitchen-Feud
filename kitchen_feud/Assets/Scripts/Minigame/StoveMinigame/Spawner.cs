@@ -103,7 +103,7 @@ public class StoveMinigameCounter
     {
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
-        int randomIngredient = Random.Range(0, newIngredients.Count-1);
+        int randomIngredient = Random.Range(0, newIngredients.Count);
 
         if (stoveMinigameCounter.GetCounter() > 0)
         {
