@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class trash : Interactable
 {
@@ -13,7 +14,7 @@ public class trash : Interactable
         if (playerHold){
             GameObject obj = playerHold.heldObj;
             playerHold.heldObj = null;
-            Destroy(obj);
+            PhotonNetwork.Destroy(obj);
             playerHold.items.Clear();
 
         }

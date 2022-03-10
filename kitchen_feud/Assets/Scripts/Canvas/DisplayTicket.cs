@@ -31,7 +31,10 @@ public class DisplayTicket : MonoBehaviour
             orderDrinkText.text = o.dishes[2].name;
         }
         foreach (BaseFood d in o.dishes){
-            dishes.Add(d.name, d.img);
+            if (dishes.ContainsKey(d.name) != true)
+            {
+                dishes.Add(d.name, d.img);
+            }
         }
         orderid = o.orderID;
     }
@@ -48,7 +51,7 @@ public class DisplayTicket : MonoBehaviour
         this.orderMainText.text = "";
         this.orderNumberText.text = "";
         this.orderSideText.text = "";
-        this.dishes.Clear();
+        //this.dishes.Clear();
     }
 }
 
