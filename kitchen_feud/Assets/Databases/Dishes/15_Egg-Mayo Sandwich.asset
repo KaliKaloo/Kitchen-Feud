@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Egg-Mayo Sandwich
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 3737447090136143940, guid: 1efaa49cf7c1ec64784346cb267a8750, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 574061d02057fc14baa0b9464fd47352, type: 3}
   canPickUp: 1

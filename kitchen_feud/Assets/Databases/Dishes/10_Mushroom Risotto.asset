@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom Risotto
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2771870706032194867, guid: a93570975bd61944896d6b670e1933ef, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 16947a4ebbd0ab04090a36a9202fcce2, type: 3}
   canPickUp: 1
