@@ -20,7 +20,7 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: 80
   finalScore: 0
-  dishID: DI31023
+  dishID: DI132033
   toCook: Sandwich Station
   cookingTime: 30
   recipe:
