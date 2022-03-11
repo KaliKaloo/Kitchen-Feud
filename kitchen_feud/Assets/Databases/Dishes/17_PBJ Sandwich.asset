@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: PB and Jelly Sandwich
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4870507564696649305, guid: 688f3fd77e6a4044881ae3a49cf6def6, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 35b26637601cf3147b49e8c09106556d, type: 3}
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: DI31819
+  dishID: DI132829
   toCook: Sandwich Station
   cookingTime: 0
   recipe:

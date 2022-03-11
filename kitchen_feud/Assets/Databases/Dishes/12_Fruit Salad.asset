@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fruit Salad
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1634257919044415744, guid: 14c4d23f772d98e49b5b06b86efd0bc3, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 73d28943f5d25b444a821bc571cc7d81, type: 3}
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: DI123
+  dishID: DI22325
   toCook: Cutting Board
   cookingTime: 20
   recipe:
