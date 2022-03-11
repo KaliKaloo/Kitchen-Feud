@@ -31,7 +31,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	void TaskOnClick(){
 		GameEvents.current.assignPointsEventFunction();
-		pot.transform.position = new Vector2(485, 70);
+		pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 6);
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
 		backButton.SetActive(false);

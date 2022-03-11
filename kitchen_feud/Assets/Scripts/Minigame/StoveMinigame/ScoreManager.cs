@@ -99,7 +99,6 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Bomb")
         {
             Destroy(target.gameObject);
-            //StartCoroutine(ShowText("YOU HIT A BOMB"));
             stoveScore.AddBombMultiplier();
         }
     }
