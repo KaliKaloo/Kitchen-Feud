@@ -15,9 +15,10 @@ public class SandwichController : MonoBehaviour
     //public SpawnIngredient spawnIngredient; 
 
     public Text scoreText;
+    public SandwichMove SandwichMove;
+
     public int CountStopped;
-    
-     public int finalScore;
+    public int finalScore;
     private int score = 0;
     public int Score
     {
@@ -46,6 +47,7 @@ public class SandwichController : MonoBehaviour
         StartButton.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
+        //SandwichMove.StartMoving();
        
         //StartSpawning();
         //ingredients spawn in the middle and start moving left and rigt

@@ -20,7 +20,7 @@ MonoBehaviour:
   canPickUp: 1
   maxScore: 120
   finalScore: 0
-  dishID: DI181624
+  dishID: DI181924
   toCook: Cutting Board
   cookingTime: 10
   recipe:

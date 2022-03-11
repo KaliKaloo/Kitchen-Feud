@@ -17,6 +17,7 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Transform platform;
     [SerializeField] private Transform rightLocation;
 
+
     public bool stopped = false;
     public float speed;
     // Start is called before the first frame update
@@ -40,8 +41,8 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    //void StartMoving
-    void Update()
+  
+    void Update() 
     {
         //while
         if (!stopped) Move();
