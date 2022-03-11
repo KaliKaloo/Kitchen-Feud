@@ -54,6 +54,7 @@ public class StoveScore
     public float FinalMultipier()
     {
         return (score / 15) * (1 - bombMultiplier);
+        
     }
 
 }

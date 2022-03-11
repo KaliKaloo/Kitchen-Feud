@@ -7,7 +7,7 @@ public class StoveMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D pot;
 
     public float speed;
-    public float xBound;
+    private float xBound;
 
     private float lowerBound;
     private float upperBound;
@@ -15,6 +15,7 @@ public class StoveMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        xBound = Screen.width / 2;
         pot = GetComponent<Rigidbody2D>();
         print(pot.position);
         lowerBound = pot.position.x - xBound;

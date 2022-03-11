@@ -22,10 +22,12 @@ public class StoveMinigameCounter
     public void StartGame()
     {
         end = false;
+        
     }
     public void EndGame()
     {
         end = true;
+      
     }
 
     public bool GetGameState()
@@ -58,12 +60,15 @@ public class StoveMinigameCounter
     [SerializeField] public GameObject bomb;
     [SerializeField] public GameObject parentCanvas;
     [SerializeField] public GameObject startButton;
+    public GameObject backButton;
 
     [SerializeField] public GameObject correctItem;
 
     public DishSO dishSO;
+    private int chosenX;
+    private int chosenY;
 
-    public float xBounds, yBound;
+    //public float xBounds, yBound;
     public List<Sprite> newIngredients;
     StoveScore stoveScore = new StoveScore();
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
@@ -74,6 +79,9 @@ public class StoveMinigameCounter
     {
         stoveMinigameCounter.StartGame();
         stoveScore.ResetValues();
+        chosenX = Screen.width;
+        chosenY = Screen.height;
+        backButton.SetActive(false);
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -91,6 +99,7 @@ public class StoveMinigameCounter
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
         startButton.SetActive(false);
+        
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
@@ -101,6 +110,7 @@ public class StoveMinigameCounter
 
     IEnumerator SpawnCorrectIngredient()
     {
+       
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
@@ -109,7 +119,7 @@ public class StoveMinigameCounter
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
-                new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
@@ -117,7 +127,9 @@ public class StoveMinigameCounter
             StartCoroutine(SpawnCorrectIngredient());
         } else
         {
+
             stoveMinigameCounter.EndGame();
+            backButton.SetActive(true);
         }
     }
 
@@ -128,7 +140,7 @@ public class StoveMinigameCounter
         if (stoveMinigameCounter.GetCounter() > 0)
         {
             Instantiate(bomb,
-                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
             StartCoroutine(SpawnBombObject());
         }
