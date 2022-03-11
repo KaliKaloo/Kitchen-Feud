@@ -218,5 +218,11 @@ public class Appliance : Interactable
         PhotonView.Find(viewID).GetComponent<Appliance>().cookedDish =
             PhotonView.Find(dishID).gameObject;
     }
+    [PunRPC]
+    void syncSmoke(int viewID)
+    {
+        ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
+    }
 }
 
