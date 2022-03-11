@@ -84,28 +84,13 @@ public class ScoreManager : MonoBehaviour
             stoveMinigameCounter.MinusCollisionCounter();
             
             score.text = "Score: " + stoveScore.GetScore() + "/15";
-            
-            Debug.Log("you caught:" + caught);
-            
-            if ((stoveMinigameCounter.GetGameState() == true))
+                        
+            if (stoveMinigameCounter.GetCollisionCounter() == 0)
             {
-                    StopGame();
+                backbutton.SetActive(true);
             }
                 
-        }
-       
-       //if (stoveMinigameCounter.GetCollisionCounter() == 14)
-        
-    }
-
-    public void StopGame(){
-        Debug.Log(stoveMinigameCounter.GetCollisionCounter());
-        
-        if (stoveMinigameCounter.GetCollisionCounter() == 15) 
-        {
-            backbutton.SetActive(true);
-         //stoveMinigameCounter.StartGame();
-        }
+        }        
     }
 
     // bombs will get hit if you just touch them
@@ -118,14 +103,6 @@ public class ScoreManager : MonoBehaviour
             stoveScore.AddBombMultiplier();
         }
     }
-
-    // IEnumerator ShowText(string text)
-    // {
-    //     errorTextBomb.text = text;
-    //     yield return new WaitForSeconds(1);
-    //     errorTextBomb.text = "";
-
-    // }
 }
 
 

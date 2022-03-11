@@ -143,7 +143,6 @@ public class StoveMinigameCounter
         else if (stoveMinigameCounter.GetCounter() == 0)
         {
             stoveMinigameCounter.EndGame();
-            Debug.Log("ended spawning");
             
         }
     }
