@@ -32,6 +32,7 @@ public class stoveMinigame : MonoBehaviour
             if (appliance.foundDish != null)
             {
                 spawner.dishSO = appliance.foundDish;
+                spawner.appliance = appliance;
             }
         }
     }

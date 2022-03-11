@@ -51,7 +51,7 @@ public class StoveMinigameCounter
 }
 
 
-    public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
 
     [SerializeField] public GameObject[] ingredients;
@@ -60,6 +60,8 @@ public class StoveMinigameCounter
     [SerializeField] public GameObject startButton;
 
     [SerializeField] public GameObject correctItem;
+    public Appliance appliance;
+
 
     public DishSO dishSO;
 
@@ -91,6 +93,7 @@ public class StoveMinigameCounter
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
         startButton.SetActive(false);
+        startSmoke();
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
@@ -132,5 +135,13 @@ public class StoveMinigameCounter
                 parentCanvas.transform);
             StartCoroutine(SpawnBombObject());
         }
+    }
+
+
+    private void startSmoke(){
+		ParticleSystem particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
+
+        // component.particleSystem' is obsolete: 'Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)'
+        particleSystem.Play();
     }
 }

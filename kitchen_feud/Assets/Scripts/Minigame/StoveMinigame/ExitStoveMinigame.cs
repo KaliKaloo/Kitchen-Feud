@@ -23,7 +23,6 @@ public class ExitStoveMinigame : MonoBehaviour
 	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 	private ParticleSystem particleSystem;
-	// private float score;
 	private float prevScore;
 
 
@@ -48,45 +47,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		appliance.playerController.enabled = true;
-		
-		smokeEffect();
 
-	}
-
-
-	void smokeEffect(){
-		// particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
-		// var main = particleSystem.main;
-		// var emission = particleSystem.emission;
-
-		// bool isStopped = particleSystem.isStopped;
-		// float duration = 20 + (10 * score/slider.maxValue);
-
-		// if (isStopped){
-		// 	main.duration = duration;
-		// }else if (prevScore != score){
-		// 	particleSystem.Stop();
-		// 	particleSystem.Clear();
-		// 	main.duration = (main.duration + duration)/2 ;
-		// }
-		
-		// particleSystem.Play();
-
-		// float startSpeed = 0.5f + (0.25f * score/slider.maxValue);
-		// float rateOverTime;
-		// if (score > 0){
-		// 	rateOverTime = 15 + (25 * score/slider.maxValue);
-		// }else{
-		// 	rateOverTime = 15;
-		// }
-
-
-		// if (!isStopped){
-		// 	main.startSpeed = (main.startSpeed.constant + startSpeed)/2;
-		// 	emission.rateOverTime = (emission.rateOverTime.constant + rateOverTime)/2;
-		// }else{
-		// 	main.startSpeed = startSpeed;
-		// 	emission.rateOverTime = rateOverTime;
-		// }
 	}
 }
