@@ -14,13 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/kitchens_particle.unity
-    guid: f10b592e3ff5b8e4bb68f8f30ec98513
   - enabled: 1
-    path: Assets/Scenes/kitchens_smoke.unity
-    guid: 8da869f8d720df644a5208e0745f450d
-  - enabled: 0
     path: Assets/Scenes/kitchens_minigames.unity
     guid: d2264c7ae97ae64478041e541bacd98a
   - enabled: 0
