@@ -5,10 +5,7 @@ on:
     branches:
       - dev
       - main
-  push:
-    branches:
-      - CI-setup
-    
+      
 jobs:
   build:
     name: Build my project ✨
@@ -66,7 +63,7 @@ jobs:
           path: build
           
           
-      - name: Discord 😝
+      - name: Discord💖
         uses: appleboy/discord-action@master
         if: ${{ failure() }}
         with:
@@ -74,9 +71,9 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: "##2fa2a7"
           username: "Action Bot"
-          message: "@everyone Regression testing has failed 😨"
+          message: "@everyone Regression testing has failed! 🙀"
 
-      - name: Discord 😝
+      - name: Discord 💖
         uses: appleboy/discord-action@master
         if: ${{ success() }}
         with:
@@ -84,6 +81,6 @@ jobs:
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
           color: "##2fa2a7"
           username: "Action Bot"
-          message: "@everyone Regression testing has passed! 🥳 Please review PR!"
+          message: "@everyone Regression testing has passed! 😺 Please review PR!"
 
       
