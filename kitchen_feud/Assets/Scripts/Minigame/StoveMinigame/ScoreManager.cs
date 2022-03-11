@@ -101,12 +101,10 @@ public class ScoreManager : MonoBehaviour
     public void StopGame(){
         Debug.Log(stoveMinigameCounter.GetCollisionCounter());
         
-        int wtf = caught + totalmisses + stoveMinigameCounter.GetCollisionCounter();
-        Debug.Log(wtf);
-        if (wtf ==15) 
+        if (stoveMinigameCounter.GetCollisionCounter() == 15) 
         {
             backbutton.SetActive(true);
-         stoveMinigameCounter.StartGame();
+         //stoveMinigameCounter.StartGame();
         }
     }
 
