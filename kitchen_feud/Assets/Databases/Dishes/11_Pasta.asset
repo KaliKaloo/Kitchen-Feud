@@ -18,7 +18,7 @@ MonoBehaviour:
   Type: 1
   img: {fileID: 21300000, guid: 585a92e961337bd40bfe030e850bd816, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 140
   finalScore: 0
   dishID: DI161720
   toCook: Stove

@@ -18,7 +18,7 @@ MonoBehaviour:
   Type: 1
   img: {fileID: 21300000, guid: d1f65e113d376d341b9c8ae648fd18a7, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 60
   finalScore: 0
   dishID: DI26
   toCook: Oven

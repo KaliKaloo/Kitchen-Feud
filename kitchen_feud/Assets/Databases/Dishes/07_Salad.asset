@@ -18,7 +18,7 @@ MonoBehaviour:
   Type: 1
   img: {fileID: 21300000, guid: 40c00fb398acf0f4991b2e9cb390c773, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 120
   finalScore: 0
   dishID: DI8914
   toCook: Cutting Board
