@@ -64,9 +64,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public Text errorTextBomb;
     [SerializeField] public GameObject backbutton;
     [SerializeField] public Text score;
-    public int totalHits;
-    public int totalmisses;
-    private int caught;
 
     StoveScore stoveScore = new StoveScore();
     public StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
@@ -77,8 +74,6 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Ingredient")
         {
             Destroy(target.gameObject);
-            totalHits++;
-            caught++;
 
             stoveScore.AddScore();
             stoveMinigameCounter.MinusCollisionCounter();
