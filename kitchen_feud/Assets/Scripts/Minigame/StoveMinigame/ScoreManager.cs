@@ -64,9 +64,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public Text errorTextBomb;
     [SerializeField] public GameObject backbutton;
     [SerializeField] public Text score;
+    public int totalHits;
+    public int totalmisses;
+    private int caught;
 
     StoveScore stoveScore = new StoveScore();
-    StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
+    public StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
     // ingredients get counted if completely fall through top
     void OnTriggerExit2D(Collider2D target)
@@ -74,15 +77,36 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Ingredient")
         {
             Destroy(target.gameObject);
+            totalHits++;
+            caught++;
+
             stoveScore.AddScore();
             stoveMinigameCounter.MinusCollisionCounter();
+            
             score.text = "Score: " + stoveScore.GetScore() + "/15";
+            
+            Debug.Log("you caught:" + caught);
+            
+            if ((stoveMinigameCounter.GetGameState() == true))
+            {
+                    StopGame();
+            }
+                
         }
+       
+       //if (stoveMinigameCounter.GetCollisionCounter() == 14)
+        
+    }
 
-        if (stoveMinigameCounter.GetGameState() && stoveMinigameCounter.GetCollisionCounter() == 0)
+    public void StopGame(){
+        Debug.Log(stoveMinigameCounter.GetCollisionCounter());
+        
+        int wtf = caught + totalmisses + stoveMinigameCounter.GetCollisionCounter();
+        Debug.Log(wtf);
+        if (wtf ==15) 
         {
-            backbutton.gameObject.SetActive(true);
-            stoveMinigameCounter.StartGame();
+            backbutton.SetActive(true);
+         stoveMinigameCounter.StartGame();
         }
     }
 
@@ -92,18 +116,18 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Bomb")
         {
             Destroy(target.gameObject);
-            StartCoroutine(ShowText("YOU HIT A BOMB"));
+            //StartCoroutine(ShowText("YOU HIT A BOMB"));
             stoveScore.AddBombMultiplier();
         }
     }
 
-    IEnumerator ShowText(string text)
-    {
-        errorTextBomb.text = text;
-        yield return new WaitForSeconds(1);
-        errorTextBomb.text = "";
+    // IEnumerator ShowText(string text)
+    // {
+    //     errorTextBomb.text = text;
+    //     yield return new WaitForSeconds(1);
+    //     errorTextBomb.text = "";
 
-    }
+    // }
 }
 
 

@@ -27,12 +27,14 @@ public class StoveMinigameCounter
     public void EndGame()
     {
         end = true;
-      
+        //Spawner.backButton.SetActive(true);
     }
 
     public bool GetGameState()
     {
+        
         return end;
+        
     }
 
     public void ResetCounter()
@@ -48,7 +50,9 @@ public class StoveMinigameCounter
 
     public int GetCounter()
     {
+        //Debug.Log(counter);
         return counter;
+
     }
 }
 
@@ -70,6 +74,8 @@ public class StoveMinigameCounter
 
     //public float xBounds, yBound;
     public List<Sprite> newIngredients;
+    public List<Sprite> bombs;
+
     StoveScore stoveScore = new StoveScore();
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
@@ -108,6 +114,12 @@ public class StoveMinigameCounter
         StartCoroutine(SpawnBombObject());
     }
 
+
+    public void StopGame(){
+        stoveMinigameCounter.EndGame();
+
+    }
+
     IEnumerator SpawnCorrectIngredient()
     {
        
@@ -125,11 +137,14 @@ public class StoveMinigameCounter
 
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
-        } else
+           
+        } 
+        
+        else if (stoveMinigameCounter.GetCounter() == 0)
         {
-
             stoveMinigameCounter.EndGame();
-            backButton.SetActive(true);
+            Debug.Log("ended spawning");
+            
         }
     }
 
@@ -137,11 +152,15 @@ public class StoveMinigameCounter
     {
         yield return new WaitForSeconds(Random.Range(1, 2));
 
+        int randomBomb = Random.Range(0, bombs.Count);
+
         if (stoveMinigameCounter.GetCounter() > 0)
         {
-            Instantiate(bomb,
+            Sprite currentBomb = bombs[randomBomb];
+            GameObject obj = Instantiate(bomb,
                 new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
+            obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }
     }
