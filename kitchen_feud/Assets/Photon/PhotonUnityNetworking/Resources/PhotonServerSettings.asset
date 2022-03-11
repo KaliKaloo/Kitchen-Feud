@@ -87,6 +87,7 @@ MonoBehaviour:
   - decCount
   - resetCount
   - syncMat
+  - syncSmoke
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
