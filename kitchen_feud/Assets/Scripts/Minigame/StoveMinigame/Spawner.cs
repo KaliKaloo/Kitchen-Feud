@@ -170,8 +170,7 @@ public class Spawner : MonoBehaviour
 
     private void startSmoke(){
 		ParticleSystem particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
-
-        // component.particleSystem' is obsolete: 'Property particleSystem has been deprecated. Use GetComponent<ParticleSystem>() instead. (UnityUpgradable)'
         particleSystem.Play();
+        Debug.Log(particleSystem.main.duration);
     }
 }
