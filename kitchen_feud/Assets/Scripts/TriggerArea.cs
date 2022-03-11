@@ -8,4 +8,7 @@ public class TriggerArea : MonoBehaviour
     private void OnTriggerEnter(Collider coll) {
         GameEvents.current.openDoorEventFunction();
     }
+    private void OnTriggerExit(Collider coll) {
+        GameEvents.current.closeDoorEventFunction();
+    }
 }

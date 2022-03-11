@@ -24,4 +24,10 @@ public class GameEvents : MonoBehaviour
             openDoor();
         }
     }
+    public event Action closeDoor;
+    public void closeDoorEventFunction() {
+        if(closeDoor != null) {
+            closeDoor();
+        }
+    }
 }
