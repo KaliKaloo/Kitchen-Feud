@@ -33,11 +33,11 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("clicked");
+        if (!stopped){
         stopped = true;
-        
+        SandwichController.CountStopped++;
         StopMove();
-
+        }
     }
 
     //void StartMoving
@@ -53,16 +53,15 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         Debug.Log("ive been stopped");
         Vector3 stoppedPosition = platform.localPosition;
         float distance = Vector3.Distance(platform.localPosition, perfectPosition);
-        Debug.Log(distance);
-        
-        int scoreInt = (int)Math.Round(distance));
-        CalculateScore(int scoreInt);
+              
+        CalculateScore(distance);
 
     }
 
-    void CalculateScore(int score)
+    void CalculateScore(float score)
     {
-        score/
+        int finalScore = 25 - (int)((score/600) * 25); 
+        SandwichController.Score += finalScore;
     }
 
     private void Move()

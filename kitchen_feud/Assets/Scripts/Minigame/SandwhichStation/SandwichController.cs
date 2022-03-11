@@ -8,14 +8,16 @@ public class SandwichController : MonoBehaviour
     public DishSO dish;
     // Start is called before the first frame update
     public GameObject StartButton;
+    public GameObject backButton;
     public GameObject GameUI;
-    public Image Ingredient;
-
-    public SpawnIngredient spawnIngredient; 
+    
+    //public Image Ingredient;
+    //public SpawnIngredient spawnIngredient; 
 
     public Text scoreText;
-    //private 
+    public int CountStopped;
     
+     public int finalScore;
     private int score = 0;
     public int Score
     {
@@ -24,6 +26,12 @@ public class SandwichController : MonoBehaviour
         {
             score = value;
             scoreText.text = "" + score;
+        }
+    }
+
+    void Update(){
+        if (CountStopped == 4){
+            StopGame();
         }
     }
 
@@ -50,4 +58,11 @@ public class SandwichController : MonoBehaviour
     // {
     //     Ingredient.sprite = dish.recipe[0].img;
     // }
+
+    public void StopGame(){
+        
+        backButton.SetActive(true);
+        finalScore = score;
+        GameEvents.current.assignPointsEventFunction();
+    }
 }

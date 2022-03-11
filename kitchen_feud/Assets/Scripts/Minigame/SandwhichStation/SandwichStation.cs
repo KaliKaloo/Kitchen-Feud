@@ -47,8 +47,8 @@ public class SandwichStation: Interactable
             if (dishOfFoundDish != null)
             {
 
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, finalScore);
-                dishOfFoundDish.points = finalScore;
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, SandwichController.finalScore);
+                dishOfFoundDish.points = SandwichController.finalScore;
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
             else
