@@ -22,15 +22,19 @@ public class StoveMinigameCounter
     public void StartGame()
     {
         end = false;
+        
     }
     public void EndGame()
     {
         end = true;
+        //Spawner.backButton.SetActive(true);
     }
 
     public bool GetGameState()
     {
+        
         return end;
+        
     }
 
     public void ResetCounter()
@@ -46,7 +50,9 @@ public class StoveMinigameCounter
 
     public int GetCounter()
     {
+        //Debug.Log(counter);
         return counter;
+
     }
 }
 
@@ -58,15 +64,20 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject bomb;
     [SerializeField] public GameObject parentCanvas;
     [SerializeField] public GameObject startButton;
+    public GameObject backButton;
 
     [SerializeField] public GameObject correctItem;
     public Appliance appliance;
 
 
     public DishSO dishSO;
+    private int chosenX;
+    private int chosenY;
 
-    public float xBounds, yBound;
+    //public float xBounds, yBound;
     public List<Sprite> newIngredients;
+    public List<Sprite> bombs;
+
     StoveScore stoveScore = new StoveScore();
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
@@ -76,6 +87,9 @@ public class Spawner : MonoBehaviour
     {
         stoveMinigameCounter.StartGame();
         stoveScore.ResetValues();
+        chosenX = Screen.width;
+        chosenY = Screen.height;
+        backButton.SetActive(false);
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -94,6 +108,7 @@ public class Spawner : MonoBehaviour
         stoveMinigameCounter.ResetCounter();
         startButton.SetActive(false);
         startSmoke();
+        
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
@@ -102,8 +117,15 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnBombObject());
     }
 
+
+    public void StopGame(){
+        stoveMinigameCounter.EndGame();
+
+    }
+
     IEnumerator SpawnCorrectIngredient()
     {
+       
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
@@ -112,15 +134,19 @@ public class Spawner : MonoBehaviour
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
-                new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
-        } else
+           
+        } 
+        
+        else if (stoveMinigameCounter.GetCounter() == 0)
         {
             stoveMinigameCounter.EndGame();
+            
         }
     }
 
@@ -128,11 +154,15 @@ public class Spawner : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(1, 2));
 
+        int randomBomb = Random.Range(0, bombs.Count);
+
         if (stoveMinigameCounter.GetCounter() > 0)
         {
-            Instantiate(bomb,
-                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
+            Sprite currentBomb = bombs[randomBomb];
+            GameObject obj = Instantiate(bomb,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
+            obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }
     }

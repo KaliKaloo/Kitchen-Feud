@@ -54,6 +54,7 @@ public class StoveScore
     public float FinalMultipier()
     {
         return (score / 15) * (1 - bombMultiplier);
+        
     }
 
 }
@@ -65,7 +66,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public Text score;
 
     StoveScore stoveScore = new StoveScore();
-    StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
+    public StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
     // ingredients get counted if completely fall through top
     void OnTriggerExit2D(Collider2D target)
@@ -73,16 +74,18 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Ingredient")
         {
             Destroy(target.gameObject);
+
             stoveScore.AddScore();
             stoveMinigameCounter.MinusCollisionCounter();
+            
             score.text = "Score: " + stoveScore.GetScore() + "/15";
-        }
-
-        if (stoveMinigameCounter.GetGameState() && stoveMinigameCounter.GetCollisionCounter() == 0)
-        {
-            backbutton.gameObject.SetActive(true);
-            stoveMinigameCounter.StartGame();
-        }
+                        
+            if (stoveMinigameCounter.GetCollisionCounter() == 0)
+            {
+                backbutton.SetActive(true);
+            }
+                
+        }        
     }
 
     // bombs will get hit if you just touch them
@@ -91,17 +94,8 @@ public class ScoreManager : MonoBehaviour
         if (target.tag.ToString() == "Bomb")
         {
             Destroy(target.gameObject);
-            StartCoroutine(ShowText("YOU HIT A BOMB"));
             stoveScore.AddBombMultiplier();
         }
-    }
-
-    IEnumerator ShowText(string text)
-    {
-        errorTextBomb.text = text;
-        yield return new WaitForSeconds(1);
-        errorTextBomb.text = "";
-
     }
 }
 
