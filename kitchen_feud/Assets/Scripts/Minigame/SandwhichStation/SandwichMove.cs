@@ -54,8 +54,15 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         Vector3 stoppedPosition = platform.localPosition;
         float distance = Vector3.Distance(platform.localPosition, perfectPosition);
         Debug.Log(distance);
-        SandwichController.Score += 20;
+        
+        int scoreInt = (int)Math.Round(distance));
+        CalculateScore(int scoreInt);
 
+    }
+
+    void CalculateScore(int score)
+    {
+        score/
     }
 
     private void Move()

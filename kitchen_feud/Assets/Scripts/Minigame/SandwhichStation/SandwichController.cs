@@ -38,8 +38,7 @@ public class SandwichController : MonoBehaviour
         StartButton.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
-        DisplayRandomIngredient();
-        
+       
         //StartSpawning();
         //ingredients spawn in the middle and start moving left and rigt
         //images of ingredients start appeairng in intervals on the left
@@ -47,8 +46,8 @@ public class SandwichController : MonoBehaviour
         //it has to stop in the center.
     }
 
-    public void DisplayRandomIngredient()
-    {
-        Ingredient.sprite = dish.recipe[0].img;
-    }
+    // public void DisplayRandomIngredient()
+    // {
+    //     Ingredient.sprite = dish.recipe[0].img;
+    // }
 }
