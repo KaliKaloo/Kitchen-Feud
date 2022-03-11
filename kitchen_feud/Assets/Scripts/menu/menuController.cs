@@ -257,9 +257,15 @@ public class menuController : MonoBehaviourPunCallbacks
     // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
-        connectPanel.SetActive(false);
-        loadingScreen.SetActive(true);
-        PhotonNetwork.JoinRoom(joinGameInput.text);
+        if (joinGameInput.text != "")
+        {
+            connectPanel.SetActive(false);
+            loadingScreen.SetActive(true);
+            PhotonNetwork.JoinRoom(joinGameInput.text);
+        } else
+        {
+            lobbyError.text = "Cannot be empty";
+        }
     }
 
     public void JoinGameWithInfo(RoomInfo info)

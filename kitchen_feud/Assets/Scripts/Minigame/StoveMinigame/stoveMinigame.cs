@@ -32,6 +32,7 @@ public class stoveMinigame : MonoBehaviour
             if (appliance.foundDish != null)
             {
                 spawner.dishSO = appliance.foundDish;
+                spawner.appliance = appliance;
             }
         }
     }
@@ -39,7 +40,6 @@ public class stoveMinigame : MonoBehaviour
 
    public void UpdateDishPointsStove() {
         if (appliance.isBeingInteractedWith){
-            Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
             if(dishOfFoundDish != null)
