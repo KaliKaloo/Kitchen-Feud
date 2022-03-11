@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class StoveMinigameCounter
 {
@@ -169,8 +170,11 @@ public class Spawner : MonoBehaviour
 
 
     private void startSmoke(){
-		ParticleSystem particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
-        particleSystem.Play();
-        Debug.Log(particleSystem.main.duration);
+        //ParticleSystem particleSystem = appliance.GetComponentInChildren<ParticleSystem>();
+        // particleSystem.Play();
+        appliance.GetComponent<PhotonView>().RPC("syncSmoke", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
+        //Debug.Log(particleSystem.main.duration);
     }
+
+
 }
