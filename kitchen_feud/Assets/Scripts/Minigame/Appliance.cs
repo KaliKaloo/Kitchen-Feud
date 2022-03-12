@@ -104,10 +104,7 @@ public class Appliance : Interactable
                     playerController.enabled = false;
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
                     playerRigidbody.isKinematic = true;
-                    cookedDishLocal = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0, 1, 0), transform.rotation);
-
-
-
+                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
 
                 }
 
