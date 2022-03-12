@@ -14,7 +14,7 @@ public class Announcement : MonoBehaviour
     void Start()
     {
         halfTime = timer.GetTotalTime()/2;
-        disappearTime = halfTime - 5;
+        disappearTime = halfTime - 7;
     }
 
     void Update()
