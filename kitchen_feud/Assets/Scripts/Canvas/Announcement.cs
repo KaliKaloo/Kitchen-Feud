@@ -7,21 +7,23 @@ public class Announcement : MonoBehaviour
 
     private static GlobalTimer timer = new GlobalTimer();
     private int halfTime;
+    private int disappearTime;
     public GameObject announcementUI;
 
 
     void Start()
     {
         halfTime = timer.GetTotalTime()/2;
-        Debug.Log( timer.GetTotalTime());
-        Debug.Log("hi");
+        disappearTime = halfTime - 5;
     }
 
     void Update()
     {
         int currentTime = timer.GetTime();
-        if (currentTime <= halfTime){
+        if (currentTime == halfTime){
             announcementUI.SetActive(true);
+        }else if (currentTime == disappearTime){
+            announcementUI.SetActive(false);
         }
         
     }
