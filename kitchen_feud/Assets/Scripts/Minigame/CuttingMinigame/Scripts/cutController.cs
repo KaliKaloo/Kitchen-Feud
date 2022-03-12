@@ -52,10 +52,14 @@ public class cutController : MonoBehaviour
     {
         instructions.SetActive(true);
         StartButton.SetActive(true);
+        backButton.SetActive(false);
         scoreSystem.SetActive(false);
 
-        score = 0;
-        num = 0;
+        IngredientSpawner.StopSpawn();
+        BombSpawner.StopSpawn();
+
+        Score = 100;
+        Ingredient = 0;
         finalScore = 0;
 
         //stop spawning
@@ -73,6 +77,7 @@ public class cutController : MonoBehaviour
 
     public void StartGame()
     {
+
         List<Sprite> dishSprites = InstantiateList(dish.recipe);
         newIngredients = new List<Sprite>(dishSprites);
         
@@ -89,9 +94,9 @@ public class cutController : MonoBehaviour
         scoretext.text = "Score: " + Score;
         Ingredient = 0;
 
-        Ingredient1.sprite = dish.recipe[0].img;
-        Ingredient2.sprite = dish.recipe[1].img;
-        Ingredient3.sprite = dish.recipe[2].img;
+        Ingredient1.sprite = newIngredients[0];
+        Ingredient2.sprite = newIngredients[1];
+        Ingredient3.sprite = newIngredients[2];
 
     }
  
@@ -106,6 +111,6 @@ public class cutController : MonoBehaviour
         finalScore = Score;
         Debug.Log(finalScore);
         GameEvents.current.assignPointsEventFunction();
-        RestartGame();
+       
     }
 }

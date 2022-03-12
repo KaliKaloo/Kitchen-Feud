@@ -50,7 +50,7 @@ public class DisplayTicket : MonoBehaviour
         this.orderDrinkText.text = "";
         this.orderMainText.text = "";
         this.orderNumberText.text = "";
-        this.orderSideText.text = "";
+        //this.orderSideText.text = "";
         //this.dishes.Clear();
     }
 }
