@@ -16,7 +16,6 @@ public class IngredientSpawner : Interactable
    
     protected override void Update(){
 
-    
         base.Update();
         int currentTime = timer.GetTime();
         if (currentTime <= totalTime/2 && !reset){
