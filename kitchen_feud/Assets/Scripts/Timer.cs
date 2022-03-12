@@ -10,10 +10,10 @@ public class Timer : MonoBehaviour
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 10;
+    private static int time = 40;
 
     public Text timerText;
-    public int timer = time;
+    public float timer = time;
     private static bool started;
     public int score = 0;
     float elapsed = 0f;
@@ -55,7 +55,7 @@ public class Timer : MonoBehaviour
         return time;
     }
 
-    public string ConvertSecondToMinutes(int seconds)
+    public string ConvertSecondToMinutes(float seconds)
     {
         
         string str;
@@ -91,7 +91,7 @@ public class Timer : MonoBehaviour
 
 
     // get current time from timer
-    public int GetTime()
+    public float GetTime()
     {
        return timer;
     }
@@ -102,11 +102,11 @@ public class Timer : MonoBehaviour
     {
         if (GetTime() > 0)
         {
-            score += 10;
+            score += 2;
         }
         else
         {
-            score -= 10;
+            score -= 2;
         }
         timer -= 1;
        
@@ -136,9 +136,9 @@ public class Timer : MonoBehaviour
     }
     private void OnDisable()
     {
-        timerText.text = "00:10";
+        timerText.text = "00:40";
         timerText.color = Color.black;
-        timer = 10;
+        timer = 40;
         score = 0;
     }
 }

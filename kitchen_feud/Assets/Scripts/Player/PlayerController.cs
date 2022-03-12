@@ -3,7 +3,7 @@ using Photon.Pun;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
 	public float m_speed, rotatespeed;
@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
 	PlayerHolding playerHold;
 	public PhotonView view;
 
+
 	void Start()
 	{
+		this.name = "Local";
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
