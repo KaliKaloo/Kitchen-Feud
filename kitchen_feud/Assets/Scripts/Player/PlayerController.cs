@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			{
 				cam.enabled = false;
 			}
-		DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
 		}
 	}
 	void Update()
@@ -80,11 +80,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		{
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
-				player.velocity = transform.forward * m_speed * Time.deltaTime;
+				player.velocity = getTransformVelocity(transform.forward);
 			}
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
-				player.velocity = -transform.forward * m_speed * Time.deltaTime;
+				player.velocity = -getTransformVelocity(transform.forward);
 			}
 		}
 	}
@@ -116,6 +116,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, 3f);
 	}
+
+	public Vector3 getTransformVelocity(Vector3 transform){
+		return transform * m_speed * Time.deltaTime;
+	}
+
+	
 
 	// Remove our current focus
 	void RemoveFocus()

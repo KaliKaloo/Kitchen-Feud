@@ -92,7 +92,8 @@ public class Appliance : Interactable
                     //myPv.RPC("ovenGame", RpcTarget.All,
                      //minigameCanvas.GetComponent<PhotonView>().ViewID,
                      //myPv.ViewID);
-                    cookedDishLocal = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.GetChild(0).position, transform.rotation);
+                    
+                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine( "DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position, transform.rotation);
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else

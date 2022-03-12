@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Kiwi
   location: 2
-  Prefab: {fileID: 5046774981484992291, guid: 61ef9c4b149400f49821d73b3b911bc7, type: 3}
+  Prefab: {fileID: 2087249168071969602, guid: 65271bb3b95b72041a58bfb30f40f42b, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: ffb341ec60ec5b64c938ab7e33d99055, type: 3}
   canPickUp: 1

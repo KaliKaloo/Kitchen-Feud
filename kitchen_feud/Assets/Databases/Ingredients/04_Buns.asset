@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Buns
   location: 3
-  Prefab: {fileID: 4036615515797736686, guid: 5023c78d73d7e1344b2820701f98613a, type: 3}
+  Prefab: {fileID: 6316129340110068361, guid: 19cdfc8033644f24c918f7368aa79a08, type: 3}
   Type: 0
   img: {fileID: 0}
   canPickUp: 1

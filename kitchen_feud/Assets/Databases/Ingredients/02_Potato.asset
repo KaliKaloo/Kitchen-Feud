@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Potato
   location: 3
-  Prefab: {fileID: 8985278511742184846, guid: 0da80766fa95d094ab47a4b550f2d2fb, type: 3}
+  Prefab: {fileID: 4003515382402528660, guid: 6ea2cce781f349842b94d3953190ab52, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: 451cc1144fe497e4a8dd3fb10a14f8bf, type: 3}
   canPickUp: 1
