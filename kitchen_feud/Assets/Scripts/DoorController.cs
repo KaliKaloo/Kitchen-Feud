@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
+    public int id;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,12 +13,16 @@ public class DoorController : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void openDoorUp() {
-        Debug.Log("Door up!");
-        LeanTween.moveLocalY(gameObject, this.transform.localPosition.y + 2.28f, 1f).setEaseOutQuad();
+    private void openDoorUp(int id) {
+        if(id == this.id) {
+            Debug.Log("Door up!");
+            LeanTween.moveLocalY(gameObject, this.transform.localPosition.y + 2.28f, 1f).setEaseOutQuad();
+        }
     }
-        private void openDoorDown() {
-        Debug.Log("Door down!");
-        LeanTween.moveLocalY(gameObject, this.transform.localPosition.y - 2.28f, 1f).setEaseOutQuad();
+    private void openDoorDown(int id) {
+        if(id == this.id) {
+            Debug.Log("Door down!");
+            LeanTween.moveLocalY(gameObject, this.transform.localPosition.y - 2.28f, 1f).setEaseOutQuad();
+        }
     }
 }
