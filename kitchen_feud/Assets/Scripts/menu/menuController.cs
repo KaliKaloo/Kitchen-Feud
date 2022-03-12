@@ -114,6 +114,7 @@ public class menuController : MonoBehaviourPunCallbacks
             SetTeam(1);
             loadingScreen.SetActive(false);
             usernameMenu.SetActive(true);
+            startButton.SetActive(false);
         } 
         else
         {
