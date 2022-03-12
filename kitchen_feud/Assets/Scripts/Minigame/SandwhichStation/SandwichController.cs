@@ -55,6 +55,17 @@ public class SandwichController : MonoBehaviour
         }
     }
 
+    public void RestartGame()
+    {
+        StartButton.SetActive(true);
+        backButton.SetActive(false);
+    
+        Score = 100;
+        finalScore = 0;
+
+        //stop spawning
+    }
+
     public void StartGame()
     {
         StartButton.SetActive(false);

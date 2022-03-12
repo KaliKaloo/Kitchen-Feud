@@ -41,7 +41,10 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-  
+    // void ResetPosition(){
+    //     startingPosition = perfectPosition;
+    // }
+    
     void Update() 
     {
         //while

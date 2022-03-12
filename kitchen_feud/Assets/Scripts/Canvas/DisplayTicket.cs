@@ -47,10 +47,10 @@ public class DisplayTicket : MonoBehaviour
     [PunRPC]
     void clearAll()
     {
-        this.orderDrinkText.text = "";
+        //this.orderDrinkText.text = "";
         this.orderMainText.text = "";
         this.orderNumberText.text = "";
-        //this.orderSideText.text = "";
+        this.orderSideText.text = "";
         //this.dishes.Clear();
     }
 }

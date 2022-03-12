@@ -13,6 +13,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 	public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
+	public SandwichController SandwichController;
 
 
 	void Start()
@@ -24,6 +25,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		SandwichController.RestartGame();
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
