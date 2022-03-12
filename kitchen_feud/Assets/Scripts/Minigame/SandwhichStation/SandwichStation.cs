@@ -6,12 +6,12 @@ using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SandwichStation: Interactable
+public class SandwichStation: MonoBehaviour
 {
+    public SandwichController SandwichController;
     private Appliance appliance;
     public ExitSandwichMinigame backbutton;
-    public int finalScore;
-    public SandwichController SandwichController;
+    
 
     void Start()
     {
