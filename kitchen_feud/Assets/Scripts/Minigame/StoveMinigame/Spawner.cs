@@ -63,8 +63,9 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] public GameObject[] ingredients;
     [SerializeField] public GameObject bomb;
-    [SerializeField] public GameObject parentCanvas;
     [SerializeField] public GameObject startButton;
+    [SerializeField] public GameObject team1Background;
+    [SerializeField] public GameObject team2Background;
     public GameObject backButton;
 
     [SerializeField] public GameObject correctItem;
@@ -74,6 +75,8 @@ public class Spawner : MonoBehaviour
     public DishSO dishSO;
     private int chosenX;
     private int chosenY;
+
+    private GameObject parentCanvas;
 
     //public float xBounds, yBound;
     public List<Sprite> newIngredients;
@@ -91,6 +94,18 @@ public class Spawner : MonoBehaviour
         chosenX = Screen.width;
         chosenY = Screen.height;
         backButton.SetActive(false);
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        {
+            parentCanvas = team1Background;
+            team1Background.SetActive(true);
+            team2Background.SetActive(false);
+        }
+        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        {
+            parentCanvas = team2Background;
+            team1Background.SetActive(false);
+            team2Background.SetActive(true);
+        }
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -107,9 +122,10 @@ public class Spawner : MonoBehaviour
     {
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
+
         startButton.SetActive(false);
         startSmoke();
-        
+
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
@@ -126,7 +142,6 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnCorrectIngredient()
     {
-       
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
