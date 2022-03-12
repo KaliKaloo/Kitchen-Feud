@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cheese
   location: 2
-  Prefab: {fileID: 6046025412411663125, guid: d988279d4ed1b7c4db2ec63e4ec146a3, type: 3}
+  Prefab: {fileID: 5744088246545593225, guid: 5c2a21423efab5a4684d6375bb04d427, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: c43bc3407591b4f4db4a951188ceb948, type: 3}
   canPickUp: 1

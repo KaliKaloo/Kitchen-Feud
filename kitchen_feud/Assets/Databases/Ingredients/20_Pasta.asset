@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pasta
   location: 3
-  Prefab: {fileID: 5819746606127231165, guid: 282356be8b4ac4c4786c7776e7ea4235, type: 3}
+  Prefab: {fileID: 551609858966586578, guid: 63c35a71d87609c48a2a334dee7d760b, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: 1d63733e79825b547a2113001b8ee7a5, type: 3}
   canPickUp: 1

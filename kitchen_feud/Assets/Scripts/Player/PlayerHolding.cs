@@ -74,7 +74,7 @@ public class PlayerHolding : MonoBehaviour
         PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = true;
-        PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
+        // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
     }
     [PunRPC]
     void SetParentAsNull(int viewID)
@@ -87,7 +87,7 @@ public class PlayerHolding : MonoBehaviour
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
-            PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
+            // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
             itemdropped = true;
         }
     }

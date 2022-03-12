@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Milk
   location: 2
-  Prefab: {fileID: 2608143732039897536, guid: c6f5b38e22266e74d95e794d75790632, type: 3}
+  Prefab: {fileID: 5410719352851005728, guid: 78217e1c7d45e10409f27df40edabda5, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: bb0c3a360f012dd45815307ffdcb8c69, type: 3}
   canPickUp: 1

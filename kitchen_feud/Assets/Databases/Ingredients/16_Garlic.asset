@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Garlic
   location: 3
-  Prefab: {fileID: 5287589002315587846, guid: 04a8b24337ddfd948b5d33747e2964df, type: 3}
+  Prefab: {fileID: 3243095163930211204, guid: 3438ea31d820f1c4293deeef9dd61799, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: c1b46674dd6400545b1065e1bae7d9dd, type: 3}
   canPickUp: 1

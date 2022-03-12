@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rice
   location: 3
-  Prefab: {fileID: 540386652021533623, guid: e1844c5336f68f44d841b0b7b3093476, type: 3}
+  Prefab: {fileID: 8493873269509207678, guid: 735853166fa29154e97b8383b41dd7dd, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: b3281c5ab1da250479b12810b5ee68bf, type: 3}
   canPickUp: 1
