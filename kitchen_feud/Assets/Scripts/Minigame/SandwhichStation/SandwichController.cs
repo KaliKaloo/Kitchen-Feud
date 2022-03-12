@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class SandwichController : MonoBehaviour
 {
     public DishSO dish;
     // Start is called before the first frame update
+    private GameObject team1Background;
+    private GameObject team2Background;
     public GameObject StartButton;
     public GameObject backButton;
     public GameObject GameUI;
@@ -38,8 +41,18 @@ public class SandwichController : MonoBehaviour
 
     void Start()
     {
-        //set bacground to correct team
-        //spawnIngredient.StartSpawn();
+        //set bacground to team1
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        {
+            team1Background.SetActive(true);
+            team2Background.SetActive(false);
+        }
+        //set bacground to team2
+        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        {
+            team1Background.SetActive(false);
+            team2Background.SetActive(true);
+        }
     }
 
     public void StartGame()
