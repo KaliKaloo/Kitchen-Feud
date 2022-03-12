@@ -26,6 +26,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 	void TaskOnClick()
 	{
 		SandwichController.RestartGame();
+		
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
