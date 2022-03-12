@@ -8,8 +8,8 @@ public class SandwichController : MonoBehaviour
 {
     public DishSO dish;
     // Start is called before the first frame update
-    private GameObject team1Background;
-    private GameObject team2Background;
+    [SerializeField] private GameObject team1Background;
+    [SerializeField] private GameObject team2Background;
     public GameObject StartButton;
     public GameObject backButton;
     public GameObject GameUI;
