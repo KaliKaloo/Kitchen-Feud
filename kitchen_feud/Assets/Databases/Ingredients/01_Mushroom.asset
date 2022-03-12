@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom
   location: 3
-  Prefab: {fileID: 2370544356775548294, guid: 55d7891b75519614792b6fa304b94756, type: 3}
+  Prefab: {fileID: 6856191594149718735, guid: 44e8ec161c43f0646a595d4afc58c3f0, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: 0ab34f4297335b94385fcee50e152fde, type: 3}
   canPickUp: 1

@@ -46,3 +46,11 @@ jobs:
           deploy_key: ${{ secrets.KEY }}
           enable_jekyll: true
                 
+      - name: Discord 💖
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: "#35bb7e"
+          username: "Action Bot"
+          message: "@Everyone A new version of the Game has been deployed! 😻"
