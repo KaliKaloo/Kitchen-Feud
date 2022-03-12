@@ -47,12 +47,10 @@ public class cutController : MonoBehaviour
     }
 
     void Start()
-    {
-
+    { 
         dishSprites.Add(dish.recipe[0].img);
         dishSprites.Add(dish.recipe[1].img);
         dishSprites.Add(dish.recipe[2].img);
-
     }
 
     public void StartGame()

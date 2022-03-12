@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pizza Dough
   location: 1
-  Prefab: {fileID: 3227593760760834362, guid: e1ae25df747448145aedd076beb5e532, type: 3}
+  Prefab: {fileID: 4831550693986655417, guid: d8146374e72fbfd4cb21b4f160ebdbf5, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: ab1cf8e334c755f4db0a8cf8a8d95739, type: 3}
   canPickUp: 1

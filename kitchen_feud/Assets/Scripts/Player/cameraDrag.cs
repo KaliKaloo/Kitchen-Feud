@@ -13,7 +13,7 @@ public class cameraDrag : MonoBehaviour
          if (Input.GetMouseButton(1))
         {
             pitch -= speed * Input.GetAxis("Mouse Y");
-            pitch = Mathf.Clamp(pitch, -90f, 90f);
+            pitch = Mathf.Clamp(pitch, -90f, 48f);
             currentRotation.eulerAngles = new Vector3(pitch, 0.0f, 0.0f);
             transform.localRotation = currentRotation;
         }

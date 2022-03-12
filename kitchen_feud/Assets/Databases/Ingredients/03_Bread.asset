@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bread
   location: 3
-  Prefab: {fileID: 1674085944443780880, guid: ecbab7c431e7d794f83d6ec66454e8a9, type: 3}
+  Prefab: {fileID: 495261921034088494, guid: d5e24d5b65d8b854992f08ee748523b5, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: c208aabd8e640bd4284f1d929a81d203, type: 3}
   canPickUp: 1

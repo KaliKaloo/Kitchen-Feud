@@ -18,8 +18,6 @@ public class ToolTipManager : MonoBehaviour
         }
     }
 
-    
-
     public void Start()
     {
         Vector2 pos;

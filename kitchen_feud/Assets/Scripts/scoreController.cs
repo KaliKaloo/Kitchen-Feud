@@ -9,7 +9,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 180;
+    private static int time = 300;
     
     private static int timer = time;
     private static bool started;
@@ -34,7 +34,7 @@ public class GlobalTimer
 
     public void ChangeTimerValue(int newTime)
     {
-        timer = time = newTime;
+        timer = time = newTime >= 0 ? newTime : 0;
     }
 
     public int GetTotalTime(){

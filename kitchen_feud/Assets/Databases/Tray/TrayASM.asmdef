@@ -1,0 +1,16 @@
+{
+    "name": "TrayASM",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b6cfa682f5d672347bf18b95f40e4c5a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

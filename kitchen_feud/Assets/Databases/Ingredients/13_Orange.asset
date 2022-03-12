@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Orange
   location: 2
-  Prefab: {fileID: 8654337748906797308, guid: 82a6813280fb8074090e744bc5f43ecc, type: 3}
+  Prefab: {fileID: 4365241661901649659, guid: bb3094b50ed2e184ea3fa81d17345b06, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: a78fa334b6d874748817f19f232b22d2, type: 3}
   canPickUp: 1

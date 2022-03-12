@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Jam
   location: 2
-  Prefab: {fileID: 7896919896942611665, guid: c37ad919fdca23a48b493ce7521c12e6, type: 3}
+  Prefab: {fileID: 8117573213662752799, guid: fcc45e826dbb831438a2279f0c372702, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: 5bcff84fa1b03934daad36a2c93446ed, type: 3}
   canPickUp: 1

@@ -8,13 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/kitchens.unity
+    guid: 0fe26d4b823f22a48a9f25883690bf83
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/kitchens_sandwich.unity
+    guid: 6f62f99a2b95ba74688cba326ea3b4b1
+  - enabled: 0
     path: Assets/Scenes/kitchens_minigames.unity
     guid: d2264c7ae97ae64478041e541bacd98a
   - enabled: 0

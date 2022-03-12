@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Marinara
   location: 2
-  Prefab: {fileID: 1224019485222714880, guid: 1083a47adde27f04c91dc7b594ed8a7d, type: 3}
+  Prefab: {fileID: 1504970576467089259, guid: b0b6acf474dd7ed40822eec9a63fac3e, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: 098f3b0f7840d7141818404af8dd1f6e, type: 3}
   canPickUp: 1
