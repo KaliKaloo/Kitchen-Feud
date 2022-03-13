@@ -24,21 +24,7 @@ public class kickPlayers : MonoBehaviour
     public static kickPlayers Instance;
 
 
-    void Awake()
-    {
-        if (Instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-
-
-    }
+  
 
     // Start is called before the first frame update
     void Start()
@@ -79,7 +65,7 @@ public class kickPlayers : MonoBehaviour
             {
                 //foreach (GameObject p in oPlayers)
                 {
-
+                    Debug.LogError(oPl1.Count);
                     //if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     if (oPl1.Count>0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     {
@@ -95,6 +81,7 @@ public class kickPlayers : MonoBehaviour
                 }
             }else if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 )
                 {
+                Debug.LogError(oPl2.Count);
                // foreach (GameObject p in oPlayers)
                 {
 
@@ -157,7 +144,7 @@ public class kickPlayers : MonoBehaviour
 
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                         if (oPl1.Count == 0) {
-                            kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                            kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                         }
 
                             break;
@@ -195,7 +182,7 @@ public class kickPlayers : MonoBehaviour
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                         if (oPl2.Count == 0)
                         {
-                            kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                            kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                         }
                         break;
                     }
