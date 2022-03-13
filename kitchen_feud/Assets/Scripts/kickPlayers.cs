@@ -158,9 +158,11 @@ public class kickPlayers : MonoBehaviour
                         if(oPl1[i] != 0) {
 
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
+                            PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
                         if (oPl1.Count == 0) {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                         }
+                        
 
                             break;
                         }
@@ -196,6 +198,7 @@ public class kickPlayers : MonoBehaviour
                     {
 
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
+                        PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
                         if (oPl2.Count == 0)
                         {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
