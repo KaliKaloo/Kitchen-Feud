@@ -32,7 +32,7 @@ public class ovenMiniGame : MonoBehaviour
         if (appliance.isBeingInteractedWith)
         {
 
-           // if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
 
                 backbutton.appliance = GetComponent<Appliance>();
