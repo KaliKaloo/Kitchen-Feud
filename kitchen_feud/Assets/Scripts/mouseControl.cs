@@ -26,7 +26,8 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-       // isPressed = true;
+
+        if (!isPressed) { 
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
         GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,1);
         }
@@ -34,20 +35,9 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler
         {
           GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,2);
         }
-    }
-    /*
-    public void OnPointerUp(PointerEventData data)
-    {
-        
-          if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
-        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,-1,1);
+        isPressed = true;
         }
-        else
-        {
-          GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,-1,2);
-        }
-        //isPressed = false;
     }
-    */
+
 
 }

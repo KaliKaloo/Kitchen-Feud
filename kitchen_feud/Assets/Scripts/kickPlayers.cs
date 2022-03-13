@@ -27,18 +27,7 @@ public class kickPlayers : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        /*if (Instance)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-           // DontDestroyOnLoad(gameObject);
-        }
-
-
-        */
+ 
     }
 
     // Start is called before the first frame update
@@ -78,68 +67,45 @@ public class kickPlayers : MonoBehaviour
 
             if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 )
             {
-                //foreach (GameObject p in oPlayers)
+                if(oPl1.Count == 0)
                 {
+                    PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
+                }
+                
 
-                    //if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     if (oPl1.Count>0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     {
-                       // noneIn = false;
                         kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
                     }
+                    
                     else
                     {
-                        
-                      //  noneIn = true;
                         kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
+                        
                     }
-                }
+                
             }else if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 )
                 {
-               // foreach (GameObject p in oPlayers)
+                if (oPl2.Count == 0)
                 {
+                    PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
+                }
+                
 
                     if (oPl2.Count > 0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
                     {
                         kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
-                       // noneIn = false;
                     }
                     else
                     {
                         kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
-                        //noneIn = true;
                     }
-                }
+                
             }
             
-            
-           /* if (noneIn)
-            {
-               if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
-                {
-                    kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
-                }
-                else
-                {
-                    kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
-                }
-                
-            }*/
+   
 
         }
-
-        //if(enteredOne == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
-        /*if(oPl1.Count>0 && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
-        {
-            kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
-        }
-         else if (enteredTwo == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
-        {
-            kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
-        }*/
-
-
-
 
     }
 
@@ -159,6 +125,7 @@ public class kickPlayers : MonoBehaviour
 
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                             PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
+                            mouseControl.Instance.isPressed = false;
                         if (oPl1.Count == 0) {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                         }
@@ -168,15 +135,6 @@ public class kickPlayers : MonoBehaviour
                         }
                         
                     }
-                    
-                   // PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl1[0], 1);
-                
-                /*else
-                {
-                    PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
-                    PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl2[0], 2);
-                }*/
-                //PV.RPC("resetPlayerPressing", RpcTarget.All,1);
             }
 
         }
@@ -186,12 +144,7 @@ public class kickPlayers : MonoBehaviour
             if (playersPressing2 == 2)
 
             {
-                /*  if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
-                  {
-                      PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
-                      PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl1[0], 1);
-                  }
-                  else*/
+            
                 for (int i = 0; i < oPl2.Count; i++)
                 {
                     if (oPl2[i] != 0)
@@ -199,6 +152,7 @@ public class kickPlayers : MonoBehaviour
 
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                         PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
+                        mouseControl.Instance.isPressed = false;
                         if (oPl2.Count == 0)
                         {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
@@ -208,11 +162,6 @@ public class kickPlayers : MonoBehaviour
 
                 }
 
-
-                //PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
-                  //  PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl2[0], 2);
-                
-              //  PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
             }
         }
         
@@ -225,8 +174,7 @@ public class kickPlayers : MonoBehaviour
         if(team == 1)
         {
             PhotonView.Find(viewID1).GetComponent<kickPlayers>().oPl1.Add(viewID);
-            
-           // oPl1.Add(viewID);
+       
         }
         else
         {
