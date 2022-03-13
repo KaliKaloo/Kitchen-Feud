@@ -36,32 +36,7 @@ jobs:
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           projectPath: kitchen_feud
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.3.1
-        if: always()
-        with:
-          name: Test results
-          path: artifacts
-
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-        with:
-          projectPath: kitchen_feud
-          targetPlatform: WebGL
-
-      # Output
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: build
-          
+          githubToken: ${{ secrets.GITHUB_TOKEN }}          
           
       - name: Discord💖
         uses: appleboy/discord-action@master

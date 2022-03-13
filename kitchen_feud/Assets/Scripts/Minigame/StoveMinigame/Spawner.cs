@@ -67,6 +67,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject team1Background;
     [SerializeField] public GameObject team2Background;
     public GameObject backButton;
+    public GameObject topBar;
 
     [SerializeField] public GameObject correctItem;
     public Appliance appliance;
@@ -90,6 +91,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         stoveMinigameCounter.StartGame();
+        
         stoveScore.ResetValues();
         chosenX = Screen.width;
         chosenY = Screen.height;
@@ -122,7 +124,8 @@ public class Spawner : MonoBehaviour
     {
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
-
+        
+        topBar.SetActive(false);
         startButton.SetActive(false);
         startSmoke();
 

@@ -20,6 +20,7 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     public bool stopped = false;
     public float speed;
+
     // Start is called before the first frame update
     
     void Start()
@@ -36,18 +37,24 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     {
         if (!stopped){
         stopped = true;
+        SandwichController.moving = false;
         SandwichController.CountStopped++;
         StopMove();
         }
     }
 
-  
+    // void ResetPosition(){
+    //     startingPosition = perfectPosition;
+    // }
+    
     void Update() 
     {
-        //while
         if (!stopped) Move();
-        
+        if ((stopped) && (SandwichController.moving)) {
+            stopped = false;
+        }
     }
+
 
     void StopMove()
     {
