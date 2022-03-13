@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aaea3fc1d506df4388ec268bcb2f0ae, type: 3}
+  m_Name: 25_PizzaDough
+  m_EditorClassIdentifier: 
+  name: Pizza Dough
+  location: 1
+  Prefab: {fileID: 4831550693986655417, guid: d8146374e72fbfd4cb21b4f160ebdbf5, type: 3}
+  Type: 0
+  img: {fileID: 21300000, guid: ab1cf8e334c755f4db0a8cf8a8d95739, type: 3}
+  canPickUp: 1
+  maxScore: -10
+  finalScore: 0
+  ingredientID: 35

@@ -1,0 +1,56 @@
+name: Deploy 🚀
+
+on:
+  push: { branches: [main] }
+
+jobs:
+  build:
+    name: Build my project ✨
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository 👀
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2.1.7
+        with:
+          path: kitchen_feud/Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-kitchen_feud-
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          projectPath: kitchen_feud
+          targetPlatform: WebGL
+      
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          external_repository: lokhei/kitchen_feud
+          publish_branch: main  
+          publish_dir: "build/WebGL/WebGL"
+          deploy_key: ${{ secrets.KEY }}
+          enable_jekyll: true
+                
+      - name: Discord 💖
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: "#35bb7e"
+          username: "Action Bot"
+          message: "@Everyone A new version of the Game has been deployed! 😻"
