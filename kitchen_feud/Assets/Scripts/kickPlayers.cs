@@ -277,6 +277,7 @@ public class kickPlayers : MonoBehaviour
         }
         
     }
+    [PunRPC]
     void resetIsPressed()
     {
         isPressed = false;
