@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
 
-public class mouseControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class mouseControl : MonoBehaviour, IPointerDownHandler
 {
     public bool isPressed = false;
     public static mouseControl Instance;
