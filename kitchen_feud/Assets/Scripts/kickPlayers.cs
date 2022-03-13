@@ -147,6 +147,7 @@ public class kickPlayers : MonoBehaviour
     {
         
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) {
+            Debug.LogError(playersPressing1);
             if (playersPressing1 == 2)
                 
             {
@@ -179,6 +180,7 @@ public class kickPlayers : MonoBehaviour
         }
         else
         {
+            Debug.LogError(playersPressing2);
             if (playersPressing2 == 2)
 
             {
