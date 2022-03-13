@@ -77,17 +77,20 @@ public class kickPlayers : MonoBehaviour
 
             if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 )
             {
-                foreach (GameObject p in oPlayers)
+                //foreach (GameObject p in oPlayers)
                 {
 
-                    if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
+                    //if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
+                    if (oPl1.Count>0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     {
-                        noneIn = false;
+                       // noneIn = false;
+                        kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
                     }
                     else
                     {
                         
-                        noneIn = true;
+                      //  noneIn = true;
+                        kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }else if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 )
@@ -95,19 +98,21 @@ public class kickPlayers : MonoBehaviour
                 foreach (GameObject p in oPlayers)
                 {
 
-                    if (Vector3.Distance(p.transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
+                    if (oPl2.Count > 0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
                     {
-                        noneIn = false;
+                        kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
+                       // noneIn = false;
                     }
                     else
                     {
-                        noneIn = true;
+                        kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
+                        //noneIn = true;
                     }
                 }
             }
             
             
-            if (noneIn)
+           /* if (noneIn)
             {
                if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
                 {
@@ -118,18 +123,19 @@ public class kickPlayers : MonoBehaviour
                     kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
                 }
                 
-            }
+            }*/
 
         }
 
-         if(enteredOne == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
+        //if(enteredOne == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
+        /*if(oPl1.Count>0 && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
         {
             kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
          else if (enteredTwo == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
         {
             kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
-        }
+        }*/
 
 
 
