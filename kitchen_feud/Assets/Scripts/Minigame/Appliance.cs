@@ -87,7 +87,8 @@ public class Appliance : Interactable
                     {
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.identity);
                     }
-                    minigameCanvas.transform.SetParent(transform);
+                    myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+                    //minigameCanvas.transform.SetParent(transform);
                     //minigameCanvas.transform.position = transform.GetChild(0).position;
                     //myPv.RPC("ovenGame", RpcTarget.All,
                      //minigameCanvas.GetComponent<PhotonView>().ViewID,
@@ -226,5 +227,11 @@ public class Appliance : Interactable
         ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
         PS.Play();
     }
+    [PunRPC]
+    void setParent(int canvasID,int ovenID)
+    {
+        PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
+    }
+    
 }
 
