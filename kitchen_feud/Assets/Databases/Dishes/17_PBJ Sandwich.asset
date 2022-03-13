@@ -18,7 +18,7 @@ MonoBehaviour:
   Type: 1
   img: {fileID: 21300000, guid: 35b26637601cf3147b49e8c09106556d, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 120
   finalScore: 0
   dishID: DI132829
   toCook: Sandwich Station

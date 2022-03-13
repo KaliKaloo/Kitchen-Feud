@@ -38,7 +38,6 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                    myAvatar.GetComponent<PlayerController>().matName = "cat_Red";
                     Team2.SetActive(false);
                 }
             }
@@ -49,7 +48,6 @@ public class PhotonPlayer : MonoBehaviour
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                     myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                    myAvatar.GetComponent<PlayerController>().matName = "cat_Blue";
                     Team1.SetActive(false);
 
 

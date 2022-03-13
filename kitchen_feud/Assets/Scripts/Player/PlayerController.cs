@@ -3,18 +3,20 @@ using Photon.Pun;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
 	public float m_speed, rotatespeed;
 	public Interactable focus;
+	public int myTeam;
 	[SerializeField] private Camera cam;
-	public string matName;
 	PlayerHolding playerHold;
 	public PhotonView view;
 
+
 	void Start()
 	{
+		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -24,17 +26,27 @@ public class PlayerController : MonoBehaviour
 			{
 				cam.enabled = false;
 			}
-		DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
 		}
+        if (view.IsMine)
+        {
+			this.name = "Local";
+			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			if(myTeam == 1)
+            {
+				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
+            }
+            else
+            {
+				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
+			}
+		}
+		
 	}
 	void Update()
 	{
-		//Debug.LogError(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name);
-		if(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name == "Default-Material (Instance)")
-        {
-			GetComponent<PhotonView>().RPC("syncMat",RpcTarget.All, GetComponent<PhotonView>().ViewID, matName);
-
-		}
+	
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
@@ -78,11 +90,11 @@ public class PlayerController : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
-				player.velocity = transform.forward * m_speed * Time.deltaTime;
+				player.velocity = getTransformVelocity(transform.forward);
 			}
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 			{
-				player.velocity = -transform.forward * m_speed * Time.deltaTime;
+				player.velocity = -getTransformVelocity(transform.forward);
 			}
 		}
 	}
@@ -115,6 +127,12 @@ public class PlayerController : MonoBehaviour
 		Gizmos.DrawWireSphere(transform.position, 3f);
 	}
 
+	public Vector3 getTransformVelocity(Vector3 transform){
+		return transform * m_speed * Time.deltaTime;
+	}
+
+	
+
 	// Remove our current focus
 	void RemoveFocus()
 	{
@@ -145,6 +163,17 @@ public class PlayerController : MonoBehaviour
 	{
 		Material newMat = Resources.Load(name, typeof(Material)) as Material;
 		PhotonView.Find(viewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+		PhotonView.Find(viewID).tag = "Player";
 
+	}
+	[PunRPC]
+	void setTeam(int viewID, int team)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerController>().myTeam = team;
+    }
+	[PunRPC]
+	void synctele(int viewID, Vector3 pos)
+	{
+		PhotonView.Find(viewID).transform.position = pos;
 	}
 }

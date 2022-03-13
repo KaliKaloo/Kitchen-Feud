@@ -89,6 +89,15 @@ MonoBehaviour:
   - syncMat
   - RPCDoorUp
   - RPCDoorDown
+  - syncSmoke
+  - setTeam
+  - synctele
+  - addOp
+  - setEntered
+  - removeOp
+  - setEnteredF
+  - resetPlayerPressing
+  - setPlayerPressing
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

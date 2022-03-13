@@ -17,6 +17,7 @@ TagManager:
   - Ingredient
   - Bomb
   - Door
+  - Kick
   layers:
   - Default
   - TransparentFX

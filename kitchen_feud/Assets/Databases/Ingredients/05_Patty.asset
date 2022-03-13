@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Patty
   location: 1
-  Prefab: {fileID: 3258702530815774522, guid: c3a8e61b0d35852448d6fb2c1c152fc2, type: 3}
+  Prefab: {fileID: 618234162418327320, guid: 143f9cb88e8dfe743bed8902b6cf3432, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: eb5b0223b8b09b44e921f2687e9f676e, type: 3}
   canPickUp: 1

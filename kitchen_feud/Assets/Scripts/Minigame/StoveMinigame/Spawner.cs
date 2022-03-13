@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class StoveMinigameCounter
 {
@@ -22,15 +23,19 @@ public class StoveMinigameCounter
     public void StartGame()
     {
         end = false;
+        
     }
     public void EndGame()
     {
         end = true;
+        //Spawner.backButton.SetActive(true);
     }
 
     public bool GetGameState()
     {
+        
         return end;
+        
     }
 
     public void ResetCounter()
@@ -46,25 +51,38 @@ public class StoveMinigameCounter
 
     public int GetCounter()
     {
+        //Debug.Log(counter);
         return counter;
+
     }
 }
 
 
-    public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
 
     [SerializeField] public GameObject[] ingredients;
     [SerializeField] public GameObject bomb;
-    [SerializeField] public GameObject parentCanvas;
     [SerializeField] public GameObject startButton;
+    [SerializeField] public GameObject team1Background;
+    [SerializeField] public GameObject team2Background;
+    public GameObject backButton;
+    public GameObject topBar;
 
     [SerializeField] public GameObject correctItem;
+    public Appliance appliance;
+
 
     public DishSO dishSO;
+    private int chosenX;
+    private int chosenY;
 
-    public float xBounds, yBound;
+    private GameObject parentCanvas;
+
+    //public float xBounds, yBound;
     public List<Sprite> newIngredients;
+    public List<Sprite> bombs;
+
     StoveScore stoveScore = new StoveScore();
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
@@ -73,7 +91,23 @@ public class StoveMinigameCounter
     void Start()
     {
         stoveMinigameCounter.StartGame();
+        
         stoveScore.ResetValues();
+        chosenX = Screen.width;
+        chosenY = Screen.height;
+        backButton.SetActive(false);
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        {
+            parentCanvas = team1Background;
+            team1Background.SetActive(true);
+            team2Background.SetActive(false);
+        }
+        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        {
+            parentCanvas = team2Background;
+            team1Background.SetActive(false);
+            team2Background.SetActive(true);
+        }
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -90,13 +124,23 @@ public class StoveMinigameCounter
     {
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
+        
+        topBar.SetActive(false);
         startButton.SetActive(false);
+        startSmoke();
+
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
 
         StartCoroutine(SpawnCorrectIngredient());
         StartCoroutine(SpawnBombObject());
+    }
+
+
+    public void StopGame(){
+        stoveMinigameCounter.EndGame();
+
     }
 
     IEnumerator SpawnCorrectIngredient()
@@ -109,15 +153,19 @@ public class StoveMinigameCounter
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
-                new Vector2(Random.Range(100, xBounds), yBound), Quaternion.identity,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
-        } else
+           
+        } 
+        
+        else if (stoveMinigameCounter.GetCounter() == 0)
         {
             stoveMinigameCounter.EndGame();
+            
         }
     }
 
@@ -125,12 +173,24 @@ public class StoveMinigameCounter
     {
         yield return new WaitForSeconds(Random.Range(1, 2));
 
+        int randomBomb = Random.Range(0, bombs.Count);
+
         if (stoveMinigameCounter.GetCounter() > 0)
         {
-            Instantiate(bomb,
-                new Vector2(Random.Range(0, xBounds), yBound), Quaternion.identity,
+            Sprite currentBomb = bombs[randomBomb];
+            GameObject obj = Instantiate(bomb,
+                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
                 parentCanvas.transform);
+            obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }
     }
+
+
+    private void startSmoke(){
+
+        appliance.GetComponent<PhotonView>().RPC("syncSmoke", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
+    }
+
+
 }
