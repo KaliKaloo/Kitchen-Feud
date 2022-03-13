@@ -96,6 +96,8 @@ MonoBehaviour:
   - setEnteredF
   - resetPlayerPressing
   - setPlayerPressing
+  - RPCDoorUp
+  - RPCDoorDown
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

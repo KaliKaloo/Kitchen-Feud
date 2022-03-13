@@ -18,4 +18,16 @@ public class GameEvents : MonoBehaviour
             assignPoints();
         }
     }
+    public event Action<int> openDoor;
+    public void openDoorEventFunction(int id) {
+        if(openDoor != null) {
+            openDoor(id);
+        }
+    }
+    public event Action<int> closeDoor;
+    public void closeDoorEventFunction(int id) {
+        if(closeDoor != null) {
+            closeDoor(id);
+        }
+    }
 }
