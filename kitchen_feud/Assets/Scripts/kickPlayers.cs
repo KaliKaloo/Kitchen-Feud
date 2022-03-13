@@ -147,7 +147,7 @@ public class kickPlayers : MonoBehaviour
     {
         
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) {
-            if (mouseControl.Instance.isPressed && playersPressing1 == 2)
+            if (playersPressing1 == 2)
                 
             {
 
@@ -179,7 +179,7 @@ public class kickPlayers : MonoBehaviour
         }
         else
         {
-            if (mouseControl.Instance.isPressed && playersPressing2 == 2)
+            if (playersPressing2 == 2)
 
             {
                 /*  if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
