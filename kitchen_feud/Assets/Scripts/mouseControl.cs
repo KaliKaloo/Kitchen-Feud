@@ -18,7 +18,7 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
 

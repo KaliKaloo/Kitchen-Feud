@@ -34,7 +34,6 @@ public class kickPlayers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log(mouseControl.Instance.isPressed);
         if (players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
@@ -49,12 +48,10 @@ public class kickPlayers : MonoBehaviour
                 foreach (GameObject p in players)
                 {
                     
-                  //  Debug.LogError(players.Length);
                     if (p.GetComponent<PlayerController>().myTeam != GameObject.Find("Local").GetComponent<PlayerController>().myTeam)
                     {
                       
                         oPlayers.Add(p);
-                       // Debug.LogError("Name: " + p.name + " Team: " + p.GetComponent<PlayerController>().myTeam);
                     }
                 }
 
@@ -68,7 +65,6 @@ public class kickPlayers : MonoBehaviour
                     if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     {
                         noneIn = false;
-                        Debug.Log(p.transform.position);
                     }
                     else
                     {
@@ -95,7 +91,6 @@ public class kickPlayers : MonoBehaviour
             
             if (noneIn)
             {
-               // Debug.LogError("NoneIN" + noneIn);
                if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
                 {
                     kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
@@ -111,12 +106,10 @@ public class kickPlayers : MonoBehaviour
 
          if(enteredOne == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
         {
-            //kickCanvas.SetActive(true);
             kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
          else if (enteredTwo == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
         {
-            //kickCanvas.SetActive(true);
             kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
         }
 
@@ -127,15 +120,11 @@ public class kickPlayers : MonoBehaviour
 
     public void kickPlayer()
     {
-        //Debug.LogError(oPlayers[0].name);
-        //oPlayers[0].transform.position = new Vector3(20.51f,1f,2.34f);
-        //Debug.LogError(isPressed);
-        // Debug.Log(mouseControl.Instance.isPressed);
+        
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) {
             if (mouseControl.Instance.isPressed && playersPressing1 == 2)
                 
             {
-               // if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
                 {
                     PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                     PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl1[0], 1);
@@ -170,14 +159,7 @@ public class kickPlayers : MonoBehaviour
         
 
     }
-   /* public void OnUpdateSelected(BaseEventData data)
-    {
-        if (isPressed)
-        {
-            kickPlayer();
-        }
-    }*/
-  
+
     [PunRPC]
     void addOp(int viewID1,int viewID, int team)
     {
@@ -198,7 +180,6 @@ public class kickPlayers : MonoBehaviour
         if (team == 1)
         {
             PhotonView.Find(viewID1).GetComponent<kickPlayers>().oPl1.Remove(viewID);
-            // oPl1.Add(viewID);
         }
         else
         {

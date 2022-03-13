@@ -32,11 +32,6 @@ public class SpatialAudio : MonoBehaviour
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
         myC = 0;
-        
-    
-        
-
-        //spatialAudioFromPlayers[PV.Owner] = this;
     }
     
 
@@ -73,7 +68,6 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 2)
             {
                 kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
-                //kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
             }
 
         }
@@ -111,7 +105,6 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 1)
             {
                 kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
-               // kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 2);
             }
 
         }
@@ -142,35 +135,6 @@ public class SpatialAudio : MonoBehaviour
             }
 
         }
-
-
-
-        /*
-                foreach(Photon.Realtime.Player player in PhotonNetwork.CurrentRoom.Players.Values)
-                {
-                    if (player.IsLocal)
-                        continue;
-
-                    if (player.CustomProperties.TryGetValue("agoraID", out object agoraID))
-                    {
-                        if (spatialAudioFromPlayers.ContainsKey(player))
-                        {
-                            SpatialAudio other = spatialAudioFromPlayers[player];
-
-                            float gain = GetGain(other.transform.position);
-                            float pan = GetPan(other.transform.position);
-
-                            agoraAduioEffects.SetRemoteVoicePosition(uint.Parse((string)agoraID), pan, gain);
-                        //engine.AdjustUserPlaybackSignalVolume(uint.Parse((string)agoraID),10);
-                        }
-                        else
-                        {
-                            agoraAduioEffects.SetRemoteVoicePosition(uint.Parse((string)agoraID), 0, 0);
-                        }
-                    }
-
-                }
-        */
     }
 
     float GetGain(Vector3 otherPosition)
