@@ -87,6 +87,8 @@ MonoBehaviour:
   - decCount
   - resetCount
   - syncMat
+  - RPCDoorUp
+  - RPCDoorDown
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
