@@ -67,6 +67,7 @@ public class SpatialAudio : MonoBehaviour
             }
             if (myTeam == 2)
             {
+                
                 kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
                 if(kickPlayers.Instance.oPl1.Contains(PV.ViewID)){
                     kick.GetComponent<PhotonView>().RPC("removeOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);

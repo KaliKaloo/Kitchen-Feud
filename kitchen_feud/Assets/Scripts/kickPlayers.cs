@@ -21,6 +21,7 @@ public class kickPlayers : MonoBehaviour
     public bool noneIn = true;
     public int playersPressing1;
     public int playersPressing2;
+    public bool isPressed;
     public static kickPlayers Instance;
 
 
@@ -29,7 +30,7 @@ public class kickPlayers : MonoBehaviour
         Instance = this;
  
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +71,8 @@ public class kickPlayers : MonoBehaviour
                 if(oPl1.Count == 0)
                 {
                     PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
-                    mouseControl.Instance.isPressed = false;
+                    isPressed = false;
+                   
                 }
                 
 
@@ -90,7 +92,7 @@ public class kickPlayers : MonoBehaviour
                 if (oPl2.Count == 0)
                 {
                     PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
-                    mouseControl.Instance.isPressed = false;
+                    isPressed = false;
                 }
                 
 
@@ -113,8 +115,14 @@ public class kickPlayers : MonoBehaviour
 
     public void kickPlayer()
     {
-        
+       
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) {
+            if (isPressed == false)
+            {
+                PV.RPC("setPlayerPressing", RpcTarget.All, 1, 1);
+                isPressed = true;
+            }
+
             Debug.LogError(playersPressing1);
             if (playersPressing1 == 2)
                 
@@ -124,7 +132,7 @@ public class kickPlayers : MonoBehaviour
                     for(int i = 0; i < oPl1.Count; i++)
                     {
                         if(oPl1[i] != 0) {
-                            mouseControl.Instance.isPressed = false;
+                        isPressed = false;
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                             PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
                            
@@ -142,7 +150,13 @@ public class kickPlayers : MonoBehaviour
         }
         else
         {
-            Debug.LogError(playersPressing2);
+
+            if (isPressed == false)
+            {
+                PV.RPC("setPlayerPressing", RpcTarget.All, 1, 2);
+                isPressed = true;
+            }
+            
             if (playersPressing2 == 2)
 
             {
@@ -151,7 +165,7 @@ public class kickPlayers : MonoBehaviour
                 {
                     if (oPl2[i] != 0)
                     {
-                        mouseControl.Instance.isPressed = false;
+                        isPressed = false;
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                         PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
                         
