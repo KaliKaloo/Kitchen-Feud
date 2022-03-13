@@ -158,8 +158,8 @@ MonoBehaviour:
   m_speed: 200
   rotatespeed: 90
   focus: {fileID: 0}
+  myTeam: 0
   cam: {fileID: 2216191030710823112}
-  matName: 
   view: {fileID: 4338776926646805293}
 --- !u!114 &873649799258480705
 MonoBehaviour:
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 5
   cube: {fileID: 4497627996167492564, guid: eea8078eb9b764be280538c6cc2555ca, type: 3}
+  kick: {fileID: 0}
 --- !u!64 &496252007107752818
 MeshCollider:
   m_ObjectHideFlags: 0

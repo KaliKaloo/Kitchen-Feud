@@ -65,12 +65,6 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
 
 
-  /*  public override void OnJoinedRoom()
-        {
-            Debug.LogError("THIS IS THE LOBBY: " + x);
-            rtcEngine.JoinChannel(x.ToString() + "Lobby");
-        }
-  */
     
     public IRtcEngine GetRtcEngine()
     {
