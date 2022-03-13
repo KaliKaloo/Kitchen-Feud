@@ -57,15 +57,13 @@ public class SpatialAudio : MonoBehaviour
             kick = GameObject.FindGameObjectWithTag("Kick");
             
         }
-        Debug.LogError(kick.GetComponent<PhotonView>().ViewID);
+        
 
         if (!PV.IsMine)
             return;
         
         if (Vector3.Distance(new Vector3(-3.28f, 1.09f, -14.94f),transform.position) > 10)
         {
-            //Debug.LogError("You're too far away");
-            //engine.EnableLocalAudio(false);
             if (myTeam == 2 && myC == 1)
             {
                 engine.LeaveChannel();

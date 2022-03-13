@@ -27,12 +27,24 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerDown(PointerEventData data)
     {
         isPressed = true;
-        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1);
+        if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
+        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,1);
+        }
+        else
+        {
+          GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,2);
+        }
     }
     public void OnPointerUp(PointerEventData data)
     {
         isPressed = false;
-        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,-1);
+          if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
+        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,-1,1);
+        }
+        else
+        {
+          GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,-1,2);
+        }
     }
 
 }
