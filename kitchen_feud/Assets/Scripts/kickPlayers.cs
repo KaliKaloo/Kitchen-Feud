@@ -25,7 +25,8 @@ public class kickPlayers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        kickCanvas.SetActive(false);
+        
+        
         PV = GetComponent<PhotonView>();
       
     }
@@ -95,20 +96,28 @@ public class kickPlayers : MonoBehaviour
             if (noneIn)
             {
                // Debug.LogError("NoneIN" + noneIn);
-                kickCanvas.SetActive(false);
+               if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
+                {
+                    kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                else
+                {
+                    kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
+                }
+                
             }
 
         }
 
          if(enteredOne == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f) )<10)
         {
-            kickCanvas.SetActive(true);
-            kickCanvas.transform.GetChild(1).gameObject.SetActive(false);
+            //kickCanvas.SetActive(true);
+            kickCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
          else if (enteredTwo == true && GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.22f, 1.09f, 9.4f)) < 10)
         {
-            kickCanvas.SetActive(true);
-            kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
+            //kickCanvas.SetActive(true);
+            kickCanvas.transform.GetChild(1).gameObject.SetActive(true);
         }
 
 
