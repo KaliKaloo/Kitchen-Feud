@@ -35,6 +35,7 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
           GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,2);
         }
     }
+    /*
     public void OnPointerUp(PointerEventData data)
     {
         
@@ -47,5 +48,6 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         //isPressed = false;
     }
+    */
 
 }
