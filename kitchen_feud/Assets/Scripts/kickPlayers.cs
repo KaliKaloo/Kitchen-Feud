@@ -70,6 +70,7 @@ public class kickPlayers : MonoBehaviour
                 if(oPl1.Count == 0)
                 {
                     PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
+                    mouseControl.Instance.isPressed = false;
                 }
                 
 
@@ -89,6 +90,7 @@ public class kickPlayers : MonoBehaviour
                 if (oPl2.Count == 0)
                 {
                     PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
+                    mouseControl.Instance.isPressed = false;
                 }
                 
 
@@ -122,10 +124,10 @@ public class kickPlayers : MonoBehaviour
                     for(int i = 0; i < oPl1.Count; i++)
                     {
                         if(oPl1[i] != 0) {
-
+                            mouseControl.Instance.isPressed = false;
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                             PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
-                            mouseControl.Instance.isPressed = false;
+                           
                         if (oPl1.Count == 0) {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);
                         }
@@ -149,10 +151,10 @@ public class kickPlayers : MonoBehaviour
                 {
                     if (oPl2[i] != 0)
                     {
-
+                        mouseControl.Instance.isPressed = false;
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                         PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
-                        mouseControl.Instance.isPressed = false;
+                        
                         if (oPl2.Count == 0)
                         {
                             kickCanvas.transform.GetChild(0).gameObject.SetActive(false);

@@ -28,9 +28,9 @@ public class mouseControl : MonoBehaviour, IPointerDownHandler
     {
 
         if (!isPressed) { 
-        if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
-        GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,1);
-        }
+            if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) { 
+                GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,1);
+            }
         else
         {
           GameObject.FindGameObjectWithTag("Kick").GetComponent<PhotonView>().RPC("setPlayerPressing",RpcTarget.All,1,2);
