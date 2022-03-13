@@ -160,7 +160,6 @@ MonoBehaviour:
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
-  matName: 
   view: {fileID: 4338776926646805293}
 --- !u!114 &873649799258480705
 MonoBehaviour:
