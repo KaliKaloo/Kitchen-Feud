@@ -36,7 +36,6 @@ public class MovingInstructions : MonoBehaviour
         }
         else if (Text.text == "Nice! Feel free look up and down by holding right click" && Input.GetMouseButtonDown(1))
         {
-            Debug.LogError ("HEYY");
             Text.text = "Brilliant! You can also pick up items using left click!";
         }
         
