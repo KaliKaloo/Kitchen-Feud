@@ -91,6 +91,9 @@ MonoBehaviour:
   - setTeam
   - synctele
   - addOp
+  - setEntered
+  - removeOp
+  - setEnteredF
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

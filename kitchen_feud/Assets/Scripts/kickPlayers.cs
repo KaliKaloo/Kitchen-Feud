@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.EventSystems;
+
 
 public class kickPlayers : MonoBehaviour
 {
@@ -15,6 +17,24 @@ public class kickPlayers : MonoBehaviour
     public List<int> oPl1;
     public List<int> oPl2;
     public bool noneIn = true;
+    public int playersPressing;
+    public static kickPlayers Instance;
+
+    void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +46,7 @@ public class kickPlayers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log(mouseControl.Instance.isPressed);
         if (players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
@@ -110,18 +131,34 @@ public class kickPlayers : MonoBehaviour
     {
         //Debug.LogError(oPlayers[0].name);
         //oPlayers[0].transform.position = new Vector3(20.51f,1f,2.34f);
-        if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
+        //Debug.LogError(isPressed);
+        // Debug.Log(mouseControl.Instance.isPressed);
+        Debug.LogError(playersPressing);
+        if (mouseControl.Instance.isPressed && playersPressing ==2)
+            
         {
-            PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
-            PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl1[0],1);
+            if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
+            {
+                PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[0]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
+                PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl1[0], 1);
+            }
+            else
+            {
+                PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
+                PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl2[0], 2);
+            }
+            PV.RPC("resetPlayerPressing", RpcTarget.All);
         }
-        else
-        {
-            PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[0]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
-            PV.RPC("removeOp", RpcTarget.All, PV.ViewID, oPl2[0], 2);
-        }
+
     }
-   
+   /* public void OnUpdateSelected(BaseEventData data)
+    {
+        if (isPressed)
+        {
+            kickPlayer();
+        }
+    }*/
+  
     [PunRPC]
     void addOp(int viewID1,int viewID, int team)
     {
@@ -173,5 +210,22 @@ public class kickPlayers : MonoBehaviour
         {
             PhotonView.Find(viewID).GetComponent<kickPlayers>().enteredTwo = false;
         }
+    }
+
+    [PunRPC]
+    void setPlayerPressing(int x)
+    {
+        if (x == 1)
+        {
+            playersPressing += 1;
+        }else if (x == -1)
+        {
+            playersPressing -= 1;
+        }
+    }
+    [PunRPC]
+    void resetPlayerPressing()
+    {
+        playersPressing = 0;
     }
 }
