@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
-	public string matName;
 	PlayerHolding playerHold;
 	public PhotonView view;
 
@@ -34,17 +33,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			if(myTeam == 1)
+            {
+				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
+            }
+            else
+            {
+				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
+			}
 		}
 		
 	}
 	void Update()
 	{
-		//Debug.LogError(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name);
-		if(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.name == "Default-Material (Instance)")
-        {
-			GetComponent<PhotonView>().RPC("syncMat",RpcTarget.All, GetComponent<PhotonView>().ViewID, matName);
-
-		}
+	
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
