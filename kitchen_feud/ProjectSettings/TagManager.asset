@@ -16,6 +16,7 @@ TagManager:
   - Bullet
   - Ingredient
   - Bomb
+  - Kick
   layers:
   - Default
   - TransparentFX

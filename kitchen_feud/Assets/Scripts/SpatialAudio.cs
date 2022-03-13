@@ -16,6 +16,8 @@ public class SpatialAudio : MonoBehaviour
     IRtcEngine engine;
     int myTeam;
     int myC;
+ 
+    public GameObject kick;
     string randomInstance;
     
   
@@ -30,10 +32,11 @@ public class SpatialAudio : MonoBehaviour
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
         myC = 0;
+        
     
         
 
-        spatialAudioFromPlayers[PV.Owner] = this;
+        //spatialAudioFromPlayers[PV.Owner] = this;
     }
     
 
@@ -49,6 +52,12 @@ public class SpatialAudio : MonoBehaviour
 
     private void Update()
     {
+        if (!kick)
+        {
+            kick = GameObject.FindGameObjectWithTag("Kick");
+            
+        }
+        Debug.LogError(kick.GetComponent<PhotonView>().ViewID);
 
         if (!PV.IsMine)
             return;
@@ -63,10 +72,16 @@ public class SpatialAudio : MonoBehaviour
                 engine.JoinChannel(randomInstance + "Team2");
                 myC = 2;
             }
+            if (myTeam == 2)
+            {
+                kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
+                //kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
+            }
 
         }
         else
         {
+            
             if(myTeam == 1 && myC == 0)
             {
                 engine.LeaveChannel();
@@ -79,6 +94,12 @@ public class SpatialAudio : MonoBehaviour
                 engine.JoinChannel(randomInstance + "Team1");
                 myC = 1;
             }
+            if(myTeam == 2)
+            {
+                kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
+                kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
+            }
+          
         }
 
         if (Vector3.Distance(new Vector3(-3.22f, 1.09f,9.4f), transform.position) > 10)
@@ -88,6 +109,11 @@ public class SpatialAudio : MonoBehaviour
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team1");
                 myC = 1;
+            }
+            if (myTeam == 1)
+            {
+                kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
+               // kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 2);
             }
 
         }
@@ -111,9 +137,15 @@ public class SpatialAudio : MonoBehaviour
                 
                 myC = 2;
             }
+            if (myTeam == 1)
+            {
+                kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
+                kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 2);
+            }
+
         }
 
-        
+
 
         /*
                 foreach(Photon.Realtime.Player player in PhotonNetwork.CurrentRoom.Players.Values)
