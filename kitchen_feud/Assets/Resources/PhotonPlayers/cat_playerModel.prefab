@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 924745824932806213}
   m_LocalRotation: {x: -0.027854197, y: -0, z: -0, w: 0.999612}
   m_LocalPosition: {x: -1.1254553, y: -0.0051338673, z: -8.929274}
-  m_LocalScale: {x: 9, y: 9, z: 9}
+  m_LocalScale: {x: 8, y: 9, z: 9}
   m_Children:
   - {fileID: 8598136079205185149}
   - {fileID: 5462542050116961387}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3701048243505201765}
-  m_speed: 200
+  m_speed: 150
   rotatespeed: 90
   focus: {fileID: 0}
   myTeam: 0
