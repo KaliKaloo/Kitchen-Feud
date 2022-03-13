@@ -132,7 +132,7 @@ public class kickPlayers : MonoBehaviour
                     for(int i = 0; i < oPl1.Count; i++)
                     {
                         if(oPl1[i] != 0) {
-                        isPressed = false;
+                            PV.RPC("resetIsPressed", RpcTarget.All);
                             PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl1[i]).GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
                             PV.RPC("resetPlayerPressing", RpcTarget.All, 1);
                            
@@ -165,7 +165,7 @@ public class kickPlayers : MonoBehaviour
                 {
                     if (oPl2[i] != 0)
                     {
-                        isPressed = false;
+                        PV.RPC("resetIsPressed", RpcTarget.All);
                         PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, PhotonView.Find(oPl2[i]).GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                         PV.RPC("resetPlayerPressing", RpcTarget.All, 2);
                         
@@ -275,5 +275,10 @@ public class kickPlayers : MonoBehaviour
         {
             playersPressing2 = 0;
         }
+        
+    }
+    void resetIsPressed()
+    {
+        isPressed = false;
     }
 }
