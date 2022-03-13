@@ -16,7 +16,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	[SerializeField] private GameObject backButton;
 	[SerializeField] private GameObject startButton;
 	[SerializeField] private Text score;
-
+	[SerializeField] private GameObject topBar;
 
 	public Appliance appliance;
 	StoveScore stoveScore = new StoveScore();
@@ -39,6 +39,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
+		topBar.SetActive(true);
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 

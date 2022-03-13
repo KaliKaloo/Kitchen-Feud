@@ -159,13 +159,17 @@ public class Appliance : Interactable
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
 
-        string applianceName = gameObject.tag;
-        string howToCook = foundDish.toCook;
+        
 
         //if (foundDish != null){
-        if ((foundDish != null) && (applianceName == howToCook))
+        if (foundDish != null)
         {
-            foundMatchingDish = true;
+            string applianceName = gameObject.tag;
+            string howToCook = foundDish.toCook;
+            
+            if (applianceName == howToCook){
+                foundMatchingDish = true;
+            }
         }
         else
         {

@@ -20,6 +20,7 @@ public class SandwichController : MonoBehaviour
     public Text scoreText;
     public SandwichMove SandwichMove;
 
+    public bool moving = false;
     public int CountStopped;
     public int finalScore;
     private int score = 0;
@@ -55,11 +56,24 @@ public class SandwichController : MonoBehaviour
         }
     }
 
+    public void RestartGame()
+    {
+        StartButton.SetActive(true);
+        backButton.SetActive(false);
+        moving = false;
+        Score = 0;
+        finalScore = 0;
+        CountStopped = 0;
+        //SandwichMove.RestartMove();
+
+    }
+
     public void StartGame()
     {
         StartButton.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
+        moving = true;
         //SandwichMove.StartMoving();
        
         //StartSpawning();

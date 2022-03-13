@@ -10,9 +10,11 @@ public class cutController : MonoBehaviour
 
     public DishSO dish;
 
-    public List<Sprite> dishSprites = new List<Sprite>();
+    public List<Sprite> newIngredients;
+    //public List<Sprite> dishSprites = new List<Sprite>();
     public List<Sprite> bombSprites = new List<Sprite>();
 
+    public GameObject instructions;
     public GameObject scoreSystem;
     public Image Ingredient1;
     public Image Ingredient2;
@@ -24,7 +26,7 @@ public class cutController : MonoBehaviour
     public GameObject StartButton;
     public int finalScore;
 
-    private int score = 0;
+    private int score = 100;
     public int Score
     {
         get { return score; }
@@ -42,33 +44,59 @@ public class cutController : MonoBehaviour
         set
         {
             num = value;
-            numtext.text = num + "/5";
+            numtext.text = num + "/15";
         }
     }
 
-    void Start()
-    { 
-        dishSprites.Add(dish.recipe[0].img);
-        dishSprites.Add(dish.recipe[1].img);
-        dishSprites.Add(dish.recipe[2].img);
+    public void RestartGame()
+    {
+        instructions.SetActive(true);
+        StartButton.SetActive(true);
+        backButton.SetActive(false);
+        scoreSystem.SetActive(false);
+
+        IngredientSpawner.StopSpawn();
+        BombSpawner.StopSpawn();
+
+        Score = 100;
+        Ingredient = 0;
+        finalScore = 0;
+
+        //stop spawning
+    }
+
+    public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
+    {
+        List<Sprite> dishSprites = new List<Sprite>();
+        foreach (IngredientSO ingredient in ingredients)
+        {
+            dishSprites.Add(ingredient.img);
+        }
+        return dishSprites;
     }
 
     public void StartGame()
     {
+
+        List<Sprite> dishSprites = InstantiateList(dish.recipe);
+        newIngredients = new List<Sprite>(dishSprites);
+        
+        instructions.SetActive(false);
         StartButton.SetActive(false);
         scoreSystem.SetActive(true);
+        
         //call ingredient spawner with a list od ingredient sprites
-        IngredientSpawner.StartSpawn(dishSprites);
+        IngredientSpawner.StartSpawn(newIngredients);
 
         //call bomb spanwer with a list of "wrong" ingredient sprites
         BombSpawner.StartSpawn(bombSprites);
-
-        Score = dish.maxScore;
+        
+        scoretext.text = "Score: " + Score;
         Ingredient = 0;
 
-        Ingredient1.sprite = dish.recipe[0].img;
-        Ingredient2.sprite = dish.recipe[1].img;
-        Ingredient3.sprite = dish.recipe[2].img;
+        Ingredient1.sprite = newIngredients[0];
+        Ingredient2.sprite = newIngredients[1];
+        Ingredient3.sprite = newIngredients[2];
 
     }
  
@@ -83,6 +111,6 @@ public class cutController : MonoBehaviour
         finalScore = Score;
         Debug.Log(finalScore);
         GameEvents.current.assignPointsEventFunction();
-
+       
     }
 }
