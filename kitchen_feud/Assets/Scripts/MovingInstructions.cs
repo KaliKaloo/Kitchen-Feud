@@ -59,14 +59,14 @@ public class MovingInstructions : MonoBehaviour
             if (timer < 0)
             {
                 gameObject.SetActive(false);
-                if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+               /* if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     PhotonNetwork.Destroy(mushroom1);
                 }
                 else
                 {
                     PhotonNetwork.Destroy(mushroom2);
-                }
+                }*/
                 started = false;
             }
         }

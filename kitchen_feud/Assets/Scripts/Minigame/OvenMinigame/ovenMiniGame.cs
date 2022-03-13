@@ -23,23 +23,23 @@ public class ovenMiniGame : MonoBehaviour
     
     void Update()
     {
-        if(transform.childCount == 4)
+        if (transform.childCount == 5)
         {
-            timer = transform.GetChild(3).GetComponent<Timer>();
-            backbutton = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<exitOven>();
-        }
-      
-        if (appliance.isBeingInteractedWith)
-        {
+            timer = transform.GetChild(4).GetComponent<Timer>();
+            backbutton = transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<exitOven>();
 
-           // if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+
+            if (appliance.isBeingInteractedWith)
             {
 
-                backbutton.appliance = GetComponent<Appliance>();
+                
+
+                    backbutton.appliance = GetComponent<Appliance>();
+
+                
+
 
             }
-
-
         }
     }
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5819746606127231167}
   - component: {fileID: 5819746606127231158}
   - component: {fileID: 5819746606127231157}
-  - component: {fileID: 6368711581780557623}
+  - component: {fileID: -2764213112946121774}
   m_Layer: 0
   m_Name: Pasta
   m_TagString: Untagged
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &6368711581780557623
+--- !u!114 &-2764213112946121774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5819746606127231165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825ad979be902e4488b476a1ba8f5d25, type: 3}
+  m_Script: {fileID: 11500000, guid: d76f0f67bc0655f91a4b8988e7758dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 9cebb2c4eec98a143a88d0062c49e950, type: 2}
+  points: 0

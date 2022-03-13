@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	PlayerHolding playerHold;
 	public PhotonView view;
 
+	
 
 	void Start()
 	{
