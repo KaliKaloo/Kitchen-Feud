@@ -92,7 +92,10 @@ public class SpatialAudio : MonoBehaviour
             if(myTeam == 2)
             {
                 kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
-                kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
+                if (!kickPlayers.Instance.oPl1.Contains(PV.ViewID))
+                {
+                    kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
+                }
             }
           
         }
@@ -138,7 +141,10 @@ public class SpatialAudio : MonoBehaviour
             if (myTeam == 1)
             {
                 kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
-                kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 2);
+                if (!kickPlayers.Instance.oPl2.Contains(PV.ViewID))
+                {
+                    kick.GetComponent<PhotonView>().RPC("addOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 2);
+                }
             }
 
         }

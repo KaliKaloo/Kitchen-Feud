@@ -24,7 +24,22 @@ public class kickPlayers : MonoBehaviour
     public static kickPlayers Instance;
 
 
-  
+    void Awake()
+    {
+        Instance = this;
+        /*if (Instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+           // DontDestroyOnLoad(gameObject);
+        }
+
+
+        */
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +80,7 @@ public class kickPlayers : MonoBehaviour
             {
                 //foreach (GameObject p in oPlayers)
                 {
-                    Debug.LogError(oPl1.Count);
+
                     //if (Vector3.Distance(p.transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     if (oPl1.Count>0 && Vector3.Distance(GameObject.Find("Local").transform.position, new Vector3(-3.28f, 1.09f, -14.94f)) < 10)
                     {
@@ -81,7 +96,6 @@ public class kickPlayers : MonoBehaviour
                 }
             }else if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2 )
                 {
-                Debug.LogError(oPl2.Count);
                // foreach (GameObject p in oPlayers)
                 {
 
