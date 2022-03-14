@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
 		
 	}
-	void Update()
+ 
+    void Update()
 	{
 	
 		if (view.IsMine)
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
+						if(obj.tag == "Player") {
+							view.RPC("push", RpcTarget.All,obj.GetComponent<PhotonView>().ViewID, view.ViewID);
+						}
+
 					}
 					// TEMPORARY - Player should not be able to drop item anywhere. 
 					// Drop only on counters, stove etcc
@@ -177,4 +182,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	{
 		PhotonView.Find(viewID).transform.position = pos;
 	}
+	[PunRPC]
+	void push(int objID, int myID)
+    {
+		GameObject obj = PhotonView.Find(objID).gameObject;
+		GameObject me = PhotonView.Find(myID).gameObject;
+		Rigidbody rb = obj.GetComponent<Rigidbody>();
+		Vector3 direction = obj.transform.position - me.transform.position;
+		direction.y = 0;
+		rb.AddForce(direction * 2, ForceMode.Impulse);
+    }
 }
