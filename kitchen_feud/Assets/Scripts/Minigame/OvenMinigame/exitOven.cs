@@ -29,8 +29,6 @@ public class exitOven : MonoBehaviour
 		PV.RPC("globalDestroy", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-
-	
 	}
 	[PunRPC]
 	void globalDestroy(int viewID)
