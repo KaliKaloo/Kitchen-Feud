@@ -11,6 +11,8 @@ public class ovenMiniGame : MonoBehaviour
     public exitOven backbutton;
     //public int finalPoints;
 
+    bool isFire = false;
+
     //public cuttingkeypress k;
 
     // Start is called before the first frame update
@@ -33,6 +35,12 @@ public class ovenMiniGame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
             }
+        }
+        if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){
+            appliance.canUse = false;
+
+        } else{
+            appliance.canUse = true;
         }
     }
 

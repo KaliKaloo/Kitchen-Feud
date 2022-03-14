@@ -27,6 +27,8 @@ public class Appliance : Interactable
     private SlotsController SlotsController;
     public int dishPoints;
 
+    public bool canUse = true;
+
 
     public PhotonView pv;
     public PhotonView myPv;
@@ -46,7 +48,8 @@ public class Appliance : Interactable
         pv = player.GetComponent<PhotonView>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        if (!isBeingInteractedWith)
+        Debug.Log(canUse);
+        if (!isBeingInteractedWith && canUse)
         {
             if (pv.IsMine)
             {
@@ -60,6 +63,9 @@ public class Appliance : Interactable
                     cookDish();
                 }
             }
+        }
+        else{
+            Debug.Log("Appliance in use");
         }
     }
     public void cookDish()

@@ -16,8 +16,9 @@ public class OvenFire : MonoBehaviour
 
     void Update()
     {
+        //and condition if temperature is too high
         if(!startFire){
-            if(timer.timer < 0){
+            if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
                     p.Play();
                 }
