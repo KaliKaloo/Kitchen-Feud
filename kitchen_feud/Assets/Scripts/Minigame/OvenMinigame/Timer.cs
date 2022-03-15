@@ -158,7 +158,13 @@ public class Timer : MonoBehaviour
         score = 0;
     }
 
+
     public void addSeconds(){
-      timerFake += 10f;
+        GetComponent<PhotonView>().RPC("addSecondsRPC", RpcTarget.All);
+   }
+
+   [PunRPC]
+   void addSecondsRPC(){
+        timerFake += 10f;
    }
 }
