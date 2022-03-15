@@ -101,6 +101,9 @@ MonoBehaviour:
   - push
   - setKickable
   - playDing
+  - setObjParent
+  - destHB
+  - giveDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

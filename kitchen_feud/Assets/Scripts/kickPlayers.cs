@@ -47,11 +47,19 @@ public class kickPlayers : MonoBehaviour
         {
             players = GameObject.FindGameObjectsWithTag("Player");
         }
+        
+
          if (players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
-          
-           
-            if (oPlayers.Count == 0)
+            for (int i = 0; i < players.Length; i++)
+            {
+                if(players[i].name != "Local")
+                {
+                    players[i].transform.GetChild(3).GetComponent<AudioListener>().enabled = false;
+                }
+            }
+
+                if (oPlayers.Count == 0)
             {
                 
                 foreach (GameObject p in players)

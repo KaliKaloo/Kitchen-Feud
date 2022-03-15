@@ -163,7 +163,8 @@ MonoBehaviour:
   myTeam: 0
   cam: {fileID: 2216191030710823112}
   healthbar1: {fileID: 0}
-  playerHealthBar: {fileID: 0}
+  theirHealthBar: {fileID: 0}
+  theirHealthBarr: {fileID: 0}
   view: {fileID: 4338776926646805293}
 --- !u!114 &873649799258480705
 MonoBehaviour:
@@ -1058,7 +1059,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5966775144733490437}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &9099027807413192718
 MonoBehaviour:
   m_ObjectHideFlags: 0
