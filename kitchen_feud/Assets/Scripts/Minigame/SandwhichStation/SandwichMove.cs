@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class SandwichMove : MonoBehaviour, IPointerClickHandler
 {
     public SandwichController SandwichController;
-    
-    //private Vector3 perfectPosition;
+    public string LayerID;
+
     private Vector3 locationA;
     private Vector3 locationB;
     private Vector3 nextLocation;
@@ -25,6 +25,7 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     
     void Start()
     {
+        LayerID = "24";
         perfectPosition = platform.localPosition;
         locationA = leftLocation.localPosition;
         locationB = rightLocation.localPosition;
@@ -35,18 +36,15 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!stopped){
-        stopped = true;
-        SandwichController.moving = false;
-        SandwichController.CountStopped++;
-        StopMove();
+        if ((!stopped) && (SandwichController.checkStoppedID(LayerID))){
+            stopped = true;
+            SandwichController.moving = false;
+            SandwichController.CountStopped++;
+            StopMove();
         }
+
     }
 
-    // void ResetPosition(){
-    //     startingPosition = perfectPosition;
-    // }
-    
     void Update() 
     {
         if (!stopped) Move();
