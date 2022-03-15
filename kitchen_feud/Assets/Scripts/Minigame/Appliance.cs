@@ -94,12 +94,13 @@ public class Appliance : Interactable
                 }
                 else
                 {
-                    canvas.gameObject.SetActive(false);
-                    minigameCanvas.gameObject.SetActive(true);
                     if (kitchenNum == 1)
                         minigameCanvas.tag = "Team1";
                     else if (kitchenNum == 2)
                         minigameCanvas.tag = "Team2";
+
+                    canvas.gameObject.SetActive(false);
+                    minigameCanvas.gameObject.SetActive(true);
 
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
