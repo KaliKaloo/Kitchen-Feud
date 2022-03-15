@@ -14,7 +14,6 @@ public class cameraDrag : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.Locked;
-
             float mouseX =  Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
             float mouseY =  Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
             xRotation -= mouseY;
@@ -26,8 +25,5 @@ public class cameraDrag : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;;
         }
 
-        if (Input.GetKey(KeyCode.R)){
-            transform.localRotation = Quaternion.identity;
-        }
     }
 }
