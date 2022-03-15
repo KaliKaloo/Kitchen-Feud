@@ -7,7 +7,10 @@ public class Billboard : MonoBehaviour
 	public Transform cam;
     private void Start()
     {
-        cam = transform.parent.parent.GetChild(3);
+        if (transform.parent.parent.GetChild(3))
+        {
+            cam = transform.parent.parent.GetChild(3);
+        }
     }
 
     void LateUpdate()
