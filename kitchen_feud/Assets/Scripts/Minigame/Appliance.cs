@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class Appliance : Interactable
 {
+    [SerializeField] public int kitchenNum;
+
     GameObject clickedObj;
     private GameObject inputObj;
     public List<IngredientSO> itemsOnTheAppliance = new List<IngredientSO>();
@@ -77,8 +79,6 @@ public class Appliance : Interactable
 
                 if (this.gameObject.tag == "Oven")
                 {
-                    //minigameCanvas.gameObject.SetActive(true);
-                    //minigameCanvas.transform.parent = this.transform.GetChild(0);
                     if (this.name == "Oven1")
                     {
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
@@ -88,11 +88,6 @@ public class Appliance : Interactable
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.identity);
                     }
                     myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
-                    //minigameCanvas.transform.SetParent(transform);
-                    //minigameCanvas.transform.position = transform.GetChild(0).position;
-                    //myPv.RPC("ovenGame", RpcTarget.All,
-                     //minigameCanvas.GetComponent<PhotonView>().ViewID,
-                     //myPv.ViewID);
                     
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine( "DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position, transform.rotation);
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
@@ -101,6 +96,11 @@ public class Appliance : Interactable
                 {
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    if (kitchenNum == 1)
+                        minigameCanvas.tag = "Team1";
+                    else if (kitchenNum == 2)
+                        minigameCanvas.tag = "Team2";
+
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
