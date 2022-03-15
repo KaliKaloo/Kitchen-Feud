@@ -9,17 +9,16 @@ public class ovenMiniGame : MonoBehaviour
     public Timer timer;
     private Appliance appliance;
     public exitOven backbutton;
-    //public int finalPoints;
-
+    // public GameObject sabotageButton;
     bool isFire = false;
-
-    //public cuttingkeypress k;
 
     // Start is called before the first frame update
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
+       
+        
 
     }
     
@@ -29,7 +28,6 @@ public class ovenMiniGame : MonoBehaviour
         {
             timer = transform.GetChild(5).GetComponent<Timer>();
             backbutton = transform.GetChild(5).GetChild(0).GetChild(1).GetComponent<exitOven>();
-
 
             if (appliance.isBeingInteractedWith)
             {
