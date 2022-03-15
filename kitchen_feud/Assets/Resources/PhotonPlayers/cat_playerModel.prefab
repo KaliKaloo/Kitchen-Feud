@@ -157,7 +157,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3701048243505201765}
   m_speed: 5
-  rotatespeed: 150
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
@@ -1039,8 +1038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4b8b4794498a74d8dfc73fe5cae7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotatespeed: 150
+  rotatespeed: 300
   playerBody: {fileID: 549029866571654399}
 --- !u!1 &6142615756986595231
 GameObject:

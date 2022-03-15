@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class cameraDrag : MonoBehaviour
 {
-    public float rotatespeed = 200.0f;
+    public float rotatespeed;
 
     public Transform playerBody;
     float xRotation = 0.0f;
-
    
     void Update()
     {
@@ -25,7 +24,6 @@ public class cameraDrag : MonoBehaviour
 
         }else{
             Cursor.lockState = CursorLockMode.None;;
-
         }
 
         if (Input.GetKey(KeyCode.R)){

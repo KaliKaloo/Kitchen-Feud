@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	PlayerHolding playerHold;
 	public PhotonView view;
 	public CharacterController controller;
+	Vector3 velocity;
+
 	
 
 	void Start()
@@ -77,13 +79,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 			float x = Input.GetAxis("Horizontal");
 			float z = Input.GetAxis("Vertical");
-			Vector3 move = transform.right * x+ transform.forward*z;
+			Vector3 move = transform.right * x + transform.forward*z;
 			controller.Move(move* m_speed * Time.deltaTime);
-
-
-			
+			velocity.y =-10;
+			controller.Move(velocity);
 		}
 	}
+
 
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
