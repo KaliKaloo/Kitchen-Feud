@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cake
   location: 1
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4089278885124418508, guid: 2aaa03957a504aa458baf3156a11a1b6, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: 9b68fde29bfc7f44eab4f7aadfa56d77, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 26
-  img: {fileID: 0}
+  ingredientID: 36

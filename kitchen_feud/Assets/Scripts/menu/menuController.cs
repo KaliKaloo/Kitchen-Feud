@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
+using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class menuController : MonoBehaviourPunCallbacks
@@ -43,6 +44,8 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Text lobbyError;
     IRtcEngine rtcEngine;
+    public int x;
+    Random rnd = new Random();
 
     [SerializeField] private Transform roomListContent;
 
@@ -50,16 +53,19 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
+   
   
 
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+    private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
+
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
     {
         //rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-
+        
         Instance = this;
        // DontDestroyOnLoad(this.gameObject);
 
@@ -97,8 +103,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
 
 
-        rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+        
         PhotonNetwork.AutomaticallySyncScene = true;
+       
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -107,6 +114,7 @@ public class menuController : MonoBehaviourPunCallbacks
             SetTeam(1);
             loadingScreen.SetActive(false);
             usernameMenu.SetActive(true);
+            startButton.SetActive(false);
         } 
         else
         {
@@ -250,9 +258,15 @@ public class menuController : MonoBehaviourPunCallbacks
     // JOIN EXISTING LOBBY HERE
     public void JoinGame()
     {
-        connectPanel.SetActive(false);
-        loadingScreen.SetActive(true);
-        PhotonNetwork.JoinRoom(joinGameInput.text);
+        if (joinGameInput.text != "")
+        {
+            connectPanel.SetActive(false);
+            loadingScreen.SetActive(true);
+            PhotonNetwork.JoinRoom(joinGameInput.text);
+        } else
+        {
+            lobbyError.text = "Cannot be empty";
+        }
     }
 
     public void JoinGameWithInfo(RoomInfo info)
@@ -274,6 +288,21 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            x = rnd.Next(11, 101);
+            lobby["Lobby"] = x;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+           
+        }
+        else
+        {
+            x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+        }
+        rtcEngine.JoinChannel(x.ToString() + "Lobby");
+
         
         loadingScreen.SetActive(false);
 
@@ -429,6 +458,8 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
+   
+  
 }
 
 

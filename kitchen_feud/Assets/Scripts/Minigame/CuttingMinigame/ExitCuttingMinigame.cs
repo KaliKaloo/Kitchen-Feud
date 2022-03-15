@@ -8,10 +8,12 @@ using Photon.Pun;
 public class ExitCuttingMinigame : MonoBehaviour
 {
 	public Button yourButton;
+	public cutController CutController;
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
+	
 
 
 	void Start () {
@@ -21,6 +23,8 @@ public class ExitCuttingMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		CutController.RestartGame();
+		
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);

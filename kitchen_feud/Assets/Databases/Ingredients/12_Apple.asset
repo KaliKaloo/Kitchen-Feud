@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Apple
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2576602944082035470, guid: 945cfdf4386e6b04588c041a3efb44ea, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: ba373edf99bdfd044b55a99eff571278, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 12
-  img: {fileID: 21300000, guid: 1d829f576951f6a428271e8d136664c8, type: 3}
+  ingredientID: 22

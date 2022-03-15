@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class DisplayTicket : MonoBehaviour
 {
     public Text orderNumberText;
-    public Text orderMainText;
-    public Text orderSideText;
-    public Text orderDrinkText;
+   
+    public TextMeshProUGUI orderMainText;
+    public TextMeshProUGUI orderSideText;
+    public TextMeshProUGUI orderDrinkText;
+    public Dictionary<string, Sprite> dishes = new Dictionary<string, Sprite>();
 
     public string orderid;
     public int orderNumber;
@@ -19,14 +22,21 @@ public class DisplayTicket : MonoBehaviour
     {
         orderNumberText.text = o.orderNumber.ToString();
         int size = o.dishes.Count;
-        orderMainText.text = o.dishes[0].name;
-        if (size > 1) orderSideText.text = o.dishes[1].name;
-        else if (size == 3) orderDrinkText.text = o.dishes[2].name;
-
-        orderid = o.orderID;
         
-
-
+        orderMainText.text = o.dishes[0].name;
+        if (size > 1) {
+            orderSideText.text = o.dishes[1].name;
+        }
+        else if (size == 3) {
+            orderDrinkText.text = o.dishes[2].name;
+        }
+        foreach (BaseFood d in o.dishes){
+            if (dishes.ContainsKey(d.name) != true)
+            {
+                dishes.Add(d.name, d.img);
+            }
+        }
+        orderid = o.orderID;
     }
 
     [PunRPC]
@@ -37,12 +47,11 @@ public class DisplayTicket : MonoBehaviour
     [PunRPC]
     void clearAll()
     {
-        this.orderDrinkText.text = "";
+        //this.orderDrinkText.text = "";
         this.orderMainText.text = "";
         this.orderNumberText.text = "";
         this.orderSideText.text = "";
-
-           
+        //this.dishes.Clear();
     }
 }
 

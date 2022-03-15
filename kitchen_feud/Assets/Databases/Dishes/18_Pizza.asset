@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pizza
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5144788934151755850, guid: ae99de9fe3b303a4fbfd8824df85f2d3, type: 3}
   Type: 1
+  img: {fileID: 21300000, guid: 7c677b49dad62e04cb0e571e48faf12b, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 120
   finalScore: 0
-  dishID: DI172325
+  dishID: DI273335
   toCook: Oven
   cookingTime: 20
   recipe:

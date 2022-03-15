@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tomato
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6467319148590857775, guid: 7a2ea4a9929588446b8ead516f5612d4, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: 6152283ad37a13a4ea5209c2b9e6b00a, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 08
-  canFry: 0
-  canCut: 0
-  img: {fileID: 21300000, guid: 38cd0bf9df062d64898268cdd3eb135b, type: 3}
+  ingredientID: 18

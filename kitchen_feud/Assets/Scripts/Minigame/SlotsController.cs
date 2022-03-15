@@ -40,8 +40,7 @@ public class SlotsController : MonoBehaviour {
     }
 
     public void RemoveFromAppliance(Appliance appliance, GameObject heldObjArg, GameObject player) {
-        if (player.GetComponent<PhotonView>().IsMine)
-        {
+       
             appliance.itemsOnTheAppliance.Remove(heldObjArg.GetComponent<IngredientItem>().item);
             pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
             pickable.onAppliance = false;
@@ -50,13 +49,14 @@ public class SlotsController : MonoBehaviour {
                 Debug.Log( x.ToString());
             }
             fullnessCount--;
-        }
+ 
     }
 
     [PunRPC]
      void removeFromApplianceRPC(int appViewID, int objViewID,int playerID)
     {
         RemoveFromAppliance(PhotonView.Find(appViewID).GetComponent<Appliance>(), PhotonView.Find(objViewID).gameObject,PhotonView.Find(playerID).gameObject);
+
 
     }
 

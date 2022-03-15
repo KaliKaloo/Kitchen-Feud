@@ -28,12 +28,11 @@ public class CanvasController : MonoBehaviour
     void Start()
     {
        
-            TC = GetComponent<TrayController>();
-            ticket1.SetActive(false);
-            ticket2.SetActive(false);
-            ticket3.SetActive(false);
-            orderMenu.SetActive(false);
-       
+        TC = GetComponent<TrayController>();
+        ticket1.SetActive(false);
+        ticket2.SetActive(false);
+        ticket3.SetActive(false);
+        orderMenu.SetActive(false);
 
         // 1st parameter is how long till 1st order added
         // 2nd parameter is how many seconds till another order is added

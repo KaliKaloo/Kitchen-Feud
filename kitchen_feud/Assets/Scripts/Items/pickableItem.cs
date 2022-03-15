@@ -46,7 +46,7 @@ public class pickableItem : Interactable
         }
         else {
             playerHold.dropItem();
-            playerHold.pickUpItem(gameObject, item);
+            //playerHold.pickUpItem(gameObject, item);
         }
     }
 		public void removeFromTray(TraySO tray)

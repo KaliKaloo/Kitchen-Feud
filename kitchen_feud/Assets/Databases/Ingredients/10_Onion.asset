@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Onion
   location: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6785610188949978076, guid: 1f70cf5e55e6db642bc5937f43d235ce, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: 45a36832205ecdf48b32032c2f819b4a, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 14
-  img: {fileID: 21300000, guid: c3c820beb29364345a827a8a9f355800, type: 3}
+  ingredientID: 20

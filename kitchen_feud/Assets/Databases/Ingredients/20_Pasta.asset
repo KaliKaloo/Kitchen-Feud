@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pasta
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 551609858966586578, guid: 63c35a71d87609c48a2a334dee7d760b, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: 1d63733e79825b547a2113001b8ee7a5, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 20
-  img: {fileID: 0}
+  ingredientID: 30

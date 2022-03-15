@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cake
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6265423231405801076, guid: 39d946c295fd44f1d81cbb93b079e772, type: 3}
   Type: 1
+  img: {fileID: 21300000, guid: d1f65e113d376d341b9c8ae648fd18a7, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 60
   finalScore: 0
-  dishID: Di26
+  dishID: DI36
   toCook: Oven
   cookingTime: 30
   recipe:

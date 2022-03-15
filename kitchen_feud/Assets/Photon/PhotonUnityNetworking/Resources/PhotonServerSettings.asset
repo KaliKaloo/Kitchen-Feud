@@ -80,6 +80,24 @@ MonoBehaviour:
   - applianceBool
   - onApplianceF
   - removeFromApplianceRPC
+  - setX
+  - ovenGame
+  - doFd
+  - cookedDishG
+  - decCount
+  - resetCount
+  - syncMat
+  - syncSmoke
+  - setTeam
+  - synctele
+  - addOp
+  - setEntered
+  - removeOp
+  - setEnteredF
+  - resetPlayerPressing
+  - setPlayerPressing
+  - resetIsPressed
+  - globalDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

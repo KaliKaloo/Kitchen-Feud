@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Flour
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5412094060877986576, guid: 2538ddda611f68343ac64107dbb6e67c, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: d40b81977e8cd7e478eb8da40118995b, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 21
-  img: {fileID: 0}
+  ingredientID: 31

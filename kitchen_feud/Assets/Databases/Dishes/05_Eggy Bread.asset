@@ -16,10 +16,11 @@ MonoBehaviour:
   location: 0
   Prefab: {fileID: 2416341045423979098, guid: 386fe3d2ba5522f4695cca0dd7ea8609, type: 3}
   Type: 1
+  img: {fileID: 21300000, guid: 36a74291f1e739a48abe0357b584d63e, type: 3}
   canPickUp: 1
   maxScore: 100
   finalScore: 0
-  dishID: DI36
+  dishID: DI1316
   toCook: Stove
   cookingTime: 10
   recipe:

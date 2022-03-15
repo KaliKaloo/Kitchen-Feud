@@ -11,17 +11,23 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject prefabToSpawn;
 
     public float spawnInterval;
-    public float objectMinX;
-    public float objectMaxX;
+    private float objectMinX;
+    private float objectMaxX;
     public float objectY;
     private Image h;
 
-    public List<Sprite> displaySprites = new List<Sprite>();
+    private List<Sprite> displaySprites = new List<Sprite>();
 
-    public cutController CutController;
+    private cutController CutController;
+
+    public void StopSpawn(){
+        CancelInvoke();
+    }
 
     public void StartSpawn(List<Sprite> dishSprites)
     {
+        objectMinX = Screen.width/5;
+        objectMaxX = Screen.width - objectMinX;
         InvokeRepeating("spawnObject", spawnInterval, spawnInterval);
         displaySprites = dishSprites;
     }

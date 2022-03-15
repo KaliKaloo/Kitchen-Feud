@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rice
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 8493873269509207678, guid: 735853166fa29154e97b8383b41dd7dd, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: b3281c5ab1da250479b12810b5ee68bf, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 11
-  canFry: 0
-  canCut: 0
+  ingredientID: 21

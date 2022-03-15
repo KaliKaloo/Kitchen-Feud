@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Buns
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6316129340110068361, guid: 19cdfc8033644f24c918f7368aa79a08, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: beff91cf387ce10409f240868ad202e5, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 04
-  canFry: 0
-  canCut: 0
+  ingredientID: 14

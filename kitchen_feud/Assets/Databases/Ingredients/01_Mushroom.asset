@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom
   location: 3
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6856191594149718735, guid: 44e8ec161c43f0646a595d4afc58c3f0, type: 3}
   Type: 0
+  img: {fileID: 21300000, guid: 0ab34f4297335b94385fcee50e152fde, type: 3}
   canPickUp: 1
   maxScore: -10
   finalScore: 0
-  ingredientID: 01
-  canFry: 0
-  canCut: 0
-  img: {fileID: 21300000, guid: 1d829f576951f6a428271e8d136664c8, type: 3}
+  ingredientID: 11

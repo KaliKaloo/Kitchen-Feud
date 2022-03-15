@@ -12,6 +12,11 @@ TagManager:
   - Appliance
   - Cut
   - cutSpawner
+  - Oven
+  - Bullet
+  - Ingredient
+  - Bomb
+  - Kick
   layers:
   - Default
   - TransparentFX

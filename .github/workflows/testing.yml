@@ -1,0 +1,61 @@
+name: Testing 😎
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+      
+jobs:
+  build:
+    name: Build my project ✨
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+      - name: Cache
+        uses: actions/cache@v2.1.7
+        with:
+          path: kitchen_feud/Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-kitchen_feud-
+            Library-
+
+      # Test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        with:
+          projectPath: kitchen_feud
+          githubToken: ${{ secrets.GITHUB_TOKEN }}          
+          
+      - name: Discord💖
+        uses: appleboy/discord-action@master
+        if: ${{ failure() }}
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: "##2fa2a7"
+          username: "Action Bot"
+          message: "@everyone Regression testing has failed! 🙀"
+
+      - name: Discord 💖
+        uses: appleboy/discord-action@master
+        if: ${{ success() }}
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          color: "##2fa2a7"
+          username: "Action Bot"
+          message: "@everyone Regression testing has passed! 😺 Please review PR!"
+
+      

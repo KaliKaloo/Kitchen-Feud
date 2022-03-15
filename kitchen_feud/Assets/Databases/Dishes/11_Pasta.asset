@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pasta
   location: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5819746606127231165, guid: 282356be8b4ac4c4786c7776e7ea4235, type: 3}
   Type: 1
+  img: {fileID: 21300000, guid: 585a92e961337bd40bfe030e850bd816, type: 3}
   canPickUp: 1
-  maxScore: 100
+  maxScore: 140
   finalScore: 0
-  dishID: DI161720
+  dishID: DI262730
   toCook: Stove
   cookingTime: 20
   recipe:
