@@ -75,20 +75,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 
-			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-			{
-				transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
-			}
-			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-			{
-				transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
-			}
+			
 		}
 	}
 	void FixedUpdate()
 	{
 		if (view.IsMine)
 		{
+			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+			{
+				// transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
+				player.velocity = -getTransformVelocity(transform.right);
+
+			}
+			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+			{
+				// transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
+				player.velocity = getTransformVelocity(transform.right);
+
+			}
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 			{
 				player.velocity = getTransformVelocity(transform.forward);
