@@ -19,7 +19,8 @@ public class SpatialAudio : MonoBehaviour
     public AudioSource ding1;
     public AudioSource ding2;
     public bool isKickable;
-    public bool dingPLayed = false;
+    public bool ding1Played = false;
+    public bool ding2Played = false;
 
  
     public GameObject kick;
@@ -76,7 +77,7 @@ public class SpatialAudio : MonoBehaviour
             }
             if (myTeam == 2)
             {
-                dingPLayed = false;
+                ding1Played = false;
                 kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
                 if(kickPlayers.Instance.oPl1.Contains(PV.ViewID)){
                     kick.GetComponent<PhotonView>().RPC("removeOp", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, PV.ViewID, 1);
@@ -101,9 +102,11 @@ public class SpatialAudio : MonoBehaviour
             }
             if(myTeam == 2)
             {
-                    if (!ding1.isPlaying)
+                Debug.LogError(ding1.isPlaying);
+                    if (ding1Played == false)
                     {
-                        ding1.Play();
+                        PV.RPC("playDing", RpcTarget.All, PV.ViewID, 1);
+                        ding1Played = true;
                     }
                     //PV.RPC("playDing", RpcTarget.All, PV.ViewID);
                   
@@ -133,7 +136,7 @@ public class SpatialAudio : MonoBehaviour
             }
             if (myTeam == 1)
             {
-                dingPLayed = false;
+                ding2Played = false;
                 kick.GetComponent<PhotonView>().RPC("setEnteredF", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
                 if (kickPlayers.Instance.oPl2.Contains(PV.ViewID))
                 {
@@ -164,9 +167,10 @@ public class SpatialAudio : MonoBehaviour
             }
             if (myTeam == 1)
             {
-                if (!ding2.isPlaying)
+                if (ding2Played == false)
                 {
-                    ding2.Play();
+                    PV.RPC("playDing", RpcTarget.All, PV.ViewID, 2);
+                    ding2Played = true;
                 }
                 PV.RPC("setKickable", RpcTarget.All);
                 kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 2);
@@ -180,6 +184,11 @@ public class SpatialAudio : MonoBehaviour
                 PV.RPC("destHB", RpcTarget.All, PV.ViewID);
             }
 
+        }
+
+        if(Vector3.Distance(new Vector3(-3.28f, 1.09f, -14.94f), transform.position) > 10 && Vector3.Distance(new Vector3(-3.22f, 1.09f, 9.4f), transform.position) > 10 && !GetComponent<PlayerController>().healthbar1)
+        {
+            PV.RPC("setKickableF", RpcTarget.All);
         }
     }
 
@@ -205,8 +214,20 @@ public class SpatialAudio : MonoBehaviour
         isKickable = true;
     }
     [PunRPC]
-    void playDing(int viewID) {
-      //  PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding.Play();
+    void setKickableF()
+    {
+        isKickable = false;
+    }
+    [PunRPC]
+    void playDing(int viewID,int room) {
+        if (room == 1)
+        {
+            PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding1.Play();
+        }
+        else
+        {
+            PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding2.Play();
+        }
         //ding.Play();
     }
 
