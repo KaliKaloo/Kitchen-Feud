@@ -10,6 +10,7 @@ public class SandwichController : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject team1Background;
     [SerializeField] private GameObject team2Background;
+    [SerializeField] private GameObject minigameCanvas;
     public GameObject StartButton;
     public GameObject backButton;
     public GameObject GameUI;
@@ -43,13 +44,13 @@ public class SandwichController : MonoBehaviour
     void Start()
     {
         //set bacground to team1
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        if (minigameCanvas.tag == "Team1")
         {
             team1Background.SetActive(true);
             team2Background.SetActive(false);
         }
         //set bacground to team2
-        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        else if (minigameCanvas.tag == "Team2")
         {
             team1Background.SetActive(false);
             team2Background.SetActive(true);
