@@ -113,7 +113,22 @@ public class kickPlayers : MonoBehaviour
 
     }
 
-    public void kickPlayer()
+    public void kickPlayer(GameObject obj)
+    {
+        if(obj.GetComponent<PlayerController>().myTeam == 1)
+        {
+           obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
+        }
+        else
+        {
+            obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
+        }
+
+
+
+    }
+
+    /*public void kickPlayer()
     {
        
         if(GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1) {
@@ -182,7 +197,7 @@ public class kickPlayers : MonoBehaviour
         }
         
 
-    }
+    }*/
 
     [PunRPC]
     void addOp(int viewID1,int viewID, int team)

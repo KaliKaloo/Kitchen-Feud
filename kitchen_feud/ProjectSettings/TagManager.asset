@@ -17,6 +17,7 @@ TagManager:
   - Ingredient
   - Bomb
   - Kick
+  - Speaker1
   layers:
   - Default
   - TransparentFX

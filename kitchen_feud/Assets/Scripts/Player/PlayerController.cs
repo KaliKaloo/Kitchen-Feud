@@ -1,5 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
+using UnityEngine.UIElements;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -11,6 +13,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
+	public GameObject healthbar1;
+	public GameObject theirHealthBar;
+	public HealthBar theirHealthBarr;
+	public Slider theirSlider;
 	public PhotonView view;
 
 	
@@ -63,8 +69,31 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
-						if(obj.tag == "Player") {
+						if(obj.tag == "Player" && obj.GetComponent<SpatialAudio>().isKickable) {
 							view.RPC("push", RpcTarget.All,obj.GetComponent<PhotonView>().ViewID, view.ViewID);
+							if (!obj.GetComponent<PlayerController>().healthbar1)
+							{
+								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
+								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,theirHealthBar.GetComponent<PhotonView>().ViewID);
+								//obj.GetComponent<PlayerController>().healthbar1.transform.SetParent(obj.transform.GetChild(4));
+                            }
+                            else
+                            {
+								theirHealthBarr = obj.GetComponent<PlayerController>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
+								if(theirHealthBarr.slider.value >0){
+									//playerHealthBar.SetHealth((int)playerHealthBar.slider.value - 1);
+									view.RPC("giveDamage", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+								}
+                                else
+                                {
+									GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
+									view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+									//Destroy(playerHealthBar.transform.parent.gameObject);
+                                }
+								//playerHealthBar.SetHealth((int)playerHealthBar.slider.value - 1);
+								
+                            }
+							
 						}
 
 					}
@@ -192,4 +221,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		direction.y = 0;
 		rb.AddForce(direction * 2, ForceMode.Impulse);
     }
+	[PunRPC]
+	void setObjParent(int viewID,int hBviewID )
+    {
+		GameObject obj1 = PhotonView.Find(viewID).gameObject;
+		obj1.GetComponent<PlayerController>().healthbar1 = PhotonView.Find(hBviewID).gameObject;
+		obj1.GetComponent<PlayerController>().healthbar1.transform.SetParent(obj1.transform.GetChild(4));
+    }
+	[PunRPC]
+	void giveDamage(int viewID)
+    {
+		GameObject obj = PhotonView.Find(viewID).gameObject;
+		HealthBar hb = obj.GetComponent<PlayerController>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
+		hb.SetHealth((int)hb.slider.value - 1);
+    }
+	[PunRPC]
+	void destHB(int viewID)
+    {
+		GameObject obj = PhotonView.Find(viewID).gameObject;
+		GameObject hb = obj.GetComponent<PlayerController>().healthbar1.gameObject;
+		Destroy(hb);
+	}
 }
