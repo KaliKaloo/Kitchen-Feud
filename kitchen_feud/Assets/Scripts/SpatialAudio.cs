@@ -102,15 +102,12 @@ public class SpatialAudio : MonoBehaviour
             }
             if(myTeam == 2)
             {
-                Debug.LogError(ding1.isPlaying);
                     if (ding1Played == false)
                     {
                         PV.RPC("playDing", RpcTarget.All, PV.ViewID, 1);
                         ding1Played = true;
                     }
-                    //PV.RPC("playDing", RpcTarget.All, PV.ViewID);
                   
-                //ding.Play();
                 PV.RPC("setKickable", RpcTarget.All);
                 kick.GetComponent<PhotonView>().RPC("setEntered", RpcTarget.All, kick.GetComponent<PhotonView>().ViewID, 1);
                 if (!kickPlayers.Instance.oPl1.Contains(PV.ViewID))
@@ -228,7 +225,6 @@ public class SpatialAudio : MonoBehaviour
         {
             PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding2.Play();
         }
-        //ding.Play();
     }
 
 }

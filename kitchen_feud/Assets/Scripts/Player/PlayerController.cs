@@ -75,22 +75,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 							{
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
 								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,theirHealthBar.GetComponent<PhotonView>().ViewID);
-								//obj.GetComponent<PlayerController>().healthbar1.transform.SetParent(obj.transform.GetChild(4));
                             }
                             else
                             {
 								theirHealthBarr = obj.GetComponent<PlayerController>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 								if(theirHealthBarr.slider.value >0){
-									//playerHealthBar.SetHealth((int)playerHealthBar.slider.value - 1);
 									view.RPC("giveDamage", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
 								}
                                 else
                                 {
 									GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
 									view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
-									//Destroy(playerHealthBar.transform.parent.gameObject);
                                 }
-								//playerHealthBar.SetHealth((int)playerHealthBar.slider.value - 1);
 								
                             }
 							
