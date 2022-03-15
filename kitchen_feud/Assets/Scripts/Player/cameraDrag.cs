@@ -9,7 +9,7 @@ public class cameraDrag : MonoBehaviour
     public Transform playerBody;
     float xRotation = 0.0f;
    
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetMouseButton(1))
         {
