@@ -160,11 +160,11 @@ public class Timer : MonoBehaviour
 
 
     public void addSeconds(){
-        GetComponent<PhotonView>().RPC("addSecondsRPC", RpcTarget.All);
+        GetComponent<PhotonView>().RPC("addSecondsRPC", RpcTarget.All, GetComponent<PhotonView>().ViewID);
    }
 
    [PunRPC]
-   void addSecondsRPC(){
-        timerFake += 10f;
+   void addSecondsRPC(int viewID){
+        PhotonView.Find(viewID).GetComponent<Timer>().timerFake += 10f;
    }
 }
