@@ -64,7 +64,7 @@ public class PanController : MonoBehaviour
             pan.Translate(Vector3.right * mouseCursorSpeed*2 * Time.deltaTime);
             if (avgSpeeds > speedLimit && haveAvg == true) {
                 friedFood.FlipPancake();
-                //Debug.Log(friedFood.points); 
+                Debug.Log("pancake flipped, points:" + friedFood.points); 
             }
         }
 

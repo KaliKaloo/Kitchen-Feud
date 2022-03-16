@@ -33,16 +33,17 @@ public class Plate : MonoBehaviour
         }
     }
     //the collision doesn't seem to happen?
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("plate hit");
         //friedFood.gameObject.transform.SetParent(null);
-        friedFood.gameObject.transform.SetParent(this.gameObject.transform);
+        var obj = col.gameObject.GetComponent<FriedFoodController>();
+        //obj.gameObject.transform.SetParent(this.gameObject.transform);
         Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-        friedFood.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
-        stackedFood.Add(friedFood);
+        obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
+       // stackedFood.Add(friedFood);
         Debug.Log("food destroyed");
-        Destroy(friedFood.gameObject);
-        friedFood = null;
+        Destroy(obj.gameObject);
+        //friedFood = null;
     }
 }

@@ -55,7 +55,7 @@ public class FriedFoodController : MonoBehaviour
     }
     
     public void YeetPancake() {
-        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 5;
+        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
 
         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(minXSpeed, maxXSpeed), Random.Range(minYSpeed, maxYSpeed));
         this.gameObject.transform.SetParent(gameCanvas.transform);
