@@ -20,6 +20,8 @@ public class SandwichController : MonoBehaviour
     public Text scoreText;
     
     public SandwichSpawner SandwichSpawner;
+    public LayerSpawn LayerSpawn;
+    public List<string> idList = new List<string>();
 
     public bool moving = false;
     public int CountStopped;
@@ -76,10 +78,27 @@ public class SandwichController : MonoBehaviour
         Score = 0;
         moving = true;
        
+       
+        //make a copy of list of ingredients and add bread again at the end
         sandwichIngredients = new List<IngredientSO>(dish.recipe);
         sandwichIngredients.Add(dish.recipe[0]);
+        
+        List<string> ingredientIDs = InstantiateList(sandwichIngredients);
+        idList = new List<string>(ingredientIDs);
+
+        LayerSpawn.StartSpawn(idList);
 
         objectSpawn(sandwichIngredients);
+    }
+
+     public List<string> InstantiateList(List<IngredientSO> ingredients)
+    {
+        List<string> ingredientIDs = new List<string>();
+        foreach (IngredientSO ingredient in ingredients)
+        {
+            ingredientIDs.Add(ingredient.ingredientID);
+        }
+        return ingredientIDs;
     }
 
     public void objectSpawn(List<IngredientSO> sandwichIngredients){   

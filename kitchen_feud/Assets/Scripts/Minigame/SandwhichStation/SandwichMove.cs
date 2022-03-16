@@ -7,6 +7,8 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 {
     public SandwichController SandwichController;
     public string LayerID;
+    public float speed;
+
 
     private Vector3 locationA;
     private Vector3 locationB;
@@ -17,16 +19,15 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Transform platform;
     [SerializeField] private Transform rightLocation;
 
-
     public bool stopped = false;
-    public float speed;
-
+    
     // Start is called before the first frame update
     
     void Start()
     {
-        LayerID = "24";
+        // perfectPosition = (Screen.width/2, Screen.height/2, 0);
         perfectPosition = platform.localPosition;
+        
         locationA = leftLocation.localPosition;
         locationB = rightLocation.localPosition;
         nextLocation = locationB;

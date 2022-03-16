@@ -14,9 +14,15 @@ public class SandwichSpawner : MonoBehaviour
     //SpawnLayers();
     public GameObject spawnObject(IngredientSO i){
         GameObject newObject = Instantiate(this.prefabToSpawn);
-        newObject.transform.position = new Vector3(0,0,0);
+        
+       // new Vector3()= newObject.transform.SetParent(transform).position;
         newObject.transform.SetParent(transform);
-        //iSO = i;
+        
+        GameObject myParentObject = gameObject;
+        newObject.transform.parent = myParentObject.transform;
+        newObject.transform.position = myParentObject.transform.position;
+       // newObject.transform.position = parent.transform.localPosition;
+        
         newObject.GetComponent<Image>().sprite = i.img;
         newObject.GetComponent<SandwichID>().Id = i.ingredientID;
          
