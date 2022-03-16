@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public CharacterController controller;
 	Vector3 velocity;
 
-	
-
 	void Start()
 	{
 		
@@ -47,6 +45,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
 		
 	}
+
+	
 	void Update()
 	{
 	
@@ -124,7 +124,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		return transform * m_speed * Time.deltaTime;
 	}
 
-	
 
 	// Remove our current focus
 	void RemoveFocus()
