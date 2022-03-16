@@ -144,14 +144,12 @@ public class SpatialAudio : MonoBehaviour
         }
         else
         {
+            
             if(myTeam == 2 && myC == 0)
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team2");
                 myC = 2;
-               
-               
-
             }
 
 
@@ -215,8 +213,8 @@ public class SpatialAudio : MonoBehaviour
     {
         isKickable = false;
     }
-    [PunRPC]
-    void playDing(int viewID,int room) {
+   // [PunRPC]
+  /*  void playDing(int viewID,int room) {
         if (room == 1)
         {
             PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding1.Play();
@@ -225,6 +223,6 @@ public class SpatialAudio : MonoBehaviour
         {
             PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding2.Play();
         }
-    }
+    }*/
 
 }

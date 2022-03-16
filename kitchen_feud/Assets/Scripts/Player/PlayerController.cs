@@ -18,8 +18,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public HealthBar theirHealthBarr;
 	public Slider theirSlider;
 	public PhotonView view;
+	public bool isKickable;
+	public bool entered1 = false;
+	public bool entered2 = false;
+	public int myC;
 
-	
+
 
 	void Start()
 	{
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			myC = 1;
 			if(myTeam == 1)
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
@@ -49,6 +54,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
 		}
+		if(myTeam  == 1)
+        {
+			entered1 = true;
+        }
+        else
+        {
+			entered2 = true;
+        }
 		
 	}
  
@@ -69,7 +82,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
-						if(obj.tag == "Player" && obj.GetComponent<SpatialAudio>().isKickable) {
+						if(obj.tag == "Player" && obj.GetComponent<PlayerController>().isKickable) {
 							view.RPC("push", RpcTarget.All,obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerController>().healthbar1)
 							{
@@ -113,6 +126,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			{
 				transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
 			}
+
+		
+			
+				if (entered1 == false && entered2 == false && !healthbar1)
+				{
+					view.RPC("setKickableF", RpcTarget.All,view.ViewID);
+				}
+			
 		}
 	}
 	void FixedUpdate()
@@ -238,4 +259,48 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		GameObject hb = obj.GetComponent<PlayerController>().healthbar1.gameObject;
 		Destroy(hb);
 	}
+	[PunRPC]
+	void setKickable(int viewID)
+	{
+		PlayerController PC = PhotonView.Find(viewID).GetComponent<PlayerController>();
+		PC.isKickable = true;
+	}
+	[PunRPC]
+	void setKickableF(int viewID)
+	{
+		PlayerController PC = PhotonView.Find(viewID).GetComponent<PlayerController>();
+		PC.isKickable = false;
+	}
+	[PunRPC]
+	void setEntered(int viewID,int x)
+    {
+		GameObject obj = PhotonView.Find(viewID).gameObject;
+		if (x == 1)
+		{
+			obj.GetComponent<PlayerController>().entered1 = true;
+		}
+        else
+        {
+			obj.GetComponent<PlayerController>().entered2 = true;
+		}
+
+
+    }
+	[PunRPC]
+	void setEnteredF(int viewID, int x)
+	{
+		GameObject obj = PhotonView.Find(viewID).gameObject;
+		if (x == 1)
+		{
+			obj.GetComponent<PlayerController>().entered1 = false;
+		}
+		else
+		{
+			obj.GetComponent<PlayerController>().entered2 = false;
+		}
+
+
+	}
+	
+
 }

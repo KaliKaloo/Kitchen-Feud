@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: -4051723241564414901}
   - component: {fileID: 873649799258480705}
   - component: {fileID: -8892825353978446714}
-  - component: {fileID: -7555329301987854437}
   - component: {fileID: 496252007107752818}
   - component: {fileID: 9098004792979052052}
   m_Layer: 0
@@ -166,6 +165,10 @@ MonoBehaviour:
   theirHealthBar: {fileID: 0}
   theirHealthBarr: {fileID: 0}
   view: {fileID: 4338776926646805293}
+  isKickable: 0
+  entered1: 0
+  entered2: 0
+  myC: 0
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,26 +220,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &-7555329301987854437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924745824932806213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a37f4102efc241cbaac604195ffc31e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
-  cube: {fileID: 4497627996167492564, guid: eea8078eb9b764be280538c6cc2555ca, type: 3}
-  ding1: {fileID: 0}
-  ding2: {fileID: 0}
-  isKickable: 0
-  ding1Played: 0
-  ding2Played: 0
-  kick: {fileID: 0}
 --- !u!64 &496252007107752818
 MeshCollider:
   m_ObjectHideFlags: 0
