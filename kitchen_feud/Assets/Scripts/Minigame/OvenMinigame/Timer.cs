@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 10;
+    private static int time = 40;
 
     public Text timerText;
     public float timer = time;
