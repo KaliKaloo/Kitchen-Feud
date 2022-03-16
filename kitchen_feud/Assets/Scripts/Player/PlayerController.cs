@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public bool entered1 = false;
 	public bool entered2 = false;
 	public int myC;
+	public bool played;
+	
 
 
 
 	void Start()
 	{
+		
 		
 		if (PhotonNetwork.IsConnected)
 		{
@@ -301,6 +304,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 	}
-	
+	[PunRPC]
+	void setPlayed(int viewID, int x)
+	{
+		if (x == 0)
+		{
+			PhotonView.Find(viewID).GetComponent<PlayerController>().played = false;
+		}
+		else
+		{
+			PhotonView.Find(viewID).GetComponent<PlayerController>().played = true;
+		}
+	}
+
 
 }

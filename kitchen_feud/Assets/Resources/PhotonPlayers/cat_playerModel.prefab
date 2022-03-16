@@ -169,6 +169,7 @@ MonoBehaviour:
   entered1: 0
   entered2: 0
   myC: 0
+  trigger: 0
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0

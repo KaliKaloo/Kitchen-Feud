@@ -43,28 +43,7 @@ public class AudioManagerTwo : MonoBehaviour
     void Update()
     {
 
-       /* Debug.Log(myC);
-        if (!PV.IsMine)
-        {
-            if (myTeam == 2 && myC == 0)
-            {
-                Debug.Log("222");
-                engine.LeaveChannel();
-
-                engine.JoinChannel(randomInstance + "Team2");
-
-                PV.RPC("setMyC",RpcTarget.All,1);
-            }
-            else if (myTeam == 1 && myC == 0)
-            {
-                Debug.Log("1111");
-                engine.LeaveChannel();
-
-                engine.JoinChannel(randomInstance + "Team1");
-
-                PV.RPC("setMyC",RpcTarget.All,1);
-            }
-        }*/
+    
     }
    
     private void OnTriggerEnter(Collider other)
@@ -78,13 +57,9 @@ public class AudioManagerTwo : MonoBehaviour
             {
                 pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
             }
-            else
-            {
-                pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
-            }
+           
 
-            if (myPlayerC.entered2 == true)
-            {
+           
                 engine.LeaveChannel();
 
                 engine.JoinChannel(randomInstance + "Team2");
@@ -92,10 +67,10 @@ public class AudioManagerTwo : MonoBehaviour
                 if (myTeam == 1)
                 {
 
-                    if (played == false)
+                    if (myPlayerC.played == false)
                     {
                         PV.RPC("playDing", RpcTarget.All, PV.ViewID);
-                        played = true;
+                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 1);
                     }
 
                     pFV.RPC("setKickable", RpcTarget.All,pFV.ViewID);
@@ -110,16 +85,7 @@ public class AudioManagerTwo : MonoBehaviour
 
 
 
-            }
-            if (myPlayerC.entered2 == false)
-            {
-                engine.LeaveChannel();
-                engine.JoinChannel(randomInstance + "Path");
-                if (myTeam == 1)
-                {
-                    played = false;
-                }
-            }
+     
 
         }
     }
@@ -131,6 +97,7 @@ public class AudioManagerTwo : MonoBehaviour
             PhotonView.Find(viewID).GetComponent<AudioManagerTwo>().ding.Play();
         
     }
+  
    
    
 }

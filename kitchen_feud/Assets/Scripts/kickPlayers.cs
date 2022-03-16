@@ -50,7 +50,6 @@ public class kickPlayers : MonoBehaviour
     void Update()
     {
 
-        //if (PV.IsMine)
         
 
 
@@ -77,7 +76,6 @@ public class kickPlayers : MonoBehaviour
                     GameObject.Find("Local").GetComponent<PlayerController>().myC == 0 &&
                     GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
                 {
-                    Debug.Log("WORKED");
                     engine.LeaveChannel();
                     engine.JoinChannel(randomInstance + "Team1");
                     PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
@@ -91,7 +89,6 @@ public class kickPlayers : MonoBehaviour
                GameObject.Find("Local").GetComponent<PlayerController>().myC == 0 &&
                GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2)
             {
-                Debug.Log("WORKED");
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team2");
                 PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);

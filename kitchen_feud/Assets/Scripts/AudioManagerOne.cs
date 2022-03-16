@@ -13,6 +13,8 @@ public class AudioManagerOne : MonoBehaviour
     public AudioSource ding;
     public PhotonView PV;
     public bool played;
+    public GameObject otherP;
+
 
 
     private void Awake()
@@ -27,7 +29,7 @@ public class AudioManagerOne : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-       
+      
 
         if (myTeam == 1)
         {
@@ -40,37 +42,39 @@ public class AudioManagerOne : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-              
+        
     }
+ 
     private void OnTriggerEnter(Collider other)
     {
+      
         if (other.GetComponent<PhotonView>().IsMine)
         {
             PhotonView pFV = other.GetComponent<PhotonView>();
             PlayerController myPlayerC = other.GetComponent<PlayerController>();
             myTeam = myPlayerC.myTeam;
             Debug.Log("Hello");
+
+
             if (myPlayerC.entered1 == false)
             {
 
                 pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
+                //GetComponent<BoxCollider>().enabled = true;
             }
-            else
-            {
-                pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
-            }
-
-            if (myPlayerC.entered1 == true)
-            {
+            
+            
+           // if (myPlayerC.entered1 == true)
+            //{
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team1");
                 if (myTeam == 2)
                 {
-                    if (played == false)
+                    if (myPlayerC.played == false)
                     {
                         PV.RPC("playDing", RpcTarget.All, PV.ViewID);
-                        played = true;
-                    }
+                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 1);
+                }
                     pFV.RPC("setKickable", RpcTarget.All,pFV.ViewID);
                 }
                 if (myTeam == 1 && myPlayerC.healthbar1)
@@ -80,16 +84,11 @@ public class AudioManagerOne : MonoBehaviour
 
                 }
 
-            }
-            if (myPlayerC.entered1 == false)
-            {
-                engine.LeaveChannel();
-                engine.JoinChannel(randomInstance + "Path");
-                if (myTeam == 2)
-                {
-                    played = false;
-                }
-            }
+         //   }
+          //  if (myPlayerC.entered1 == false)
+           // {
+              
+        //    }
 
             
 
