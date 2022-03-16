@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 1
+    path: Assets/Scenes/kitchens_smoke.unity
+    guid: cb938da6f7927db41b4470a6de36efee
+  - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 0fe26d4b823f22a48a9f25883690bf83
   - enabled: 0
-    path: Assets/Scenes/kitchens-ovenFire.unity
-    guid: 85508c48ddad12f43a44684b36fe2bdc
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
