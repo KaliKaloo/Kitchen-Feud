@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class SandwichMove : MonoBehaviour, IPointerClickHandler
 {
     public SandwichController SandwichController;
     public string LayerID;
     public float speed;
-
+    public SpriteAtlas imgAtlas;
 
     private Vector3 locationA;
     private Vector3 locationB;
@@ -33,7 +35,8 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         nextLocation = locationB;
         
         SandwichController = gameObject.GetComponentInParent<SandwichController>();
-    }
+        platform.GetComponent<Image>().sprite = imgAtlas.GetSprite(LayerID);
+    }   
 
     public void OnPointerClick(PointerEventData eventData)
     {

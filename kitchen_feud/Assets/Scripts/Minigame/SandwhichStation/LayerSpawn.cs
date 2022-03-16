@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class LayerSpawn : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject prefab;
+    public SpriteAtlas imgAtlas;
+        
     private float gridX = 1;
     private float gridY = 4;
     private float spacing = Screen.height/6;
@@ -22,7 +25,7 @@ public class LayerSpawn : MonoBehaviour
 
                     newObject.GetComponent<SandwichMove>().LayerID = idList[y-1];
                     newObject.GetComponent<SandwichMove>().speed = Random.Range(550, 730);
-                    //newObject.GetComponent<Image>().sprite = dictionary by id
+                    newObject.GetComponent<SandwichMove>().imgAtlas = imgAtlas;
                 }
             }
         

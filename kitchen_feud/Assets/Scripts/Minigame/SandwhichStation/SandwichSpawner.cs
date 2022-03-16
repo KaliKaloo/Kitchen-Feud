@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SandwichSpawner : MonoBehaviour
 {
     public SandwichController SandwichController;
     public GameObject prefabToSpawn;
-    //public IngredientSO iSO;
-    public Image img;
 
 
     //SpawnLayers();
