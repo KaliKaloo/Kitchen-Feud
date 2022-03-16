@@ -33,9 +33,7 @@ public class StoveMinigameCounter
 
     public bool GetGameState()
     {
-        
         return end;
-        
     }
 
     public void ResetCounter()
