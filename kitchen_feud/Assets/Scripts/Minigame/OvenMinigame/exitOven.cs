@@ -14,6 +14,7 @@ public class exitOven : MonoBehaviour
 	public Appliance appliance;
 	public PhotonView PV;
 
+
 	void Start()
 	{
 		Button btn = yourButton.GetComponent<Button>();
