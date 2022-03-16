@@ -20,7 +20,8 @@ public class FriedFoodController : MonoBehaviour
     void Start()
     {
         //you need to get the pancontroller for every instance of the prefab!
-        gameObject.transform.parent = pan.gameObject.transform.parent;
+        //gameObject.transform.parent = pan.gameObject.transform.parent;
+        gameObject.transform.SetParent(pan.gameObject.transform.parent);
         //startLocation = pan.transform.position;
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
@@ -38,8 +39,9 @@ public class FriedFoodController : MonoBehaviour
         //NO ISFLIPPED - FLIP MULTIPLE TIMES INSTEAD
         //NO POST OR PREFLIPPOINTS, ADD UP MULTIPLE TIMES
         if (isFlipped == false) {
-            Debug.Log("Flip pancake!");
             isFlipped = true;
+            Debug.Log("Flip pancake!");
+            
             //preFlipPoints = timer.Reset();
         //}
        // else if (isFlipped == true) {

@@ -7,6 +7,8 @@ public class Plate : MonoBehaviour
     public FriedFoodController friedFood;
     public List<FriedFoodController> stackedFood = new List<FriedFoodController>();
     public PanController pan;
+    private Vector2 screenBounds;
+    public float totalPoints;
 
     // Start is called before the first frame update
 
@@ -17,7 +19,9 @@ public class Plate : MonoBehaviour
     //move and be controlled by another player
     void Start()
     {
+        totalPoints = 0;
         friedFood = pan.friedFood;
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
@@ -27,17 +31,23 @@ public class Plate : MonoBehaviour
         //TEMPORARY UNTIL THE COLLISIONS WORK
         if(pan.friedFood != null) friedFood = pan.friedFood;
         
-        if(friedFood != null && friedFood.gameObject.transform.position.y < this.gameObject.transform.position.y) {
-            //Destroy(friedFood.gameObject);
+        /*if(friedFood != null && friedFood.gameObject.transform.position.y < this.gameObject.transform.position.y) {
+            Destroy(friedFood.gameObject);
             
+        }*/
+        if(friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y) {
+            friedFood.timer.Reset();
+            Destroy(friedFood.gameObject);
         }
     }
-    //the collision doesn't seem to happen?
+ 
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("plate hit");
         //friedFood.gameObject.transform.SetParent(null);
         var obj = col.gameObject.GetComponent<FriedFoodController>();
+        totalPoints += obj.points;
+        Debug.Log("total points:" + totalPoints);
         //obj.gameObject.transform.SetParent(this.gameObject.transform);
         Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;

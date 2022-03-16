@@ -20,15 +20,18 @@ public class PanController : MonoBehaviour
     private bool haveAvg;
     public int foodInstancesCounter;
     public FryingTimerBar timer;
+    //public float totalPoints;
+    private bool pointsAssigned = false;
 
     void Start () {
+        //totalPoints = 0;
         startLocation = pan.position;
         haveAvg = false;
         speeds = new Queue<float>();
         foodInstancesCounter = 0;
 
         Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-        var temp = Instantiate(friedFoodPrefab, panPos, Quaternion.identity);
+        var temp = Instantiate(friedFoodPrefab, panPos, friedFoodPrefab.transform.rotation);
         friedFood = temp.GetComponent<FriedFoodController>();
         friedFood.pan = this;
         friedFood.gameCanvas = this.gameObject.transform.parent.transform.parent.gameObject;
@@ -62,23 +65,24 @@ public class PanController : MonoBehaviour
         }
         if(Input.GetAxis("Mouse X")>0 && ( lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)){
             pan.Translate(Vector3.right * mouseCursorSpeed*2 * Time.deltaTime);
-            if (avgSpeeds > speedLimit && haveAvg == true) {
+            if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false) {
+                pointsAssigned = true;
                 friedFood.FlipPancake();
-                Debug.Log("pancake flipped, points:" + friedFood.points); 
+                //totalPoints += friedFood.points;
+                //Debug.Log("pancake flipped, points:" + friedFood.points); 
+                //Debug.Log("totalPoints:" + totalPoints);
             }
         }
 
         if(foodInstancesCounter < foodInstances && friedFood == null) {
-                    //instantiate new pancake
-                    //friedFood = the new pancake
                 Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-                var temp = Instantiate(friedFoodPrefab, panPos, Quaternion.identity);
+                var temp = Instantiate(friedFoodPrefab, panPos, friedFoodPrefab.transform.rotation);
                 friedFood = temp.GetComponent<FriedFoodController>();
                 friedFood.pan = this;
                 friedFood.gameCanvas = this.gameObject.transform.parent.transform.parent.gameObject;
                 friedFood.timer = timer;
-                //friedFood = friedFoodPrefab.GetComponent<FriedFoodController>();
                 foodInstancesCounter++;
+                pointsAssigned = false;
                 Debug.Log(foodInstancesCounter);
         }
     }
