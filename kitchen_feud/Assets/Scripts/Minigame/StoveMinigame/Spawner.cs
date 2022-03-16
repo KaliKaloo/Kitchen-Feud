@@ -57,7 +57,6 @@ public class StoveMinigameCounter
     }
 }
 
-
 public class Spawner : MonoBehaviour
 {
 
@@ -66,6 +65,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject startButton;
     [SerializeField] public GameObject team1Background;
     [SerializeField] public GameObject team2Background;
+    [SerializeField] public GameObject minigameCanvas;
     public GameObject backButton;
     public GameObject topBar;
 
@@ -96,18 +96,6 @@ public class Spawner : MonoBehaviour
         chosenX = Screen.width;
         chosenY = Screen.height;
         backButton.SetActive(false);
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
-        {
-            parentCanvas = team1Background;
-            team1Background.SetActive(true);
-            team2Background.SetActive(false);
-        }
-        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
-        {
-            parentCanvas = team2Background;
-            team1Background.SetActive(false);
-            team2Background.SetActive(true);
-        }
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -122,6 +110,11 @@ public class Spawner : MonoBehaviour
 
     public void StartGame()
     {
+        if (team1Background.activeSelf)
+            parentCanvas = team1Background;
+        else if (team2Background.activeSelf)
+            parentCanvas = team2Background;
+
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
         
