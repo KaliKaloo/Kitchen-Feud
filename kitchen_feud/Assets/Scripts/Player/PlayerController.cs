@@ -13,17 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
-	public GameObject healthbar1;
-	public GameObject theirHealthBar;
-	public HealthBar theirHealthBarr;
-	public Slider theirSlider;
 	public PhotonView view;
-	public bool isKickable;
-	public bool entered1 = false;
-	public bool entered2 = false;
-	public int myC;
-	public bool played;
-	
 
 
 
@@ -47,7 +37,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-			myC = 1;
+			
 			if(myTeam == 1)
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
@@ -57,14 +47,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
 		}
-		if(myTeam  == 1)
-        {
-			entered1 = true;
-        }
-        else
-        {
-			entered2 = true;
-        }
+		
 		
 	}
  
@@ -85,29 +68,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
-						if(obj.tag == "Player" && obj.GetComponent<PlayerController>().isKickable) {
-							view.RPC("push", RpcTarget.All,obj.GetComponent<PhotonView>().ViewID, view.ViewID);
-							if (!obj.GetComponent<PlayerController>().healthbar1)
-							{
-								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,theirHealthBar.GetComponent<PhotonView>().ViewID);
-                            }
-                            else
-                            {
-								theirHealthBarr = obj.GetComponent<PlayerController>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
-								if(theirHealthBarr.slider.value >0){
-									view.RPC("giveDamage", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
-								}
-                                else
-                                {
-									GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
-									view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
-                                }
-								
-                            }
-							
-						}
-
 					}
 					// TEMPORARY - Player should not be able to drop item anywhere. 
 					// Drop only on counters, stove etcc
@@ -132,10 +92,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 		
 			
-				if (entered1 == false && entered2 == false && !healthbar1)
-				{
-					view.RPC("setKickableF", RpcTarget.All,view.ViewID);
-				}
+				
 			
 		}
 	}
@@ -231,91 +188,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	{
 		PhotonView.Find(viewID).transform.position = pos;
 	}
-	[PunRPC]
-	void push(int objID, int myID)
-    {
-		GameObject obj = PhotonView.Find(objID).gameObject;
-		GameObject me = PhotonView.Find(myID).gameObject;
-		Rigidbody rb = obj.GetComponent<Rigidbody>();
-		Vector3 direction = obj.transform.position - me.transform.position;
-		direction.y = 0;
-		rb.AddForce(direction * 2, ForceMode.Impulse);
-    }
-	[PunRPC]
-	void setObjParent(int viewID,int hBviewID )
-    {
-		GameObject obj1 = PhotonView.Find(viewID).gameObject;
-		obj1.GetComponent<PlayerController>().healthbar1 = PhotonView.Find(hBviewID).gameObject;
-		obj1.GetComponent<PlayerController>().healthbar1.transform.SetParent(obj1.transform.GetChild(4));
-    }
-	[PunRPC]
-	void giveDamage(int viewID)
-    {
-		GameObject obj = PhotonView.Find(viewID).gameObject;
-		HealthBar hb = obj.GetComponent<PlayerController>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
-		hb.SetHealth((int)hb.slider.value - 1);
-    }
-	[PunRPC]
-	void destHB(int viewID)
-    {
-		GameObject obj = PhotonView.Find(viewID).gameObject;
-		GameObject hb = obj.GetComponent<PlayerController>().healthbar1.gameObject;
-		Destroy(hb);
-	}
-	[PunRPC]
-	void setKickable(int viewID)
-	{
-		PlayerController PC = PhotonView.Find(viewID).GetComponent<PlayerController>();
-		PC.isKickable = true;
-	}
-	[PunRPC]
-	void setKickableF(int viewID)
-	{
-		PlayerController PC = PhotonView.Find(viewID).GetComponent<PlayerController>();
-		PC.isKickable = false;
-	}
-	[PunRPC]
-	void setEntered(int viewID,int x)
-    {
-		GameObject obj = PhotonView.Find(viewID).gameObject;
-		if (x == 1)
-		{
-			obj.GetComponent<PlayerController>().entered1 = true;
-		}
-        else
-        {
-			obj.GetComponent<PlayerController>().entered2 = true;
-		}
 
 
-    }
-	[PunRPC]
-	void setEnteredF(int viewID, int x)
-	{
-		GameObject obj = PhotonView.Find(viewID).gameObject;
-		if (x == 1)
-		{
-			obj.GetComponent<PlayerController>().entered1 = false;
-		}
-		else
-		{
-			obj.GetComponent<PlayerController>().entered2 = false;
-		}
-
-
-	}
-	[PunRPC]
-	void setPlayed(int viewID, int x)
-	{
-		if (x == 0)
-		{
-			PhotonView.Find(viewID).GetComponent<PlayerController>().played = false;
-		}
-		else
-		{
-			PhotonView.Find(viewID).GetComponent<PlayerController>().played = true;
-		}
-	}
 
 
 }

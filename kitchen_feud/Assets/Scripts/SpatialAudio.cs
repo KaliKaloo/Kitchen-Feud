@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -121,6 +121,7 @@ public class SpatialAudio : MonoBehaviour
                 PV.RPC("destHB", RpcTarget.All, PV.ViewID);
             }
           
+
         }
 
         if (Vector3.Distance(new Vector3(-3.22f, 1.09f,9.4f), transform.position) > 10)
@@ -214,7 +215,7 @@ public class SpatialAudio : MonoBehaviour
         isKickable = false;
     }
    // [PunRPC]
-  /*  void playDing(int viewID,int room) {
+   void playDing(int viewID,int room) {
         if (room == 1)
         {
             PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding1.Play();
@@ -223,6 +224,6 @@ public class SpatialAudio : MonoBehaviour
         {
             PhotonView.Find(viewID).GetComponent<SpatialAudio>().ding2.Play();
         }
-    }*/
+    }
 
-}
+}*/

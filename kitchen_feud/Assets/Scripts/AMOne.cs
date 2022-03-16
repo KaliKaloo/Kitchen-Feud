@@ -41,9 +41,11 @@ public class AMOne : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        PhotonView pFV = other.GetComponent<PhotonView>();
+        PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+        if (pFV.IsMine)
         {
-            PhotonView pFV = other.GetComponent<PhotonView>();
-            PlayerController myPlayerC = other.GetComponent<PlayerController>();
+           
             myTeam = myPlayerC.myTeam;
             if (myPlayerC.entered1 == true)
             {

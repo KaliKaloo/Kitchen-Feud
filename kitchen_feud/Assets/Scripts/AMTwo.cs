@@ -42,22 +42,25 @@ public class AMTwo : MonoBehaviour
     {
         {
             PhotonView pFV = other.GetComponent<PhotonView>();
-            PlayerController myPlayerC = other.GetComponent<PlayerController>();
+            PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
             myTeam = myPlayerC.myTeam;
-             if(myPlayerC.entered2 == true)
+            if (pFV.IsMine)
             {
-                pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
-                engine.LeaveChannel();
-                engine.JoinChannel(randomInstance + "Path");
-                if (myTeam == 1)
+                if (myPlayerC.entered2 == true)
                 {
-                    pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                    pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
+                    engine.LeaveChannel();
+                    engine.JoinChannel(randomInstance + "Path");
+                    if (myTeam == 1)
+                    {
+                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                    }
                 }
+
+
+
+
             }
-            
-                
-                
-          
         }
 
     }

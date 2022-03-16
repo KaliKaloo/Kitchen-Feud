@@ -47,25 +47,21 @@ public class AudioManagerOne : MonoBehaviour
  
     private void OnTriggerEnter(Collider other)
     {
-      
-        if (other.GetComponent<PhotonView>().IsMine)
+        PhotonView pFV = other.GetComponent<PhotonView>();
+        PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+        myTeam = myPlayerC.myTeam;
+        Debug.Log("Hello");
+        if (pFV.IsMine)
         {
-            PhotonView pFV = other.GetComponent<PhotonView>();
-            PlayerController myPlayerC = other.GetComponent<PlayerController>();
-            myTeam = myPlayerC.myTeam;
-            Debug.Log("Hello");
+          
 
 
             if (myPlayerC.entered1 == false)
             {
 
                 pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
-                //GetComponent<BoxCollider>().enabled = true;
             }
-            
-            
-           // if (myPlayerC.entered1 == true)
-            //{
+     
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team1");
                 if (myTeam == 2)
@@ -84,12 +80,7 @@ public class AudioManagerOne : MonoBehaviour
 
                 }
 
-         //   }
-          //  if (myPlayerC.entered1 == false)
-           // {
-              
-        //    }
-
+  
             
 
         }

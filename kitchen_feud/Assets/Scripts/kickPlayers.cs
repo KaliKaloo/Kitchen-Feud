@@ -73,7 +73,7 @@ public class kickPlayers : MonoBehaviour
 
             
                 if (Vector3.Distance(new Vector3(-3.28f, 1.09f, -14.94f), GameObject.Find("Local").transform.position) < 10 &&
-                    GameObject.Find("Local").GetComponent<PlayerController>().myC == 0 &&
+                    GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myC == 0 &&
                     GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
                 {
                     engine.LeaveChannel();
@@ -86,7 +86,7 @@ public class kickPlayers : MonoBehaviour
 
 
             if (Vector3.Distance(new Vector3(-3.22f, 1.09f, 9.4f), GameObject.Find("Local").transform.position) < 10 &&
-               GameObject.Find("Local").GetComponent<PlayerController>().myC == 0 &&
+               GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myC == 0 &&
                GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2)
             {
                 engine.LeaveChannel();
@@ -361,7 +361,7 @@ public class kickPlayers : MonoBehaviour
     [PunRPC]
     void setMyC(int viewiD,int x)
     {
-        PlayerController OV = PhotonView.Find(viewiD).GetComponent<PlayerController>();
+        PlayerVoiceManager OV = PhotonView.Find(viewiD).GetComponent<PlayerVoiceManager>();
         OV.myC = x;
     }
 }

@@ -48,11 +48,13 @@ public class AudioManagerTwo : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PhotonView>().IsMine)
-        {
-            myTeam = other.GetComponent<PlayerController>().myTeam;
+
+        myTeam = other.GetComponent<PlayerController>().myTeam;
             PhotonView pFV = other.GetComponent<PhotonView>();
-            PlayerController myPlayerC = other.GetComponent<PlayerController>();
+            PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+        if(pFV.IsMine)
+        {
+        
             if (myPlayerC.entered2 == false)
             {
                 pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
@@ -75,7 +77,7 @@ public class AudioManagerTwo : MonoBehaviour
 
                     pFV.RPC("setKickable", RpcTarget.All,pFV.ViewID);
                 }
-                if (myTeam == 2 && other.GetComponent<PlayerController>().healthbar1)
+                if (myTeam == 2 && other.GetComponent<PlayerVoiceManager>().healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
 
