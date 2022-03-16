@@ -11,6 +11,8 @@ public class SmokeGrenade : MonoBehaviour
     float countdown;
 
     public GameObject smoke1;
+    public AudioSource smokeSource;
+    public AudioClip smokeSound;
 
 
     private ParticleSystem particle1;
@@ -45,6 +47,7 @@ public class SmokeGrenade : MonoBehaviour
     void Explode()
     {
         particle1.Play();
+        smokeSource.Play();
         started = true;
     }
 }
