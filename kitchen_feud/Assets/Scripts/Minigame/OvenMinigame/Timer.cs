@@ -55,7 +55,6 @@ public class Timer : MonoBehaviour
         if (elapsed >= 1f)
         {
             elapsed = elapsed % 1f;
-            Debug.Log(timer);
             OutputTime();
         }
     }
