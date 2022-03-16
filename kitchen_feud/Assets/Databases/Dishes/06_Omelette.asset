@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI1617
   toCook: Stove
   cookingTime: 10
+  stoveFry: 1
   recipe:
   - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
   - {fileID: 11400000, guid: 5e76d433ee189f6469c0e00686e9c594, type: 2}

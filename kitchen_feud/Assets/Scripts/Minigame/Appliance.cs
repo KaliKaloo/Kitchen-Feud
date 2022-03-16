@@ -19,6 +19,7 @@ public class Appliance : Interactable
     public Dish dishOfFoundDish;
     public GameObject canvas;
     public GameObject minigameCanvas;
+    public GameObject minigameCanvas2;
     public GameObject cookedDish;
     private GameObject cookedDishLocal;
 
@@ -91,6 +92,10 @@ public class Appliance : Interactable
                     
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine( "DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position, transform.rotation);
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
+                }
+                else if (this.gameObject.tag == "Stove" && foundDish.stoveFry) {
+                    canvas.gameObject.SetActive(false);
+                    minigameCanvas2.gameObject.SetActive(true);
                 }
                 else
                 {
