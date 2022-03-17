@@ -102,6 +102,7 @@ public class DoorController : MonoBehaviour
     public Vector3 offset;
     void Start() {
         pos = this.gameObject.transform.position;
+        Debug.Log(pos);
         offset = new Vector3(2.5f, 0f, 0f);
         isOpened = false;
     }
@@ -112,10 +113,11 @@ public class DoorController : MonoBehaviour
         //if (!isOpened) this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, pos, moveSpeed * Time.deltaTime);
         //this.rotation = Quaternion.RotateTowards(Door.rotation, target.rotation, rotateSpeed * Time.deltaTime);
         if(isOpened && this.gameObject.transform.position.x < pos.x + offset.x) {
-            this.gameObject.transform.Translate(moveSpeed * 5 * Time.deltaTime, 0f, 0f);
+            //this.gameObject.transform.Translate(moveSpeed * 5 * Time.deltaTime, 0f, 0f);
+            gameObject.GetComponent<Animator>().Play("OpenDoor");
         }
         else if(!isOpened && this.gameObject.transform.position.x > pos.x) {
-            this.gameObject.transform.Translate(-moveSpeed * 5 * Time.deltaTime, 0f, 0f);
+            //this.gameObject.transform.Translate(-moveSpeed * 5 * Time.deltaTime, 0f, 0f);
         }
 
     }
