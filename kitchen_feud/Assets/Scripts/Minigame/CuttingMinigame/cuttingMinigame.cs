@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 
 public class cuttingMinigame : MonoBehaviour
 {
+    public GameObject cutCanvas;
     public cutController CutController;
     private Appliance appliance;
     public ExitCuttingMinigame backbutton;
@@ -48,6 +49,14 @@ public class cuttingMinigame : MonoBehaviour
                 
                 dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, CutController.finalScore);
                 dishOfFoundDish.points = CutController.finalScore;
+
+                // if player is team 2 but interacts with team1 stove, points doubled
+                if (cutCanvas.tag == "Team1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+                    dishOfFoundDish.points = dishOfFoundDish.points * 2;
+                // if player is team 1 but interacts with team2 stove, points doubled
+                else if (cutCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+                    dishOfFoundDish.points = dishOfFoundDish.points * 2;
+
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
             else{

@@ -6,12 +6,14 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
-	public float m_speed, rotatespeed;
+	public float m_speed;
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
+	public CharacterController controller;
+	Vector3 velocity;
 
 	
 
@@ -75,30 +77,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 
-			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-			{
-				transform.Rotate(0, -rotatespeed * Time.deltaTime, 0);
-			}
-			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-			{
-				transform.Rotate(0, rotatespeed * Time.deltaTime, 0);
-			}
+			
 		}
 	}
-	void FixedUpdate()
-	{
-		if (view.IsMine)
-		{
-			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-			{
-				player.velocity = getTransformVelocity(transform.forward);
-			}
-			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-			{
-				player.velocity = -getTransformVelocity(transform.forward);
-			}
-		}
+
+
+	void FixedUpdate(){
+		float x = Input.GetAxis("Horizontal");
+		float z = Input.GetAxis("Vertical");
+		Vector3 move = transform.right * x + transform.forward*z;
+		controller.Move(move* m_speed * Time.deltaTime);
+		velocity.y =-10;
+		controller.Move(velocity*Time.deltaTime);
 	}
+
 
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)

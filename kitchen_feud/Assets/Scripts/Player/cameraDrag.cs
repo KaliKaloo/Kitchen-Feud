@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class cameraDrag : MonoBehaviour
 {
-    public float speed = 5.0f;
-    private float pitch = 0.0f;
-    private Quaternion currentRotation;
+    public float rotatespeed;
 
-    void LateUpdate()
+    public Transform playerBody;
+    float xRotation = 0.0f;
+   
+    void FixedUpdate()
     {
-         if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
-            pitch -= speed * Input.GetAxis("Mouse Y");
-            pitch = Mathf.Clamp(pitch, -90f, 48f);
-            currentRotation.eulerAngles = new Vector3(pitch, 0.0f, 0.0f);
-            transform.localRotation = currentRotation;
+            Cursor.lockState = CursorLockMode.Locked;
+            float mouseX =  Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
+            float mouseY =  Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 48f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            playerBody.Rotate(Vector3.up*mouseX);
+
+        }else{
+            Cursor.lockState = CursorLockMode.None;;
         }
 
-        if (Input.GetKey(KeyCode.R)){
-            transform.localRotation = Quaternion.identity;
-        }
     }
 }

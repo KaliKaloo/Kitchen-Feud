@@ -10,15 +10,19 @@ public class SandwichController : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject team1Background;
     [SerializeField] private GameObject team2Background;
+    [SerializeField] private GameObject minigameCanvas;
     public GameObject StartButton;
     public GameObject backButton;
     public GameObject GameUI;
     
-    //public Image Ingredient;
     //public SpawnIngredient spawnIngredient; 
-
+    public List<IngredientSO> sandwichIngredients = new List<IngredientSO>();
+    public List<GameObject>  objectPool = new List<GameObject>();
     public Text scoreText;
-    public SandwichMove SandwichMove;
+    
+    public SandwichSpawner SandwichSpawner;
+    public LayerSpawn LayerSpawn;
+    public List<string> idList = new List<string>();
 
     public bool moving = false;
     public int CountStopped;
@@ -43,13 +47,13 @@ public class SandwichController : MonoBehaviour
     void Start()
     {
         //set bacground to team1
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        if (minigameCanvas.tag == "Team1")
         {
             team1Background.SetActive(true);
             team2Background.SetActive(false);
         }
         //set bacground to team2
-        else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        else if (minigameCanvas.tag == "Team2")
         {
             team1Background.SetActive(false);
             team2Background.SetActive(true);
@@ -63,30 +67,74 @@ public class SandwichController : MonoBehaviour
         moving = false;
         Score = 0;
         finalScore = 0;
-        CountStopped = 0;
-        //SandwichMove.RestartMove();
-
+        sandwichIngredients.Clear();
     }
+
 
     public void StartGame()
     {
+        RestartGame();
         StartButton.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
         moving = true;
-        //SandwichMove.StartMoving();
        
-        //StartSpawning();
-        //ingredients spawn in the middle and start moving left and rigt
-        //images of ingredients start appeairng in intervals on the left
-        //player has to click on the correct object corresponding to the image 
-        //it has to stop in the center.
+       
+        //make a copy of list of ingredients and add bread again at the end
+        sandwichIngredients = new List<IngredientSO>(dish.recipe);
+        sandwichIngredients.Add(dish.recipe[0]);
+        
+        List<string> ingredientIDs = InstantiateList(sandwichIngredients);
+        idList = new List<string>(ingredientIDs);
+
+        LayerSpawn.StartSpawn(idList);
+
+        objectSpawn(sandwichIngredients);
     }
 
-    // public void DisplayRandomIngredient()
-    // {
-    //     Ingredient.sprite = dish.recipe[0].img;
-    // }
+     public List<string> InstantiateList(List<IngredientSO> ingredients)
+    {
+        List<string> ingredientIDs = new List<string>();
+        foreach (IngredientSO ingredient in ingredients)
+        {
+            ingredientIDs.Add(ingredient.ingredientID);
+        }
+        return ingredientIDs;
+    }
+
+    public void objectSpawn(List<IngredientSO> sandwichIngredients){   
+        foreach (IngredientSO i in sandwichIngredients) {
+
+            GameObject obj =  SandwichSpawner.spawnObject(i);
+            obj.SetActive(false);
+            objectPool.Add(obj);
+        }
+
+        InvokeRepeating("NewRandomObject", 1, 1);
+    }
+
+    public int currentIndex;
+    public string currentActiveID;
+    public void NewRandomObject()
+     {
+         int newIndex = Random.Range(0, objectPool.Count);
+         // Deactivate old gameobject
+         objectPool[currentIndex].SetActive(false);
+         // Activate new gameobject
+         currentIndex = newIndex;
+         objectPool[currentIndex].SetActive(true);
+         currentActiveID = objectPool[currentIndex].GetComponent<SandwichID>().Id;
+        Debug.Log(currentActiveID);
+     }
+
+    public bool checkStoppedID(string objectID){
+        if (currentActiveID == objectID){
+            return true;
+        } 
+        return false;
+
+    }
+
 
     public void StopGame(){
         

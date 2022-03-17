@@ -36,9 +36,6 @@ EditorBuildSettings:
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
     path: Assets/AgoraEngine/Demo/HelloUnity3D.unity
     guid: cf0f0349488134449a67eea42ac82665
   m_configObjects: {}
