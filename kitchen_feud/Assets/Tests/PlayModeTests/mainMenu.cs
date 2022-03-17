@@ -8,7 +8,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 
 
-public class UserInput
+public class mainMenu
 {
     [OneTimeSetUp]
     public void SetUp()
@@ -18,7 +18,7 @@ public class UserInput
    
 
     [UnityTest]
-    public IEnumerator enterUserName()
+    public IEnumerator UsernameUI()
     {
         GameObject usrCanvas = GameObject.Find("usernameCanvas");
         GameObject userInput = GameObject.Find("usernameInput");
@@ -31,6 +31,16 @@ public class UserInput
         playButton.GetComponent<Button>().onClick.Invoke();
         Assert.IsTrue(GameObject.Find("mainMenuCanvas") != null && GameObject.Find("mainMenuCanvas").activeSelf);
 
+        yield return null;
+    }
+
+
+    [UnityTest]
+    public IEnumerator mainMenuLoad()
+    {
+        Assert.IsFalse(GameObject.Find("LoadingScreen") != null && GameObject.Find("LoadingScreen").activeSelf);
+        Assert.IsTrue(GameObject.Find("usernameCanvas").activeSelf);
+        Assert.IsFalse(GameObject.Find("startGame") != null && GameObject.Find("startGame").activeSelf);
         yield return null;
     }
 }
