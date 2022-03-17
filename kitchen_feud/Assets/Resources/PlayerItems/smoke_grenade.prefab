@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7036463906689606882}
   - component: {fileID: 7342420009070844067}
   - component: {fileID: 7333293549292572559}
-  - component: {fileID: 7400482040333672705}
   - component: {fileID: 8386118762325441156}
   m_Layer: 0
   m_Name: smoke_grenade
@@ -115,23 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7400482040333672705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4936424809907669809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9f39460769f66408d3184619f49bb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 4936424809907669809}
-  delay: 3
-  smoke1: {fileID: 7411354726921359910}
-  smokeSource: {fileID: 8386118762325441156}
-  smokeSound: {fileID: 8300000, guid: eb7669c9587e7a2419468fb9eaa3342d, type: 3}
 --- !u!82 &8386118762325441156
 AudioSource:
   m_ObjectHideFlags: 0

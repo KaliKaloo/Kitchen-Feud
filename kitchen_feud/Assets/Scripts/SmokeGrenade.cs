@@ -6,25 +6,22 @@ using UnityEngine;
 public class SmokeGrenade : MonoBehaviour
 {
     public GameObject prefab;
+    
     public float delay = 3f;
 
     float countdown;
 
     public GameObject smoke1;
-    public AudioSource smokeSource;
-    public AudioClip smokeSound;
-
-
     private ParticleSystem particle1;
 
+    GameObject smokeClone;
     bool hasExploded = false;
     bool started = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        particle1 = smoke1.GetComponent<ParticleSystem>();
-
+        particle1 = prefab.transform.GetChild(0).GetComponent<ParticleSystem>();
         countdown = delay;
     }
 
@@ -47,20 +44,18 @@ public class SmokeGrenade : MonoBehaviour
 
         if (!particle1.isEmitting && hasExploded && started)
         {
-            Destroy(gameObject);
+            Destroy(smokeClone);
         }
     }
 
     void Throw() {
-        GameObject clone = Instantiate(prefab, transform.position, transform.rotation);
-  
-        clone.GetComponent<Rigidbody>().AddForce(Vector3.forward* 500); //Moving projectile
+        smokeClone = Instantiate(prefab, transform.position, transform.rotation);
+        smokeClone.GetComponent<Rigidbody>().AddForce(Vector3.forward * 500); //Moving projectile
     }
 
     void Explode()
     {
         particle1.Play();
-        smokeSource.Play();
         started = true;
     }
 }
