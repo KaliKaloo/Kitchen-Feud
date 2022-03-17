@@ -74,12 +74,12 @@ public class PlayerVoiceManager : MonoBehaviour
 					if (interactable != null)
 					{
 						//Debug.LogError(obj.name);
-						if(!obj.GetComponent<PlayerVoiceManager>().kickedBy.Contains(view.ViewID))
+						if(obj.GetComponent<PlayerVoiceManager>() && !obj.GetComponent<PlayerVoiceManager>().kickedBy.Contains(view.ViewID))
                         {
 							view.RPC("appendKickedBy", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,
 								view.ViewID);
                         }
-						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable)
+						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable && obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
 						{	
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
