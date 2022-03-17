@@ -13,6 +13,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     Random rnd = new Random();
     IRtcEngine rtcEngine;
     public int x;
+    SmokeGrenade smokeGrenade = new SmokeGrenade();
 
 
    public static VoiceChatManager Instance;
@@ -52,8 +53,15 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     }
 
     private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
-    {
-       
+    {   
+        // if player enters enemy kitchen 
+        if (((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1 && channelName.Substring(2) == "Team2") 
+        || ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2 && channelName.Substring(2) == "Team1")) {
+            smokeGrenade.inEnemyKitchen = true;
+        // if player joins another area
+        } else {
+            smokeGrenade.inEnemyKitchen = false;
+        }
         Debug.Log("Joined " + channelName.Substring(2));
     }
     public override void OnConnectedToMaster()

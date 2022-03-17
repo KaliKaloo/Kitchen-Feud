@@ -16,7 +16,8 @@ public class SmokeGrenade : MonoBehaviour
 
     GameObject smokeClone;
     bool hasExploded = false;
-    bool started = false;
+    public static bool started = false;
+    public bool inEnemyKitchen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,24 +28,26 @@ public class SmokeGrenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Input.GetKeyDown("1") && !started) {
-            started = true;
-            Throw();
-         } else if (started && !hasExploded) {
-             countdown -= Time.deltaTime;
-         }
+        if (inEnemyKitchen) {
+            if (Input.GetKeyDown("1") && !started) {
+                started = true;
+                Throw();
+            } else if (started && !hasExploded) {
+                countdown -= Time.deltaTime;
+            }
 
 
-        if (countdown <= 0 && !hasExploded)
-        {
-            Explode();
-            hasExploded = true;
-        }
+            if (countdown <= 0 && !hasExploded)
+            {
+                Explode();
+                hasExploded = true;
+            }
 
-        if (particle1 != null && hasExploded && started)
-        {
-            if (!particle1.isEmitting)
-                Destroy(smokeClone);
+            if (particle1 != null && hasExploded && started)
+            {
+                if (!particle1.isEmitting)
+                    Destroy(smokeClone);
+            }
         }
     }
 
