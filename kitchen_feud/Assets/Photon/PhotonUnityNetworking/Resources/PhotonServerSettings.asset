@@ -46,6 +46,13 @@ MonoBehaviour:
   - cookedDishG
   - decCount
   - destHB
+  - addSecondsRPC
+  - applianceBool
+  - clearAll
+  - clearItems
+  - ClickRpc
+  - cookedDishG
+  - decCount
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
@@ -65,6 +72,7 @@ MonoBehaviour:
   - playDing
   - pointSync
   - push
+  - pointSync
   - removeFromApplianceRPC
   - removeFromTray
   - removeOp
@@ -87,6 +95,10 @@ MonoBehaviour:
   - setPlayed
   - setPlayerPressing
   - setStarted
+  - setParent
+  - SetParentAsNull
+  - SetParentAsSlot
+  - setPlayerPressing
   - setTeam
   - SetToF
   - SetToFalse

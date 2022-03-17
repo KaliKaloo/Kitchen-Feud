@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class Appliance : Interactable
 {
+    [SerializeField] public int kitchenNum;
+
     GameObject clickedObj;
     private GameObject inputObj;
     public List<IngredientSO> itemsOnTheAppliance = new List<IngredientSO>();
@@ -26,6 +28,8 @@ public class Appliance : Interactable
     private Rigidbody playerRigidbody;
     private SlotsController SlotsController;
     public int dishPoints;
+
+    public bool canUse = true;
 
 
     public PhotonView pv;
@@ -45,7 +49,8 @@ public class Appliance : Interactable
         pv = player.GetComponent<PhotonView>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        if (!isBeingInteractedWith)
+        Debug.Log(canUse);
+        if (!isBeingInteractedWith && canUse)
         {
             if (pv.IsMine)
             {
@@ -59,6 +64,9 @@ public class Appliance : Interactable
                     cookDish();
                 }
             }
+        }
+        else{
+            Debug.Log("Appliance in use");
         }
     }
     public void cookDish()
@@ -90,8 +98,14 @@ public class Appliance : Interactable
                 }
                 else
                 {
+                    if (kitchenNum == 1)
+                        minigameCanvas.tag = "Team1";
+                    else if (kitchenNum == 2)
+                        minigameCanvas.tag = "Team2";
+
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
