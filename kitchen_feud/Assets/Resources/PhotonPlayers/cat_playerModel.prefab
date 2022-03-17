@@ -268,6 +268,11 @@ MonoBehaviour:
   entered2: 0
   myC: 0
   played: 0
+  timer: 0
+  timer1: 0
+  started: 0
+  started1: 0
+  kickedBy: 
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1068,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5966775144733490437}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &9099027807413192718
 MonoBehaviour:
   m_ObjectHideFlags: 0

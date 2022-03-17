@@ -37,9 +37,11 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - appendKickedBy
   - applianceBool
   - clearAll
   - clearItems
+  - clearKickedBy
   - ClickRpc
   - cookedDishG
   - decCount
@@ -70,6 +72,7 @@ MonoBehaviour:
   - resetCount
   - resetIsPressed
   - resetPlayerPressing
+  - resetTimer
   - RespawnSpaceship
   - setEntered
   - setEnteredF
@@ -81,7 +84,9 @@ MonoBehaviour:
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
+  - setPlayed
   - setPlayerPressing
+  - setStarted
   - setTeam
   - SetToF
   - SetToFalse
@@ -96,7 +101,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - setPlayed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

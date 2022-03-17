@@ -43,18 +43,23 @@ public class kickPlayers : MonoBehaviour
         
         
         PV = GetComponent<PhotonView>();
-      
+        //GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+        if (GameObject.Find("Local"))
+        {
+            if (!GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled)
+            {
+                GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled = true;
+            }
+        }
 
 
-
-        
         if (players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
@@ -63,14 +68,14 @@ public class kickPlayers : MonoBehaviour
 
         if (players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            for (int i = 0; i < players.Length; i++)
+           /* for (int i = 0; i < players.Length; i++)
             {
                 if (players[i].name != "Local")
                 {
                     players[i].transform.GetChild(3).GetComponent<AudioListener>().enabled = false;
                 }
             }
-
+           */
             
                 if (Vector3.Distance(new Vector3(-3.28f, 1.09f, -14.94f), GameObject.Find("Local").transform.position) < 10 &&
                     GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myC == 0 &&
