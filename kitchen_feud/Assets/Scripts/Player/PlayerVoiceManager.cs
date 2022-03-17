@@ -120,7 +120,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	{
 		GameObject obj = PhotonView.Find(viewID).gameObject;
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
-		hb.SetHealth((int)hb.slider.value - 1);
+		hb.SetHealth(hb.slider.value - 0.3f);
 	}
 	[PunRPC]
 	void destHB(int viewID)
