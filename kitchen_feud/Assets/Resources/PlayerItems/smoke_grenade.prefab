@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9f39460769f66408d3184619f49bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 4936424809907669809}
   delay: 3
   smoke1: {fileID: 7411354726921359910}
   smokeSource: {fileID: 8386118762325441156}

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SmokeGrenade : MonoBehaviour
 {
-
+    public GameObject prefab;
     public float delay = 3f;
 
     float countdown;
@@ -31,7 +31,14 @@ public class SmokeGrenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        countdown -= Time.deltaTime;
+         if (Input.GetKeyDown("1") && !started) {
+            started = true;
+            Throw();
+         } else if (started && !hasExploded) {
+             countdown -= Time.deltaTime;
+         }
+
+
         if (countdown <= 0 && !hasExploded)
         {
             Explode();
@@ -42,6 +49,12 @@ public class SmokeGrenade : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Throw() {
+        GameObject clone = Instantiate(prefab, transform.position, transform.rotation);
+  
+        clone.GetComponent<Rigidbody>().AddForce(Vector3.forward* 500); //Moving projectile
     }
 
     void Explode()
