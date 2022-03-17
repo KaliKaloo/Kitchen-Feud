@@ -57,6 +57,6 @@ public class SmokeGrenade : MonoBehaviour
     void Explode()
     {
         particle1.Play();
-        started = true;
+        started = false;
     }
 }
