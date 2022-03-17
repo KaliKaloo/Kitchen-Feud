@@ -98,6 +98,10 @@ MonoBehaviour:
   - setPlayerPressing
   - resetIsPressed
   - globalDestroy
+  - syncAnim
+  - syncIsOpened
+  - decrementDoor
+  - incrementDoor
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
