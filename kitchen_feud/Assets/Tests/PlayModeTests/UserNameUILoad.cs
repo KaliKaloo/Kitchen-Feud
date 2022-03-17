@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using Photon.Pun;
 
-public class AnnounceStock
+public class UserNameUILoad
 {
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         SceneManager.LoadScene("mainMenu");
@@ -23,7 +23,6 @@ public class AnnounceStock
         Assert.IsFalse(GameObject.Find("startGame") != null && GameObject.Find("startGame").activeSelf);
         yield return null;
     }
-   
 
 
 }
