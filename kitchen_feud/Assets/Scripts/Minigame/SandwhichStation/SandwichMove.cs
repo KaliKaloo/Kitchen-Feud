@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class SandwichMove : MonoBehaviour, IPointerClickHandler
 {
     public SandwichController SandwichController;
-    
-    //private Vector3 perfectPosition;
+    public string LayerID;
+    public float speed;
+    public SpriteAtlas imgAtlas;
+
     private Vector3 locationA;
     private Vector3 locationB;
     private Vector3 nextLocation;
@@ -17,36 +21,34 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Transform platform;
     [SerializeField] private Transform rightLocation;
 
-
     public bool stopped = false;
-    public float speed;
-
+    
     // Start is called before the first frame update
     
     void Start()
     {
+        // perfectPosition = (Screen.width/2, Screen.height/2, 0);
         perfectPosition = platform.localPosition;
+        
         locationA = leftLocation.localPosition;
         locationB = rightLocation.localPosition;
         nextLocation = locationB;
         
         SandwichController = gameObject.GetComponentInParent<SandwichController>();
-    }
+        platform.GetComponent<Image>().sprite = imgAtlas.GetSprite(LayerID);
+    }   
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!stopped){
-        stopped = true;
-        SandwichController.moving = false;
-        SandwichController.CountStopped++;
-        StopMove();
+        if ((!stopped) && (SandwichController.checkStoppedID(LayerID))){
+            stopped = true;
+            SandwichController.moving = false;
+            SandwichController.CountStopped++;
+            StopMove();
         }
+
     }
 
-    // void ResetPosition(){
-    //     startingPosition = perfectPosition;
-    // }
-    
     void Update() 
     {
         if (!stopped) Move();
