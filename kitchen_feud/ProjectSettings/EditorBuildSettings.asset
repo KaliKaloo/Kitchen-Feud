@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/kitchens.unity
     guid: 0fe26d4b823f22a48a9f25883690bf83
   - enabled: 0
+    path: Assets/Scenes/kitchens_sandwich.unity
+    guid: 4bd8bb9fb3ea5bf43975c464dac7496f
+  - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
