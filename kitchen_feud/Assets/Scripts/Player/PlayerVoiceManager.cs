@@ -20,11 +20,17 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool entered2;
 	public int myC;
 	public bool played;
+	public float timer;
+	public float timer1;
+	public bool started;
+	public bool started1;
 	// Start is called before the first frame update
 	void Start()
 	{
 		entered1 = false;
 		entered2 = false;
+		started = false;
+		started1 = false;
 		view = GetComponent<PhotonView>();
 		myC = 1;
 		if (PhotonNetwork.IsConnected)
@@ -46,7 +52,7 @@ public class PlayerVoiceManager : MonoBehaviour
 			{
 				view.RPC("setEntered", RpcTarget.All, view.ViewID, 1);
 			}
-			else
+			else 
 			{
 				view.RPC("setEntered", RpcTarget.All, view.ViewID, 2);
 			}
@@ -57,11 +63,30 @@ public class PlayerVoiceManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		
 
 		if (view.IsMine)
 		{
+			if(started == true)
+            {
+				Increment();
+            }
+			Debug.LogError(timer);
+			if(timer > 3 && healthbar1.GetComponentInChildren<HealthBar>().slider.value <= 4)
+            {
+				//started1 = true;
+				timer1 += Time.deltaTime;
+				Debug.Log("HERRERE");
+				if (timer1 > 1)
+				{
+					view.RPC("giveDamage", RpcTarget.All, view.ViewID, 1);
+					timer1 = 0;
+				}
+            }
 			if (Input.GetButtonDown("Fire1"))
 			{
+				
+
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
@@ -75,6 +100,8 @@ public class PlayerVoiceManager : MonoBehaviour
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
 							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
 						{
+							view.RPC("setStarted", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 1);
+							view.RPC("resetTimer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
@@ -86,12 +113,15 @@ public class PlayerVoiceManager : MonoBehaviour
 								theirHealthBarr = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 								if (theirHealthBarr.slider.value > 0)
 								{
-									view.RPC("giveDamage", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+									
+									view.RPC("giveDamage", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,0);
+										
 								}
 								else
 								{
 									GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
 									view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+									view.RPC("setStarted", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
 								}
 
 							}
@@ -109,6 +139,13 @@ public class PlayerVoiceManager : MonoBehaviour
 			}
 		}
 	}
+	void Increment()
+    {
+		
+		timer += Time.deltaTime;
+			
+    }
+	
 	[PunRPC]
 	void setObjParent(int viewID, int hBviewID)
 	{
@@ -117,11 +154,18 @@ public class PlayerVoiceManager : MonoBehaviour
 		obj1.GetComponent<PlayerVoiceManager>().healthbar1.transform.SetParent(obj1.transform.GetChild(4));
 	}
 	[PunRPC]
-	void giveDamage(int viewID)
+	void giveDamage(int viewID,int x)
 	{
 		GameObject obj = PhotonView.Find(viewID).gameObject;
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
-		hb.SetHealth(hb.slider.value - 0.3f);
+		if (x == 0)
+		{
+			hb.SetHealth(hb.slider.value - 0.3f);
+        }
+        else
+        {
+			hb.SetHealth(hb.slider.value + 0.1f);
+		}
 	}
 	[PunRPC]
 	void destHB(int viewID)
@@ -194,4 +238,21 @@ public class PlayerVoiceManager : MonoBehaviour
 		direction.y = 0;
 		rb.AddForce(direction * 1, ForceMode.Impulse);
 	}
+	[PunRPC]
+	void setStarted(int viewID,int x)
+    {
+		if (x == 1)
+		{
+			PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().started = true;
+        }
+        else
+        {
+			PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().started = false;
+		}
+    }
+	[PunRPC]
+	void resetTimer(int viewID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().timer = 0;
+    }
 }
