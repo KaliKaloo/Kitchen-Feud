@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class PlayerVoiceManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool entered2;
 	public int myC;
 	public bool played;
+	public List<int> kickedBy;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -71,9 +73,14 @@ public class PlayerVoiceManager : MonoBehaviour
 					var obj = hit.collider.gameObject;
 					if (interactable != null)
 					{
-						Debug.LogError(obj.name);
+						//Debug.LogError(obj.name);
+						if(!obj.GetComponent<PlayerVoiceManager>().kickedBy.Contains(view.ViewID))
+                        {
+							view.RPC("appendKickedBy", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,
+								view.ViewID);
+                        }
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable)
-						{
+						{	
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
@@ -89,8 +96,14 @@ public class PlayerVoiceManager : MonoBehaviour
 								}
 								else
 								{
-									GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
-									view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+									if (obj.GetComponent<PlayerVoiceManager>().kickedBy.Count > 1)
+									{
+										GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
+										view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+										view.RPC("clearKickedBy", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+
+									}
+									
 								}
 
 							}
@@ -120,7 +133,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	{
 		GameObject obj = PhotonView.Find(viewID).gameObject;
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
-		hb.SetHealth((int)hb.slider.value - 1);
+		hb.SetHealth(hb.slider.value - 0.5f);
 	}
 	[PunRPC]
 	void destHB(int viewID)
@@ -192,5 +205,15 @@ public class PlayerVoiceManager : MonoBehaviour
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
 		rb.AddForce(direction * 2, ForceMode.Impulse);
+	}
+	[PunRPC]
+	void appendKickedBy(int viewID, int myID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Add(myID);
+    }
+	[PunRPC]
+	void clearKickedBy(int viewID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Clear();
 	}
 }
