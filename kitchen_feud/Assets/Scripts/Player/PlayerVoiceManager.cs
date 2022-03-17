@@ -72,7 +72,8 @@ public class PlayerVoiceManager : MonoBehaviour
 					if (interactable != null)
 					{
 						Debug.LogError(obj.name);
-						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable)
+						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
+							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
 						{
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
@@ -191,6 +192,6 @@ public class PlayerVoiceManager : MonoBehaviour
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
-		rb.AddForce(direction * 2, ForceMode.Impulse);
+		rb.AddForce(direction * 1, ForceMode.Impulse);
 	}
 }
