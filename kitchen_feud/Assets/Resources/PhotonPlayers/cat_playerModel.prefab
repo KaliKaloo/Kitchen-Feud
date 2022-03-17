@@ -257,8 +257,6 @@ MonoBehaviour:
   prefab: {fileID: 4936424809907669809, guid: b3f7125e318dd564a8cb6e7c2789a70c, type: 3}
   delay: 3
   smoke1: {fileID: 0}
-  smokeSource: {fileID: 0}
-  smokeSound: {fileID: 0}
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0

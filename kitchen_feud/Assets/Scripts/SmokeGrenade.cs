@@ -51,12 +51,11 @@ public class SmokeGrenade : MonoBehaviour
     void Throw() {
         smokeClone = Instantiate(prefab, transform.position, transform.rotation);
         particle1 = smokeClone.transform.GetChild(0).GetComponent<ParticleSystem>();
-        smokeClone.GetComponent<Rigidbody>().AddForce(Vector3.forward * 500); //Moving projectile
+        smokeClone.GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * 500); //Moving projectile
     }
 
     void Explode()
     {
         particle1.Play();
-        started = false;
     }
 }
