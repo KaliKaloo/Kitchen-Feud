@@ -21,7 +21,6 @@ public class SmokeGrenade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        particle1 = prefab.transform.GetChild(0).GetComponent<ParticleSystem>();
         countdown = delay;
     }
 
@@ -42,14 +41,16 @@ public class SmokeGrenade : MonoBehaviour
             hasExploded = true;
         }
 
-        if (!particle1.isEmitting && hasExploded && started)
+        if (particle1 != null && hasExploded && started)
         {
-            Destroy(smokeClone);
+            if (!particle1.isEmitting)
+                Destroy(smokeClone);
         }
     }
 
     void Throw() {
         smokeClone = Instantiate(prefab, transform.position, transform.rotation);
+        particle1 = smokeClone.transform.GetChild(0).GetComponent<ParticleSystem>();
         smokeClone.GetComponent<Rigidbody>().AddForce(Vector3.forward * 500); //Moving projectile
     }
 
