@@ -12,26 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/kitchens- anim-door.unity
     guid: 1f82f5f4c0fca258bac23a7e685911f0
   - enabled: 0
-    path: Assets/Scenes/kitchens-door.unity
-    guid: 5d7be866ffec437aaa276cf0dc7f5157
-  - enabled: 0
     path: Assets/Scenes/kitchens.unity
     guid: 0fe26d4b823f22a48a9f25883690bf83
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
