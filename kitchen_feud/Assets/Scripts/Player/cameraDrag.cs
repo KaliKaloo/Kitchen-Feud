@@ -25,24 +25,7 @@ public class cameraDrag : MonoBehaviour
     }
     private void Update()
     {
-        if (GetComponentInParent<PhotonView>().IsMine)
-        {
-            if (Input.GetMouseButton(1))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
-                xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -90f, 48f);
-                transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                playerBody.Rotate(Vector3.up * mouseX);
-
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None; ;
-            }
-        }
+      
         // transform.position = obj.transform.GetChild(4).position;
         //    if(done == false)
         //    {
@@ -73,7 +56,25 @@ public class cameraDrag : MonoBehaviour
     //}
     private void FixedUpdate()
     {
-       // playerBody.Rotate (Vector3.up * mouseX);
+        if (GetComponentInParent<PhotonView>().IsMine)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+                xRotation -= mouseY;
+                xRotation = Mathf.Clamp(xRotation, -90f, 48f);
+                transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                playerBody.Rotate(Vector3.up * mouseX);
+
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None; ;
+            }
+        }
+        // playerBody.Rotate (Vector3.up * mouseX);
         //playerBody.rotation = Quaternion.Euler(new Vector3(0f, mouseX, 0f));
         //   rb.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
 

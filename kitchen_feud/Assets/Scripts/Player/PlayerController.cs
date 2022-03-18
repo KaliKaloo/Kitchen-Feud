@@ -65,11 +65,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		if (view.IsMine)
 		{
 			
-				x = Input.GetAxis("Horizontal");
-				z = Input.GetAxis("Vertical");
-
-				Vector3 move = transform.right * x + transform.forward * z + new Vector3(0, -10, 0);
-				controller.Move(move * m_speed * Time.deltaTime);
+			
 			//if (Input.GetMouseButton(1))
 			
 				//Debug.LogError(velocity);
@@ -104,13 +100,23 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			
 		}
 	}
-   
 
 
+    private void FixedUpdate()
+    {
+		if (view.IsMine)
+		{
+			x = Input.GetAxis("Horizontal");
+			z = Input.GetAxis("Vertical");
+
+			Vector3 move = transform.right * x + transform.forward * z + new Vector3(0, -10, 0);
+			controller.Move(move * m_speed * Time.deltaTime);
+		}
+	}
 
 
-	// Set our focus to a new focus
-	void SetFocus(Interactable newFocus, GameObject obj)
+    // Set our focus to a new focus
+    void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{
