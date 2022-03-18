@@ -98,6 +98,7 @@ MonoBehaviour:
   - setPlayerPressing
   - resetIsPressed
   - globalDestroy
+  - instantiateSmokeGrenadeRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

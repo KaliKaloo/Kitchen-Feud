@@ -255,9 +255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4936424809907669809, guid: b3f7125e318dd564a8cb6e7c2789a70c, type: 3}
-  smokeSlot: {fileID: 4337464729722944361, guid: 79aa2debe9a530143b48eb43047897a9, type: 3}
-  delay: 3
-  smoke1: {fileID: 0}
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0
