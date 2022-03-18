@@ -129,7 +129,7 @@ public class PlayerVoiceManager : MonoBehaviour
 								}
 								else
 								{
-									if (obj.GetComponent<PlayerVoiceManager>().kickedBy.Count > 1)
+									if (obj.GetComponent<PlayerVoiceManager>().kickedBy.Count > 0)
 									{
 										GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
 										view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);

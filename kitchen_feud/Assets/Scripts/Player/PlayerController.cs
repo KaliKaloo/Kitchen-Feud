@@ -58,6 +58,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
+			float x = Input.GetAxis("Horizontal");
+			float z = Input.GetAxis("Vertical");
+			
+			Vector3 move = transform.right * x + transform.forward * z + new Vector3(0,-10,0);
+			controller.Move(move * m_speed * Time.deltaTime);
+			Debug.LogError(velocity);
+			//velocity.y = -10;
+			//controller.Move(velocity * Time.deltaTime);
 			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -86,8 +94,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			
 		}
 	}
-
-
+   
+/*
 	void FixedUpdate(){
 		if (view.IsMine)
 		{
@@ -100,7 +108,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
 	}
 
-
+*/
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
 	{
