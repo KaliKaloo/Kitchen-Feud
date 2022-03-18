@@ -16,13 +16,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public PhotonView view;
 	public CharacterController controller;
 	Vector3 velocity;
+	float yaw;
+	float x;
+	float z;
+	Vector3 localVelocity;
+	public Rigidbody rb;
 
 
 
 	void Start()
 	{
-		
-		
+
+		rb = GetComponent<Rigidbody>();
+		rb.freezeRotation = true;
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -58,13 +64,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
-			float x = Input.GetAxis("Horizontal");
-			float z = Input.GetAxis("Vertical");
 			
-			Vector3 move = transform.right * x + transform.forward * z + new Vector3(0,-10,0);
-			controller.Move(move * m_speed * Time.deltaTime);
-			Debug.LogError(velocity);
-			//velocity.y = -10;
+				x = Input.GetAxis("Horizontal");
+				z = Input.GetAxis("Vertical");
+
+				Vector3 move = transform.right * x + transform.forward * z + new Vector3(0, -10, 0);
+				controller.Move(move * m_speed * Time.deltaTime);
+			//if (Input.GetMouseButton(1))
+			
+				//Debug.LogError(velocity);
+				//velocity.y = -10;
+			
 			//controller.Move(velocity * Time.deltaTime);
 			if (Input.GetButtonDown("Fire1"))
 			{
@@ -95,20 +105,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
 	}
    
-/*
-	void FixedUpdate(){
-		if (view.IsMine)
-		{
-			float x = Input.GetAxis("Horizontal");
-			float z = Input.GetAxis("Vertical");
-			Vector3 move = transform.right * x + transform.forward * z;
-			controller.Move(move * m_speed * Time.deltaTime);
-			velocity.y = -10;
-			controller.Move(velocity * Time.deltaTime);
-		}
-	}
 
-*/
+
+
+
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
 	{
