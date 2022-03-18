@@ -20,11 +20,9 @@ public class PanController : MonoBehaviour
     private bool haveAvg;
     public int foodInstancesCounter;
     public FryingTimerBar timer;
-    //public float totalPoints;
     private bool pointsAssigned = false;
 
     void Start () {
-        //totalPoints = 0;
         startLocation = pan.position;
         haveAvg = false;
         speeds = new Queue<float>();
@@ -41,6 +39,7 @@ public class PanController : MonoBehaviour
 
     void Update()
     {
+        //do that all if it's player1, add rpcs to player2
         mouseCursorSpeed = abs(Input.GetAxis("Mouse X") / Time.deltaTime);
         if (speeds.Count == speedQueueCapacity) {
             
@@ -68,9 +67,6 @@ public class PanController : MonoBehaviour
             if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false) {
                 pointsAssigned = true;
                 friedFood.FlipPancake();
-                //totalPoints += friedFood.points;
-                //Debug.Log("pancake flipped, points:" + friedFood.points); 
-                //Debug.Log("totalPoints:" + totalPoints);
             }
         }
 

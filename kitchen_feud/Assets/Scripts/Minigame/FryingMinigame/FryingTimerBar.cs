@@ -37,7 +37,6 @@ public class FryingTimerBar : MonoBehaviour
 
     public float SetFriedLevel(float value)
     {
-        //return 50f - abs(10f- value);
         return (float)(100f - abs(50f- value*5))/5;
     }
 

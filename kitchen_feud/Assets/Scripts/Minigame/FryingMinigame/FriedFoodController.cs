@@ -8,8 +8,6 @@ public class FriedFoodController : MonoBehaviour
     public Vector3 startLocation;
     public bool isFlipped = false;
     public FryingTimerBar timer;
-    //public float preFlipPoints;
-    //public float postFlipPoints;
     public float points;
     public float minXSpeed;
     public float maxXSpeed;
@@ -19,37 +17,23 @@ public class FriedFoodController : MonoBehaviour
 
     void Start()
     {
-        //you need to get the pancontroller for every instance of the prefab!
-        //gameObject.transform.parent = pan.gameObject.transform.parent;
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
         //startLocation = pan.transform.position;
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
-        
-        //gameCanvas = pan.transform.parent.gameObject.GetComponent<ExitFryingMinigame>().minigameCanvas;
     }
 
     void Update()
     {
-        //pan.mouseCursorSpeed;
-        //this.transform.Translate(Vector3.down * mouseCursorSpeed*2 * Time.deltaTime);
+
     }
 
     public void FlipPancake() {
-        //NO ISFLIPPED - FLIP MULTIPLE TIMES INSTEAD
-        //NO POST OR PREFLIPPOINTS, ADD UP MULTIPLE TIMES
+
         if (isFlipped == false) {
             isFlipped = true;
             Debug.Log("Flip pancake!");
-            
-            //preFlipPoints = timer.Reset();
-        //}
-       // else if (isFlipped == true) {
-        //    Debug.Log("Finish game!");
-       //     postFlipPoints = timer.Reset();
             points = timer.Reset();
-            //timer.stopTimer = true;
-        //    points = preFlipPoints + postFlipPoints;
             if(points != 0) GameEvents.current.assignPointsEventFunction();
             this.YeetPancake();
         }

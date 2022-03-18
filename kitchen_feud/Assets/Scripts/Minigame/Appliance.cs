@@ -30,6 +30,8 @@ public class Appliance : Interactable
     private SlotsController SlotsController;
     public int dishPoints;
 
+//maybe add bool on player enter, or and int for order
+//each canvas/appliance allows or dissallows multiple players
 
     public PhotonView pv;
     public PhotonView myPv;
