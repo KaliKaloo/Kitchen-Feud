@@ -172,11 +172,13 @@ public class kickPlayers : MonoBehaviour
         {
             if (obj.GetComponent<PlayerController>().myTeam == 1)
             {
+                
                 OV.RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
                 OV.RPC("setEnteredF", RpcTarget.All, OV.ViewID, 2);
                 OV.RPC("setEntered", RpcTarget.All,OV.ViewID, 1);
                 PV.RPC("setMyC", RpcTarget.All, OV.ViewID,0);
                 OV.RPC("setKickableF", RpcTarget.All, OV.ViewID);
+                Debug.Log(OV.transform.position);
 
             }
             else

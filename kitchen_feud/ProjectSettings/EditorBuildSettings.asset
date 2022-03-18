@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
+    path: Assets/Scenes/kitchens 1.unity
+    guid: 7d31bd0cab9204a6e9982c1f3f68b7dc
+  - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1

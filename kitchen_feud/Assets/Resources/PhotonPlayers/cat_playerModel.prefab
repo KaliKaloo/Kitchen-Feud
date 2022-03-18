@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3701048243505201765}
-  m_speed: 4
+  m_speed: 2
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
@@ -274,10 +274,6 @@ MonoBehaviour:
   started: 0
   started1: 0
   kickedBy: 
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2061238001691712000, guid: 74599f679acc5a74db4d9037a83ecfe4, type: 3}
 --- !u!143 &-3337640174975405624
 CharacterController:
   m_ObjectHideFlags: 0
