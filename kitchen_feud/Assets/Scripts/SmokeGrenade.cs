@@ -10,17 +10,20 @@ public class EnableSmoke
     public static GameObject smokeSlot;
     public static bool usedUp;
 
+    // Gets state of player whether in enemy kitchen or not
     public bool GetPlayerState()
     {
         return inEnemyKitchen;
     }
 
+    // Initialize smoke slot so can be used in other functions
     public void SetUIForSmoke(GameObject slot)
     {
         smokeSlot = slot;
         smokeSlot.SetActive(false);
     }
 
+    // Disables UI for smoke slot
     public void DisableSmokeSlot()
     {
         smokeSlot.SetActive(false);
@@ -47,56 +50,31 @@ public class EnableSmoke
 
 public class SmokeGrenade : MonoBehaviour
 {
-    public GameObject prefab;
-
-    private ParticleSystem particle1;
-
-    GameObject smokeClone;
-    bool hasExploded = false;
-    private bool started = false;
+    private bool used = false;
 
     readonly EnableSmoke enableSmoke = new EnableSmoke();
-    PhotonView PV;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        PV = this.GetComponent<PhotonView>();
-    }
 
     // Update is called once per frame
     void Update()
     {
+        // if player in enemy kitchen
         if (enableSmoke.GetPlayerState()) {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !started) {
-                started = true;
+            // and player presses 1, and the has not been used before
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !used) {
+                // lock player from using another smoke
+                used = true;
                 enableSmoke.UseSmoke();
-                Throw();
-            } 
 
-            // when smoke has finished animation destroy
-            if (particle1 != null && hasExploded && started && !particle1.isEmitting)
-            {
-                //StartCoroutine(WaitForSmokeToDissipate());
-            }
+                InstantiateSmokeBomb();
+            } 
         }
     }
 
-    void Throw() {
+    void InstantiateSmokeBomb() {
         enableSmoke.DisableSmokeSlot();
-        if (PV.IsMine)
+
+        // syncs smoke bomb on network
+        if (this.GetComponent<PhotonView>().IsMine)
             PhotonNetwork.Instantiate("smoke_grenade", transform.position + (transform.forward * 2), transform.rotation, 0);
-
-        //this.GetComponent<PhotonView>().RPC("AddSmokeForce", RpcTarget.All, smokeClone);
-    }
-    void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        // e.g. store this gameobject as this player's charater in PhotonPlayer.TagObject
-        Debug.Log("Instantiated here");
-    }
-
-    void Explode()
-    {
-        particle1.Play();
     }
 }
