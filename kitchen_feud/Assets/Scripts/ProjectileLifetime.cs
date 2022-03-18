@@ -15,6 +15,7 @@ public class ProjectileLifetime : MonoBehaviour
 
     IEnumerator WaitForExplosion()
     {
+        this.GetComponent<Rigidbody>().AddForce(transform.forward * 200);
         yield return new WaitForSeconds(timeToExplode);
         gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
     }

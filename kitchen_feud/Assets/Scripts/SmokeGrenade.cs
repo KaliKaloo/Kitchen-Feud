@@ -56,11 +56,12 @@ public class SmokeGrenade : MonoBehaviour
     private bool started = false;
 
     readonly EnableSmoke enableSmoke = new EnableSmoke();
+    PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
     {
-        //a
+        PV = this.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -81,17 +82,17 @@ public class SmokeGrenade : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    void AddSmokeForce(GameObject prefabObject)
-    {
-        prefabObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * 500); //Moving projectile
-    }
-
     void Throw() {
         enableSmoke.DisableSmokeSlot();
-        smokeClone = PhotonNetwork.Instantiate("smoke_grenade", transform.position, transform.rotation);
+        if (PV.IsMine)
+            PhotonNetwork.Instantiate("smoke_grenade", transform.position + (transform.forward * 2), transform.rotation, 0);
 
         //this.GetComponent<PhotonView>().RPC("AddSmokeForce", RpcTarget.All, smokeClone);
+    }
+    void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        // e.g. store this gameobject as this player's charater in PhotonPlayer.TagObject
+        Debug.Log("Instantiated here");
     }
 
     void Explode()
