@@ -59,7 +59,7 @@ public class SmokeGrenade : MonoBehaviour
     {
         // if player in enemy kitchen
         if (enableSmoke.GetPlayerState()) {
-            // and player presses 1, and the has not been used before
+            // and player presses 1, and has not been used before
             if (Input.GetKeyDown(KeyCode.Alpha1) && !used) {
                 // lock player from using another smoke
                 used = true;
