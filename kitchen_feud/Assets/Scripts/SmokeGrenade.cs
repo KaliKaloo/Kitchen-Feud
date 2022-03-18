@@ -82,15 +82,16 @@ public class SmokeGrenade : MonoBehaviour
     }
 
     [PunRPC]
-    void instantiateSmokeGrenadeRPC(Vector3 position, Quaternion rotation)
+    void AddSmokeForce(GameObject prefabObject)
     {
-        smokeClone = Instantiate(prefab, position, rotation);
-        smokeClone.GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * 500); //Moving projectile
+        prefabObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * 500); //Moving projectile
     }
 
     void Throw() {
         enableSmoke.DisableSmokeSlot();
-        this.GetComponent<PhotonView>().RPC("instantiateSmokeGrenadeRPC", RpcTarget.Others, transform.position, transform.rotation);
+        smokeClone = PhotonNetwork.Instantiate("smoke_grenade", transform.position, transform.rotation);
+
+        //this.GetComponent<PhotonView>().RPC("AddSmokeForce", RpcTarget.All, smokeClone);
     }
 
     void Explode()
