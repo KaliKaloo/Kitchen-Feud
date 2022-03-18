@@ -34,72 +34,61 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - RPC_GetTeam
-  - RPC_SentTeam
-  - SetNullAsParent
-  - SetPlatformAsParent
-  - DisableView
-  - EnView
-  - SetToTrue
-  - SetToFalse
-  - pointSync
-  - UpdateScore1
-  - UpdateScore2
-  - showT
-  - Showing
-  - DisablePushing
-  - EnablePushing
-  - SetGrav
-  - ShowingWithOrder
-  - ShowingWithOrderTeam1
-  - ShowingWithOrderTeam2
-  - ShowClientTicket
-  - SetToF
-  - makeTrayAcross
-  - resetAcross
-  - ServeAll
-  - clearAll
-  - setParent
-  - addItemRPC
-  - clearItems
   - addComps
-  - trayBool
-  - SetParentAsNull
-  - SetParentAsSlot
-  - removeFromTray
-  - onTrayF
-  - UpdateLobby
-  - UpdateTimer
-  - loadS
-  - DisableIngredientView
+  - addItemRPC
+  - addOp
+  - addSecondsRPC
   - applianceBool
-  - onApplianceF
-  - removeFromApplianceRPC
-  - setX
-  - ovenGame
-  - doFd
+  - clearAll
+  - clearItems
+  - ClickRpc
   - cookedDishG
   - decCount
+  - DestroyRpc
+  - DestroySpaceship
+  - DisableIngredientView
+  - DisablePushing
+  - DisableView
+  - doFd
+  - EnablePushing
+  - EnView
+  - Fire
+  - globalDestroy
+  - loadS
+  - makeTrayAcross
+  - onApplianceF
+  - onTrayF
+  - ovenGame
+  - pointSync
+  - removeFromApplianceRPC
+  - removeFromTray
+  - removeOp
+  - resetAcross
   - resetCount
+  - resetIsPressed
+  - resetPlayerPressing
+  - RespawnSpaceship
+  - setEntered
+  - setEnteredF
+  - SetGrav
+  - setParent
+  - SetParentAsNull
+  - SetParentAsSlot
+  - setPlayerPressing
+  - setTeam
+  - SetToF
+  - SetToFalse
+  - SetToTrue
+  - ShowingWithOrderTeam1
+  - ShowingWithOrderTeam2
   - syncMat
   - syncSmoke
-  - setTeam
   - synctele
-  - addOp
-  - setEntered
-  - removeOp
-  - setEnteredF
-  - resetPlayerPressing
-  - setPlayerPressing
-  - resetIsPressed
-  - globalDestroy
-  - instantiateSmokeGrenadeRPC
-  - AddSmokeForce
+  - trayBool
+  - UpdateLobby
+  - UpdateScore1
+  - UpdateScore2
+  - UpdateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
