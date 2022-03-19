@@ -17,7 +17,7 @@ public class PlayerMvmt
         obj = new GameObject();
         playerContr = obj.AddComponent<PlayerController>();
         player = obj.AddComponent<Rigidbody>();
-        playerContr.m_speed =  200;
+        playerContr.mvmtSpeed =  200;
     }
 
     [Test]
@@ -25,7 +25,7 @@ public class PlayerMvmt
     {
         Vector3 mvmt = playerContr.getTransformVelocity(new Vector3(2,3,4));
         Assert.AreNotEqual(0.0f, mvmt.z);
-        Assert.AreEqual(playerContr.m_speed * 4 * Time.deltaTime, mvmt.z);
+        Assert.AreEqual(playerContr.mvmtSpeed * 4 * Time.deltaTime, mvmt.z);
     }
 
     [Test]

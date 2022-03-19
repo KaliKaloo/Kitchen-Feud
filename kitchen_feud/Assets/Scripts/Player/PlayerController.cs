@@ -6,7 +6,7 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
-	public float m_speed;
+	public float mvmtSpeed;
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
@@ -86,9 +86,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		float x = Input.GetAxis("Horizontal");
 		float z = Input.GetAxis("Vertical");
 		Vector3 move = transform.right * x + transform.forward*z;
-		controller.Move(move* m_speed * Time.deltaTime);
+		controller.Move(move* mvmtSpeed * Time.deltaTime);
 		velocity.y =-10;
 		controller.Move(velocity*Time.deltaTime);
+		if (mvmtSpeed !=4){
+			Debug.Log(mvmtSpeed);
+		}
 	}
 
 
@@ -121,8 +124,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	}
 
 	public Vector3 getTransformVelocity(Vector3 transform){
-		return transform * m_speed * Time.deltaTime;
+		return transform * mvmtSpeed * Time.deltaTime;
 	}
+
+	public void updateSpeed(float newSpeed){
+        mvmtSpeed = newSpeed;
+    }
 
 	
 
