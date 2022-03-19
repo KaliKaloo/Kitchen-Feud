@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+			GetComponent<CharacterController>().enabled = true;
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -52,6 +53,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
+			float x = Input.GetAxis("Horizontal");
+			float z = Input.GetAxis("Vertical");
+			Vector3 move = transform.right * x + transform.forward * z;
+			controller.Move(move * m_speed * Time.deltaTime);
+			//velocity.y = -10;
+			//controller.Move(velocity * Time.deltaTime);
 			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -82,14 +89,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	}
 
 
-	void FixedUpdate(){
-		float x = Input.GetAxis("Horizontal");
-		float z = Input.GetAxis("Vertical");
-		Vector3 move = transform.right * x + transform.forward*z;
-		controller.Move(move* m_speed * Time.deltaTime);
-		velocity.y =-10;
-		controller.Move(velocity*Time.deltaTime);
-	}
+	//void FixedUpdate(){
+	//	float x = Input.GetAxis("Horizontal");
+	//	float z = Input.GetAxis("Vertical");
+	//	Vector3 move = transform.right * x + transform.forward*z;
+	//	controller.Move(move* m_speed * Time.deltaTime);
+	//	velocity.y =-10;
+	//	controller.Move(velocity*Time.deltaTime);
+	//}
 
 
 	// Set our focus to a new focus
