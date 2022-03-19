@@ -14,17 +14,13 @@ public class FriedFoodController : MonoBehaviour
     public float minYSpeed;
     public float maxYSpeed;
     public GameObject gameCanvas;
-    //public fryingMinigame fryingMg;
-
     public Appliance appliance;
 
 //use dishSO to get sprite and set it as the friedFood image
     public DishSO dishSO;
 
     void Start()
-    {
-        //fryingMg = appliance.gameObject.GetComponent<fryingMinigame>();
-        
+    {   
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
@@ -32,7 +28,7 @@ public class FriedFoodController : MonoBehaviour
 
     void Update()
     {
-        //fryingMg.friedFoodController = this;
+
     }
 
     public void FlipPancake() {

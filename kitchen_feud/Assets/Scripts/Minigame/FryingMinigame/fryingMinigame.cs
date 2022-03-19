@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Photon.Pun; 
+using UnityEngine.U2D;
 
 public class fryingMinigame : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class fryingMinigame : MonoBehaviour
     private Appliance appliance;
     public ExitFryingMinigame backbutton;
     public PanController pan;
+
+    public SpriteAtlas imgAtlas;
+    public string spriteName;
+
+
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsFrying;
@@ -28,8 +34,10 @@ public class fryingMinigame : MonoBehaviour
                     friedFoodController = pan.friedFood;
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
-                    Debug.Log("dish asigned: " + friedFoodController.dishSO);            
-                    friedFoodController.GetComponent<SpriteRenderer>().sprite = friedFoodController.dishSO.img;
+                    spriteName = GetSpriteName(friedFoodController.dishSO);           
+                    //friedFoodController.GetComponent<SpriteRenderer>().sprite = friedFoodController.dishSO.img;
+                    //to check
+                    friedFoodController.GetComponent<SpriteRenderer>().sprite = imgAtlas.GetSprite(spriteName);
                     Debug.Log("sprite assigned: " + friedFoodController.GetComponent<SpriteRenderer>().sprite);
                 }
             }
@@ -45,7 +53,15 @@ public class fryingMinigame : MonoBehaviour
             dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)friedFoodController.points);
             dishOfFoundDish.points = (int)friedFoodController.points;
             Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
-        }
+            }
         }
     }
+    public string GetSpriteName(DishSO dishSO) {
+        if(dishSO.dishID == "DI1415") return "patty";
+        if(dishSO.dishID == "DI1621") return "rice";
+        if(dishSO.dishID == "DI1316") return "13";
+        if(dishSO.dishID == "DI1617") return "eggFried";
+        else return "pngegg";
+    }
+
 }
