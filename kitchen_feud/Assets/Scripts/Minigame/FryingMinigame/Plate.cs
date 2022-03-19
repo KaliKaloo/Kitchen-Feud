@@ -9,6 +9,7 @@ public class Plate : MonoBehaviour
     public PanController pan;
     private Vector2 screenBounds;
     public float totalPoints;
+    public float speed = 10f;
 
     //the plate needs to:
     //add points on caught pancake
@@ -31,7 +32,17 @@ public class Plate : MonoBehaviour
             Destroy(friedFood.gameObject);
         }
 
-        //movement: only if it's player2, rpcs for player1
+     //movement: only if it's player2, rpcs for player1
+
+        if (Input.GetKey(KeyCode.LeftArrow)) {
+            if(!(transform.position.x < screenBounds.x)) gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
+        }
+		if (Input.GetKey(KeyCode.RightArrow)) {
+            Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+            Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
+            if (platePos.x + 370 < panPos.x) gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
+        }
+       
     }
  
     void OnTriggerEnter2D(Collider2D col)

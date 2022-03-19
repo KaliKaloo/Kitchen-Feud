@@ -23,6 +23,13 @@ public class fryingMinigame : MonoBehaviour
             if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
                 backbutton.appliance = GetComponent<Appliance>();
+                if (appliance.foundDish != null) {
+                    friedFoodController.dishSO = appliance.foundDish;
+                    friedFoodController.appliance = appliance;
+//NOT WORKING                  
+                    friedFoodController.GetComponent<SpriteRenderer>().sprite = friedFoodController.dishSO.img;
+                    Debug.Log(friedFoodController.GetComponent<SpriteRenderer>().sprite);
+                }
             }
         }
     }

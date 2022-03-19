@@ -15,12 +15,20 @@ public class FriedFoodController : MonoBehaviour
     public float maxYSpeed;
     public GameObject gameCanvas;
 
+    public Appliance appliance;
+
+//use dishSO to get sprite and set it as the friedFood image
+    public DishSO dishSO;
+
     void Start()
     {
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
         //startLocation = pan.transform.position;
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
+
+        
+
     }
 
     void Update()
