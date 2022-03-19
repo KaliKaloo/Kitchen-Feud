@@ -14,6 +14,7 @@ public class FriedFoodController : MonoBehaviour
     public float minYSpeed;
     public float maxYSpeed;
     public GameObject gameCanvas;
+    //public fryingMinigame fryingMg;
 
     public Appliance appliance;
 
@@ -22,18 +23,16 @@ public class FriedFoodController : MonoBehaviour
 
     void Start()
     {
+        //fryingMg = appliance.gameObject.GetComponent<fryingMinigame>();
+        
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
-        //startLocation = pan.transform.position;
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
-
-        
-
     }
 
     void Update()
     {
-
+        //fryingMg.friedFoodController = this;
     }
 
     public void FlipPancake() {

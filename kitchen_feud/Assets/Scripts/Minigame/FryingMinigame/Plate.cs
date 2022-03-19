@@ -11,11 +11,6 @@ public class Plate : MonoBehaviour
     public float totalPoints;
     public float speed = 10f;
 
-    //the plate needs to:
-    //add points on caught pancake
-    //catch pancakes - when collision plate becomes the parent
-    //stack pancakes: the caught foods are located a lil bit above one another
-    //move and be controlled by another player
     void Start()
     {
         totalPoints = 0;
@@ -25,11 +20,13 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
-        if(pan.friedFood != null) friedFood = pan.friedFood;
+        if(pan.friedFood != null) {
+            friedFood = pan.friedFood;
         
-        if(friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y) {
-            friedFood.timer.Reset();
-            Destroy(friedFood.gameObject);
+            if(friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y) {
+                friedFood.timer.Reset();
+                Destroy(friedFood.gameObject);
+            }
         }
 
      //movement: only if it's player2, rpcs for player1

@@ -12,6 +12,7 @@ public class fryingMinigame : MonoBehaviour
     public FriedFoodController friedFoodController;
     private Appliance appliance;
     public ExitFryingMinigame backbutton;
+    public PanController pan;
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsFrying;
@@ -24,11 +25,12 @@ public class fryingMinigame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
                 if (appliance.foundDish != null) {
+                    friedFoodController = pan.friedFood;
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
-//NOT WORKING                  
+                    Debug.Log("dish asigned: " + friedFoodController.dishSO);            
                     friedFoodController.GetComponent<SpriteRenderer>().sprite = friedFoodController.dishSO.img;
-                    Debug.Log(friedFoodController.GetComponent<SpriteRenderer>().sprite);
+                    Debug.Log("sprite assigned: " + friedFoodController.GetComponent<SpriteRenderer>().sprite);
                 }
             }
         }
