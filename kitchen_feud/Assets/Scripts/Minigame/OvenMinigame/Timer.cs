@@ -14,10 +14,15 @@ public class Timer : MonoBehaviour
 
     public Text timerText;
     public float timer = time;
+    public float timerFake = time;
+
     private static bool started;
     public int score = 0;
     float elapsed = 0f;
     public exitOven backbutton;
+    public GameObject sabotageButton;
+    string applianceName;
+
     PhotonRoom room;
 
     // changes original starting time, only do before game starts!
@@ -29,6 +34,14 @@ public class Timer : MonoBehaviour
         // start timer if not started yet
         InitializeTimer();
         timerText.text = ConvertSecondToMinutes(GetTime());
+        applianceName = transform.parent.name;
+
+        if(applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2){
+            sabotageButton.SetActive(true);
+        }
+        else if (applianceName == "Oven2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1){
+            sabotageButton.SetActive(true);
+        }   
     }
 
     void Update()
@@ -80,6 +93,7 @@ public class Timer : MonoBehaviour
     public void InitializeTimer()
     {
         timer = time;
+        timerFake = time;
         
     }
 
@@ -93,7 +107,7 @@ public class Timer : MonoBehaviour
     // get current time from timer
     public float GetTime()
     {
-       return timer;
+       return timerFake;
     }
 
 
@@ -109,6 +123,7 @@ public class Timer : MonoBehaviour
             score -= 2;
         }
         timer -= 1;
+        timerFake -=1;
        
      
     }
@@ -141,4 +156,14 @@ public class Timer : MonoBehaviour
         timer = 40;
         score = 0;
     }
+
+
+    public void addSeconds(){
+        GetComponent<PhotonView>().RPC("addSecondsRPC", RpcTarget.All, GetComponent<PhotonView>().ViewID);
+   }
+
+   [PunRPC]
+   void addSecondsRPC(int viewID){
+        PhotonView.Find(viewID).GetComponent<Timer>().timerFake += 10f;
+   }
 }
