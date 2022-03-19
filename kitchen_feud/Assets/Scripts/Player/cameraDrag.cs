@@ -8,7 +8,12 @@ public class cameraDrag : MonoBehaviour
 
     public Transform playerBody;
     float xRotation = 0.0f;
-   
+	Slider rotateSlider;
+
+    void Start(){
+        rotateSlider = GameObject.Find("Rotation").GetComponentInChildren<Slider>();
+
+    }
     void FixedUpdate()
     {
         if (Input.GetMouseButton(1))
