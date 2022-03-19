@@ -1,5 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
+
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -14,12 +16,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public PhotonView view;
 	public CharacterController controller;
 	Vector3 velocity;
+	Slider speedSlider;
 
-	
+
 
 	void Start()
 	{
-		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+			speedSlider = GameObject.Find("Speed").GetComponentInChildren<Slider>();
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -76,6 +79,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
+
+			mvmtSpeed = speedSlider.value;
 
 			
 		}

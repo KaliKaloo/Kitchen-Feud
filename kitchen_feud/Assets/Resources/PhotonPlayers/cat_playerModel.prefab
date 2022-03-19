@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3701048243505201765}
-  mvmtSpeed: 4.866067
+  mvmtSpeed: 4
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
