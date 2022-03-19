@@ -132,11 +132,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		return transform * mvmtSpeed * Time.deltaTime;
 	}
 
-	public void updateSpeed(float newSpeed){
-        mvmtSpeed = newSpeed;
-    }
-
-	
 
 	// Remove our current focus
 	void RemoveFocus()

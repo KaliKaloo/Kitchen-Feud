@@ -16,6 +16,11 @@ public class cameraDrag : MonoBehaviour
         rotateSlider = GameObject.Find("Rotation").GetComponentInChildren<Slider>();
 
     }
+
+    void Update(){
+        rotatespeed = rotateSlider.value;
+
+    }
     void FixedUpdate()
     {
         if (Input.GetMouseButton(1))
@@ -33,4 +38,5 @@ public class cameraDrag : MonoBehaviour
         }
 
     }
+
 }
