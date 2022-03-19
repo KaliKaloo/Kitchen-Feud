@@ -35,10 +35,7 @@ public class fryingMinigame : MonoBehaviour
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
                     spriteName = GetSpriteName(friedFoodController.dishSO);           
-                    //friedFoodController.GetComponent<SpriteRenderer>().sprite = friedFoodController.dishSO.img;
-                    //to check
-                    friedFoodController.GetComponent<SpriteRenderer>().sprite = imgAtlas.GetSprite(spriteName);
-                    Debug.Log("sprite assigned: " + friedFoodController.GetComponent<SpriteRenderer>().sprite);
+                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(spriteName).texture;
                 }
             }
         }
