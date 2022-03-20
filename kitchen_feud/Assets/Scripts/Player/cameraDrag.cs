@@ -8,6 +8,8 @@ public class cameraDrag : MonoBehaviour
 {
     public float rotatespeed;
 	Slider rotateSlider;
+	Slider speedSlider;
+
     public Transform playerBody;
     float xRotation = 0.0f;
     public Rigidbody rb;
@@ -16,17 +18,17 @@ public class cameraDrag : MonoBehaviour
     float Vertical;
     Vector3 movement;
     // float yaw;
-    public float speed;
+    public float mvmtSpeed;
 
     private void Start()
     {
-        rotateSlider = GameObject.Find("Rotation").GetComponentInChildren<Slider>();
         rb = GetComponentInParent<Rigidbody>();
         PV = GetComponentInParent<PhotonView>();
+        rotateSlider = GameObject.Find("Rotation").GetComponentInChildren<Slider>();
+        speedSlider = GameObject.Find("Speed").GetComponentInChildren<Slider>();
     }
     private void Update()
     {
-        rotatespeed = rotateSlider.value;
 
         if (PV.IsMine)
         {
@@ -35,9 +37,12 @@ public class cameraDrag : MonoBehaviour
             movement = transform.forward * Vertical + transform.right * Horizontal;
             // if (Input.GetMouseButton(1))
             // {
-            //     yaw = (yaw + Input.GetAxis("Mouse X") * speed) % 360f;
+            //     yaw = (yaw + Input.GetAxis("Mouse X") * mvmtSpeed) % 360f;
             // }
         }
+        rotatespeed = rotateSlider.value;
+        mvmtSpeed = speedSlider.value;
+
     }
     private void LateUpdate()
     {
@@ -50,7 +55,7 @@ public class cameraDrag : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
                 float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
-                xRotation -= mouseY * speed;
+                xRotation -= mouseY * mvmtSpeed;
                 xRotation = Mathf.Clamp(xRotation, -90f, 48f);
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                 playerBody.Rotate(Vector3.up*mouseX);

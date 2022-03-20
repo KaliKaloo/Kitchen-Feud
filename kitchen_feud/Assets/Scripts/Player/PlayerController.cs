@@ -8,16 +8,11 @@ using System.IO;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
-	public float mvmtSpeed;
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
-	Vector3 velocity;
-	Slider speedSlider;
-	InputField speedVal;
-
 
 	void Start()
 	{
@@ -35,10 +30,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
-			speedSlider = GameObject.Find("Speed").GetComponentInChildren<Slider>();
-			speedVal = GameObject.Find("Speed").GetComponentInChildren<InputField>();
 			
-			//GetComponent<CharacterController>().enabled = true;
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -86,11 +78,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
-
-			mvmtSpeed = speedSlider.value;
-			speedVal.text = mvmtSpeed.ToString();
-
-			
 		}
 	}
 
@@ -122,11 +109,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, 3f);
 	}
-
-	public Vector3 getTransformVelocity(Vector3 transform){
-		return transform * mvmtSpeed * Time.deltaTime;
-	}
-
 
 	// Remove our current focus
 	void RemoveFocus()
