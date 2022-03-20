@@ -50,7 +50,6 @@ public class AudioManagerOne : MonoBehaviour
         PhotonView pFV = other.GetComponent<PhotonView>();
         PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
         myTeam = myPlayerC.myTeam;
-        Debug.Log("Hello");
         if (pFV.IsMine)
         {
           

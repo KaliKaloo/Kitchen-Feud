@@ -79,7 +79,6 @@ public class PlayerVoiceManager : MonoBehaviour
 				{
 					//started1 = true;
 					timer1 += Time.deltaTime;
-					Debug.Log("HERRERE");
 					if (timer1 > 1)
 					{
 						view.RPC("giveDamage", RpcTarget.All, view.ViewID, 1);
@@ -100,9 +99,6 @@ public class PlayerVoiceManager : MonoBehaviour
 					var obj = hit.collider.gameObject;
 					if (interactable != null)
 					{
-						Debug.LogError(obj.name);
-
-
 
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
 							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
@@ -132,6 +128,7 @@ public class PlayerVoiceManager : MonoBehaviour
 								}
 								else
 								{
+									//change 0 to 1 to make kicking multiplayer
 									if (obj.GetComponent<PlayerVoiceManager>().kickedBy.Count > 0)
 									{
 										GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
@@ -253,7 +250,7 @@ public class PlayerVoiceManager : MonoBehaviour
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
-		rb.AddForce(direction * 1, ForceMode.Impulse);
+		rb.AddForce(direction * 0.3f, ForceMode.Impulse);
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)
