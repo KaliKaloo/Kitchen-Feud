@@ -1,7 +1,8 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
-
+using System.IO;
+// using UnityEngine.UIElements;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -14,15 +15,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
-	public CharacterController controller;
 	Vector3 velocity;
 	Slider speedSlider;
 	InputField speedVal;
 
 
+	public Rigidbody rb;
+	
+
 
 	void Start()
 	{
+		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -38,9 +42,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
 			speedSlider = GameObject.Find("Speed").GetComponentInChildren<Slider>();
 			speedVal = GameObject.Find("Speed").GetComponentInChildren<InputField>();
+			
+			//GetComponent<CharacterController>().enabled = true;
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			
 			if(myTeam == 1)
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
@@ -51,13 +58,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			}
 		}
 		
+		
 	}
+
+
 	void Update()
 	{
 	
 		if (view.IsMine)
 		{
-			if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -90,18 +100,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	}
 
 
-	void FixedUpdate(){
-		float x = Input.GetAxis("Horizontal");
-		float z = Input.GetAxis("Vertical");
-		Vector3 move = transform.right * x + transform.forward*z;
-		controller.Move(move* mvmtSpeed * Time.deltaTime);
-		velocity.y =-10;
-		controller.Move(velocity*Time.deltaTime);
-	}
+	// void FixedUpdate(){
+	// 	float x = Input.GetAxis("Horizontal");
+	// 	float z = Input.GetAxis("Vertical");
+	// 	Vector3 move = transform.right * x + transform.forward*z;
+	// 	controller.Move(move* mvmtSpeed * Time.deltaTime);
+	// 	velocity.y =-10;
+	// 	controller.Move(velocity*Time.deltaTime);
+	// }
+   
 
 
-	// Set our focus to a new focus
-	void SetFocus(Interactable newFocus, GameObject obj)
+    // Set our focus to a new focus
+    void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{
@@ -170,10 +181,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	void setTeam(int viewID, int team)
     {
 		PhotonView.Find(viewID).GetComponent<PlayerController>().myTeam = team;
-    }
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().myTeam = team;
+	}
 	[PunRPC]
 	void synctele(int viewID, Vector3 pos)
 	{
 		PhotonView.Find(viewID).transform.position = pos;
 	}
+
 }
