@@ -150,7 +150,7 @@ public class Spawner : MonoBehaviour
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
-                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
+                new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
@@ -176,7 +176,7 @@ public class Spawner : MonoBehaviour
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,
-                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
+                new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
