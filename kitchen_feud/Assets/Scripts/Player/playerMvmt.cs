@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class cameraDrag : MonoBehaviour
+public class playerMvmt : MonoBehaviour
 {
     public float rotatespeed;
     public float mvmtSpeed;
@@ -17,7 +17,6 @@ public class cameraDrag : MonoBehaviour
     float Horizontal;
     float Vertical;
     Vector3 movement;
-    // float yaw;
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class cameraDrag : MonoBehaviour
         PV = GetComponentInParent<PhotonView>();
     }
 
-    
+
     private void Update()
     {
 
@@ -34,10 +33,7 @@ public class cameraDrag : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
-            // if (Input.GetMouseButton(1))
-            // {
-            //     yaw = (yaw + Input.GetAxis("Mouse X") * mvmtSpeed) % 360f;
-            // }
+          
         }
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
@@ -77,7 +73,6 @@ public class cameraDrag : MonoBehaviour
         if (PV.IsMine)
         {
             {
-                // rb.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
                 rb.MovePosition(rb.position + movement * mvmtSpeed * Time.fixedDeltaTime);
             }
         }
