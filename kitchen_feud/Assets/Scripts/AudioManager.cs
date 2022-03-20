@@ -6,7 +6,6 @@ using Photon.Pun;
 
 public class AudioManager : MonoBehaviour
 {
-    //public bool entered1;
     IRtcEngine engine;
     int myTeam;
     string randomInstance;
@@ -15,9 +14,7 @@ public class AudioManager : MonoBehaviour
     public bool played;
     public GameObject otherP;
     public string Speaker;
-    //public string Team;
     public int team;
-
 
 
     private void Awake()
@@ -28,7 +25,7 @@ public class AudioManager : MonoBehaviour
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
 
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -45,11 +42,6 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
  
     private void OnTriggerEnter(Collider other)
     {
@@ -80,23 +72,16 @@ public class AudioManager : MonoBehaviour
                     pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
                 }
             }
-                if (myTeam == team && myPlayerC.healthbar1)
-                {
-                    pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
-
-
-                }
-
-
-            
-
+            if (myTeam == team && myPlayerC.healthbar1)
+            {
+                pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
+            }
         }
     }
+
     [PunRPC]
     void playDing(int viewID)
     {
-
         PhotonView.Find(viewID).GetComponent<AudioManager>().ding.Play();
-
     }
 }
