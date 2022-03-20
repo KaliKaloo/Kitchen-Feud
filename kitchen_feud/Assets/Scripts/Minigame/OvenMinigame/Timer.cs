@@ -11,22 +11,17 @@ public class Timer : MonoBehaviour
 
     // SET TIMER HERE !!!!!!
     private static int time = 40;
-
     public Text timerText;
     public float timer = time;
     public float timerFake = time;
-
-    private static bool started;
     public int score = 0;
     float elapsed = 0f;
     public exitOven backbutton;
     public GameObject sabotageButton;
     string applianceName;
-
     PhotonRoom room;
 
     // changes original starting time, only do before game starts!
-
     void Start()
     {
         // start scores at 0
@@ -97,19 +92,11 @@ public class Timer : MonoBehaviour
         
     }
 
-    public void RestartTimer()
-    {
-        started = false;
-    }
-
-
-
     // get current time from timer
     public float GetTime()
     {
        return timerFake;
     }
-
 
     // decrement timer
     public void Decrement()
