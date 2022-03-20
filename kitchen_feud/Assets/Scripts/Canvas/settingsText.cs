@@ -10,6 +10,9 @@ public class settingsText : MonoBehaviour
 {
 
     public void updateText(float setting){
+        if (transform.parent.parent.name == "Rotation"){
+            setting/=100;
+        }
         gameObject.GetComponent<TextMeshProUGUI>().text = Math.Round(setting, 1).ToString();
     }
 }
