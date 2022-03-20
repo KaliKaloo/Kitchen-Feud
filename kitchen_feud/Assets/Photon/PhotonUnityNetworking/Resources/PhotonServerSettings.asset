@@ -37,6 +37,15 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - appendKickedBy
+  - applianceBool
+  - clearAll
+  - clearItems
+  - clearKickedBy
+  - ClickRpc
+  - cookedDishG
+  - decCount
+  - destHB
   - addSecondsRPC
   - applianceBool
   - clearAll
@@ -53,12 +62,16 @@ MonoBehaviour:
   - EnablePushing
   - EnView
   - Fire
+  - giveDamage
   - globalDestroy
   - loadS
   - makeTrayAcross
   - onApplianceF
   - onTrayF
   - ovenGame
+  - playDing
+  - pointSync
+  - push
   - pointSync
   - removeFromApplianceRPC
   - removeFromTray
@@ -67,10 +80,21 @@ MonoBehaviour:
   - resetCount
   - resetIsPressed
   - resetPlayerPressing
+  - resetTimer
   - RespawnSpaceship
   - setEntered
   - setEnteredF
   - SetGrav
+  - setKickable
+  - setKickableF
+  - setMyC
+  - setObjParent
+  - setParent
+  - SetParentAsNull
+  - SetParentAsSlot
+  - setPlayed
+  - setPlayerPressing
+  - setStarted
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
