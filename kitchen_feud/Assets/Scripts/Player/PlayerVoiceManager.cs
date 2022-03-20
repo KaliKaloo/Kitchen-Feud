@@ -88,18 +88,15 @@ public class PlayerVoiceManager : MonoBehaviour
 			}
 			if (Input.GetButtonDown("Fire1"))
 			{
-				
-
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
 				if (Physics.Raycast(ray, out hit, 100))
 				{
-					Interactable interactable = hit.collider.GetComponent<Interactable>();
+					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
-					if (interactable != null)
+					if (obj != null)
 					{
-
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
 							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
 						{

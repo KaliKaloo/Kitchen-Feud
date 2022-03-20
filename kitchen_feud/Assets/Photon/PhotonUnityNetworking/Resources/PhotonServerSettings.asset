@@ -108,6 +108,18 @@ MonoBehaviour:
   - syncMat
   - syncSmoke
   - synctele
+  - addOp
+  - setEntered
+  - removeOp
+  - setEnteredF
+  - resetPlayerPressing
+  - setPlayerPressing
+  - resetIsPressed
+  - globalDestroy
+  - syncAnim
+  - syncIsOpened
+  - decrementDoor
+  - incrementDoor
   - trayBool
   - UpdateLobby
   - UpdateScore1

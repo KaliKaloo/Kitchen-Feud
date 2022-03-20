@@ -15,7 +15,6 @@ public class AudioManager : MonoBehaviour
     public bool played;
     public GameObject otherP;
     public string Speaker;
-    //public string Team;
     public int team;
 
 
@@ -53,44 +52,44 @@ public class AudioManager : MonoBehaviour
  
     private void OnTriggerEnter(Collider other)
     {
-        PhotonView pFV = other.GetComponent<PhotonView>();
-        PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
-        myTeam = myPlayerC.myTeam;
-        if (pFV.IsMine)
+        if (other.tag == "Player")
         {
-            if (team == 1)
+            PhotonView pFV = other.GetComponent<PhotonView>();
+            PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+            myTeam = myPlayerC.myTeam;
+            if (pFV.IsMine)
             {
-                pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
-            }
-            else
-            {
-                pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
-            }
-            engine.LeaveChannel();
-            engine.JoinChannel(randomInstance + "Team" + team);
-
-            if (myTeam != team)
-            {
+                if (team == 1)
                 {
-                    if (myPlayerC.played == false)
-                    {
-                        PV.RPC("playDing", RpcTarget.All, PV.ViewID);
-                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 1);
-                    }
-                    pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
+                    pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
                 }
-            }
+                else
+                {
+                    pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
+                }
+                engine.LeaveChannel();
+                engine.JoinChannel(randomInstance + "Team" + team);
+
+                if (myTeam != team)
+                {
+                    {
+                        if (myPlayerC.played == false)
+                        {
+                            PV.RPC("playDing", RpcTarget.All, PV.ViewID);
+                            pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 1);
+                        }
+                        pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
+                    }
+                }
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
-
-
+                    pFV.RPC("setKickableF", RpcTarget.All, pFV.ViewID);
                 }
-
-
-            
-
+            }
         }
+
+        
     }
     [PunRPC]
     void playDing(int viewID)

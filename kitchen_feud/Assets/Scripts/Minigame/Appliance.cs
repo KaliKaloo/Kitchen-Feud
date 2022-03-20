@@ -49,7 +49,6 @@ public class Appliance : Interactable
         pv = player.GetComponent<PhotonView>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        Debug.Log(canUse);
         if (!isBeingInteractedWith && canUse)
         {
             if (pv.IsMine)
