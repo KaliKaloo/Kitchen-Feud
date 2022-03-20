@@ -21,7 +21,8 @@ public class spawnCutBurst : MonoBehaviour
         var main = ps.main;
         // Debug.Log(Color.red);
         // Debug.Log(colorA);
-       //main.startColor = new ParticleSystem.MinMaxGradient(colorA);
+        colorA.a = 1f;
+       main.startColor = new ParticleSystem.MinMaxGradient(colorA);
         
         Destroy(newObject,1f);
     }
