@@ -15,7 +15,6 @@ public class AudioManager : MonoBehaviour
     public bool played;
     public GameObject otherP;
     public string Speaker;
-    //public string Team;
     public int team;
 
 
@@ -53,8 +52,8 @@ public class AudioManager : MonoBehaviour
  
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
-        // if (other.tag == "Player"){
+        if (other.tag == "Player")
+        {
             PhotonView pFV = other.GetComponent<PhotonView>();
             PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
             myTeam = myPlayerC.myTeam;
@@ -87,8 +86,8 @@ public class AudioManager : MonoBehaviour
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
                 }
             }
+        }
 
-        // }
         
     }
     [PunRPC]

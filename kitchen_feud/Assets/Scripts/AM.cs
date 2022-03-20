@@ -29,35 +29,38 @@ public class AM : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PhotonView pFV = other.GetComponent<PhotonView>();
-        PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
-        if (pFV.IsMine)
+        if (other.tag == "Player")
         {
-            if (team == 1)
+            PhotonView pFV = other.GetComponent<PhotonView>();
+            PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+            if (pFV.IsMine)
             {
-                myTeam = myPlayerC.myTeam;
-                if (myPlayerC.entered1 == true)
+                if (team == 1)
                 {
-                    pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
-                    engine.LeaveChannel();
-                    engine.JoinChannel(randomInstance + "Path");
-                    if (myTeam == 2)
+                    myTeam = myPlayerC.myTeam;
+                    if (myPlayerC.entered1 == true)
                     {
-                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                        pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
+                        engine.LeaveChannel();
+                        engine.JoinChannel(randomInstance + "Path");
+                        if (myTeam == 2)
+                        {
+                            pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                        }
                     }
                 }
-            }
-            else
-            {
-                myTeam = myPlayerC.myTeam;
-                if (myPlayerC.entered2 == true)
+                else
                 {
-                    pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
-                    engine.LeaveChannel();
-                    engine.JoinChannel(randomInstance + "Path");
-                    if (myTeam == 1)
+                    myTeam = myPlayerC.myTeam;
+                    if (myPlayerC.entered2 == true)
                     {
-                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                        pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
+                        engine.LeaveChannel();
+                        engine.JoinChannel(randomInstance + "Path");
+                        if (myTeam == 1)
+                        {
+                            pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                        }
                     }
                 }
             }
