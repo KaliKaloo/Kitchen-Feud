@@ -7,12 +7,14 @@ using Photon.Pun;
 public class cameraDrag : MonoBehaviour
 {
     public float rotatespeed;
+	Slider rotateSlider;
+
 
     public Transform playerBody;
     float xRotation = 0.0f;
     public Rigidbody rb;
-    public GameObject obj;
-    public Vector3 pos;
+    // public GameObject obj;
+    // public Vector3 pos;
     public PhotonView PV;
     float Horizontal;
     float Vertical;
