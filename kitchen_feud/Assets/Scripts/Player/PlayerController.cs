@@ -14,23 +14,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
-	public CharacterController controller;
-	Vector3 velocity;
-	float yaw;
-	float x;
-	float z;
-	Vector3 localVelocity;
 	public Rigidbody rb;
-	Vector3 movement;
-	float Horizontal;
-	float Vertical;
+	
 
 
 	void Start()
 	{
 		
-		rb = GetComponent<Rigidbody>();
-		rb.freezeRotation = true;
+		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -69,17 +60,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
-		
-			 Horizontal = Input.GetAxis("Horizontal");
-			  Vertical = Input.GetAxis("Vertical");
-			movement = transform.forward * Vertical + transform.right * Horizontal;
-            if (Input.GetMouseButton(1))
-            {
-                yaw = (yaw + Input.GetAxis("Mouse X") * 3) % 360f;
-            }
-
-
-
             if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -110,17 +90,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	}
 
 
-    private void FixedUpdate()
-    {
-        if (view.IsMine)
-        {
-		
-
-			//rb.velocity = localVelocity;
-			rb.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
-			rb.MovePosition(rb.position + movement * 5 * Time.fixedDeltaTime);
-		}
-    }
+   
 
 
     // Set our focus to a new focus
@@ -201,8 +171,5 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	{
 		PhotonView.Find(viewID).transform.position = pos;
 	}
-
-
-
 
 }
