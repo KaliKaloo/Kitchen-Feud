@@ -73,17 +73,20 @@ public class PlayerVoiceManager : MonoBehaviour
             {
 				Increment();
             }
-			if(timer > 3 && healthbar1.GetComponentInChildren<HealthBar>().slider.value <= 4)
-            {
-				//started1 = true;
-				timer1 += Time.deltaTime;
-				Debug.Log("HERRERE");
-				if (timer1 > 1)
+			if (healthbar1)
+			{
+				if (timer > 3 && healthbar1.GetComponentInChildren<HealthBar>().slider.value <= 4)
 				{
-					view.RPC("giveDamage", RpcTarget.All, view.ViewID, 1);
-					timer1 = 0;
+					//started1 = true;
+					timer1 += Time.deltaTime;
+					Debug.Log("HERRERE");
+					if (timer1 > 1)
+					{
+						view.RPC("giveDamage", RpcTarget.All, view.ViewID, 1);
+						timer1 = 0;
+					}
 				}
-            }
+			}
 			if (Input.GetButtonDown("Fire1"))
 			{
 				

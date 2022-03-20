@@ -21,12 +21,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	float z;
 	Vector3 localVelocity;
 	public Rigidbody rb;
-
+	Vector3 movement;
+	float Horizontal;
+	float Vertical;
 
 
 	void Start()
 	{
-
+		
 		rb = GetComponent<Rigidbody>();
 		rb.freezeRotation = true;
 		if (PhotonNetwork.IsConnected)
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+			
+			//GetComponent<CharacterController>().enabled = true;
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -58,21 +62,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		
 		
 	}
- 
-    void Update()
+
+
+	void Update()
 	{
 	
 		if (view.IsMine)
 		{
-			
-			
-			//if (Input.GetMouseButton(1))
-			
-				//Debug.LogError(velocity);
-				//velocity.y = -10;
-			
-			//controller.Move(velocity * Time.deltaTime);
-			if (Input.GetButtonDown("Fire1"))
+		
+			 Horizontal = Input.GetAxis("Horizontal");
+			  Vertical = Input.GetAxis("Vertical");
+			movement = transform.forward * Vertical + transform.right * Horizontal;
+            if (Input.GetMouseButton(1))
+            {
+                yaw = (yaw + Input.GetAxis("Mouse X") * 3) % 360f;
+            }
+
+
+
+            if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -104,15 +112,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-		if (view.IsMine)
-		{
-			x = Input.GetAxis("Horizontal");
-			z = Input.GetAxis("Vertical");
+        if (view.IsMine)
+        {
+		
 
-			Vector3 move = transform.right * x + transform.forward * z + new Vector3(0, -10, 0);
-			controller.Move(move * m_speed * Time.deltaTime);
+			//rb.velocity = localVelocity;
+			rb.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
+			rb.MovePosition(rb.position + movement * 5 * Time.fixedDeltaTime);
 		}
-	}
+    }
 
 
     // Set our focus to a new focus
@@ -186,7 +194,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	void setTeam(int viewID, int team)
     {
 		PhotonView.Find(viewID).GetComponent<PlayerController>().myTeam = team;
-    }
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().myTeam = team;
+	}
 	[PunRPC]
 	void synctele(int viewID, Vector3 pos)
 	{
