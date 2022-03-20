@@ -84,6 +84,7 @@ public class AudioManager : MonoBehaviour
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
+                    pFV.RPC("setKickableF", RpcTarget.All, pFV.ViewID);
                 }
             }
         }
