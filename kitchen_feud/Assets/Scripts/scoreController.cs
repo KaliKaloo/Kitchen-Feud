@@ -9,10 +9,8 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
-    
+    private static int time = 10;
     private static int timer = time;
-    // private static bool started;
     PhotonRoom room;
 
     // changes original starting time, only do before game starts!
@@ -76,11 +74,6 @@ public class GlobalTimer
             timer = TryTime();
         }
     }
-
-    // public void RestartTimer()
-    // {
-    //     started = false;
-    // }
 
     // avoiding trying to access hashmap without master client loading
     private int TryTime()
@@ -237,7 +230,6 @@ public class scoreController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
             }
-                // timer.RestartTimer();
             PhotonNetwork.LoadLevel("gameOver");
         }
 
