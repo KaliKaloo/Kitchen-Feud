@@ -4,48 +4,52 @@ using UnityEngine;
 using agora_gaming_rtc;
 using Photon.Pun;
 
-public class AMTwo : MonoBehaviour
+
+public class AM : MonoBehaviour
 {
-    // public bool entered2;
     IRtcEngine engine;
-
-    int myTeam;
     string randomInstance;
-    public AudioSource ding;
+    int myTeam;
     public PhotonView PV;
-    public int myC = 1;
-    public bool played = false;
-
+    public bool played;
+    public GameObject otherP;
+    public string Speaker;
+    public int team;
+    // Start is called before the first frame update
     private void Awake()
     {
-        
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
-        ding = GameObject.FindGameObjectWithTag("Speaker2").GetComponent<AudioSource>();
     }
-    // Start is called before the first frame update
     void Start()
     {
         PV = GetComponent<PhotonView>();
-
-
-        if (myTeam == 2)
-        {
-            engine.LeaveChannel();
-            engine.JoinChannel(randomInstance + "Team2");
-
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        PhotonView pFV = other.GetComponent<PhotonView>();
+        PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
+        if (pFV.IsMine)
         {
-            PhotonView pFV = other.GetComponent<PhotonView>();
-            PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
-            myTeam = myPlayerC.myTeam;
-            if (pFV.IsMine)
+            if (team == 1)
             {
+                myTeam = myPlayerC.myTeam;
+                if (myPlayerC.entered1 == true)
+                {
+                    pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
+                    engine.LeaveChannel();
+                    engine.JoinChannel(randomInstance + "Path");
+                    if (myTeam == 2)
+                    {
+                        pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
+                    }
+                }
+            }
+            else
+            {
+                myTeam = myPlayerC.myTeam;
                 if (myPlayerC.entered2 == true)
                 {
                     pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
@@ -56,10 +60,6 @@ public class AMTwo : MonoBehaviour
                         pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                     }
                 }
-
-
-
-
             }
         }
 
