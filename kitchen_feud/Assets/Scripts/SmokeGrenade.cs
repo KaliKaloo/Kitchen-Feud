@@ -38,6 +38,10 @@ public class EnableSmoke
             {
                 smokeSlot.SetActive(true);
             }
+            else if (smokeSlot && !playerState)
+            {
+                smokeSlot.SetActive(false);
+            }
         }
     }
 
