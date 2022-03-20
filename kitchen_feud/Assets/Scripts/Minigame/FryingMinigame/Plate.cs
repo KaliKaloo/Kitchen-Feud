@@ -47,6 +47,7 @@ public class Plate : MonoBehaviour
         Debug.Log("plate hit");
         var obj = col.gameObject.GetComponent<FriedFoodController>();
         totalPoints += obj.points;
+        GameEvents.current.assignPointsEventFunction();
         Debug.Log("total points:" + totalPoints);
         //obj.gameObject.transform.SetParent(this.gameObject.transform);
         Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;

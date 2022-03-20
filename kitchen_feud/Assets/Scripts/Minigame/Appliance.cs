@@ -104,6 +104,7 @@ public class Appliance : Interactable
                 else if (this.gameObject.tag == "Stove" && foundDish.stoveFry) {
                     canvas.gameObject.SetActive(false);
                     minigameCanvas2.gameObject.SetActive(true);
+                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
                 }
                 else
                 {

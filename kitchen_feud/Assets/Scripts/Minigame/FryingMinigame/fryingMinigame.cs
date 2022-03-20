@@ -14,6 +14,7 @@ public class fryingMinigame : MonoBehaviour
     private Appliance appliance;
     public ExitFryingMinigame backbutton;
     public PanController pan;
+    public Plate plate;
 
     public SpriteAtlas imgAtlas;
     public string spriteName;
@@ -48,7 +49,8 @@ public class fryingMinigame : MonoBehaviour
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
             dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)friedFoodController.points);
-            dishOfFoundDish.points = (int)friedFoodController.points;
+            //dishOfFoundDish.points = (int)friedFoodController.points;
+            dishOfFoundDish.points = (int) plate.totalPoints;
             Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
         }

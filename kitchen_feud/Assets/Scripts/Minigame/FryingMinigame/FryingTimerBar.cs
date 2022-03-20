@@ -22,7 +22,11 @@ public class FryingTimerBar : MonoBehaviour
     {
         time += Time.deltaTime;
         int seconds = Mathf.FloorToInt(time * 60f);
-        if(time >= gameTime) stopTimer = true;
+        if(time >= gameTime) {
+            //stopTimer = true;
+            time = 0;
+            slider.value = 0;
+        }
         if(stopTimer == false) slider.value = time;
         
     }

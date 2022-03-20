@@ -37,6 +37,7 @@ public class FriedFoodController : MonoBehaviour
             isFlipped = true;
             Debug.Log("Flip pancake!");
             points = timer.Reset();
+            //I shouldn't assign points yet, only if it's the last call. maybe keep a counter?
             if(points != 0) GameEvents.current.assignPointsEventFunction();
             this.YeetPancake();
         }
