@@ -12,6 +12,7 @@ public class StoveMovement : MonoBehaviour
     private float lowerBound;
     private float upperBound;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class StoveMovement : MonoBehaviour
         lowerBound = pot.position.x - xBound;
         upperBound = pot.position.x + xBound;
         pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
+
 
     }
 

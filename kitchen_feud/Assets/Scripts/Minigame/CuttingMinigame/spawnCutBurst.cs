@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+
+public class spawnCutBurst : MonoBehaviour
+{
+    public GameObject burstPrefab;
+    // Start is called before the first frame update
+    public void BurstEffect(GameObject SpawnParent){
+        Image img = SpawnParent.GetComponent<Image>();
+        Color colorA = AverageColorFromTexture(img.sprite.texture);
+        
+        GameObject newObject = Instantiate(burstPrefab, SpawnParent.transform.position,SpawnParent.transform.rotation);
+        newObject.transform.position = new Vector3(newObject.transform.position.x,newObject.transform.position.y,0 );
+     
+
+        ParticleSystem ps = newObject.GetComponent<ParticleSystem>();
+        var main = ps.main;
+        // Debug.Log(Color.red);
+        // Debug.Log(colorA);
+       //main.startColor = new ParticleSystem.MinMaxGradient(colorA);
+        
+        Destroy(newObject,1f);
+    }
+
+    Color AverageColorFromTexture(Texture2D tex)
+        {
+ 
+        Color32[] texColors = tex.GetPixels32();
+ 
+        int total = texColors.Length;
+ 
+        float r = 0;
+        float g = 0;
+        float b = 0;
+ 
+        for(int i = 0; i < total; i++)
+        {
+ 
+            r += texColors[i].r;
+ 
+            g += texColors[i].g;
+ 
+            b += texColors[i].b;
+ 
+        }
+    
+        //return new Color32((byte)(r / total) , (byte)(g / total) , (byte)(b / total) , 0);
+         Color color = new Color32((byte)(r / total) , (byte)(g / total) , (byte)(b / total) , 0);
+         return color;
+ 
+    }     
+}

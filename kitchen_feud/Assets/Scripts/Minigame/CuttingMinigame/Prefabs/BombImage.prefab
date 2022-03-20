@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4142da0309a83ec4da2e06609dddbec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minXSpeed: -400
-  maxXSpeed: 300
-  minYSpeed: 300
-  maxYSpeed: 350
+  minXSpeed: -500
+  maxXSpeed: 500
+  minYSpeed: 200
+  maxYSpeed: 250
   destroyTime: 6
 --- !u!114 &7098516748484960589
 MonoBehaviour:
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctIngredient: 0
   CutController: {fileID: 0}
+  spawnCutBurst: {fileID: 0}
 --- !u!50 &8351037696430277866
 Rigidbody2D:
   serializedVersion: 4
