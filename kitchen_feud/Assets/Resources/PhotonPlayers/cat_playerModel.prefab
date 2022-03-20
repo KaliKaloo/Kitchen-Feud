@@ -148,7 +148,6 @@ MonoBehaviour:
   myTeam: 0
   cam: {fileID: 2216191030710823112}
   view: {fileID: 4338776926646805293}
-  rb: {fileID: 0}
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,6 +1116,7 @@ MonoBehaviour:
   playerBody: {fileID: 549029866571654399}
   rb: {fileID: 0}
   PV: {fileID: 0}
+  speed: 4
 --- !u!1 &6142615756986595231
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
-// using UnityEngine.UIElements;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -18,10 +17,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	Vector3 velocity;
 	Slider speedSlider;
 	InputField speedVal;
-
-
-	public Rigidbody rb;
-	
 
 
 	void Start()
@@ -98,17 +93,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			
 		}
 	}
-
-
-	// void FixedUpdate(){
-	// 	float x = Input.GetAxis("Horizontal");
-	// 	float z = Input.GetAxis("Vertical");
-	// 	Vector3 move = transform.right * x + transform.forward*z;
-	// 	controller.Move(move* mvmtSpeed * Time.deltaTime);
-	// 	velocity.y =-10;
-	// 	controller.Move(velocity*Time.deltaTime);
-	// }
-   
 
 
     // Set our focus to a new focus
