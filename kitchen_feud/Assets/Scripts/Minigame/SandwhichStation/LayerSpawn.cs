@@ -19,9 +19,14 @@ public class LayerSpawn : MonoBehaviour
             {
                 for (int x = 0; x < gridX; x++)
                 {
+                    GameObject myParentObject = gameObject;
+                    Vector3 newPosition = myParentObject.transform.position;
+                    newPosition.z = 0;
+                    myParentObject.transform.position = newPosition;
+
                     Vector3 pos = new Vector3(Screen.width/2, y * spacing, 0) ;
                     GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
-                    newObject.transform.SetParent(transform);
+                    newObject.transform.SetParent(myParentObject.transform);
 
                     newObject.GetComponent<SandwichMove>().LayerID = idList[y-1];
                     newObject.GetComponent<SandwichMove>().speed = Random.Range(550, 730);
