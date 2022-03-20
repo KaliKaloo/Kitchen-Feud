@@ -172,7 +172,4 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		PhotonView.Find(viewID).transform.position = pos;
 	}
 
-
-
-
 }
