@@ -10,18 +10,12 @@ public class ovenMiniGame : MonoBehaviour
     public Timer timer;
     private Appliance appliance;
     public exitOven backbutton;
-    bool isFire = false;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
-       
-        
-
     }
     
     void Update()

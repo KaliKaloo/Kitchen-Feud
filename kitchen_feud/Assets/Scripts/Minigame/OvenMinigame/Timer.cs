@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     public float timer = time;
     public float timerFake = time;
 
-    private static bool started;
+    // private static bool started;
     public int score = 0;
     float elapsed = 0f;
     public exitOven backbutton;
@@ -97,10 +97,10 @@ public class Timer : MonoBehaviour
         
     }
 
-    public void RestartTimer()
-    {
-        started = false;
-    }
+    // public void RestartTimer()
+    // {
+    //     started = false;
+    // }
 
 
 

@@ -22,7 +22,6 @@ public class ExitStoveMinigame : MonoBehaviour
 	StoveScore stoveScore = new StoveScore();
 	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
-	private ParticleSystem particleSystem;
 	private float prevScore;
 
 
