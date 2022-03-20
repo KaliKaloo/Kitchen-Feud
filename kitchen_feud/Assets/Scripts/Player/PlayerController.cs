@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public CharacterController controller;
 	Vector3 velocity;
 	Slider speedSlider;
+	InputField speedVal;
 
 
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (view.IsMine)
         {
 			speedSlider = GameObject.Find("Speed").GetComponentInChildren<Slider>();
+			speedVal = GameObject.Find("Speed").GetComponentInChildren<InputField>();
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			}
 
 			mvmtSpeed = speedSlider.value;
+			speedVal.text = mvmtSpeed.ToString();
 
 			
 		}
@@ -94,9 +97,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		controller.Move(move* mvmtSpeed * Time.deltaTime);
 		velocity.y =-10;
 		controller.Move(velocity*Time.deltaTime);
-		if (mvmtSpeed !=4){
-			Debug.Log(mvmtSpeed);
-		}
 	}
 
 
