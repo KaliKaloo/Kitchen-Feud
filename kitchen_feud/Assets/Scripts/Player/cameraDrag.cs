@@ -9,25 +9,44 @@ public class cameraDrag : MonoBehaviour
 
     public Transform playerBody;
     float xRotation = 0.0f;
-    float mouseX;
-    float mouseY;
-    bool done;
+    public Rigidbody rb;
     public GameObject obj;
     public Vector3 pos;
-    Quaternion xRot;
-    Quaternion yRot;
+    public PhotonView PV;
+    float Horizontal;
+    float Vertical;
+    Vector3 movement;
+    float yaw;
+    float speed;
+
     private void Start()
     {
         //  obj = transform.parent.gameObject;
 
         // transform.SetParent(null);
+        speed = 3;
+        rb = GetComponentInParent<Rigidbody>();
+        PV = GetComponentInParent<PhotonView>();
+        rb.freezeRotation = true;
 
     }
-   
+    private void Update()
+    {
+        if (PV.IsMine)
+        {
+            Horizontal = Input.GetAxis("Horizontal");
+            Vertical = Input.GetAxis("Vertical");
+            movement = transform.forward * Vertical + transform.right * Horizontal;
+            if (Input.GetMouseButton(1))
+            {
+                yaw = (yaw + Input.GetAxis("Mouse X") * speed) % 360f;
+            }
+        }
+    }
     private void LateUpdate()
     {
 
-        if (GetComponentInParent<PhotonView>().IsMine)
+        if (PV.IsMine)
         {
             if (Input.GetMouseButton(1))
             {
@@ -35,12 +54,11 @@ public class cameraDrag : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
                 float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
-                xRotation -= mouseY * 3;
+                xRotation -= mouseY * speed;
                 xRotation = Mathf.Clamp(xRotation, -90f, 48f);
 
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-                //playerBody.Rotate(Vector3.up * mouseX);
             }
             else
             {
@@ -49,8 +67,19 @@ public class cameraDrag : MonoBehaviour
         }
 
     }
- 
 
+    private void FixedUpdate()
+    {
+        if (PV.IsMine)
+        {
+            {
+
+
+                rb.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
+                rb.MovePosition(rb.position + movement * 5 * Time.fixedDeltaTime);
+            }
+        }
+    }
 
 }
 
