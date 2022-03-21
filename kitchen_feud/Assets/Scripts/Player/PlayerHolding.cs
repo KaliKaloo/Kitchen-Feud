@@ -23,37 +23,25 @@ public class PlayerHolding : MonoBehaviour
         if (view.IsMine)
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-                
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-                
-                if (heldObj.GetComponent<Rigidbody>())
-                {
-         
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-                
-                }
+            {
+               slotItem(obj, item); 
             }
-        else
-        {
-            obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-               
-                if (heldObj.GetComponent<Rigidbody>())
-                {
-       
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-           
-                }
-               
+            else
+            {
+                obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+                slotItem(obj, item); 
             }
+        }
+    }
 
+
+    void slotItem(GameObject obj, BaseFood item){
+                
+        items.Add(item);
+        heldObj = obj;
+        if (heldObj.GetComponent<Rigidbody>())
+        {
+            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
         }
     }
 
