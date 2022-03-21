@@ -9,12 +9,13 @@ public class trash : Interactable
     {
         
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-        Debug.Log(playerHold);
 
         if (playerHold){
             GameObject obj = playerHold.heldObj;
             playerHold.heldObj = null;
-            PhotonNetwork.Destroy(obj);
+            if (obj){
+                PhotonNetwork.Destroy(obj);
+            }
             playerHold.items.Clear();
 
         }

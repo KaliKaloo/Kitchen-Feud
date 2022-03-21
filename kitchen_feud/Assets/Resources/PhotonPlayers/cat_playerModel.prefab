@@ -142,12 +142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  m_speed: 4
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
   view: {fileID: 4338776926646805293}
-  rb: {fileID: 0}
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,10 +1096,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatespeed: 300
+  mvmtSpeed: 5
   playerBody: {fileID: 549029866571654399}
   rb: {fileID: 0}
-  obj: {fileID: 0}
-  pos: {x: 0, y: 0, z: 0}
   PV: {fileID: 0}
 --- !u!1 &6142615756986595231
 GameObject:

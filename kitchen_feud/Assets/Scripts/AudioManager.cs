@@ -6,7 +6,6 @@ using Photon.Pun;
 
 public class AudioManager : MonoBehaviour
 {
-    //public bool entered1;
     IRtcEngine engine;
     int myTeam;
     string randomInstance;
@@ -18,7 +17,6 @@ public class AudioManager : MonoBehaviour
     public int team;
 
 
-
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -27,7 +25,7 @@ public class AudioManager : MonoBehaviour
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
 
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -44,11 +42,6 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
  
     private void OnTriggerEnter(Collider other)
     {
@@ -91,11 +84,10 @@ public class AudioManager : MonoBehaviour
 
         
     }
+
     [PunRPC]
     void playDing(int viewID)
     {
-
         PhotonView.Find(viewID).GetComponent<AudioManager>().ding.Play();
-
     }
 }

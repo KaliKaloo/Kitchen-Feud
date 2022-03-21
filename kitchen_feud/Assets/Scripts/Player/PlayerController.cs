@@ -1,26 +1,21 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 using System.IO;
-using UnityEngine.UIElements;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
-	public float m_speed;
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
-	public Rigidbody rb;
-	
-
 
 	void Start()
 	{
-		
 		
 		if (PhotonNetwork.IsConnected)
 		{
@@ -36,7 +31,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (view.IsMine)
         {
 			
-			//GetComponent<CharacterController>().enabled = true;
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
@@ -84,13 +78,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
-
-			
 		}
 	}
-
-
-   
 
 
     // Set our focus to a new focus
@@ -120,12 +109,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, 3f);
 	}
-
-	public Vector3 getTransformVelocity(Vector3 transform){
-		return transform * m_speed * Time.deltaTime;
-	}
-
-	
 
 	// Remove our current focus
 	void RemoveFocus()
