@@ -3,7 +3,7 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-
+using TMPro;
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
@@ -26,6 +26,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started;
 	public bool started1;
 	public List<int> kickedBy;
+	public GameObject nametag;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -112,7 +113,7 @@ public class PlayerVoiceManager : MonoBehaviour
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
+								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID,4);
 							}
 							else
 							{
@@ -158,11 +159,11 @@ public class PlayerVoiceManager : MonoBehaviour
     }
 	
 	[PunRPC]
-	void setObjParent(int viewID, int hBviewID)
+	void setObjParent(int viewID, int hBviewID,int child)
 	{
 		GameObject obj1 = PhotonView.Find(viewID).gameObject;
 		obj1.GetComponent<PlayerVoiceManager>().healthbar1 = PhotonView.Find(hBviewID).gameObject;
-		obj1.GetComponent<PlayerVoiceManager>().healthbar1.transform.SetParent(obj1.transform.GetChild(4));
+		obj1.GetComponent<PlayerVoiceManager>().healthbar1.transform.SetParent(obj1.transform.GetChild(child));
 	}
 	[PunRPC]
 	void giveDamage(int viewID,int x)
@@ -275,5 +276,10 @@ public class PlayerVoiceManager : MonoBehaviour
 	void clearKickedBy(int viewID)
 	{
 		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Clear();
+	}
+	[PunRPC]
+	void setName(int viewiD)
+	{
+		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = PhotonNetwork.NickName;
 	}
 }

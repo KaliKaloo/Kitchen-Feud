@@ -59,7 +59,6 @@ public class menuController : MonoBehaviourPunCallbacks
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
-
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
