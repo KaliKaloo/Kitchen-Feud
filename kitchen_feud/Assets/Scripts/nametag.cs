@@ -23,7 +23,7 @@ public class nametag : MonoBehaviour
             {
                 obj = GameObject.Find("Local");
                 obj.GetComponent<PlayerVoiceManager>().nametag = PhotonNetwork.Instantiate(Path.Combine("Healthbar", "Nametag"), obj.transform.GetChild(5).position, Quaternion.identity);
-                obj.GetComponent<PhotonView>().RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, obj.GetComponent<PlayerVoiceManager>().nametag.GetComponent<PhotonView>().ViewID, 5);
+                obj.GetComponent<PhotonView>().RPC("setNTParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, obj.GetComponent<PlayerVoiceManager>().nametag.GetComponent<PhotonView>().ViewID);
                 
             }else if(GameObject.Find("Local") && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag)
             {
