@@ -42,6 +42,7 @@ public class PlayerHolding : MonoBehaviour
         if (heldObj.GetComponent<Rigidbody>())
         {
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
+            heldObj.layer = 7;
         }
     }
 
@@ -49,6 +50,7 @@ public class PlayerHolding : MonoBehaviour
     {
         if (view.IsMine)
         {
+            heldObj.layer = 0;
             Debug.Log("Drop item: " + items[0].name);
             items.Clear();
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,

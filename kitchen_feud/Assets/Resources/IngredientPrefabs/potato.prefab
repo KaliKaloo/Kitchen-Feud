@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2961587890186885133}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Empty.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1644698298098310479}
   - component: {fileID: 5129703973661419612}
   - component: {fileID: 742020137150169008}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4273407894716090560}
   - component: {fileID: 4273407894716090561}
   - component: {fileID: 4273407894716090562}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: potato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
