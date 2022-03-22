@@ -22,6 +22,7 @@ public class SlotsController : MonoBehaviour {
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
 
                     pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
+                    heldObjArg.layer = 0;
                     break;
                 }
             }
