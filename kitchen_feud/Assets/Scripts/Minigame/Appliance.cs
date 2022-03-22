@@ -25,8 +25,8 @@ public class Appliance : Interactable
     public bool isBeingInteractedWith = false;
     private Renderer r;
     public PlayerController playerController;
-    private Rigidbody playerRigidbody;
-    private SlotsController SlotsController;
+    public Rigidbody playerRigidbody;
+    public SlotsController SlotsController;
     public int dishPoints;
 
     public bool canUse = true;
