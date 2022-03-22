@@ -51,7 +51,6 @@ public class PlayerHolding : MonoBehaviour
         if (view.IsMine)
         {
             heldObj.layer = 0;
-            Debug.Log("Drop item: " + items[0].name);
             items.Clear();
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
