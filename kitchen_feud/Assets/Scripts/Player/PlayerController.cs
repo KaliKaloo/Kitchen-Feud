@@ -1,21 +1,18 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
+using System.IO;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 	public Rigidbody player;
-	public float m_speed;
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public PhotonView view;
-	public CharacterController controller;
-	Vector3 velocity;
-
-	
 
 	void Start()
 	{
@@ -33,9 +30,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+			
 			this.name = "Local";
 			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			
 			if(myTeam == 1)
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
@@ -46,13 +45,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			}
 		}
 		
+		
 	}
+
+
 	void Update()
 	{
 	
 		if (view.IsMine)
 		{
-			if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -76,24 +78,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
-
-			
 		}
 	}
 
 
-	void FixedUpdate(){
-		float x = Input.GetAxis("Horizontal");
-		float z = Input.GetAxis("Vertical");
-		Vector3 move = transform.right * x + transform.forward*z;
-		controller.Move(move* m_speed * Time.deltaTime);
-		velocity.y =-10;
-		controller.Move(velocity*Time.deltaTime);
-	}
-
-
-	// Set our focus to a new focus
-	void SetFocus(Interactable newFocus, GameObject obj)
+    // Set our focus to a new focus
+    void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{
@@ -119,12 +109,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, 3f);
 	}
-
-	public Vector3 getTransformVelocity(Vector3 transform){
-		return transform * m_speed * Time.deltaTime;
-	}
-
-	
 
 	// Remove our current focus
 	void RemoveFocus()
@@ -163,10 +147,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	void setTeam(int viewID, int team)
     {
 		PhotonView.Find(viewID).GetComponent<PlayerController>().myTeam = team;
-    }
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().myTeam = team;
+	}
 	[PunRPC]
 	void synctele(int viewID, Vector3 pos)
 	{
 		PhotonView.Find(viewID).transform.position = pos;
 	}
+
 }

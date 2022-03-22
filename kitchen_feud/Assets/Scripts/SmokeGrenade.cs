@@ -10,6 +10,12 @@ public class EnableSmoke
     public static GameObject smokeSlot;
     public static bool usedUp;
 
+    public void RestartState()
+    {
+        inEnemyKitchen = false;
+        usedUp = false;
+    }
+
     // Gets state of player whether in enemy kitchen or not
     public bool GetPlayerState()
     {
@@ -38,6 +44,10 @@ public class EnableSmoke
             {
                 smokeSlot.SetActive(true);
             }
+            else if (smokeSlot && !playerState)
+            {
+                smokeSlot.SetActive(false);
+            }
         }
     }
 
@@ -45,7 +55,6 @@ public class EnableSmoke
     {
         usedUp = true;
     }
-
 }
 
 public class SmokeGrenade : MonoBehaviour
@@ -53,6 +62,11 @@ public class SmokeGrenade : MonoBehaviour
     private bool used = false;
 
     readonly EnableSmoke enableSmoke = new EnableSmoke();
+
+    private void Start()
+    {
+        enableSmoke.RestartState();
+    }
 
     // Update is called once per frame
     void Update()
