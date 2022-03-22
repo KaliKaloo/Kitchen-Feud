@@ -67,13 +67,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
+						animator.SetBool("IsHolding", true);
 					}
 					// TEMPORARY - Player should not be able to drop item anywhere. 
 					// Drop only on counters, stove etcc
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-						if (playerHold.items.Count != 0) playerHold.dropItem();
+						if (playerHold.items.Count != 0)
+						{
+							playerHold.dropItem();
+							animator.SetBool("IsHolding", false);
+						}
 						RemoveFocus();
 					}
 					// -------------------------------------------------------------------------
@@ -81,7 +86,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			}
 
 			// IF PLAYER IS MOVING
-			Debug.Log(player.velocity.magnitude);
 			if (player.velocity.magnitude < 1e-15 && player.velocity.magnitude > 0)
 				animator.SetBool("IsMoving", true);
 			else
