@@ -23,6 +23,11 @@ public class SlotsController : MonoBehaviour {
 
                     pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
                     heldObjArg.layer = 0;
+                    foreach ( Transform child in heldObjArg.transform )
+                    {
+                        child.gameObject.layer = 0;
+                    }
+                    items.Clear();
                     break;
                 }
             }

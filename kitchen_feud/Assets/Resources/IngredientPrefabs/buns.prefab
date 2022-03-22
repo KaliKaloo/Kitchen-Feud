@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 6585969072777979869}
   - component: {fileID: 6585969072777979868}
   - component: {fileID: 6585969072777979867}
-  - component: {fileID: 3035846069316016148}
   - component: {fileID: -3789628420861306781}
   m_Layer: 0
   m_Name: buns
@@ -305,14 +304,6 @@ MonoBehaviour:
   tray2: {fileID: 0}
   appliance: {fileID: 0}
   applianceSlots: {fileID: 0}
---- !u!33 &3035846069316016148
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6316129340110068361}
-  m_Mesh: {fileID: 6483716499555246378, guid: b5594925948c8b64cbe84d5a27492961, type: 3}
 --- !u!23 &-3789628420861306781
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -320,7 +311,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6316129340110068361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
