@@ -60,7 +60,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 549029866571654399}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!20 &5992262761695865800
 Camera:
@@ -178,8 +178,8 @@ Transform:
   - {fileID: 5999747082366446667}
   - {fileID: 4415319526273413884}
   - {fileID: 2824229349347360035}
-  - {fileID: 3336179029912035731}
   - {fileID: 5776727471763801902}
+  - {fileID: 3336179029912035731}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -3.192, y: 0, z: 0}
