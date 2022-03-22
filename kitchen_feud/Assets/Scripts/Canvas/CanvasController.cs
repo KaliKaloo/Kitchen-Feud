@@ -5,9 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Photon.Pun;
 
-
-
-
 public class CanvasController : MonoBehaviour
 {
     //public GameObject makeTicket;
@@ -19,6 +16,7 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
 
+    public GameObject orderNumberPrefab;
     public int teamNumber;
     private int orderNum;
 
@@ -59,15 +57,10 @@ public class CanvasController : MonoBehaviour
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
             justClicked.GetComponent<PhotonView>().ViewID);
         
-        //justClicked.SetActive(false);
         orderMenu.SetActive(false);
-        //makeTicket.SetActive(true);
 
-        //TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
-
-        //TC.resetTray(d_ticket.orderid);
         TC.CompareOrder(d_ticket.orderid);
        
         
@@ -75,27 +68,9 @@ public class CanvasController : MonoBehaviour
         
     }
 
-  /*  public void ServeClxient(string name)
-    {
-        orderMenu.SetActive(false);
-        //makeTicket.SetActive(true);
-
-        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
-        DisplayTicket d_ticket = GameObject.Find(name).GetComponent<DisplayTicket>();
-        GameObject.Find(name).SetActive(false);
-
-        tray_Controller.resetTray(d_ticket.orderid);
-    }
-  */
-
     public void ShowNewTicket()
     {
-        if ((ticket3.activeSelf == true) && (ticket1.activeSelf == true) && (ticket2.activeSelf == true))
-        {
-            //disable button
-            //makeTicket.SetActive(false);
-        }
-
+        int orderN;
         if (ticket1.activeSelf == true)
         {
            if (ticket2.activeSelf == true)
@@ -103,16 +78,19 @@ public class CanvasController : MonoBehaviour
                 DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
                 ticket3.SetActive(true);
                 Ticket3.orderNumber = 3;
-                DisplayNewRandomOrder(Ticket3);
-                
+
+                orderN = DisplayNewRandomOrder(Ticket3);
+                InstantiateOrderSign(Ticket3.orderNumber, orderN);
             }
-            
+
             else
             {
                 DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
                 ticket2.SetActive(true);
                 Ticket2.orderNumber = 2;
-                DisplayNewRandomOrder(Ticket2);
+
+                orderN = DisplayNewRandomOrder(Ticket2);
+                InstantiateOrderSign(Ticket2.orderNumber, orderN);
             }
         }
 
@@ -121,17 +99,15 @@ public class CanvasController : MonoBehaviour
             DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
             ticket1.SetActive(true);
             Ticket1.orderNumber = 1;
-            DisplayNewRandomOrder(Ticket1);
+
+            orderN = DisplayNewRandomOrder(Ticket1);
+            InstantiateOrderSign(Ticket1.orderNumber, orderN);
         }
     }
 
     public void ShowNewTicketWithID(string order)
     {
-        if ((ticket3.activeSelf == true) && (ticket1.activeSelf == true) && (ticket2.activeSelf == true))
-        {
-            //disable button
-            //makeTicket.SetActive(false);
-        }
+        int orderN;
 
         if (ticket1.activeSelf == true)
         {
@@ -141,7 +117,9 @@ public class CanvasController : MonoBehaviour
                 ticket3.SetActive(true);
                 Ticket3.orderNumber = 3;
 
-                DisplayOrderFromID(Ticket3, order);
+                orderN = DisplayOrderFromID(Ticket3, order);
+                InstantiateOrderSign(Ticket3.orderNumber, orderN);
+
 
             }
 
@@ -151,7 +129,9 @@ public class CanvasController : MonoBehaviour
                 ticket2.SetActive(true);
                 Ticket2.orderNumber = 2;
 
-                DisplayOrderFromID(Ticket2, order);
+                orderN = DisplayOrderFromID(Ticket2, order);
+                InstantiateOrderSign(Ticket2.orderNumber, orderN);
+
             }
         }
 
@@ -161,9 +141,19 @@ public class CanvasController : MonoBehaviour
             ticket1.SetActive(true);
             Ticket1.orderNumber = 1;
 
-            DisplayOrderFromID(Ticket1, order);
+            orderN = DisplayOrderFromID(Ticket1, order);
+            InstantiateOrderSign(Ticket1.orderNumber, orderN);
         }
     }
+
+    // creates sign prefab pertaining to particular tray
+    private void InstantiateOrderSign(int ticketNumber, int orderNumber)
+    {
+        GameObject currentTray = TC.trays[ticketNumber-1];
+        GameObject sign = Instantiate(orderNumberPrefab, currentTray.transform);
+        sign.GetComponent<TrayText>().ChangeText(orderNumber.ToString());
+    }
+
 
     private bool CheckIfTicketsNotFull()
     {
@@ -215,7 +205,7 @@ public class CanvasController : MonoBehaviour
         
     }
 
-    public void DisplayNewRandomOrder(DisplayTicket ticket)
+    public int DisplayNewRandomOrder(DisplayTicket ticket)
     {  
         // RANDOM ORDER
         Order o = Database.GetRandomOrder();
@@ -225,6 +215,7 @@ public class CanvasController : MonoBehaviour
         tray_Controller.makeTray(orderID);
         o.orderNumber  = ++orderNum;
         ticket.SetUI(o);
+        return o.orderNumber;
 
     }
 
@@ -234,7 +225,7 @@ public class CanvasController : MonoBehaviour
         return Database.GetRandomOrder();
     }
 
-    public void DisplayOrderFromID(DisplayTicket ticket, string order)
+    public int DisplayOrderFromID(DisplayTicket ticket, string order)
     {
         Order o = Database.GetOrderByID(order);
         string orderID = o.orderID;
@@ -243,6 +234,7 @@ public class CanvasController : MonoBehaviour
 
         o.orderNumber = ++orderNum;
         ticket.SetUI(o);
+        return o.orderNumber;
 
     }
 
@@ -262,14 +254,4 @@ public class CanvasController : MonoBehaviour
             ShowNewTicketWithID(o);
         
     }
-
-
-   /* [PunRPC]
-    void ShowClientTicket(string name)
-    {
-        ServeClient(name);
-    }*/
-
-    
-
 }

@@ -10,6 +10,8 @@ public class Tray : Interactable
     public GameObject objectHolding;
     public List<Transform> slots = new List<Transform>();
 
+    public GameObject currentPrefab;
+
     PlayerHolding playerHold;
     public pickableItem pickable;
     

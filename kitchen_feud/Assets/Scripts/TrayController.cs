@@ -38,9 +38,14 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
+
         foreach (Transform slot in ts.transform)
         {
-            if (slot.childCount != 0)
+            if (slot.name == "OrderNumber(Clone)")
+            {
+                Destroy(slot.gameObject);
+            }
+            else if (slot.childCount != 0)
             {
                 Destroy(slot.GetChild(0).gameObject);
             }
