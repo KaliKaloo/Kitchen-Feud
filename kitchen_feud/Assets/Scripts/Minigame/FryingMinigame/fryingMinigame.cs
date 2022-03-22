@@ -15,7 +15,7 @@ public class fryingMinigame : MonoBehaviour
     public ExitFryingMinigame backbutton;
     public PanController pan;
     public Plate plate;
-
+    
     public SpriteAtlas imgAtlas;
     public string spriteName;
 

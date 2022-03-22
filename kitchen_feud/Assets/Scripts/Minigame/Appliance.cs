@@ -22,7 +22,7 @@ public class Appliance : Interactable
     public GameObject minigameCanvas2;
     public GameObject cookedDish;
     private GameObject cookedDishLocal;
-
+    public List<int> appliancePlayers;
     public bool isBeingInteractedWith = false;
     private Renderer r;
     public PlayerController playerController;
@@ -45,6 +45,7 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
+        myPv.RPC("addPlayer",RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
@@ -84,7 +85,7 @@ public class Appliance : Interactable
                 Debug.Log("Recipe found: " + foundDish.name + " - " + foundDish.dishID);
 
 
-                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                
 
                 if (this.gameObject.tag == "Oven")
                 {
@@ -102,6 +103,7 @@ public class Appliance : Interactable
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else if (this.gameObject.tag == "Stove" && foundDish.stoveFry) {
+                    Debug.LogError(isBeingInteractedWith);
                     canvas.gameObject.SetActive(false);
                     minigameCanvas2.gameObject.SetActive(true);
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
@@ -123,6 +125,7 @@ public class Appliance : Interactable
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
 
                 }
+                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID,minigameCanvas2.GetComponent<PhotonView>());
 
                 //instantiate the cooked dish
 
@@ -197,9 +200,25 @@ public class Appliance : Interactable
 
 
     [PunRPC]
-    void SetToTrue(int viewID)
+    void SetToTrue(int viewID,int canvID)
     {
-        PhotonView.Find(viewID).GetComponent<Appliance>().isBeingInteractedWith = true;
+        GameObject canv = PhotonView.Find(canvID).gameObject;
+        Appliance appl = PhotonView.Find(viewID).GetComponent<Appliance>();
+        if (canv.activeSelf) {
+            if(appl.appliancePlayers.Count == 2) {
+                appl.isBeingInteractedWith = true;
+            }
+
+
+        }
+        else
+        {
+
+            PhotonView.Find(viewID).GetComponent<Appliance>().isBeingInteractedWith = true;
+
+
+        }
+
     }
     [PunRPC]
     void SetToFalse(int viewID)
@@ -246,6 +265,11 @@ public class Appliance : Interactable
     void setParent(int canvasID,int ovenID)
     {
         PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
+    }
+    [PunRPC]
+    void addPlayer(int viewID,int appID)
+    {
+        PhotonView.Find(appID).GetComponent<Appliance>().appliancePlayers.Add(viewID);
     }
     
 }
