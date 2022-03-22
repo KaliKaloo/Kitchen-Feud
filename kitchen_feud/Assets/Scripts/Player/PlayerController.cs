@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
+	[SerializeField] private Camera secondaryCam;
+
 	PlayerHolding playerHold;
 	public PhotonView view;
 
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			if (!view.IsMine)
 			{
 				cam.enabled = false;
+				secondaryCam.enabled = false;
+
 			}
 			DontDestroyOnLoad(gameObject);
 		}

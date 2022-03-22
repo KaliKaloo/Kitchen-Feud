@@ -55,7 +55,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46821496519712838}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalRotation: {x: 0.34202012, y: 0, z: 0, w: 0.9396926}
   m_LocalPosition: {x: 0, y: 0.18, z: 0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -220,6 +220,7 @@ MonoBehaviour:
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 2216191030710823112}
+  secondaryCam: {fileID: 5992262761695865800}
   view: {fileID: 4338776926646805293}
 --- !u!114 &873649799258480705
 MonoBehaviour:

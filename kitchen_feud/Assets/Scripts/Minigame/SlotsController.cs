@@ -27,7 +27,6 @@ public class SlotsController : MonoBehaviour {
                     {
                         child.gameObject.layer = 0;
                     }
-                    items.Clear();
                     break;
                 }
             }
