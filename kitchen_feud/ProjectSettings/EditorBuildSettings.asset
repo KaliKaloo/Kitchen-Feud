@@ -9,13 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 0
-    path: Assets/Scenes/kitchens.unity
-    guid: 0fe26d4b823f22a48a9f25883690bf83
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/kitchens_2d.unity
     guid: 872a318612128a747a7d72382591b7cb
-    path: Assets/Scenes/kitchens_setting.unity
-    guid: 5456578410b0210419bfca0b5bb6f54b
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -29,8 +27,8 @@ EditorBuildSettings:
     path: Assets/Scenes/kitchens.unity
     guid: 76282e320968e4bc7be23058856691d7
   - enabled: 0
-    path: Assets/Scenes/kitchens- anim-door.unity
-    guid: 1f82f5f4c0fca258bac23a7e685911f0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
