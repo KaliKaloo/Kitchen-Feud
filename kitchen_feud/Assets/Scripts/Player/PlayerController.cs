@@ -79,13 +79,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
-		}
 
-		// IF PLAYER IS MOVING
-		if (player.velocity.magnitude < 1e-15 && player.velocity.magnitude > 0)
-			animator.SetBool("IsMoving", true);
-		else
-			animator.SetBool("IsMoving", false);
+			// IF PLAYER IS MOVING
+			Debug.Log(player.velocity.magnitude);
+			if (player.velocity.magnitude < 1e-15 && player.velocity.magnitude > 0)
+				animator.SetBool("IsMoving", true);
+			else
+				animator.SetBool("IsMoving", false);
+		}
 	}
 
 
