@@ -54,7 +54,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
-            if (Input.GetButtonDown("Fire1"))
+			Color c = transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color;
+			c.a = 0;
+			//transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color",c);
+			Debug.LogError(transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color);
+			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
