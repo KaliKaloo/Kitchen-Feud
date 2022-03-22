@@ -7,6 +7,8 @@ using System.IO;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
+	private Animator animator;
+
 	public Rigidbody player;
 	public Interactable focus;
 	public int myTeam;
@@ -16,9 +18,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Start()
 	{
-		
 		if (PhotonNetwork.IsConnected)
 		{
+			animator = GetComponent<Animator>();
 			view = GetComponent<PhotonView>();
 			player = GetComponent<Rigidbody>();
 			playerHold = GetComponent<PlayerHolding>();
@@ -51,10 +53,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Update()
 	{
-	
 		if (view.IsMine)
 		{
-            if (Input.GetButtonDown("Fire1"))
+			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -79,11 +80,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 		}
+
+		// IF PLAYER IS MOVING
+		if (player.velocity.magnitude < 1e-15 && player.velocity.magnitude > 0)
+			animator.SetBool("IsMoving", true);
+		else
+			animator.SetBool("IsMoving", false);
 	}
 
 
-    // Set our focus to a new focus
-    void SetFocus(Interactable newFocus, GameObject obj)
+	// Set our focus to a new focus
+	void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{
