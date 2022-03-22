@@ -12,7 +12,9 @@ public class trash : Interactable
         if (playerHold){
             GameObject obj = playerHold.heldObj;
             playerHold.heldObj = null;
-            PhotonNetwork.Destroy(obj);
+            if (obj){
+                PhotonNetwork.Destroy(obj);
+            }
             playerHold.items.Clear();
         }
         

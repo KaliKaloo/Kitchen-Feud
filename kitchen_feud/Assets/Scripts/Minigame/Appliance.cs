@@ -43,13 +43,11 @@ public class Appliance : Interactable
     {
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
-        //stoveSlotsController = this.GetComponent<StoveSlotsController>();
         SlotsController = gameObject.GetComponent<SlotsController>();
         //view control
         pv = player.GetComponent<PhotonView>();
 
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        Debug.Log(canUse);
         if (!isBeingInteractedWith && canUse)
         {
             if (pv.IsMine)
@@ -95,7 +93,6 @@ public class Appliance : Interactable
                     myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
                     
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine( "DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position, transform.rotation);
-                    //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else
                 {
@@ -115,9 +112,7 @@ public class Appliance : Interactable
 
                 }
 
-                //instantiate the cooked dish
 
-                //cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0, 1, 0), transform.rotation);
                 myPv.RPC("cookedDishG", RpcTarget.All, myPv.ViewID, cookedDishLocal.GetComponent<PhotonView>().ViewID);
                 Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 

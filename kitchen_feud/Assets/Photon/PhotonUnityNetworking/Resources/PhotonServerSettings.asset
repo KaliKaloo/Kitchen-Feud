@@ -37,6 +37,15 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - appendKickedBy
+  - applianceBool
+  - clearAll
+  - clearItems
+  - clearKickedBy
+  - ClickRpc
+  - cookedDishG
+  - decCount
+  - destHB
   - addSecondsRPC
   - applianceBool
   - clearAll
@@ -53,12 +62,16 @@ MonoBehaviour:
   - EnablePushing
   - EnView
   - Fire
+  - giveDamage
   - globalDestroy
   - loadS
   - makeTrayAcross
   - onApplianceF
   - onTrayF
   - ovenGame
+  - playDing
+  - pointSync
+  - push
   - pointSync
   - removeFromApplianceRPC
   - removeFromTray
@@ -67,10 +80,21 @@ MonoBehaviour:
   - resetCount
   - resetIsPressed
   - resetPlayerPressing
+  - resetTimer
   - RespawnSpaceship
   - setEntered
   - setEnteredF
   - SetGrav
+  - setKickable
+  - setKickableF
+  - setMyC
+  - setObjParent
+  - setParent
+  - SetParentAsNull
+  - SetParentAsSlot
+  - setPlayed
+  - setPlayerPressing
+  - setStarted
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
@@ -84,11 +108,36 @@ MonoBehaviour:
   - syncMat
   - syncSmoke
   - synctele
+  - addOp
+  - setEntered
+  - removeOp
+  - setEnteredF
+  - resetPlayerPressing
+  - setPlayerPressing
+  - resetIsPressed
+  - globalDestroy
+  - syncAnim
+  - syncIsOpened
+  - decrementDoor
+  - incrementDoor
   - trayBool
   - UpdateLobby
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - appendKickedBy
+  - clearKickedBy
+  - destHB
+  - giveDamage
+  - playDing
+  - push
+  - resetTimer
+  - setKickable
+  - setKickableF
+  - setMyC
+  - setObjParent
+  - setPlayed
+  - setStarted
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
