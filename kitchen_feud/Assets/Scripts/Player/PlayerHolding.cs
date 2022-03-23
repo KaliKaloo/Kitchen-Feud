@@ -7,14 +7,11 @@ using Photon.Pun;
 public class PlayerHolding : MonoBehaviour
 {
     public int holdingLimit = 1;
-    public List<BaseFood> items = new List<BaseFood>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
     public PhotonView view;
     public bool itemdropped = false;
-
-    // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {
@@ -23,37 +20,42 @@ public class PlayerHolding : MonoBehaviour
         if (view.IsMine)
         {
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-                
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-                
-                if (heldObj.GetComponent<Rigidbody>())
-                {
-         
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-                
-                }
+            {
+               slotItem(obj, item); 
             }
-        else
-        {
-            obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-               
-                if (heldObj.GetComponent<Rigidbody>())
-                {
-       
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-           
-                }
-               
+            else
+            {
+                this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
+                obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+                slotItem(obj, item); 
             }
+        }
+    }
 
+
+    [PunRPC]
+    void changeLayer(int viewID, int layer){
+        PhotonView.Find(viewID).gameObject.layer = layer;
+        foreach ( Transform child in PhotonView.Find(viewID).gameObject.transform )
+        {
+            child.gameObject.layer = layer;
+        }
+    }
+
+
+
+    void slotItem(GameObject obj, BaseFood item){
+                
+        heldObj = obj;
+        if (heldObj.GetComponent<Rigidbody>())
+        {
+            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
+            
+            heldObj.layer = 7;
+            foreach ( Transform child in heldObj.transform )
+            {
+                child.gameObject.layer = 7;
+            }
         }
     }
 
@@ -61,8 +63,11 @@ public class PlayerHolding : MonoBehaviour
     {
         if (view.IsMine)
         {
-            Debug.Log("Drop item: " + items[0].name);
-            items.Clear();
+            heldObj.layer = 0;
+            foreach ( Transform child in heldObj.transform )
+            {
+                child.gameObject.layer = 0;
+            }
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
         }
@@ -82,7 +87,6 @@ public class PlayerHolding : MonoBehaviour
       
        
         {
-            this.items.Clear();
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
@@ -91,11 +95,4 @@ public class PlayerHolding : MonoBehaviour
             itemdropped = true;
         }
     }
-
-    [PunRPC]
-    void clearItems(int viewID)
-    {
-        PhotonView.Find(viewID).GetComponent<PlayerHolding>().items.Clear();
-    }
-
 }
