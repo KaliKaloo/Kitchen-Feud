@@ -239,7 +239,7 @@ public class Appliance : Interactable
     }
 
 
-
+    
 
     [PunRPC]
     void SetToTrue(int viewID,int canvID)

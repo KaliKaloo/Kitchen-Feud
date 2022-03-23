@@ -67,7 +67,7 @@ public class FriedFoodController : MonoBehaviour
         FriedFoodController FFC = me.GetComponent<FriedFoodController>();
         me.GetComponent<Rigidbody2D>().gravityScale = 1f;
         //me.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(FFC.minXSpeed, FFC.maxXSpeed), Random.Range(FFC.minYSpeed, FFC.maxYSpeed));
-        me.GetComponent<Rigidbody2D>().velocity = new Vector2(-60,60);
+        me.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(FFC.minXSpeed, FFC.maxXSpeed), Random.Range(FFC.minYSpeed, FFC.maxYSpeed));
         me.transform.SetParent(FFC.gameCanvas.transform);
         Vector2 panPos = FFC.pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         me.GetComponent<RectTransform>().anchoredPosition = panPos;

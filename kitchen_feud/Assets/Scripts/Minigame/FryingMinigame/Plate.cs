@@ -9,6 +9,7 @@ public class Plate : MonoBehaviour
     public PanController pan;
     private Vector2 screenBounds;
     public float totalPoints;
+    public Appliance appliance;
     public float speed = 10f;
     public PhotonView PV;
 
@@ -25,26 +26,43 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
-        if(pan.friedFood != null) {
-            friedFood = pan.friedFood;
-        
-            if(friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y) {
-                friedFood.timer.Reset();
-                Destroy(friedFood.gameObject);
+        Debug.LogError(friedFood.appliance.appliancePlayers.Count);
+
+        {
+            if (pan.friedFood != null)
+            {
+                friedFood = pan.friedFood;
+
+                if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
+                {
+                    friedFood.timer.Reset();
+                    Destroy(friedFood.gameObject);
+                }
             }
-        }
 
-     //movement: only if it's player2, rpcs for player1
-
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            if (!(transform.position.x < screenBounds.x)) PV.RPC("moveLeft",RpcTarget.All,PV.ViewID);
-                //gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
-        }
-		if (Input.GetKey(KeyCode.RightArrow)) {
-            Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-            Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-            if (platePos.x + 370 < panPos.x) PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
-            //gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
+            //movement: only if it's player2, rpcs for player1
+            if(appliance.appliancePlayers.Count > 1 && PhotonView.Find(appliance.appliancePlayers[1]).OwnerActorNr != PV.OwnerActorNr)
+            {
+                PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
+            }
+            if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
+            appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
+            {
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (!(transform.position.x < screenBounds.x)) gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
+                    //PV.RPC("moveLeft",RpcTarget.All,PV.ViewID);
+                    //gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                    Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
+                    //
+                    if (platePos.x + 370 < panPos.x) gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
+                    //PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
+                }
+            }
         }
        
     }
@@ -68,6 +86,7 @@ public class Plate : MonoBehaviour
     void setPlateStartVals(int viewID)
     {
         Plate me = PhotonView.Find(viewID).GetComponent<Plate>();
+        me.appliance = me.transform.parent.parent.GetComponent<Appliance>();
         me.pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
         me.totalPoints = 0;
         me.friedFood = me.pan.friedFood;
