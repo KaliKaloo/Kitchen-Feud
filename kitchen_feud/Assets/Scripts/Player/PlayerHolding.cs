@@ -7,14 +7,11 @@ using Photon.Pun;
 public class PlayerHolding : MonoBehaviour
 {
     public int holdingLimit = 1;
-    public List<BaseFood> items = new List<BaseFood>();
     public Transform slot;
     GameObject clickedObj;
     public GameObject heldObj;
     public PhotonView view;
     public bool itemdropped = false;
-
-    // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {
@@ -37,7 +34,6 @@ public class PlayerHolding : MonoBehaviour
 
     void slotItem(GameObject obj, BaseFood item){
                 
-        items.Add(item);
         heldObj = obj;
         if (heldObj.GetComponent<Rigidbody>())
         {
@@ -60,7 +56,6 @@ public class PlayerHolding : MonoBehaviour
             {
                 child.gameObject.layer = 0;
             }
-            items.Clear();
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
         }
@@ -80,7 +75,6 @@ public class PlayerHolding : MonoBehaviour
       
        
         {
-            this.items.Clear();
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
@@ -89,11 +83,4 @@ public class PlayerHolding : MonoBehaviour
             itemdropped = true;
         }
     }
-
-    [PunRPC]
-    void clearItems(int viewID)
-    {
-        PhotonView.Find(viewID).GetComponent<PlayerHolding>().items.Clear();
-    }
-
 }
