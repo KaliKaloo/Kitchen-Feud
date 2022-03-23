@@ -18,7 +18,7 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (playerHold.items.Count == 1)
+        if (player.transform.Find("slot").childCount == 1)
         {
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
