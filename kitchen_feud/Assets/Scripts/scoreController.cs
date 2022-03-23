@@ -9,7 +9,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    private static int time = 18;
     
     private static int timer = time;
     PhotonRoom room;
@@ -37,12 +37,12 @@ public class GlobalTimer
     }
 
     public int GetTotalTime(){
-        return timer;
+        return time;
     }
 
     public int GetCurrentTime()
     {
-        return time;
+        return timer;
     }
 
     public string ConvertSecondToMinutes(int seconds)
@@ -183,7 +183,6 @@ public class scoreController : MonoBehaviour
         // start timer if not started yet
         timer.InitializeTimer();
         timerText.text = ConvertSecondToMinutes(timer.GetTime());
-        totalTime = timer.GetTotalTime();
         music = FindObjectOfType<MusicManager>();
     }
 
@@ -212,10 +211,6 @@ public class scoreController : MonoBehaviour
         {
             elapsed = elapsed % 1f;
             OutputTime();
-            if (timer.GetTime() == totalTime*0.2){
-                Debug.Log(timer.GetTime());
-                Debug.Log(timer.GetTotalTime());
-            }
         }
     }
 
