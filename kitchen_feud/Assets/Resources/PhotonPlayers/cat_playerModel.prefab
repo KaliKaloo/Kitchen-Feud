@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdingLimit: 1
-  items: []
   slot: {fileID: 5999747082366446667}
   heldObj: {fileID: 0}
   view: {fileID: 4338776926646805293}

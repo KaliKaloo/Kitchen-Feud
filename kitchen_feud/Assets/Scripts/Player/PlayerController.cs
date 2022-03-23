@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-						if (playerHold.items.Count != 0) playerHold.dropItem();
+						if (player.transform.Find("slot").childCount!= 0) playerHold.dropItem();
 						RemoveFocus();
 					}
 					// -------------------------------------------------------------------------
