@@ -14,7 +14,14 @@ public class Tray : Interactable
 
     PlayerHolding playerHold;
     public pickableItem pickable;
-    
+    public GameObject teamController;
+    private CanvasController canvasController;
+
+    private void Start()
+    {
+        canvasController = teamController.GetComponent<CanvasController>();
+    }
+
     public override void Interact()
     {
         playerHold = player.GetComponent<PlayerHolding>();
@@ -44,6 +51,12 @@ public class Tray : Interactable
                     this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
                 }
             }
+        } 
+
+        // IF HANDS EMPTY THEN SERVE OR PROMPT TO SERVE
+        else if (playerHold.items.Count == 0 && tray.trayID != "")
+        {
+            canvasController.TrayOrderOptions(tray.name);
         }
     }
     

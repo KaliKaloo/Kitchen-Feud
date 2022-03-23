@@ -15,6 +15,7 @@ public class CanvasController : MonoBehaviour
     public Button serve;
     public GameObject justClicked;
     public TrayController TC;
+    private TicketController ticketController;
 
     public GameObject orderNumberPrefab;
     public int teamNumber;
@@ -27,6 +28,8 @@ public class CanvasController : MonoBehaviour
     {
        
         TC = GetComponent<TrayController>();
+        ticketController = GetComponent<TicketController>();
+
         ticket1.SetActive(false);
         ticket2.SetActive(false);
         ticket3.SetActive(false);
@@ -51,7 +54,14 @@ public class CanvasController : MonoBehaviour
         orderMenu.SetActive(true);
         justClicked = EventSystem.current.currentSelectedGameObject;
     }
-    
+
+    // Gets correct ticket based on tray
+    public void TrayOrderOptions(string trayName)
+    {
+        orderMenu.SetActive(true);
+        justClicked = ticketController.GetCorrectTicket(trayName);
+    }
+
     public void Serve(GameObject justClicked)
     {
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
