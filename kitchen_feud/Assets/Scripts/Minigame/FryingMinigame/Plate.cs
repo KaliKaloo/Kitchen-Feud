@@ -19,11 +19,6 @@ public class Plate : MonoBehaviour
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
-        //pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
-        //totalPoints = 0;
-        //friedFood = pan.friedFood;
-
-        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     void Update()
