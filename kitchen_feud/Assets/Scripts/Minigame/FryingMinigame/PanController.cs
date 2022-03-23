@@ -43,11 +43,7 @@ public class PanController : MonoBehaviour
 
 
         PV.RPC("setFoodVals", RpcTarget.All,temp.GetComponent<PhotonView>().ViewID,PV.ViewID);
-        //friedFood = temp.GetComponent<FriedFoodController>();
-        //friedFood.pan = this;
-        //friedFood.gameCanvas = this.gameObject.transform.parent.transform.parent.gameObject;
-        //friedFood.timer = timer;
-        //Debug.Log(temp.name);
+    
     }
 
     void Update()
@@ -105,10 +101,6 @@ public class PanController : MonoBehaviour
                 Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                 var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                 PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
-                //friedFood = temp.GetComponent<FriedFoodController>();
-                //friedFood.pan = this;
-                //friedFood.gameCanvas = this.gameObject.transform.parent.transform.parent.gameObject;
-                //friedFood.timer = timer;
                 foodInstancesCounter++;
                 pointsAssigned = false;
                 Debug.Log(foodInstancesCounter);
@@ -140,12 +132,10 @@ public class PanController : MonoBehaviour
         me = PhotonView.Find(myID).gameObject;
         FFC = PhotonView.Find(viewID).GetComponent<FriedFoodController>();
         me.GetComponent<PanController>().friedFood = FFC;
-        //me.GetComponent<PanController>().appliance = me.transform.parent.parent.parent.GetComponent<Appliance>();
         FFC.pan = me.GetComponent<PanController>();
         FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
         FFC.timer = me.GetComponent<PanController>().timer;
 
-       // PhotonView.Find(viewID).GetComponent<PanController>().pan = 
     }
 
   

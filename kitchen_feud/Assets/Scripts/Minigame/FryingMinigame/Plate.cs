@@ -50,9 +50,7 @@ public class Plate : MonoBehaviour
                         transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
 
                             };
-                    //gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
-                    //
-                    //gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
+            
                 }
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
@@ -64,8 +62,7 @@ public class Plate : MonoBehaviour
                         PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
 
                     }
-                    //gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
-                    //
+                 
                 }
             }
         }
