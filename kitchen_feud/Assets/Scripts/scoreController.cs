@@ -170,6 +170,9 @@ public class scoreController : MonoBehaviour
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
 
+    private int totalTime;
+    private MusicManager music;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -180,6 +183,8 @@ public class scoreController : MonoBehaviour
         // start timer if not started yet
         timer.InitializeTimer();
         timerText.text = ConvertSecondToMinutes(timer.GetTime());
+        totalTime = timer.GetTotalTime();
+        music = FindObjectOfType<MusicManager>();
     }
 
     // Converts an integer to a string with proper comma notation
@@ -195,7 +200,6 @@ public class scoreController : MonoBehaviour
         return str;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // update scores every frame
@@ -208,6 +212,10 @@ public class scoreController : MonoBehaviour
         {
             elapsed = elapsed % 1f;
             OutputTime();
+            if (timer.GetTime() == totalTime*0.2){
+                Debug.Log(timer.GetTime());
+                Debug.Log(timer.GetTotalTime());
+            }
         }
     }
 
