@@ -49,10 +49,13 @@ public class fryingMinigame : MonoBehaviour
                 backbutton.appliance = GetComponent<Appliance>();
                 if (appliance.foundDish != null) {
                     friedFoodController = pan.friedFood;
+                    if (friedFoodController) { 
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
-                    spriteName = GetSpriteName(friedFoodController.dishSO);           
-                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+                    
+                        spriteName = GetSpriteName(friedFoodController.dishSO);
+                        friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+                    }
                 }
             }
         }

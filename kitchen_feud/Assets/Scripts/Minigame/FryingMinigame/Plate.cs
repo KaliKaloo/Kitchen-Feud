@@ -83,7 +83,8 @@ public class Plate : MonoBehaviour
         appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
         {
             var obj = col.gameObject.GetComponent<FriedFoodController>();
-            totalPoints += obj.points;
+            //totalPoints += obj.points;
+            PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
             GameEvents.current.assignPointsEventFunction();
             Debug.Log("total points:" + totalPoints);
             //obj.gameObject.transform.SetParent(this.gameObject.transform);
@@ -92,7 +93,7 @@ public class Plate : MonoBehaviour
             // stackedFood.Add(friedFood);
             Debug.Log("food destroyed");
             PV.RPC("destP", RpcTarget.All, col.GetComponent<PhotonView>().ViewID);
-            Destroy(obj.gameObject);
+            //Destroy(obj.gameObject);
             //friedFood = null;
         }
     }
@@ -120,5 +121,9 @@ public class Plate : MonoBehaviour
     void destP(int viewID)
     {
         Destroy(PhotonView.Find(viewID).gameObject);
+    }
+    void syncTotal(int viewiD, float points)
+    {
+        PhotonView.Find(viewiD).GetComponent<Plate>().totalPoints += points;
     }
 }

@@ -98,6 +98,7 @@ MonoBehaviour:
   points: 0
   minXSpeed: 50
   maxXSpeed: 150
+  Yspeed: 0
   minYSpeed: 10
   maxYSpeed: 100
   gameCanvas: {fileID: 0}

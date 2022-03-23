@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 626672960269552017}
   - component: {fileID: 626672960269552016}
   - component: {fileID: 626672960269552019}
+  - component: {fileID: 6445359929864926172}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -652,6 +653,29 @@ MonoBehaviour:
   minigameCanvas: {fileID: 626672959617897019}
   player: {fileID: 0}
   appliance: {fileID: 0}
+  PV: {fileID: 0}
+--- !u!114 &6445359929864926172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626672960269552029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &626672960339889362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1206,7 @@ MonoBehaviour:
   totalPoints: 0
   appliance: {fileID: 0}
   speed: 10
+  timer: {fileID: 0}
   PV: {fileID: 0}
 --- !u!70 &626672960781006354
 CapsuleCollider2D:
@@ -1347,6 +1372,7 @@ MonoBehaviour:
   stopTimer: 0
   resetTimer: 0
   time: 0
+  points: 0
   PV: {fileID: 0}
 --- !u!114 &8170918709502818923
 MonoBehaviour:
