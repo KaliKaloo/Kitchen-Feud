@@ -13,6 +13,7 @@ public class FriedFoodController : MonoBehaviour
     public float points;
     public float minXSpeed;
     public float maxXSpeed;
+    public float Yspeed;
     public float minYSpeed;
     public float maxYSpeed;
     public GameObject gameCanvas;
@@ -22,18 +23,26 @@ public class FriedFoodController : MonoBehaviour
     public DishSO dishSO;
 
     void Start()
-    {   
+    {
+        minYSpeed = 200;
+        maxYSpeed = 400;
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
         PV = GetComponent<PhotonView>();
         appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
+        //do in RPC
+        //PV.RPC("setDishSO", RpcTarget.All, PV.ViewID);
+        dishSO = appliance.foundDish;
         //appliance = transform.parent.parent.parent.GetComponent<Appliance>();
     }
 
     void Update()
     {
-        Debug.LogError(transform.position);
+        if (!dishSO)
+        {
+            dishSO = appliance.foundDish;
+        }
     }
 
     public void FlipPancake() {
@@ -43,11 +52,14 @@ public class FriedFoodController : MonoBehaviour
             Debug.Log("Flip pancake!");
             points = timer.Reset();
             //I shouldn't assign points yet, only if it's the last call. maybe keep a counter?
-            if(points != 0) GameEvents.current.assignPointsEventFunction();
+           // if(points != 0) GameEvents.current.assignPointsEventFunction();
 
             this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 20f;
             //this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(minXSpeed, maxXSpeed), Random.Range(minYSpeed, maxYSpeed));
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-150,200);
+            Yspeed = Random.Range(minYSpeed, maxYSpeed);
+            float ratio = maxYSpeed / Yspeed;
+            float XSpeed = 300 / ratio;
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-XSpeed,Yspeed);
 
             //YeetPancake();
             PV.RPC("flip",RpcTarget.All,PV.ViewID);
@@ -81,5 +93,15 @@ public class FriedFoodController : MonoBehaviour
     void setParentP(int viewID)
     {
         PhotonView.Find(viewID).transform.SetParent(PhotonView.Find(viewID).GetComponent<FriedFoodController>().gameCanvas.transform);
+    }
+    [PunRPC]
+    void resetTimerRPC(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<FriedFoodController>().points = PhotonView.Find(viewID).GetComponent<FriedFoodController>().timer.Reset();
+    }
+    [PunRPC]
+    void setDishSO(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<FriedFoodController>().dishSO = PhotonView.Find(viewID).GetComponent<FriedFoodController>().appliance.foundDish;
     }
 }

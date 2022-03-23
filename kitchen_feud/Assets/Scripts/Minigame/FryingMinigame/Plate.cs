@@ -11,13 +11,14 @@ public class Plate : MonoBehaviour
     public float totalPoints;
     public Appliance appliance;
     public float speed = 10f;
+    public FryingTimerBar timer;
     public PhotonView PV;
 
     void Start()
     {
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
-        
+        timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
         //pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
         //totalPoints = 0;
         //friedFood = pan.friedFood;
@@ -28,23 +29,24 @@ public class Plate : MonoBehaviour
     void Update()
     {
 
-        {
+        
+
             if (pan.friedFood != null)
             {
                 friedFood = pan.friedFood;
-
                 if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
                 {
-                    friedFood.timer.Reset();
-                    Destroy(friedFood.gameObject);
-                }
+                    PV.RPC("destP", RpcTarget.All, friedFood.GetComponent<PhotonView>().ViewID);
+             
             }
+        }
 
-            //movement: only if it's player2, rpcs for player1
-           
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
             appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
+                //movement: only if it's player2, rpcs for player1
+
+
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     if (!(transform.position.x < screenBounds.x)) {
@@ -73,14 +75,13 @@ public class Plate : MonoBehaviour
             }
         }
        
-    }
+    
  
     void OnTriggerEnter2D(Collider2D col)
     {
         if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
         appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
         {
-            Debug.Log("plate hit");
             var obj = col.gameObject.GetComponent<FriedFoodController>();
             totalPoints += obj.points;
             GameEvents.current.assignPointsEventFunction();

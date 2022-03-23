@@ -28,19 +28,23 @@ public class fryingMinigame : MonoBehaviour
     }
 
     void Update(){
-        if (transform.Find("Frying(Clone)") && set == false && transform.Find("Frying(Clone)").GetComponentInChildren<FriedFoodController>())
+        
+
+        if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
         {
             GameObject canv = transform.Find("Frying(Clone)").gameObject;
             slider = canv.GetComponentInChildren<Slider>();
             backbutton = canv.GetComponentInChildren<ExitFryingMinigame>();
             plate = canv.GetComponentInChildren<Plate>();
             pan = canv.GetComponentInChildren<PanController>();
-            friedFoodController = canv.transform.Find("PanGameObject").GetComponentInChildren<FriedFoodController>();
-            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("patty").texture;
+            friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
+            Debug.LogError("CAME HERE");
+            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+
             set = true;
         }
         if (transform.Find("Frying(Clone)") && appliance.isBeingInteractedWith){
-            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+            //if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
                 backbutton.appliance = GetComponent<Appliance>();
                 if (appliance.foundDish != null) {
@@ -48,7 +52,7 @@ public class fryingMinigame : MonoBehaviour
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
                     spriteName = GetSpriteName(friedFoodController.dishSO);           
-                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("patty").texture;
+                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
                 }
             }
         }

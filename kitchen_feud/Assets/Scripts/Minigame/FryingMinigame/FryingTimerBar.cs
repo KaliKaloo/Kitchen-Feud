@@ -11,6 +11,7 @@ public class FryingTimerBar : MonoBehaviour
     public bool stopTimer;
     public bool resetTimer;
     public float time;
+    public float points;
     public PhotonView PV;
 
     void Start()
@@ -40,6 +41,7 @@ public class FryingTimerBar : MonoBehaviour
         
     }
     public float Reset() {
+        
         float tempTime = time;
         time = 0;
         slider.value = 0;
