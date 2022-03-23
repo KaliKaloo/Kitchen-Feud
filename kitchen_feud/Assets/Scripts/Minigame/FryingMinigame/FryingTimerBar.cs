@@ -40,13 +40,14 @@ public class FryingTimerBar : MonoBehaviour
         }
         
     }
-    public float Reset() {
+    public void Reset() {
         
         float tempTime = time;
         time = 0;
         slider.value = 0;
         //stopTimer = false;
-        return SetFriedLevel(tempTime);
+        points = SetFriedLevel(tempTime);
+        //return SetFriedLevel(tempTime);
         
     }
 

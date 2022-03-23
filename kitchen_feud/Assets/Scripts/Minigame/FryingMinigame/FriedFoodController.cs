@@ -50,7 +50,10 @@ public class FriedFoodController : MonoBehaviour
         if (isFlipped == false) {
             isFlipped = true;
             Debug.Log("Flip pancake!");
-            points = timer.Reset();
+            timer.Reset();
+            //points = timer.points;
+            PV.RPC("setPoints",RpcTarget.All,PV.ViewID,timer.points);
+            Debug.LogError(points);
             //I shouldn't assign points yet, only if it's the last call. maybe keep a counter?
            // if(points != 0) GameEvents.current.assignPointsEventFunction();
 
@@ -97,11 +100,17 @@ public class FriedFoodController : MonoBehaviour
     [PunRPC]
     void resetTimerRPC(int viewID)
     {
-        PhotonView.Find(viewID).GetComponent<FriedFoodController>().points = PhotonView.Find(viewID).GetComponent<FriedFoodController>().timer.Reset();
+        //PhotonView.Find(viewID).GetComponent<FriedFoodController>().points =
+            PhotonView.Find(viewID).GetComponent<FriedFoodController>().timer.Reset();
     }
     [PunRPC]
     void setDishSO(int viewID)
     {
         PhotonView.Find(viewID).GetComponent<FriedFoodController>().dishSO = PhotonView.Find(viewID).GetComponent<FriedFoodController>().appliance.foundDish;
+    }
+    [PunRPC]
+    void setPoints(int viewID,float points)
+    {
+        PhotonView.Find(viewID).GetComponent<FriedFoodController>().points = points;
     }
 }
