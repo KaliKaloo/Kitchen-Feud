@@ -36,6 +36,7 @@ public class fryingMinigame : MonoBehaviour
             plate = canv.GetComponentInChildren<Plate>();
             pan = canv.GetComponentInChildren<PanController>();
             friedFoodController = canv.transform.Find("PanGameObject").GetComponentInChildren<FriedFoodController>();
+            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("rice").texture;
             set = true;
         }
         if (transform.Find("Frying(Clone)") && appliance.isBeingInteractedWith){

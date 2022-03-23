@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Plate : MonoBehaviour
 {
     public FriedFoodController friedFood;
@@ -10,12 +10,17 @@ public class Plate : MonoBehaviour
     private Vector2 screenBounds;
     public float totalPoints;
     public float speed = 10f;
+    public PhotonView PV;
 
     void Start()
     {
-        totalPoints = 0;
-        friedFood = pan.friedFood;
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        PV = GetComponent<PhotonView>();
+        PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
+        //pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
+        //totalPoints = 0;
+        //friedFood = pan.friedFood;
+
+        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     void Update()
@@ -32,12 +37,14 @@ public class Plate : MonoBehaviour
      //movement: only if it's player2, rpcs for player1
 
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            if(!(transform.position.x < screenBounds.x)) gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
+            if (!(transform.position.x < screenBounds.x)) PV.RPC("moveLeft",RpcTarget.All,PV.ViewID);
+                //gameObject.transform.Translate(Vector3.left * speed * 10 * Time.deltaTime);
         }
 		if (Input.GetKey(KeyCode.RightArrow)) {
             Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
             Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-            if (platePos.x + 370 < panPos.x) gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
+            if (platePos.x + 370 < panPos.x) PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
+            //gameObject.transform.Translate(Vector3.right * speed * 10 * Time.deltaTime);
         }
        
     }
@@ -56,5 +63,24 @@ public class Plate : MonoBehaviour
         Debug.Log("food destroyed");
         Destroy(obj.gameObject);
         //friedFood = null;
+    }
+    [PunRPC]
+    void setPlateStartVals(int viewID)
+    {
+        Plate me = PhotonView.Find(viewID).GetComponent<Plate>();
+        me.pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
+        me.totalPoints = 0;
+        me.friedFood = me.pan.friedFood;
+        me.screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
+    [PunRPC]
+    void moveLeft(int viewID)
+    {
+        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 10 * Time.deltaTime);
+    }
+    [PunRPC]
+    void moveRight(int viewID)
+    {
+        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 10 * Time.deltaTime);
     }
 }

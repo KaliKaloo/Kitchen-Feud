@@ -111,6 +111,9 @@ MonoBehaviour:
   - UpdateTimer
   - flip
   - setFoodVals
+  - moveLeft
+  - moveRight
+  - setPlateStartVals
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

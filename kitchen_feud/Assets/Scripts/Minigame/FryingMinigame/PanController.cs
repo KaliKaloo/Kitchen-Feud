@@ -81,10 +81,10 @@ public class PanController : MonoBehaviour
         {
             PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
            // pan.Translate(Vector3.right * mouseCursorSpeed*2 * Time.deltaTime);
-            if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false) {
-                pointsAssigned = true;
+            //if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false) {
+                //pointsAssigned = true;
                 friedFood.FlipPancake();
-            }
+            //}
         }
 
         if(foodInstancesCounter < foodInstances && friedFood == null) {

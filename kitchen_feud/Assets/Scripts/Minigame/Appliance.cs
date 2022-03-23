@@ -249,7 +249,7 @@ public class Appliance : Interactable
         if (appl.minigameCanvas2) {
             Debug.LogError(appl.appliancePlayers[0]);
             Debug.LogError(appl.appliancePlayers.Count);
-            if(appl.appliancePlayers.Count > 2) {
+            if(appl.appliancePlayers.Count > 1) {
                 appl.isBeingInteractedWith = true;
             }
 
