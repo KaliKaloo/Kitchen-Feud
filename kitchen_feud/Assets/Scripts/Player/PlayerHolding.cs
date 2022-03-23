@@ -25,11 +25,23 @@ public class PlayerHolding : MonoBehaviour
             }
             else
             {
+                this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                 obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
                 slotItem(obj, item); 
             }
         }
     }
+
+
+    [PunRPC]
+    void changeLayer(int viewID, int layer){
+        PhotonView.Find(viewID).gameObject.layer = layer;
+        foreach ( Transform child in PhotonView.Find(viewID).gameObject.transform )
+        {
+            child.gameObject.layer = layer;
+        }
+    }
+
 
 
     void slotItem(GameObject obj, BaseFood item){
