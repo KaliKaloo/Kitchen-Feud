@@ -29,9 +29,10 @@ public class Appliance : Interactable
     private Rigidbody playerRigidbody;
     private SlotsController SlotsController;
     public int dishPoints;
+    public bool added;
 
-//maybe add bool on player enter, or and int for order
-//each canvas/appliance allows or dissallows multiple players
+    //maybe add bool on player enter, or and int for order
+    //each canvas/appliance allows or dissallows multiple players
     public bool canUse = true;
 
 
@@ -40,12 +41,14 @@ public class Appliance : Interactable
     private void Start()
     {
         //minigameCanvas.SetActive(false);
+        added = false;
         myPv = GetComponent<PhotonView>();
     }
 
     public override void Interact()
     {
-        myPv.RPC("addPlayer",RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+
+        Debug.LogError("Clicked");
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
@@ -53,10 +56,28 @@ public class Appliance : Interactable
         //view control
         pv = player.GetComponent<PhotonView>();
 
-        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        Debug.Log(canUse);
-        if (!isBeingInteractedWith && canUse)
+        if (PhotonView.Find(myPv.ViewID).Owner != PhotonNetwork.LocalPlayer)
         {
+            PhotonView.Find(myPv.ViewID).TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+        }
+        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+        if (myPv.IsMine)
+        {
+           
+            if (!added)
+            {
+
+                myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+
+                added = true;
+
+            }
+        }
+        Debug.LogError(isBeingInteractedWith);
+
+        if (!isBeingInteractedWith)
+        {
+
             if (pv.IsMine)
             {
                 if (playerHold.items.Count != 0)
@@ -70,9 +91,12 @@ public class Appliance : Interactable
                 }
             }
         }
-        else{
+        else
+        {
             Debug.Log("Appliance in use");
         }
+
+
     }
     public void cookDish()
     {
@@ -103,10 +127,20 @@ public class Appliance : Interactable
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else if (this.gameObject.tag == "Stove" && foundDish.stoveFry) {
-                    Debug.LogError(isBeingInteractedWith);
-                    canvas.gameObject.SetActive(false);
-                    minigameCanvas2.gameObject.SetActive(true);
-                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
+                    if (!minigameCanvas2)
+                    {
+                        Debug.LogError(isBeingInteractedWith);
+                        canvas.gameObject.SetActive(false);
+                        minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), transform.position, transform.rotation);
+                        myPv.RPC("falseForOthers", RpcTarget.Others,myPv.ViewID, minigameCanvas2.GetPhotonView().ViewID);
+                        minigameCanvas2.transform.SetParent(transform);
+                        cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
+                    }
+                    else
+                    {
+                        Debug.LogError("Made iT");
+                        minigameCanvas2.SetActive(true);
+                    }
                 }
                 else
                 {
@@ -125,7 +159,7 @@ public class Appliance : Interactable
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
 
                 }
-                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID,minigameCanvas2.GetComponent<PhotonView>());
+                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID,minigameCanvas2.GetComponent<PhotonView>().ViewID);
 
                 //instantiate the cooked dish
 
@@ -142,7 +176,15 @@ public class Appliance : Interactable
                 myPv.RPC("doFd", RpcTarget.All, myPv.ViewID, cookedDish.GetComponent<PhotonView>().ViewID);
 
                 //delete the items the dish was cooked from
-                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                if (tag == "Stove" && appliancePlayers.Count > 1)
+                {
+                    Debug.LogError("Cleareed");
+                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                }
+                else if(tag != "Stove")
+                {
+                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                }
                 itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
 
@@ -204,8 +246,10 @@ public class Appliance : Interactable
     {
         GameObject canv = PhotonView.Find(canvID).gameObject;
         Appliance appl = PhotonView.Find(viewID).GetComponent<Appliance>();
-        if (canv.activeSelf) {
-            if(appl.appliancePlayers.Count == 2) {
+        if (appl.minigameCanvas2) {
+            Debug.LogError(appl.appliancePlayers[0]);
+            Debug.LogError(appl.appliancePlayers.Count);
+            if(appl.appliancePlayers.Count > 2) {
                 appl.isBeingInteractedWith = true;
             }
 
@@ -270,6 +314,16 @@ public class Appliance : Interactable
     void addPlayer(int viewID,int appID)
     {
         PhotonView.Find(appID).GetComponent<Appliance>().appliancePlayers.Add(viewID);
+    }
+    [PunRPC]
+    void falseForOthers(int applID,int viewID)
+    {
+        GameObject canv = PhotonView.Find(viewID).gameObject;
+        Appliance appl = PhotonView.Find(applID).GetComponent<Appliance>();
+        canv.transform.SetParent(appl.transform);
+        appl.minigameCanvas2 = canv;
+        canv.SetActive(false);
+
     }
     
 }

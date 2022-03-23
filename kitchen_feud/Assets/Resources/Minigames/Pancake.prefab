@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4970998734160830097}
   - component: {fileID: -8271138423373549483}
   - component: {fileID: -3796959591002898532}
+  - component: {fileID: -6074044397168173118}
   m_Layer: 5
   m_Name: Pancake
   m_TagString: Untagged
@@ -89,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pan: {fileID: 0}
+  PV: {fileID: 0}
   startLocation: {x: 0, y: 0, z: 0}
   isFlipped: 0
   timer: {fileID: 0}
@@ -188,3 +190,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-6074044397168173118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624622295829595481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
