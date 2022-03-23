@@ -96,8 +96,8 @@ MonoBehaviour:
   isFlipped: 0
   timer: {fileID: 0}
   points: 0
-  minXSpeed: 10
-  maxXSpeed: 100
+  minXSpeed: 50
+  maxXSpeed: 150
   minYSpeed: 10
   maxYSpeed: 100
   gameCanvas: {fileID: 0}

@@ -52,8 +52,10 @@ public class PanController : MonoBehaviour
 
     void Update()
     {
-        Debug.LogError(pan.position);
-
+        if (appliance.appliancePlayers.Count > 0 && PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
+        {
+            GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
+        }
         //do that all if it's player1, add rpcs to player2
         if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
          appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
@@ -138,7 +140,7 @@ public class PanController : MonoBehaviour
         me = PhotonView.Find(myID).gameObject;
         FFC = PhotonView.Find(viewID).GetComponent<FriedFoodController>();
         me.GetComponent<PanController>().friedFood = FFC;
-        me.GetComponent<PanController>().appliance = me.transform.parent.parent.parent.GetComponent<Appliance>();
+        //me.GetComponent<PanController>().appliance = me.transform.parent.parent.parent.GetComponent<Appliance>();
         FFC.pan = me.GetComponent<PanController>();
         FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
         FFC.timer = me.GetComponent<PanController>().timer;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class FryingTimerBar : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class FryingTimerBar : MonoBehaviour
     public bool stopTimer;
     public bool resetTimer;
     public float time;
+    public PhotonView PV;
 
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         stopTimer = false;
         slider.maxValue = gameTime;
         slider.value = 0;
@@ -20,14 +23,20 @@ public class FryingTimerBar : MonoBehaviour
 
     void Update()
     {
-        time += Time.deltaTime;
-        int seconds = Mathf.FloorToInt(time * 60f);
-        if(time >= gameTime) {
-            //stopTimer = true;
-            time = 0;
-            slider.value = 0;
+        if (PV.IsMine)
+        {
+            time += Time.deltaTime;
+            int seconds = Mathf.FloorToInt(time * 60f);
+            if (time >= gameTime)
+            {
+                //stopTimer = true;
+                time = 0;
+                slider.value = 0;
+            }
+
+            PV.RPC("syncSlider", RpcTarget.All, PV.ViewID, time);
+            Debug.LogError("HERE");
         }
-        if(stopTimer == false) slider.value = time;
         
     }
     public float Reset() {
@@ -47,5 +56,11 @@ public class FryingTimerBar : MonoBehaviour
     public float abs(float x) {
        float result = x < 0 ? -x : x;
        return result;
+    }
+    [PunRPC]
+    void syncSlider(int viewID,float time)
+    {
+        Debug.LogError("IN RPC");
+        PhotonView.Find(viewID).GetComponent<FryingTimerBar>().slider.value = time;
     }
 }

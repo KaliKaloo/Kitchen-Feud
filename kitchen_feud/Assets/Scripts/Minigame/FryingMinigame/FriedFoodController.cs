@@ -27,12 +27,13 @@ public class FriedFoodController : MonoBehaviour
         gameObject.transform.localPosition = Vector3.zero;
         points = 0;
         PV = GetComponent<PhotonView>();
-        appliance = transform.parent.parent.parent.GetComponent<Appliance>();
+        appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
+        //appliance = transform.parent.parent.parent.GetComponent<Appliance>();
     }
 
     void Update()
     {
-
+        Debug.LogError(transform.position);
     }
 
     public void FlipPancake() {
@@ -44,7 +45,11 @@ public class FriedFoodController : MonoBehaviour
             //I shouldn't assign points yet, only if it's the last call. maybe keep a counter?
             if(points != 0) GameEvents.current.assignPointsEventFunction();
 
-            //this.YeetPancake();
+            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 20f;
+            //this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(minXSpeed, maxXSpeed), Random.Range(minYSpeed, maxYSpeed));
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-150,200);
+
+            //YeetPancake();
             PV.RPC("flip",RpcTarget.All,PV.ViewID);
         }
 
@@ -52,8 +57,8 @@ public class FriedFoodController : MonoBehaviour
     
     public void YeetPancake() {
         this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-
         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(minXSpeed, maxXSpeed), Random.Range(minYSpeed, maxYSpeed));
+
         this.gameObject.transform.SetParent(gameCanvas.transform);
         Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         this.gameObject.GetComponent<RectTransform>().anchoredPosition = panPos;
@@ -65,11 +70,16 @@ public class FriedFoodController : MonoBehaviour
         Debug.LogError("hello");
         GameObject me = PhotonView.Find(viewID).gameObject;
         FriedFoodController FFC = me.GetComponent<FriedFoodController>();
-        me.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        //me.GetComponent<Rigidbody2D>().gravityScale = 1f;
         //me.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(FFC.minXSpeed, FFC.maxXSpeed), Random.Range(FFC.minYSpeed, FFC.maxYSpeed));
-        me.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(FFC.minXSpeed, FFC.maxXSpeed), Random.Range(FFC.minYSpeed, FFC.maxYSpeed));
+        //me.GetComponent<Rigidbody2D>().velocity = new Vector2(-Random.Range(FFC.minXSpeed, FFC.maxXSpeed), Random.Range(FFC.minYSpeed, FFC.maxYSpeed));
         me.transform.SetParent(FFC.gameCanvas.transform);
         Vector2 panPos = FFC.pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         me.GetComponent<RectTransform>().anchoredPosition = panPos;
+    }
+    [PunRPC]
+    void setParentP(int viewID)
+    {
+        PhotonView.Find(viewID).transform.SetParent(PhotonView.Find(viewID).GetComponent<FriedFoodController>().gameCanvas.transform);
     }
 }

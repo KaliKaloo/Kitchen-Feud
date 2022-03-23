@@ -114,6 +114,10 @@ MonoBehaviour:
   - moveLeft
   - moveRight
   - setPlateStartVals
+  - setAppl
+  - syncSlider
+  - setParentP
+  - destP
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

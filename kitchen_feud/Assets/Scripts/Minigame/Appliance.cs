@@ -134,6 +134,10 @@ public class Appliance : Interactable
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), transform.position, transform.rotation);
                         myPv.RPC("falseForOthers", RpcTarget.Others,myPv.ViewID, minigameCanvas2.GetPhotonView().ViewID);
                         minigameCanvas2.transform.SetParent(transform);
+                        myPv.RPC("setAppl", RpcTarget.All, minigameCanvas2.GetComponent<PhotonView>().ViewID,
+                            myPv.ViewID);
+                        //minigameCanvas2.GetComponentInChildren<Plate>().appliance = GetComponent<Appliance>();
+                        //minigameCanvas2.transform.Find("PanGameObject").transform.GetChild(0).GetComponent<PanController>().appliance = GetComponent<Appliance>();
                         cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
                     }
                     else
@@ -325,6 +329,14 @@ public class Appliance : Interactable
         canv.SetActive(false);
 
     }
-    
+    [PunRPC]
+    void setAppl(int viewID,int applID)
+    {
+        GameObject canv = PhotonView.Find(viewID).gameObject;
+        GameObject appl = PhotonView.Find(applID).gameObject;
+        canv.GetComponentInChildren<Plate>().appliance = appl.GetComponent<Appliance>();
+        canv.transform.Find("PanGameObject").transform.GetChild(0).GetComponent<PanController>().appliance = appl.GetComponent<Appliance>();
+
+    }
 }
 

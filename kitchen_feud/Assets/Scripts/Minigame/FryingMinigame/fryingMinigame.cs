@@ -36,7 +36,7 @@ public class fryingMinigame : MonoBehaviour
             plate = canv.GetComponentInChildren<Plate>();
             pan = canv.GetComponentInChildren<PanController>();
             friedFoodController = canv.transform.Find("PanGameObject").GetComponentInChildren<FriedFoodController>();
-            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("rice").texture;
+            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("patty").texture;
             set = true;
         }
         if (transform.Find("Frying(Clone)") && appliance.isBeingInteractedWith){
@@ -48,7 +48,7 @@ public class fryingMinigame : MonoBehaviour
                     friedFoodController.dishSO = appliance.foundDish;
                     friedFoodController.appliance = appliance;
                     spriteName = GetSpriteName(friedFoodController.dishSO);           
-                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("rice").texture;
+                    friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite("patty").texture;
                 }
             }
         }
