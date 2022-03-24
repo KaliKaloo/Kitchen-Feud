@@ -21,7 +21,7 @@ public class StoveMovement : MonoBehaviour
         //print(pot.position);
         lowerBound = pot.position.x - xBound;
         upperBound = pot.position.x + xBound;
-        pot.transform.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
+        pot.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
 
 
     }
@@ -37,7 +37,7 @@ public class StoveMovement : MonoBehaviour
         else
             pot.velocity = Vector2.zero;
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, lowerBound, upperBound),
-            transform.position.y);
+        pot.position = new Vector2(Mathf.Clamp(pot.position.x, lowerBound, upperBound),
+            pot.position.y);
     }
 }
