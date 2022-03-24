@@ -154,6 +154,8 @@ public class Spawner : MonoBehaviour
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
+            obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
+
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
            
@@ -178,6 +180,9 @@ public class Spawner : MonoBehaviour
             GameObject obj = Instantiate(bomb,
                 new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
+
+            obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
+
             obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }
