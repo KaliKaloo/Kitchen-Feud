@@ -53,7 +53,7 @@ public class Appliance : Interactable
         {
             if (pv.IsMine)
             {
-                if (playerHold.items.Count != 0)
+                if (player.transform.Find("slot").childCount!= 0)
                 {
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                         player.GetComponent<PhotonView>().ViewID);
@@ -149,7 +149,7 @@ public class Appliance : Interactable
 
             playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
 
-            if (playerHold.items.Count == 0 && playerHold.GetComponent<PhotonView>().IsMine)
+            if (player.transform.Find("slot").childCount== 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
                 SlotsController.PutOnAppliance(heldObjArg);
             }
