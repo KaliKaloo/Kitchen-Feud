@@ -18,10 +18,16 @@ public class playerMvmt : MonoBehaviour
     float Vertical;
     Vector3 movement;
 
+    private Animator animator;
+
+
     private void Start()
     {
+        GameObject parent = transform.parent.gameObject;
         rb = GetComponentInParent<Rigidbody>();
         PV = GetComponentInParent<PhotonView>();
+        animator = parent.GetComponent<Animator>();
+
     }
 
 
@@ -33,6 +39,12 @@ public class playerMvmt : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
+            
+            // IF PLAYER IS MOVING
+			if (movement.magnitude > 0)
+				animator.SetBool("IsMoving", true);
+			else
+				animator.SetBool("IsMoving", false);
           
         }
         rotateSlider = GameObject.Find("Rotation");
