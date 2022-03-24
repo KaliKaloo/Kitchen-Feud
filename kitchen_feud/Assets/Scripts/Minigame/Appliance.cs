@@ -110,12 +110,13 @@ public class Appliance : Interactable
 
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
+                    player.GetComponentInChildren<playerMvmt>().enabled = false;
+                    UIcamera.enabled = true;
+                    player.GetComponentInChildren<Camera>().enabled = false;
+                    
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
                     playerRigidbody.isKinematic = true;
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
-
-                    UIcamera.enabled = true;
-                    player.GetComponentInChildren<Camera>().enabled = false;
                 }
 
 
