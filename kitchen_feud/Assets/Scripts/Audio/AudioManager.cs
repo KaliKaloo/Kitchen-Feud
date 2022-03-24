@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
+        MusicManager.instance.team = myTeam;
 
     }
     
@@ -61,13 +62,13 @@ public class AudioManager : MonoBehaviour
                 if (team == 1)
                 {
                     pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
-                    AudioManager.instance.changeBGM(1);
+                    MusicManager.instance.changeBGM(1);
                     
                 }
                 else
                 {
                     pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
-                    AudioManager.instance.changeBGM(2);
+                    MusicManager.instance.changeBGM(2);
 
                 }
                 engine.LeaveChannel();

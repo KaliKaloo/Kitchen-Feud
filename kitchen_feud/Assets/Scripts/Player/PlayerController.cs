@@ -86,10 +86,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 		}
-        
-		if (location != 1){
-			Debug.Log(location);
-		}
+		
 	}
 
 
