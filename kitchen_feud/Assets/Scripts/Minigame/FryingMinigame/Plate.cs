@@ -40,15 +40,18 @@ public class Plate : MonoBehaviour
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
             appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-                //movement: only if it's player2, rpcs for player1
+            Vector2 panPos = pan.transform.parent.gameObject.transform.parent.GetComponent<RectTransform>().position;
+            Vector2 platePos = gameObject.GetComponent<RectTransform>().position;
+            Vector3 EndPos = transform.parent.Find("End").transform.position;
+            //movement: only if it's player2, rpcs for player1
 
 
-                if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    if (!(transform.position.x < screenBounds.x)) {
-                        Debug.LogError(Screen.width);
-                    Debug.LogError(transform.position);
-                        PV.RPC("moveLeft", RpcTarget.All, PV.ViewID);
+                    if (!(transform.position.x < EndPos.x)) {
+
+                    Debug.LogError("ME: " + transform.position.x + " screen: " + transform.parent.Find("End").transform.position);
+                    PV.RPC("moveLeft", RpcTarget.All, PV.ViewID);
                         transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
 
                             };
@@ -56,11 +59,12 @@ public class Plate : MonoBehaviour
                 }
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-                    Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
+      
+                float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
                     //
-                    if (platePos.x < panPos.x)
+                    if (platePos.x < panPos.x-panW*1.4f)
                     {
+                        Debug.LogError("ME: " + platePos.x + " Pan: " + panPos.x);
                         PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
 
                     }
