@@ -47,6 +47,8 @@ public class ExitStoveMinigame : MonoBehaviour
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		appliance.playerController.enabled = true;
+		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+		appliance.UIcamera.enabled = false;
 
 	}
 }

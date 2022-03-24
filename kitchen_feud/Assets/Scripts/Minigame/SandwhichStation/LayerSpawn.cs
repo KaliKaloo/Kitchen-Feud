@@ -23,6 +23,7 @@ public class LayerSpawn : MonoBehaviour
                     Vector3 newPosition = myParentObject.transform.position;
                     newPosition.z = 0;
                     myParentObject.transform.position = newPosition;
+          
 
                     Vector3 pos = new Vector3(Screen.width/2, y * spacing, 0) ;
                     GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
@@ -31,6 +32,7 @@ public class LayerSpawn : MonoBehaviour
                     newObject.GetComponent<SandwichMove>().LayerID = idList[y-1];
                     newObject.GetComponent<SandwichMove>().speed = Random.Range(550, 730);
                     newObject.GetComponent<SandwichMove>().imgAtlas = imgAtlas;
+                    transform.localPosition = new Vector3(0,0,0);
                 }
             }
         

@@ -18,7 +18,7 @@ public class StoveMovement : MonoBehaviour
     {
         xBound = Screen.width / 2;
         pot = GetComponent<Rigidbody2D>();
-        print(pot.position);
+        //print(pot.position);
         lowerBound = pot.position.x - xBound;
         upperBound = pot.position.x + xBound;
         pot.transform.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
