@@ -59,7 +59,7 @@ public class Plate : MonoBehaviour
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     Vector2 platePos = gameObject.GetComponent<RectTransform>().anchoredPosition;
                     //
-                    if (platePos.x + 370 < panPos.x)
+                    if (platePos.x < panPos.x)
                     {
                         PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
 
