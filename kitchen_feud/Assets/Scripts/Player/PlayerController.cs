@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	PlayerHolding playerHold;
 	public PhotonView view;
 
+	public int location;
+
 	void Start()
 	{
 		
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
+			location = myTeam;
 		}
 		
 		
@@ -82,6 +85,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
+		}
+        
+		if (location != 1){
+			Debug.Log(location);
 		}
 	}
 

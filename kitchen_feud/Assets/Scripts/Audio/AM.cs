@@ -15,7 +15,10 @@ public class AM : MonoBehaviour
     public GameObject otherP;
     public string Speaker;
     public int team;
-    // Start is called before the first frame update
+
+    public PlayerController player; 
+
+    public int location;
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -23,26 +26,33 @@ public class AM : MonoBehaviour
         randomInstance = menuController.Instance.x.ToString();
     }
     void Start()
-    {
+    {   
         PV = GetComponent<PhotonView>();
     }
 
+
+   
     private void OnTriggerEnter(Collider other)
     {
+         if (!player){
+            player = GameObject.Find("Local").GetComponent<PlayerController>();
+        }
         if (other.tag == "Player")
         {
             PhotonView pFV = other.GetComponent<PhotonView>();
             PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
             if (pFV.IsMine)
             {
+                engine.LeaveChannel();
+                engine.JoinChannel(randomInstance + "Path");
+                player.location = 3;
+
                 if (team == 1)
                 {
                     myTeam = myPlayerC.myTeam;
                     if (myPlayerC.entered1 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
-                        engine.LeaveChannel();
-                        engine.JoinChannel(randomInstance + "Path");
                         if (myTeam == 2)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
@@ -55,8 +65,7 @@ public class AM : MonoBehaviour
                     if (myPlayerC.entered2 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
-                        engine.LeaveChannel();
-                        engine.JoinChannel(randomInstance + "Path");
+                       
                         if (myTeam == 1)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);

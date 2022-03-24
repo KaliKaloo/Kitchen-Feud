@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     public GameObject otherP;
     public string Speaker;
     public int team;
+    public PlayerController player; 
+
 
 
     private void Awake()
@@ -42,9 +44,13 @@ public class AudioManager : MonoBehaviour
         
     }
 
- 
+   
+
     private void OnTriggerEnter(Collider other)
     {
+         if (!player){
+            player = GameObject.Find("Local").GetComponent<PlayerController>();
+		}
         if (other.tag == "Player")
         {
             PhotonView pFV = other.GetComponent<PhotonView>();
@@ -55,6 +61,7 @@ public class AudioManager : MonoBehaviour
                 if (team == 1)
                 {
                     pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
+                    
                 }
                 else
                 {
@@ -62,6 +69,8 @@ public class AudioManager : MonoBehaviour
                 }
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team" + team);
+                player.location = team;
+
 
                 if (myTeam != team)
                 {
