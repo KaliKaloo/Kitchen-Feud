@@ -13,7 +13,6 @@ public class SlotsController : MonoBehaviour {
     private int fullnessCount = 0;
 
     public void PutOnAppliance(GameObject heldObjArg) {
-        Debug.Log("click");
         if(fullnessCount < 3) {
             for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount == 0) {
@@ -50,10 +49,6 @@ public class SlotsController : MonoBehaviour {
             appliance.itemsOnTheAppliance.Remove(heldObjArg.GetComponent<IngredientItem>().item);
             pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
             pickable.onAppliance = false;
-            Debug.Log("items on the appliance: ");
-            foreach( var x in appliance.itemsOnTheAppliance) {
-                Debug.Log( x.ToString());
-            }
             fullnessCount--;
  
     }

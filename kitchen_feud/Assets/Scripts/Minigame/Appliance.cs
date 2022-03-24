@@ -54,10 +54,8 @@ public class Appliance : Interactable
         {
             if (pv.IsMine)
             {
-                Debug.Log("before");
                 if (player.transform.Find("slot").childCount!= 0)
                 {
-                    Debug.Log("after");
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                         player.GetComponent<PhotonView>().ViewID);
                 }
