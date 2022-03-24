@@ -25,6 +25,7 @@ public class Plate : MonoBehaviour
     void Update()
     {
 
+
         
 
             if (pan.friedFood != null)
@@ -52,7 +53,7 @@ public class Plate : MonoBehaviour
 
                     Debug.LogError("ME: " + transform.position.x + " screen: " + transform.parent.Find("End").transform.position);
                     PV.RPC("moveLeft", RpcTarget.All, PV.ViewID);
-                        transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
+                        //transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
 
                             };
             
@@ -65,9 +66,9 @@ public class Plate : MonoBehaviour
                     if (platePos.x < panPos.x-panW*1.4f)
                     {
                         Debug.LogError("ME: " + platePos.x + " Pan: " + panPos.x);
-                        PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
-
-                    }
+                    PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
+                    //transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
+                }
                  
                 }
             }
@@ -108,12 +109,12 @@ public class Plate : MonoBehaviour
     [PunRPC]
     void moveLeft(int viewID)
     {
-        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
+        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 90 * Time.deltaTime);
     }
     [PunRPC]
     void moveRight(int viewID)
     {
-        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 30 * Time.deltaTime);
+        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 90 * Time.deltaTime);
     }
     [PunRPC]
     void destP(int viewID)

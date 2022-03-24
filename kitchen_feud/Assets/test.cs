@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-/*
+
 public class test : MonoBehaviour,IPunObservable
 {
     Transform Stove;
@@ -38,10 +38,17 @@ public class test : MonoBehaviour,IPunObservable
             if (p)
             {
                 stream.SendNext(p.position);
+                stream.SendNext(p.GetComponent<RectTransform>().position);
+                stream.SendNext(p.GetComponent<RectTransform>().anchoredPosition);
+                Debug.LogError("Sent " + p.position + "RP " + p.GetComponent<RectTransform>().position +
+                    " AP " );
                 for (int i = 0; i < p.childCount; i++)
                 {
-                    Debug.LogError(p.GetChild(i).name);
-                    stream.SendNext(p.GetChild(i).position);
+                    if (p.GetChild(i).name != "pan")
+                    {
+                        //D
+                        stream.SendNext(p.GetChild(i).position);
+                    }
                 }
 
             }
@@ -74,9 +81,19 @@ public class test : MonoBehaviour,IPunObservable
             if (p)
             {
                 p.position = (Vector3)stream.ReceiveNext();
+                p.GetComponent<RectTransform>().position = (Vector3)stream.ReceiveNext();
+                p.GetComponent<RectTransform>().anchoredPosition = (Vector2)stream.ReceiveNext();
+                Debug.LogError("receivedP " + p.position + "RP " + p.GetComponent<RectTransform>().position
+                    + " AP " );
+
                 for (int i = 0; i < p.childCount; i++)
                 {
-                    p.GetChild(i).position = (Vector3)stream.ReceiveNext();
+                    if (p.GetChild(i).name != "pan")
+                    {
+                        p.GetChild(i).position = (Vector3)stream.ReceiveNext();
+                        //Debug.LogError("received " + p.GetChild(i).position);
+                    }
+
                 }
 
             }
@@ -102,4 +119,4 @@ public class test : MonoBehaviour,IPunObservable
         }
     }
 }
-        */
+        
