@@ -105,12 +105,8 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
-                    UIcamera.enabled = true;
-                    //Camera.enabled = false;
-                    // for Camera cam in player.GetComponentInChildren<Camera>.(){
-                    //     cam.enabled = false;
-                    // }
-                    player.GetComponentInChildren<Camera>().enabled = false;
+                    
+                   
 
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
@@ -118,6 +114,8 @@ public class Appliance : Interactable
                     playerRigidbody.isKinematic = true;
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
 
+                    UIcamera.enabled = true;
+                    player.GetComponentInChildren<Camera>().enabled = false;
                 }
 
 
