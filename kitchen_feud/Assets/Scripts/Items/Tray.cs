@@ -53,7 +53,7 @@ public class Tray : Interactable
             }
         } 
 
-        // IF HANDS EMPTY THEN SERVE OR PROMPT TO SERVE
+        // if not holding anything and tray has an order then prompt for serve
         else if (playerHold.items.Count == 0 && tray.trayID != "")
         {
             canvasController.TrayOrderOptions(tray.name);

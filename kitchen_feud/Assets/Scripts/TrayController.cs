@@ -41,10 +41,12 @@ public class TrayController : MonoBehaviour
 
         foreach (Transform slot in ts.transform)
         {
+            // Destroy order stand prefab
             if (slot.name == "OrderNumber(Clone)")
             {
                 Destroy(slot.gameObject);
             }
+            // else destroy items on tray
             else if (slot.childCount != 0)
             {
                 Destroy(slot.GetChild(0).gameObject);

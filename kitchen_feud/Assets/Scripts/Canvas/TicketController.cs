@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class TicketController : MonoBehaviour
 {
+    // assign tickets in inspector
+    // team 1 tickets
     public GameObject ticket1x1;
     public GameObject ticket2x1;
     public GameObject ticket3x1;
 
+    // team 2 tickets
     public GameObject ticket1x2;
     public GameObject ticket2x2;
     public GameObject ticket3x2;
 
-    // returns the corresponding tray given the tray name
+    // returns the corresponding ticket given the tray name
     public GameObject GetCorrectTicket(string trayName)
     {
         if (trayName == "Tray1-1")

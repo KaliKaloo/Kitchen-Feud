@@ -55,13 +55,14 @@ public class CanvasController : MonoBehaviour
         justClicked = EventSystem.current.currentSelectedGameObject;
     }
 
-    // Gets correct ticket based on tray
+    // Sets justClicked to correct ticket given the tray name
     public void TrayOrderOptions(string trayName)
     {
         orderMenu.SetActive(true);
         justClicked = ticketController.GetCorrectTicket(trayName);
     }
 
+    // serve corresponding order depending on what justClicked equals
     public void Serve(GameObject justClicked)
     {
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
