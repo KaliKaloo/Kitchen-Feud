@@ -40,11 +40,23 @@ public class playerMvmt : MonoBehaviour
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
             
-            // IF PLAYER IS MOVING
-			if (movement.magnitude > 0)
-				animator.SetBool("IsMoving", true);
-			else
-				animator.SetBool("IsMoving", false);
+            // if player moving forward
+			if (movement.z > 0)
+				animator.SetBool("IsMovingForwards", true);
+            // if player moving backward
+            else if (movement.z < 0) 
+				animator.SetBool("IsMovingBackwards", true);
+
+            //disable movement
+            else {
+                // disable backwards
+                if (animator.GetBool("IsMovingBackwards"))
+                    animator.SetBool("IsMovingBackwards", false);
+                // disable forwards
+                else if (animator.GetBool("IsMovingForwards"))
+				    animator.SetBool("IsMovingForwards", false);
+            }
+                
           
         }
         rotateSlider = GameObject.Find("Rotation");

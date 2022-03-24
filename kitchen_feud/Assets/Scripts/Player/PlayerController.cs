@@ -7,8 +7,6 @@ using System.IO;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
-	private Animator animator;
-
 	public Rigidbody player;
 	public Interactable focus;
 	public int myTeam;
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	{
 		if (PhotonNetwork.IsConnected)
 		{
-			animator = GetComponent<Animator>();
 			view = GetComponent<PhotonView>();
 			player = GetComponent<Rigidbody>();
 			playerHold = GetComponent<PlayerHolding>();
@@ -67,7 +64,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					if (interactable != null)
 					{
 						SetFocus(interactable, obj);
-						animator.SetBool("IsHolding", true);
 					}
 					// TEMPORARY - Player should not be able to drop item anywhere. 
 					// Drop only on counters, stove etcc
@@ -77,7 +73,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 						if (playerHold.items.Count != 0)
 						{
 							playerHold.dropItem();
-							animator.SetBool("IsHolding", false);
 						}
 						RemoveFocus();
 					}
