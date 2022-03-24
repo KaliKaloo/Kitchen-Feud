@@ -7,7 +7,7 @@ using System.IO;
 public class PanController : MonoBehaviour
 {
     public Transform pan;
-    public float clampDistance = 50f;
+    public float clampDistance = Screen.width/5;
     public Vector3 startLocation;
     public float mouseCursorSpeed;
     

@@ -67,7 +67,7 @@ public class fryingMinigame : MonoBehaviour
             Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
-            dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)friedFoodController.points);
+            dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)plate.totalPoints);
             //dishOfFoundDish.points = (int)friedFoodController.points;
             dishOfFoundDish.points = (int) plate.totalPoints;
             Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
