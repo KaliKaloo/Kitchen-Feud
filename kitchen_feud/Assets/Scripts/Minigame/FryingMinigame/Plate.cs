@@ -18,6 +18,7 @@ public class Plate : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
     }
 
@@ -45,7 +46,8 @@ public class Plate : MonoBehaviour
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     if (!(transform.position.x < screenBounds.x)) {
-
+                        Debug.LogError(Screen.width);
+                    Debug.LogError(transform.position);
                         PV.RPC("moveLeft", RpcTarget.All, PV.ViewID);
                         transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
 
@@ -97,7 +99,7 @@ public class Plate : MonoBehaviour
         me.pan = transform.parent.Find("PanGameObject").GetComponentInChildren<PanController>();
         me.totalPoints = 0;
         me.friedFood = me.pan.friedFood;
-        me.screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        //me.screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
     [PunRPC]
     void moveLeft(int viewID)

@@ -43,6 +43,7 @@ public class AM : MonoBehaviour
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
                         engine.LeaveChannel();
                         engine.JoinChannel(randomInstance + "Path");
+
                         if (myTeam == 2)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);

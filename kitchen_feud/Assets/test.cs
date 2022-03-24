@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+/*
 public class test : MonoBehaviour,IPunObservable
 {
     Transform Stove;
     Transform p;
-    // Start is called before the first frame update
+// Start is called before the first frame update
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+      
     {
 
         if (stream.IsWriting)
@@ -101,3 +102,4 @@ public class test : MonoBehaviour,IPunObservable
         }
     }
 }
+        */
