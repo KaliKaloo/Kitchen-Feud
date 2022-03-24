@@ -16,7 +16,7 @@ public class MusicManager : MonoBehaviour
     private bool played = false;
 
     public static MusicManager instance;
-    public int team;
+    public int playerTeam;
     
     void Awake(){
         if (instance == null){
@@ -43,9 +43,9 @@ public class MusicManager : MonoBehaviour
         
 
         if (!played){
-            if (team == 1){
+            if (playerTeam == 1){
                 track1.clip = k1track1;
-            }else if (team == 2){
+            }else if (playerTeam == 2){
                 track1.clip = k2track1;
             }
             track1.Play();
@@ -55,14 +55,13 @@ public class MusicManager : MonoBehaviour
     }
 
     public void changeBGM(int team){
-       StopAllCoroutines();
-       AudioClip newTrack;
-       if (team == 1){
-           newTrack = switched ? k1track1 : k1track2;
-       }else{
+        StopAllCoroutines();
+        AudioClip newTrack;
+        if (team == 1 || team == 3){
+            newTrack = switched ? k1track1 : k1track2;
+        }else{
             newTrack = switched ? k2track1 : k2track2;
-
-       }
+        }
        StartCoroutine(fadeTrack(newTrack, 1, 5));
     }
     public void changeBGM(AudioClip newTrack){

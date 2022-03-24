@@ -46,12 +46,14 @@ public class AM : MonoBehaviour
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Path");
                 player.location = 3;
-                MusicManager.instance.changeBGM(3);
 
 
                 if (team == 1)
                 {
                     myTeam = myPlayerC.myTeam;
+                    MusicManager.instance.changeBGM(3);
+
+
                     if (myPlayerC.entered1 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
@@ -64,6 +66,9 @@ public class AM : MonoBehaviour
                 else
                 {
                     myTeam = myPlayerC.myTeam;
+                    MusicManager.instance.changeBGM(4);
+
+
                     if (myPlayerC.entered2 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
