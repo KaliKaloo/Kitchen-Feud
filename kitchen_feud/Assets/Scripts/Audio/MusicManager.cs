@@ -34,18 +34,18 @@ public class MusicManager : MonoBehaviour
 
     void Update()
     {
-        if (timer.GetCurrentTime() == (int)(totalTime*0.3)){
+        // if (timer.GetCurrentTime() == (int)(totalTime*0.3)){
 
-            changeBGM(k1track2);
-            switched = true;
+        //     changeBGM(k1track2);
+        //     switched = true;
 
-        }
+        // }
         
 
         if (!played){
             if (playerTeam == 1){
                 track1.clip = k1track1;
-            }else if (playerTeam == 2){
+            }else if (playerTeam     == 2){
                 track1.clip = k2track1;
             }
             track1.Play();
@@ -62,36 +62,60 @@ public class MusicManager : MonoBehaviour
         }else{
             newTrack = switched ? k2track1 : k2track2;
         }
-       StartCoroutine(fadeTrack(newTrack, 1, 5));
+       StartCoroutine(fadeTrack(newTrack, 1, 10));
     }
-    public void changeBGM(AudioClip newTrack){
-       StopAllCoroutines();
-       StartCoroutine(fadeTrack(newTrack, 0.5f, 5));
-    }
+    // public void changeBGM(AudioClip newTrack){
+    //    StopAllCoroutines();
+    //    StartCoroutine(fadeTrack(newTrack, 0.5f, 5));
+    // }
 
 
 
     private IEnumerator fadeTrack(AudioClip newTrack, float volume, int FadeTime){
         float timeElapsed = 0;
-        if (newTrack != track1.clip){
-            track2.clip = newTrack;
-            track2.Play();
-            while (timeElapsed < FadeTime){
-                track1.volume = Mathf.Lerp(1, volume, timeElapsed/FadeTime);
-                track2.volume = Mathf.Lerp(0, volume, timeElapsed/FadeTime);
-                timeElapsed += Time.deltaTime;
-                yield return null;
+
+        if (track1.isPlaying){
+            if (newTrack != track1.clip){
+                track2.clip = newTrack;
+                track2.Play();
+                while (timeElapsed < FadeTime){
+                    track1.volume = Mathf.Lerp(1, 0, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(0, 1, timeElapsed/FadeTime);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+
+                }
+                
+                track1.Stop();
+            } else{
+                float currentVol = track1.volume;
+                while (timeElapsed < FadeTime){
+                    track1.volume = Mathf.Lerp(currentVol, 1, timeElapsed/FadeTime);
+                    yield return null;
+                }
 
             }
-            
-            track1.Stop();
-        } else{
-            float currentVol = track1.volume;
-            while (timeElapsed < FadeTime){
-                track1.volume = Mathf.Lerp(currentVol, 1, timeElapsed/FadeTime);
-                yield return null;
-            }
+        } else {
+             if (newTrack != track2.clip){
+                track1.clip = newTrack;
+                track1.Play();
+                while (timeElapsed < FadeTime){
+                    track2.volume = Mathf.Lerp(1, 0, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(0, 1, timeElapsed/FadeTime);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
 
+                }
+                
+                track1.Stop();
+            } else{
+                float currentVol = track1.volume;
+                while (timeElapsed < FadeTime){
+                    track2.volume = Mathf.Lerp(currentVol, 1, timeElapsed/FadeTime);
+                    yield return null;
+                }
+
+            }
         }
     }
 }
