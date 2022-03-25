@@ -36,7 +36,10 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         
         SandwichController = gameObject.GetComponentInParent<SandwichController>();
         platform.GetComponent<Image>().sprite = imgAtlas.GetSprite(LayerID);
+
     }   
+
+    
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -54,6 +57,7 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         if (!stopped) Move();
         if ((stopped) && (SandwichController.moving)) {
             stopped = false;
+           // Destroy(this.gameObject);
         }
     }
 
