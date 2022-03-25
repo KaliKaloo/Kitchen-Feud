@@ -143,7 +143,10 @@ public class Plate : MonoBehaviour
     [PunRPC]
     void destP(int viewID)
     {
-        Destroy(PhotonView.Find(viewID).gameObject);
+        if (PhotonView.Find(viewID).gameObject)
+        {
+            Destroy(PhotonView.Find(viewID).gameObject);
+        }
     }
     [PunRPC]
     void syncTotal(int viewiD, float points)

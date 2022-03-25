@@ -48,44 +48,42 @@ public class Appliance : Interactable
     public override void Interact()
     {
 
-        Debug.LogError("Clicked");
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
         SlotsController = gameObject.GetComponent<SlotsController>();
         //view control
         pv = player.GetComponent<PhotonView>();
-        Debug.LogError(myPv.OwnerActorNr + " ???A?A " + GameObject.Find("Local").GetPhotonView().OwnerActorNr);
         if(myPv.Owner != GameObject.Find("Local").GetPhotonView().Owner)
         {
-            Debug.LogError("???");
             PhotonView.Find(myPv.ViewID).TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
         }
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        if (myPv.IsMine)
+        if (pv.IsMine)
         {
            
-            if (!added)
-            {
-                Debug.LogError("PLSPLSLPSLPSLS");
-                myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
-
-                added = true;
-
-            }
+          
         }
-        Debug.LogError(isBeingInteractedWith);
 
         if (!isBeingInteractedWith)
         {
 
             if (pv.IsMine)
             {
+                if (!added && playerHold.items.Count != 0 || !added && dishOfFoundDish)
+                {
+                    Debug.LogError("Hello?>!>!");
+                    myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+
+                    added = true;
+
+                }
                 if (playerHold.items.Count != 0)
                 {
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                         player.GetComponent<PhotonView>().ViewID);
                 }
+              
                 else
                 {
                     cookDish();
@@ -130,7 +128,6 @@ public class Appliance : Interactable
                 else if (this.gameObject.tag == "Stove" && foundDish.stoveFry) {
                     if (!minigameCanvas2)
                     {
-                        Debug.LogError(isBeingInteractedWith);
                         canvas.gameObject.SetActive(false);
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), transform.position, transform.rotation);
                         myPv.RPC("falseForOthers", RpcTarget.Others,myPv.ViewID, minigameCanvas2.GetPhotonView().ViewID);
@@ -143,7 +140,6 @@ public class Appliance : Interactable
                     }
                     else
                     {
-                        Debug.LogError("Made iT");
                         minigameCanvas2.SetActive(true);
                     }
                 }
@@ -164,12 +160,22 @@ public class Appliance : Interactable
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
 
                 }
-                this.GetComponent<PhotonView>().RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID,minigameCanvas2.GetComponent<PhotonView>().ViewID);
+                //if (minigameCanvas2) { 
+                myPv.RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                //}
+                //else
+                //{
+                //    myPv.RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, 0);
+
+                //}
 
                 //instantiate the cooked dish
 
                 //cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0, 1, 0), transform.rotation);
-                myPv.RPC("cookedDishG", RpcTarget.All, myPv.ViewID, cookedDishLocal.GetComponent<PhotonView>().ViewID);
+                if (appliancePlayers.Count<2)
+                {
+                    myPv.RPC("cookedDishG", RpcTarget.All, myPv.ViewID, cookedDishLocal.GetComponent<PhotonView>().ViewID);
+                }
                 Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 
                 //setting gravity of cookedDish
@@ -181,16 +187,15 @@ public class Appliance : Interactable
                 myPv.RPC("doFd", RpcTarget.All, myPv.ViewID, cookedDish.GetComponent<PhotonView>().ViewID);
 
                 //delete the items the dish was cooked from
-                if (tag == "Stove" && appliancePlayers.Count > 1)
+                if (tag == "Stove" && foundDish.stoveFry &&appliancePlayers.Count > 1)
                 {
-                    Debug.LogError("Cleareed");
-                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 }
-                else if(tag != "Stove")
+                else if(!foundDish.stoveFry)
                 {
-                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 }
-                itemsOnTheAppliance.Clear();
+                //itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
 
 
@@ -247,13 +252,10 @@ public class Appliance : Interactable
     
 
     [PunRPC]
-    void SetToTrue(int viewID,int canvID)
+    void SetToTrue(int viewID)
     {
-        GameObject canv = PhotonView.Find(canvID).gameObject;
         Appliance appl = PhotonView.Find(viewID).GetComponent<Appliance>();
         if (appl.minigameCanvas2) {
-            Debug.LogError(appl.appliancePlayers[0]);
-            Debug.LogError(appl.appliancePlayers.Count);
             if(appl.appliancePlayers.Count > 1) {
                 appl.isBeingInteractedWith = true;
             }

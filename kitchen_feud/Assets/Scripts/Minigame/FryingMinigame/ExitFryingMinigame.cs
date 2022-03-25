@@ -24,13 +24,24 @@ public class ExitFryingMinigame : MonoBehaviour
 		canvas = GameObject.Find("Canvas");
 		appliance = transform.parent.parent.GetComponent<Appliance>();
 		minigameCanvas = transform.parent.gameObject;
-    }
+		//GameEvents.current.assignPoints += appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
+	}
 
     // Update is called once per frame
     void TaskOnClick()
     {
+		appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
+		PhotonView aV = appliance.GetComponent<PhotonView>();
         canvas.gameObject.SetActive(true);
-		//minigameCanvas.gameObject.SetActive(false);
+		PV.RPC("setAddedF", RpcTarget.All, aV.ViewID);
+		
+        //minigameCanvas.gameObject.SetActive(false);
+        if (appliance.itemsOnTheAppliance.Count > 0)
+        {
+            aV.RPC("clearItems", RpcTarget.All, aV.ViewID);
+
+
+		}
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
@@ -40,8 +51,12 @@ public class ExitFryingMinigame : MonoBehaviour
         //view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		PV.RPC("EnablePforAll", RpcTarget.All, view.ViewID);
 		PV.RPC("globalDestroy",RpcTarget.All,minigameCanvas.GetPhotonView().ViewID);
-		
-    }
+	
+		//GameEvents.current.assignPoints -= appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
+		//GameEvents.current = null;
+		//PV.RPC("setSetF", RpcTarget.All, aV.ViewID);
+
+	}
 	[PunRPC]
 	void globalDestroy(int viewID)
 	{
@@ -64,4 +79,17 @@ public class ExitFryingMinigame : MonoBehaviour
 
 				
     }
+	[PunRPC]
+	void setAddedF(int viewiD)
+    {
+		PhotonView.Find(viewiD).GetComponent<Appliance>().added = false;
+    }
+    [PunRPC]
+    private void setSetF(int viewiD)
+    {
+		Debug.Log("setF?");
+		Debug.Log(PhotonView.Find(viewiD).GetComponent<fryingMinigame>().set);
+		PhotonView.Find(viewiD).GetComponent<fryingMinigame>().set = false;
+    }
+
 }

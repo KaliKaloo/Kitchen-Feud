@@ -39,10 +39,11 @@ public class PanController : MonoBehaviour
         if (PV.IsMine)
         {
              temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
+            PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
         }
 
 
-        PV.RPC("setFoodVals", RpcTarget.All,temp.GetComponent<PhotonView>().ViewID,PV.ViewID);
+        
     
     }
 
@@ -53,7 +54,6 @@ public class PanController : MonoBehaviour
         {
            PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
         }
-            //Debug.LogError(pan.position);
             //if (appliance.appliancePlayers.Count > 0 && PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
             //{
             //    GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
@@ -87,7 +87,6 @@ public class PanController : MonoBehaviour
                 if (Input.GetAxis("Mouse X") < 0 && (startLocation.x - lastLocation.x < clampDistance || startLocation.x < lastLocation.x)
                     && friedFood.appliance.appliancePlayers.Count > 1)
                 {
-                    Debug.LogError("HERE???");
                     //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
                     pan.Translate(Vector3.left * mouseCursorSpeed * 2 * Time.deltaTime);
                 }
