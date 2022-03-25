@@ -82,7 +82,6 @@ public class FriedFoodController : MonoBehaviour
    [PunRPC]
     void flip(int viewID)
     {
-        Debug.LogError("hello");
         GameObject me = PhotonView.Find(viewID).gameObject;
         FriedFoodController FFC = me.GetComponent<FriedFoodController>();
         //me.GetComponent<Rigidbody2D>().gravityScale = 1f;

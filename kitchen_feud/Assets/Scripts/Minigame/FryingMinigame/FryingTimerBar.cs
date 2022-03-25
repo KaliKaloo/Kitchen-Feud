@@ -36,7 +36,6 @@ public class FryingTimerBar : MonoBehaviour
             }
 
             PV.RPC("syncSlider", RpcTarget.All, PV.ViewID, time);
-            Debug.LogError("HERE");
         }
         
     }
@@ -63,7 +62,6 @@ public class FryingTimerBar : MonoBehaviour
     [PunRPC]
     void syncSlider(int viewID,float time)
     {
-        Debug.LogError("IN RPC");
         PhotonView.Find(viewID).GetComponent<FryingTimerBar>().slider.value = time;
     }
 }

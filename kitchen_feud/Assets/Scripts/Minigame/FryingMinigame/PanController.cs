@@ -48,63 +48,71 @@ public class PanController : MonoBehaviour
 
     void Update()
     {
-        //Debug.LogError(pan.position);
-        if (appliance.appliancePlayers.Count > 0 && PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
+        if(appliance.appliancePlayers.Count > 0) { 
+        if (PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != PV.OwnerActorNr)
         {
-            GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
+           PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
         }
-        //do that all if it's player1, add rpcs to player2
-        if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
-         appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
-        {
-            mouseCursorSpeed = abs(Input.GetAxis("Mouse X") / Time.deltaTime);
-            if (speeds.Count == speedQueueCapacity)
+            //Debug.LogError(pan.position);
+            //if (appliance.appliancePlayers.Count > 0 && PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
+            //{
+            //    GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
+            //}
+            //do that all if it's player1, add rpcs to player2
+            if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
+             appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-
-                while (speeds.Count > 0)
+                mouseCursorSpeed = abs(Input.GetAxis("Mouse X") / Time.deltaTime);
+                if (speeds.Count == speedQueueCapacity)
                 {
-                    avgSpeeds += speeds.Dequeue();
+
+                    while (speeds.Count > 0)
+                    {
+                        avgSpeeds += speeds.Dequeue();
+                    }
+                    avgSpeeds = avgSpeeds / speedQueueCapacity;
+                    haveAvg = true;
+
+                    speeds.Clear();
+                    //Debug.Log(avgSpeeds);
                 }
-                avgSpeeds = avgSpeeds / speedQueueCapacity;
-                haveAvg = true;
-
-                speeds.Clear();
-                //Debug.Log(avgSpeeds);
-            }
-            else
-            {
-                speeds.Enqueue(mouseCursorSpeed);
-            }
-
-
-            Vector3 lastLocation = pan.position;
-
-            if (Input.GetAxis("Mouse X") < 0 && (startLocation.x - lastLocation.x < clampDistance || startLocation.x < lastLocation.x)
-                && friedFood.appliance.appliancePlayers.Count > 1)
-            {
-                //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
-                pan.Translate(Vector3.left * mouseCursorSpeed*2 * Time.deltaTime);
-            }
-            if (Input.GetAxis("Mouse X") > 0 && (lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)
-                && friedFood.appliance.appliancePlayers.Count > 1)
-            {
-                //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
-                pan.Translate(Vector3.right * mouseCursorSpeed*2 * Time.deltaTime);
-                if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false)
+                else
                 {
-                    pointsAssigned = true;
-                    friedFood.FlipPancake();
+                    speeds.Enqueue(mouseCursorSpeed);
                 }
-            }
 
-            if (foodInstancesCounter < foodInstances && friedFood == null)
-            {
-                Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-                var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
-                PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
-                foodInstancesCounter++;
-                pointsAssigned = false;
-                Debug.Log(foodInstancesCounter);
+
+                Vector3 lastLocation = pan.position;
+
+                if (Input.GetAxis("Mouse X") < 0 && (startLocation.x - lastLocation.x < clampDistance || startLocation.x < lastLocation.x)
+                    && friedFood.appliance.appliancePlayers.Count > 1)
+                {
+                    Debug.LogError("HERE???");
+                    //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
+                    pan.Translate(Vector3.left * mouseCursorSpeed * 2 * Time.deltaTime);
+                }
+                if (Input.GetAxis("Mouse X") > 0 && (lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)
+                    && friedFood.appliance.appliancePlayers.Count > 1)
+                {
+                    //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
+                    pan.Translate(Vector3.right * mouseCursorSpeed * 2 * Time.deltaTime);
+                    if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false)
+                    {
+                        pointsAssigned = true;
+                        friedFood.FlipPancake();
+                    }
+                }
+
+                if (foodInstancesCounter < foodInstances && friedFood == null)
+                {
+                    Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                    var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
+                    PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
+                    foodInstancesCounter++;
+                    pointsAssigned = false;
+                    Debug.Log(foodInstancesCounter);
+                }
+
             }
         }
     }

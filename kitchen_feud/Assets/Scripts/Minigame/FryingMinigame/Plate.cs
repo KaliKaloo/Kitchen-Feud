@@ -26,53 +26,72 @@ public class Plate : MonoBehaviour
     {
 
 
-        
 
-            if (pan.friedFood != null)
+        if (pan.friedFood != null)
+        {
+            friedFood = pan.friedFood;
+            if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
             {
-                friedFood = pan.friedFood;
-                if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
-                {
-                    PV.RPC("destP", RpcTarget.All, friedFood.GetComponent<PhotonView>().ViewID);
-             
+                PV.RPC("destP", RpcTarget.All, friedFood.GetComponent<PhotonView>().ViewID);
+
             }
         }
+        if (appliance.appliancePlayers.Count > 1)
+        {
+            if (PhotonView.Find(appliance.appliancePlayers[1]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
+            {
+                GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
+            }
+            if (PV.Owner != PhotonView.Find(appliance.appliancePlayers[1]).Owner)
+            {
+                PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
+            }
 
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
-            appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
+                appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-            Vector2 panPos = pan.transform.parent.gameObject.transform.parent.GetComponent<RectTransform>().position;
-            Vector2 platePos = gameObject.GetComponent<RectTransform>().position;
-            Vector3 EndPos = transform.parent.Find("End").transform.position;
-            //movement: only if it's player2, rpcs for player1
 
-
-            if (Input.GetKey(KeyCode.LeftArrow))
+                Vector2 panPos = pan.transform.parent.gameObject.transform.parent.GetComponent<RectTransform>().position;
+                Vector2 platePos = gameObject.GetComponent<RectTransform>().position;
+                Vector3 EndPos = transform.parent.Find("End").transform.position;
+                //movement: only if it's player2, rpcs for player1
+                if (!(transform.position.x < EndPos.x))
                 {
-                    if (!(transform.position.x < EndPos.x)) {
 
-                    Debug.LogError("ME: " + transform.position.x + " screen: " + transform.parent.Find("End").transform.position);
-                    PV.RPC("moveLeft", RpcTarget.All, PV.ViewID);
-                        //transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
-
-                            };
-            
-                }
-                if (Input.GetKey(KeyCode.RightArrow))
-                {
-      
-                float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
-                    //
-                    if (platePos.x < panPos.x-panW*1.4f)
+                    if (Input.GetKey(KeyCode.LeftArrow))
                     {
-                        Debug.LogError("ME: " + platePos.x + " Pan: " + panPos.x);
-                    PV.RPC("moveRight", RpcTarget.All, PV.ViewID);
-                    //transform.Translate(Vector3.left * 10 * 30 * Time.deltaTime);
+
+
+
+
+                        transform.Translate(Vector3.left * 10 * 50 * Time.deltaTime);
+                        //PV.RPC("moveLeft", RpcTarget.Others, PV.ViewID);
+
+
+                    };
+
                 }
-                 
+                float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
+                if (platePos.x < panPos.x - panW)
+                {
+                    if (Input.GetKey(KeyCode.RightArrow))
+                    {
+
+
+                        //
+
+                        // Debug.LogError("ME: " + platePos.x + " Pan: " + panPos.x);
+
+                        transform.Translate(Vector3.right * 10 * 50 * Time.deltaTime);
+                        //Debug.LogError("Hello");
+                        //PV.RPC("moveRight", RpcTarget.Others, PV.ViewID);
+
+                    }
+
                 }
             }
         }
+    }
        
     
  
@@ -109,18 +128,24 @@ public class Plate : MonoBehaviour
     [PunRPC]
     void moveLeft(int viewID)
     {
-        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 90 * Time.deltaTime);
+        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 45 * Time.deltaTime);
+        //PhotonView.Find(viewID).GetComponent<Rigidbody2D>().MovePosition(Vector2.left);
     }
     [PunRPC]
     void moveRight(int viewID)
     {
-        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 90 * Time.deltaTime);
+        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 45 * Time.deltaTime);
+        //PhotonView.Find(viewID).GetComponent<Rigidbody2D>().MovePosition(Vector2.right);
+        //PhotonView.Find(viewID).transform.GetComponent<RectTransform>().anchoredPosition = transform.GetComponent<RectTransform>().anchoredPosition;
+        //PhotonView.Find(viewID).transform.position = transform.position;
+        //Debug.Log(transform.GetComponent<RectTransform>().anchoredPosition);
     }
     [PunRPC]
     void destP(int viewID)
     {
         Destroy(PhotonView.Find(viewID).gameObject);
     }
+    [PunRPC]
     void syncTotal(int viewiD, float points)
     {
         PhotonView.Find(viewiD).GetComponent<Plate>().totalPoints += points;

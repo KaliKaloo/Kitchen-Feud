@@ -55,9 +55,10 @@ public class Appliance : Interactable
         SlotsController = gameObject.GetComponent<SlotsController>();
         //view control
         pv = player.GetComponent<PhotonView>();
-
-        if (PhotonView.Find(myPv.ViewID).Owner != PhotonNetwork.LocalPlayer)
+        Debug.LogError(myPv.OwnerActorNr + " ???A?A " + GameObject.Find("Local").GetPhotonView().OwnerActorNr);
+        if(myPv.Owner != GameObject.Find("Local").GetPhotonView().Owner)
         {
+            Debug.LogError("???");
             PhotonView.Find(myPv.ViewID).TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
         }
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
@@ -66,7 +67,7 @@ public class Appliance : Interactable
            
             if (!added)
             {
-
+                Debug.LogError("PLSPLSLPSLPSLS");
                 myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
 
                 added = true;
