@@ -33,12 +33,16 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	void TaskOnClick(){
 		GameEvents.current.assignPointsEventFunction();
-		pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
 		topBar.SetActive(true);
+		var xBound = Screen.width / 2;
+        var lowerBound = pot.position.x - xBound;
+        var upperBound = pot.position.x + xBound;
+        pot.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
+
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 
@@ -47,6 +51,9 @@ public class ExitStoveMinigame : MonoBehaviour
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		appliance.playerController.enabled = true;
+		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+		appliance.UIcamera.enabled = false;
+		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}
 }

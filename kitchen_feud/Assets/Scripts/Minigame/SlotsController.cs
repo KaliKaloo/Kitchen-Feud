@@ -49,10 +49,6 @@ public class SlotsController : MonoBehaviour {
             appliance.itemsOnTheAppliance.Remove(heldObjArg.GetComponent<IngredientItem>().item);
             pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
             pickable.onAppliance = false;
-            Debug.Log("items on the appliance: ");
-            foreach( var x in appliance.itemsOnTheAppliance) {
-                Debug.Log( x.ToString());
-            }
             fullnessCount--;
  
     }

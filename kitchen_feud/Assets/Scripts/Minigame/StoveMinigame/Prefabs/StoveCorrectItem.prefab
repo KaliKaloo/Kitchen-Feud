@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1515584413280201187}
   - component: {fileID: 6296033949197010674}
   - component: {fileID: -6183318412086817235}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: StoveCorrectItem
   m_TagString: Ingredient
   m_Icon: {fileID: 0}

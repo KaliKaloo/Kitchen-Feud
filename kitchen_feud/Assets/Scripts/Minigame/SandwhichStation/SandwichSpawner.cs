@@ -27,4 +27,11 @@ public class SandwichSpawner : MonoBehaviour
          
         return newObject;
     }
+
+    public void DestroySandwich(){
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }
