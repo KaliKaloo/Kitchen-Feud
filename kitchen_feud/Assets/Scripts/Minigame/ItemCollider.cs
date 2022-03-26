@@ -17,7 +17,7 @@ public class ItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag == "Ingredient")
+        if (collision.CompareTag("Ingredient"))
         {
             // Get player
             GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;

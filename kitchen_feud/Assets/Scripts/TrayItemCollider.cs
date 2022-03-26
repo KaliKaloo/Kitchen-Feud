@@ -21,37 +21,42 @@ public class TrayItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        // Get player
         GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;
-        PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-        GameObject objectHolding = playerHold.heldObj;
-
-
-        if (playerHold.items.Count == 1)
+        if (collision.CompareTag("Ingredient") && player.name == "Local")
         {
-            //add object holding to tray slot if tray slot empty
-            if (tray.ServingTray.Count < 4)
-            {
-                //foreach (Transform slot in slots)
-                for (int i = 0; i < slots.Count; i++)
-                {
-                    if (slots[i].transform.childCount == 0)
-                    {
-                        playerHold.dropItem();
+            // Get player
+            Debug.Log(player.name);
+            PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+            GameObject objectHolding = playerHold.heldObj;
 
-                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
-                        objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                        break;
-                    }
-                }
-                pickable = objectHolding.GetComponent<pickableItem>();
-                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
-                if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+
+            if (playerHold.items.Count == 1)
+            {
+                //add object holding to tray slot if tray slot empty
+                if (tray.ServingTray.Count < 4)
                 {
-                    parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                    //foreach (Transform slot in slots)
+                    for (int i = 0; i < slots.Count; i++)
+                    {
+                        if (slots[i].transform.childCount == 0)
+                        {
+                            playerHold.dropItem();
+
+                            objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
+                            objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                            break;
+                        }
+                    }
+                    pickable = objectHolding.GetComponent<pickableItem>();
+                    pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
+                    if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+                    {
+                        parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                    }
                 }
             }
         }
+
     }
 
     [PunRPC]

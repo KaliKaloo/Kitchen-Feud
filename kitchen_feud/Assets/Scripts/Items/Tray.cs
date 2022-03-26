@@ -27,34 +27,8 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (playerHold.items.Count == 1)
-        {
-            //add object holding to tray slot if tray slot empty
-            if (tray.ServingTray.Count < 4)
-            {
-                //foreach (Transform slot in slots)
-                for (int i =0;i<slots.Count;i++)
-                { 
-                    if (slots[i].transform.childCount == 0)
-                    {
-                        playerHold.dropItem();
-
-                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
-                        objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                        break;
-                    }
-                }
-                pickable = objectHolding.GetComponent<pickableItem>();
-                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
-                if (objectHolding && player.GetComponent<PhotonView>().IsMine)
-                {
-                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
-                }
-            }
-        } 
-
         // if not holding anything and tray has an order then prompt for serve
-        else if (playerHold.items.Count == 0 && tray.trayID != "")
+        if (playerHold.items.Count == 0 && tray.trayID != "")
         {
             canvasController.TrayOrderOptions(tray.name);
         }
