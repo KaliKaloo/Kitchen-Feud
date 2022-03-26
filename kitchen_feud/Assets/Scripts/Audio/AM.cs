@@ -39,7 +39,7 @@ public class AM : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Path");
-                MusicManager.instance.changeBGM(3, 10, 1, 0);
+                MusicManager.instance.changeBGM(3, 10, 0, 1);
 
 
 

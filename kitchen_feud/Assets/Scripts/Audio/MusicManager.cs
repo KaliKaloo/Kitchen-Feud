@@ -40,7 +40,8 @@ public class MusicManager : MonoBehaviour
     void Update()
     {
         if (timer.GetCurrentTime() == (int)(totalTime*0.3)){
-            changeBGM(location, 10, 1, 0);
+            if(location == 1 || location == 2)
+                changeBGM(location, 10, 1, 0);
             switched = true;
 
         }
@@ -59,7 +60,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void changeBGM(int team, int FadeTime, float startVol, float endVol){
+    public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
         AudioClip newTrack;
         if (team == 1){
@@ -70,12 +71,15 @@ public class MusicManager : MonoBehaviour
             newTrack = hallway;
         }
         firstLoop = true;
-        StartCoroutine(fadeTrack(newTrack, FadeTime, startVol, endVol, firstLoop));
+        StartCoroutine(fadeTrack(newTrack, FadeTime, minVol, maxVol, firstLoop));
     }
 
 
-    private IEnumerator fadeTrack(AudioClip newTrack, int FadeTime, float startVol, float endVol, bool firstLoop){
+    private IEnumerator fadeTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol, bool firstLoop){
         float timeElapsed = 0;
+        float track1CurrentVol = 0;
+        float track2CurrentVol = 0;
+
         if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
             if (newTrack != track1.clip){
                 track2.clip = newTrack;
@@ -83,10 +87,13 @@ public class MusicManager : MonoBehaviour
                 if (firstLoop){
                     fadingTrack = 1;
                     firstLoop = false;
+                    track1CurrentVol = track1.volume;
+                    track2CurrentVol = track2.volume;
+
                 }   
                 while (timeElapsed < FadeTime){
-                    track1.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
-                    track2.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(track1CurrentVol, minVol, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(track2CurrentVol, maxVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
@@ -99,14 +106,15 @@ public class MusicManager : MonoBehaviour
              if (newTrack != track2.clip){
                 track1.clip = newTrack;
                 track1.Play();
-                // fadingTrack = 2;
-                 if (firstLoop){
+                if (firstLoop){
                     fadingTrack = 2;
                     firstLoop = false;
+                    track1CurrentVol = track1.volume;
+                    track2CurrentVol = track2.volume;
                 }  
                 while (timeElapsed < FadeTime){
-                    track2.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
-                    track1.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(track2CurrentVol, minVol, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(track1CurrentVol, maxVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
