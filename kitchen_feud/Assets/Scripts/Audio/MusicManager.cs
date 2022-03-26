@@ -15,6 +15,8 @@ public class MusicManager : MonoBehaviour
     private bool switched = false;
     private bool played = false;
 
+    private int lastPlayed;
+
     public static MusicManager instance;
     public int playerTeam;
     
@@ -51,10 +53,13 @@ public class MusicManager : MonoBehaviour
             track1.Play();
             track1.loop = true;
             played = true;
+            lastPlayed = true;
+
+
         }
     }
 
-    public void changeBGM(int team){
+    public void changeBGM(int team, int FadeTime, float startVol, float endVol){
         StopAllCoroutines();
         AudioClip newTrack;
         if (team == 1){
@@ -64,34 +69,38 @@ public class MusicManager : MonoBehaviour
         }else{
             newTrack = hallway;
         }
-       StartCoroutine(fadeTrack(newTrack, 10));
+        StartCoroutine(fadeTrack(newTrack, nextTrackis1, FadeTime, startVol, endVol));
     }
 
 
-    private IEnumerator fadeTrack(AudioClip newTrack, int FadeTime){
+    private IEnumerator fadeTrack(AudioClip newTrack, bool nextTrackis1, int FadeTime, float startVol, float endVol){
         float timeElapsed = 0;
-
-        if (track1.isPlaying){
+        // Debug.Log(nextTrackis1);
+        if (!nextTrackis1){
             if (newTrack != track1.clip){
+                lastPlayed = 2;
                 track2.clip = newTrack;
                 track2.Play();
                 while (timeElapsed < FadeTime){
-                    track1.volume = Mathf.Lerp(1, 0, timeElapsed/FadeTime);
-                    track2.volume = Mathf.Lerp(0, 1, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
                 }
                 track1.Stop();
+                
             }
 
         } else {
              if (newTrack != track2.clip){
+                lastPlayed = 1;
+
                 track1.clip = newTrack;
                 track1.Play();
                 while (timeElapsed < FadeTime){
-                    track2.volume = Mathf.Lerp(1, 0, timeElapsed/FadeTime);
-                    track1.volume = Mathf.Lerp(0, 1, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
