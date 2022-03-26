@@ -150,7 +150,7 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 1
   m_Points:
   - {x: 0.5158012, y: -0.34300816}
   - {x: 1.5158012, y: -0.34300816}
