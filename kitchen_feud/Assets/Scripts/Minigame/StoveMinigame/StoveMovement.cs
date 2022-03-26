@@ -11,12 +11,14 @@ public class StoveMovement : MonoBehaviour
 
     private float lowerBound;
     private float upperBound;
-
+    public Camera UICamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        xBound = Screen.width / 2;
+        int chosenY = (int)(2f * UICamera.orthographicSize);
+        xBound = (int)(chosenY  * UICamera.aspect)/2;
+         
         pot = GetComponent<Rigidbody2D>();
         //print(pot.position);
         lowerBound = pot.position.x - xBound;
