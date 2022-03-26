@@ -46,8 +46,8 @@ public class TrayController : MonoBehaviour
             {
                 Destroy(slot.gameObject);
             }
-            // else destroy items on tray
-            else if (slot.childCount != 0)
+            // else destroy items on tray, except from item collider
+            else if (slot.childCount != 0 && slot.name != "ItemCollider")
             {
                 Destroy(slot.GetChild(0).gameObject);
             }
