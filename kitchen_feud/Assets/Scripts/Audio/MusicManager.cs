@@ -14,12 +14,10 @@ public class MusicManager : MonoBehaviour
 
     private bool switched = false;
     private bool played = false;
-
     private int fadingTrack;
     private bool firstLoop;
 
     public static MusicManager instance;
-    // public int playerTeam;
     public int location;
 
     
@@ -43,7 +41,6 @@ public class MusicManager : MonoBehaviour
             if(location == 1 || location == 2)
                 changeBGM(location, 10, 1, 0);
             switched = true;
-
         }
         
 
@@ -53,13 +50,22 @@ public class MusicManager : MonoBehaviour
             }else if (location == 2){
                 track1.clip = k2track1;
             }
-            track1.Play();
+            track1.volume = 0;
+            track1.Play();        
             track1.loop = true;
             played = true;
-
+            StartCoroutine(fadeTrack(track1, 10, 0, 1));
         }
     }
 
+    private IEnumerator fadeTrack(AudioSource source, int FadeTime, float startVol, float endVol){
+        float timeElapsed = 0;
+        while (timeElapsed < FadeTime){
+            track1.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
         AudioClip newTrack;
@@ -71,11 +77,11 @@ public class MusicManager : MonoBehaviour
             newTrack = hallway;
         }
         firstLoop = true;
-        StartCoroutine(fadeTrack(newTrack, FadeTime, minVol, maxVol, firstLoop));
+        StartCoroutine(switchTrack(newTrack, FadeTime, minVol, maxVol, firstLoop));
     }
 
 
-    private IEnumerator fadeTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol, bool firstLoop){
+    private IEnumerator switchTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol, bool firstLoop){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
