@@ -19,7 +19,9 @@ public class MusicManager : MonoBehaviour
     private bool firstLoop;
 
     public static MusicManager instance;
-    public int playerTeam;
+    // public int playerTeam;
+    public int location;
+
     
     void Awake(){
         if (instance == null){
@@ -37,18 +39,17 @@ public class MusicManager : MonoBehaviour
 
     void Update()
     {
-        // if (timer.GetCurrentTime() == (int)(totalTime*0.3)){
+        if (timer.GetCurrentTime() == (int)(totalTime*0.3)){
+            changeBGM(location, 10, 1, 0);
+            switched = true;
 
-        //     changeBGM(k1track2);
-        //     switched = true;
-
-        // }
+        }
         
 
         if (!played){
-            if (playerTeam == 1){
+            if (location == 1){
                 track1.clip = k1track1;
-            }else if (playerTeam == 2){
+            }else if (location == 2){
                 track1.clip = k2track1;
             }
             track1.Play();

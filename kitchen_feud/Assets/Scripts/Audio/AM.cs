@@ -16,9 +16,6 @@ public class AM : MonoBehaviour
     public string Speaker;
     public int team;
 
-    public PlayerController player; 
-
-    public int location;
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -34,9 +31,6 @@ public class AM : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-         if (!player){
-            player = GameObject.Find("Local").GetComponent<PlayerController>();
-        }
         if (other.tag == "Player")
         {
             PhotonView pFV = other.GetComponent<PhotonView>();
@@ -45,8 +39,7 @@ public class AM : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Path");
-                player.location = 3;
-                MusicManager.instance.changeBGM(3, 10, 0.8f, 0.2f);
+                MusicManager.instance.changeBGM(3, 10, 1, 0);
 
 
 
