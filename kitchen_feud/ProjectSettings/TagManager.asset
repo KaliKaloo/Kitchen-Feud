@@ -19,6 +19,8 @@ TagManager:
   - Kick
   - Speaker1
   - Speaker2
+  - ItemCollider
+  - OrderTower
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+public class PickupLock
+{
+    public static bool pickupLock = false;
+
+    public void Lock()
+    {
+        pickupLock = true;
+
+    }
+    public void Unlock()
+    {
+        pickupLock = false;
+    }
+
+    public bool GetLock()
+    {
+        return pickupLock;
+    }
+
+}
 public class PlayerHolding : MonoBehaviour
 {
     public int holdingLimit = 1;
@@ -14,47 +34,63 @@ public class PlayerHolding : MonoBehaviour
     public PhotonView view;
     public bool itemdropped = false;
 
+    public bool itemLock = false;
+    PickupLock pickupLock = new PickupLock();
+
     // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {
+        // if serve canvas is enabled then dont let player pickup item
+        if (!pickupLock.GetLock())
+        {
+            StartCoroutine(LockPickup());
 
-    
-        if (view.IsMine)
-        {
-            if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-                
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-                
-                if (heldObj.GetComponent<Rigidbody>())
+            if (view.IsMine)
+            {
+                if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
-         
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-                
-                }
-            }
-        else
-        {
-            obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                items.Add(item);
-                heldObj = obj;
-                // move object to slot
-               
-                if (heldObj.GetComponent<Rigidbody>())
-                {
-       
-                    this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
-                        heldObj.GetComponent<PhotonView>().ViewID);
-           
-                }
-               
-            }
 
+                    items.Add(item);
+                    heldObj = obj;
+                    // move object to slot
+
+                    if (heldObj.GetComponent<Rigidbody>())
+                    {
+
+                        this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
+                            heldObj.GetComponent<PhotonView>().ViewID);
+
+                    }
+                }
+                else
+                {
+                    obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+                    items.Add(item);
+                    heldObj = obj;
+                    // move object to slot
+
+                    if (heldObj.GetComponent<Rigidbody>())
+                    {
+
+                        this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All,
+                            heldObj.GetComponent<PhotonView>().ViewID);
+
+                    }
+
+                }
+
+            }
         }
+    }
+
+    IEnumerator LockPickup()
+    {
+        itemLock = true;
+        // wait 0.5 seconds before can do anything else
+        yield return new WaitForSeconds(0.5f);
+        itemLock = false;
+
     }
 
     public void dropItem()

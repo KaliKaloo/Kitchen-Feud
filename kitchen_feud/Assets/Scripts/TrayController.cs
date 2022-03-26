@@ -42,12 +42,13 @@ public class TrayController : MonoBehaviour
         foreach (Transform slot in ts.transform)
         {
             // Destroy order stand prefab
-            if (slot.name == "OrderNumber(Clone)")
+            if (slot.tag == "OrderTower")
             {
                 Destroy(slot.gameObject);
             }
+
             // else destroy items on tray, except from item collider
-            else if (slot.childCount != 0 && slot.name != "ItemCollider")
+            if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
                 Destroy(slot.GetChild(0).gameObject);
             }
