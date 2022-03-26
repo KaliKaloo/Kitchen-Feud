@@ -15,7 +15,8 @@ public class MusicManager : MonoBehaviour
     private bool switched = false;
     private bool played = false;
 
-    private int lastPlayed;
+    private int fadingTrack;
+    private bool firstLoop;
 
     public static MusicManager instance;
     public int playerTeam;
@@ -53,8 +54,6 @@ public class MusicManager : MonoBehaviour
             track1.Play();
             track1.loop = true;
             played = true;
-            lastPlayed = true;
-
 
         }
     }
@@ -69,18 +68,21 @@ public class MusicManager : MonoBehaviour
         }else{
             newTrack = hallway;
         }
-        StartCoroutine(fadeTrack(newTrack, nextTrackis1, FadeTime, startVol, endVol));
+        firstLoop = true;
+        StartCoroutine(fadeTrack(newTrack, FadeTime, startVol, endVol, firstLoop));
     }
 
 
-    private IEnumerator fadeTrack(AudioClip newTrack, bool nextTrackis1, int FadeTime, float startVol, float endVol){
+    private IEnumerator fadeTrack(AudioClip newTrack, int FadeTime, float startVol, float endVol, bool firstLoop){
         float timeElapsed = 0;
-        // Debug.Log(nextTrackis1);
-        if (!nextTrackis1){
+        if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
             if (newTrack != track1.clip){
-                lastPlayed = 2;
                 track2.clip = newTrack;
                 track2.Play();
+                if (firstLoop){
+                    fadingTrack = 1;
+                    firstLoop = false;
+                }   
                 while (timeElapsed < FadeTime){
                     track1.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
                     track2.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
@@ -94,10 +96,13 @@ public class MusicManager : MonoBehaviour
 
         } else {
              if (newTrack != track2.clip){
-                lastPlayed = 1;
-
                 track1.clip = newTrack;
                 track1.Play();
+                // fadingTrack = 2;
+                 if (firstLoop){
+                    fadingTrack = 2;
+                    firstLoop = false;
+                }  
                 while (timeElapsed < FadeTime){
                     track2.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
                     track1.volume = Mathf.Lerp(endVol, startVol, timeElapsed/FadeTime);
