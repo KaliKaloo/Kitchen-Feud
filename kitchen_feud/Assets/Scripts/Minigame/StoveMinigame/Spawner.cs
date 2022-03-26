@@ -72,7 +72,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] public GameObject correctItem;
     public Appliance appliance;
-
+    public Camera UICamera;
 
     public DishSO dishSO;
     private int chosenX;
@@ -97,8 +97,12 @@ public class Spawner : MonoBehaviour
         stoveMinigameCounter.StartGame();
         
         stoveScore.ResetValues();
-        chosenX = Screen.width;
-        chosenY = Screen.height;
+        //Camera cam = Camera.main;
+        //float height = 2f * UICamera.orthographicSize;
+        //float width = height * UICamera.aspect;
+        
+        chosenY = (int)(2f * UICamera.orthographicSize);
+        chosenX = (int)(chosenY  * UICamera.aspect);
         backButton.SetActive(false);
     }
 
@@ -155,7 +159,7 @@ public class Spawner : MonoBehaviour
             obj.GetComponent<Image>().sprite = currentIngredient;
 
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
-
+           
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
            
@@ -182,7 +186,6 @@ public class Spawner : MonoBehaviour
                 parentCanvas.transform);
 
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
-
             obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }
