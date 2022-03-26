@@ -70,14 +70,11 @@ public class Appliance : Interactable
 
             if (pv.IsMine)
             {
-                if (!added && playerHold.items.Count != 0 || !added && dishOfFoundDish)
-                {
-                    Debug.LogError("Hello?>!>!");
-                    myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+                //if (foundDish && foundDish.stoveFry)
+                //{
+                  
 
-                    added = true;
-
-                }
+                //}
                 if (playerHold.items.Count != 0)
                 {
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
@@ -105,6 +102,14 @@ public class Appliance : Interactable
             if (foundMatchingDish)
             {
 
+                if (foundDish.stoveFry)
+                {
+                    Debug.LogError("Hello?>!>!");
+                    myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
+
+                    added = true;
+                }
+                
                 Debug.Log("Recipe found: " + foundDish.name + " - " + foundDish.dishID);
 
 
@@ -193,7 +198,9 @@ public class Appliance : Interactable
                 }
                 else if(!foundDish.stoveFry)
                 {
-                    this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                    myPv.RPC("clearItems", RpcTarget.All, myPv.ViewID);
+                    myPv.RPC("clearPlayers", RpcTarget.All, myPv.ViewID);
+
                 }
                 //itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
@@ -340,6 +347,11 @@ public class Appliance : Interactable
         canv.GetComponentInChildren<Plate>().appliance = appl.GetComponent<Appliance>();
         canv.transform.Find("PanGameObject").transform.GetChild(0).GetComponent<PanController>().appliance = appl.GetComponent<Appliance>();
 
+    }
+    [PunRPC]
+    void clearPlayers(int viewiD)
+    {
+        PhotonView.Find(viewiD).GetComponent<Appliance>().appliancePlayers.Clear();
     }
 }
 
