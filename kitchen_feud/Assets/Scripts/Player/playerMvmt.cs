@@ -39,9 +39,10 @@ public class playerMvmt : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
-            
+            Debug.Log(movement);
+
             // if player moving forward
-			if (movement.z > 0)
+            if (movement.z > 0)
 				animator.SetBool("IsMovingForwards", true);
             // if player moving backward
             else if (movement.z < 0) 
