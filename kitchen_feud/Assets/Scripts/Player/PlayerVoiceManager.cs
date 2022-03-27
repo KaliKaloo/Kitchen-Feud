@@ -3,7 +3,7 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-
+using TMPro;
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
@@ -26,6 +26,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started;
 	public bool started1;
 	public List<int> kickedBy;
+	public GameObject nametag;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -111,8 +112,9 @@ public class PlayerVoiceManager : MonoBehaviour
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
+								Debug.LogError("sss");
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setObjParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
+								view.RPC("setHBParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
 							}
 							else
 							{
@@ -158,11 +160,18 @@ public class PlayerVoiceManager : MonoBehaviour
     }
 	
 	[PunRPC]
-	void setObjParent(int viewID, int hBviewID)
+	void setHBParent(int viewID, int hBviewID)
 	{
 		GameObject obj1 = PhotonView.Find(viewID).gameObject;
 		obj1.GetComponent<PlayerVoiceManager>().healthbar1 = PhotonView.Find(hBviewID).gameObject;
 		obj1.GetComponent<PlayerVoiceManager>().healthbar1.transform.SetParent(obj1.transform.GetChild(4));
+	}
+	[PunRPC]
+	void setNTParent(int viewID, int hBviewID)
+	{
+		GameObject obj1 = PhotonView.Find(viewID).gameObject;
+		obj1.GetComponent<PlayerVoiceManager>().nametag = PhotonView.Find(hBviewID).gameObject;
+		obj1.GetComponent<PlayerVoiceManager>().nametag.transform.SetParent(obj1.transform.GetChild(5));
 	}
 	[PunRPC]
 	void giveDamage(int viewID,int x)
@@ -275,5 +284,10 @@ public class PlayerVoiceManager : MonoBehaviour
 	void clearKickedBy(int viewID)
 	{
 		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Clear();
+	}
+	[PunRPC]
+	void setName(int viewiD)
+	{
+		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = PhotonNetwork.NickName;
 	}
 }

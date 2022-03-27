@@ -27,8 +27,9 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
+        // if (playerHold.items.Count == 0 && tray.trayID != "")
         // if not holding anything and tray has an order then prompt for serve
-        if (playerHold.items.Count == 0 && tray.trayID != "")
+        if (player.transform.Find("slot").childCount == 1)
         {
             canvasController.TrayOrderOptions(tray.name);
         }

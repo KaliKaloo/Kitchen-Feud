@@ -29,7 +29,8 @@ TagManager:
   - Water
   - UI
   - Cuttable
-  - 
+  - Particle Effects
+  - Pickable
   - 
   - 
   - 
@@ -58,9 +59,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
-    uniqueID: 2912803297
+  - name: front
+    uniqueID: 1791140599
     locked: 0
-  - name: forgrpund
-    uniqueID: 2221805617
+  - name: back
+    uniqueID: 1840845019
     locked: 0
