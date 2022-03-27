@@ -46,6 +46,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
+
+			gameObject.layer = 9;
+			gameObject.transform.GetChild(0).gameObject.layer = 9;
+			gameObject.transform.GetChild(1).gameObject.layer = 9;
+
+
+           
 		}
 		
 		

@@ -158,7 +158,6 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-            //playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
 
             if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
@@ -172,10 +171,8 @@ public class Appliance : Interactable
     public void checkForDish()
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
-
         
 
-        //if (foundDish != null){
         if (foundDish != null)
         {
             string applianceName = gameObject.tag;
@@ -210,11 +207,7 @@ public class Appliance : Interactable
     {
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
-    // [PunRPC]
-    // void clearItems(int viewID)
-    // {
-    //     PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
-    // }
+   
     [PunRPC]
     void ovenGame(int viewID, int stoveID)
     {

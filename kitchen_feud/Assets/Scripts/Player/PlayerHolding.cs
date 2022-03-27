@@ -81,10 +81,10 @@ public class PlayerHolding : MonoBehaviour
         {
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
 
-            heldObj.layer = 7;
+            heldObj.layer = 8;
             foreach (Transform child in heldObj.transform)
             {
-                child.gameObject.layer = 7;
+                child.gameObject.layer = 8;
             }
         }
     }
