@@ -32,6 +32,8 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		MusicManager.instance.minigameEnd();
+
 		GameEvents.current.assignPointsEventFunction();
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();

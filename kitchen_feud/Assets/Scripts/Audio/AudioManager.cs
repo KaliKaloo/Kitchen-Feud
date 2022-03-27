@@ -42,7 +42,9 @@ public class AudioManager : MonoBehaviour
         }
         
     }
+    
 
+   
    
 
     private void OnTriggerEnter(Collider other)

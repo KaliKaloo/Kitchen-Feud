@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
     private static GlobalTimer timer = new GlobalTimer();
     private AudioSource track1, track2;
 
-    public AudioClip k1track1, k1track2, k2track1, k2track2, hallway;
+    public AudioClip k1track1, k1track2, k1_MG, k2track1, k2track2, k2_MG, hallway;
 
     private int totalTime;
 
@@ -65,6 +65,20 @@ public class MusicManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+    }
+
+
+    public void minigameSwitch(){
+        AudioClip newTrack;
+        newTrack = (location == 1) ? k1_MG : k2_MG;
+        firstLoop = true;
+        StartCoroutine(switchTrack(newTrack, 0, 0, 1, firstLoop));
+        
+    }
+
+
+    public void minigameEnd(){
+        changeBGM(location, 0, 0, 1);
     }
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
