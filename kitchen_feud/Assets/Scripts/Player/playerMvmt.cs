@@ -69,6 +69,34 @@ public class playerMvmt : MonoBehaviour
                 playerBody.Rotate(Vector3.up*mouseX);
 
             }
+            else if (Input.GetKey(KeyCode.Z))
+            {
+
+                Cursor.lockState = CursorLockMode.Locked;
+                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+                //xRotation -= mouseY;
+                xRotation -= rotatespeed * Time.deltaTime;
+                //xRotation = Mathf.Clamp(xRotation, -90f, 48f);
+                //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
+                playerBody.Rotate(Vector3.up*mouseX);
+
+            }
+            else if (Input.GetKey(KeyCode.C))
+            {
+
+                Cursor.lockState = CursorLockMode.Locked;
+                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+                //xRotation -= mouseY;
+                xRotation += rotatespeed * Time.deltaTime;
+                //xRotation = Mathf.Clamp(xRotation, -90f, 48f);
+                //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
+                playerBody.Rotate(Vector3.up*mouseX);
+
+            }
             else
             {
                 Cursor.lockState = CursorLockMode.None;

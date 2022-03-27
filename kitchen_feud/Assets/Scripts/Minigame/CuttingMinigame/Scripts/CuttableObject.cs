@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class CuttableObject : MonoBehaviour
 {
-   public bool correctIngredient;
+    public bool correctIngredient;
     public cutController CutController;
+    public spawnCutBurst spawnCutBurst;
 
     public void OnCollisionEnter2D (Collision2D collision)
     {
         //identify if object is being cut by knife
         if (collision.gameObject.tag == "Cut") {
-            Destroy (gameObject);
+            spawnCutBurst = GameObject.Find("spawnCutBurst").transform.GetComponent<spawnCutBurst>();
+            spawnCutBurst.BurstEffect(gameObject);
+            
+            //SOUND -----------------------------------------------------------------
+            FindObjectOfType<SoundEffectsManager>().cuttingSound.Play();
+            //-----------------------------------------------------------------------
+            
+            Destroy(gameObject);
             CutController = GameObject.Find("CutController").transform.GetComponent<cutController>();
+            
             
             if (!correctIngredient)
             {
@@ -29,4 +38,6 @@ public class CuttableObject : MonoBehaviour
             }
         }
     }
+
+
 }

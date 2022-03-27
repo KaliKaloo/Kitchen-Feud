@@ -7,6 +7,7 @@ public class Knife : MonoBehaviour
     [Header("Gameplay")]
     public GameObject cutPrefab;
     public float cutLifetime;
+    public Camera UICamera;
 
     private bool dragging;
     //coordinates where we start the cut
@@ -19,9 +20,9 @@ public class Knife : MonoBehaviour
         {
             this.dragging = true;
             //to get the unity coordinates we need to access the camera\
-            swipeStart = Input.mousePosition;
+            //swipeStart = Input.mousePosition;
             //Debug.Log(Input.mousePosition);
-            //swipeStart = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+            swipeStart = UICamera.ScreenToWorldPoint(Input.mousePosition); 
         }
         else if (Input.GetMouseButtonUp(0) && this.dragging)
         {
@@ -32,8 +33,8 @@ public class Knife : MonoBehaviour
 
     private void SpawnCut()
     {
-        //Vector2 swipeEnd = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-        Vector2 swipeEnd = Input.mousePosition; 
+        Vector2 swipeEnd = UICamera.ScreenToWorldPoint (Input.mousePosition);
+        //Vector2 swipeEnd = Input.mousePosition; 
         //Debug.Log(Input.mousePosition);
         //instantiate and set position of line renderer
         GameObject cutInstance = Instantiate(this.cutPrefab, this.swipeStart, Quaternion.identity);

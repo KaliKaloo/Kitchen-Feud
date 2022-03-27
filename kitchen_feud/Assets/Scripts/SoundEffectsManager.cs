@@ -13,15 +13,6 @@ public class SoundEffectsManager : MonoBehaviour
     public AudioSource fryingSound;
     public AudioSource servingSound;
     public AudioSource hittingSound;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

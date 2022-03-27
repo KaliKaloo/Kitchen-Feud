@@ -36,5 +36,8 @@ public class ExitCuttingMinigame : MonoBehaviour
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		
 		appliance.playerController.enabled = true;
+		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+		appliance.UIcamera.enabled = false;
+		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }

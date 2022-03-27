@@ -18,12 +18,14 @@ public class stoveMinigame : MonoBehaviour
     private Appliance appliance;
     public ExitStoveMinigame backbutton;
     public AudioSource sound;
+    public bool hasPlayed;
 
     void Start()
     {
         //SOUND -----------------------------------------------------------------
         //RPC to others
-        //sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
+        hasPlayed = false;
+        sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
         //-----------------------------------------------------------------------
 
         GameEvents.current.assignPoints += UpdateDishPointsStove;
@@ -39,10 +41,12 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
-                        //SOUND -----------------------------------------------------------------
-                        //RPC to others
-                        //sound.Play();
-                        //-----------------------------------------------------------------------
+                //SOUND -----------------------------------------------------------------
+                //RPC to others
+                sound.Play();
+                hasPlayed = true;
+                //-----------------------------------------------------------------------
+                
             }
         }
     }
