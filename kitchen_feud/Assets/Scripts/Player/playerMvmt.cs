@@ -39,13 +39,14 @@ public class playerMvmt : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
-            Debug.Log(movement);
+
+            float dotProduct = Vector3.Dot(movement, transform.forward);
 
             // if player moving forward
-            if (movement.z > 0)
+            if (dotProduct > 0)
 				animator.SetBool("IsMovingForwards", true);
             // if player moving backward
-            else if (movement.z < 0) 
+            else if (dotProduct < 0) 
 				animator.SetBool("IsMovingBackwards", true);
 
             //disable movement

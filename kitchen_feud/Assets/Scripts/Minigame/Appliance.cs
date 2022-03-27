@@ -43,30 +43,35 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
-        PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-        playerRigidbody = player.GetComponent<Rigidbody>();
-        SlotsController = gameObject.GetComponent<SlotsController>();
-        //view control
-        pv = player.GetComponent<PhotonView>();
-
-        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        if (!isBeingInteractedWith && canUse)
+        // checks whether player has been assigned yet
+        if (player != null)
         {
-            if (pv.IsMine)
+            PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+            playerRigidbody = player.GetComponent<Rigidbody>();
+            SlotsController = gameObject.GetComponent<SlotsController>();
+            //view control
+            pv = player.GetComponent<PhotonView>();
+
+            //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+            if (!isBeingInteractedWith && canUse)
             {
-                if (player.transform.Find("slot").childCount!= 0)
+                if (pv.IsMine)
                 {
-                    this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
-                        player.GetComponent<PhotonView>().ViewID);
-                }
-                else
-                {
-                    cookDish();
+                    if (player.transform.Find("slot").childCount != 0)
+                    {
+                        this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                            player.GetComponent<PhotonView>().ViewID);
+                    }
+                    else
+                    {
+                        cookDish();
+                    }
                 }
             }
-        }
-        else{
-            Debug.Log("Appliance in use");
+            else
+            {
+                Debug.Log("Appliance in use");
+            }
         }
     }
     public void cookDish()
