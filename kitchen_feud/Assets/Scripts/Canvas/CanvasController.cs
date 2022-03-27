@@ -56,6 +56,10 @@ public class CanvasController : MonoBehaviour
     
     public void Serve(GameObject justClicked)
     {
+        //SOUND -------------------------------------------------
+        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        //-------------------------------------------------------
+
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
             justClicked.GetComponent<PhotonView>().ViewID);
         

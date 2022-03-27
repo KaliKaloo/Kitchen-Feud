@@ -47,9 +47,7 @@ public class pickableItem : Interactable
             }
         }
         else {
-            //SOUND ----------------------------------------------------------
-            dropSound = GetComponent<AudioSource>();
-            //----------------------------------------------------------------
+            
             playerHold.dropItem();
             //playerHold.pickUpItem(gameObject, item);
         }

@@ -17,9 +17,15 @@ public class stoveMinigame : MonoBehaviour
 
     private Appliance appliance;
     public ExitStoveMinigame backbutton;
+    public AudioSource sound;
 
     void Start()
     {
+        //SOUND -----------------------------------------------------------------
+        //RPC to others
+        //sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
+        //-----------------------------------------------------------------------
+
         GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
@@ -33,6 +39,10 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
+                        //SOUND -----------------------------------------------------------------
+                        //RPC to others
+                        //sound.Play();
+                        //-----------------------------------------------------------------------
             }
         }
     }
