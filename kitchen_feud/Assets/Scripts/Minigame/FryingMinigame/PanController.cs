@@ -34,7 +34,7 @@ public class PanController : MonoBehaviour
         haveAvg = false;
         speeds = new Queue<float>();
         foodInstancesCounter = 0;
-
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
         Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         if (PV.IsMine)
         {
@@ -85,13 +85,13 @@ public class PanController : MonoBehaviour
                 Vector3 lastLocation = pan.position;
 
                 if (Input.GetAxis("Mouse X") < 0 && (startLocation.x - lastLocation.x < clampDistance || startLocation.x < lastLocation.x)
-                    && friedFood.appliance.appliancePlayers.Count > 1)
+                    && appliance.appliancePlayers.Count > 1)
                 {
                     //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
                     pan.Translate(Vector3.left * mouseCursorSpeed * 2 * Time.deltaTime);
                 }
                 if (Input.GetAxis("Mouse X") > 0 && (lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)
-                    && friedFood.appliance.appliancePlayers.Count > 1)
+                    && appliance.appliancePlayers.Count > 1)
                 {
                     //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
                     pan.Translate(Vector3.right * mouseCursorSpeed * 2 * Time.deltaTime);
@@ -104,12 +104,14 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter < foodInstances && friedFood == null)
                 {
+                    Debug.LogError("IM HERE");
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                     PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
-                    foodInstancesCounter++;
+                    //foodInstancesCounter++;
                     pointsAssigned = false;
                     Debug.Log(foodInstancesCounter);
+                    
                 }
 
             }

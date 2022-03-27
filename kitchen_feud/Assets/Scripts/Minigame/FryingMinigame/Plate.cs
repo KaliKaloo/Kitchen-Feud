@@ -13,6 +13,8 @@ public class Plate : MonoBehaviour
     public float speed = 10f;
     public FryingTimerBar timer;
     public PhotonView PV;
+    public float currentH;
+
 
     void Start()
     {
@@ -20,22 +22,25 @@ public class Plate : MonoBehaviour
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
+        RectTransform rect = GetComponent<RectTransform>();
+        GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width/1.4f, rect.rect.height / 6.15f);
     }
 
     void Update()
     {
 
 
+        //Use colliders to destroy
+        //if (pan.friedFood != null)
+        //{
+        //    friedFood = pan.friedFood;
+        //    if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
+        //    {
+        //        PV.RPC("destP", RpcTarget.All, friedFood.GetComponent<PhotonView>().ViewID);
 
-        if (pan.friedFood != null)
-        {
-            friedFood = pan.friedFood;
-            if (friedFood.gameObject.transform.position.x < screenBounds.x || friedFood.gameObject.transform.position.y < screenBounds.y)
-            {
-                PV.RPC("destP", RpcTarget.All, friedFood.GetComponent<PhotonView>().ViewID);
-
-            }
-        }
+        //    }
+        //}
         if (appliance.appliancePlayers.Count > 1)
         {
             if (PhotonView.Find(appliance.appliancePlayers[1]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
@@ -72,7 +77,7 @@ public class Plate : MonoBehaviour
 
                 }
                 float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
-                if (platePos.x < panPos.x - panW)
+                if (platePos.x < panPos.x)
                 {
                     if (Input.GetKey(KeyCode.RightArrow))
                     {
@@ -97,22 +102,46 @@ public class Plate : MonoBehaviour
  
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
-        appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
+        var obj = col.gameObject.GetComponent<FriedFoodController>();
+        if (!obj.collided)
         {
-            var obj = col.gameObject.GetComponent<FriedFoodController>();
-            //totalPoints += obj.points;
-            PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
-            GameEvents.current.assignPointsEventFunction();
-            Debug.Log("total points:" + totalPoints);
-            //obj.gameObject.transform.SetParent(this.gameObject.transform);
-            Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-            obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
-            // stackedFood.Add(friedFood);
-            Debug.Log("food destroyed");
-            PV.RPC("destP", RpcTarget.All, col.GetComponent<PhotonView>().ViewID);
-            //Destroy(obj.gameObject);
-            //friedFood = null;
+            if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
+            appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
+            {
+
+
+
+                //totalPoints += obj.points;
+                PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
+                Debug.LogError("MyPoints " + obj.points);
+                //GameEvents.current.assignPointsEventFunction();
+                //appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
+                Debug.Log("total points:" + totalPoints);
+                //obj.gameObject.transform.SetParent(this.gameObject.transform);
+                Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
+                // stackedFood.Add(friedFood);
+
+                // col.GetComponent<PhotonView>().RPC("setGravScale", RpcTarget.Others, col.GetComponent<PhotonView>().ViewID);
+                //col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID,PV.ViewID);
+                //col.GetComponent<Rigidbody2D>().gravityScale = 0;
+                //col.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+                Debug.Log("food destroyed");
+                //PV.RPC("destP", RpcTarget.All, col.GetComponent<PhotonView>().ViewID);
+                //Destroy(obj.gameObject);
+                //friedFood = null;
+            }
+            else
+            {
+                col.GetComponent<Rigidbody2D>().gravityScale = 0;
+                col.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
+            }
+            currentH += 22.5f;
+            col.GetComponent<FriedFoodController>().onPlate = true;
+            pan.friedFood = null;
+            pan.foodInstancesCounter += 1;
+            obj.collided = true;
         }
     }
     [PunRPC]
@@ -140,14 +169,7 @@ public class Plate : MonoBehaviour
         //PhotonView.Find(viewID).transform.position = transform.position;
         //Debug.Log(transform.GetComponent<RectTransform>().anchoredPosition);
     }
-    [PunRPC]
-    void destP(int viewID)
-    {
-        if (PhotonView.Find(viewID).gameObject)
-        {
-            Destroy(PhotonView.Find(viewID).gameObject);
-        }
-    }
+  
     [PunRPC]
     void syncTotal(int viewiD, float points)
     {

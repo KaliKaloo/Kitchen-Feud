@@ -31,6 +31,7 @@ public class ExitFryingMinigame : MonoBehaviour
     void TaskOnClick()
     {
 		appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
+
 		PhotonView aV = appliance.GetComponent<PhotonView>();
         canvas.gameObject.SetActive(true);
 		PV.RPC("setAddedF", RpcTarget.All, aV.ViewID);
@@ -51,7 +52,6 @@ public class ExitFryingMinigame : MonoBehaviour
         //view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		PV.RPC("EnablePforAll", RpcTarget.All, view.ViewID);
 		PV.RPC("globalDestroy",RpcTarget.All,minigameCanvas.GetPhotonView().ViewID);
-	
 		//GameEvents.current.assignPoints -= appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
 		//GameEvents.current = null;
 		//PV.RPC("setSetF", RpcTarget.All, aV.ViewID);

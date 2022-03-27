@@ -104,7 +104,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
 
         
-        PhotonNetwork.AutomaticallySyncScene = true;
+        
        
 
         if (!PhotonNetwork.IsConnected)
@@ -123,6 +123,7 @@ public class menuController : MonoBehaviourPunCallbacks
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void BackToMainMenu()

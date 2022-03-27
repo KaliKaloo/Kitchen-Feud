@@ -125,6 +125,10 @@ MonoBehaviour:
   - syncTotal
   - setAddedF
   - setSetF
+  - clearPlayers
+  - setGravScale
+  - SetParentPlate
+  - setParentPlate
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

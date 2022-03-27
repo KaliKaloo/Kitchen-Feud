@@ -18,12 +18,16 @@ public class FriedFoodController : MonoBehaviour
     public float maxYSpeed;
     public GameObject gameCanvas;
     public Appliance appliance;
+    public bool onPlate;
+    public bool collided;
 
 //use dishSO to get sprite and set it as the friedFood image
     public DishSO dishSO;
 
     void Start()
     {
+        collided = false;
+        onPlate = false;
         minYSpeed = 200;
         maxYSpeed = 400;
         gameObject.transform.SetParent(pan.gameObject.transform.parent);
@@ -34,6 +38,9 @@ public class FriedFoodController : MonoBehaviour
         //do in RPC
         //PV.RPC("setDishSO", RpcTarget.All, PV.ViewID);
         dishSO = appliance.foundDish;
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.1f, Screen.height * 0.4f);
+        RectTransform rect = GetComponent<RectTransform>();
+        //GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width, rect.rect.height);
         //appliance = transform.parent.parent.parent.GetComponent<Appliance>();
     }
 
@@ -53,7 +60,7 @@ public class FriedFoodController : MonoBehaviour
             timer.Reset();
             //points = timer.points;
             PV.RPC("setPoints",RpcTarget.All,PV.ViewID,timer.points);
-            Debug.LogError(points);
+            //Debug.LogError(points);
             //I shouldn't assign points yet, only if it's the last call. maybe keep a counter?
            // if(points != 0) GameEvents.current.assignPointsEventFunction();
 
@@ -111,5 +118,30 @@ public class FriedFoodController : MonoBehaviour
     void setPoints(int viewID,float points)
     {
         PhotonView.Find(viewID).GetComponent<FriedFoodController>().points = points;
+    }
+    [PunRPC]
+    void destP(int viewID)
+    {
+        if (PhotonView.Find(viewID).gameObject)
+        {
+            Destroy(PhotonView.Find(viewID).gameObject);
+        }
+    }
+    [PunRPC]
+    void setGravScale(int viewiD)
+    {
+        PhotonView.Find(viewiD).GetComponent<Rigidbody2D>().gravityScale = 0;
+        PhotonView.Find(viewiD).GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+
+    }
+    [PunRPC]
+    void setParentPlate(int viewiD,int plateID) 
+    {
+        Plate plate = PhotonView.Find(plateID).GetComponent<Plate>();
+        PhotonView.Find(viewiD).transform.SetParent(PhotonView.Find(plateID).transform);
+        PhotonView.Find(viewiD).transform.localPosition = new Vector3(0, plate.currentH, PhotonView.Find(viewiD).transform.localPosition.z);
+        //PhotonView.Find(viewiD).GetComponent<RectTransform>().anchoredPosition = PhotonView.Find(plateID).GetComponent<RectTransform>().anchoredPosition;
+        //PhotonView.Find(viewiD).transform.position = PhotonView.Find(plateID).transform.position;
+
     }
 }

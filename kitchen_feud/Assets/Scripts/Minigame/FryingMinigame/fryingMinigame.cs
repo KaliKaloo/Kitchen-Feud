@@ -50,11 +50,7 @@ public class fryingMinigame : MonoBehaviour
         }
 
         if (transform.Find("Frying(Clone)") && appliance.isBeingInteractedWith){
-            if (appliance.pv.IsMine)
-            {
-                GameEvents.current.assignPoints += UpdateDishPointsFrying;
-                //pointsadded = true;
-            }
+            
             //if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
             {
                 if (backbutton) { 
@@ -69,6 +65,7 @@ public class fryingMinigame : MonoBehaviour
 
                             spriteName = GetSpriteName(friedFoodController.dishSO);
                             friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+                            
                         }
                     }
                 }
