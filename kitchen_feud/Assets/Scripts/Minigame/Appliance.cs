@@ -60,32 +60,30 @@ public class Appliance : Interactable
             PhotonView.Find(myPv.ViewID).TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
         }
         //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+
         if (pv.IsMine)
         {
-           
-          
-        }
-
-        if (!isBeingInteractedWith)
-        {
-
-            if (pv.IsMine)
+            Debug.LogError("ettestt");
+            if (!isBeingInteractedWith)
             {
-                if (player.transform.Find("slot").childCount!= 0)
+
+
+                if (player.transform.Find("slot").childCount != 0)
                 {
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                         player.GetComponent<PhotonView>().ViewID);
                 }
-              
+
                 else
                 {
                     cookDish();
                 }
+
             }
-        }
-        else
-        {
-            Debug.Log("Appliance in use");
+            else
+            {
+                Debug.Log("Appliance in use");
+            }
         }
 
 
@@ -218,20 +216,21 @@ public class Appliance : Interactable
 
     public void addItem(GameObject heldObjArg, PlayerHolding playerHold)
     {
-        if (heldObjArg.GetComponent<IngredientItem>())
-        {
-            IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
-            itemsOnTheAppliance.Add(heldObjArgItem.item);
-
-            //playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
-
-            if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
+        
+            if (heldObjArg.GetComponent<IngredientItem>())
             {
-                SlotsController.PutOnAppliance(heldObjArg);
-            }
-        }
-        else { Debug.Log("Can't put a cooked dish in a appliance."); }
+                IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
+                itemsOnTheAppliance.Add(heldObjArgItem.item);
 
+                //playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+
+                if (playerHold.transform.Find("slot").childCount != 0 && playerHold.GetComponent<PhotonView>().IsMine)
+                {
+                    SlotsController.PutOnAppliance(heldObjArg);
+                }
+            }
+            else { Debug.Log("Can't put a cooked dish in a appliance."); }
+        
     }
 
     public void checkForDish()
@@ -290,11 +289,11 @@ public class Appliance : Interactable
     {
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
-    // [PunRPC]
-    // void clearItems(int viewID)
-    // {
-    //     PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
-    // }
+    [PunRPC]
+    void clearItems(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
+    }
     [PunRPC]
     void ovenGame(int viewID, int stoveID)
     {

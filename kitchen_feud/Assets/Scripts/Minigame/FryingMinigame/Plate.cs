@@ -20,7 +20,7 @@ public class Plate : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+       // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
         RectTransform rect = GetComponent<RectTransform>();
