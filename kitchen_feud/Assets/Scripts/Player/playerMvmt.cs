@@ -22,6 +22,15 @@ public class playerMvmt : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
         PV = GetComponentInParent<PhotonView>();
+        //SOUND -------------------------------------------------------------------
+        if (GameObject.Find("Local"))
+        {
+            if (!GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled)
+            {
+                GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled = true;
+            }
+        }
+        //-------------------------------------------------------------------------
     }
 
 

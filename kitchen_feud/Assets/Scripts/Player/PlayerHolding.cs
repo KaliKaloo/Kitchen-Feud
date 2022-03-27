@@ -70,6 +70,12 @@ public class PlayerHolding : MonoBehaviour
             }
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
+            //SOUND ---------------------------------------------------------
+            /*Debug.Log(heldObj.GetComponent<pickableItem>());
+            Debug.Log(heldObj.GetComponent<pickableItem>().dropSound);
+            heldObj.GetComponent<pickableItem>().dropSound.Play();*/
+            heldObj.GetComponent<AudioSource>().Play();
+            //---------------------------------------------------------------
         }
     }
     [PunRPC]
