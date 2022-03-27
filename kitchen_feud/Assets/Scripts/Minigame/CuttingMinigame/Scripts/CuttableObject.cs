@@ -14,8 +14,9 @@ public class CuttableObject : MonoBehaviour
         if (collision.gameObject.tag == "Cut") {
             spawnCutBurst = GameObject.Find("spawnCutBurst").transform.GetComponent<spawnCutBurst>();
             spawnCutBurst.BurstEffect(gameObject);
-            
+
             //SOUND -----------------------------------------------------------------
+            //no RPC needed
             FindObjectOfType<SoundEffectsManager>().cuttingSound.Play();
             //-----------------------------------------------------------------------
             

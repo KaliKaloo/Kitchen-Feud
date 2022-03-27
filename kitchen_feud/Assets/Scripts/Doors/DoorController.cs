@@ -72,6 +72,7 @@ public class DoorController : MonoBehaviour
         PhotonView.Find(viewiD).GetComponent<Animator>().Play(x,0,0.0f);
         //SOUND -----------------------------------------------------------------
         FindObjectOfType<SoundEffectsManager>().doorSound.Play();
+        //this.GetComponent<PhotonView>().RPC("PlayDoorSound", RpcTarget.All);
         //-----------------------------------------------------------------------
     }
     [PunRPC]
@@ -95,5 +96,10 @@ public class DoorController : MonoBehaviour
     void decrementDoor()
     {
         count -= 1;
+    }
+
+    [PunRPC]
+    void PlayDoorSound() {
+        FindObjectOfType<SoundEffectsManager>().doorSound.Play();
     }
 }

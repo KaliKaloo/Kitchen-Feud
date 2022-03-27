@@ -355,6 +355,7 @@ MonoBehaviour:
   tray2: {fileID: 0}
   appliance: {fileID: 0}
   applianceSlots: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!114 &7444644692714486495
 MonoBehaviour:
   m_ObjectHideFlags: 0

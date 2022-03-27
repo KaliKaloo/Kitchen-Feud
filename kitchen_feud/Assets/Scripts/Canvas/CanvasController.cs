@@ -57,7 +57,9 @@ public class CanvasController : MonoBehaviour
     public void Serve(GameObject justClicked)
     {
         //SOUND -------------------------------------------------
-        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        //RPC to all
+        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        this.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All);
         //-------------------------------------------------------
 
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
@@ -265,6 +267,11 @@ public class CanvasController : MonoBehaviour
       
             ShowNewTicketWithID(o);
         
+    }
+
+    [PunRPC]
+    void PlayServingSound() {
+        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
     }
 
 
