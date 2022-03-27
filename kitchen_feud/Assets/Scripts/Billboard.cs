@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Billboard : MonoBehaviour
 {
@@ -16,6 +17,20 @@ public class Billboard : MonoBehaviour
 
     void LateUpdate()
     {
-		transform.LookAt(transform.position + cam.forward);
+
+        if (transform.name != "Nametag(Clone)")
+        {
+            transform.LookAt(transform.position + cam.forward);
+
+        }
+        else
+        {
+            if (!GetComponent<PhotonView>().IsMine)
+            {
+                cam = GameObject.Find("Local").transform.GetChild(3);
+                transform.LookAt(transform.position + cam.rotation * Vector3.forward, cam.rotation * Vector3.up);
+            }
+        }
+        }
     }
-}
+

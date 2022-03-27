@@ -67,7 +67,15 @@ public class SandwichController : MonoBehaviour
         moving = false;
         Score = 0;
         finalScore = 0;
+        CountStopped = 0;
         sandwichIngredients.Clear();
+        idList.Clear();
+        objectPool.Clear();
+        CancelInvoke("NewRandomObject");
+        currentIndex = 0;
+        currentActiveID = "";
+        SandwichSpawner.DestroySandwich();
+        LayerSpawn.DestroyLayers();
     }
 
 
@@ -124,7 +132,7 @@ public class SandwichController : MonoBehaviour
          currentIndex = newIndex;
          objectPool[currentIndex].SetActive(true);
          currentActiveID = objectPool[currentIndex].GetComponent<SandwichID>().Id;
-        Debug.Log(currentActiveID);
+        
      }
 
     public bool checkStoppedID(string objectID){

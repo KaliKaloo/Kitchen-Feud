@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
+	[SerializeField] private Camera secondaryCam;
+
 	PlayerHolding playerHold;
 	public PhotonView view;
 
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			if (!view.IsMine)
 			{
 				cam.enabled = false;
+				secondaryCam.enabled = false;
+
 			}
 			DontDestroyOnLoad(gameObject);
 		}
@@ -54,7 +58,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	
 		if (view.IsMine)
 		{
-            if (Input.GetButtonDown("Fire1"))
+			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -72,7 +76,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-						if (playerHold.items.Count != 0) playerHold.dropItem();
+						if (player.transform.Find("slot").childCount!= 0) playerHold.dropItem();
 						RemoveFocus();
 					}
 					// -------------------------------------------------------------------------

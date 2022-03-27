@@ -20,6 +20,7 @@ public class Appliance : Interactable
     public GameObject canvas;
     public GameObject minigameCanvas;
     public GameObject minigameCanvas2;
+    public Camera UIcamera;
     public GameObject cookedDish;
     private GameObject cookedDishLocal;
     public List<int> appliancePlayers;
@@ -70,12 +71,7 @@ public class Appliance : Interactable
 
             if (pv.IsMine)
             {
-                //if (foundDish && foundDish.stoveFry)
-                //{
-                  
-
-                //}
-                if (playerHold.items.Count != 0)
+                if (player.transform.Find("slot").childCount!= 0)
                 {
                     this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                         player.GetComponent<PhotonView>().ViewID);
@@ -157,13 +153,18 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    
+                   
 
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
+                    player.GetComponentInChildren<playerMvmt>().enabled = false;
+                    UIcamera.enabled = true;
+                    player.GetComponentInChildren<Camera>().enabled = false;
+                    
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
                     playerRigidbody.isKinematic = true;
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
-
                 }
                 //if (minigameCanvas2) { 
                 myPv.RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
@@ -222,9 +223,9 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-            playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
+            //playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
 
-            if (playerHold.items.Count == 0 && playerHold.GetComponent<PhotonView>().IsMine)
+            if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
                 SlotsController.PutOnAppliance(heldObjArg);
             }
@@ -289,11 +290,11 @@ public class Appliance : Interactable
     {
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
-    [PunRPC]
-    void clearItems(int viewID)
-    {
-        PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
-    }
+    // [PunRPC]
+    // void clearItems(int viewID)
+    // {
+    //     PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
+    // }
     [PunRPC]
     void ovenGame(int viewID, int stoveID)
     {

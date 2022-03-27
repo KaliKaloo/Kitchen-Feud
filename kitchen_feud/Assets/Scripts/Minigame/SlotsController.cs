@@ -22,6 +22,11 @@ public class SlotsController : MonoBehaviour {
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
 
                     pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
+                    heldObjArg.layer = 0;
+                    foreach ( Transform child in heldObjArg.transform )
+                    {
+                        child.gameObject.layer = 0;
+                    }
                     break;
                 }
             }
@@ -44,10 +49,6 @@ public class SlotsController : MonoBehaviour {
             appliance.itemsOnTheAppliance.Remove(heldObjArg.GetComponent<IngredientItem>().item);
             pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
             pickable.onAppliance = false;
-            Debug.Log("items on the appliance: ");
-            foreach( var x in appliance.itemsOnTheAppliance) {
-                Debug.Log( x.ToString());
-            }
             fullnessCount--;
  
     }

@@ -34,12 +34,17 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	void TaskOnClick(){
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
-		pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
+		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
 		topBar.SetActive(true);
+		var xBound = Screen.width / 2;
+        var lowerBound = pot.position.x - xBound;
+        var upperBound = pot.position.x + xBound;
+        pot.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
+
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 
@@ -49,9 +54,9 @@ public class ExitStoveMinigame : MonoBehaviour
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 
 		appliance.playerController.enabled = true;
-		//GameEvents.current.makeNull();
-		//GameEvents.current.assignPoints -= appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
-		//GameEvents.current = null;
+		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+		appliance.UIcamera.enabled = false;
+		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}
 }

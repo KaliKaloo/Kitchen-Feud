@@ -129,6 +129,23 @@ MonoBehaviour:
   - setGravScale
   - SetParentPlate
   - setParentPlate
+  - appendKickedBy
+  - clearKickedBy
+  - destHB
+  - giveDamage
+  - playDing
+  - push
+  - resetTimer
+  - setKickable
+  - setKickableF
+  - setMyC
+  - setObjParent
+  - setPlayed
+  - setStarted
+  - setName
+  - setHBParent
+  - setNTParent
+  - changeLayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
