@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: -951451966299113654}
   - component: {fileID: 8813379893451686089}
   - component: {fileID: 4369332404756512163}
+  - component: {fileID: 7772909676096678396}
   m_Layer: 0
   m_Name: cat_playerModel
   m_TagString: Player
@@ -275,6 +276,7 @@ MonoBehaviour:
   heldObj: {fileID: 0}
   view: {fileID: 4338776926646805293}
   itemdropped: 0
+  itemLock: 0
 --- !u!114 &-8892825353978446714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +442,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &7772909676096678396
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924745824932806213}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9a288fc68834204ebfbbcec63ea3e41, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0
