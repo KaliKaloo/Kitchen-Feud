@@ -25,6 +25,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		MusicManager.instance.minigameEnd();
 		SandwichController.RestartGame();
 		
 		canvas.gameObject.SetActive(true);

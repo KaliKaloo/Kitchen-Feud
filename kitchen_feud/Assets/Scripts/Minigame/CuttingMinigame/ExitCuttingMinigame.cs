@@ -23,8 +23,9 @@ public class ExitCuttingMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+
+		MusicManager.instance.minigameEnd();
 		CutController.RestartGame();
-		
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);

@@ -22,17 +22,14 @@ public class SandwichStation: MonoBehaviour
     }
     void Update()
     {
-        if (appliance.isBeingInteractedWith)
+        if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
+            MusicManager.instance.minigameSwitch();
+            backbutton.appliance = GetComponent<Appliance>();
 
-            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+            if (appliance.foundDish != null)
             {
-                backbutton.appliance = GetComponent<Appliance>();
-
-                if (appliance.foundDish != null)
-                {
-                    SandwichController.dish = appliance.foundDish;
-                }
+                SandwichController.dish = appliance.foundDish;
             }
 
         }
