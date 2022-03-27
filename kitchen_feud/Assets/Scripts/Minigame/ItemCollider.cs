@@ -21,6 +21,9 @@ public class ItemCollider : MonoBehaviour
         {
             // Get player
             GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;
+            // Send player to appliance 
+            parentAppliance.player = player.transform;
+
             PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
             parentAppliance.playerRigidbody = player.GetComponent<Rigidbody>();
             parentAppliance.SlotsController = parentObject.GetComponent<SlotsController>();
@@ -29,6 +32,7 @@ public class ItemCollider : MonoBehaviour
 
             if (pv.IsMine && parentAppliance.canUse)
             {
+                // PLAY SOUND FOR SLOT HERE
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
             }

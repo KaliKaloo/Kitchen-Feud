@@ -29,7 +29,7 @@ public class Tray : Interactable
 
         // if (playerHold.items.Count == 0 && tray.trayID != "")
         // if not holding anything and tray has an order then prompt for serve
-        if (player.transform.Find("slot").childCount == 1)
+        if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")
         {
             canvasController.TrayOrderOptions(tray.name);
         }

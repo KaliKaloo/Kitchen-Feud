@@ -21,6 +21,7 @@ TagManager:
   - Speaker2
   - ItemCollider
   - OrderTower
+  - Dish
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,6 @@ TagManager:
   - Cuttable
   - Particle Effects
   - Pickable
-  - 
   - 
   - 
   - 
