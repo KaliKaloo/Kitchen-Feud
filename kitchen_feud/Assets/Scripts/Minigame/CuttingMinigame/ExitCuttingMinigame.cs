@@ -25,6 +25,8 @@ public class ExitCuttingMinigame : MonoBehaviour
 	void TaskOnClick(){
 
 		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
+
 		CutController.RestartGame();
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
