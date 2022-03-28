@@ -13,6 +13,8 @@ public class Plate : MonoBehaviour
     public float speed = 10f;
     public FryingTimerBar timer;
     public PhotonView PV;
+    public PhotonView localPV;
+    public int controllerPV;
     public float currentH;
 
 
@@ -24,7 +26,8 @@ public class Plate : MonoBehaviour
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
         RectTransform rect = GetComponent<RectTransform>();
-        GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width/1.4f, rect.rect.height / 6.15f);
+        GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width/1.4f, (rect.rect.height / 6.15f) + 100);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, GetComponent<CapsuleCollider2D>().size.y/3);
     }
 
     void Update()
@@ -43,10 +46,10 @@ public class Plate : MonoBehaviour
         //}
         if (appliance.appliancePlayers.Count > 1)
         {
-            if (PhotonView.Find(appliance.appliancePlayers[1]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
-            {
-                GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
-            }
+            //if (PhotonView.Find(appliance.appliancePlayers[1]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
+            //{
+            //    GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
+            //}
             if (PV.Owner != PhotonView.Find(appliance.appliancePlayers[1]).Owner)
             {
                 PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[1]).Owner);
@@ -102,24 +105,26 @@ public class Plate : MonoBehaviour
  
     void OnTriggerEnter2D(Collider2D col)
     {
+        
         var obj = col.gameObject.GetComponent<FriedFoodController>();
+        Debug.LogError("HEJHE");
         if (!obj.collided)
         {
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
             appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-
+                Debug.LogError("TOuched" + obj.collided);
 
 
                 //totalPoints += obj.points;
-                PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
-                Debug.LogError("MyPoints " + obj.points);
+
                 //GameEvents.current.assignPointsEventFunction();
                 //appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
-                Debug.Log("total points:" + totalPoints);
                 //obj.gameObject.transform.SetParent(this.gameObject.transform);
-                Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-                obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
+
+                //Vector2 platePos = this.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                //obj.gameObject.GetComponent<RectTransform>().anchoredPosition = platePos;
+
                 // stackedFood.Add(friedFood);
 
                 // col.GetComponent<PhotonView>().RPC("setGravScale", RpcTarget.Others, col.GetComponent<PhotonView>().ViewID);
@@ -133,15 +138,26 @@ public class Plate : MonoBehaviour
             }
             else
             {
+                PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
+                Debug.LogError("MyPoints " + obj.points);
+
+                Debug.Log("total points:" + totalPoints);
+
+       
+
+
+
                 col.GetComponent<Rigidbody2D>().gravityScale = 0;
                 col.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
             }
+            obj.collided = true;
+
             currentH += 22.5f;
             col.GetComponent<FriedFoodController>().onPlate = true;
             pan.friedFood = null;
             pan.foodInstancesCounter += 1;
-            obj.collided = true;
+            
         }
     }
     [PunRPC]

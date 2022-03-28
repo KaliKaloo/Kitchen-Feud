@@ -88,13 +88,13 @@ public class PanController : MonoBehaviour
                     && appliance.appliancePlayers.Count > 1)
                 {
                     //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
-                    pan.Translate(Vector3.left * mouseCursorSpeed * 2 * Time.deltaTime);
+                    pan.Translate(Vector3.left * mouseCursorSpeed * 5 * Time.deltaTime);
                 }
                 if (Input.GetAxis("Mouse X") > 0 && (lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)
                     && appliance.appliancePlayers.Count > 1)
                 {
                     //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
-                    pan.Translate(Vector3.right * mouseCursorSpeed * 2 * Time.deltaTime);
+                    pan.Translate(Vector3.right * mouseCursorSpeed * 5 * Time.deltaTime);
                     if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false)
                     {
                         pointsAssigned = true;
