@@ -38,9 +38,17 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
+
         foreach (Transform slot in ts.transform)
         {
-            if (slot.childCount != 0)
+            // Destroy order stand prefab
+            if (slot.tag == "OrderTower")
+            {
+                Destroy(slot.gameObject);
+            }
+
+            // else destroy items on tray, except from item collider
+            if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
                 Destroy(slot.GetChild(0).gameObject);
             }
