@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Start()
 	{
-		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -47,6 +46,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
+
+			gameObject.layer = 9;
+			gameObject.transform.GetChild(0).gameObject.layer = 9;
+			gameObject.transform.GetChild(1).gameObject.layer = 9;
+
+
+           
 		}
 		
 		
@@ -55,7 +61,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Update()
 	{
-	
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
@@ -83,11 +88,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 		}
+		
 	}
 
 
-    // Set our focus to a new focus
-    void SetFocus(Interactable newFocus, GameObject obj)
+	// Set our focus to a new focus
+	void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{

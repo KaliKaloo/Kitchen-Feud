@@ -26,8 +26,8 @@ public class Appliance : Interactable
     public bool isBeingInteractedWith = false;
     private Renderer r;
     public PlayerController playerController;
-    private Rigidbody playerRigidbody;
-    private SlotsController SlotsController;
+    public Rigidbody playerRigidbody;
+    public SlotsController SlotsController;
     public int dishPoints;
 
     public bool canUse = true;
@@ -43,30 +43,35 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
-        PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-        playerRigidbody = player.GetComponent<Rigidbody>();
-        SlotsController = gameObject.GetComponent<SlotsController>();
-        //view control
-        pv = player.GetComponent<PhotonView>();
-
-        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
-        if (!isBeingInteractedWith && canUse)
+        // checks whether player has been assigned yet
+        if (player != null)
         {
-            if (pv.IsMine)
+            PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
+            playerRigidbody = player.GetComponent<Rigidbody>();
+            SlotsController = gameObject.GetComponent<SlotsController>();
+            //view control
+            pv = player.GetComponent<PhotonView>();
+
+            //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
+            if (!isBeingInteractedWith && canUse)
             {
-                if (player.transform.Find("slot").childCount!= 0)
+                if (pv.IsMine)
                 {
-                    this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
-                        player.GetComponent<PhotonView>().ViewID);
-                }
-                else
-                {
-                    cookDish();
+                    if (player.transform.Find("slot").childCount != 0)
+                    {
+                        this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
+                            player.GetComponent<PhotonView>().ViewID);
+                    }
+                    else
+                    {
+                        cookDish();
+                    }
                 }
             }
-        }
-        else{
-            Debug.Log("Appliance in use");
+            else
+            {
+                Debug.Log("Appliance in use");
+            }
         }
     }
     public void cookDish()
@@ -153,7 +158,6 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-            //playerHold.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
 
             if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
@@ -167,10 +171,8 @@ public class Appliance : Interactable
     public void checkForDish()
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
-
         
 
-        //if (foundDish != null){
         if (foundDish != null)
         {
             string applianceName = gameObject.tag;
@@ -205,11 +207,7 @@ public class Appliance : Interactable
     {
         addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
-    // [PunRPC]
-    // void clearItems(int viewID)
-    // {
-    //     PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
-    // }
+   
     [PunRPC]
     void ovenGame(int viewID, int stoveID)
     {

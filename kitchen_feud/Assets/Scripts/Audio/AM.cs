@@ -15,7 +15,7 @@ public class AM : MonoBehaviour
     public GameObject otherP;
     public string Speaker;
     public int team;
-    // Start is called before the first frame update
+
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -23,10 +23,12 @@ public class AM : MonoBehaviour
         randomInstance = menuController.Instance.x.ToString();
     }
     void Start()
-    {
+    {   
         PV = GetComponent<PhotonView>();
     }
 
+
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -35,14 +37,20 @@ public class AM : MonoBehaviour
             PlayerVoiceManager myPlayerC = other.GetComponent<PlayerVoiceManager>();
             if (pFV.IsMine)
             {
+                engine.LeaveChannel();
+                engine.JoinChannel(randomInstance + "Path");
+                MusicManager.instance.changeBGM(3, 10, 0, 1);
+
+
+
                 if (team == 1)
                 {
                     myTeam = myPlayerC.myTeam;
+
+
                     if (myPlayerC.entered1 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
-                        engine.LeaveChannel();
-                        engine.JoinChannel(randomInstance + "Path");
                         if (myTeam == 2)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
@@ -52,11 +60,12 @@ public class AM : MonoBehaviour
                 else
                 {
                     myTeam = myPlayerC.myTeam;
+
+
                     if (myPlayerC.entered2 == true)
                     {
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
-                        engine.LeaveChannel();
-                        engine.JoinChannel(randomInstance + "Path");
+                       
                         if (myTeam == 1)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);

@@ -32,6 +32,10 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
+
+
 		GameEvents.current.assignPointsEventFunction();
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
@@ -41,7 +45,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		var xBound = Screen.width / 2;
         var lowerBound = pot.position.x - xBound;
         var upperBound = pot.position.x + xBound;
-        pot.position = new Vector3(Screen.width / 2, Screen.height / 4.3f,0);
+        pot.position = new Vector3(Screen.width / 2, Screen.height / 5.5f, 0);
 
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);

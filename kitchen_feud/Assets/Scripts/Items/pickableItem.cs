@@ -59,6 +59,11 @@ public class pickableItem : Interactable
 		onTray = false;
 	}
 
+    public void interactPublic()
+    {
+        Interact();
+    }
+
 
 
     [PunRPC]
