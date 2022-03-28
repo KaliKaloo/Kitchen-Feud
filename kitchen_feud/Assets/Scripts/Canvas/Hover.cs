@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+//public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
+public class Hover : MonoBehaviour, IPointerClickHandler
 {
     public GameObject tooltip;
     private SpriteRenderer sprite;
@@ -13,34 +14,50 @@ public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI dish;
     public DisplayTicket displayticket;
     public Sprite img;
+    public GameObject RecipeCard;
 
-    void Update()
-    {
-        if (mouse_over)
-        {
-            Image hoverImage = tooltip.GetComponent<Image>();
+
+    // void Update()
+    // {
+    //     if (mouse_over)
+    //     {
+    //         //Image hoverImage = tooltip.GetComponent<Image>();
+    //         RecipeCard.SetActive(true);
             
-            if (displayticket.dishes.ContainsKey(dish.text))
-            {
-                hoverImage.sprite = displayticket.dishes[dish.text];
-            }
-            tooltip.SetActive(true);
-        }
-    }
+    //         Debug.Log("clicked on" + dish.text)
+    //         if (displayticket.dishes.ContainsKey(dish.text))
+    //         {
+    //             //hoverImage.sprite = displayticket.dishes[dish.text];
+    //             RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
+    //         }
+    //         //tooltip.SetActive(true);
+    //     }
+    // }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    
+
+    public void OnPointerClick(PointerEventData eventData)
     {
         mouse_over = true;
         // Debug.Log("Mouse enter");
+          RecipeCard.SetActive(true);
+            
+            Debug.Log("clicked on" + dish.text);
+            if (displayticket.dishes.ContainsKey(dish.text))
+            {
+                //hoverImage.sprite = displayticket.dishes[dish.text];
+                RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
+            }
+            //tooltip.SetActive(true);
         
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        mouse_over = false;
-        // Debug.Log("Mouse exit");
-        tooltip.SetActive(false);
-    }
+    // public void OnPointerClickExit(PointerEventData eventData)
+    // {
+    //     mouse_over = false;
+    //     // Debug.Log("Mouse exit");
+    //     tooltip.SetActive(false);
+    // }
 
 }
 
