@@ -130,5 +130,13 @@ public class Database : MonoBehaviour
         return null;
     }
 
+    public static DishSO GetDishByName(string dishName){
+         foreach (DishSO dish in dishInstance.dishes.allDishes)
+        {
+            if (dish.name == dishName)
+                return dish;
+        }
+        return null;
+    }
 
 }
