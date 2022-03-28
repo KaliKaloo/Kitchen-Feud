@@ -71,7 +71,8 @@ public class DoorController : MonoBehaviour
     {   
         PhotonView.Find(viewiD).GetComponent<Animator>().Play(x,0,0.0f);
         //SOUND -----------------------------------------------------------------
-        FindObjectOfType<SoundEffectsManager>().doorSound.Play();
+        //FindObjectOfType<SoundEffectsManager>().doorSound.Play();
+        PhotonView.Find(viewiD).GetComponent<AudioSource>().Play();
         //this.GetComponent<PhotonView>().RPC("PlayDoorSound", RpcTarget.All);
         //-----------------------------------------------------------------------
     }

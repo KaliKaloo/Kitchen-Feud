@@ -25,7 +25,8 @@ public class stoveMinigame : MonoBehaviour
         //SOUND -----------------------------------------------------------------
         //fix + RPC to others
         hasPlayed = false;
-        sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
+        //sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
+        sound = GetComponent<AudioSource>();
         
         //-----------------------------------------------------------------------
 
@@ -47,7 +48,7 @@ public class stoveMinigame : MonoBehaviour
                 spawner.appliance = appliance;
                 //SOUND -----------------------------------------------------------------
                 //RPC to others
-                this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.Others);
+                this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
                 //sound.Play();
                 hasPlayed = true;
                 //-----------------------------------------------------------------------

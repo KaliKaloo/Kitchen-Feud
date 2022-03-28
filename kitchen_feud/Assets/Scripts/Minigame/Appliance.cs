@@ -238,6 +238,12 @@ public class Appliance : Interactable
     {
         PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
     }
+
+    [PunRPC]
+	void StopBoilingSound() {
+        GetComponent<stoveMinigame>().sound.Stop();
+    }
+
     
 }
 

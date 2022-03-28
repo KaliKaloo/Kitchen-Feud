@@ -17,6 +17,7 @@ public class CuttableObject : MonoBehaviour
 
             //SOUND -----------------------------------------------------------------
             //no RPC needed
+            //keep it in the sound manager
             FindObjectOfType<SoundEffectsManager>().cuttingSound.Play();
             //-----------------------------------------------------------------------
             

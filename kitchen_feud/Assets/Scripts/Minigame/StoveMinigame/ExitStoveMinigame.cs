@@ -53,7 +53,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		//SOUND ----------------------------------------------------------
 		//fix + RPC to others
 		//appliance.GetComponent<stoveMinigame>().sound.Stop();
-		this.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.Others);
+		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.All);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
 		//----------------------------------------------------------------
 
@@ -67,8 +67,4 @@ public class ExitStoveMinigame : MonoBehaviour
 		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}
-
-	void StopBoilingSound() {
-        appliance.GetComponent<stoveMinigame>().sound.Stop();
-    }
 }
