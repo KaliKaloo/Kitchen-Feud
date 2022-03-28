@@ -271,11 +271,13 @@ public class CanvasController : MonoBehaviour
             ShowNewTicketWithID(o);
         
     }
-
+    
+    //SOUND ---------------------------------------------------------------
     [PunRPC]
     void PlayServingSound() {
         FindObjectOfType<SoundEffectsManager>().servingSound.Play();
     }
+    //----------------------------------------------------------------------
 
 
    /* [PunRPC]
