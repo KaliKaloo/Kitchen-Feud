@@ -15,7 +15,6 @@ public class MusicManager : MonoBehaviour
     private bool switched = false;
     private bool played = false;
     private int fadingTrack;
-    private bool firstLoop;
 
     public static MusicManager instance;
     public int location;
@@ -72,14 +71,13 @@ public class MusicManager : MonoBehaviour
     public void minigameSwitch(){
         AudioClip newTrack;
         newTrack = (location == 1) ? k1_MG : k2_MG;
-        firstLoop = true;
-        StartCoroutine(switchTrack(newTrack, 1, 0, 1, firstLoop));
+        StartCoroutine(switchTrack(newTrack, 1, 0, 1));
         
     }
 
 
     public void minigameEnd(){
-        changeBGM(location, 0, 0, 1);
+        changeBGM(location, 1, 0, 1);
     }
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
@@ -91,13 +89,12 @@ public class MusicManager : MonoBehaviour
         }else{
             newTrack = hallway;
         }
-        firstLoop = true;
         bool track1Switch = (track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2);
-        StartCoroutine(switchTrack(newTrack, FadeTime, minVol, maxVol, firstLoop));
+        StartCoroutine(switchTrack(newTrack, FadeTime, minVol, maxVol));
     }
 
 
-    private IEnumerator switchTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol, bool firstLoop){
+    private IEnumerator switchTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
@@ -106,13 +103,10 @@ public class MusicManager : MonoBehaviour
             
             if (newTrack != track1.clip){
                 track2.clip = newTrack;
-                if (firstLoop){
-                    fadingTrack = 1;
-                    firstLoop = false;
-                    track1CurrentVol = track1.volume;
-                    track2CurrentVol = track2.isPlaying ? track2.volume : 0;
+                fadingTrack = 1;
+                track1CurrentVol = track1.volume;
+                track2CurrentVol = track2.isPlaying ? track2.volume : 0;
 
-                }   
                 track2.Play();
 
                 while (timeElapsed < FadeTime){
@@ -129,12 +123,9 @@ public class MusicManager : MonoBehaviour
         } else {
              if (newTrack != track2.clip){
                 track1.clip = newTrack;
-                if (firstLoop){
-                    fadingTrack = 2;
-                    firstLoop = false;
-                    track1CurrentVol = track1.isPlaying ? track1.volume : 0;
-                    track2CurrentVol = track2.volume;
-                }  
+                fadingTrack = 2;
+                track1CurrentVol = track1.isPlaying ? track1.volume : 0;
+                track2CurrentVol = track2.volume;
                 track1.Play();
 
                 while (timeElapsed < FadeTime){
