@@ -92,10 +92,16 @@ public class Appliance : Interactable
                     if (this.name == "Oven1")
                     {
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
+                        //SOUND -------------------------------------------------------
+                        minigameCanvas.GetComponent<AudioSource>().Play();
+                        //-------------------------------------------------------------
                     }
                     else
                     {
                         minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.identity);
+                        //SOUND -------------------------------------------------------
+                        minigameCanvas.GetComponent<AudioSource>().Play();
+                        //-------------------------------------------------------------
                     }
                     myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
                     
@@ -110,6 +116,10 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    
+                    //SOUND -------------------------------------------------------
+                    minigameCanvas.GetComponent<AudioSource>().Play();
+                    //-------------------------------------------------------------
                     
                    
 

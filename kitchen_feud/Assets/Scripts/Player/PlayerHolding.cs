@@ -144,7 +144,8 @@ public class PlayerHolding : MonoBehaviour
 
     [PunRPC]
     void PlayDropSound() {
-        FindObjectOfType<SoundEffectsManager>().dropSound.Play();
+        //FindObjectOfType<SoundEffectsManager>().dropSound.Play();
+        if(heldObj.GetComponent<AudioSource>() != null) heldObj.GetComponent<AudioSource>().Play();
     }
 
     

@@ -67,8 +67,8 @@ public class CanvasController : MonoBehaviour
     {
         //SOUND -------------------------------------------------
         //RPC to all
-        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
-        justClicked.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, justClicked);
+        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        //justClicked.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, justClicked);
         //-------------------------------------------------------
 
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
@@ -274,9 +274,9 @@ public class CanvasController : MonoBehaviour
 
     //SOUND ---------------------------------------------------------------
     [PunRPC]
-    void PlayServingSound(GameObject obj) {
-        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
-        obj.GetComponent<AudioSource>().Play();
+    void PlayServingSound(/*GameObject obj*/) {
+        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        //obj.GetComponent<AudioSource>().Play();
     }
     //----------------------------------------------------------------------
 
