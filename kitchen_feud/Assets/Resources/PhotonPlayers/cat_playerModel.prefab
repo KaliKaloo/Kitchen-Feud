@@ -258,7 +258,6 @@ MonoBehaviour:
   cam: {fileID: 2216191030710823112}
   secondaryCam: {fileID: 5992262761695865800}
   view: {fileID: 4338776926646805293}
-  location: 0
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -73,7 +73,7 @@ public class MusicManager : MonoBehaviour
         AudioClip newTrack;
         newTrack = (location == 1) ? k1_MG : k2_MG;
         firstLoop = true;
-        // StartCoroutine(switchTrack(newTrack, 0, 0, 1, firstLoop));
+        StartCoroutine(switchTrack(newTrack, 0, 0, 1, firstLoop));
         
     }
 
