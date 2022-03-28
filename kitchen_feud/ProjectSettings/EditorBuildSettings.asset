@@ -9,27 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 1
-    path: Assets/Scenes/kitchens_music.unity
-    guid: daa4beec24e5a3c4e9d820b7aad31afe
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 76282e320968e4bc7be23058856691d7
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
+  - enabled: 0
+    path: Assets/Scenes/kitchens_music.unity
+    guid: daa4beec24e5a3c4e9d820b7aad31afe
   m_configObjects: {}

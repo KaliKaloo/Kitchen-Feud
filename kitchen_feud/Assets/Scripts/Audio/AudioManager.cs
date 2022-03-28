@@ -23,12 +23,11 @@ public class AudioManager : MonoBehaviour
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
-        MusicManager.instance.location = myTeam;
-
     }
     
     void Start()
     {
+        MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
 
         if (myTeam == 1)
