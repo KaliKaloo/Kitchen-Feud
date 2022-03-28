@@ -20,21 +20,25 @@ public class ItemCollider : MonoBehaviour
         if (collision.CompareTag("Ingredient"))
         {
             // Get player
-            GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;
-            // Send player to appliance 
-            parentAppliance.player = player.transform;
+            GameObject player = collision.transform.parent.parent.gameObject;
+            PhotonView pv = player.GetComponent<PhotonView>();
+            // Send player to appliance
+            parentAppliance.GetComponent<PhotonView>().RPC("setPlayer", RpcTarget.All, parentAppliance.GetComponent<PhotonView>().ViewID,
+                pv.ViewID);
+            //parentAppliance.player = player.transform;
 
             PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
             parentAppliance.playerRigidbody = player.GetComponent<Rigidbody>();
             parentAppliance.SlotsController = parentObject.GetComponent<SlotsController>();
 
-            PhotonView pv = player.GetComponent<PhotonView>();
+            
 
             if (pv.IsMine && parentAppliance.canUse)
             {
                 // PLAY SOUND FOR SLOT HERE
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
+                playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
             }
                 
         }
