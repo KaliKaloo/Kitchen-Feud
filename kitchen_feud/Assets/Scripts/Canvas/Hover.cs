@@ -73,12 +73,12 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
         appliancesToGlow = GameObject.FindGameObjectsWithTag(dishTag);
 
-        foreach (GameObject glowAppliance in appliancesToGlow)
-        {
-            //turn on the glow script
-           glowAppliance.GetComponent<OutlineEffect>().enabled = true;
+        // foreach (GameObject glowAppliance in appliancesToGlow)
+        // {
+        //     //turn on the glow script
+        //    glowAppliance.GetComponent<OutlineEffect>().enabled = true;
            
-        }
+        // }
 
 
     }
