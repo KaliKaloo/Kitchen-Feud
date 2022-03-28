@@ -14,6 +14,7 @@ public class EnableBackgrounds : MonoBehaviour
         {
             team1Background.SetActive(true);
             team2Background.SetActive(false);
+            
         }
         else if (canvas.tag == "Team2")
         {
