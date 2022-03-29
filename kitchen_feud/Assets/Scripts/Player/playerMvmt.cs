@@ -34,7 +34,7 @@ public class playerMvmt : MonoBehaviour
     private void Update()
     {
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.tag == "Player")
         {
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
@@ -72,7 +72,7 @@ public class playerMvmt : MonoBehaviour
     private void LateUpdate()
     {
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.tag == "Player")
         {
             if (Input.GetMouseButton(1))
             {
@@ -96,7 +96,7 @@ public class playerMvmt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.tag == "Player")
         {
             {
                 rb.MovePosition(rb.position + movement * mvmtSpeed * Time.fixedDeltaTime);
