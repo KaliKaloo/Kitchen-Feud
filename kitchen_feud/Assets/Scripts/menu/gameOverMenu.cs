@@ -55,9 +55,11 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // alters global variable and returns straight to lobby menu
     public void PlayAgain()
     {
-        PhotonNetwork.LeaveRoom();
-
+        PhotonNetwork.Destroy(GameObject.Find("VoiceManager"));
         PhotonNetwork.Destroy(GameObject.Find("RoomController"));
+
+        // leave photon room on the network
+        PhotonNetwork.LeaveRoom();
     }
 
     public override void OnLeftRoom()

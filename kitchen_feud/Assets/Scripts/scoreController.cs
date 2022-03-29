@@ -6,6 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
+// IMPORTANT:
+// timer and score parser class have been moved to separate scripts
+// CHECK scripts/menu folder for the relevant scripts
+
 public class scoreController : MonoBehaviour
 {
     [SerializeField] private Text score1Text;
@@ -114,10 +118,7 @@ public class scoreController : MonoBehaviour
             // calls this to clean objects which need resetting
             cleanupRoom.Clean();
 
-            Debug.Log("End");
-
             startGame = false;
-
             // sends to server that game has finished
             lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
