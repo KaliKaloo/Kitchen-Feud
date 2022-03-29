@@ -49,12 +49,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Transform roomListContent;
 
-
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
-   
-  
 
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
@@ -63,11 +60,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        //rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-        
         Instance = this;
-       // DontDestroyOnLoad(this.gameObject);
-
     }
 
     private void SetTeam(int teamNumber)
@@ -93,16 +86,11 @@ public class menuController : MonoBehaviourPunCallbacks
                 // do nothing if no players exist in that team   
             }
         }
-        //print("Team " + team + " has " + total + " members.");
         return total;
     }
 
     private void Start()
     {
-
-
-
-        
         PhotonNetwork.AutomaticallySyncScene = true;
        
 
@@ -117,7 +105,6 @@ public class menuController : MonoBehaviourPunCallbacks
         } 
         else
         {
-            // NEED TO ADD CURRENT USERNAME HERE
             greetingMenu.text = "Welcome back " + PhotonNetwork.LocalPlayer.NickName + "!";
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
@@ -158,7 +145,6 @@ public class menuController : MonoBehaviourPunCallbacks
         findLobbyMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
-        //UpdateTeamButtons();
         playerList.text = GetPlayers(1);
         playerList2.text = GetPlayers(2);
 
@@ -293,11 +279,9 @@ public class menuController : MonoBehaviourPunCallbacks
         rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         if (PhotonNetwork.IsMasterClient)
         {
-
             x = rnd.Next(11, 101);
             lobby["Lobby"] = x;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-           
         }
         else
         {
@@ -305,14 +289,12 @@ public class menuController : MonoBehaviourPunCallbacks
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
         rtcEngine.JoinChannel(x.ToString() + "Lobby");
-
         
         loadingScreen.SetActive(false);
 
-        // WIP ASSIGN CORRECT TEAM ON JOIN
-
-        int teamBalance = CheckTeamBalance();
-        if (teamBalance == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+           
+        // Auto balance team on join
+        if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
         {
             SetTeam(2);
         }
