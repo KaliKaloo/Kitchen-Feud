@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  Oven: {fileID: 0}
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1549,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4d69a5245b8ce4ae5bc379254eec04dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -233,6 +233,7 @@ public class Appliance : Interactable
     {
         ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        
     }
     [PunRPC]
     void setParent(int canvasID,int ovenID)
