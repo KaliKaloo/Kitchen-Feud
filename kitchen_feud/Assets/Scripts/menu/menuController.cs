@@ -277,6 +277,10 @@ public class menuController : MonoBehaviourPunCallbacks
     // Load level once game is started
     public void StartGame()
     {
+        // after start button is pressed players can no longer join
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
             this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
         else
