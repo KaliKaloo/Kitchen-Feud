@@ -8,7 +8,6 @@ public class ItemCollider : MonoBehaviour
     private GameObject parentObject;
     private Appliance parentAppliance;
 
-    // Start is called before the first frame update
     void Start()
     {
         parentObject = gameObject.transform.parent.gameObject;
@@ -17,8 +16,9 @@ public class ItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Ingredient"))
+        if (collision.CompareTag("Ingredient") && collision.transform.parent)
         {
+
             // Get player
             GameObject player = collision.transform.parent.parent.gameObject;
             PhotonView pv = player.GetComponent<PhotonView>();
@@ -33,7 +33,7 @@ public class ItemCollider : MonoBehaviour
 
             
 
-            if (pv.IsMine && parentAppliance.canUse)
+            if (pv.IsMine && parentAppliance.canUse && playerHold)
             {
                 // PLAY SOUND FOR SLOT HERE
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
@@ -50,9 +50,4 @@ public class ItemCollider : MonoBehaviour
         parentAppliance.addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
