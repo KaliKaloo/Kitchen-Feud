@@ -23,7 +23,7 @@ public class Agent : MonoBehaviour
         //agent.SetDestination(GameObject.Find("Local").transform.position);
         if (Oven.GetComponentInChildren<Timer>())
         {
-            if (Oven.GetComponentInChildren<Timer>().timerFake == 7)
+            if (Oven.GetComponentInChildren<Timer>().timerFake == 35)
             {
                 agent.SetDestination(Oven.GetComponentInChildren<Timer>().transform.position);
                 isMoving = true;
@@ -37,6 +37,11 @@ public class Agent : MonoBehaviour
             {
                 Debug.LogError("s");
                 Oven.GetComponentInChildren<Timer>().GetComponentInChildren<exitOven>().TaskOnClick();
+                if (Oven.GetComponent<Appliance>().cookedDish)
+                {
+                    GetComponent<PlayerHolding>().pickUpItem(Oven.GetComponent<Appliance>().cookedDish,
+                        Oven.GetComponent<Appliance>().cookedDish.GetComponent<pickableItem>().item);
+                }
                 isMoving = false;
             }
         }
