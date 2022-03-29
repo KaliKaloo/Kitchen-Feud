@@ -44,7 +44,13 @@ public class Agent : MonoBehaviour
                 }
                 isMoving = false;
             }
+          
+
         }
+          if(GetComponent<PlayerHolding>().slot.childCount != 0)
+            {
+                agent.SetDestination(GameObject.Find("Kitchen 1").GetComponentInChildren<Tray>().transform.position);
+            }
     }
     
 
