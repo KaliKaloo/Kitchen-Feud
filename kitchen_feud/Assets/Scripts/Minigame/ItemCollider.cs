@@ -8,7 +8,6 @@ public class ItemCollider : MonoBehaviour
     private GameObject parentObject;
     private Appliance parentAppliance;
 
-    // Start is called before the first frame update
     void Start()
     {
         parentObject = gameObject.transform.parent.gameObject;
@@ -17,24 +16,29 @@ public class ItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Ingredient"))
+        if (collision.CompareTag("Ingredient") && collision.transform.parent)
         {
+
             // Get player
-            GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;
-            // Send player to appliance 
-            parentAppliance.player = player.transform;
+            GameObject player = collision.transform.parent.parent.gameObject;
+            PhotonView pv = player.GetComponent<PhotonView>();
+            // Send player to appliance
+            parentAppliance.GetComponent<PhotonView>().RPC("setPlayer", RpcTarget.All, parentAppliance.GetComponent<PhotonView>().ViewID,
+                pv.ViewID);
+            //parentAppliance.player = player.transform;
 
             PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
             parentAppliance.playerRigidbody = player.GetComponent<Rigidbody>();
             parentAppliance.SlotsController = parentObject.GetComponent<SlotsController>();
 
-            PhotonView pv = player.GetComponent<PhotonView>();
+            
 
-            if (pv.IsMine && parentAppliance.canUse)
+            if (pv.IsMine && parentAppliance.canUse && playerHold)
             {
                 // PLAY SOUND FOR SLOT HERE
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
+                playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.All, playerHold.GetComponent<PhotonView>().ViewID);
             }
                 
         }
@@ -46,9 +50,4 @@ public class ItemCollider : MonoBehaviour
         parentAppliance.addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

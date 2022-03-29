@@ -158,10 +158,10 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-
-            if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
+            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
                 SlotsController.PutOnAppliance(heldObjArg);
+
             }
         }
         else { Debug.Log("Can't put a cooked dish in a appliance."); }
@@ -238,6 +238,10 @@ public class Appliance : Interactable
     {
         PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
     }
-    
+    [PunRPC]
+    void setPlayer(int viewiD,int playerID)
+    {
+        PhotonView.Find(viewiD).GetComponent<Appliance>().player = PhotonView.Find(playerID).transform;
+    }
 }
 
