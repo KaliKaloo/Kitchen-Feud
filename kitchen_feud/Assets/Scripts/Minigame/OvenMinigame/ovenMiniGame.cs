@@ -30,12 +30,12 @@ public class ovenMiniGame : MonoBehaviour
                 backbutton.appliance = GetComponent<Appliance>();
             }
         }
-        if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){
-            appliance.canUse = false;
+        // if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){
+        //     appliance.canUse = false;
 
-        } else{
-            appliance.canUse = true;
-        }
+        // } else{
+        //     appliance.canUse = true;
+        // }
     }
 
 
