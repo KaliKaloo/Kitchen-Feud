@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6626711080517108647}
   m_Layer: 0
   m_Name: Tomato Soup
-  m_TagString: Untagged
+  m_TagString: Dish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

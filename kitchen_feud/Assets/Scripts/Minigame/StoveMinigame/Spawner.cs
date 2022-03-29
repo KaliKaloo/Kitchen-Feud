@@ -66,14 +66,16 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject minigameCanvas;
     public GameObject backButton;
     public GameObject topBar;
+    public GameObject bottomBar;
 
     [SerializeField] public GameObject correctItem;
     public Appliance appliance;
-
+    public Camera UICamera;
 
     public DishSO dishSO;
     private int chosenX;
     private int chosenY;
+    BoxCollider2D boxCollider;
 
     private GameObject parentCanvas;
 
@@ -88,11 +90,17 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // boxCollider = bottomBar.GetComponent<BoxCollider2D>();
+        // boxCollider.size = new Vector3(Screen.width, bottomBar.transform.lossyScale.y, bottomBar.transform.lossyScale.z);
         stoveMinigameCounter.StartGame();
         
         stoveScore.ResetValues();
-        chosenX = Screen.width;
-        chosenY = Screen.height;
+        //Camera cam = Camera.main;
+        //float height = 2f * UICamera.orthographicSize;
+        //float width = height * UICamera.aspect;
+        
+        chosenY = (int)(2f * UICamera.orthographicSize);
+        chosenX = (int)(chosenY  * UICamera.aspect);
         backButton.SetActive(false);
     }
 
@@ -144,10 +152,12 @@ public class Spawner : MonoBehaviour
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
-                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
+                new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
 
+            obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
+           
             stoveMinigameCounter.MinusCounter();
             StartCoroutine(SpawnCorrectIngredient());
            
@@ -170,8 +180,10 @@ public class Spawner : MonoBehaviour
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,
-                new Vector2(Random.Range(0, chosenX), chosenY), Quaternion.identity,
+                new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
+
+            obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
             obj.GetComponent<Image>().sprite = currentBomb;
             StartCoroutine(SpawnBombObject());
         }

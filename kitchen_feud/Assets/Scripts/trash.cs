@@ -15,7 +15,6 @@ public class trash : Interactable
             if (obj){
                 PhotonNetwork.Destroy(obj);
             }
-            playerHold.items.Clear();
         }
         
     }

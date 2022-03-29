@@ -22,7 +22,7 @@ public class pickableItem : Interactable
         
         playerHold = player.GetComponent<PlayerHolding>();
 
-        if (playerHold.items.Count == 0) {
+        if (player.transform.Find("slot").childCount == 0) {
             if (onAppliance == false && onTray == false) {
                 playerHold.pickUpItem(gameObject, item);
             }
@@ -55,6 +55,11 @@ public class pickableItem : Interactable
 		tray.ServingTray.Remove(item);
 		onTray = false;
 	}
+
+    public void interactPublic()
+    {
+        Interact();
+    }
 
 
 

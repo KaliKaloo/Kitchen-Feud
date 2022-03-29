@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 821590201347586432}
   m_Layer: 0
   m_Name: rawPasta
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

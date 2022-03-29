@@ -25,6 +25,8 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
 		SandwichController.RestartGame();
 		
 		canvas.gameObject.SetActive(true);
@@ -38,5 +40,8 @@ public class ExitSandwichMinigame : MonoBehaviour
 		view.RPC("EnablePushing", RpcTarget.All, view.ViewID);
 
 		appliance.playerController.enabled = true;
+		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+		appliance.UIcamera.enabled = false;
+		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }

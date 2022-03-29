@@ -13,30 +13,25 @@ public class cuttingMinigame : MonoBehaviour
     public cutController CutController;
     private Appliance appliance;
     public ExitCuttingMinigame backbutton;
-    //public int finalPoints;
-    
-    //public cuttingkeypress k;
-
-    // Start is called before the first frame update
+   
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsCutting;
         appliance = GetComponent<Appliance>();
         
     }
-     void Update(){
-        if(appliance.isBeingInteractedWith){
-            
-            if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+    void Update(){
+        if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+        {
+            MusicManager.instance.minigameSwitch();
+		    MusicManager.instance.inMG = true;
+
+            backbutton.appliance = GetComponent<Appliance>();
+
+            if (appliance.foundDish != null)
             {
-                backbutton.appliance = GetComponent<Appliance>();
-
-                if (appliance.foundDish != null)
-                {
-                    CutController.dish = appliance.foundDish;
-                }
+                CutController.dish = appliance.foundDish;
             }
-
         }
     }
 

@@ -11,12 +11,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public Interactable focus;
 	public int myTeam;
 	[SerializeField] private Camera cam;
+	[SerializeField] private Camera secondaryCam;
+
 	PlayerHolding playerHold;
 	public PhotonView view;
 
 	void Start()
 	{
-		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 			if (!view.IsMine)
 			{
 				cam.enabled = false;
+				secondaryCam.enabled = false;
+
 			}
 			DontDestroyOnLoad(gameObject);
 		}
@@ -43,16 +46,22 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
+
+			gameObject.layer = 9;
+			gameObject.transform.GetChild(0).gameObject.layer = 9;
+			gameObject.transform.GetChild(1).gameObject.layer = 9;
+
+
+           
 		}
 		
 	}
 
 	void Update()
 	{
-	
 		if (view.IsMine)
 		{
-            if (Input.GetButtonDown("Fire1"))
+			if (Input.GetButtonDown("Fire1"))
 			{
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -70,18 +79,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
-						if (playerHold.items.Count != 0) playerHold.dropItem();
+						if (player.transform.Find("slot").childCount!= 0) playerHold.dropItem();
 						RemoveFocus();
 					}
 					// -------------------------------------------------------------------------
 				}
 			}
 		}
+		
 	}
 
 
-    // Set our focus to a new focus
-    void SetFocus(Interactable newFocus, GameObject obj)
+	// Set our focus to a new focus
+	void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{

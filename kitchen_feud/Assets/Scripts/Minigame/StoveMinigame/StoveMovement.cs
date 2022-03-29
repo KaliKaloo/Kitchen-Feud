@@ -11,16 +11,20 @@ public class StoveMovement : MonoBehaviour
 
     private float lowerBound;
     private float upperBound;
+    public Camera UICamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        xBound = Screen.width / 2;
+        int chosenY = (int)(2f * UICamera.orthographicSize);
+        xBound = (int)(chosenY  * UICamera.aspect)/2;
+         
         pot = GetComponent<Rigidbody2D>();
-        print(pot.position);
+        //print(pot.position);
         lowerBound = pot.position.x - xBound;
         upperBound = pot.position.x + xBound;
-        pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
+        pot.position = new Vector3(Screen.width / 2, Screen.height / 5.5f,0);
+
 
     }
 
@@ -35,7 +39,7 @@ public class StoveMovement : MonoBehaviour
         else
             pot.velocity = Vector2.zero;
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, lowerBound, upperBound),
-            transform.position.y);
+        pot.position = new Vector2(Mathf.Clamp(pot.position.x, lowerBound, upperBound),
+            pot.position.y);
     }
 }
