@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.808
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.31404793, g: 0.5882939, b: 0.59193647, a: 0.808}
+  m_IndirectSpecularColor: {r: 0.3141726, g: 0.58853096, b: 0.5932542, a: 0.808}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 118424244}
   m_Layer: 2
   m_Name: AudioManagerOne
-  m_TagString: Speaker1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1595,11 +1595,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118424242}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.36, y: 0.54, z: 14.05}
+  m_LocalPosition: {x: 10.36, y: 0.54, z: 13.762}
   m_LocalScale: {x: 1, y: 1, z: 1.4022}
   m_Children: []
   m_Father: {fileID: 6517171174103740527}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &118424244
 MonoBehaviour:
@@ -8584,7 +8584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266543285}
   - component: {fileID: 266543286}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Speaker1
   m_TagString: Speaker1
   m_Icon: {fileID: 0}
@@ -16153,7 +16153,7 @@ GameObject:
   - component: {fileID: 423693982}
   m_Layer: 2
   m_Name: AudioManagerOne (1)
-  m_TagString: Speaker1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16166,11 +16166,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423693980}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 9.656, y: 0.5, z: 12.596}
+  m_LocalPosition: {x: 9.656, y: 0.5, z: 13.058}
   m_LocalScale: {x: 1, y: 1, z: 1.3858289}
   m_Children: []
   m_Father: {fileID: 6517171174103740527}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &423693982
 MonoBehaviour:
@@ -16313,7 +16313,7 @@ GameObject:
   - component: {fileID: 433653282}
   m_Layer: 2
   m_Name: AudioManagerTwo
-  m_TagString: Speaker2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41018,7 +41018,7 @@ GameObject:
   - component: {fileID: 998557871}
   m_Layer: 0
   m_Name: Music
-  m_TagString: Speaker1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72351,7 +72351,7 @@ GameObject:
   - component: {fileID: 2133190622}
   m_Layer: 2
   m_Name: AudioManagerTwo (1)
-  m_TagString: Speaker2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86475,8 +86475,8 @@ Transform:
   - {fileID: 1251206772935879216}
   - {fileID: 1819152650}
   - {fileID: 266543285}
-  - {fileID: 118424243}
   - {fileID: 423693981}
+  - {fileID: 118424243}
   - {fileID: 1626507061}
   - {fileID: 1244015734}
   - {fileID: 1053684662}
