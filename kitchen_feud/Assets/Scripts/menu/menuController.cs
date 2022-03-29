@@ -278,8 +278,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            LoadScene(1);
-            //this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
         else
             // change this to load larger kitchen if > 4 players!!!!!
             LoadScene(1);
@@ -298,6 +297,7 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         else
         {
+            AddPlayerToLobby();
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
         rtcEngine.JoinChannel(x.ToString() + "Lobby");
@@ -320,6 +320,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         lobbyMenu.SetActive(false);
+        RemovePlayerFromLobby();
         connectPanel.SetActive(true);
     }
 
@@ -327,6 +328,12 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         loadingScreen.SetActive(false);
         lobbyError.text = "Lobby does not exist!";
+        connectPanel.SetActive(true);
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        loadingScreen.SetActive(false);
         connectPanel.SetActive(true);
     }
 
@@ -343,6 +350,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         loadingScreen.SetActive(false);
+        lobby["Players"] = 1;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -353,6 +362,21 @@ public class menuController : MonoBehaviourPunCallbacks
         for (int i = 0; i < roomList.Count; i++) {
             Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
+    }
+
+    private void AddPlayerToLobby()
+    {
+        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+        lobby["Players"] = currentPlayers + 1;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+    }
+
+    private void RemovePlayerFromLobby()
+    {
+        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+        if (currentPlayers > 1)
+            lobby["Players"] = currentPlayers - 1;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
     public void SwitchToTeam1() {

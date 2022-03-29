@@ -172,18 +172,22 @@ public class scoreController : MonoBehaviour
 
     private int totalTime;
     private MusicManager music;
+    private bool startGame = false;
+
+    private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
 
     // Start is called before the first frame update
     void Start()
     {
+        // send message to server that finished loading
+        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+        if (currentPlayers > 0)
+            lobby["Players"] = currentPlayers - 1;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+
         // start scores at 0
         score1Text.text = ConvertScoreToString(scores.GetScore1());
         score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-        // start timer if not started yet
-        timer.InitializeTimer();
-        timerText.text = ConvertSecondToMinutes(timer.GetTime());
-        music = FindObjectOfType<MusicManager>();
     }
 
     // Converts an integer to a string with proper comma notation
@@ -202,15 +206,30 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        score1Text.text = ConvertScoreToString(scores.GetScore1());
-        score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-        // increment every second
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
+        if (startGame)
         {
-            elapsed = elapsed % 1f;
-            OutputTime();
+            score1Text.text = ConvertScoreToString(scores.GetScore1());
+            score2Text.text = ConvertScoreToString(scores.GetScore2());
+
+            // increment every second
+            elapsed += Time.deltaTime;
+            if (elapsed >= 1f)
+            {
+                elapsed = elapsed % 1f;
+                OutputTime();
+            }
+        }
+        else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
+        {
+            // show waiting for others players menu
+        } else
+        {
+            startGame = true;
+
+            // start timer if not started yet
+            timer.InitializeTimer();
+            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            music = FindObjectOfType<MusicManager>();
         }
     }
 
@@ -235,6 +254,11 @@ public class scoreController : MonoBehaviour
                 ts.tray.objectsOnTray.Clear();
             }
             PhotonNetwork.LoadLevel("gameOver");
+            startGame = false;
+
+            // sends to server that game has finished
+            lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         }
 
     }
