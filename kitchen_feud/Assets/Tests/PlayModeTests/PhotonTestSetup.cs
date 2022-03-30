@@ -55,6 +55,7 @@ public class PhotonTestSetup
         public void Connect()
         {
             PhotonNetwork.OfflineMode = true;
+        
         }
 
         public override void OnConnectedToMaster()
@@ -67,7 +68,7 @@ public class PhotonTestSetup
 
         public override void OnCreatedRoom()
         {
-            SceneManager.LoadScene("Test");
+            SceneManager.LoadScene("kitchens Test");
             ready = true;
         }
     }
