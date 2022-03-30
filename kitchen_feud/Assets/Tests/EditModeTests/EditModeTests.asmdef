@@ -8,7 +8,8 @@
         "PhotonUnityNetworking",
         "DatabaseASM",
         "TrayASM",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "PantryASM"
     ],
     "includePlatforms": [
         "Editor"

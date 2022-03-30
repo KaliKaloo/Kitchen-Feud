@@ -32,13 +32,25 @@ public class PickableItem
 
 
     [Test]
-    public void removeItemFromTray()
+    public void removeIngredientFromTray()
     {
         item.item = ScriptableObject.CreateInstance<IngredientSO>();
         TraySO tray = ScriptableObject.CreateInstance<TraySO>();
         tray.ServingTray.Add(item.item);
         Assert.AreEqual(1, tray.ServingTray.Count, "serving tray should have 1 ingredient");
 
+        item.removeFromTray(tray);
+        Assert.IsFalse(item.onTray, "on Tray should be set to false");
+        Assert.AreEqual(0, tray.ServingTray.Count, "serving tray should be empty");
+    }
+
+     [Test]
+    public void removeDishFromTray()
+    {
+        item.item = ScriptableObject.CreateInstance<DishSO>();
+        TraySO tray = ScriptableObject.CreateInstance<TraySO>();
+        tray.ServingTray.Add(item.item);
+        Assert.AreEqual(1, tray.ServingTray.Count, "serving tray should have 1 ingredient");
         item.removeFromTray(tray);
         Assert.IsFalse(item.onTray, "on Tray should be set to false");
         Assert.AreEqual(0, tray.ServingTray.Count, "serving tray should be empty");
