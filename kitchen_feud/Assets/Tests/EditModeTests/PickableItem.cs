@@ -8,6 +8,7 @@ public class PickableItem
 {
 
     pickableItem item;
+
     [OneTimeSetUp]
     public void SetUp()
     {
@@ -19,14 +20,14 @@ public class PickableItem
     [Test]
     public void trayInit()
     {
-        Assert.AreEqual(false, item.onTray, "on Tray should be initialised to false");
+        Assert.IsFalse(item.onTray, "on Tray should be initialised to false");
     }
 
     
     [Test]
     public void applianceInit()
     {
-        Assert.AreEqual(false, item.onAppliance, "on Appliance not initialised to false");
+        Assert.IsFalse(item.onAppliance, "on Appliance not initialised to false");
     }
 
 
@@ -39,7 +40,7 @@ public class PickableItem
         Assert.AreEqual(1, tray.ServingTray.Count, "serving tray should have 1 ingredient");
 
         item.removeFromTray(tray);
-        Assert.AreEqual(false, item.onTray, "on Tray should be set to false");
+        Assert.IsFalse(item.onTray, "on Tray should be set to false");
         Assert.AreEqual(0, tray.ServingTray.Count, "serving tray should be empty");
     }
 
