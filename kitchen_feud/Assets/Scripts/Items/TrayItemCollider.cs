@@ -21,9 +21,9 @@ public class TrayItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Ingredient") || collision.CompareTag("Dish"))
+        if ((collision.CompareTag("Ingredient") || collision.CompareTag("Dish")) && collision.transform.parent)
         {
-            GameObject player = collision.transform.parent.gameObject.transform.parent.gameObject;
+            GameObject player = collision.transform.parent.parent.gameObject;
             if (player.name == "Local")
             {
                 // Get player
