@@ -21,6 +21,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // receives scores from score screen
     private static ParseScore endScores = new ParseScore();
 
+    private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,9 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Destroy(GameObject.Find("VoiceManager"));
         PhotonNetwork.Destroy(GameObject.Find("RoomController"));
+
+        customProperties["Team"] = 1;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
 
         // leave photon room on the network
         PhotonNetwork.LeaveRoom();

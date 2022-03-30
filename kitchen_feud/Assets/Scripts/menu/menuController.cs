@@ -448,9 +448,6 @@ public class menuController : MonoBehaviourPunCallbacks
         UpdateLobby();
     }
 
-
-
-
     [PunRPC]
     void UpdateLobby(string roomName)
     {
