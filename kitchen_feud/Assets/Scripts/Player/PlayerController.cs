@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
 			
 			this.name = "Local";
-			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
-			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+//			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+//			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
 			
 			if(myTeam == 1)
             {
