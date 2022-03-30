@@ -50,5 +50,11 @@ public class Tray : Interactable
         this.tray.objectsOnTray.Remove(PhotonView.Find(viewID).gameObject);
     }
 
+    [PunRPC]
+    void PlayServingSound(int viewID) {
+        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Play();
+    }
+
 } 
  

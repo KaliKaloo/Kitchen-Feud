@@ -16,6 +16,7 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
     private TicketController ticketController;
+    private GameObject currentTray;
 
     public GameObject orderNumberPrefab;
     public int teamNumber;
@@ -63,14 +64,9 @@ public class CanvasController : MonoBehaviour
     }
 
     // serve corresponding order depending on what justClicked equals
-    public void Serve(GameObject justClicked)
+    public async void Serve(GameObject justClicked)
     {
-        //SOUND -------------------------------------------------
-        //RPC to all
-        FindObjectOfType<SoundEffectsManager>().servingSound.Play();
-        //justClicked.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, justClicked);
-        //-------------------------------------------------------
-
+        
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
             justClicked.GetComponent<PhotonView>().ViewID);
         
@@ -78,10 +74,30 @@ public class CanvasController : MonoBehaviour
 
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
+        //SOUND -------------------------------------------------
+        //RPC to all
+        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+
+        /*foreach (GameObject t in TC.trays)
+        {
+            Tray ts = t.GetComponent<Tray>();
+            if (ts.tray.trayID == d_ticket.orderid)
+            {
+                GameObject currentTray = t;
+                Debug.Log("trays in the loop: " + t.name);
+                
+            }
+        }
+        Debug.Log("tray " + currentTray.name);
+        currentTray.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, currentTray);*/
+        //-------------------------------------------------------
+
+
         TC.CompareOrder(d_ticket.orderid);
        
         
         d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
+        
         
     }
 
@@ -273,11 +289,17 @@ public class CanvasController : MonoBehaviour
     }
 
     //SOUND ---------------------------------------------------------------
-    [PunRPC]
-    void PlayServingSound(/*GameObject obj*/) {
+    /*[PunRPC]
+    void PlayServingSound() {
         FindObjectOfType<SoundEffectsManager>().servingSound.Play();
         //obj.GetComponent<AudioSource>().Play();
     }
+
+    [PunRPC]
+    void PlayServingSound(GameObject obj) {
+        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
+        obj.GetComponent<AudioSource>().Play();
+    } */
     //----------------------------------------------------------------------
 
 
