@@ -6,7 +6,15 @@ using UnityEngine.TestTools;
 
 public class StoveCounter
 {
-   StoveMinigameCounter stoveCounter = new StoveMinigameCounter();
+   StoveMinigameCounter stoveCounter;
+
+
+    [SetUp]
+    public void SetUp()
+    {
+        stoveCounter = new StoveMinigameCounter();
+    }
+
 
     [Test]
     public void startGame()
@@ -49,16 +57,5 @@ public class StoveCounter
         stoveCounter.MinusCounter();
         Assert.AreEqual(14, stoveCounter.GetCounter());
     }
-
     
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator StoveSpawnerWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
-
-    }
 }

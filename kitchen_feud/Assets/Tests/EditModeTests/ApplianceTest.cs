@@ -9,7 +9,7 @@ public class ApplianceTest
 
     Appliance appliance;
 
-    [OneTimeSetUp]
+    [SetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();

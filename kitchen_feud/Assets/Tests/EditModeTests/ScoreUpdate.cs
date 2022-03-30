@@ -7,7 +7,15 @@ using UnityEngine.TestTools;
 public class ScoreUpdate
 {
 
-    ParseScore score = new ParseScore();
+
+    ParseScore score;
+
+    [SetUp]
+    public void SetUp()
+    {
+        score = new ParseScore();
+    }
+
 
     [Test]
     public void scoresToZero()

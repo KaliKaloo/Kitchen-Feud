@@ -9,7 +9,7 @@ public class PickableItem
 
     pickableItem item;
 
-    [OneTimeSetUp]
+    [SetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();
@@ -43,6 +43,7 @@ public class PickableItem
         Assert.IsFalse(item.onTray, "on Tray should be set to false");
         Assert.AreEqual(0, tray.ServingTray.Count, "serving tray should be empty");
     }
+    
 
   
 }

@@ -11,7 +11,7 @@ public class healthBarTest
 
     HealthBar health;
     
-    [OneTimeSetUp]
+    [SetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();

@@ -9,6 +9,14 @@ public class ScoreInit
 
     ParseScore score = new ParseScore();
 
+
+    [SetUp]
+    public void SetUp()
+    {
+        score = new ParseScore();
+    }
+
+
     [Test]
     public void score1InitZero()
     {

@@ -9,7 +9,7 @@ public class InteractableTest
 
     Interactable interactable;
     
-    [OneTimeSetUp]
+    [SetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();
@@ -48,5 +48,7 @@ public class InteractableTest
         Assert.IsNull(interactable.player, "player should be null on defocus");
 
     }
+
+
    
 }

@@ -6,7 +6,13 @@ using UnityEngine.TestTools;
 
 public class PickUpLockTest
 {
-    PickupLock pickup = new PickupLock();
+    PickupLock pickup;
+
+    [SetUp]
+    public void SetUp()
+    {
+        pickup = new PickupLock();
+    }
 
     [Test]
     public void InitPickup()
