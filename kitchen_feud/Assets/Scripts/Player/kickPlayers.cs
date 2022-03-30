@@ -173,7 +173,7 @@ public class kickPlayers : MonoBehaviour
             if (obj.GetComponent<PlayerController>().myTeam == 1)
             {
                 
-                OV.RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(-1.98f, 0.006363153f, -8.37f));
+                OV.RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(11.21f,0.201f, -3.37f));
                 OV.RPC("setEnteredF", RpcTarget.All, OV.ViewID, 2);
                 OV.RPC("setEntered", RpcTarget.All,OV.ViewID, 1);
                 PV.RPC("setMyC", RpcTarget.All, OV.ViewID,0);
@@ -183,7 +183,7 @@ public class kickPlayers : MonoBehaviour
             }
             else
             {
-                obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(4.13f, 0.006363153f, 7.16f));
+                obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(-7.35f, 0.201f, -4.27f));
                 OV.RPC("setEnteredF", RpcTarget.All, OV.ViewID, 1);
                 OV.RPC("setEntered", RpcTarget.All, OV.ViewID, 2);
                 PV.RPC("setMyC", RpcTarget.All, OV.ViewID, 0);
