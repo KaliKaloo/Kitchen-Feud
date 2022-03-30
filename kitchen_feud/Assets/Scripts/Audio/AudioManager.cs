@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
+        // Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
     }
 
     private void OnTriggerEnter(Collider other)
