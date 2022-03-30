@@ -5,22 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 76282e320968e4bc7be23058856691d7
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
   - enabled: 0
     path: 
-    guid: 00000000000000000000000000000000
+    guid: daa4beec24e5a3c4e9d820b7aad31afe
   - enabled: 1
-    path: Assets/Scenes/kitchens Test.unity
-    guid: b6c4371bebe344484afb966a44123cfa
-  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: dd96bfc9090ea4a51afb615b7a817ca1
   m_configObjects: {}

@@ -178,11 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7725110315163838782}
+  m_speed: 200
   focus: {fileID: 0}
   myTeam: 0
   cam: {fileID: 529380843882259817}
-  secondaryCam: {fileID: 0}
   view: {fileID: 8876107304136392510}
+  rb: {fileID: 0}
 --- !u!114 &-8133205025873562219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,11 +197,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdingLimit: 1
+  items: []
   slot: {fileID: 5725064515487422948}
   heldObj: {fileID: 0}
   view: {fileID: 8876107304136392510}
   itemdropped: 0
-  itemLock: 0
 --- !u!114 &1194199829187532428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatespeed: 0
-  mvmtSpeed: 0
   playerBody: {fileID: 0}
   rb: {fileID: 0}
+  obj: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
   PV: {fileID: 0}
