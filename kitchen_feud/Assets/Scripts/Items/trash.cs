@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class trash : Interactable
+public class Trash : Interactable
 {
     public override void Interact()
     {
@@ -12,7 +12,7 @@ public class trash : Interactable
         if (playerHold){
             GameObject obj = playerHold.heldObj;
             playerHold.heldObj = null;
-            if (obj){
+            if (obj && PhotonNetwork.IsConnected){
                 PhotonNetwork.Destroy(obj);
             }
         }

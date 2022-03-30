@@ -40,8 +40,7 @@ public class InteractableTest
     public void defocusedTest()
     {
         GameObject transObj = new GameObject();
-        Transform playerTransform = transObj.transform;
-        interactable.player = playerTransform;
+        interactable.player = transObj.transform;
         Assert.IsNotNull(interactable.player);
         interactable.OnDefocused();
         Assert.IsFalse(interactable.isFocus, "isFocus should be set to false");
