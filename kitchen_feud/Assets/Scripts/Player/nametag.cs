@@ -17,7 +17,7 @@ public class nametag : MonoBehaviour
     }
     private void Update()
     {
-       //if (PV.IsMine)
+       if (PV.IsMine)
         {
             if (GameObject.Find("Local") && !GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag)
             {

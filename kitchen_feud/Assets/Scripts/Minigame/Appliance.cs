@@ -137,7 +137,7 @@ public class Appliance : Interactable
                 myPv.RPC("doFd", RpcTarget.All, myPv.ViewID, cookedDish.GetComponent<PhotonView>().ViewID);
 
                 //delete the items the dish was cooked from
-                //this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
                 itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
 
@@ -188,7 +188,11 @@ public class Appliance : Interactable
         }
     }
 
-
+    [PunRPC]
+    void clearItems(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
+    }
 
 
     [PunRPC]
