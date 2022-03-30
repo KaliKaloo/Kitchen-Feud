@@ -285,8 +285,8 @@ public class PlayerVoiceManager : MonoBehaviour
 		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Clear();
 	}
 	[PunRPC]
-	void setName(int viewiD)
+	void setName(int viewiD,string name)
 	{
-		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = PhotonNetwork.NickName;
+		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = name;
 	}
 }

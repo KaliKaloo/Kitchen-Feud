@@ -21,6 +21,7 @@ public class nametag : MonoBehaviour
         {
             if (GameObject.Find("Local").GetPhotonView().IsMine)
             {
+                
                 if (!GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag)
                 {
                     obj = GameObject.Find("Local");
@@ -30,7 +31,8 @@ public class nametag : MonoBehaviour
                 }
                 else if (GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag)
                 {
-                    obj.GetComponent<PhotonView>().RPC("setName", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+                    obj = GameObject.Find("Local");
+                    obj.GetComponent<PhotonView>().RPC("setName", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID,PhotonNetwork.NickName);
 
                 }
 
