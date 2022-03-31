@@ -10,14 +10,14 @@ public class CleanupRoom : MonoBehaviour
     // put all things you need resetting/destroyed here
     public void Clean()
     {
-        DestroyMushrooms();
+        // DestroyMushrooms();
         CleanPlayerSlots();
     }
 
-    private void DestroyMushrooms() {
-        Destroy(PhotonView.Find(55).gameObject);
-        Destroy(PhotonView.Find(56).gameObject);
-    }
+    // private void DestroyMushrooms() {
+    //     Destroy(PhotonView.Find(55).gameObject);
+    //     Destroy(PhotonView.Find(56).gameObject);
+    // }
     
     // Destroy all slots player is holding
     private void CleanPlayerSlots() {
@@ -25,7 +25,10 @@ public class CleanupRoom : MonoBehaviour
         // Destroy all items player is holding when game ends
         Transform slots = localPlayer.transform.Find("slot");
         foreach (Transform child in slots) {
+            if(child.GetComponent<PhotonView>().ViewID != 55 ||child.GetComponent<PhotonView>().ViewID != 56 ){
             Destroy(child.gameObject);
+
+            }
         }
         localPlayer = null;
     }
