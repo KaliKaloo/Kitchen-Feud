@@ -7,7 +7,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 60;
+    private static int time = 5;
 
     private static int timer = time;
     PhotonRoom room;

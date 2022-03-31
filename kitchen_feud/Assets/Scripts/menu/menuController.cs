@@ -233,6 +233,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Leave existing lobby
     public void LeaveGame()
     {
+        RemovePlayerFromLobby();
         lobbyError.text = "";
         connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
@@ -306,7 +307,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         lobbyMenu.SetActive(false);
-        RemovePlayerFromLobby();
         connectPanel.SetActive(true);
     }
 
