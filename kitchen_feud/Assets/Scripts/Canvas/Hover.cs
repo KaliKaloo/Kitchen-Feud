@@ -69,20 +69,35 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public void GlowAppliance(string dishName){
         DishSO dishInFocus = Database.GetDishByName(dishName);
         string dishTag = dishInFocus.toCook;
-        Debug.Log(dishTag);
-
+        // Debug.Log(dishTag);
+        GlowLocation(dishInFocus);
         appliancesToGlow = GameObject.FindGameObjectsWithTag(dishTag);
 
-        // foreach (GameObject glowAppliance in appliancesToGlow)
-        // {
-        //     //turn on the glow script
-        //    glowAppliance.GetComponent<OutlineEffect>().enabled = true;
+        foreach (GameObject glowAppliance in appliancesToGlow)
+        {
+            //turn on the glow script
+           OutlineEffect ce = glowAppliance.GetComponent<OutlineEffect>();
+           ce.enabled = true;
+        //    ce.colorOutline = new Color(4,3,4,0);
            
-        // }
-
-
+        }
     }
-     
+    
+    public void GlowLocation(DishSO dishInFocus){
+    
+        foreach (IngredientSO ingredient in dishInFocus.recipe)
+            {
+                //turn on the glow script
+                Debug.Log(ingredient.location);
+              
+                GameObject location = GameObject.Find(ingredient.location.ToString());
+                ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
+                var main = PS.main;
+                main.startColor = new Color(243,255,28,255);
+                // Color newColor = new Vector4(0.04f,0,0.89f,0);
+                // main.startColor = newColor;
 
+            }
+    }
 }
 

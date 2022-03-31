@@ -14,6 +14,7 @@ using System.IO;
         public GameObject outlineObjectPrefab;
         public GameObject outlineObject;
         // Start is called before the first frame update
+        
         void Start()
         {
         
@@ -24,8 +25,8 @@ using System.IO;
             // pv.enabled = false;
            // outlineObject = Instantiate(this.gameObject,transform.position,transform.rotation,transform);
             //  Debug.Log(outlineObject.name);
-            outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances","Stove"), transform.position,Quaternion.identity);
-
+            outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,Quaternion.identity);
+            //outlineObject = PhotonNetwork.Instantiate(outlineObjectPrefab, transform.position,Quaternion.identity);
             outlineObject.transform.SetParent(gameObject.transform);
             
             outlineObject.transform.localScale = new Vector3(1, 1, 1);
