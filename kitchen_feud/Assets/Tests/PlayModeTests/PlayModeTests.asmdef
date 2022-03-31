@@ -11,7 +11,8 @@
         "PhotonUnityNetworking.Editor",
         "PhotonUnityNetworking.Utilities",
         "PhotonUnityNetworking.Utilities.Culling.Editor",
-        "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor"
+        "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor",
+        "DatabaseASM"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
