@@ -16,6 +16,8 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text score2Text;
 
     [SerializeField] private Text timerText;
+    [SerializeField] private GameObject loadingScreen;
+
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
 
@@ -35,6 +37,7 @@ public class scoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        loadingScreen.SetActive(true);
         // send message to server that finished loading
         int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
         if (currentPlayers > 0)
@@ -83,8 +86,8 @@ public class scoreController : MonoBehaviour
         }
         else
         {
+            loadingScreen.SetActive(false);
             startGame = true;
-
             // start timer if not started yet
             timer.InitializeTimer();
             timerText.text = ConvertSecondToMinutes(timer.GetTime());
@@ -115,11 +118,12 @@ public class scoreController : MonoBehaviour
                 ts.tray.objectsOnTray.Clear();
             }
             PhotonNetwork.LoadLevel("gameOver");
-
             // calls this to clean objects which need resetting
             cleanupRoom.Clean();
-
+                        
             startGame = false;
+
+
             // sends to server that game has finished
             lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);

@@ -31,4 +31,10 @@ public class ParseScore
     {
         return score2;
     }
+
+    public void ResetScores() 
+    {
+        score1 = 0;
+        score2 = 0;
+    }
 }

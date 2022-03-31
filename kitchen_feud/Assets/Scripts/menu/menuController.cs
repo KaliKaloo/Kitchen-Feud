@@ -271,11 +271,11 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
         }
-
-        // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
- 
-            // change this to load larger kitchen if > 4 players!!!!!
-            //LoadScene(1);
+        // if > 4 players load into a different scene 
+        else 
+        {
+            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+        }
     }
 
     public override void OnJoinedRoom()
@@ -425,24 +425,18 @@ public class menuController : MonoBehaviourPunCallbacks
 
     }
 
-    //public void LoadScene(int levelIndex)
-    //{
-    //    StartCoroutine(LoadSceneAsynchronously(levelIndex));
-    //}
-
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
         lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
-        loadingBar.value = 10;
-        //while (!operation.isDone)
-        //{
-        //    loadingBar.value = operation.progress;
-        //    yield return null;
-        //}
-        //loadingBarCanvas.SetActive(false);
-        yield return null;
+        while (!operation.isDone)
+        {
+           loadingBar.value = operation.progress;
+           yield return null;
+        }
+        loadingBarCanvas.SetActive(false);
     }
 
 
@@ -466,10 +460,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [PunRPC]
     void loadS(int levelIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
-        StartCoroutine(LoadSceneAsynchronously(1));
-
-        //StartCoroutine(LoadSceneAsynchronously(levelIndex));
+        StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
    
   

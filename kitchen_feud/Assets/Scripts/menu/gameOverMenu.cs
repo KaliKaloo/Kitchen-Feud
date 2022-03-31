@@ -64,6 +64,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
 
         // leave photon room on the network
+        endScores.ResetScores();
         PhotonNetwork.LeaveRoom();
     }
 
