@@ -269,7 +269,9 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+            StartCoroutine(LoadSceneAsynchronously(1));
+
+       // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
         else
             // change this to load larger kitchen if > 4 players!!!!!
             LoadScene(1);

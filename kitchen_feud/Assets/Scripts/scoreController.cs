@@ -77,18 +77,19 @@ public class scoreController : MonoBehaviour
                 OutputTime();
             }
         }
-        // else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
-        // {
-        //     // show waiting for others players menu
-        // } else
-        // {
-        //     startGame = true;
+        else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
+        {
+            // show waiting for others players menu
+        }
+        else
+        {
+            startGame = true;
 
-        //     // start timer if not started yet
-        //     timer.InitializeTimer();
-        //     timerText.text = ConvertSecondToMinutes(timer.GetTime());
-        //     music = FindObjectOfType<MusicManager>();
-        // }
+            // start timer if not started yet
+            timer.InitializeTimer();
+            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            music = FindObjectOfType<MusicManager>();
+        }
     }
 
     // OutputTime is called once per second
