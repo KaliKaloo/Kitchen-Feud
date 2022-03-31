@@ -21,7 +21,6 @@ public class Timer : MonoBehaviour
     string applianceName;
     PhotonRoom room;
 
-    // changes original starting time, only do before game starts!
     void Start()
     {
         // start scores at 0
@@ -55,10 +54,11 @@ public class Timer : MonoBehaviour
     }
     public void ChangeTimerValue(int newTime)
     {
+        newTime = Mathf.Max(newTime, 0);
         timer = time = newTime;
     }
 
-    public int GetCurrentTime()
+    public int GetTotalTime()
     {
         return time;
     }
@@ -79,10 +79,11 @@ public class Timer : MonoBehaviour
         return str;
     }
 
-    public string GetCurrentTimeString()
-    {
-        return ConvertSecondToMinutes(time);
-    }
+        // are we using this ???
+    // public string GetCurrentTimeString()
+    // {
+    //     return ConvertSecondToMinutes(time);
+    // }
 
     // set the timer amount here 
     public void InitializeTimer()
@@ -93,15 +94,18 @@ public class Timer : MonoBehaviour
     }
 
     // get current time from timer
+    //timerfake is public - why do we have this
     public float GetTime()
     {
        return timerFake;
     }
 
-    // decrement timer
+
+
+// but get time gets fake time???
     public void Decrement()
     {
-        if (GetTime() > 0)
+        if (GetTime() > 0) 
         {
             score += 2;
         }

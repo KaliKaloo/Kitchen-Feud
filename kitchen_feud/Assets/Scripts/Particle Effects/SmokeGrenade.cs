@@ -15,7 +15,9 @@ public class EnableSmoke
         inEnemyKitchen = false;
         usedUp = false;
     }
+    
 
+    // what is the point of this?? already public
     // Gets state of player whether in enemy kitchen or not
     public bool GetPlayerState()
     {

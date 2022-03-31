@@ -18,6 +18,8 @@ public class PickupLock
         pickupLock = false;
     }
 
+
+    //point of this - already public???
     public bool GetLock()
     {
         return pickupLock;
