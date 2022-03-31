@@ -44,13 +44,5 @@ public class healthBarTest
         Assert.AreEqual(0.2f, health.slider.value);
     }
 
-    
-    public void healthMoreThanMax()
-    {
-        health.SetMaxHealth(0.3f);
-        health.SetHealth(0.4f);
-        Assert.AreEqual(0.3f, health.slider.value, "slider value cannot exceed max value");
-    }
-
   
 }
