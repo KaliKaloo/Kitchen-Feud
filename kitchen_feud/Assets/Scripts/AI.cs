@@ -20,7 +20,7 @@ public class AI : MonoBehaviour
     {
         if(PhotonNetwork.CurrentRoom.PlayerCount == 1 && PhotonNetwork.IsMasterClient && !GameObject.Find("Agent(Clone)"))
         {
-            Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Agent"), GameSetup.GS.spawnPoints1[0].position, Quaternion.identity);
+            Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Agent"), GameSetup.GS.WSP1[0].position, Quaternion.identity);
             Agent.GetPhotonView().TransferOwnership(1000);
 
         }

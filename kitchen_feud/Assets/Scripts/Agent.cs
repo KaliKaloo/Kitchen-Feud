@@ -14,7 +14,7 @@ public class Agent : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         
-        Oven = GameObject.Find("Kitchen 1").GetComponentInChildren<ovenMiniGame>().gameObject;
+        Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class Agent : MonoBehaviour
         }
           if(GetComponent<PlayerHolding>().slot.childCount != 0)
             {
-                agent.SetDestination(GameObject.Find("Kitchen 1").GetComponentInChildren<Tray>().transform.position);
+                agent.SetDestination(GameObject.Find("k1").GetComponentInChildren<Tray>().transform.position);
             }
     }
     
