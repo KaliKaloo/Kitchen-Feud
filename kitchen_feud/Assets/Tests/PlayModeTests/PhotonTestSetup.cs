@@ -67,7 +67,7 @@ public class PhotonTestSetup
 
         public override void OnCreatedRoom()
         {
-            SceneManager.LoadScene("Test");
+            SceneManager.LoadScene("kitchens Test");
             ready = true;
         }
     }
