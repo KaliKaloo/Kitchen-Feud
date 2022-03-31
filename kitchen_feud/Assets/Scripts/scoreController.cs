@@ -64,7 +64,7 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        if (startGame)
+        if (true)
         {
             score1Text.text = ConvertScoreToString(scores.GetScore1());
             score2Text.text = ConvertScoreToString(scores.GetScore2());
