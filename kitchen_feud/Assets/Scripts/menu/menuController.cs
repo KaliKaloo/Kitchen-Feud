@@ -270,9 +270,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
+            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
             AsyncOperation operation = SceneManager.LoadSceneAsync(1);
            
-            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+            
         }
 
         // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
@@ -438,12 +439,13 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
+        loadingBar.value = 10;
         //while (!operation.isDone)
         //{
         //    loadingBar.value = operation.progress;
         //    yield return null;
         //}
-        loadingBarCanvas.SetActive(false);
+        //loadingBarCanvas.SetActive(false);
         yield return null;
     }
 
@@ -468,6 +470,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [PunRPC]
     void loadS(int levelIndex)
     {
+
         StartCoroutine(LoadSceneAsynchronously(1));
 
         //StartCoroutine(LoadSceneAsynchronously(levelIndex));
