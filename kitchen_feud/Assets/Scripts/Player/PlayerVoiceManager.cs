@@ -112,7 +112,6 @@ public class PlayerVoiceManager : MonoBehaviour
 							view.RPC("push", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, view.ViewID);
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
-								Debug.LogError("sss");
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
 								view.RPC("setHBParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
 							}
@@ -286,8 +285,8 @@ public class PlayerVoiceManager : MonoBehaviour
 		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().kickedBy.Clear();
 	}
 	[PunRPC]
-	void setName(int viewiD)
+	void setName(int viewiD,string name)
 	{
-		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = PhotonNetwork.NickName;
+		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = name;
 	}
 }

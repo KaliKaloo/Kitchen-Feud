@@ -23,13 +23,15 @@ public class AudioManager : MonoBehaviour
         //engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
-        ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
     }
+    
     
     void Start()
     {
         MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
+        ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
+
 
         if (myTeam == 1)
         {
@@ -42,10 +44,13 @@ public class AudioManager : MonoBehaviour
         }
         
     }
-    
 
-   
-   
+
+
+    private void Update()
+    {
+        // Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

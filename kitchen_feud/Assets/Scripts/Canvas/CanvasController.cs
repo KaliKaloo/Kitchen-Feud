@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Photon.Pun;
+using System.IO;
+using TMPro;
 
 public class CanvasController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class CanvasController : MonoBehaviour
     private TicketController ticketController;
     private GameObject currentTray;
 
+    public List<GameObject> orderStands = new List<GameObject>(); 
     public GameObject orderNumberPrefab;
     public int teamNumber;
     private int orderNum;
@@ -56,7 +59,7 @@ public class CanvasController : MonoBehaviour
         justClicked = EventSystem.current.currentSelectedGameObject;
     }
 
-    // Sets justClicked to correct ticket given the tray name
+    // Sets justClicked to correct ticket given the tray name 
     public void TrayOrderOptions(string trayName)
     {
         orderMenu.SetActive(true);
@@ -101,47 +104,50 @@ public class CanvasController : MonoBehaviour
         
     }
 
-    public void ShowNewTicket()
-    {
-        int orderN;
-        if (ticket1.activeSelf == true)
-        {
-           if (ticket2.activeSelf == true)
-            {
-                DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                ticket3.SetActive(true);
-                Ticket3.orderNumber = 3;
+    // public void ShowNewTicket()
+    // {
+    //     int orderN;
+    //     if (ticket1.activeSelf == true)
+    //     {
+    //        if (ticket2.activeSelf == true)
+    //         {
+    //             DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
+    //             ticket3.SetActive(true);
+    //             Ticket3.orderNumber = 3;
 
-                orderN = DisplayNewRandomOrder(Ticket3);
-                InstantiateOrderSign(Ticket3.orderNumber, orderN);
-            }
+    //             orderN = DisplayNewRandomOrder(Ticket3);
+    //             orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); 
+    //             // InstantiateOrderSign(Ticket3.orderNumber, orderN);
+    //         }
 
-            else
-            {
-                DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-                ticket2.SetActive(true);
-                Ticket2.orderNumber = 2;
+    //         else
+    //         {
+    //             DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
+    //             ticket2.SetActive(true);
+    //             Ticket2.orderNumber = 2;
 
-                orderN = DisplayNewRandomOrder(Ticket2);
-                InstantiateOrderSign(Ticket2.orderNumber, orderN);
-            }
-        }
+    //             orderN = DisplayNewRandomOrder(Ticket2);
+    //             orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); 
+    //             // InstantiateOrderSign(Ticket2.orderNumber, orderN);
+    //         }
+    //     }
 
-        else
-        {
-            DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
-            ticket1.SetActive(true);
-            Ticket1.orderNumber = 1;
+    //     else
+    //     {
+    //         DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
+    //         ticket1.SetActive(true);
+    //         Ticket1.orderNumber = 1;
 
-            orderN = DisplayNewRandomOrder(Ticket1);
-            InstantiateOrderSign(Ticket1.orderNumber, orderN);
-        }
-    }
+    //         orderN = DisplayNewRandomOrder(Ticket1);
+    //         orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); 
+    //         // InstantiateOrderSign(Ticket1.orderNumber, orderN);
+    //     }
+    // }
 
     public void ShowNewTicketWithID(string order)
     {
         int orderN;
-
+        Debug.Log(orderStands.Count);
         if (ticket1.activeSelf == true)
         {
             if (ticket2.activeSelf == true)
@@ -151,8 +157,9 @@ public class CanvasController : MonoBehaviour
                 Ticket3.orderNumber = 3;
 
                 orderN = DisplayOrderFromID(Ticket3, order);
-                InstantiateOrderSign(Ticket3.orderNumber, orderN);
+                orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); 
 
+                // InstantiateOrderSign(Ticket3.orderNumber, orderN);
 
             }
 
@@ -163,7 +170,9 @@ public class CanvasController : MonoBehaviour
                 Ticket2.orderNumber = 2;
 
                 orderN = DisplayOrderFromID(Ticket2, order);
-                InstantiateOrderSign(Ticket2.orderNumber, orderN);
+                orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); 
+
+                // InstantiateOrderSign(Ticket2.orderNumber, orderN);
 
             }
         }
@@ -175,7 +184,9 @@ public class CanvasController : MonoBehaviour
             Ticket1.orderNumber = 1;
 
             orderN = DisplayOrderFromID(Ticket1, order);
-            InstantiateOrderSign(Ticket1.orderNumber, orderN);
+            orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); 
+
+            // InstantiateOrderSign(Ticket1.orderNumber, orderN);
         }
     }
 
@@ -183,8 +194,10 @@ public class CanvasController : MonoBehaviour
     private void InstantiateOrderSign(int ticketNumber, int orderNumber)
     {
         GameObject currentTray = TC.trays[ticketNumber-1];
-        GameObject sign = Instantiate(orderNumberPrefab, currentTray.transform);
+        GameObject sign = PhotonNetwork.Instantiate(Path.Combine("KitchenPrefabs", "OrderNumber"), currentTray.transform.position, Quaternion.identity);
+        GetComponent<PhotonView>().RPC("setSignParent", RpcTarget.All, sign.GetComponent<PhotonView>().ViewID, currentTray.GetComponent<PhotonView>().ViewID);
         sign.GetComponent<TrayText>().ChangeText(orderNumber.ToString());
+
     }
 
 
@@ -271,6 +284,10 @@ public class CanvasController : MonoBehaviour
 
     }
 
+    [PunRPC]
+    void setSignParent(int viewIDSign, int viewIDTray){
+        PhotonView.Find(viewIDSign).transform.SetParent(PhotonView.Find(viewIDTray).transform);
+    }
 
     [PunRPC]
     void ShowingWithOrderTeam1(string o)

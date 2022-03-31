@@ -142,13 +142,11 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
-
-
         {
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
-            PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
+            // PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
             // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
             itemdropped = true;
         }
