@@ -269,12 +269,16 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            StartCoroutine(LoadSceneAsynchronously(1));
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+           
+            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+        }
 
-       // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-        else
+        // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+ 
             // change this to load larger kitchen if > 4 players!!!!!
-            LoadScene(1);
+            //LoadScene(1);
     }
 
     public override void OnJoinedRoom()
@@ -424,24 +428,25 @@ public class menuController : MonoBehaviourPunCallbacks
 
     }
 
-    public void LoadScene(int levelIndex)
-    {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
-    }
+    //public void LoadScene(int levelIndex)
+    //{
+    //    StartCoroutine(LoadSceneAsynchronously(levelIndex));
+    //}
 
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
         lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
-        while (!operation.isDone)
-        {
-            loadingBar.value = operation.progress;
-            yield return null;
-        }
+        //while (!operation.isDone)
+        //{
+        //    loadingBar.value = operation.progress;
+        //    yield return null;
+        //}
         loadingBarCanvas.SetActive(false);
+        yield return null;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -463,7 +468,9 @@ public class menuController : MonoBehaviourPunCallbacks
     [PunRPC]
     void loadS(int levelIndex)
     {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
+        StartCoroutine(LoadSceneAsynchronously(1));
+
+        //StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
    
   
