@@ -91,8 +91,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
-       
+        //PhotonNetwork.AutomaticallySyncScene = true;
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -270,10 +269,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
-            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-            AsyncOperation operation = SceneManager.LoadSceneAsync(1);
-           
-            
+            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
         }
 
         // this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
@@ -470,7 +466,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [PunRPC]
     void loadS(int levelIndex)
     {
-
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
         StartCoroutine(LoadSceneAsynchronously(1));
 
         //StartCoroutine(LoadSceneAsynchronously(levelIndex));
