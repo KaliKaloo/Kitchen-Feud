@@ -31,8 +31,6 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     //     }
     // }
 
-    
-
     public void OnPointerClick(PointerEventData eventData)
     {
         bool click = true;
@@ -96,7 +94,6 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
                 main.startColor = new Color(243,255,28,255);
                 // Color newColor = new Vector4(0.04f,0,0.89f,0);
                 // main.startColor = newColor;
-
             }
     }
 }
