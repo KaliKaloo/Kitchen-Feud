@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.TestTools;
 using System.IO;
 
@@ -17,6 +18,7 @@ public class PlayerTests : PhotonTestSetup
     [UnitySetUp]
     public IEnumerator Setup()
     {
+        
         mushroom = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "mushroom"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
             "cat_playerModel"),
@@ -97,7 +99,7 @@ public class PlayerTests : PhotonTestSetup
         playerHold.dropItem();
 
         Assert.IsTrue(obj.transform.GetChild(2).childCount == 0);
-
+        
 
         yield return null;
     }
