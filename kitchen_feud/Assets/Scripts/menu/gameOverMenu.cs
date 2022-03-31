@@ -57,8 +57,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // alters global variable and returns straight to lobby menu
     public void PlayAgain()
     {
-        PhotonNetwork.Destroy(GameObject.Find("VoiceManager"));
-        PhotonNetwork.Destroy(GameObject.Find("RoomController"));
+        Destroy(GameObject.Find("VoiceManager"));
+        Destroy(GameObject.Find("RoomController"));
 
         customProperties["Team"] = 1;
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
