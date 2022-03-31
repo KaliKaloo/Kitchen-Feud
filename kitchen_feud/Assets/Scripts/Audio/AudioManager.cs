@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         //TO REMOVE COMMENT
-//        engine = VoiceChatManager.Instance.GetRtcEngine();
+        engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
