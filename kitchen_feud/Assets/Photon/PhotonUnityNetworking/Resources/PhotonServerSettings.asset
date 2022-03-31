@@ -142,6 +142,10 @@ MonoBehaviour:
   - setHBParent
   - setNTParent
   - changeLayer
+  - setHeldobj
+  - setHeldobjAsNull
+  - setPlayer
+  - setSignParent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

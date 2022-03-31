@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 		}
+		
 	}
 
 

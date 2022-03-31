@@ -76,7 +76,17 @@ public class PlayerHolding : MonoBehaviour
     void slotItem(GameObject obj, BaseFood item)
     {
 
-        heldObj = obj;
+        
+        PhotonView objPV = obj.GetComponent<PhotonView>();
+        if (objPV)
+        {
+            view.RPC("setHeldobj", RpcTarget.All, view.ViewID, objPV.ViewID);
+        }
+        else
+        {
+            heldObj = obj;
+        }
+
         if (heldObj.GetComponent<Rigidbody>())
         {
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
@@ -109,6 +119,8 @@ public class PlayerHolding : MonoBehaviour
             }
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
+            view.RPC("setHeldobjAsNull", RpcTarget.All, view.ViewID);
+
         }
     }
     [PunRPC]
@@ -124,16 +136,24 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
-
-
         {
             PhotonView.Find(viewID).gameObject.transform.SetParent(null);
             PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
-            PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
+            // PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
             // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
             itemdropped = true;
         }
+    }
+    [PunRPC]
+    void setHeldobj(int viewID,int heldObjId)
+    {
+        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = PhotonView.Find(heldObjId).gameObject;
+    }
+    [PunRPC]
+    void setHeldobjAsNull(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
     }
 
 }

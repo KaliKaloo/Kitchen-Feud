@@ -9,7 +9,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    private static int time = 600;
     
     private static int timer = time;
     PhotonRoom room;
@@ -37,12 +37,12 @@ public class GlobalTimer
     }
 
     public int GetTotalTime(){
-        return timer;
+        return time;
     }
 
     public int GetCurrentTime()
     {
-        return time;
+        return timer;
     }
 
     public string ConvertSecondToMinutes(int seconds)
@@ -170,6 +170,9 @@ public class scoreController : MonoBehaviour
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
 
+    private int totalTime;
+    private MusicManager music;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -180,6 +183,7 @@ public class scoreController : MonoBehaviour
         // start timer if not started yet
         timer.InitializeTimer();
         timerText.text = ConvertSecondToMinutes(timer.GetTime());
+        music = FindObjectOfType<MusicManager>();
     }
 
     // Converts an integer to a string with proper comma notation
@@ -195,7 +199,6 @@ public class scoreController : MonoBehaviour
         return str;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // update scores every frame

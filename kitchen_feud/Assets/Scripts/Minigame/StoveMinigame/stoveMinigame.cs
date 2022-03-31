@@ -28,6 +28,9 @@ public class stoveMinigame : MonoBehaviour
     void Update(){
         if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
+            MusicManager.instance.minigameSwitch();
+            MusicManager.instance.inMG = true;
+            
             backbutton.appliance = GetComponent<Appliance>();
             if (appliance.foundDish != null)
             {
@@ -44,7 +47,7 @@ public class stoveMinigame : MonoBehaviour
 
             if(dishOfFoundDish != null)
             {
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, 100);
+                
                 dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultipier();
 
                 // if player is team 2 but interacts with team1 stove, points doubled
@@ -53,6 +56,8 @@ public class stoveMinigame : MonoBehaviour
                 // if player is team 1 but interacts with team2 stove, points doubled
                 else if (stoveCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                     dishOfFoundDish.points = dishOfFoundDish.points * 2;
+                
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
 
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
