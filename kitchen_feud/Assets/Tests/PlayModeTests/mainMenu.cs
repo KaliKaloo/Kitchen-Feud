@@ -2,9 +2,11 @@
 //using System.Collections.Generic;
 //using NUnit.Framework;
 //using UnityEngine;
+//using UnityEditor;
 //using UnityEngine.SceneManagement;
 //using UnityEngine.TestTools;
 //using Photon.Pun;
+
 //using UnityEngine.UI;
 
 
@@ -13,9 +15,18 @@
 //    [OneTimeSetUp]
 //    public void SetUp()
 //    {
-//        SceneManager.LoadScene("mainMenu");
-//    }
 
+//        //UnityEditor.SceneManagement.Ed
+//        //UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsync("mainMenu");
+
+//    }
+//    [OneTimeTearDown]
+//    public void Tear()
+//    {
+//        PhotonNetwork.Disconnect();
+//        SceneManager.UnloadSceneAsync("mainMenu");
+
+//    }
 //    [UnityTest]
 //    public IEnumerator mainMenuLoad()
 //    {
@@ -24,7 +35,7 @@
 //        Assert.IsFalse(GameObject.Find("startGame") != null && GameObject.Find("startGame").activeSelf);
 //        yield return null;
 //    }
-    
+
 //    [UnityTest]
 //    public IEnumerator UsernameUI()
 //    {
