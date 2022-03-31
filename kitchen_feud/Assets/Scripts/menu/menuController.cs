@@ -301,7 +301,6 @@ public class menuController : MonoBehaviourPunCallbacks
         }
 
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
-       
     }
 
     public override void OnLeftRoom()
