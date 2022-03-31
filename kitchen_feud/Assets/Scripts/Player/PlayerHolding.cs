@@ -45,8 +45,9 @@ public class PlayerHolding : MonoBehaviour
         {
             StartCoroutine(LockPickup());
 
-            if (view.IsMine)
+            //if (view.IsMine)
             {
+                
 
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
@@ -91,11 +92,13 @@ public class PlayerHolding : MonoBehaviour
         if (heldObj.GetComponent<Rigidbody>())
         {
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
-
-            heldObj.layer = 8;
-            foreach (Transform child in heldObj.transform)
+            if (transform.name != "Agent(Clone)")
             {
-                child.gameObject.layer = 8;
+                heldObj.layer = 8;
+                foreach (Transform child in heldObj.transform)
+                {
+                    child.gameObject.layer = 8;
+                }
             }
         }
     }
