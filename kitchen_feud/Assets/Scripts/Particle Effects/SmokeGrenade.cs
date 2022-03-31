@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class EnableSmoke
 {
-    public static bool inEnemyKitchen = false;
+    private static bool inEnemyKitchen = false;
     public static GameObject smokeSlot;
     public static bool usedUp;
 
@@ -17,11 +17,16 @@ public class EnableSmoke
     }
     
 
-    // what is the point of this?? already public
     // Gets state of player whether in enemy kitchen or not
     public bool GetPlayerState()
     {
         return inEnemyKitchen;
+    }
+
+
+    public void SetPlayerState(bool state)
+    {
+        inEnemyKitchen = state;
     }
 
     // Initialize smoke slot so can be used in other functions

@@ -14,8 +14,8 @@ public class EnableSmokeTest
     public void InitSmoke()
     {   
         enableSmoke = new EnableSmoke();
-        Assert.IsFalse(EnableSmoke.inEnemyKitchen);
-        EnableSmoke.inEnemyKitchen = true;
+        Assert.IsFalse(enableSmoke.GetPlayerState());
+        enableSmoke.SetPlayerState(true);
     }
 
 
@@ -23,7 +23,7 @@ public class EnableSmokeTest
     public void RestartState()
     {   
         enableSmoke.RestartState();
-        Assert.IsFalse(EnableSmoke.inEnemyKitchen);
+        Assert.IsFalse(enableSmoke.GetPlayerState());
         Assert.IsFalse(EnableSmoke.usedUp);
 
     }
@@ -93,7 +93,7 @@ public class EnableSmokeTest
     [TearDown]
 
     public void reset(){
-        EnableSmoke.inEnemyKitchen = false;
+        enableSmoke.SetPlayerState(false);
         EnableSmoke.usedUp = false;
     }
 

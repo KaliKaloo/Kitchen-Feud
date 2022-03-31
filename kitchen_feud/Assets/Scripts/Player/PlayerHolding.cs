@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PickupLock
 {
-    public static bool pickupLock = false;
+    private static bool pickupLock = false;
 
     public void Lock()
     {
@@ -19,7 +19,6 @@ public class PickupLock
     }
 
 
-    //point of this - already public???
     public bool GetLock()
     {
         return pickupLock;

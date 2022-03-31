@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     private static int time = 40;
     public Text timerText;
     public float timer = time;
-    public float timerFake = time;
+    private float timerFake = time;
     public int score = 0;
     float elapsed = 0f;
     public exitOven backbutton;
@@ -79,11 +79,6 @@ public class Timer : MonoBehaviour
         return str;
     }
 
-        // are we using this ???
-    // public string GetCurrentTimeString()
-    // {
-    //     return ConvertSecondToMinutes(time);
-    // }
 
     // set the timer amount here 
     public void InitializeTimer()
@@ -94,18 +89,21 @@ public class Timer : MonoBehaviour
     }
 
     // get current time from timer
-    //timerfake is public - why do we have this
     public float GetTime()
     {
        return timerFake;
     }
 
 
+    public void SetTime(float time)
+    {
+       timerFake = time;
+    }
 
-// but get time gets fake time???
+
     public void Decrement()
     {
-        if (GetTime() > 0) 
+        if (timer > 0) 
         {
             score += 2;
         }
@@ -123,21 +121,18 @@ public class Timer : MonoBehaviour
     void OutputTime()
     {
 
-       // if (GetTime() > 0)
+        Decrement();
+        // updates timer and text in timer
+        if (GetTime() < 5)
         {
-            Decrement();
-            // updates timer and text in timer
-            if (GetTime() < 5)
-            {
-                timerText.color = Color.red;
-            }
-            else
-            {
-                timerText.color = Color.black;
-            }
-            
-            timerText.text = ConvertSecondToMinutes(GetTime());
+            timerText.color = Color.red;
         }
+        else
+        {
+            timerText.color = Color.black;
+        }
+        
+        timerText.text = ConvertSecondToMinutes(GetTime());
        
     }
     private void OnDisable()
