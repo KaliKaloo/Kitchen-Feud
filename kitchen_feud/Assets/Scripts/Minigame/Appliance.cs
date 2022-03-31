@@ -121,7 +121,7 @@ public class Appliance : Interactable
                     
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others, player.GetComponent<PhotonView>().ViewID);
                     playerRigidbody.isKinematic = true;
-                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0), transform.rotation);
+                    cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position, transform.rotation);
                 }
 
 
@@ -137,7 +137,7 @@ public class Appliance : Interactable
                 myPv.RPC("doFd", RpcTarget.All, myPv.ViewID, cookedDish.GetComponent<PhotonView>().ViewID);
 
                 //delete the items the dish was cooked from
-                //this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
+                this.GetComponent<PhotonView>().RPC("clearItems", RpcTarget.Others, this.GetComponent<PhotonView>().ViewID);
                 itemsOnTheAppliance.Clear();
                 SlotsController.ClearAppliance();
 
@@ -158,8 +158,7 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-
-            if (player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
+            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
             {
                 SlotsController.PutOnAppliance(heldObjArg);
 
@@ -189,7 +188,11 @@ public class Appliance : Interactable
         }
     }
 
-
+    [PunRPC]
+    void clearItems(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<Appliance>().itemsOnTheAppliance.Clear();
+    }
 
 
     [PunRPC]
