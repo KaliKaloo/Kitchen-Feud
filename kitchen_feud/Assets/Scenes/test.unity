@@ -152,12 +152,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 814937626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed7edbb8827c4164c974224141cc490f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6393f8e7d4d96a0459c9bef8fc6420c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 70705594ece468f49b1d01a84d34f8a4, type: 2}
-  thickness: 1.04
-  colorOutline: {r: 1, g: 0.54402506, b: 0.54402506, a: 0.84313726}
+  thickness: 1.03
+  colorOutline: {r: 1, g: 1, b: 1, a: 0}
+  outlineObjectPrefab: {fileID: 4546395616927275262, guid: 9adfb1b1ae03b6249aac0d3ede196d3a, type: 3}
+  outlineObject: {fileID: 0}
 --- !u!65 &814937628
 BoxCollider:
   m_ObjectHideFlags: 0

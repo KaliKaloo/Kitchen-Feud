@@ -92,9 +92,25 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
                 ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
                 var main = PS.main;
                 main.startColor = new Color(243,255,28,255);
+                // spawnerName = ingredient.name.ToString();
+                // GameObject IngredientSpawner = location.Find(spawnerName + "Object");
                 // Color newColor = new Vector4(0.04f,0,0.89f,0);
                 // main.startColor = newColor;
             }
     }
+
+    public void GlowIngredient(DishSO dishInFocus){
+        
+        foreach (IngredientSO ingredient in dishInFocus.recipe)
+            {
+                //turn on the glow script
+                Debug.Log(ingredient.location);
+              
+                GameObject IngredientSpawner = GameObject.Find(ingredient.ToString());
+                glowAppliance.GetComponent<OutlineEffect>().enabled = true;
+             
+            }
+    }
 }
+
 
