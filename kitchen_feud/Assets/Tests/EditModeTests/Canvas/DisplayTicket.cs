@@ -30,6 +30,7 @@ public class DisplayTicketTest
         dish1.name = "pizza";
         dish2.name = "chips";
         dish3.name = "water";
+        order.orderID = "order ID";
         
         displayTicket.orderNumberText = obj.AddComponent<Text>();
         GameObject main = new GameObject();
@@ -49,6 +50,7 @@ public class DisplayTicketTest
         order.dishes.Add(dish1);
         displayTicket.SetUI(order);
         Assert.AreEqual("5", displayTicket.orderNumberText.text);
+        Assert.AreEqual("order ID", displayTicket.orderid);
 
     }
 
@@ -84,7 +86,29 @@ public class DisplayTicketTest
         Assert.AreEqual("pizza", displayTicket.orderMainText.text);
         Assert.AreEqual("chips", displayTicket.orderSideText.text);
         Assert.AreEqual("water", displayTicket.orderDrinkText.text);
+        Assert.AreEqual(3, displayTicket.dishes.Count);
+        Assert.IsTrue(displayTicket.dishes.ContainsKey("pizza"));
+        Assert.IsTrue(displayTicket.dishes.ContainsKey("chips"));
+        Assert.IsTrue(displayTicket.dishes.ContainsKey("water"));
 
+
+    }
+
+
+    [Test]
+    public void repeatedOrders()
+    {
+        order.dishes.Add(dish1);
+        order.dishes.Add(dish2);
+        order.dishes.Add(dish2);
+        displayTicket.SetUI(order);
+        Assert.AreEqual("pizza", displayTicket.orderMainText.text);
+        Assert.AreEqual("chips", displayTicket.orderSideText.text);
+        Assert.AreEqual("chips", displayTicket.orderDrinkText.text);
+        Assert.AreEqual(2, displayTicket.dishes.Count);
+        Assert.IsTrue(displayTicket.dishes.ContainsKey("pizza"));
+        Assert.IsTrue(displayTicket.dishes.ContainsKey("chips"));
+        Assert.IsFalse(displayTicket.dishes.ContainsKey("water"));
     }
 
 
