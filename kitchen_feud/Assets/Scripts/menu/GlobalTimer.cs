@@ -10,7 +10,8 @@ public class GlobalTimer
     private static int time = 5;
 
     private static int timer = time;
-    PhotonRoom room;
+    private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
+
 
     // changes original starting time, only do before game starts!
     public int AddSubtractTimerValue(int newTime)
@@ -98,27 +99,11 @@ public class GlobalTimer
         return TryTime();
     }
 
-    public bool OrderInterval()
-    {
-        int currentTime = TryTime();
-        int interval = currentTime % 20;
-        if (interval == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     // decrement timer
     public void Decrement()
     {
         timer -= 1;
-        ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
-        ht.Remove("Time");
-        ht.Add("Time", timer);
-        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+        hashTimer["Time"] = timer;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
     }
 }
