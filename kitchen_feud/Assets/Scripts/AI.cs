@@ -56,7 +56,7 @@ public class AI : MonoBehaviour
                     //Debug.Log("Here");
                     foreach (GameObject a in agents)
                     {
-                        if (!a.GetComponent<Agent>().tray)
+                        if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0)
                         {
                             a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
                                 ts.GetComponent<PhotonView>().ViewID);
