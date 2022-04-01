@@ -9,7 +9,7 @@ public class TrayTextTest
 {
     TrayText trayText;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();

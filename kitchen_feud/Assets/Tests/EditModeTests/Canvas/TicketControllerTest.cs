@@ -9,7 +9,7 @@ public class TicketControllerTest
 
     TicketController ticketController;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         GameObject obj = new GameObject();

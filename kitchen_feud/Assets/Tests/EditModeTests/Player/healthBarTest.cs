@@ -11,8 +11,8 @@ public class healthBarTest
 
     HealthBar health;
     
-    [SetUp]
-    public void SetUp()
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
         GameObject obj = new GameObject();
         health = obj.AddComponent<HealthBar>();

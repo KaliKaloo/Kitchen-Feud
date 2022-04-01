@@ -7,7 +7,14 @@ using UnityEngine.TestTools;
 public class TimerTests
 {
 
-    GlobalTimer timer = new GlobalTimer();
+    GlobalTimer timer;
+
+
+    [OneTimeSetUp]
+    public void SetUp()
+    {
+        timer = new GlobalTimer();
+    }
 
     [Test]
     public void TimerNotNull()

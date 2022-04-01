@@ -11,20 +11,21 @@ public class TrashTest
 
     Trash trash;
     
-    [SetUp]
-    public void SetUp()
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
         GameObject obj = new GameObject();
         trash = obj.AddComponent<Trash>();
         GameObject transObj = new GameObject();
         trash.player = transObj.transform;
+        trash.player.gameObject.AddComponent<PlayerHolding>();
+
     }
 
 
     [Test]
     public void TrashHeldObjRemainsNull()
     {
-        trash.player.gameObject.AddComponent<PlayerHolding>();
         GameObject heldObj = trash.player.GetComponent<PlayerHolding>().heldObj;
         Assert.IsNull(heldObj);
         trash.Interact();
@@ -34,7 +35,6 @@ public class TrashTest
     [Test]
     public void TrashHeldObjSetToNull()
     {
-        trash.player.gameObject.AddComponent<PlayerHolding>();
         GameObject trashObj = new GameObject();
         trashObj.AddComponent<PhotonView>();
         trash.player.GetComponent<PlayerHolding>().heldObj = trashObj;

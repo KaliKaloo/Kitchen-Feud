@@ -9,7 +9,7 @@ public class StoveCounter
    StoveMinigameCounter stoveCounter;
 
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         stoveCounter = new StoveMinigameCounter();

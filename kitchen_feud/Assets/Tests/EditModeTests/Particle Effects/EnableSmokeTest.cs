@@ -9,15 +9,6 @@ public class EnableSmokeTest
 
     EnableSmoke enableSmoke = new EnableSmoke();
     
-    
-    [Test]
-    public void InitSmoke()
-    {   
-        enableSmoke = new EnableSmoke();
-        Assert.IsFalse(enableSmoke.GetPlayerState());
-        enableSmoke.SetPlayerState(true);
-    }
-
 
     [Test]
     public void RestartState()

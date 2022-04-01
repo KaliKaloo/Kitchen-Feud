@@ -10,7 +10,7 @@ public class ScoreUpdate
 
     ParseScore score;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void SetUp()
     {
         score = new ParseScore();
@@ -66,7 +66,6 @@ public class ScoreUpdate
         Assert.AreEqual(7, updatedScore1, "score 1 not updated correctly");
         Assert.AreEqual(-2, updatedScore2, "score 2 not updated correctly");
     }
-
 
 
     [Test]
