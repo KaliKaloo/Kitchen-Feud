@@ -53,7 +53,8 @@ public class TrayController : MonoBehaviour
             // else destroy items on tray, except from item collider
             if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
-                Destroy(slot.GetChild(0).gameObject);
+                ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+                //Destroy(slot.GetChild(0).gameObject);
             }
         }
     }

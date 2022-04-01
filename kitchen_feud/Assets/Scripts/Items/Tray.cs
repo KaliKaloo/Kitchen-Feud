@@ -16,6 +16,7 @@ public class Tray : Interactable
     public pickableItem pickable;
     public GameObject teamController;
     private CanvasController canvasController;
+    public bool isReady;
 
     private void Start()
     {
@@ -48,6 +49,16 @@ public class Tray : Interactable
     {
         this.tray.ServingTray.Remove(PhotonView.Find(viewID).GetComponent<pickableItem>().item);
         this.tray.objectsOnTray.Remove(PhotonView.Find(viewID).gameObject);
+    }
+    [PunRPC]
+    void setIsReady(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<Tray>().isReady = true;
+    }
+    [PunRPC]
+    void setIsReadyF(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<Tray>().isReady = false;
     }
 
 } 

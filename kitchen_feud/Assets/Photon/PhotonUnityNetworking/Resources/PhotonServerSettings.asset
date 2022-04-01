@@ -146,6 +146,10 @@ MonoBehaviour:
   - setHeldobjAsNull
   - setPlayer
   - setSignParent
+  - setIsReady
+  - setTray
+  - setTrayNull
+  - setIsReadyF
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

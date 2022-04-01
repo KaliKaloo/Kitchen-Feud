@@ -22,6 +22,7 @@ TagManager:
   - ItemCollider
   - OrderTower
   - Dish
+  - Agent
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Particle Effects
   - Pickable
   - ME
-  - 
+  - Agent
   - 
   - 
   - 
