@@ -26,7 +26,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         if (tray)
         {
             agent.SetDestination(tray.transform.position);
@@ -36,11 +36,14 @@ public class Agent : MonoBehaviour
             {
                 foreach (Transform t in tray.transform)
                 {
+                    
                     if (t.name.Contains("Slot") && t.childCount > 0)
                     {
                         playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
-                        agent.isStopped = true;
+                        agent.ResetPath();
+                        //GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
                         PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                        break;
                     }
 
                 }
