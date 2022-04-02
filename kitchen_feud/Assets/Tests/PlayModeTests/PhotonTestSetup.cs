@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class PhotonTestSetup
 {
     PhotonTestLobby lobby = null;
+   
     [OneTimeSetUp]
     public void SetUp()
     {
