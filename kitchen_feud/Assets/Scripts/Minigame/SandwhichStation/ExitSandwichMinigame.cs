@@ -25,6 +25,8 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		CustomProperties.PlayerCookedDishes.AddCookedDishes();
+
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
 		SandwichController.RestartGame();

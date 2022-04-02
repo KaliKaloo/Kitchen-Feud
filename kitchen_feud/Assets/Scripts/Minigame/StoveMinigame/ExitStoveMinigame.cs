@@ -35,6 +35,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
 
+		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		GameEvents.current.assignPointsEventFunction();
 		score.text = "Score: 0/15";

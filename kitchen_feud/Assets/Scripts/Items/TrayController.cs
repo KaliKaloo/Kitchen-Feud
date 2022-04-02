@@ -110,6 +110,9 @@ public class TrayController : MonoBehaviour
                 if(tray.Count>0)
                     currentScore += calcScore(onTray, tray, o.dishes);
 
+                // Adds player points to stats
+                CustomProperties.PlayerPoints.AddIndividualPlayerPoints(currentScore);
+
                 if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);

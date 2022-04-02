@@ -35,10 +35,21 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         team2UIScore.text = String.Format("{0:n0}", team2Score);
 
         CompareScore();
+
+
+        DisplayStats();
+        // Reset all player stats after stats are displayed
+        CustomProperties.PlayerResetStats.ResetAll();
+
+    }
+
+    private void DisplayStats()
+    {
+        // TODO
     }
 
     // compare scores and update who wins based on scores
-    public void CompareScore()
+    private void CompareScore()
     {
         if (team2Score < team1Score)
         {
@@ -59,24 +70,18 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     {
         Destroy(GameObject.Find("VoiceManager"));
         Destroy(GameObject.Find("RoomController"));
+        PhotonNetwork.LeaveRoom();
+
 
         customProperties["Team"] = 1;
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
 
         // leave photon room on the network
         endScores.ResetScores();
-        PhotonNetwork.LeaveRoom();
     }
 
     public override void OnLeftRoom()
     {
         PhotonNetwork.LoadLevel(0);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -43,6 +43,7 @@ public class scoreController : MonoBehaviour
         if (currentPlayers > 0)
             lobby["Players"] = currentPlayers - 1;
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        CustomProperties.PlayerResetStats.ResetAll();
 
         cleanupRoom = this.GetComponent<CleanupRoom>();
 

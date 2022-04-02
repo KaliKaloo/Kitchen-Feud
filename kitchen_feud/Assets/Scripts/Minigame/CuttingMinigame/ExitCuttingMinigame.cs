@@ -23,6 +23,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
