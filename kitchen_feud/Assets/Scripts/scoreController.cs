@@ -79,7 +79,12 @@ public class scoreController : MonoBehaviour
                 elapsed = elapsed % 1f;
                 OutputTime();
             }
-        } else
+        }
+        else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
+        {
+            // show waiting for others players menu
+        }
+        else
         {
             loadingScreen.SetActive(false);
             startGame = true;
