@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverAnimationController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameOverAnimationController : MonoBehaviour
     private Animator player2ModelAnimator;
     private Animator player3ModelAnimator;
 
+
     private gameOverMenu overMenu;
 
 
@@ -31,12 +33,8 @@ public class GameOverAnimationController : MonoBehaviour
         overMenu = GameOverController.GetComponent<gameOverMenu>();
 
         //get scores from score screen
-        //team1Score = endScores.GetScore1();
-        //team2Score = endScores.GetScore2();
-
-        // GET RID OF AFTER PULL MERGING!!!
-        team1Score = 0;
-        team2Score = 5;
+        team1Score = endScores.GetScore1();
+        team2Score = endScores.GetScore2();
 
         overMenu.CompareScore(team1Score, team2Score);
 

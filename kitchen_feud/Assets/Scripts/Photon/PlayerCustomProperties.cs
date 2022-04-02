@@ -67,20 +67,24 @@ namespace CustomProperties
         }
 
         // returns a string message of the player with the highest points
-        public static string GetHighestPlayerPoints()
+        public static string GetHighestPlayerPoints(int team)
         {
             int highest = 0;
             string name = "";
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
 
-                if ((int)player.CustomProperties[property] >= highest)
+                if ((int)player.CustomProperties[property] >= highest && (int)player.CustomProperties["Team"] == team)
                 {
                     highest = (int)player.CustomProperties[property];
                     name = player.NickName;
                 }
             }
-            return name + " scored the most points for their team!";
+
+            if (name == "")
+                return "No one was the MVP";
+            else
+                return "MVP: " + name;
         }
     }
 

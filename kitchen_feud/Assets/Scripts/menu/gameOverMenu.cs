@@ -19,9 +19,15 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject genericPlayer2;
     [SerializeField] private GameObject genericPlayer3;
 
+    [SerializeField] private TextMeshProUGUI stat1;
+    [SerializeField] private TextMeshProUGUI stat2;
+    [SerializeField] private TextMeshProUGUI stat3;
+
     private Animator genericPlayer1Animator;
     private Animator genericPlayer2Animator;
     private Animator genericPlayer3Animator;
+
+    private int winningTeam;
 
     private static ParseScore endScores = new ParseScore();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
@@ -43,15 +49,9 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
 
     }
 
-    private void DisplayStats()
-    {
-        // TODO
-    }
-
     // compare scores and update who wins based on scores
     public void CompareScore(int score1, int score2)
     {
-        int winningTeam = 0;
         if (score2 < score1)
         {
             winnerText.text = "Team 1 wins!";
@@ -67,49 +67,72 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
             winnerText.text = "It's a draw!";
         }
 
-        SkinPlayers(winningTeam);
+        DisplayStats();
+        SkinPlayers();
     }
 
-    private void SkinPlayers(int team)
+    private void DisplayStats()
     {
-        Material newMat;
-        if (team == 1)
+        stat1.text = CustomProperties.PlayerPoints.GetHighestPlayerPoints(winningTeam);
+        stat2.text = CustomProperties.PlayerCookedDishes.GetHighestCookedDishes();
+        stat3.text = CustomProperties.PlayerMischievous.GetHighestMischievousStat();
+    }
+
+    private void SkinPlayers()
+    {
+        Material newMat = Resources.Load("cat_red", typeof(Material)) as Material;
+
+        if (winningTeam == 1)
         {
             newMat = Resources.Load("cat_red", typeof(Material)) as Material;
         }
-        else
+        else if (winningTeam == 2)
         {
             newMat = Resources.Load("cat_blue", typeof(Material)) as Material;
         }
 
-        genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-        genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-        genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+        // if not draw colour models correctly
+        if (winningTeam > 0)
+        {
+            genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+            genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+            genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+        }
+        // if draw then split model colours up
+        else
+        {
+            Material newMat2 = Resources.Load("cat_blue", typeof(Material)) as Material;
+            genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+            genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat2;
+            genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat2;
+        }
 
     }
 
     private void ChooseAnimation()
     {
-
+        List<int> animationList = new List<int>();
         int index;
         int current;
-
-        List<int> AnimationList = new List<int>() { 1, 2, 3 };
+        if (winningTeam != 0)
+            animationList = new List<int>() { 1, 2, 3 };
+        else
+            animationList = new List<int>() { 4, 5, 6 };
 
         System.Random random = new System.Random();
-        index = random.Next(AnimationList.Count);
-        current = AnimationList[index];
-        AnimationList.RemoveAt(index);
+        index = random.Next(animationList.Count);
+        current = animationList[index];
+        animationList.RemoveAt(index);
 
         genericPlayer1Animator.SetInteger("Dance", current);
 
-        index = random.Next(AnimationList.Count);
-        current = AnimationList[index];
-        AnimationList.RemoveAt(index);
+        index = random.Next(animationList.Count);
+        current = animationList[index];
+        animationList.RemoveAt(index);
 
         genericPlayer2Animator.SetInteger("Dance", current);
 
-        genericPlayer3Animator.SetInteger("Dance", AnimationList[0]);
+        genericPlayer3Animator.SetInteger("Dance", animationList[0]);
 
 
     }
@@ -120,15 +143,24 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     {
         Destroy(GameObject.Find("VoiceManager"));
         Destroy(GameObject.Find("RoomController"));
-        PhotonNetwork.LeaveRoom();
 
+        try
+        {
+            Destroy(GameObject.Find("Local"));
+        } catch
+        {
+            // local player is not found
+        }
 
         customProperties["Team"] = 1;
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
 
         // leave photon room on the network
+        PhotonNetwork.LeaveRoom();
+
         endScores.ResetScores();
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+
     }
 
     public override void OnLeftRoom()

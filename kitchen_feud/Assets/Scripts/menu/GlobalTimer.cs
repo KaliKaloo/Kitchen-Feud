@@ -7,7 +7,7 @@ public class GlobalTimer
 {
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    private static int time = 5;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
@@ -67,8 +67,8 @@ public class GlobalTimer
 
             // how long the timer will last in seconds
             timer = time;
-            ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
-            PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+            hashTimer["Time"] = timer;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
 
         }
         else
