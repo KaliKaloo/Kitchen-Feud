@@ -5,18 +5,15 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class gameOverMenu : MonoBehaviourPunCallbacks
 {
-    // SCORES GO HERE
-    private int team1Score = 0;
-    private int team2Score = 0;
-
     [SerializeField] private Text team1UIScore;
     [SerializeField] private Text team2UIScore;
 
-    [SerializeField] private Text winnerText;
+    [SerializeField] private TextMeshProUGUI winnerText;
 
     [SerializeField] private GameObject genericPlayer1;
     [SerializeField] private GameObject genericPlayer2;
@@ -26,10 +23,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     private Animator genericPlayer2Animator;
     private Animator genericPlayer3Animator;
 
-
-    // receives scores from score screen
     private static ParseScore endScores = new ParseScore();
-
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
 
     // Start is called before the first frame update
@@ -39,21 +33,11 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         genericPlayer2Animator = genericPlayer2.GetComponent<Animator>();
         genericPlayer3Animator = genericPlayer3.GetComponent<Animator>();
 
-        SkinPlayers(1);
-        ChooseAnimation();
-
-        //get scores from score screen
-        team1Score = endScores.GetScore1();
-        team2Score = endScores.GetScore2();
-
         // update scores received onto UI
-        team1UIScore.text = String.Format("{0:n0}", team1Score);
-        team2UIScore.text = String.Format("{0:n0}", team2Score);
+        //team1UIScore.text = String.Format("{0:n0}", team1Score);
+        //team2UIScore.text = String.Format("{0:n0}", team2Score);
 
-        CompareScore();
-
-
-        DisplayStats();
+        ChooseAnimation();
         // Reset all player stats after stats are displayed
         CustomProperties.PlayerResetStats.ResetAll();
 
@@ -65,15 +49,15 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     }
 
     // compare scores and update who wins based on scores
-    private void CompareScore()
+    public void CompareScore(int score1, int score2)
     {
         int winningTeam = 0;
-        if (team2Score < team1Score)
+        if (score2 < score1)
         {
             winnerText.text = "Team 1 wins!";
             winningTeam = 1;
         }
-        else if (team1Score < team2Score)
+        else if (score1 < score2)
         {
             winnerText.text = "Team 2 wins!";
             winningTeam = 2;
@@ -83,10 +67,10 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
             winnerText.text = "It's a draw!";
         }
 
-        // SkinPlayers(winningTeam);
+        SkinPlayers(winningTeam);
     }
 
-    public void SkinPlayers(int team)
+    private void SkinPlayers(int team)
     {
         Material newMat;
         if (team == 1)
@@ -99,6 +83,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         }
 
         genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+        genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
+        genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
 
     }
 
