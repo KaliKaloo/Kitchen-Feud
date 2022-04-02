@@ -19,7 +19,13 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     [SerializeField] private Text winnerText;
 
     [SerializeField] private GameObject genericPlayer1;
+    [SerializeField] private GameObject genericPlayer2;
+    [SerializeField] private GameObject genericPlayer3;
+
     private Animator genericPlayer1Animator;
+    private Animator genericPlayer2Animator;
+    private Animator genericPlayer3Animator;
+
 
     // receives scores from score screen
     private static ParseScore endScores = new ParseScore();
@@ -30,11 +36,12 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     void Start()
     {
         genericPlayer1Animator = genericPlayer1.GetComponent<Animator>();
-        ResetDanceAnimations();
-
+        genericPlayer2Animator = genericPlayer2.GetComponent<Animator>();
+        genericPlayer3Animator = genericPlayer3.GetComponent<Animator>();
 
         SkinPlayers(1);
-        StartCoroutine(ChooseAnimation());
+        ChooseAnimation();
+
         //get scores from score screen
         team1Score = endScores.GetScore1();
         team2Score = endScores.GetScore2();
@@ -95,9 +102,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
 
     }
 
-    private IEnumerator ChooseAnimation()
+    private void ChooseAnimation()
     {
-        yield return new WaitForSeconds(6);
 
         int index;
         int current;
@@ -107,16 +113,21 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         System.Random random = new System.Random();
         index = random.Next(AnimationList.Count);
         current = AnimationList[index];
+        AnimationList.RemoveAt(index);
 
         genericPlayer1Animator.SetInteger("Dance", current);
+
+        index = random.Next(AnimationList.Count);
+        current = AnimationList[index];
+        AnimationList.RemoveAt(index);
+
+        genericPlayer2Animator.SetInteger("Dance", current);
+
+        genericPlayer3Animator.SetInteger("Dance", AnimationList[0]);
+
+
     }
 
-    private void ResetDanceAnimations()
-    {
-        genericPlayer1Animator.SetInteger("Dance", 0);
-        // genericPlayer2Animator.SetInteger("Dance", 0);
-        // genericPlayer3Animator.SetInteger("Dance", 0);
-    }
 
     // alters global variable and returns straight to lobby menu
     public void PlayAgain()

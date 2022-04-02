@@ -21,8 +21,10 @@ public class GameOverAnimationController : MonoBehaviour
         StartCoroutine(WaitForStart());
 
         player1ModelAnimator = player1Model.GetComponent<Animator>();
-        //player2ModelAnimator = player2Model.GetComponent<Animator>();
-        //player2ModelAnimator = player2Model.GetComponent<Animator>();
+        player2ModelAnimator = player2Model.GetComponent<Animator>();
+        player2ModelAnimator = player2Model.GetComponent<Animator>();
+
+        ResetAnimations();
 
     }
 
@@ -34,8 +36,10 @@ public class GameOverAnimationController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void ResetAnimations()
     {
-        
+        player1ModelAnimator.SetInteger("Dance", 0);
+        player2ModelAnimator.SetInteger("Dance", 0);
+        player3ModelAnimator.SetInteger("Dance", 0);
     }
 }
