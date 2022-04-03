@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: tr
+    FixedRegion: eu
     Server: 
     Port: 0
     ProxyServer: 
@@ -151,6 +151,7 @@ MonoBehaviour:
   - setTrayNull
   - setIsReadyF
   - setAgent
+  - setAgentF
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
