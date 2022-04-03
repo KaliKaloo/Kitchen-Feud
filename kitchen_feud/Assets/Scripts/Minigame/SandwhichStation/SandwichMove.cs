@@ -63,10 +63,8 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     void StopMove()
     {
-        Debug.Log("ive been stopped");
         Vector3 stoppedPosition = platform.localPosition;
         float distance = Vector3.Distance(platform.localPosition, perfectPosition);
-              
         CalculateScore(distance);
 
     }
