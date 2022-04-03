@@ -41,7 +41,7 @@ public class stoveMinigame : MonoBehaviour
     }
 
 
-   public void UpdateDishPointsStove() {
+    public void UpdateDishPointsStove() {
         if (appliance.isBeingInteractedWith){
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
