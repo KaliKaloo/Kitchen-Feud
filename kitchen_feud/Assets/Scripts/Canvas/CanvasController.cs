@@ -124,7 +124,7 @@ public class CanvasController : MonoBehaviour
     public void ShowNewTicketWithID(string order)
     {
         int orderN;
-        Debug.Log(orderStands.Count);
+//        Debug.Log(orderStands.Count);
         if (ticket1.activeSelf == true)
         {
             if (ticket2.activeSelf == true)

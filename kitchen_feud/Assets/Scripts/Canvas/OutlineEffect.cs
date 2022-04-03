@@ -10,12 +10,12 @@ using System.IO;
         public float thickness = 1.03f;
         [ColorUsage(true, true)]
         public Color colorOutline;
-        private Renderer rend;
+        public Renderer rend;
         public GameObject outlineObjectPrefab;
         public GameObject outlineObject;
         // Start is called before the first frame update
         
-        void Start()
+        public void startGlowing()
         {
         
             //GameObject outlineObject = Instantiate(this.gameObject,transform.position,transform.rotation,transform);
@@ -41,9 +41,21 @@ using System.IO;
             //outlineObject.GetComponentInParent<OutlineEffect>().enabled = false;
             this.rend = rend;
             rend.enabled = true;
+     
             
         }
+
+        // public void startGlowing(){
+        //     //outlineObject.enabled = true;
+        //     this.rend = rend;
+        //     rend.enabled = true;
+        // }
         
+        public void destroyClone(){
+            //outlineObject.enabled = false;
+            this.rend = rend;
+            rend.enabled = false;
+        }
         void Update(){
            // if(!outlineObject){
 
