@@ -99,8 +99,8 @@ public class DoorController : MonoBehaviour
         count -= 1;
     }
 
-    [PunRPC]
+   /* [PunRPC]
     void PlayDoorSound() {
         FindObjectOfType<SoundEffectsManager>().doorSound.Play();
-    }
+    }*/
 }

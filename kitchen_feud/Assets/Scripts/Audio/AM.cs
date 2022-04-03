@@ -39,7 +39,8 @@ public class AM : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Path");
-                MusicManager.instance.changeBGM(3, 10, 0, 1);
+                //TO REMOVE COMMENT - MUSIC
+                //MusicManager.instance.changeBGM(3, 10, 0, 1);
 
 
 

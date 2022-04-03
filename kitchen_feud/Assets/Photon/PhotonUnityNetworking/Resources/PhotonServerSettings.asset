@@ -66,7 +66,12 @@ MonoBehaviour:
   - onApplianceF
   - onTrayF
   - ovenGame
+  - PlayBoilingSound
   - playDing
+  - PlayDropSound
+  - PlayFireSound
+  - PlayServingSound
+  - PlaySmokeBombSound
   - pointSync
   - push
   - removeFromApplianceRPC
@@ -82,6 +87,8 @@ MonoBehaviour:
   - setEnteredF
   - SetGrav
   - setHBParent
+  - setHeldobj
+  - setHeldobjAsNull
   - setKickable
   - setKickableF
   - setMyC
@@ -91,7 +98,9 @@ MonoBehaviour:
   - SetParentAsNull
   - SetParentAsSlot
   - setPlayed
+  - setPlayer
   - setPlayerPressing
+  - setSignParent
   - setStarted
   - setTeam
   - SetToF
@@ -99,6 +108,7 @@ MonoBehaviour:
   - SetToTrue
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
+  - StopBoilingSound
   - syncAnim
   - syncIsOpened
   - syncMat
@@ -109,34 +119,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - PlayServingSound
-  - PlayDoorSound
-  - PlayDropSound
-  - PlayBoilingSound
-  - StopBoilingSound
-  - appendKickedBy
-  - clearKickedBy
-  - destHB
-  - giveDamage
-  - playDing
-  - push
-  - resetTimer
-  - setKickable
-  - setKickableF
-  - setMyC
-  - setObjParent
-  - setPlayed
-  - setStarted
-  - setName
-  - setHBParent
-  - setNTParent
-  - changeLayer
-  - setHeldobj
-  - setHeldobjAsNull
-  - setPlayer
-  - PlayFireSound
-  - PlaySmokeBombSound
-  - setSignParent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

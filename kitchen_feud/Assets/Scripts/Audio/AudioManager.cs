@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         //TO REMOVE COMMENT
-        //engine = VoiceChatManager.Instance.GetRtcEngine();
+        engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
         randomInstance = menuController.Instance.x.ToString();
     }
@@ -28,7 +28,8 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
-        MusicManager.instance.location = myTeam;
+        //TO REMOVE COMMENT
+        //MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
 
@@ -61,8 +62,9 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                MusicManager.instance.changeBGM(team, 10, 0, 1);
-                MusicManager.instance.location = team;
+                //TO REMOVE COMMENT - MUSIC
+                //MusicManager.instance.changeBGM(team, 10, 0, 1);
+                //MusicManager.instance.location = team;
 
                 if (team == 1)
                 {
