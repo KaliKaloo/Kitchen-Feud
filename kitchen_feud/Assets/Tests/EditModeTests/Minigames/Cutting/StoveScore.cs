@@ -21,16 +21,16 @@ public class StoveScoreTests
     [Test]
     public void SetAmountInitialIngredients(){
         stoveScore.SetAmountInitialIngredients(5);
-        Assert.AreEqual(5, StoveScore.initialIngredients);
-        Assert.AreEqual(5, StoveScore.currentIngredients);
+        Assert.AreEqual(5, StoveScore.InitialIngredients);
+        Assert.AreEqual(5, StoveScore.CurrentIngredients);
     }
 
     [Test]
     public void ResetValues(){
         stoveScore.ResetValues();
-        Assert.AreEqual(3, StoveScore.initialIngredients);
-        Assert.AreEqual(3, StoveScore.currentIngredients);
-        Assert.AreEqual(0, StoveScore.bombMultiplier);
+        Assert.AreEqual(3, StoveScore.InitialIngredients);
+        Assert.AreEqual(3, StoveScore.CurrentIngredients);
+        Assert.AreEqual(0, StoveScore.BombMultiplier);
 
     }
 
@@ -50,17 +50,17 @@ public class StoveScoreTests
 
     [Test]
     public void AddBombMultiplier(){
-        StoveScore.bombMultiplier = 0.5f;
+        StoveScore.BombMultiplier = 0.5f;
         stoveScore.AddBombMultiplier();
-        Assert.AreEqual(0.6f, StoveScore.bombMultiplier);
+        Assert.AreEqual(0.6f, StoveScore.BombMultiplier);
     }
 
 
     [Test]
-    public void FinalMultipier(){
+    public void FinalMultiplier(){
         StoveScore.Score = 3;
-        StoveScore.bombMultiplier = 0.5f;
-        float finalScore = stoveScore.FinalMultipier();
+        StoveScore.BombMultiplier = 0.5f;
+        float finalScore = stoveScore.FinalMultiplier();
         Assert.AreEqual(0.1f, finalScore);
     }
 

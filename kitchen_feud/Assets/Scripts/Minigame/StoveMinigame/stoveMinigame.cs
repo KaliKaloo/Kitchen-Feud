@@ -48,7 +48,7 @@ public class stoveMinigame : MonoBehaviour
             if(dishOfFoundDish != null)
             {
                 
-                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultipier();
+                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
 
                 // if player is team 2 but interacts with team1 stove, points doubled
                 if (stoveCanvas.tag == "Team1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)

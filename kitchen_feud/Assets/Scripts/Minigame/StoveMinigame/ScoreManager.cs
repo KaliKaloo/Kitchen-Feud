@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class StoveScore
 {
-    public static int initialIngredients;
-    public static int currentIngredients;
+    private static int initialIngredients;
+    private static int currentIngredients;
     private static float score;
-    public static float bombMultiplier;
+    private static float bombMultiplier;
 
 
     public static float Score
@@ -19,6 +19,26 @@ public class StoveScore
         {
             score = value;
         }
+    }
+
+    public static float BombMultiplier
+    {
+        get{  return bombMultiplier; }
+        set
+        {
+            bombMultiplier = value;
+        }
+    }
+
+    public static int InitialIngredients
+    {
+        get{  return initialIngredients; }
+    }
+
+
+    public static int CurrentIngredients
+    {
+        get{  return currentIngredients; }
     }
 
 
@@ -47,7 +67,7 @@ public class StoveScore
         bombMultiplier += 0.1f;
     }
 
-    public float FinalMultipier()
+    public float FinalMultiplier()
     {
         return (score / 15) * (1 - bombMultiplier);
         
