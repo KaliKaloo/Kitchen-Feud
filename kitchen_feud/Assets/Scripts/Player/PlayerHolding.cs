@@ -47,7 +47,7 @@ public class PlayerHolding : MonoBehaviour
 
             //if (view.IsMine)
             {
-                
+
 
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
@@ -78,7 +78,7 @@ public class PlayerHolding : MonoBehaviour
     void slotItem(GameObject obj, BaseFood item)
     {
 
-        
+
         PhotonView objPV = obj.GetComponent<PhotonView>();
         if (objPV)
         {
@@ -89,7 +89,7 @@ public class PlayerHolding : MonoBehaviour
             heldObj = obj;
         }
 
-        if (heldObj.GetComponent<Rigidbody>())
+        if (heldObj.GetComponent<Rigidbody>()) 
         {
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
             if (transform.name != "Agent(Clone)")

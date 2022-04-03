@@ -12,7 +12,7 @@ public class Agent : MonoBehaviour
     bool isMoving;
     public PlayerHolding playerHold;
     public PhotonView PV;
-
+    public bool readyToServe;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,7 @@ public class Agent : MonoBehaviour
         playerHold = GetComponent<PlayerHolding>();
         Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
         PV = GetComponent<PhotonView>();
+        readyToServe = false;
 
     }
 
@@ -34,6 +35,8 @@ public class Agent : MonoBehaviour
 
             if (dist < 1.3f && dist != 0)
             {
+               
+
                 foreach (Transform t in tray.transform)
                 {
                     
@@ -43,11 +46,21 @@ public class Agent : MonoBehaviour
                         agent.ResetPath();
                         //GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
                         PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                        readyToServe = true;    
                         break;
                     }
 
                 }
             }
+         
+
+
+        }
+        if (readyToServe)
+        {
+            Debug.LogError(GameObject.Find("Serving Point").transform.position);
+            agent.SetDestination(GameObject.Find("Serving Point").transform.position);
+            //readyToServe = false;
         }
 
         //agent.SetDestination(GameObject.Find("Local").transform.position);
