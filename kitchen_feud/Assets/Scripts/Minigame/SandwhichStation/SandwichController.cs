@@ -124,7 +124,7 @@ public class SandwichController : MonoBehaviour
 
     
     public void NewRandomObject()
-     {
+    {
          int newIndex = Random.Range(0, objectPool.Count);
          // Deactivate old gameobject
          objectPool[currentIndex].SetActive(false);
