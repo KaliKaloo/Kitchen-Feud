@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 1
+    path: Assets/Scenes/kitchens_new_glow.unity
+    guid: 82e3c4d0dbb0f8f4f807eae094143c09
+  - enabled: 0
     path: Assets/Scenes/kitchens_glow.unity
     guid: 89effde3564999f4380ef8b6f1c87558
   - enabled: 0

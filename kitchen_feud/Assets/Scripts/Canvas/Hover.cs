@@ -12,7 +12,7 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     //public Database database;
     public GameObject tooltip;
     private SpriteRenderer sprite;
-    private bool mouse_over = false;
+    // private bool mouse_over = false;
     public TextMeshProUGUI dish;
     public DisplayTicket displayticket;
     public Sprite img;
@@ -22,7 +22,7 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        bool click = true;
+        //bool click = true;
         // Debug.Log("Mouse enter");
           RecipeCard.SetActive(true);
             
@@ -40,21 +40,23 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        mouse_over = true;
+        //mouse_over = true;
         Cursor.SetCursor(cursorClickable, Vector2.zero, CursorMode.ForceSoftware);
         
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        mouse_over = false;
+       // mouse_over = false;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
     }
+    
     public DishSO dishInFocus;
     public void GlowAll(string dishName){
-       dishInFocus = Database.GetDishByName(dishName);
-        GlowLocation(dishInFocus);
+        dishInFocus = Database.GetDishByName(dishName);
+       
         GlowAppliance(dishName);
+        GlowLocation(dishInFocus);
         //GlowIngredient();        
     }
 
@@ -62,18 +64,13 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public GameObject glowAppliance;
     
     public void GlowAppliance(string dishName){
-       
         string dishTag = dishInFocus.toCook;
-        // Debug.Log(dishTag);
-        // GlowLocation(dishInFocus);
         appliancesToGlow = GameObject.FindGameObjectsWithTag(dishTag);
 
         foreach (GameObject glowAppliance in appliancesToGlow)
         {
-            //turn on the glow script
-           OutlineEffect ce = glowAppliance.GetComponent<OutlineEffect>();
-           if (!ce){
-                ce.enabled = true;
+           if (glowAppliance.GetComponent<OutlineEffect>()){
+                glowAppliance.GetComponent<OutlineEffect>().enabled = true;
             }
     
            
@@ -91,39 +88,39 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
                 Debug.Log(location.name);
                 ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
                 var main = PS.main;
-                public Color originalColor = main.startColor;
+                //public Color originalColor = main.startColor;
                 main.startColor = new Color(243,255,28,255);
                 
-                Debug.Log(ingredient.name);
-                string spawnerName = ingredient.name.ToString();
-                string name = spawnerName + "Spawner";
-                Debug.Log(name);
+                // Debug.Log(ingredient.name);
+                // string spawnerName = ingredient.name.ToString();
+                // string name = spawnerName + "Spawner";
+                // Debug.Log(name);
                 
-                foreach (Transform child in location.transform){
-                    foreach (Transform childInChild in child){
-                        if (childInChild.name == name){
+                // foreach (Transform child in location.transform){
+                //     foreach (Transform childInChild in child){
+                //         if (childInChild.name == name){
                         
-                        IngredientSpawner = child.gameObject;
-                        GlowIngredient(IngredientSpawner);
+                //         IngredientSpawner = child.gameObject;
+                //         GlowIngredient(IngredientSpawner);
                         
-                        Debug.Log(IngredientSpawner.name);
-                    }
-                    }
+                //         Debug.Log(IngredientSpawner.name);
+                //     }
+                //     }
                     
-                }
+                // }
                 
             }
     }
 
-    public void GlowIngredient(GameObject IngredientSpawnerToGlow){
-        OutlineEffect ce = IngredientSpawnerToGlow.GetComponent<OutlineEffect>();
-        if (!ce){
-            ce.enabled = true;
-        }
-    }
+    // public void GlowIngredient(GameObject IngredientSpawnerToGlow){
+    //     OutlineEffect ce = IngredientSpawnerToGlow.GetComponent<OutlineEffect>();
+    //     if (!ce){
+    //         ce.enabled = true;
+    //     }
+    // }
 
-    public void StopGlowingAll(){
+    // public void StopGlowingAll(){
 
-    }
+    // }
     
 }
