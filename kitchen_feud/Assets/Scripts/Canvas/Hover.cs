@@ -9,13 +9,9 @@ using TMPro;
 //public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    //public Database database;
-    public GameObject tooltip;
     private SpriteRenderer sprite;
-    // private bool mouse_over = false;
     public TextMeshProUGUI dish;
     public DisplayTicket displayticket;
-    //public Sprite img;
     public GameObject RecipeCard;
     public Texture2D cursorClickable;
     public GlowController GlowController;
@@ -27,7 +23,7 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
             if (!RecipeCard.activeInHierarchy){
                 GlowController.firstClick = true;
-                Debug.Log("this is a first click");
+                //Debug.Log("this is a first click");
             }
 
             if (displayticket.dishes.ContainsKey(dish.text)){

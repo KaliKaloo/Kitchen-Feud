@@ -29,8 +29,6 @@ public class GlowController : MonoBehaviour
         
         GlowAppliance(dishName);
         GlowLocation(dishInFocus);
-        
-       
     }
 
     public GameObject[] appliancesToGlow;
@@ -39,13 +37,18 @@ public class GlowController : MonoBehaviour
     public void GlowAppliance(string dishName){
         string dishTag = dishInFocus.toCook;
         appliancesToGlow = GameObject.FindGameObjectsWithTag(dishTag);
-
+        int teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;
+        
         foreach (GameObject glowAppliance in appliancesToGlow)
         {
-           if (glowAppliance.GetComponent<OutlineEffect>()){
-                glowAppliance.GetComponent<OutlineEffect>().enabled = true;
-                glowAppliance.GetComponent<OutlineEffect>().startGlowing();
-            }
+           int kitchenNum = glowAppliance.GetComponent<Appliance>().kitchenNum;
+
+           if (kitchenNum == teamNumber){
+                if (glowAppliance.GetComponent<OutlineEffect>()){
+                        glowAppliance.GetComponent<OutlineEffect>().enabled = true;
+                        //glowAppliance.GetComponent<OutlineEffect>().startGlowing();
+                    }
+           }
         }
     }
     
@@ -103,7 +106,7 @@ public class GlowController : MonoBehaviour
         {
            if (glowAppliance.GetComponent<OutlineEffect>()){
                 OutlineEffect outlineScript = glowAppliance.GetComponent<OutlineEffect>();
-                outlineScript.enabled = false;
+                //outlineScript.enabled = false;
                 outlineScript.destroyClone();
             }
     

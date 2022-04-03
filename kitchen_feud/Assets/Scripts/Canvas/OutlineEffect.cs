@@ -15,7 +15,7 @@ public class OutlineEffect : MonoBehaviour
     public GameObject outlineObject;
     // Start is called before the first frame update
     
-    public void startGlowing()
+ void Start()
     {
         outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,Quaternion.identity);
         outlineObject.transform.SetParent(gameObject.transform);
@@ -32,16 +32,16 @@ public class OutlineEffect : MonoBehaviour
         this.rend = rend;
         rend.enabled = true;
     
-        
     }
 
-    // public void startGlowing(){
-    //     rend.enabled = true;
+    // public void startGlowing()
+    // {
+    //     o
     // }
-    
+
     public void destroyClone(){
-    
-        rend.enabled = false;
+
+       rend.enabled = false;
     }
 
 }
