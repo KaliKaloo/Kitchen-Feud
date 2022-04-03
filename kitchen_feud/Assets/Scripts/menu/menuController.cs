@@ -172,6 +172,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LoadBackToLobbyMenu()
     {
         timerError.text = "";
+        timer.SetServerTime();
 
         // updates all users' timers based on changed settings from master
         this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetCurrentTime());
@@ -341,6 +342,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         loadingScreen.SetActive(false);
         lobby["Players"] = 1;
+        timer.SetServerTime();
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
