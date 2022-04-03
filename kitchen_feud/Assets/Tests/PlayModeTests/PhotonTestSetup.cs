@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 using UnityEngine.TestTools;
 using Photon.Pun;
 using Photon.Realtime;
@@ -68,6 +69,7 @@ public class PhotonTestSetup
 
         public override void OnCreatedRoom()
         {
+            
             SceneManager.LoadScene("kitchens Test");
             ready = true;
         }
