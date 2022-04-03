@@ -23,7 +23,7 @@ public class GlowController : MonoBehaviour
             newClick = false;
         }
 
-    
+        Debug.Log("dishname v=bf db" + dishName);
         dishInFocus = Database.GetDishByName(dishName);
         currentGlowingDishName = dishName;
         
@@ -46,8 +46,6 @@ public class GlowController : MonoBehaviour
                 glowAppliance.GetComponent<OutlineEffect>().enabled = true;
                 glowAppliance.GetComponent<OutlineEffect>().startGlowing();
             }
-    
-           
         }
     }
     
@@ -58,11 +56,9 @@ public class GlowController : MonoBehaviour
     
         foreach (IngredientSO ingredient in dishInFocus.recipe)
             {   
-                //Debug.Log(dishInFocus.recipe.Count);
                 GameObject location = GameObject.Find(ingredient.location.ToString());
                 
-              
-               // Debug.Log(location.name);
+                Debug.Log(location.name);
                 ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
                 var main = PS.main;
                 main.startColor = new Color(243,255,28,255);
@@ -96,7 +92,6 @@ public class GlowController : MonoBehaviour
     // }
 
     public void RecipeCardClose(){
-        //RecipeCard.SetActive(false);
         firstClick = true;
         StopGlowingAll(currentGlowingDishName);
     }
