@@ -20,17 +20,6 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public Texture2D cursorClickable;
 
 
-    // void Update()
-    // {
-    //     if (mouse_over)
-    //     {
- 
-            
-    //         Debug.Log("over on" + dish.text);
-   
-    //     }
-    // }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         bool click = true;
@@ -42,7 +31,8 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
             {
                 //hoverImage.sprite = displayticket.dishes[dish.text];
                 RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
-                GlowAppliance(dish.text);
+                GlowAll(dish.text);
+           
             }
             //tooltip.SetActive(true);
         
@@ -60,57 +50,80 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         mouse_over = false;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
     }
+    public DishSO dishInFocus;
+    public void GlowAll(string dishName){
+       dishInFocus = Database.GetDishByName(dishName);
+        GlowLocation(dishInFocus);
+        GlowAppliance(dishName);
+        //GlowIngredient();        
+    }
 
     public GameObject[] appliancesToGlow;
     public GameObject glowAppliance;
     
     public void GlowAppliance(string dishName){
-        DishSO dishInFocus = Database.GetDishByName(dishName);
+       
         string dishTag = dishInFocus.toCook;
         // Debug.Log(dishTag);
-        GlowLocation(dishInFocus);
+        // GlowLocation(dishInFocus);
         appliancesToGlow = GameObject.FindGameObjectsWithTag(dishTag);
 
         foreach (GameObject glowAppliance in appliancesToGlow)
         {
             //turn on the glow script
            OutlineEffect ce = glowAppliance.GetComponent<OutlineEffect>();
-           ce.enabled = true;
-        //    ce.colorOutline = new Color(4,3,4,0);
+           if (!ce){
+                ce.enabled = true;
+            }
+    
            
         }
     }
-    
+
+    public GameObject IngredientSpawner;
+    public string glowLocation;
     public void GlowLocation(DishSO dishInFocus){
     
         foreach (IngredientSO ingredient in dishInFocus.recipe)
-            {
-                //turn on the glow script
-                Debug.Log(ingredient.location);
-              
+            {   
+                Debug.Log(dishInFocus.recipe.Count);
                 GameObject location = GameObject.Find(ingredient.location.ToString());
+                Debug.Log(location.name);
                 ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
                 var main = PS.main;
+                public Color originalColor = main.startColor;
                 main.startColor = new Color(243,255,28,255);
-                // spawnerName = ingredient.name.ToString();
-                // GameObject IngredientSpawner = location.Find(spawnerName + "Object");
-                // Color newColor = new Vector4(0.04f,0,0.89f,0);
-                // main.startColor = newColor;
+                
+                Debug.Log(ingredient.name);
+                string spawnerName = ingredient.name.ToString();
+                string name = spawnerName + "Spawner";
+                Debug.Log(name);
+                
+                foreach (Transform child in location.transform){
+                    foreach (Transform childInChild in child){
+                        if (childInChild.name == name){
+                        
+                        IngredientSpawner = child.gameObject;
+                        GlowIngredient(IngredientSpawner);
+                        
+                        Debug.Log(IngredientSpawner.name);
+                    }
+                    }
+                    
+                }
+                
             }
     }
 
-    public void GlowIngredient(DishSO dishInFocus){
-        
-        foreach (IngredientSO ingredient in dishInFocus.recipe)
-            {
-                //turn on the glow script
-                Debug.Log(ingredient.location);
-              
-                GameObject IngredientSpawner = GameObject.Find(ingredient.ToString());
-                glowAppliance.GetComponent<OutlineEffect>().enabled = true;
-             
-            }
+    public void GlowIngredient(GameObject IngredientSpawnerToGlow){
+        OutlineEffect ce = IngredientSpawnerToGlow.GetComponent<OutlineEffect>();
+        if (!ce){
+            ce.enabled = true;
+        }
     }
+
+    public void StopGlowingAll(){
+
+    }
+    
 }
-
-
