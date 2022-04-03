@@ -8,8 +8,18 @@ public class StoveScore
 {
     public static int initialIngredients;
     public static int currentIngredients;
-    public static float score;
+    private static float score;
     public static float bombMultiplier;
+
+
+    public static float Score
+    {
+        get{  return score; }
+        set
+        {
+            score = value;
+        }
+    }
 
 
     public void SetAmountInitialIngredients(int amount)
@@ -25,26 +35,12 @@ public class StoveScore
         bombMultiplier = 0;
     }
 
-    public bool CheckIfFull()
-    {
-        if (currentIngredients <= 0)
-        {
-            Debug.Log(this.FinalMultipier());
-            return true;
-        }
-        else
-            return false;
-    }
 
     public void AddScore()
     {
         score += 1;
     }
 
-    public int GetScore()
-    {
-        return (int)score;
-    }
 
     public void AddBombMultiplier()
     {
@@ -78,7 +74,7 @@ public class ScoreManager : MonoBehaviour
             stoveScore.AddScore();
             stoveMinigameCounter.MinusCollisionCounter();
             
-            score.text = "Score: " + stoveScore.GetScore() + "/15";
+            score.text = "Score: " + StoveScore.Score + "/15";
                         
             if (stoveMinigameCounter.GetCollisionCounter() == 0)
             {

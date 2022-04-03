@@ -57,7 +57,6 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         if (!stopped) Move();
         if ((stopped) && (SandwichController.moving)) {
             stopped = false;
-           // Destroy(this.gameObject);
         }
     }
 
