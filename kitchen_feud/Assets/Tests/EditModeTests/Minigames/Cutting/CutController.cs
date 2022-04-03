@@ -91,6 +91,8 @@ public class CutControllerTests
 
         List<Sprite> dishSprites = cutController.InstantiateList(ingredients);
         Assert.AreEqual(0, dishSprites.Count);
+        Assert.AreEqual(new List<Sprite>(){}, dishSprites);
+
 
     }
 

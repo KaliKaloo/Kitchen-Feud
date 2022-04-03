@@ -9,8 +9,6 @@ public class StoveScoreTests
 
     StoveScore stoveScore;
 
-
-
     [OneTimeSetUp]
     public void setUp()
     {

@@ -16,7 +16,7 @@ public class SandwichControllerTests
 
 
     [OneTimeSetUp]
-    public void setUp(){
+    public void oneTimeSetUp(){
         GameObject obj = new GameObject();
         sandwichController = obj.AddComponent<SandwichController>();
         sandwichController.scoreText = obj.AddComponent<Text>();
@@ -36,13 +36,14 @@ public class SandwichControllerTests
         ingredient3 = ScriptableObject.CreateInstance<IngredientSO>();
         ingredient3.ingredientID = "ingr 3";
 
-
-        sandwichController.dish = ScriptableObject.CreateInstance<DishSO>();
-        sandwichController.dish.recipe = new List<IngredientSO>(){ingredient1, ingredient2};
-
-
         GameEvents gameEvents = obj.AddComponent<GameEvents >();
         GameEvents.current = gameEvents;
+
+    }
+
+    [SetUp]
+    public void SetUp(){
+        ingredients = new List<IngredientSO>();
 
     }
 

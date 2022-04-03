@@ -36,7 +36,6 @@ public class Spawner : MonoBehaviour
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 
-    // Start is called before the first frame update
     void Start()
     {
         // boxCollider = bottomBar.GetComponent<BoxCollider2D>();
@@ -75,7 +74,8 @@ public class Spawner : MonoBehaviour
         
         topBar.SetActive(false);
         startButton.SetActive(false);
-        startSmoke();
+        if (PhotonNetwork.IsConnected)
+            startSmoke();
 
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
