@@ -5,7 +5,15 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Main",
-        "PhotonUnityNetworking"
+        "PhotonUnityNetworking",
+        "PhotonRealtime",
+        "PhotonUnityNetworking.Demos",
+        "PhotonUnityNetworking.Editor",
+        "PhotonUnityNetworking.Utilities",
+        "PhotonUnityNetworking.Utilities.Culling.Editor",
+        "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor",
+        "DatabaseASM",
+        "PhotonChat"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -20,4 +28,4 @@
     ],
     "versionDefines": [],
     "noEngineReferences": false
-} 
+}

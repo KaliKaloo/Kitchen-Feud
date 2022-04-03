@@ -24,6 +24,9 @@ public class SandwichController : MonoBehaviour
     public LayerSpawn LayerSpawn;
     public List<string> idList = new List<string>();
 
+    public int currentIndex;
+    public string currentActiveID;
+
     public bool moving = false;
     public int CountStopped;
     public int finalScore;
@@ -100,7 +103,7 @@ public class SandwichController : MonoBehaviour
         objectSpawn(sandwichIngredients);
     }
 
-     public List<string> InstantiateList(List<IngredientSO> ingredients)
+    public List<string> InstantiateList(List<IngredientSO> ingredients)
     {
         List<string> ingredientIDs = new List<string>();
         foreach (IngredientSO ingredient in ingredients)
@@ -121,8 +124,7 @@ public class SandwichController : MonoBehaviour
         InvokeRepeating("NewRandomObject", 1, 1);
     }
 
-    public int currentIndex;
-    public string currentActiveID;
+    
     public void NewRandomObject()
      {
          int newIndex = Random.Range(0, objectPool.Count);
