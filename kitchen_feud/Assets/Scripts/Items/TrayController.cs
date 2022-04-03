@@ -39,6 +39,8 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
+        Debug.Log("Setting Ready");
+        ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
 
         foreach (Transform slot in ts.transform)
         {
@@ -53,7 +55,7 @@ public class TrayController : MonoBehaviour
             // else destroy items on tray, except from item collider
             if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
-                ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+                
                 //Destroy(slot.GetChild(0).gameObject);
             }
         }

@@ -11,7 +11,7 @@ public class Tray : Interactable
     public List<Transform> slots = new List<Transform>();
 
     public GameObject currentPrefab;
-
+    public GameObject Agent;
     PlayerHolding playerHold;
     public pickableItem pickable;
     public GameObject teamController;
@@ -20,6 +20,7 @@ public class Tray : Interactable
 
     private void Start()
     {
+        isReady = false;
         canvasController = teamController.GetComponent<CanvasController>();
     }
 
@@ -58,7 +59,18 @@ public class Tray : Interactable
     [PunRPC]
     void setIsReadyF(int viewID)
     {
+        Debug.Log("SetToFalse1");
         PhotonView.Find(viewID).GetComponent<Tray>().isReady = false;
+    }
+    [PunRPC]
+    void setAgent(int trayID, int AgentID)
+    {
+        PhotonView.Find(trayID).GetComponent<Tray>().Agent = PhotonView.Find(AgentID).gameObject;
+    }
+    [PunRPC]
+    void setAgentF(int trayID)
+    {
+        PhotonView.Find(trayID).GetComponent<Tray>().Agent = null;
     }
 
 } 

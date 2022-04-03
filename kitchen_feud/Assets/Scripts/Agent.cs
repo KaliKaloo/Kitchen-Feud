@@ -27,75 +27,85 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (tray)
+        if (PV.IsMine)
         {
-            agent.SetDestination(tray.transform.position);
             float dist = RemainingDistance(agent.path.corners);
 
-            if (dist < 1.3f && dist != 0)
+            if (tray)
             {
-               
+                agent.SetDestination(tray.transform.position);
 
-                foreach (Transform t in tray.transform)
+                if (dist < 1.3f && dist != 0)
                 {
-                    
-                    if (t.name.Contains("Slot") && t.childCount > 0)
+
+
+                    foreach (Transform t in tray.transform)
                     {
-                        playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
-                        agent.ResetPath();
-                        //GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-                        PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
-                        readyToServe = true;    
-                        break;
+
+                        if (t.name.Contains("Slot") && t.childCount > 0)
+                        {
+                            playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
+                            //Set Tray to not Collectable;
+                            tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                            agent.ResetPath();
+                            readyToServe = true;
+                            break;
+                        }
+
                     }
+                }
+
+
+
+            }
+            if (readyToServe)
+            {
+                float newDist = RemainingDistance(agent.path.corners);
+                agent.SetDestination(GameObject.Find("Serving Point").transform.position);
+                if (newDist < 1.3f && newDist != 0)
+                {
+                    tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+
+                    readyToServe = false;
 
                 }
             }
-         
 
+
+            //agent.SetDestination(GameObject.Find("Local").transform.position);
+            //if (Oven.GetComponentInChildren<Timer>())
+            //{
+            //    if (Oven.GetComponentInChildren<Timer>().timerFake == 35)
+            //    {
+            //        agent.SetDestination(Oven.GetComponentInChildren<Timer>().transform.position);
+            //        isMoving = true;
+
+            //    }
+
+            //    float dist = RemainingDistance(agent.path.corners);
+
+
+            //    if (dist <0.3 && dist !=0)
+            //    {
+            //        Debug.LogError("s");
+            //        Oven.GetComponentInChildren<Timer>().GetComponentInChildren<exitOven>().TaskOnClick();
+            //        if (Oven.GetComponent<Appliance>().cookedDish)
+            //        {
+            //            GetComponent<PlayerHolding>().pickUpItem(Oven.GetComponent<Appliance>().cookedDish,
+            //                Oven.GetComponent<Appliance>().cookedDish.GetComponent<pickableItem>().item);
+            //        }
+            //        isMoving = false;
+            //    }
+
+
+            //}
+            //  if(GetComponent<PlayerHolding>().slot.childCount != 0)
+            //    {
+            //        agent.SetDestination(GameObject.Find("k1").GetComponentInChildren<Tray>().transform.position);
+            //    }
 
         }
-        if (readyToServe)
-        {
-            Debug.LogError(GameObject.Find("Serving Point").transform.position);
-            agent.SetDestination(GameObject.Find("Serving Point").transform.position);
-            //readyToServe = false;
-        }
-
-        //agent.SetDestination(GameObject.Find("Local").transform.position);
-        //if (Oven.GetComponentInChildren<Timer>())
-        //{
-        //    if (Oven.GetComponentInChildren<Timer>().timerFake == 35)
-        //    {
-        //        agent.SetDestination(Oven.GetComponentInChildren<Timer>().transform.position);
-        //        isMoving = true;
-
-        //    }
-
-        //    float dist = RemainingDistance(agent.path.corners);
-
-
-        //    if (dist <0.3 && dist !=0)
-        //    {
-        //        Debug.LogError("s");
-        //        Oven.GetComponentInChildren<Timer>().GetComponentInChildren<exitOven>().TaskOnClick();
-        //        if (Oven.GetComponent<Appliance>().cookedDish)
-        //        {
-        //            GetComponent<PlayerHolding>().pickUpItem(Oven.GetComponent<Appliance>().cookedDish,
-        //                Oven.GetComponent<Appliance>().cookedDish.GetComponent<pickableItem>().item);
-        //        }
-        //        isMoving = false;
-        //    }
-
-
-        //}
-        //  if(GetComponent<PlayerHolding>().slot.childCount != 0)
-        //    {
-        //        agent.SetDestination(GameObject.Find("k1").GetComponentInChildren<Tray>().transform.position);
-        //    }
-
-
     }
 
 
