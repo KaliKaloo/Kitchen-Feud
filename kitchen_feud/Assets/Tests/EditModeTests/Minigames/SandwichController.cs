@@ -41,6 +41,9 @@ public class SandwichControllerTests
         sandwichController.dish.recipe = new List<IngredientSO>(){ingredient1, ingredient2};
 
 
+        GameEvents gameEvents = obj.AddComponent<GameEvents >();
+        GameEvents.current = gameEvents;
+
     }
 
 
@@ -136,6 +139,14 @@ public class SandwichControllerTests
         sandwichController.currentActiveID = "Wrong ID";
         bool isStoppedID = sandwichController.checkStoppedID("ID");
         Assert.IsFalse(isStoppedID);
+    }
+
+    [Test]
+    public void StopGame()
+    {
+        sandwichController.StopGame();
+        Assert.IsTrue(sandwichController.backButton.activeSelf);
+        Assert.AreEqual(sandwichController.Score, sandwichController.finalScore);
     }
 
 

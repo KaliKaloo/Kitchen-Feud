@@ -7,7 +7,6 @@ using Photon.Pun;
 public class SandwichController : MonoBehaviour
 {
     public DishSO dish;
-    // Start is called before the first frame update
     [SerializeField] private GameObject team1Background;
     [SerializeField] private GameObject team2Background;
     [SerializeField] private GameObject minigameCanvas;
@@ -49,7 +48,7 @@ public class SandwichController : MonoBehaviour
 
     void Start()
     {
-        //set bacground to team1
+        //set background to team1
         if (minigameCanvas.tag == "Team1")
         {
             team1Background.SetActive(true);
@@ -89,7 +88,6 @@ public class SandwichController : MonoBehaviour
         GameUI.SetActive(true);
         Score = 0;
         moving = true;
-       
        
         //make a copy of list of ingredients and add bread again at the end
         sandwichIngredients = new List<IngredientSO>(dish.recipe);
@@ -138,16 +136,11 @@ public class SandwichController : MonoBehaviour
      }
 
     public bool checkStoppedID(string objectID){
-        if (currentActiveID == objectID){
-            return true;
-        } 
-        return false;
-
+        return currentActiveID == objectID;
     }
 
 
     public void StopGame(){
-        
         backButton.SetActive(true);
         finalScore = score;
         GameEvents.current.assignPointsEventFunction();
