@@ -267,6 +267,8 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
+        timer.SetServerTime();
+
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
             GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           

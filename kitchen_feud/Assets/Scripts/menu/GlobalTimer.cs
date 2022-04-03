@@ -32,6 +32,12 @@ public class GlobalTimer
         }
     }
 
+    public void SetServerTime()
+    {
+        hashTimer["Time"] = timer;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
+    }
+
     public void ChangeTimerValue(int newTime)
     {
         timer = time = newTime >= 0 ? newTime : 0;
@@ -44,7 +50,7 @@ public class GlobalTimer
 
     public int GetCurrentTime()
     {
-        return timer;
+        return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
     }
 
     public string ConvertSecondToMinutes(int seconds)
