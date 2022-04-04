@@ -1218,6 +1218,9 @@ MonoBehaviour:
   speed: 10
   timer: {fileID: 0}
   PV: {fileID: 0}
+  localPV: {fileID: 0}
+  controllerPV: 0
+  currentH: 0
 --- !u!70 &626672960781006354
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
