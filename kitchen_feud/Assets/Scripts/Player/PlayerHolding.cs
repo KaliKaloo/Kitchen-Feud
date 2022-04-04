@@ -47,7 +47,6 @@ public class PlayerHolding : MonoBehaviour
 
             if (view.IsMine)
             {
-                Debug.Log("a");
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     slotItem(obj, item);
