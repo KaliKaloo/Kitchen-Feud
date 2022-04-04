@@ -10,16 +10,15 @@ public class OutlineEffect : MonoBehaviour
     public float thickness = 1.03f;
     [ColorUsage(true, true)]
     public Color colorOutline;
-    public Renderer rend;
+    private Renderer rend;
     public GameObject outlineObjectPrefab;
     public GameObject outlineObject;
-    // Start is called before the first frame update
     
      void Start()
     {
-        outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,Quaternion.identity);
+        outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,gameObject.transform.rotation);
         outlineObject.transform.SetParent(gameObject.transform);
-        outlineObject.transform.localScale = new Vector3(1, 1, 1);
+        //outlineObject.transform.localScale = new Vector3(1, 1, 1);
   
         Renderer rend = outlineObject.GetComponent<Renderer>();
         rend.material = mat;
@@ -28,23 +27,18 @@ public class OutlineEffect : MonoBehaviour
         rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         rend.enabled = false;
         outlineObject.GetComponent<Collider>().enabled = false;
-        //outlineObject.GetComponentInParent<OutlineEffect>().enabled = false;
+
         this.rend = rend;
         rend.enabled = false;
-       // outlineObject.SetActive(true);
-    
-        
     }
 
     public void startGlowing(){
-        // Debug.Log(outlineObject.name);
         if(outlineObject){
         outlineObject.GetComponent<Renderer>().enabled = true;
         }
     }
     
-    public void destroyClone(){
-        Debug.Log("Stop Glowing" + this.gameObject.name);
+    public void stopGlowing(){
         if(outlineObject){
             outlineObject.GetComponent<Renderer>().enabled = false;
         }

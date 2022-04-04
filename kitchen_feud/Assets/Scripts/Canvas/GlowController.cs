@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GlowController : MonoBehaviour
 {
-    public Database Database;
+
     public bool newClick;
     public bool firstClick = false;
     public string currentGlowingDishName;
@@ -24,7 +24,6 @@ public class GlowController : MonoBehaviour
         } else {
             doorTag = "Kitchen2Portals";
         }
-
          kitchenPortals = GameObject.FindGameObjectsWithTag(doorTag);
     }
 
@@ -40,7 +39,6 @@ public class GlowController : MonoBehaviour
             }
 
             firstClick = false;
-            Debug.Log("new dish:" + dishName);
             dishInFocus = Database.GetDishByName(dishName);
             appliancesToGlow = getListOfAppliancesToGlow(dishName);
         
@@ -52,66 +50,42 @@ public class GlowController : MonoBehaviour
 
     }
 
-    public List<GameObject> appliancesToGlow = new List<GameObject>(); 
-    //public GameObject glowAppliance;
+    public List<GameObject> appliancesToGlow = new List<GameObject>();
 
     public List<GameObject> getListOfAppliancesToGlow(string dishNameToGlow){
-        
         currentGlowingDishName = dishNameToGlow ;
-
         string dishTag = dishInFocus.toCook;
     
         GameObject[] objs = GameObject.FindGameObjectsWithTag(dishTag);
-
         foreach (GameObject obj in objs){
             appliancesToGlow.Add(obj);
-            
-            
-       }
-
-        // foreach (GameObject obj in objs){
-        //     if (obj.GetComponent<Appliance>().kitchenNum == teamNumber){
-        //         appliancesToGlow.Add(obj);
-        //     }
-            
-        // }
-
+        }
         return appliancesToGlow;
-
     }
 
     
     public void GlowAppliance(List<GameObject> appliances){
-        // teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;
-        
-        foreach (GameObject glowAppliance in appliances)
-        {
+    
+        foreach (GameObject glowAppliance in appliances){
             if (glowAppliance.GetComponent<Appliance>().kitchenNum == teamNumber ){
-            if (glowAppliance.GetComponent<OutlineEffect>()){
-                //glowAppliance.GetComponent<OutlineEffect>().enabled = true;
-                glowAppliance.GetComponent<OutlineEffect>().startGlowing();
-            }   
+                if (glowAppliance.GetComponent<OutlineEffect>()){
+                    glowAppliance.GetComponent<OutlineEffect>().startGlowing();
+                }   
             }
-           
         }
     }
     
-    public GameObject IngredientSpawner;
-    public string glowLocation;
-
+    private string glowLocation;
     public List<GameObject> getLocation(DishSO dish){
         List<GameObject> locations = new List<GameObject>();
 
         foreach (IngredientSO ingredient in dish.recipe){   
             
-
             foreach (GameObject room in kitchenPortals){
                 if (room.name == ingredient.location.ToString()){
                    locations.Add(room);
-
                 }
             }
-
         }
         return locations;
     }
@@ -136,46 +110,32 @@ public class GlowController : MonoBehaviour
     }
 
     public void StopGlowingAll(string dishToStopGlowing){
-        Debug.Log("dishToStopGlowing: " + dishToStopGlowing);
-
-
 
         foreach (GameObject glowAppliance in appliancesToGlow){
+           
            kitchenNum = glowAppliance.GetComponent<Appliance>().kitchenNum;
            if (kitchenNum == teamNumber){
                 if (glowAppliance.GetComponent<OutlineEffect>()){
                         OutlineEffect outlineScript = glowAppliance.GetComponent<OutlineEffect>();
-                        outlineScript.destroyClone();
-                        //outlineScript.enabled = false;
+                        outlineScript.stopGlowing();
                        
                 }
             }
-            }
-
-        
+        }
 
         appliancesToGlow.Clear();
         currentGlowingDishName = "";
 
         List<GameObject> locationToStop = getLocation(dishInFocus);
+        foreach (GameObject location in locationToStop){
+            ParticleSystem PS1 = location.GetComponentInChildren<ParticleSystem>();
+            Transform PSChild = PS1.gameObject.transform.GetChild(2);;
+            ParticleSystem PS2 = PSChild.GetComponentInChildren<ParticleSystem>();
+            var main = PS1.main;
+            var main2  = PS2.main;
 
-        // foreach (IngredientSO ingredient in dishInFocus.recipe)
-        //     {   
-            foreach (GameObject location in locationToStop){
-                //GameObject location = GameObject.Find(ingredient.location.ToString());
-
-                ParticleSystem PS1 = location.GetComponentInChildren<ParticleSystem>();
-                Transform PSChild = PS1.gameObject.transform.GetChild(2);;
-                ParticleSystem PS2 = PSChild.GetComponentInChildren<ParticleSystem>();
-                var main = PS1.main;
-                var main2  = PS2.main;
-
-                main.startColor = main2.startColor;
-
-                // PS1.Simulate(0.0f,true, true);
-                // PS1.Play();
-                
-            }
+            main.startColor = main2.startColor;
+        }
             
     }
    
