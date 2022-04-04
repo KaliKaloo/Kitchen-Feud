@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class StoveCounter
+public class StoveMinigameCounterTests
 {
    StoveMinigameCounter stoveCounter;
 

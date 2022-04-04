@@ -12,7 +12,6 @@ public class IngredientMove : MonoBehaviour
    
     public float destroyTime;
 
-    // Use this for initialization
     void Start()
     {
         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(minXSpeed, maxXSpeed), Random.Range(minYSpeed, maxYSpeed));

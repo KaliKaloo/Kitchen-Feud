@@ -16,7 +16,7 @@ public class SandwichControllerTests
 
 
     [OneTimeSetUp]
-    public void setUp(){
+    public void oneTimeSetUp(){
         GameObject obj = new GameObject();
         sandwichController = obj.AddComponent<SandwichController>();
         sandwichController.scoreText = obj.AddComponent<Text>();
@@ -36,10 +36,14 @@ public class SandwichControllerTests
         ingredient3 = ScriptableObject.CreateInstance<IngredientSO>();
         ingredient3.ingredientID = "ingr 3";
 
+        GameEvents gameEvents = obj.AddComponent<GameEvents >();
+        GameEvents.current = gameEvents;
 
-        sandwichController.dish = ScriptableObject.CreateInstance<DishSO>();
-        sandwichController.dish.recipe = new List<IngredientSO>(){ingredient1, ingredient2};
+    }
 
+    [SetUp]
+    public void SetUp(){
+        ingredients = new List<IngredientSO>();
 
     }
 
@@ -136,6 +140,14 @@ public class SandwichControllerTests
         sandwichController.currentActiveID = "Wrong ID";
         bool isStoppedID = sandwichController.checkStoppedID("ID");
         Assert.IsFalse(isStoppedID);
+    }
+
+    [Test]
+    public void StopGame()
+    {
+        sandwichController.StopGame();
+        Assert.IsTrue(sandwichController.backButton.activeSelf);
+        Assert.AreEqual(sandwichController.Score, sandwichController.finalScore);
     }
 
 
