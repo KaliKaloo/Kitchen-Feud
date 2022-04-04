@@ -37,7 +37,6 @@ public class PlayerHolding : MonoBehaviour
     public bool itemLock = false;
     PickupLock pickupLock = new PickupLock();
 
-    // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {
@@ -48,6 +47,7 @@ public class PlayerHolding : MonoBehaviour
 
             if (view.IsMine)
             {
+                Debug.Log("a");
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     slotItem(obj, item);

@@ -13,7 +13,7 @@ public class MovingInstructions : MonoBehaviour
     private float time = 1.5f;
     public float timer;
     private bool started = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         Text.text = "Welcome! You can now move around using WASD or Arrow Keys!";
@@ -21,7 +21,6 @@ public class MovingInstructions : MonoBehaviour
    
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (LocalPlayer == null)
@@ -75,15 +74,11 @@ public class MovingInstructions : MonoBehaviour
    
     public void Decrement()
     {
-
         timer -= Time.deltaTime;
-
-
     }
 
     public void InitializeTimer()
     {
         timer = time;
-
     }
 }
