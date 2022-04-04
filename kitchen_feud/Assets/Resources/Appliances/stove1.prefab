@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4089649501271651511}
   m_Layer: 0
   m_Name: stove1
-  m_TagString: Stove
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -20,7 +20,7 @@ public class OutlineEffect : MonoBehaviour
         outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,Quaternion.identity);
         outlineObject.transform.SetParent(gameObject.transform);
         outlineObject.transform.localScale = new Vector3(1, 1, 1);
-
+  
         Renderer rend = outlineObject.GetComponent<Renderer>();
         rend.material = mat;
         rend.material.SetFloat("_Thickness", thickness);

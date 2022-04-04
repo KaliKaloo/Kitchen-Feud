@@ -13,6 +13,20 @@ public class GlowController : MonoBehaviour
     private int kitchenNum;
 
     public DishSO dishInFocus;
+    public GameObject[] kitchenPortals;
+
+    void Start(){
+        teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;
+        string doorTag;
+
+        if (teamNumber == 1){
+            doorTag = "Kitchen1Portals";
+        } else {
+            doorTag = "Kitchen2Portals";
+        }
+
+         kitchenPortals = GameObject.FindGameObjectsWithTag(doorTag);
+    }
 
     public void GlowAll(string dishName){
 
@@ -28,7 +42,7 @@ public class GlowController : MonoBehaviour
             firstClick = false;
             Debug.Log("new dish:" + dishName);
             dishInFocus = Database.GetDishByName(dishName);
-            if (dishName != ""){appliancesToGlow = getListOfAppliancesToGlow(dishName);}
+            appliancesToGlow = getListOfAppliancesToGlow(dishName);
         
             GlowAppliance(appliancesToGlow);
 
@@ -42,7 +56,7 @@ public class GlowController : MonoBehaviour
     //public GameObject glowAppliance;
 
     public List<GameObject> getListOfAppliancesToGlow(string dishNameToGlow){
-        teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;
+        
         currentGlowingDishName = dishNameToGlow ;
 
         string dishTag = dishInFocus.toCook;
@@ -85,16 +99,42 @@ public class GlowController : MonoBehaviour
     
     public GameObject IngredientSpawner;
     public string glowLocation;
+
+    public List<GameObject> getLocation(DishSO dish){
+        List<GameObject> locations = new List<GameObject>();
+
+        foreach (IngredientSO ingredient in dish.recipe){   
+   
+
+            foreach (GameObject room in kitchenPortals){
+                if (room.name == ingredient.location.ToString()){
+                   locations.Add(room);
+
+                }
+            }
+
+        }
+        return locations;
+    }
    
     public void GlowLocation(DishSO dishInFocus){
-    
-        foreach (IngredientSO ingredient in dishInFocus.recipe)
-            {   
-                GameObject location = GameObject.Find(ingredient.location.ToString());
+        List<GameObject> locationsToGlow = getLocation(dishInFocus);
 
-                ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
-                var main = PS.main;
-                main.startColor = new Color(243,255,28,255);
+        // foreach (IngredientSO ingredient in dishInFocus.recipe)
+        //     {   
+        //         GameObject location;
+        //         foreach (GameObject room in kitchenPortals){
+        //             if (room.name == ingredient.location.ToString()){
+        //                 location = room;
+        //             }
+        //         }
+            foreach (GameObject location in locationsToGlow){
+                if (location){
+                    ParticleSystem PS = location.GetComponentInChildren<ParticleSystem>();
+                    var main = PS.main;
+                    main.startColor = new Color(243,255,28,255);
+                }
+            }
                 
                 // Debug.Log(ingredient.name);
                 // string spawnerName = ingredient.name.ToString();
@@ -114,7 +154,7 @@ public class GlowController : MonoBehaviour
                     
                 // }
                 
-            }
+            
     }
 
     // public void GlowIngredient(GameObject IngredientSpawnerToGlow){
@@ -149,13 +189,15 @@ public class GlowController : MonoBehaviour
         appliancesToGlow.Clear();
         currentGlowingDishName = "";
 
-        foreach (IngredientSO ingredient in dishInFocus.recipe)
-            {   
-                //Debug.Log(dishInFocus.recipe.Count);
-                GameObject location = GameObject.Find(ingredient.location.ToString());
-               // Debug.Log(location.name);
+        List<GameObject> locationToStop = getLocation(dishInFocus);
+
+        // foreach (IngredientSO ingredient in dishInFocus.recipe)
+        //     {   
+            foreach (GameObject location in locationToStop){
+                //GameObject location = GameObject.Find(ingredient.location.ToString());
+
                 ParticleSystem PS1 = location.GetComponentInChildren<ParticleSystem>();
-                Transform PSChild = PS1.gameObject.transform.GetChild(2);;
+                Transform PSChild = PS1.gameObject.transform.GetChild(2);
                 ParticleSystem PS2 = PSChild.GetComponentInChildren<ParticleSystem>();
                 var main = PS1.main;
                 var main2  = PS2.main;
@@ -165,8 +207,8 @@ public class GlowController : MonoBehaviour
                 PS1.Simulate(0.0f,true, true);
                 PS1.Play();
                 
-            
             }
+            
     }
    
 }

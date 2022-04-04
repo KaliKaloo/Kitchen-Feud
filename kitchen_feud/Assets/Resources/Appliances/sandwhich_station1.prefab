@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2616269699067794107}
   m_Layer: 0
   m_Name: sandwhich_station1
-  m_TagString: Sandwich Station
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

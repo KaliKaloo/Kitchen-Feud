@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1314813099449010680}
   m_Layer: 0
   m_Name: Oven1
-  m_TagString: Oven
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
