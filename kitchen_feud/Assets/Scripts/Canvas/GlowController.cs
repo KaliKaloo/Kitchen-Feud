@@ -172,8 +172,8 @@ public class GlowController : MonoBehaviour
 
                 main.startColor = main2.startColor;
 
-                PS1.Simulate(0.0f,true, true);
-                PS1.Play();
+                // PS1.Simulate(0.0f,true, true);
+                // PS1.Play();
                 
             }
             
