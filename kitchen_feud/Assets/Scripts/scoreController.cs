@@ -39,10 +39,14 @@ public class scoreController : MonoBehaviour
     {
         loadingScreen.SetActive(true);
         // send message to server that finished loading
-        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
-        if (currentPlayers > 0)
-            lobby["Players"] = currentPlayers - 1;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        if (PhotonNetwork.CurrentRoom.CustomProperties["Players"] != null)
+        {
+            int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+
+            if (currentPlayers > 0)
+                lobby["Players"] = currentPlayers - 1;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        }
 
         cleanupRoom = this.GetComponent<CleanupRoom>();
 
@@ -67,22 +71,34 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        if (startGame)
+        if (PhotonNetwork.CurrentRoom.CustomProperties["Players"] != null)
         {
-            score1Text.text = ConvertScoreToString(scores.GetScore1());
-            score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-            // increment every second
-            elapsed += Time.deltaTime;
-            if (elapsed >= 1f)
+            if (startGame)
             {
-                elapsed = elapsed % 1f;
-                OutputTime();
+                score1Text.text = ConvertScoreToString(scores.GetScore1());
+                score2Text.text = ConvertScoreToString(scores.GetScore2());
+
+                // increment every second
+                elapsed += Time.deltaTime;
+                if (elapsed >= 1f)
+                {
+                    elapsed = elapsed % 1f;
+                    OutputTime();
+                }
             }
-        }
-        else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
-        {
-            // show waiting for others players menu
+            else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
+            {
+                // show waiting for others players menu
+            }
+            else
+            {
+                loadingScreen.SetActive(false);
+                startGame = true;
+                // start timer if not started yet
+                timer.InitializeTimer();
+                timerText.text = ConvertSecondToMinutes(timer.GetTime());
+                music = FindObjectOfType<MusicManager>();
+            }
         }
         else
         {

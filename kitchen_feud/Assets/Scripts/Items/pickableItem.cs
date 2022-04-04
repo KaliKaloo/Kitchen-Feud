@@ -49,7 +49,8 @@ public class pickableItem : Interactable
             //playerHold.pickUpItem(gameObject, item);
         }
     }
-		public void removeFromTray(TraySO tray)
+    
+    public void removeFromTray(TraySO tray)
 	{
         
 		tray.ServingTray.Remove(item);

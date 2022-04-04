@@ -81,6 +81,7 @@ public class MusicManager : MonoBehaviour
     public void minigameEnd(){
         changeBGM(location, 1, 0, 1);
     }
+    
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
         AudioClip newTrack;
