@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Photon.Pun;
+using TMPro;
 
 public class TrayController : MonoBehaviour
 {
@@ -38,9 +39,19 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
+
         foreach (Transform slot in ts.transform)
         {
-            if (slot.childCount != 0)
+            // Destroy order stand prefab
+            if (slot.tag == "OrderTower")
+            {
+                slot.GetComponentInChildren<TextMeshProUGUI>().text ="";
+                // Destroy(slot.gameObject);
+                // Debug.Log(slot.GetComponent<PhotonView>().ViewID);
+            }
+
+            // else destroy items on tray, except from item collider
+            if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
                 Destroy(slot.GetChild(0).gameObject);
             }
@@ -63,6 +74,7 @@ public class TrayController : MonoBehaviour
 
                 Dish dishComponent = trayDishes[i].GetComponent<Dish>();
                 total += (int)dishComponent.points;
+                Debug.Log((int)dishComponent.points);
                 tempOrderDish.Remove(trayItems[i]);
             }
             else

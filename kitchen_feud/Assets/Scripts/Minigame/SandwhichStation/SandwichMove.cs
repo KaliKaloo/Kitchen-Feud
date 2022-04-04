@@ -23,7 +23,6 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     public bool stopped = false;
     
-    // Start is called before the first frame update
     
     void Start()
     {
@@ -57,17 +56,14 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
         if (!stopped) Move();
         if ((stopped) && (SandwichController.moving)) {
             stopped = false;
-           // Destroy(this.gameObject);
         }
     }
 
 
     void StopMove()
     {
-        Debug.Log("ive been stopped");
         Vector3 stoppedPosition = platform.localPosition;
         float distance = Vector3.Distance(platform.localPosition, perfectPosition);
-              
         CalculateScore(distance);
 
     }

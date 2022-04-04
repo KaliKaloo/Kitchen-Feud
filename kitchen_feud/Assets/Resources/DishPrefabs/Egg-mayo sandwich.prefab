@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4685713985748059090}
   m_Layer: 0
   m_Name: Egg-mayo sandwich
-  m_TagString: Untagged
+  m_TagString: Dish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

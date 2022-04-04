@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Start()
 	{
-		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -36,9 +35,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
 			
 			this.name = "Local";
-			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
-			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-			
+			if (PhotonNetwork.LocalPlayer.CustomProperties["Team"] != null)
+			{
+				view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+				myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			}
 			if(myTeam == 1)
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
@@ -47,15 +48,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
             {
 				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
 			}
+
+			gameObject.layer = 9;
+			gameObject.transform.GetChild(0).gameObject.layer = 9;
+			gameObject.transform.GetChild(1).gameObject.layer = 9;
+
+
+           
 		}
-		
 		
 	}
 
-
 	void Update()
 	{
-	
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
@@ -83,11 +88,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				}
 			}
 		}
+		
 	}
 
 
-    // Set our focus to a new focus
-    void SetFocus(Interactable newFocus, GameObject obj)
+	// Set our focus to a new focus
+	void SetFocus(Interactable newFocus, GameObject obj)
 	{
 		if (view.IsMine)
 		{

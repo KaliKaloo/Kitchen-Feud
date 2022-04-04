@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3552936086683428303}
   m_Layer: 0
   m_Name: Peanut Butter and Jelly sandwich
-  m_TagString: Untagged
+  m_TagString: Dish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

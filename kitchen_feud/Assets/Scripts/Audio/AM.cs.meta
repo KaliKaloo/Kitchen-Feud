@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:kitchen_feud/Assets/Tests/EditModeTests/StoveCounter.cs.meta
+guid: 6ecaf0572d81f834fa9b005418407acd
+========
+guid: 088254c5448114654a19faeaadef78a8
+>>>>>>>> dev:kitchen_feud/Assets/Scripts/AM.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

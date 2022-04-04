@@ -7,7 +7,6 @@ using Photon.Pun;
 public class SandwichController : MonoBehaviour
 {
     public DishSO dish;
-    // Start is called before the first frame update
     [SerializeField] private GameObject team1Background;
     [SerializeField] private GameObject team2Background;
     [SerializeField] private GameObject minigameCanvas;
@@ -23,6 +22,9 @@ public class SandwichController : MonoBehaviour
     public SandwichSpawner SandwichSpawner;
     public LayerSpawn LayerSpawn;
     public List<string> idList = new List<string>();
+
+    public int currentIndex;
+    public string currentActiveID;
 
     public bool moving = false;
     public int CountStopped;
@@ -46,7 +48,7 @@ public class SandwichController : MonoBehaviour
 
     void Start()
     {
-        //set bacground to team1
+        //set background to team1
         if (minigameCanvas.tag == "Team1")
         {
             team1Background.SetActive(true);
@@ -87,7 +89,6 @@ public class SandwichController : MonoBehaviour
         Score = 0;
         moving = true;
        
-       
         //make a copy of list of ingredients and add bread again at the end
         sandwichIngredients = new List<IngredientSO>(dish.recipe);
         sandwichIngredients.Add(dish.recipe[0]);
@@ -100,7 +101,7 @@ public class SandwichController : MonoBehaviour
         objectSpawn(sandwichIngredients);
     }
 
-     public List<string> InstantiateList(List<IngredientSO> ingredients)
+    public List<string> InstantiateList(List<IngredientSO> ingredients)
     {
         List<string> ingredientIDs = new List<string>();
         foreach (IngredientSO ingredient in ingredients)
@@ -121,10 +122,9 @@ public class SandwichController : MonoBehaviour
         InvokeRepeating("NewRandomObject", 1, 1);
     }
 
-    public int currentIndex;
-    public string currentActiveID;
+    
     public void NewRandomObject()
-     {
+    {
          int newIndex = Random.Range(0, objectPool.Count);
          // Deactivate old gameobject
          objectPool[currentIndex].SetActive(false);
@@ -136,16 +136,11 @@ public class SandwichController : MonoBehaviour
      }
 
     public bool checkStoppedID(string objectID){
-        if (currentActiveID == objectID){
-            return true;
-        } 
-        return false;
-
+        return currentActiveID == objectID;
     }
 
 
     public void StopGame(){
-        
         backButton.SetActive(true);
         finalScore = score;
         GameEvents.current.assignPointsEventFunction();

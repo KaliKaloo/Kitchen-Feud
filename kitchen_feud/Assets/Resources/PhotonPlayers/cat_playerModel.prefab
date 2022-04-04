@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3336179029912035731}
   - component: {fileID: 5992262761695865800}
   - component: {fileID: 1176948023147645252}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: ItemCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ Camera:
   m_Depth: 80
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -185,10 +185,11 @@ GameObject:
   - component: {fileID: -8892825353978446714}
   - component: {fileID: 496252007107752818}
   - component: {fileID: 4390903883628915758}
-  - component: {fileID: -3337640174975405624}
   - component: {fileID: -951451966299113654}
   - component: {fileID: 8813379893451686089}
   - component: {fileID: 4369332404756512163}
+  - component: {fileID: 7772909676096678396}
+  - component: {fileID: 2471392885907318680}
   m_Layer: 0
   m_Name: cat_playerModel
   m_TagString: Player
@@ -237,6 +238,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -8892825353978446714}
+  - {fileID: 2471392885907318680}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -275,6 +277,7 @@ MonoBehaviour:
   heldObj: {fileID: 0}
   view: {fileID: 4338776926646805293}
   itemdropped: 0
+  itemLock: 0
 --- !u!114 &-8892825353978446714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,24 +356,6 @@ MonoBehaviour:
   started1: 0
   kickedBy: 
   nametag: {fileID: 0}
---- !u!143 &-3337640174975405624
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924745824932806213}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 0.25
-  m_Radius: 0.035
-  m_SlopeLimit: 0
-  m_StepOffset: 0.2
-  m_SkinWidth: 0.0035
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.125, z: 0.005}
 --- !u!114 &-951451966299113654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +425,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &7772909676096678396
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924745824932806213}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9a288fc68834204ebfbbcec63ea3e41, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2471392885907318680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924745824932806213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsMovingForwards
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsHolding
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsMovingBackwards
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &1085704102467656990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1198,7 @@ GameObject:
   - component: {fileID: 3821972603889988333}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

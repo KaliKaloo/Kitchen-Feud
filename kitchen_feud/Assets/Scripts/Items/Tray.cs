@@ -10,9 +10,18 @@ public class Tray : Interactable
     public GameObject objectHolding;
     public List<Transform> slots = new List<Transform>();
 
+    public GameObject currentPrefab;
+
     PlayerHolding playerHold;
     public pickableItem pickable;
-    
+    public GameObject teamController;
+    private CanvasController canvasController;
+
+    private void Start()
+    {
+        canvasController = teamController.GetComponent<CanvasController>();
+    }
+
     public override void Interact()
     {
         playerHold = player.GetComponent<PlayerHolding>();
@@ -24,8 +33,8 @@ public class Tray : Interactable
             if (tray.ServingTray.Count < 4)
             {
                 //foreach (Transform slot in slots)
-                for (int i =0;i<slots.Count;i++)
-                { 
+                for (int i = 0; i < slots.Count; i++)
+                {
                     if (slots[i].transform.childCount == 0)
                     {
                         playerHold.dropItem();
@@ -42,6 +51,10 @@ public class Tray : Interactable
                     this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
                 }
             }
+        }
+        else if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")
+        {
+            canvasController.TrayOrderOptions(tray.name);
         }
     }
     

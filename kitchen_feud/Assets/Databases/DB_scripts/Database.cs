@@ -9,15 +9,12 @@ public class Database : MonoBehaviour
     public DishDatabase dishes;
     public IngredientDatabase ingredients;
 
-    // public IngredientSO in1;
-    // public IngredientSO in2;
 
     //make sure only one instance of our database is active
     private static Database orderInstance;
     private static Database dishInstance;
     private static Database ingredientInstance;
 
-    //I dont know hpw this works lol
     private void Awake(){
         if(orderInstance == null)
         {
@@ -55,11 +52,6 @@ public class Database : MonoBehaviour
 
     }
 
-    //just to see if it works
-    void Start()
-    {
-        // GetDishFromIngredients(in1, in2);
-    }
 
     public static DishSO GetDishFromIngredients(List<IngredientSO> ingredients)
     {

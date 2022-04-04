@@ -19,6 +19,9 @@ TagManager:
   - Kick
   - Speaker1
   - Speaker2
+  - ItemCollider
+  - OrderTower
+  - Dish
   layers:
   - Default
   - TransparentFX
@@ -30,8 +33,7 @@ TagManager:
   - UICollisions
   - Particle Effects
   - Pickable
-  - 
-  - 
+  - ME
   - 
   - 
   - 

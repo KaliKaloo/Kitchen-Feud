@@ -6,7 +6,10 @@
         "UnityEditor.TestRunner",
         "Main",
         "PhotonUnityNetworking",
-        "DatabaseAssembly"
+        "DatabaseASM",
+        "TrayASM",
+        "Unity.TextMeshPro",
+        "PantryASM"
     ],
     "includePlatforms": [
         "Editor"
@@ -23,4 +26,4 @@
     ],
     "versionDefines": [],
     "noEngineReferences": false
-} 
+}

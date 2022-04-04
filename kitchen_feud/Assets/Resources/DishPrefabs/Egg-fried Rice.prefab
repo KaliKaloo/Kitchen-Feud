@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3825670957840269763}
   m_Layer: 0
   m_Name: Egg-fried Rice
-  m_TagString: Untagged
+  m_TagString: Dish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
