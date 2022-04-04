@@ -13,19 +13,24 @@ public class PlayerTests : PhotonTestSetup
 {
     GameObject obj;
     GameObject mushroom;
+    GameObject potato;
     PlayerHolding playerHold;
+    Appliance stove;
 
     [UnitySetUp]
     public IEnumerator Setup()
     {
         
         mushroom = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "mushroom"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
             "cat_playerModel"),
             new Vector3(-1.98f, 0.006363153f, -8.37f),
             Quaternion.identity,
             0
         );
+        stove = GameObject.Find("stove1").GetComponent<Appliance>();
+
         playerHold = obj.GetComponent<PlayerHolding>();
         //h = obj.GetComponent<EnemyHealth>();
 
@@ -90,17 +95,45 @@ public class PlayerTests : PhotonTestSetup
         playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
         Assert.IsTrue(obj.transform.GetChild(2).childCount > 0);
         Assert.IsTrue(obj.transform.GetChild(2).GetChild(0).name == mushroom.name);
+        playerHold.dropItem();
 
 
         yield return null;
     }
+    [UnityTest]
     public IEnumerator dropItem()
     {
+        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+
         playerHold.dropItem();
 
         Assert.IsTrue(obj.transform.GetChild(2).childCount == 0);
-        
 
+
+        yield return null;
+    }
+    [UnityTest]
+    public IEnumerator ApplianceSlot()
+    {
+        stove.player = obj.transform;
+        stove.addItem(mushroom, playerHold);
+        Assert.IsTrue(stove.itemsOnTheAppliance.Count == 1);
+        yield return null;
+
+    }
+    [UnityTest]
+    public IEnumerator ApplianceCookTest()
+    {
+        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        stove.player = obj.transform;
+        stove.Interact();
+        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        stove.Interact();
+        stove.Interact();
+        
+        Assert.IsTrue(stove.cookedDish.name.Contains("Mushroom Soup"));
+
+        stove.player = null;
         yield return null;
     }
 
