@@ -8,6 +8,7 @@ public class GlobalTimer
 
     // SET TIMER HERE !!!!!!
     private static int time = 20;
+    private readonly int startTime = time;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
@@ -32,6 +33,7 @@ public class GlobalTimer
         }
     }
 
+    // sets the server's timer
     public void SetServerTime()
     {
         hashTimer["Time"] = timer;
@@ -48,11 +50,20 @@ public class GlobalTimer
         return time;
     }
 
-    public int GetCurrentTime()
+    // gets the time from the server
+    public int GetTime()
     {
         return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
     }
 
+    // resets the timer to original starting value
+    // call every time the game ends
+    public void ResetTimer()
+    {
+        timer = time = startTime;
+    }
+
+    // Converts an int into a suitable string for timer
     public string ConvertSecondToMinutes(int seconds)
     {
         TimeSpan time = TimeSpan.FromSeconds(seconds);
@@ -60,6 +71,7 @@ public class GlobalTimer
         return str;
     }
 
+    // returns the current time in string format to be displayed on UI
     public string GetCurrentTimeString()
     {
         return ConvertSecondToMinutes(time);
@@ -79,31 +91,10 @@ public class GlobalTimer
         }
         else
         {
-            // temporary fix
-            timer = TryTime();
+            timer = GetTime();
         }
     }
 
-    // avoiding trying to access hashmap without master client loading
-    private int TryTime()
-    {
-        int currentTime;
-        try
-        {
-            currentTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        }
-        catch
-        {
-            currentTime = timer;
-        }
-        return currentTime;
-    }
-
-    // get current time from timer
-    public int GetTime()
-    {
-        return TryTime();
-    }
 
     // decrement timer
     public void Decrement()

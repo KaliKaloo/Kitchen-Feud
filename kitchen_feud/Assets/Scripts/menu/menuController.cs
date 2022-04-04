@@ -175,7 +175,7 @@ public class menuController : MonoBehaviourPunCallbacks
         timer.SetServerTime();
 
         // updates all users' timers based on changed settings from master
-        this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetCurrentTime());
+        this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetTime());
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 

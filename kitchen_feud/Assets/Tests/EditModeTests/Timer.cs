@@ -12,7 +12,7 @@ public class Timer
     [Test]
     public void TimerNotNull()
     {
-        int currTime = timer.GetCurrentTime();
+        int currTime = timer.GetTime();
         Assert.NotNull(currTime, "time should not be null");
     }
 
@@ -21,7 +21,7 @@ public class Timer
     public void ChangeTimerZero()
     {
         timer.ChangeTimerValue(0);
-        int currTime = timer.GetCurrentTime();
+        int currTime = timer.GetTime();
         Assert.AreEqual(0, currTime, "time should be set to 0");
     }
 
@@ -29,7 +29,7 @@ public class Timer
     public void ChangeTimerValue()
     {
         timer.ChangeTimerValue(300);
-        int currTime = timer.GetCurrentTime();
+        int currTime = timer.GetTime();
         Assert.AreEqual(300, currTime, "changing timer values does not update correctly");
     }
 
@@ -37,7 +37,7 @@ public class Timer
     public void ChangeTimerNeg()
     {
         timer.ChangeTimerValue(-5);
-        int currTime = timer.GetCurrentTime();
+        int currTime = timer.GetTime();
         Assert.AreEqual(0, currTime, "time should be 0 if set to negative");
     }
 

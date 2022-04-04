@@ -71,6 +71,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         SkinPlayers();
     }
 
+
+    // Sets the custom stats to be displayed properly on the screen
     private void DisplayStats()
     {
         stat1.text = CustomProperties.PlayerPoints.GetHighestPlayerPoints(winningTeam);
@@ -78,6 +80,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         stat3.text = CustomProperties.PlayerMischievous.GetHighestMischievousStat();
     }
 
+    // Skin the models in the scene to appropriate winning team
     private void SkinPlayers()
     {
         Material newMat = Resources.Load("cat_red", typeof(Material)) as Material;
@@ -109,6 +112,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
 
     }
 
+    // Choose random animation depending on the outcome of the game
+    // i.e. winning team chooses 3 dance animations, draw chooses 3 sad animations
     private void ChooseAnimation()
     {
         List<int> animationList = new List<int>();
@@ -163,6 +168,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
 
     }
 
+    // Load main menu once player has properly left the room
     public override void OnLeftRoom()
     {
         PhotonNetwork.LoadLevel(0);
