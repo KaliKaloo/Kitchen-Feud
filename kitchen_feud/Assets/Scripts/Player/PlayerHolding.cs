@@ -37,7 +37,6 @@ public class PlayerHolding : MonoBehaviour
     public bool itemLock = false;
     PickupLock pickupLock = new PickupLock();
 
-    // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {
