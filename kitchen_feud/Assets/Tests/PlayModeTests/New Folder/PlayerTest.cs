@@ -136,5 +136,20 @@ public class PlayerTests : PhotonTestSetup
         stove.player = null;
         yield return null;
     }
+    [UnityTest]
+    public IEnumerator StoveMinigameTest()
+    {
+        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        stove.player = obj.transform;
+        stove.Interact();
+        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        stove.Interact();
+        stove.Interact();
+        Assert.IsTrue(GameObject.Find("StoveGameCanvas").activeSelf);
+
+
+        yield return null;
+
+    }
 
 }
