@@ -53,12 +53,12 @@ public class GlowController : MonoBehaviour
             appliancesToGlow.Add(obj);
             
             
-        }
+       }
 
-        //       foreach (GameObject obj in objs){
-        //         if (obj.GetComponent<Appliance>().kitchenNum == teamNumber){
-        //             appliancesToGlow.Add(obj);
-        //         }
+        // foreach (GameObject obj in objs){
+        //     if (obj.GetComponent<Appliance>().kitchenNum == teamNumber){
+        //         appliancesToGlow.Add(obj);
+        //     }
             
         // }
 
@@ -76,8 +76,8 @@ public class GlowController : MonoBehaviour
         foreach (GameObject glowAppliance in appliances)
         {
             if (glowAppliance.GetComponent<OutlineEffect>()){
-                glowAppliance.GetComponent<OutlineEffect>().enabled = true;
-                //glowAppliance.GetComponent<OutlineEffect>().startGlowing();
+                //glowAppliance.GetComponent<OutlineEffect>().enabled = true;
+                glowAppliance.GetComponent<OutlineEffect>().startGlowing();
             }   
            
         }
@@ -139,7 +139,7 @@ public class GlowController : MonoBehaviour
                 if (glowAppliance.GetComponent<OutlineEffect>()){
                         OutlineEffect outlineScript = glowAppliance.GetComponent<OutlineEffect>();
                         outlineScript.destroyClone();
-                        outlineScript.enabled = false;
+                        //outlineScript.enabled = false;
                        
                 }
             }

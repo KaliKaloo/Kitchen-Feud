@@ -30,23 +30,23 @@ public class OutlineEffect : MonoBehaviour
         outlineObject.GetComponent<Collider>().enabled = false;
         //outlineObject.GetComponentInParent<OutlineEffect>().enabled = false;
         this.rend = rend;
-        rend.enabled = true;
+        rend.enabled = false;
        // outlineObject.SetActive(true);
     
         
     }
 
-
-    // public void startGlowing(){
-    //     Debug.Log(outlineObject.name);
-    //     outlineObject.GetComponent<Renderer>().enabled = true;
-        
-    // }
+    public void startGlowing(){
+        // Debug.Log(outlineObject.name);
+        if(outlineObject){
+        outlineObject.GetComponent<Renderer>().enabled = true;
+        }
+    }
     
     public void destroyClone(){
         Debug.Log("Stop Glowing" + this.gameObject.name);
-        // if(outlineObject){
-        //     outlineObject.GetComponent<Renderer>().enabled = false;
-        // }
+        if(outlineObject){
+            outlineObject.GetComponent<Renderer>().enabled = false;
+        }
     }
 }
