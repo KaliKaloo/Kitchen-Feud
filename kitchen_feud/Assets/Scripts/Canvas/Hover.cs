@@ -23,13 +23,14 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
             if (!RecipeCard.activeInHierarchy){
                 GlowController.firstClick = true;
-                //Debug.Log("this is a first click");
+                Debug.Log("this is a first click");
             }
 
             if (displayticket.dishes.ContainsKey(dish.text)){
-                Debug.Log(dish.text);
+                
                 GlowController.newClick = true;
                 RecipeCard.SetActive(true);
+
                 RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
                 GlowController.GlowAll(dish.text);
                

@@ -10,12 +10,12 @@ public class OutlineEffect : MonoBehaviour
     public float thickness = 1.03f;
     [ColorUsage(true, true)]
     public Color colorOutline;
-    private Renderer rend;
+    public Renderer rend;
     public GameObject outlineObjectPrefab;
     public GameObject outlineObject;
     // Start is called before the first frame update
     
- void Start()
+     void Start()
     {
         outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,Quaternion.identity);
         outlineObject.transform.SetParent(gameObject.transform);
@@ -31,17 +31,22 @@ public class OutlineEffect : MonoBehaviour
         //outlineObject.GetComponentInParent<OutlineEffect>().enabled = false;
         this.rend = rend;
         rend.enabled = true;
+       // outlineObject.SetActive(true);
     
+        
     }
 
-    // public void startGlowing()
-    // {
-    //     o
+
+    // public void startGlowing(){
+    //     Debug.Log(outlineObject.name);
+    //     outlineObject.GetComponent<Renderer>().enabled = true;
+        
     // }
-
+    
     public void destroyClone(){
-
-       rend.enabled = false;
+        Debug.Log("Stop Glowing" + this.gameObject.name);
+        // if(outlineObject){
+        //     outlineObject.GetComponent<Renderer>().enabled = false;
+        // }
     }
-
 }
