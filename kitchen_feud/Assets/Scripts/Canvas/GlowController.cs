@@ -129,7 +129,7 @@ public class GlowController : MonoBehaviour
         List<GameObject> locationToStop = getLocation(dishInFocus);
         foreach (GameObject location in locationToStop){
             ParticleSystem PS1 = location.GetComponentInChildren<ParticleSystem>();
-            Transform PSChild = PS1.gameObject.transform.GetChild(2);;
+            Transform PSChild = PS1.gameObject.transform.GetChild(1);
             ParticleSystem PS2 = PSChild.GetComponentInChildren<ParticleSystem>();
             var main = PS1.main;
             var main2  = PS2.main;
