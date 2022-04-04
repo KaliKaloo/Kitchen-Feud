@@ -1,10 +1,12 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
 public class GlobalTimer
 {
+
+    private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
     private static int time = 20;
@@ -56,6 +58,11 @@ public class GlobalTimer
         return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
     }
 
+    public int GetLocalTime()
+    {
+        return timer;
+    }
+
     // resets the timer to original starting value
     // call every time the game ends
     public void ResetTimer()
@@ -77,7 +84,7 @@ public class GlobalTimer
         return ConvertSecondToMinutes(time);
     }
 
-    // set the timer amount here 
+    // set the timer amount here by getting it from the server
     public void InitializeTimer()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -87,7 +94,6 @@ public class GlobalTimer
             timer = time;
             hashTimer["Time"] = timer;
             PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
-
         }
         else
         {
@@ -95,8 +101,31 @@ public class GlobalTimer
         }
     }
 
+    // decrement the timer locally
+    // ENSURE all local timer values are the same when game starts
+    public void StartTimer(MonoBehaviour monoBehaviour)
+    {
+        monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
+    }
 
-    // decrement timer
+    private IEnumerator DecrementTimer(MonoBehaviour monoBehaviour)
+    {
+        yield return new WaitForSeconds(1);
+
+        timer -= 1;
+
+        if (timer <= 0)
+        {
+            timerCoroutine = null;
+        } 
+        else
+        {
+            timerCoroutine = monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
+        }
+    }
+
+
+    // DEPRECATED: decrement timer
     public void Decrement()
     {
         timer -= 1;

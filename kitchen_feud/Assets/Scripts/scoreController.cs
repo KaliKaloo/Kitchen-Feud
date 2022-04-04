@@ -91,6 +91,7 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
+            timer.StartTimer(this);
             timerText.text = ConvertSecondToMinutes(timer.GetTime());
             music = FindObjectOfType<MusicManager>();
         }
@@ -100,11 +101,10 @@ public class scoreController : MonoBehaviour
     void OutputTime()
     {
 
-        if (timer.GetTime() > 0)
+        if (timer.GetLocalTime() > 0)
         {
             // updates timer and text in timer
-            timer.Decrement();
-            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
         }
 
         // SIGNAL FOR GAME OVER:

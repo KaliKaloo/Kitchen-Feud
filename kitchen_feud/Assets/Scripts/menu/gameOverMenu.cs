@@ -10,8 +10,7 @@ using TMPro;
 
 public class gameOverMenu : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private Text team1UIScore;
-    [SerializeField] private Text team2UIScore;
+    [SerializeField] private GameObject LeavingGameCanvas;
 
     [SerializeField] private TextMeshProUGUI winnerText;
 
@@ -35,13 +34,11 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        LeavingGameCanvas.SetActive(false);
+
         genericPlayer1Animator = genericPlayer1.GetComponent<Animator>();
         genericPlayer2Animator = genericPlayer2.GetComponent<Animator>();
         genericPlayer3Animator = genericPlayer3.GetComponent<Animator>();
-
-        // update scores received onto UI
-        //team1UIScore.text = String.Format("{0:n0}", team1Score);
-        //team2UIScore.text = String.Format("{0:n0}", team2Score);
 
         ChooseAnimation();
         // Reset all player stats after stats are displayed
@@ -119,24 +116,32 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         List<int> animationList = new List<int>();
         int index;
         int current;
+
+        // if there is a winning team pick from dance animations
         if (winningTeam != 0)
             animationList = new List<int>() { 1, 2, 3 };
+        // else pick from sad animations
         else
             animationList = new List<int>() { 4, 5, 6 };
 
+        // choose a random animation from list
         System.Random random = new System.Random();
         index = random.Next(animationList.Count);
         current = animationList[index];
+        // remove animation so can't be picked again
         animationList.RemoveAt(index);
 
+        // set 1st model animation
         genericPlayer1Animator.SetInteger("Dance", current);
 
+        // get next model animation
         index = random.Next(animationList.Count);
         current = animationList[index];
         animationList.RemoveAt(index);
 
         genericPlayer2Animator.SetInteger("Dance", current);
 
+        // set last model's animation to remaining in list
         genericPlayer3Animator.SetInteger("Dance", animationList[0]);
 
 
@@ -146,9 +151,12 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // alters global variable and returns straight to lobby menu
     public void PlayAgain()
     {
+        // start loading screen for leave game
+        LeavingGameCanvas.SetActive(true);
         Destroy(GameObject.Find("VoiceManager"));
         Destroy(GameObject.Find("RoomController"));
 
+        // sometimes local player is not destroyed on scene load so try destroying if available
         try
         {
             Destroy(GameObject.Find("Local"));
@@ -164,8 +172,6 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
 
         endScores.ResetScores();
-        //this.gameObject.SetActive(false);
-
     }
 
     // Load main menu once player has properly left the room
