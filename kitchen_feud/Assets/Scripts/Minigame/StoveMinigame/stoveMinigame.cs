@@ -22,12 +22,12 @@ public class stoveMinigame : MonoBehaviour
 
     void Start()
     {
+        //TO FIX!
         //SOUND -----------------------------------------------------------------
-        //fix + RPC to others
+        /*
         hasPlayed = false;
-        //sound = FindObjectOfType<SoundEffectsManager>().boilingSound;
         sound = GetComponent<AudioSource>();
-        
+        */
         //-----------------------------------------------------------------------
 
         GameEvents.current.assignPoints += UpdateDishPointsStove;
@@ -47,11 +47,11 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
+                //TO FIX!
                 //SOUND -----------------------------------------------------------------
-                //RPC to others
+                /*
                 this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
-                //sound.Play();
-                hasPlayed = true;
+                hasPlayed = true;*/
                 //-----------------------------------------------------------------------
                 
             }
