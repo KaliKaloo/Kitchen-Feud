@@ -16,20 +16,24 @@ public class OutlineEffect : MonoBehaviour
     
      void Start()
     {
-        outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances",outlineObjectPrefab.name), transform.position,gameObject.transform.rotation);
-        outlineObject.transform.SetParent(gameObject.transform);
-        //outlineObject.transform.localScale = new Vector3(1, 1, 1);
-  
-        Renderer rend = outlineObject.GetComponent<Renderer>();
-        rend.material = mat;
-        rend.material.SetFloat("_Thickness", thickness);
-        rend.material.SetColor("_OutlineColor", colorOutline);
-        rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        rend.enabled = false;
-        outlineObject.GetComponent<Collider>().enabled = false;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
+                transform.position, gameObject.transform.rotation);
+            outlineObject.transform.SetParent(gameObject.transform);
+            //outlineObject.transform.localScale = new Vector3(1, 1, 1);
 
-        this.rend = rend;
-        rend.enabled = false;
+            Renderer rend = outlineObject.GetComponent<Renderer>();
+            rend.material = mat;
+            rend.material.SetFloat("_Thickness", thickness);
+            rend.material.SetColor("_OutlineColor", colorOutline);
+            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            rend.enabled = false;
+            outlineObject.GetComponent<Collider>().enabled = false;
+
+            this.rend = rend;
+            rend.enabled = false;
+        }
     }
 
     public void startGlowing(){
