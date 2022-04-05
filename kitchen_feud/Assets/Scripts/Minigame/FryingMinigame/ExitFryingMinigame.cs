@@ -21,9 +21,11 @@ public class ExitFryingMinigame : MonoBehaviour
 		PV = GetComponent<PhotonView>();
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
-		canvas = GameObject.Find("MainCanvas");
-		Debug.Log(canvas.name);
-		appliance = transform.parent.parent.parent.GetComponent<Appliance>();
+	
+		appliance = transform.parent.parent.GetComponent<Appliance>();
+		//canvas = appliance.canvas;
+		
+//		Debug.Log(canvas.name);
 		minigameCanvas = transform.parent.gameObject;
 		//GameEvents.current.assignPoints += appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
 	}
