@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Chips
   location: 0
-  Prefab: {fileID: 623057231658601572, guid: ac31b333afb8ce84cbd134a912efb88f, type: 3}
+  Prefab: {fileID: 3077110384540350873, guid: ac31b333afb8ce84cbd134a912efb88f, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 1680603883fc9414e9064bf16455832d, type: 3}
   canPickUp: 1
