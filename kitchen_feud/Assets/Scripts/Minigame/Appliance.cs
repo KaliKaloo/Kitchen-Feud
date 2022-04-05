@@ -67,14 +67,7 @@ public class Appliance : Interactable
             {
 
 
-                if (player.transform.Find("slot").childCount != 0)
-                {
-                    this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
-                        player.GetComponent<PhotonView>().ViewID);
-                }
-
-                else
-                {
+               
                     if (player.transform.Find("slot").childCount != 0)
                     {
                         this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
@@ -84,7 +77,7 @@ public class Appliance : Interactable
                     {
                         cookDish();
                     }
-                }
+                
 
             }
             else
@@ -223,18 +216,20 @@ public class Appliance : Interactable
 
     public void addItem(GameObject heldObjArg, PlayerHolding playerHold)
     {
-        
-            if (heldObjArg.GetComponent<IngredientItem>())
-            {
-                IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
-                itemsOnTheAppliance.Add(heldObjArgItem.item);
 
-            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount!= 0 && playerHold.GetComponent<PhotonView>().IsMine)
+        if (heldObjArg.GetComponent<IngredientItem>())
+        {
+            IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
+            itemsOnTheAppliance.Add(heldObjArgItem.item);
+
+            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount != 0 &&
+                playerHold.GetComponent<PhotonView>().IsMine)
             {
                 SlotsController.PutOnAppliance(heldObjArg);
 
             }
-            else { Debug.Log("Can't put a cooked dish in a appliance."); }
+        }
+        else { Debug.Log("Can't put a cooked dish in a appliance."); }
         
     }
 
@@ -354,6 +349,11 @@ public class Appliance : Interactable
     void clearPlayers(int viewiD)
     {
         PhotonView.Find(viewiD).GetComponent<Appliance>().appliancePlayers.Clear();
+    }
+    [PunRPC]
+    void setPlayer(int viewiD,int playerID)
+    {
+        PhotonView.Find(viewiD).GetComponent<Appliance>().player = PhotonView.Find(playerID).transform;
     }
 }
 
