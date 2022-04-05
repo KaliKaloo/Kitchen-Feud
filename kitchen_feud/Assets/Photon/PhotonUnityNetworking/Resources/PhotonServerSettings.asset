@@ -153,6 +153,10 @@ MonoBehaviour:
   - setCurrentPlayers
   - setPlayerC
   - setNum
+  - enableMoving
+  - hideFryingUI
+  - enableBack
+  - setCanvActive
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
