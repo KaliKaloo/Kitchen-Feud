@@ -119,28 +119,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - appendKickedBy
-  - clearKickedBy
-  - destHB
-  - giveDamage
-  - playDing
-  - push
-  - resetTimer
-  - setKickable
-  - setKickableF
-  - setMyC
-  - setObjParent
-  - setPlayed
-  - setStarted
-  - setName
-  - setHBParent
-  - setNTParent
-  - changeLayer
-  - setHeldobj
-  - setHeldobjAsNull
-  - setPlayer
-  - setSignParent
-  - setCurrentPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

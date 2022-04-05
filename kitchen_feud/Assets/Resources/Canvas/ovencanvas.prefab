@@ -873,7 +873,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 7858008110608466653}
   timer: 10
-  timerFake: 10
   score: 5
   backbutton: {fileID: 7858008110543252491}
   sabotageButton: {fileID: 234072082304689736}
