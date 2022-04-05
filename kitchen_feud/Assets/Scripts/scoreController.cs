@@ -44,11 +44,6 @@ public class scoreController : MonoBehaviour
         // send message to server that finished loading
   
 
-         PV.RPC("setNum", RpcTarget.All, PV.ViewID);
-
-
-        
-
         cleanupRoom = this.GetComponent<CleanupRoom>();
 
         // start scores at 0
@@ -73,7 +68,6 @@ public class scoreController : MonoBehaviour
 
     void Update()
     {
-        Debug.LogError(PhotonNetwork.CurrentRoom.PlayerCount);
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
