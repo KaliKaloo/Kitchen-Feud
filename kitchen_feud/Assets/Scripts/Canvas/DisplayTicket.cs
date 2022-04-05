@@ -13,7 +13,6 @@ public class DisplayTicket : MonoBehaviour
     public TextMeshProUGUI orderSideText;
     public TextMeshProUGUI orderDrinkText;
     public Dictionary<string, Sprite> dishes = new Dictionary<string, Sprite>();
-    public string applianceTag;
     public string orderid;
     public int orderNumber;
 
