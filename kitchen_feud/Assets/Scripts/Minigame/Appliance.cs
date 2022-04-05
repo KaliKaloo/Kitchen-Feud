@@ -117,7 +117,7 @@ public class Appliance : Interactable
                     minigameCanvas.gameObject.SetActive(true);
                     
                     //SOUND -------------------------------------------------------
-                    minigameCanvas.GetComponent<AudioSource>().Play();
+                    //minigameCanvas.GetComponent<AudioSource>().Play();
                     //-------------------------------------------------------------
                     
                    

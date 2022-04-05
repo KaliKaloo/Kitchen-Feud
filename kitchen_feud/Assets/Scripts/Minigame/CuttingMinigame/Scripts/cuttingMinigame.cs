@@ -24,8 +24,8 @@ public class cuttingMinigame : MonoBehaviour
         if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
             //TO REMOVE COMMENT - PLAYING MUSIC
-            //MusicManager.instance.minigameSwitch();
-		    //MusicManager.instance.inMG = true;
+            MusicManager.instance.minigameSwitch();
+		    MusicManager.instance.inMG = true;
 
             backbutton.appliance = GetComponent<Appliance>();
 

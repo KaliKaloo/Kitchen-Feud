@@ -28,8 +28,8 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
-        //TO REMOVE COMMENT
-        //MusicManager.instance.location = myTeam;
+        //TO REMOVE COMMENT - MUSIC
+        MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
 
@@ -63,8 +63,8 @@ public class AudioManager : MonoBehaviour
             if (pFV.IsMine)
             {
                 //TO REMOVE COMMENT - MUSIC
-                //MusicManager.instance.changeBGM(team, 10, 0, 1);
-                //MusicManager.instance.location = team;
+                MusicManager.instance.changeBGM(team, 10, 0, 1);
+                MusicManager.instance.location = team;
 
                 if (team == 1)
                 {
