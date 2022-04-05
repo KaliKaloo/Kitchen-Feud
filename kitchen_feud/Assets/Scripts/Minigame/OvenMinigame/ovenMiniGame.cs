@@ -20,10 +20,10 @@ public class ovenMiniGame : MonoBehaviour
     
     void Update()
     {
-        if (transform.childCount == 8)
+        if (transform.GetComponentInChildren<Timer>())
         {
-            timer = transform.GetChild(7).GetComponent<Timer>();
-            backbutton = transform.GetChild(7).GetChild(0).GetChild(1).GetComponent<exitOven>();
+            timer = transform.GetComponentInChildren<Timer>();
+            backbutton = timer.GetComponentInChildren<exitOven>();
 
             if (appliance.isBeingInteractedWith)
             {
