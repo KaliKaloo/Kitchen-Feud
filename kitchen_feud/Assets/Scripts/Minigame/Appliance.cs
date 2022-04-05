@@ -131,6 +131,7 @@ public class Appliance : Interactable
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), new Vector3(0,0,0), transform.rotation);
                        
                         Camera UICamera = gameObject.GetComponentInChildren<fryingMinigame>().UICamera;
+                        UICamera.enabled=false;
                         UICamera.enabled=true;
                         minigameCanvas2.GetComponent<Canvas>().worldCamera = UICamera;
                         
