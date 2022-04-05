@@ -101,9 +101,9 @@ public class fryingMinigame : MonoBehaviour
     public string GetSpriteName(DishSO dishSO) {
         if(dishSO.dishID == "DI1415") return "patty";
         if(dishSO.dishID == "DI1621") return "rice";
-        if(dishSO.dishID == "DI1316") return "13";
+        if(dishSO.dishID == "DI1316") return "Eggy bread";
         if(dishSO.dishID == "DI1617") return "eggFried";
-        else return "pngegg";
+        else return "Pancake";
     }
 
 }

@@ -139,7 +139,7 @@ public class Plate : MonoBehaviour
             else
             {
                 PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
-                Debug.LogError("MyPoints " + obj.points);
+//                Debug.LogError("MyPoints " + obj.points);
 
                 Debug.Log("total points:" + totalPoints);
 

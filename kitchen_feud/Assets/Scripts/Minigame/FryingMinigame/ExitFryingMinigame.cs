@@ -21,8 +21,9 @@ public class ExitFryingMinigame : MonoBehaviour
 		PV = GetComponent<PhotonView>();
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
-		canvas = GameObject.Find("Canvas");
-		appliance = transform.parent.parent.GetComponent<Appliance>();
+		canvas = GameObject.Find("MainCanvas");
+		Debug.Log(canvas.name);
+		appliance = transform.parent.parent.parent.GetComponent<Appliance>();
 		minigameCanvas = transform.parent.gameObject;
 		//GameEvents.current.assignPoints += appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
 	}
@@ -33,7 +34,7 @@ public class ExitFryingMinigame : MonoBehaviour
 		appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
 		PhotonView aV = appliance.GetComponent<PhotonView>();
-        canvas.gameObject.SetActive(true);
+        if (canvas){canvas.gameObject.SetActive(true);}
 		PV.RPC("setAddedF", RpcTarget.All, aV.ViewID);
 		
         //minigameCanvas.gameObject.SetActive(false);

@@ -62,7 +62,7 @@ public class Appliance : Interactable
 
         if (pv.IsMine)
         {
-            Debug.LogError("ettestt");
+//            Debug.LogError("ettestt");
             if (!isBeingInteractedWith)
             {
 
