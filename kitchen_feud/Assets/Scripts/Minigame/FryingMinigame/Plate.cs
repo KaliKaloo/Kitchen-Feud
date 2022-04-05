@@ -107,13 +107,13 @@ public class Plate : MonoBehaviour
     {
         
         var obj = col.gameObject.GetComponent<FriedFoodController>();
-        Debug.LogError("HEJHE");
+//        Debug.LogError("HEJHE");
         if (!obj.collided)
         {
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
             appliance.appliancePlayers[1] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-                Debug.LogError("TOuched" + obj.collided);
+//                Debug.LogError("TOuched" + obj.collided);
 
 
                 //totalPoints += obj.points;

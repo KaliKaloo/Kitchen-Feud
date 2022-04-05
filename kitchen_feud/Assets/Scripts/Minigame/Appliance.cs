@@ -98,7 +98,7 @@ public class Appliance : Interactable
 
                 if (foundDish.stoveFry)
                 {
-                    Debug.LogError("Hello?>!>!");
+//                    Debug.LogError("Hello?>!>!");
                     myPv.RPC("addPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID, myPv.ViewID);
 
                     added = true;
