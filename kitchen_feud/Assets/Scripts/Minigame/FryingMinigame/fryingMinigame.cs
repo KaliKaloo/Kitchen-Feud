@@ -18,6 +18,7 @@ public class fryingMinigame : MonoBehaviour
     public bool set;
     public SpriteAtlas imgAtlas;
     public string spriteName;
+    public Camera UICamera;
     bool pointsadded;
     
 
@@ -34,7 +35,7 @@ public class fryingMinigame : MonoBehaviour
 
         if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf)
         {
-            Debug.LogError("??");
+            //Debug.LogError("??");
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
         }
         else 
@@ -87,7 +88,7 @@ public class fryingMinigame : MonoBehaviour
        // Debug.Log("Outside");
 //        Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
         if (appliance.isBeingInteractedWith){
-            Debug.Log("Inside");
+            //Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
             dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)plate.totalPoints);

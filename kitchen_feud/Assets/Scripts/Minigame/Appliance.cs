@@ -128,9 +128,16 @@ public class Appliance : Interactable
                     if (!minigameCanvas2)
                     {
                         canvas.gameObject.SetActive(false);
-                        minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), transform.position, transform.rotation);
+                        minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"), new Vector3(0,0,0), transform.rotation);
+                       
+                        Camera UICamera = gameObject.GetComponentInChildren<fryingMinigame>().UICamera;
+                        UICamera.enabled=true;
+                        minigameCanvas2.GetComponent<Canvas>().worldCamera = UICamera;
+                        
+                        
                         myPv.RPC("falseForOthers", RpcTarget.Others,myPv.ViewID, minigameCanvas2.GetPhotonView().ViewID);
                         minigameCanvas2.transform.SetParent(transform);
+                        
                         myPv.RPC("setAppl", RpcTarget.All, minigameCanvas2.GetComponent<PhotonView>().ViewID,
                             myPv.ViewID);
                         //minigameCanvas2.GetComponentInChildren<Plate>().appliance = GetComponent<Appliance>();
