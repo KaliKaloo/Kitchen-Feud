@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6788934453759544099}
   - component: {fileID: 4120549187962170631}
   - component: {fileID: 2616269699067794107}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: sandwhich_station1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

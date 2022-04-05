@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2915437654449027587}
   - component: {fileID: 728556273360137719}
   - component: {fileID: 4089649501271651511}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: stove1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -74,7 +74,6 @@ public class PanController : MonoBehaviour
                     haveAvg = true;
 
                     speeds.Clear();
-                    //Debug.Log(avgSpeeds);
                 }
                 else
                 {
@@ -104,14 +103,17 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter < foodInstances && friedFood == null)
                 {
-                    Debug.LogError("IM HERE");
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                     PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
                     //foodInstancesCounter++;
                     pointsAssigned = false;
-                    Debug.Log(foodInstancesCounter);
                     
+                }
+
+                if (foodInstancesCounter == 5)
+                {
+                    PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
                 }
 
             }
@@ -148,5 +150,10 @@ public class PanController : MonoBehaviour
 
     }
 
+    [PunRPC]
+    void enableBack(int viewID)
+    {
+        PhotonView.Find(viewID).transform.parent.parent.Find("BackButton").gameObject.SetActive(true);
+    }
   
 }
