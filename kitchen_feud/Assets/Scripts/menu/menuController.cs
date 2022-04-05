@@ -49,12 +49,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Transform roomListContent;
 
-
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
-   
-  
 
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
@@ -63,11 +60,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        //rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-        
         Instance = this;
-       // DontDestroyOnLoad(this.gameObject);
-
     }
 
     private void SetTeam(int teamNumber)
@@ -93,18 +86,12 @@ public class menuController : MonoBehaviourPunCallbacks
                 // do nothing if no players exist in that team   
             }
         }
-        //print("Team " + team + " has " + total + " members.");
         return total;
     }
 
     private void Start()
     {
-
-
-
-        
-        PhotonNetwork.AutomaticallySyncScene = true;
-       
+        //PhotonNetwork.AutomaticallySyncScene = true;
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -117,7 +104,6 @@ public class menuController : MonoBehaviourPunCallbacks
         } 
         else
         {
-            // NEED TO ADD CURRENT USERNAME HERE
             greetingMenu.text = "Welcome back " + PhotonNetwork.LocalPlayer.NickName + "!";
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
@@ -158,7 +144,6 @@ public class menuController : MonoBehaviourPunCallbacks
         findLobbyMenu.SetActive(false);
         lobbyMenu.SetActive(true);
         lobbyName.text = name;
-        //UpdateTeamButtons();
         playerList.text = GetPlayers(1);
         playerList2.text = GetPlayers(2);
 
@@ -247,6 +232,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Leave existing lobby
     public void LeaveGame()
     {
+        RemovePlayerFromLobby();
         lobbyError.text = "";
         connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
@@ -277,12 +263,19 @@ public class menuController : MonoBehaviourPunCallbacks
     // Load level once game is started
     public void StartGame()
     {
+        // after start button is pressed players can no longer join
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
-            LoadScene(1);
-            //this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-        else
-            // change this to load larger kitchen if > 4 players!!!!!
-            LoadScene(1);
+        {
+            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
+        }
+        // if > 4 players load into a different scene 
+        else 
+        {
+            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+        }
     }
 
     public override void OnJoinedRoom()
@@ -291,32 +284,28 @@ public class menuController : MonoBehaviourPunCallbacks
         rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         if (PhotonNetwork.IsMasterClient)
         {
-
             x = rnd.Next(11, 101);
             lobby["Lobby"] = x;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-           
         }
         else
         {
+            AddPlayerToLobby();
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
         //TO REMOVE COMMENT
         rtcEngine.JoinChannel(x.ToString() + "Lobby");
-
         
         loadingScreen.SetActive(false);
 
-        // WIP ASSIGN CORRECT TEAM ON JOIN
-
-        int teamBalance = CheckTeamBalance();
-        if (teamBalance == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+           
+        // Auto balance team on join
+        if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
         {
             SetTeam(2);
         }
 
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
-       
     }
 
     public override void OnLeftRoom()
@@ -329,6 +318,12 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         loadingScreen.SetActive(false);
         lobbyError.text = "Lobby does not exist!";
+        connectPanel.SetActive(true);
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        loadingScreen.SetActive(false);
         connectPanel.SetActive(true);
     }
 
@@ -345,6 +340,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         loadingScreen.SetActive(false);
+        lobby["Players"] = 1;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -355,6 +352,21 @@ public class menuController : MonoBehaviourPunCallbacks
         for (int i = 0; i < roomList.Count; i++) {
             Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
+    }
+
+    private void AddPlayerToLobby()
+    {
+        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+        lobby["Players"] = currentPlayers + 1;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+    }
+
+    private void RemovePlayerFromLobby()
+    {
+        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+        if (currentPlayers > 1)
+            lobby["Players"] = currentPlayers - 1;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
     public void SwitchToTeam1() {
@@ -415,33 +427,26 @@ public class menuController : MonoBehaviourPunCallbacks
 
     }
 
-    public void LoadScene(int levelIndex)
-    {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
-    }
-
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
         lobbyMenu.SetActive(false);
         loadingScreen.SetActive(true);
         loadingBarCanvas.SetActive(true);
         while (!operation.isDone)
         {
-            loadingBar.value = operation.progress;
-            yield return null;
+           loadingBar.value = operation.progress;
+           yield return null;
         }
         loadingBarCanvas.SetActive(false);
     }
+
 
     // Update is called once per frame
     void Update()
     {
         UpdateLobby();
     }
-
-
-
 
     [PunRPC]
     void UpdateLobby(string roomName)

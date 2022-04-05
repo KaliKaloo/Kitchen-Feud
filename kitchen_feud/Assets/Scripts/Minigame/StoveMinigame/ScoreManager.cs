@@ -2,62 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
-public class StoveScore
-{
-    public static int initialIngredients;
-    public static int currentIngredients;
-    public static float score;
-    public static float bombMultiplier;
-
-
-    public void SetAmountInitialIngredients(int amount)
-    {
-        initialIngredients = amount;
-        currentIngredients = amount;
-    }
-
-    public void ResetValues()
-    {
-        initialIngredients = currentIngredients = 3;
-        score = 0;
-        bombMultiplier = 0;
-    }
-
-    public bool CheckIfFull()
-    {
-        if (currentIngredients <= 0)
-        {
-            Debug.Log(this.FinalMultipier());
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public void AddScore()
-    {
-        score += 1;
-    }
-
-    public int GetScore()
-    {
-        return (int)score;
-    }
-
-    public void AddBombMultiplier()
-    {
-        bombMultiplier += 0.1f;
-    }
-
-    public float FinalMultipier()
-    {
-        return (score / 15) * (1 - bombMultiplier);
-        
-    }
-
-}
 
 public class ScoreManager : MonoBehaviour
 {
@@ -78,7 +22,7 @@ public class ScoreManager : MonoBehaviour
             stoveScore.AddScore();
             stoveMinigameCounter.MinusCollisionCounter();
             
-            score.text = "Score: " + stoveScore.GetScore() + "/15";
+            score.text = "Score: " + StoveScore.Score + "/15";
                         
             if (stoveMinigameCounter.GetCollisionCounter() == 0)
             {

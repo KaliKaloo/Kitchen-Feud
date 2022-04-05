@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PickupLock
 {
-    public static bool pickupLock = false;
+    private static bool pickupLock = false;
 
     public void Lock()
     {
@@ -17,6 +17,7 @@ public class PickupLock
     {
         pickupLock = false;
     }
+
 
     public bool GetLock()
     {
@@ -36,7 +37,6 @@ public class PlayerHolding : MonoBehaviour
     public bool itemLock = false;
     PickupLock pickupLock = new PickupLock();
 
-    // BaseFood item;
 
     public void pickUpItem(GameObject obj, BaseFood item)
     {

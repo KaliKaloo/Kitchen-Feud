@@ -4,59 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class StoveMinigameCounter
-{
-    public static int counter;
-    public static bool end;
-    public static int collisionCounter;
-
-    public void MinusCollisionCounter()
-    {
-        collisionCounter -= 1;
-    }
-
-    public int GetCollisionCounter()
-    {
-        return collisionCounter;
-    }
-
-    public void StartGame()
-    {
-        end = false;
-        
-    }
-    public void EndGame()
-    {
-        end = true;
-        //Spawner.backButton.SetActive(true);
-    }
-
-    public bool GetGameState()
-    {
-        
-        return end;
-        
-    }
-
-    public void ResetCounter()
-    {
-        counter = 15;
-        collisionCounter = 15;
-    }
-
-    public void MinusCounter()
-    {
-        counter -= 1;
-    }
-
-    public int GetCounter()
-    {
-        //Debug.Log(counter);
-        return counter;
-
-    }
-}
-
 public class Spawner : MonoBehaviour
 {
 
@@ -89,7 +36,6 @@ public class Spawner : MonoBehaviour
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 
-    // Start is called before the first frame update
     void Start()
     {
         // boxCollider = bottomBar.GetComponent<BoxCollider2D>();
@@ -128,7 +74,8 @@ public class Spawner : MonoBehaviour
         
         topBar.SetActive(false);
         startButton.SetActive(false);
-        startSmoke();
+        if (PhotonNetwork.IsConnected)
+            startSmoke();
 
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:kitchen_feud/Assets/Tests/PlayModeTests/mainMenu.cs.meta
+guid: 32d88fcf63a31394a87d2572359b1945
+========
+guid: ff02275c89d5c55429762f883b2d5154
+>>>>>>>> dev:kitchen_feud/Assets/Scripts/Minigame/ItemCollider.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

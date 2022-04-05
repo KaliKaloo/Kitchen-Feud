@@ -10,7 +10,6 @@ using UnityEngine.EventSystems;
 public class Appliance : Interactable
 {
     [SerializeField] public int kitchenNum;
-
     GameObject clickedObj;
     private GameObject inputObj;
     public List<IngredientSO> itemsOnTheAppliance = new List<IngredientSO>();
@@ -182,7 +181,6 @@ public class Appliance : Interactable
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
         
-
         if (foundDish != null)
         {
             string applianceName = gameObject.tag;

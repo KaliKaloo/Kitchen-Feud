@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    //public delegate ObjectSpawnedHandler (CuttableObject obj);
-    //public event ObjectSpawnedHandler OnObjectSpawned;
     
     public GameObject prefabToSpawn;
 
