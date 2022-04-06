@@ -27,8 +27,11 @@ public class Billboard : MonoBehaviour
         {
             if (!GetComponent<PhotonView>().IsMine)
             {
-                cam = GameObject.Find("Local").transform.GetChild(3);
-                transform.LookAt(transform.position + cam.rotation * Vector3.forward, cam.rotation * Vector3.up);
+                if (GameObject.Find("Local"))
+                {
+                    cam = GameObject.Find("Local").transform.GetChild(3);
+                    transform.LookAt(transform.position + cam.rotation * Vector3.forward, cam.rotation * Vector3.up);
+                }
             }
         }
         }
