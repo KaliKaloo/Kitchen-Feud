@@ -124,7 +124,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // gets list of players in the lobby in string
     private string GetPlayers(int team)
     {
-        string players = "Team " + team + ":"  + System.Environment.NewLine;
+        //string players = "Team " + team + ":"  + System.Environment.NewLine;
+        string players = System.Environment.NewLine;
         // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
