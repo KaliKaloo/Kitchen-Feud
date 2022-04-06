@@ -62,7 +62,7 @@ public class pickableItem : Interactable
         Interact();
     }
 
-
+ 
 
     [PunRPC]
     void SetGrav()
@@ -74,6 +74,8 @@ public class pickableItem : Interactable
     {
         PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }

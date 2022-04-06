@@ -84,7 +84,7 @@ public class ExitFryingMinigame : MonoBehaviour
 		for (int i=0; i < x.Count; i++)
 		{
 			PhotonView.Find(x[i]).GetComponentInChildren<playerMvmt>().enabled = true;
-			
+			PhotonView.Find(x[i]).GetComponentInChildren<PlayerController>().enabled = true;
 			//PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
 		}
 

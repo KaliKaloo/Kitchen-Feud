@@ -127,7 +127,7 @@ public class Appliance : Interactable
                     myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
 
                     cookedDishLocal = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", foundDish.Prefab.name),
-                        transform.GetChild(0).position, transform.rotation);
+                        transform.GetChild(1).position, transform.rotation);
                     //Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
                 }
                 else if (this.gameObject.tag == "Stove" && foundDish.stoveFry)
@@ -138,9 +138,13 @@ public class Appliance : Interactable
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
                             new Vector3(0, 0, 0), transform.rotation);
 
-                        UIcamera.enabled = false;
                         UIcamera.enabled = true;
+                        playerController = player.GetComponent<PlayerController>();
+                        player.GetComponentInChildren<playerMvmt>().enabled = false;
+
+                        playerController.enabled = false;
                         minigameCanvas2.GetComponent<Canvas>().worldCamera = UIcamera;
+                        player.GetComponentInChildren<Camera>().enabled = false;
                         canvas.SetActive(false);
 
                         myPv.RPC("falseForOthers", RpcTarget.Others, myPv.ViewID,
@@ -152,8 +156,6 @@ public class Appliance : Interactable
                         //minigameCanvas2.GetComponentInChildren<Plate>().appliance = GetComponent<Appliance>();
                         //minigameCanvas2.transform.Find("PanGameObject").transform.GetChild(0).GetComponent<PanController>().appliance = GetComponent<Appliance>();
 
-
-
                     }
                     else
                     {
@@ -163,9 +165,15 @@ public class Appliance : Interactable
                         canvas.SetActive(false);
                         UIcamera.enabled = false;
                         UIcamera.enabled = true;
+                        player.GetComponentInChildren<Camera>().enabled = false;
+                        playerController = player.GetComponent<PlayerController>();
+                        player.GetComponentInChildren<playerMvmt>().enabled = false;
+
+                        playerController.enabled = false;
+
                         minigameCanvas2.GetComponent<Canvas>().worldCamera = UIcamera;
                         cookedDishLocal = PhotonNetwork.Instantiate(
-                            Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.TransformPoint(0, 1, 0),
+                            Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position,
                             transform.rotation);
 
                     }
@@ -180,14 +188,11 @@ public class Appliance : Interactable
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
 
-
-                    
-             
-                       
-                        
                     UIcamera.enabled = true;
-                    player.GetComponentInChildren<Camera>().enabled = false;
+                    playerController = player.GetComponent<PlayerController>();
+                    player.GetComponentInChildren<playerMvmt>().enabled = false;
 
+                    playerController.enabled = false;
                     player.GetComponent<PhotonView>().RPC("DisablePushing", RpcTarget.Others,
                         player.GetComponent<PhotonView>().ViewID);
                     playerRigidbody.isKinematic = true;
@@ -195,21 +200,11 @@ public class Appliance : Interactable
                         transform.GetChild(0).position, transform.rotation);
                 }
 
-                //if (minigameCanvas2) { 
                 myPv.RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
-                //}
-                player.GetComponentInChildren<playerMvmt>().enabled = false;
-
-                //else
-                //{
-                //    myPv.RPC("SetToTrue", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, 0);
-
-                //}
 
                 //instantiate the cooked dish
                 if (cookedDishLocal)
                 {
-                    //cookedDish = PhotonNetwork.Instantiate(foundDish.Prefab.name, transform.TransformPoint(0, 1, 0), transform.rotation);
                     if (appliancePlayers.Count < 2)
                     {
                         myPv.RPC("cookedDishG", RpcTarget.All, myPv.ViewID,
@@ -227,9 +222,6 @@ public class Appliance : Interactable
                     myPv.RPC("doFd", RpcTarget.All, myPv.ViewID, cookedDish.GetComponent<PhotonView>().ViewID);
 
                     //delete the items the dish was cooked from
-
-
-
                 }
                 if (tag == "Stove" && foundDish.stoveFry && appliancePlayers.Count > 1)
                 {
