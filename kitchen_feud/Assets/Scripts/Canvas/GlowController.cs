@@ -8,12 +8,17 @@ public class GlowController : MonoBehaviour
     public bool newClick;
     public bool firstClick = false;
     public string currentGlowingDishName;
-    // public string dishName;
     public int teamNumber;
     private int kitchenNum;
 
     public DishSO dishInFocus;
     public GameObject[] kitchenPortals;
+
+    public List<GameObject> appliancesToGlow = new List<GameObject>();
+
+    private string glowLocation;
+
+
 
     void Start(){
         teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;
@@ -50,12 +55,10 @@ public class GlowController : MonoBehaviour
 
     }
 
-    public List<GameObject> appliancesToGlow = new List<GameObject>();
 
     public List<GameObject> getListOfAppliancesToGlow(string dishNameToGlow){
         currentGlowingDishName = dishNameToGlow ;
         string dishTag = dishInFocus.toCook;
-    
         GameObject[] objs = GameObject.FindGameObjectsWithTag(dishTag);
         foreach (GameObject obj in objs){
             appliancesToGlow.Add(obj);
@@ -63,7 +66,6 @@ public class GlowController : MonoBehaviour
         return appliancesToGlow;
     }
 
-    
     public void GlowAppliance(List<GameObject> appliances){
     
         foreach (GameObject glowAppliance in appliances){
@@ -75,7 +77,7 @@ public class GlowController : MonoBehaviour
         }
     }
     
-    private string glowLocation;
+
     public List<GameObject> getLocation(DishSO dish){
         List<GameObject> locations = new List<GameObject>();
 
@@ -90,6 +92,7 @@ public class GlowController : MonoBehaviour
         return locations;
     }
    
+
     public void GlowLocation(DishSO dishInFocus){
         List<GameObject> locationsToGlow = getLocation(dishInFocus);
 
@@ -102,12 +105,15 @@ public class GlowController : MonoBehaviour
             }
     }
 
+
     public void RecipeCardClose(){
         firstClick = true;
         if (currentGlowingDishName != ""){
             StopGlowingAll(currentGlowingDishName);
         }
     }
+
+    //to do
 
     public void StopGlowingAll(string dishToStopGlowing){
 
