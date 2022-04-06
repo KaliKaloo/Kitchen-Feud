@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
 using TMPro;
 
@@ -41,7 +42,7 @@ public class TrayController : MonoBehaviour
         ts.tray.objectsOnTray.Clear();
         Debug.Log("Setting Ready");
         ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
-
+        ts.findDestination(ts.GetComponent<PhotonView>().ViewID);
         foreach (Transform slot in ts.transform)
         {
             // Destroy order stand prefab
@@ -129,6 +130,12 @@ public class TrayController : MonoBehaviour
         }
         
     }
+
+
+
+      
+        
+    
 
     private void OnApplicationQuit() {
         for(int i = 0; i< trays.Count; i++)

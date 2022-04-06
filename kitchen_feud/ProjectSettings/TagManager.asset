@@ -23,6 +23,7 @@ TagManager:
   - OrderTower
   - Dish
   - Agent
+  - ServingPoint1
   layers:
   - Default
   - TransparentFX

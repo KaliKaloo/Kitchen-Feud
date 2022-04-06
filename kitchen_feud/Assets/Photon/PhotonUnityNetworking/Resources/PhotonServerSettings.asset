@@ -152,6 +152,9 @@ MonoBehaviour:
   - setIsReadyF
   - setAgent
   - setAgentF
+  - setUsed
+  - setUsedF
+  - setDest
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

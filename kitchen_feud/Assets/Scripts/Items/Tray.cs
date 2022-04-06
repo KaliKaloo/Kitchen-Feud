@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using Photon.Pun;
 
@@ -9,17 +10,19 @@ public class Tray : Interactable
     public BaseFood item;
     public GameObject objectHolding;
     public List<Transform> slots = new List<Transform>();
-
     public GameObject currentPrefab;
     public GameObject Agent;
     PlayerHolding playerHold;
+    public GameObject SP;
     public pickableItem pickable;
     public GameObject teamController;
     private CanvasController canvasController;
     public bool isReady;
+    public PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         isReady = false;
         canvasController = teamController.GetComponent<CanvasController>();
     }
@@ -36,7 +39,20 @@ public class Tray : Interactable
             canvasController.TrayOrderOptions(tray.name);
         }
     }
-    
+
+    public void findDestination(int trayID)
+    {
+        foreach (GameObject s in GameObject.FindGameObjectsWithTag("ServingPoint1"))
+        {
+            if (s.GetComponent<Serving>().used == false)
+            {
+                PV.RPC("setDest",RpcTarget.All,trayID,s.GetPhotonView().ViewID);
+                s.GetComponent<PhotonView>().RPC("setUsed",RpcTarget.All,s.GetPhotonView().ViewID);
+                break;
+            }
+        }
+    }
+
     [PunRPC]
     void addComps(int viewID, int objID)
     {
@@ -73,5 +89,10 @@ public class Tray : Interactable
         PhotonView.Find(trayID).GetComponent<Tray>().Agent = null;
     }
 
+    [PunRPC]
+    void setDest(int viewID,int destID)
+    {
+        PhotonView.Find(viewID).GetComponent<Tray>().SP = PhotonView.Find(destID).gameObject;
+    }
 } 
  

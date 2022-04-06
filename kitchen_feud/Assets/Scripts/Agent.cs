@@ -61,11 +61,17 @@ public class Agent : MonoBehaviour
             if (readyToServe)
             {
                 float newDist = RemainingDistance(agent.path.corners);
-                agent.SetDestination(GameObject.Find("Serving Point").transform.position);
+                if (tray.SP)
+                {
+                    agent.SetDestination(tray.SP.transform.position);
+                }
+
+                //Find Serving point and assign it to tray using 
                 if (newDist < 1.3f && newDist != 0)
                 {
                     tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                    //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
 
                     readyToServe = false;
 
