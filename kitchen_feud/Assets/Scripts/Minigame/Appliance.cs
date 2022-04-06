@@ -144,7 +144,7 @@ public class Appliance : Interactable
 
                         playerController.enabled = false;
                         minigameCanvas2.GetComponent<Canvas>().worldCamera = UIcamera;
-                        player.GetComponentInChildren<Camera>().enabled = false;
+                        // player.GetComponentInChildren<Camera>().enabled = false;
                         canvas.SetActive(false);
 
                         myPv.RPC("falseForOthers", RpcTarget.Others, myPv.ViewID,
@@ -165,7 +165,7 @@ public class Appliance : Interactable
                         canvas.SetActive(false);
                         UIcamera.enabled = false;
                         UIcamera.enabled = true;
-                        player.GetComponentInChildren<Camera>().enabled = false;
+                        // player.GetComponentInChildren<Camera>().enabled = false;
                         playerController = player.GetComponent<PlayerController>();
                         player.GetComponentInChildren<playerMvmt>().enabled = false;
 
