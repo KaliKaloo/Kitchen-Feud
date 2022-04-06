@@ -105,7 +105,6 @@ public class GlowController : MonoBehaviour
             }
     }
 
-
     public void RecipeCardClose(){
         firstClick = true;
         if (currentGlowingDishName != ""){
@@ -113,7 +112,6 @@ public class GlowController : MonoBehaviour
         }
     }
 
-    //to do
 
     public void StopGlowingAll(string dishToStopGlowing){
 
