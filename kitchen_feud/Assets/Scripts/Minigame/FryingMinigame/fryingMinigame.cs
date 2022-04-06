@@ -9,6 +9,7 @@ using UnityEngine.U2D;
 
 public class fryingMinigame : MonoBehaviour
 {
+    public Image background;
     public Slider slider;
     public FriedFoodController friedFoodController;
     private Appliance appliance;
@@ -20,11 +21,13 @@ public class fryingMinigame : MonoBehaviour
     public string spriteName;
     public Camera UICamera;
     bool pointsadded;
+    private int team;
     
 
 
     void Start()
     {
+        
         set = false;
         //GameEvents.current.assignPoints += UpdateDishPointsFrying;
         pointsadded = false;    
@@ -55,6 +58,19 @@ public class fryingMinigame : MonoBehaviour
             friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
             friedFoodController.dishSO = appliance.foundDish;
             friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+            
+            int canvasTag = appliance.kitchenNum;
+            if (canvasTag == 1){
+                GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team2");
+                foreach (GameObject obj in otherTeam){
+                    obj.SetActive(false);
+                }
+            } else if (canvasTag == 2){
+                GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team1");
+                foreach (GameObject obj in otherTeam){
+                    obj.SetActive(false);
+                }
+            }
 
             set = true;
         }else if (!transform.Find("Frying(Clone)")) {
