@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.EventSystems;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -65,6 +66,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		{
 			if (Input.GetButtonDown("Fire1"))
 			{
+				if(EventSystem.current.IsPointerOverGameObject())
+					return;
+
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
