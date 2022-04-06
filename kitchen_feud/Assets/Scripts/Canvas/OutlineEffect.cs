@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using ExitGames.Client.Photon.StructWrapping;
 
 public class OutlineEffect : MonoBehaviour
 {
@@ -13,26 +14,18 @@ public class OutlineEffect : MonoBehaviour
     private Renderer rend;
     public GameObject outlineObjectPrefab;
     public GameObject outlineObject;
-    
+    public PhotonView PV;
      void Start()
-    {
+     {
+         PV = GetComponent<PhotonView>();
         if (PhotonNetwork.IsMasterClient)
         {
             outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
                 transform.position, gameObject.transform.rotation);
-            outlineObject.transform.SetParent(gameObject.transform);
+            PV.RPC("glowSettings",RpcTarget.All,outlineObject.GetPhotonView().ViewID,PV.ViewID);
             //outlineObject.transform.localScale = new Vector3(1, 1, 1);
 
-            Renderer rend = outlineObject.GetComponent<Renderer>();
-            rend.material = mat;
-            rend.material.SetFloat("_Thickness", thickness);
-            rend.material.SetColor("_OutlineColor", colorOutline);
-            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            rend.enabled = false;
-            outlineObject.GetComponent<Collider>().enabled = false;
-
-            this.rend = rend;
-            rend.enabled = false;
+    
         }
     }
 
@@ -46,5 +39,27 @@ public class OutlineEffect : MonoBehaviour
         if(outlineObject){
             outlineObject.GetComponent<Renderer>().enabled = false;
         }
+    }
+
+    [PunRPC]
+    void glowSettings(int glowID,int thisID)
+    {
+        GameObject outline = PhotonView.Find(glowID).gameObject;
+        outline.transform.SetParent(PhotonView.Find(thisID).transform);
+        Renderer rendR = outline.GetComponent<Renderer>();
+        if (!PhotonView.Find(thisID).GetComponent<OutlineEffect>().outlineObject)
+        {
+            PhotonView.Find(thisID).GetComponent<OutlineEffect>().outlineObject = outline;
+        }
+        rendR.material = mat;
+        rendR.material.SetFloat("_Thickness", thickness);
+        rendR.material.SetColor("_OutlineColor", colorOutline);
+        rendR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        rendR.enabled = false;
+        outline.GetComponent<Collider>().enabled = false;
+
+        /*this.rend = rend;
+        rend.enabled = false;*/
+
     }
 }
