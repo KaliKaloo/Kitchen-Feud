@@ -25,6 +25,7 @@ public class fryingMinigame : MonoBehaviour
 
     void Start()
     {
+        if(canv)
         set = false;
         //GameEvents.current.assignPoints += UpdateDishPointsFrying;
         pointsadded = false;    

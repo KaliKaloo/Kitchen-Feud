@@ -8,16 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mainMenu.unity
     guid: 964c7775d29b916498a18c1aa866a842
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/kitchens_frying.unity
-    guid: 6ba57286436e42847986ca6cc73d11b5
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: f3e38abd6aa9a4d79907472e51980529
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
+  - enabled: 1
+    path: Assets/Scenes/kitchens Test.unity
+    guid: a81d01413b9a2453f8d837aebcacbbf8
   m_configObjects: {}
