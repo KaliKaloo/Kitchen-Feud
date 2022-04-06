@@ -25,7 +25,6 @@ public class fryingMinigame : MonoBehaviour
 
     void Start()
     {
-        if(canv)
         set = false;
         //GameEvents.current.assignPoints += UpdateDishPointsFrying;
         pointsadded = false;    
@@ -34,18 +33,17 @@ public class fryingMinigame : MonoBehaviour
 
     void Update(){
 
-        /*if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf && disableMoving == false)
+        if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf)
         {
             //Debug.LogError("??");
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
-            disableMoving = true;
-        }*/
-        /*else 
+        }
+        else 
         {
             if (GameObject.Find("Local")){
                 GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = true;
             }
-        }*/
+        }
 
         if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
         {
