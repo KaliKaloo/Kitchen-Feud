@@ -71,7 +71,6 @@ public class GlowController : MonoBehaviour
            
             if (glowAppliance.GetComponent<Appliance>().kitchenNum == teamNumber ){
                 if (glowAppliance.GetComponent<OutlineEffect>()){
-                    Debug.Log("??");
                     glowAppliance.GetComponent<OutlineEffect>().startGlowing();
                 }   
             }
