@@ -31,21 +31,39 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: abb65b3efa8dc9346b310d6006f6d033, type: 3}
-    - {fileID: 2800000, guid: 4f183891b835ec24087161455a595263, type: 3}
-    - {fileID: 2800000, guid: e7f73ac2a460f64449ccb91ffa125b31, type: 3}
+    - {fileID: 2800000, guid: eb8357143e59d37438734981cb768b58, type: 3}
+    - {fileID: 2800000, guid: 9d7b27e172b2eff4a987853a93306fef, type: 3}
+    - {fileID: 2800000, guid: 760ac32dfcde5df4bb6afe229b7cbf2b, type: 3}
+    - {fileID: 2800000, guid: bc8a45e6dc375c34894391540a9a590b, type: 3}
+    - {fileID: 2800000, guid: 57bb239bc2dc27049a844f8db4a98d8a, type: 3}
+    - {fileID: 2800000, guid: cb4be8262f7514e459fb03c93aa6661a, type: 3}
+    - {fileID: 2800000, guid: 14ce2efba2a51364fa7ab11999e7832a, type: 3}
+    - {fileID: 2800000, guid: 265a7e71844f77b48ab13eb715bedbeb, type: 3}
+    - {fileID: 2800000, guid: 94a7252035cb81a4ea3e848a79032e13, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 4f183891b835ec24087161455a595263, type: 3}
-  - {fileID: 21300000, guid: e7f73ac2a460f64449ccb91ffa125b31, type: 3}
-  - {fileID: 21300000, guid: abb65b3efa8dc9346b310d6006f6d033, type: 3}
+  - {fileID: 21300000, guid: 94a7252035cb81a4ea3e848a79032e13, type: 3}
+  - {fileID: 21300000, guid: 265a7e71844f77b48ab13eb715bedbeb, type: 3}
+  - {fileID: 21300000, guid: 9d7b27e172b2eff4a987853a93306fef, type: 3}
+  - {fileID: 21300000, guid: eb8357143e59d37438734981cb768b58, type: 3}
+  - {fileID: 21300000, guid: cb4be8262f7514e459fb03c93aa6661a, type: 3}
+  - {fileID: 21300000, guid: bc8a45e6dc375c34894391540a9a590b, type: 3}
+  - {fileID: 21300000, guid: 57bb239bc2dc27049a844f8db4a98d8a, type: 3}
+  - {fileID: 21300000, guid: 14ce2efba2a51364fa7ab11999e7832a, type: 3}
+  - {fileID: 21300000, guid: 760ac32dfcde5df4bb6afe229b7cbf2b, type: 3}
   m_PackedSpriteNamesToIndex:
   - 18
-  - 19
   - 13
+  - 16
+  - 33
+  - 29
+  - 20
+  - 28
+  - 32
+  - 19
   m_RenderDataMap: {}
   m_Tag: sandwichLayerSprites
   m_IsVariant: 0

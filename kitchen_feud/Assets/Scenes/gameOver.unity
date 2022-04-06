@@ -1444,6 +1444,7 @@ GameObject:
   - component: {fileID: 2125578533}
   - component: {fileID: 2125578532}
   - component: {fileID: 2125578531}
+  - component: {fileID: 2125578534}
   m_Layer: 5
   m_Name: playAgain
   m_TagString: Untagged
@@ -1565,3 +1566,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125578529}
   m_CullTransparentMesh: 1
+--- !u!114 &2125578534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125578529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2aab50c0a830d044b97f538427b3521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
