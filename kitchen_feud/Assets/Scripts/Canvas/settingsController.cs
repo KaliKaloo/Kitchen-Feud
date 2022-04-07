@@ -16,13 +16,15 @@ public class settingsController : MonoBehaviour
 
     public void showSettings(){
         settingsButton = GameObject.Find("Settings Button");
-        settingsButton.SetActive(false);
+        if (settingsButton)
+            settingsButton.SetActive(false);
         gameObject.SetActive(true);
     }
 
     public void exitSettings(){
         gameObject.SetActive(false);
-        settingsButton.SetActive(true);
+        if (settingsButton)
+            settingsButton.SetActive(true);
     }
 
 }

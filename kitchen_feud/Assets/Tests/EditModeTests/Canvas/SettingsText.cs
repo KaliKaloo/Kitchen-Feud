@@ -47,14 +47,14 @@ public class SettingsTextTests
     {
         grandParent.name = "Rotation";
         settingsText.updateText(50);
-        Assert.AreEqual("0.5", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("0.8", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
     [Test]
     public void updateIntTextRotation()
     {
         grandParent.name = "Rotation";
-        settingsText.updateText(100);
+        settingsText.updateText(60);
         Assert.AreEqual("1", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
