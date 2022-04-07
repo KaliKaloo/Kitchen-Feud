@@ -16,6 +16,7 @@ public class settingsController : MonoBehaviour
 
     public void showSettings(){
         settingsButton = GameObject.Find("Settings Button");
+        settingsButton.SetActive(false);
         gameObject.SetActive(true);
     }
 
