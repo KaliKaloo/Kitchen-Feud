@@ -37,6 +37,8 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - addPlayer
+  - addSecondsRPC
   - appendKickedBy
   - applianceBool
   - clearAll
@@ -45,14 +47,8 @@ MonoBehaviour:
   - ClickRpc
   - cookedDishG
   - decCount
+  - decrementDoor
   - destHB
-  - addSecondsRPC
-  - applianceBool
-  - clearAll
-  - clearItems
-  - ClickRpc
-  - cookedDishG
-  - decCount
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
@@ -61,18 +57,20 @@ MonoBehaviour:
   - doFd
   - EnablePushing
   - EnView
+  - falseForOthers
   - Fire
   - giveDamage
   - globalDestroy
+  - incrementDoor
   - loadS
   - makeTrayAcross
+  - movePan
   - onApplianceF
   - onTrayF
   - ovenGame
   - playDing
   - pointSync
   - push
-  - pointSync
   - removeFromApplianceRPC
   - removeFromTray
   - removeOp
@@ -95,36 +93,42 @@ MonoBehaviour:
   - setPlayed
   - setPlayerPressing
   - setStarted
-  - setParent
-  - SetParentAsNull
-  - SetParentAsSlot
-  - setPlayerPressing
   - setTeam
   - SetToF
   - SetToFalse
   - SetToTrue
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
+  - syncAnim
+  - syncIsOpened
   - syncMat
   - syncSmoke
   - synctele
-  - addOp
-  - setEntered
-  - removeOp
-  - setEnteredF
-  - resetPlayerPressing
-  - setPlayerPressing
-  - resetIsPressed
-  - globalDestroy
-  - syncAnim
-  - syncIsOpened
-  - decrementDoor
-  - incrementDoor
   - trayBool
   - UpdateLobby
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - flip
+  - setFoodVals
+  - moveLeft
+  - moveRight
+  - setPlateStartVals
+  - setAppl
+  - syncSlider
+  - setParentP
+  - destP
+  - EnablePforAll
+  - resetTimerRPC
+  - setDishSO
+  - setPoints
+  - syncTotal
+  - setAddedF
+  - setSetF
+  - clearPlayers
+  - setGravScale
+  - SetParentPlate
+  - setParentPlate
   - appendKickedBy
   - clearKickedBy
   - destHB
@@ -147,6 +151,13 @@ MonoBehaviour:
   - setPlayer
   - setSignParent
   - setCurrentPlayers
+  - setPlayerC
+  - setNum
+  - enableMoving
+  - hideFryingUI
+  - enableBack
+  - setCanvActive
+  - glowSettings
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

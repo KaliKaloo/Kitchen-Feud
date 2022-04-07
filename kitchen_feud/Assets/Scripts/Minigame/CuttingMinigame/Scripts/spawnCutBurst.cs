@@ -15,11 +15,11 @@ public class spawnCutBurst : MonoBehaviour
         
         GameObject newObject = Instantiate(burstPrefab, SpawnParent.transform.position,SpawnParent.transform.rotation);
         newObject.transform.position = new Vector3(newObject.transform.position.x,newObject.transform.position.y,0 );
-
+        
         ParticleSystem ps = newObject.GetComponent<ParticleSystem>();
         var main = ps.main;
         colorA.a = 1f;
-       main.startColor = new ParticleSystem.MinMaxGradient(colorA);
+        main.startColor = new ParticleSystem.MinMaxGradient(colorA);
         
         Destroy(newObject,1f);
     }

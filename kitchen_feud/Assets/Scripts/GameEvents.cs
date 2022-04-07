@@ -16,6 +16,8 @@ public class GameEvents : MonoBehaviour
     public void assignPointsEventFunction() {
         if(assignPoints != null) {
             assignPoints();
+            
         }
     }
+ 
 }

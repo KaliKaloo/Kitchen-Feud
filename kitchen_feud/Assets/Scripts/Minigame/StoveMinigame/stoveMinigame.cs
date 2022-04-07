@@ -10,6 +10,7 @@ public class stoveMinigame : MonoBehaviour
 {
     [SerializeField] public GameObject stoveCanvas;
     [SerializeField] public GameObject startButton;
+    bool pointset = false;
 
     StoveScore stoveScore = new StoveScore();
 
@@ -20,13 +21,17 @@ public class stoveMinigame : MonoBehaviour
 
     void Start()
     {
-        GameEvents.current.assignPoints += UpdateDishPointsStove;
+		
+        //
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
     }
 
     void Update(){
-        if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+
+
+      
+        if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
@@ -37,15 +42,23 @@ public class stoveMinigame : MonoBehaviour
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
             }
+            //if (GameObject.Find("StoveGameCanvas"))
+            //{
+            //    GameEvents.current.assignPoints += UpdateDishPointsStove;
+                
+                
+            //}
         }
     }
 
 
-    public void UpdateDishPointsStove() {
-        if (appliance.isBeingInteractedWith){
+    public void UpdateDishPointsStove()
+    {
+        if (appliance.isBeingInteractedWith)
+        {
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
-            if(dishOfFoundDish != null)
+            if (dishOfFoundDish != null)
             {
                 
                 dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
