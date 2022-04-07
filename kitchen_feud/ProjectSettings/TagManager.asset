@@ -24,6 +24,9 @@ TagManager:
   - Dish
   - Kitchen1Portals
   - Kitchen2Portals
+  - ExplodingBox
+  - Balloon
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -36,8 +39,7 @@ TagManager:
   - Particle Effects
   - Pickable
   - ME
-  - 
-  - 
+  - Walls
   - 
   - 
   - 
