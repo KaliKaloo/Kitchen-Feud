@@ -179,6 +179,10 @@ public class PlayerVoiceManager : MonoBehaviour
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 		if (x == 0)
 		{
+			//SOUND ------------------------------------------------
+			//add hitting sound! (it's on player)
+			obj.GetComponent<AudioSource>().Play();
+			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
         }
         else
