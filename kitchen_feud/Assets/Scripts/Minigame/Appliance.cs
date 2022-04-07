@@ -118,9 +118,13 @@ public class Appliance : Interactable
                     
                     //SOUND -------------------------------------------------------
                     //minigameCanvas.GetComponent<AudioSource>().Play();
-                    //-------------------------------------------------------------
                     
-                   
+                    
+                   if (this.gameObject.tag == "Stove") {
+                       myPv.RPC("PlayBoilingSound", RpcTarget.All);
+                    
+                   }
+                   //-------------------------------------------------------------
 
                     playerController = player.GetComponent<PlayerController>();
                     playerController.enabled = false;
@@ -251,6 +255,10 @@ public class Appliance : Interactable
         PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
     }
 
+    [PunRPC]
+    void PlayBoilingSound() {
+        GetComponent<stoveMinigame>().sound.Play();
+    }
     [PunRPC]
 	void StopBoilingSound() {
         GetComponent<stoveMinigame>().sound.Stop();

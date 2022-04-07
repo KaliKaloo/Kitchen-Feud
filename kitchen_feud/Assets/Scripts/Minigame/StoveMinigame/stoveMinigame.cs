@@ -49,9 +49,10 @@ public class stoveMinigame : MonoBehaviour
                 spawner.appliance = appliance;
                 //TO FIX!
                 //SOUND -----------------------------------------------------------------
-                /*
-                this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
-                hasPlayed = true;*/
+                
+                //this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
+                //appliance.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
+                //hasPlayed = true;
                 //-----------------------------------------------------------------------
                 
             }
@@ -81,9 +82,10 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
-
+/*
     [PunRPC]
     void PlayBoilingSound() {
         sound.Play();
     }
+    */
 }
