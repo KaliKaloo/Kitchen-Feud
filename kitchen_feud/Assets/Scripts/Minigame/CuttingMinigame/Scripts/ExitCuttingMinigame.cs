@@ -10,7 +10,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 	public Button yourButton;
 	public cutController CutController;
 	public GameObject canvas;
-    public GameObject minigameCanvas;
+	public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
 	
@@ -34,7 +34,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 
-		PhotonView	view = appliance.player.GetComponent<PhotonView>();
+		PhotonView view = appliance.player.GetComponent<PhotonView>();
 		
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 		
