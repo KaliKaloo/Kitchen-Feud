@@ -1,6 +1,7 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class MusicManager : MonoBehaviour
     public int location;
 
     public bool inMG = false;
+    public float musicVol = 0.5f;
 
     
     void Awake(){
@@ -53,17 +55,27 @@ public class MusicManager : MonoBehaviour
                 track1.clip = k2track1;
             }
             track1.volume = 0;
-            track1.Play();        
+            track1.Play();
             track1.loop = true;
             played = true;
-            StartCoroutine(fadeTrack(track1, 10, 0, 1));
+            StartCoroutine(fadeTrack(track1, 10, 0));
+        }
+
+        //set music volume
+        GameObject volumeSlider = GameObject.Find("Music Volume");
+        if (volumeSlider){
+            musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
+            if (track1.isPlaying && !track2.isPlaying)
+                track1.volume = musicVol;
+            else if (track2.isPlaying && !track1.isPlaying)
+                track2.volume = musicVol;
         }
     }
 
-    private IEnumerator fadeTrack(AudioSource source, int FadeTime, float startVol, float endVol){
+    private IEnumerator fadeTrack(AudioSource source, int FadeTime, float startVol){
         float timeElapsed = 0;
         while (timeElapsed < FadeTime){
-            track1.volume = Mathf.Lerp(startVol, endVol, timeElapsed/FadeTime);
+            track1.volume = Mathf.Lerp(startVol, musicVol, timeElapsed/FadeTime);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -114,7 +126,7 @@ public class MusicManager : MonoBehaviour
 
                 while (timeElapsed < FadeTime){
                     track1.volume = Mathf.Lerp(track1CurrentVol, minVol, timeElapsed/FadeTime);
-                    track2.volume = Mathf.Lerp(track2CurrentVol, maxVol, timeElapsed/FadeTime);
+                    track2.volume = Mathf.Lerp(track2CurrentVol, musicVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
@@ -133,7 +145,7 @@ public class MusicManager : MonoBehaviour
 
                 while (timeElapsed < FadeTime){
                     track2.volume = Mathf.Lerp(track2CurrentVol, minVol, timeElapsed/FadeTime);
-                    track1.volume = Mathf.Lerp(track1CurrentVol, maxVol, timeElapsed/FadeTime);
+                    track1.volume = Mathf.Lerp(track1CurrentVol, musicVol, timeElapsed/FadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
