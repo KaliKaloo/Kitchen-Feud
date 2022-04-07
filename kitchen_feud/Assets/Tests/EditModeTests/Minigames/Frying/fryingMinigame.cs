@@ -13,7 +13,6 @@ public class fryingMinigameTests
     {
         GameObject obj = new GameObject();
         fryingMinigame = obj.AddComponent<fryingMinigame>();
-
     }
 
 
