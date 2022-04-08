@@ -87,8 +87,11 @@ public class AudioManager : MonoBehaviour
                         pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
                     }
                 }
+         
+        
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
+                    Debug.Log("entered with HB");
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
                     pFV.RPC("setKickableF", RpcTarget.All, pFV.ViewID);
                 }
