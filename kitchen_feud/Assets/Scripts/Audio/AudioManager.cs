@@ -46,10 +46,6 @@ public class AudioManager : MonoBehaviour
 
 
 
-    private void Update()
-    {
-        // Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,7 +87,6 @@ public class AudioManager : MonoBehaviour
         
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
-                    Debug.Log("entered with HB");
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
                     pFV.RPC("setKickableF", RpcTarget.All, pFV.ViewID);
                 }
