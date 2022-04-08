@@ -248,7 +248,21 @@ public class Appliance : Interactable
     {
         ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        //try the first one, but with an array and then search for the one with the right name
+        //ParticleSystem PS = PhotonView.Find(viewID).gameObject.transform.Find("Particle System").GetComponent<ParticleSystem>();
+        //gameObject.transform.Find("Child Name").GetComponent();
+        //PS.Play();
     }
+
+    //SPARKS --------------------
+    /*[PunRPC]
+    void syncSparks(int viewID)
+    {
+        ParticleSystem PS = PhotonView.Find(viewID).gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>();
+        PS.Play();
+    }*/
+    //---------------------------
+
     [PunRPC]
     void setParent(int canvasID,int ovenID)
     {
