@@ -3,12 +3,14 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
 	public Interactable focus;
 	public int myTeam;
+	
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public GameObject healthbar1;
@@ -49,8 +51,13 @@ public class PlayerVoiceManager : MonoBehaviour
 		}
 		if (view.IsMine)
 		{
-//			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
-//			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			if (SceneManager.GetActiveScene().name != "kitchens Test")
+			{
+				view.RPC("setTeam", RpcTarget.Others, view.ViewID,
+					(int) PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+				myTeam = (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			}
+
 			if (myTeam == 1)
 			{
 				view.RPC("setEntered", RpcTarget.All, view.ViewID, 1);

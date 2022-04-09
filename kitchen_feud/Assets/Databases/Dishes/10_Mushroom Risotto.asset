@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mushroom Risotto
   location: 0
-  Prefab: {fileID: 2771870706032194867, guid: a93570975bd61944896d6b670e1933ef, type: 3}
+  Prefab: {fileID: 8769107413079274451, guid: 8243cd81c5cfb454dbf40302118f5845, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 16947a4ebbd0ab04090a36a9202fcce2, type: 3}
   canPickUp: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI1121
   toCook: Stove
   cookingTime: 30
+  stoveFry: 0
   recipe:
   - {fileID: 11400000, guid: 21a4e3505eafe764fa7bb4c4d86da128, type: 2}
   - {fileID: 11400000, guid: 2e52c90c96e8b2742aba22e28f9b8c57, type: 2}

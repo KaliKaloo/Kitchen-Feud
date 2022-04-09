@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7550691057038017026}
   - component: {fileID: 7123840084013849328}
   - component: {fileID: 5779232729951452848}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: chopping_board1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

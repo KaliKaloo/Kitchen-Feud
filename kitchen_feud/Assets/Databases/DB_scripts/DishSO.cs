@@ -9,6 +9,7 @@ public class DishSO : BaseFood
     public string dishID;
     public string toCook;
     public int cookingTime;
+    public bool stoveFry;
 
     // public int maxScore;
     // public int finalScore;

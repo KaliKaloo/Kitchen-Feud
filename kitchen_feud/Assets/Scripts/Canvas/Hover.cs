@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-//using outlineEffect;
 
-//public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
-public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Hover : MonoBehaviour, IPointerClickHandler
 {
     private SpriteRenderer sprite;
     public TextMeshProUGUI dish;
@@ -35,19 +33,5 @@ public class Hover : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
                
             }
     }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (dish.text != ""){
-            Cursor.SetCursor(cursorClickable, Vector2.zero, CursorMode.ForceSoftware);
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
-    }
-    
-
     
 }

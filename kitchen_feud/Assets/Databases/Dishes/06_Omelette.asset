@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Omelette
   location: 0
-  Prefab: {fileID: 6998398168430758222, guid: 190ed82d6b5eb634086324959b6e15ac, type: 3}
+  Prefab: {fileID: 2971369331219283360, guid: 22ebe55841379d848a0a03d0af4f4ed6, type: 3}
   Type: 0
   img: {fileID: 21300000, guid: b7442b5094696334b9f7114e4588ccf4, type: 3}
   canPickUp: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI1617
   toCook: Stove
   cookingTime: 10
+  stoveFry: 1
   recipe:
   - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}
   - {fileID: 11400000, guid: 5e76d433ee189f6469c0e00686e9c594, type: 2}

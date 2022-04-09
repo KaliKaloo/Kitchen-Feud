@@ -37,6 +37,7 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - addPlayer
   - addSecondsRPC
   - appendKickedBy
   - applianceBool
@@ -57,12 +58,14 @@ MonoBehaviour:
   - doFd
   - EnablePushing
   - EnView
+  - falseForOthers
   - Fire
   - giveDamage
   - globalDestroy
   - incrementDoor
   - loadS
   - makeTrayAcross
+  - movePan
   - onApplianceF
   - onTrayF
   - ovenGame
@@ -120,6 +123,56 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - flip
+  - setFoodVals
+  - moveLeft
+  - moveRight
+  - setPlateStartVals
+  - setAppl
+  - syncSlider
+  - setParentP
+  - destP
+  - EnablePforAll
+  - resetTimerRPC
+  - setDishSO
+  - setPoints
+  - syncTotal
+  - setAddedF
+  - setSetF
+  - clearPlayers
+  - setGravScale
+  - SetParentPlate
+  - setParentPlate
+  - appendKickedBy
+  - clearKickedBy
+  - destHB
+  - giveDamage
+  - playDing
+  - push
+  - resetTimer
+  - setKickable
+  - setKickableF
+  - setMyC
+  - setObjParent
+  - setPlayed
+  - setStarted
+  - setName
+  - setHBParent
+  - setNTParent
+  - changeLayer
+  - setHeldobj
+  - setHeldobjAsNull
+  - setPlayer
+  - setSignParent
+  - setCurrentPlayers
+  - setPlayerC
+  - setNum
+  - enableMoving
+  - hideFryingUI
+  - enableBack
+  - setCanvActive
+  - glowSettings
+  - distort
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

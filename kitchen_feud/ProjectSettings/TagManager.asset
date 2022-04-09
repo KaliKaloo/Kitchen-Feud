@@ -32,6 +32,7 @@ TagManager:
   - Water
   - UI
   - Cuttable
+  - UICollisions
   - Particle Effects
   - Pickable
   - ME

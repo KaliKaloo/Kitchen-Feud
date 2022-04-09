@@ -28,15 +28,18 @@ public class ExitStoveMinigame : MonoBehaviour
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
-		btn.onClick.AddListener(TaskOnClick);		
+		btn.onClick.AddListener(TaskOnClick);
+		//GameEvents.current.assignPoints += appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
 	}
 
 	void TaskOnClick(){
+		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
+		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
 
 
-		GameEvents.current.assignPointsEventFunction();
+		//GameEvents.current.assignPointsEventFunction();
 		score.text = "Score: 0/15";
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
@@ -60,6 +63,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
 		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+
 		appliance.playerController.enabled = true;
 		appliance.player.GetComponentInChildren<Camera>().enabled = true;
 		appliance.UIcamera.enabled = false;

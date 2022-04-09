@@ -64,9 +64,11 @@ public class GlowController : MonoBehaviour
     }
 
     
-    public void GlowAppliance(List<GameObject> appliances){
-    
+    public void GlowAppliance(List<GameObject> appliances)
+    {
+     
         foreach (GameObject glowAppliance in appliances){
+           
             if (glowAppliance.GetComponent<Appliance>().kitchenNum == teamNumber ){
                 if (glowAppliance.GetComponent<OutlineEffect>()){
                     glowAppliance.GetComponent<OutlineEffect>().startGlowing();

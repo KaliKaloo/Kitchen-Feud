@@ -48,10 +48,6 @@ public class AudioManager : MonoBehaviour
 
 
 
-    private void Update()
-    {
-        // Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -90,6 +86,8 @@ public class AudioManager : MonoBehaviour
                         pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
                     }
                 }
+         
+        
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);

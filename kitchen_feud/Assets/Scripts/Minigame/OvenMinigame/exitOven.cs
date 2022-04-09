@@ -21,6 +21,8 @@ public class exitOven : MonoBehaviour
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
 		PV = GetComponent<PhotonView>();
+
+		
 	}
 
 	void TaskOnClick()
