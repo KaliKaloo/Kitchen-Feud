@@ -75,7 +75,6 @@ public class Tray : Interactable
 
     [PunRPC]
     void PlayServingSound(int viewID) {
-        //FindObjectOfType<SoundEffectsManager>().servingSound.Play();
         PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Play();
     }
 
