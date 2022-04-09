@@ -12,8 +12,8 @@ using System.IO;
 public class UI : PhotonTestSetup
 {
     GameObject obj;
-    GameObject Team1;
-    GameObject Team2;
+    GameObject[] Team1;
+    GameObject[] Team2;
 
    
 
@@ -27,8 +27,8 @@ public class UI : PhotonTestSetup
             Quaternion.identity,
             0
         );
-        Team1 = GameObject.FindGameObjectWithTag("Team1");
-        Team2 = GameObject.FindGameObjectWithTag("Team2");
+        Team1 = GameObject.FindGameObjectsWithTag("Team1");
+        Team2 = GameObject.FindGameObjectsWithTag("Team2");
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
         obj.AddComponent<PhotonPlayer>();
 
@@ -49,9 +49,12 @@ public class UI : PhotonTestSetup
     {
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 1;
         yield return new WaitForSeconds(0.1f);
-        
-        Assert.IsTrue(Team1.activeSelf);
-        Assert.IsFalse(Team2.activeSelf);
+        foreach (GameObject obj in Team1){
+            Assert.IsTrue(obj.activeSelf);
+        }
+        foreach (GameObject obj in Team2){
+            Assert.IsFalse(obj.activeSelf);
+        }
 
     }
 
@@ -61,9 +64,13 @@ public class UI : PhotonTestSetup
     {
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 2;
         yield return new WaitForSeconds(0.1f);
-        Assert.IsFalse(Team1.activeSelf);
-        Debug.Log(Team2);
-        Assert.IsTrue(Team2.activeSelf);
+         foreach (GameObject obj in Team1){
+            Assert.IsFalse(obj.activeSelf);
+        }
+        foreach (GameObject obj in Team2){
+            Assert.IsTrue(obj.activeSelf);
+
+        }
 
     }
 
