@@ -61,8 +61,10 @@ public class TrashTest : PhotonTestSetup
         trash.player = obj.transform;
         trash.Interact();
         Assert.IsNull(playerHold.heldObj);
-        yield return new WaitForEndOfFrame();
+        yield return null;
+
         Assert.IsTrue(mushroom == null);
+
     }
 
     [UnityTest]
@@ -73,7 +75,7 @@ public class TrashTest : PhotonTestSetup
         trash.player = obj.transform;
         trash.Interact();
         Assert.IsNull(playerHold.heldObj);
-        yield return new WaitForEndOfFrame();
+        yield return null;
         Assert.IsTrue(chips == null);
     }
 
