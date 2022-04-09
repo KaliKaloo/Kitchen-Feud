@@ -294,7 +294,8 @@ public class menuController : MonoBehaviourPunCallbacks
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
         rtcEngine.JoinChannel(x.ToString() + "Lobby");
-        
+        rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+            AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
         loadingScreen.SetActive(false);
 
            
