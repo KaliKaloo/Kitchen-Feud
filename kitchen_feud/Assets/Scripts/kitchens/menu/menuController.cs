@@ -99,8 +99,16 @@ public class menuController : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
             SetTeam(1);
             loadingScreen.SetActive(false);
-            usernameMenu.SetActive(true);
-            startButton.SetActive(false);
+            if (PlayerPrefs.GetString("username") != null)
+            {
+                greetingMenu.text = "Welcome back " + PlayerPrefs.GetString("username") + "!";
+                usernameMenu.SetActive(false);
+                connectPanel.SetActive(true);
+            } else
+            {
+                usernameMenu.SetActive(true);
+                startButton.SetActive(false);
+            }
         } 
         else
         {
@@ -216,10 +224,18 @@ public class menuController : MonoBehaviourPunCallbacks
             startButton.SetActive(false);
     }
 
+    public void ChangeUsernameOnClick()
+    {
+        connectPanel.SetActive(false);
+        usernameMenu.SetActive(true);
+        startButton.SetActive(false);
+    }
+
     public void SetUsername()
     {
         usernameMenu.SetActive(false);
         connectPanel.SetActive(true);
+        PlayerPrefs.SetString("username", usernameInput.text);
         PhotonNetwork.NickName = usernameInput.text;
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
     }
