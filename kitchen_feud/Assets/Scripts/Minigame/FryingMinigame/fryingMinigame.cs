@@ -20,7 +20,6 @@ public class fryingMinigame : MonoBehaviour
     public SpriteAtlas imgAtlas;
     public string spriteName;
     public Camera UICamera;
-    bool pointsadded;
     private int team;
     
 
@@ -28,7 +27,6 @@ public class fryingMinigame : MonoBehaviour
     void Start()
     {
         set = false;
-        pointsadded = false;    
         appliance = GetComponent<Appliance>();
     }
 
