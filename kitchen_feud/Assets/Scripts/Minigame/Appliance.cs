@@ -383,7 +383,8 @@ public class Appliance : Interactable
 
     [PunRPC]
     void PlayBoilingSound() {
-        GetComponent<stoveMinigame>().sound.Play();
+        if (GetComponent<stoveMinigame>().sound)
+            GetComponent<stoveMinigame>().sound.Play();
     }
     [PunRPC]
 	void StopBoilingSound() {
