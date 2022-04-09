@@ -16,7 +16,9 @@ public class pickableItem : Interactable
     public Tray tray2;
     public Appliance appliance;
     public SlotsController applianceSlots;
-   
+    //SOUND --------------------------------------------
+    public AudioSource dropSound;
+   //-----------------------------------------------------
     public override void Interact()
     {
         
@@ -45,6 +47,7 @@ public class pickableItem : Interactable
             }
         }
         else {
+            
             playerHold.dropItem();
             //playerHold.pickUpItem(gameObject, item);
         }
