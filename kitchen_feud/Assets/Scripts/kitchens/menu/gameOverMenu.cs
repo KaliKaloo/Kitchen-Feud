@@ -34,6 +34,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetString("lastLobby", null);
+
         LeavingGameCanvas.SetActive(false);
 
         genericPlayer1Animator = genericPlayer1.GetComponent<Animator>();

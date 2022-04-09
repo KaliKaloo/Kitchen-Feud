@@ -45,6 +45,8 @@ public class scoreController : MonoBehaviour
         if (currentPlayers > 0)
             lobby["Players"] = currentPlayers - 1;
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+
+        PlayerPrefs.Save();
         CustomProperties.PlayerResetStats.ResetAll();
 
         cleanupRoom = this.GetComponent<CleanupRoom>();
@@ -102,8 +104,8 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                timer.InitializeTimer();
-                timerText.text = ConvertSecondToMinutes(timer.GetTime());
+                timer.StartTimer(this);
+                timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                 music = FindObjectOfType<MusicManager>();
             }
         }

@@ -21,6 +21,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject userSettingsMenu;
     [SerializeField] private GameObject findLobbyMenu;
+    [SerializeField] private GameObject reconnectMenu;
     [SerializeField] private GameObject changeTeam1;
     [SerializeField] private GameObject changeTeam2;
 
@@ -47,6 +48,7 @@ public class menuController : MonoBehaviourPunCallbacks
     IRtcEngine rtcEngine;
     public int x;
     Random rnd = new Random();
+    private bool calledRejoin = false;
 
     [SerializeField] private Transform roomListContent;
 
@@ -96,13 +98,15 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.IsConnected)
         {
-            loadingScreen.SetActive(true);
             PhotonNetwork.ConnectUsingSettings();
+            loadingScreen.SetActive(true);
+
+
             SetTeam(1);
-            loadingScreen.SetActive(false);
-            if (PlayerPrefs.GetString("username") != null)
+            if (PlayerPrefs.GetString("username") != null && PlayerPrefs.GetString("username") != "")
             {
                 greetingMenu.text = "Welcome back " + PlayerPrefs.GetString("username") + "!";
+                PhotonNetwork.NickName = PlayerPrefs.GetString("username");
                 usernameMenu.SetActive(false);
                 connectPanel.SetActive(true);
             } else
@@ -113,10 +117,27 @@ public class menuController : MonoBehaviourPunCallbacks
         } 
         else
         {
+            // set photon's nickname to one stored in settings
+            PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("username");
             greetingMenu.text = "Welcome back " + PhotonNetwork.LocalPlayer.NickName + "!";
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }
+    }
+
+    public override void OnConnected()
+    {
+        loadingScreen.SetActive(false);
+        if (PlayerPrefs.GetString("lastLobby") != null && PlayerPrefs.GetString("lastLobby") != "")
+        {
+            reconnectMenu.SetActive(true);
+        }
+    }
+
+    public void TryRejoin()
+    {
+        calledRejoin = true;
+        PhotonNetwork.RejoinRoom(PlayerPrefs.GetString("lastLobby"));
     }
 
     public void BackToMainMenu()
@@ -133,6 +154,11 @@ public class menuController : MonoBehaviourPunCallbacks
     public void OpenUserSettings()
     {
         userSettingsMenu.SetActive(true);
+    }
+
+    public void HideReconnectMenu()
+    {
+        reconnectMenu.SetActive(false);
     }
 
 
@@ -270,6 +296,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LeaveGame()
     {
         RemovePlayerFromLobby();
+        PlayerPrefs.SetString("lastLobby", null);
         lobbyError.text = "";
         connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
@@ -319,6 +346,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        // tells player what their last joined lobby was so can reconnect if available
+        PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+
         rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         if (PhotonNetwork.IsMasterClient)
         {
@@ -354,7 +384,17 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         loadingScreen.SetActive(false);
-        lobbyError.text = "Lobby does not exist!";
+        reconnectMenu.SetActive(false);
+
+        if (calledRejoin)
+        {
+            lobbyError.text = "Lobby no longer exists!";
+            PlayerPrefs.SetString("lastLobby", null);
+        } else
+        {
+            lobbyError.text = "Lobby does not exist!";
+        }
+        calledRejoin = false;
         connectPanel.SetActive(true);
     }
 
@@ -376,6 +416,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
         loadingScreen.SetActive(false);
         lobby["Players"] = 1;
         timer.SetServerTime();

@@ -31,9 +31,7 @@ public class ItemCollider : MonoBehaviour
             parentAppliance.playerRigidbody = player.GetComponent<Rigidbody>();
             parentAppliance.SlotsController = parentObject.GetComponent<SlotsController>();
 
-            
-
-            if (pv.IsMine && parentAppliance.canUse && playerHold)
+            if (pv.IsMine && parentAppliance.canUse && playerHold && !playerHold.itemLock)
             {
                 // PLAY SOUND FOR SLOT HERE
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
