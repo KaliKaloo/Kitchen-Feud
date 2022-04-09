@@ -15,8 +15,6 @@ public class UI : PhotonTestSetup
     GameObject[] Team1;
     GameObject[] Team2;
 
-   
-
     [UnitySetUp]
     public IEnumerator Setup()
     {
@@ -69,9 +67,7 @@ public class UI : PhotonTestSetup
         }
         foreach (GameObject obj in Team2){
             Assert.IsTrue(obj.activeSelf);
-
         }
-
     }
 
 }
