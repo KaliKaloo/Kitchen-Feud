@@ -166,6 +166,7 @@ public class Appliance : Interactable
                         
                         minigameCanvas2.SetActive(true);
                         myPv.RPC("hideFryingUI",RpcTarget.All,minigameCanvas2.GetPhotonView().ViewID);
+                        
                         canvas.SetActive(false);
                         UIcamera.enabled = false;
                         UIcamera.enabled = true;

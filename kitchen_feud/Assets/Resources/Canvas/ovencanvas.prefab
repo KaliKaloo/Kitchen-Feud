@@ -292,11 +292,11 @@ GameObject:
   - component: {fileID: 2422327126312253711}
   m_Layer: 5
   m_Name: Img2
-  m_TagString: Team2
+  m_TagString: Team2Oven
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8296209739263886288
 RectTransform:
   m_ObjectHideFlags: 0
@@ -364,11 +364,11 @@ GameObject:
   - component: {fileID: 3013172878835231179}
   m_Layer: 5
   m_Name: Img1
-  m_TagString: Team1
+  m_TagString: Team1Oven
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3486479455564086273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1022,6 +1022,8 @@ MonoBehaviour:
   score: 5
   backbutton: {fileID: 7858008110543252491}
   sabotageButton: {fileID: 234072082304689736}
+  Team1Image: {fileID: 6635584705706734438}
+  Team2Image: {fileID: 6373124799163501082}
 --- !u!114 &7858008110842948596
 MonoBehaviour:
   m_ObjectHideFlags: 0
