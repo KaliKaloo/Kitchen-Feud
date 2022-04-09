@@ -19,6 +19,7 @@ public class ItemCollider : MonoBehaviour
         if (collision.CompareTag("Ingredient") && collision.transform.parent)
         {
 
+
             // Get player
             GameObject player = collision.transform.parent.parent.gameObject;
             PhotonView pv = player.GetComponent<PhotonView>();
