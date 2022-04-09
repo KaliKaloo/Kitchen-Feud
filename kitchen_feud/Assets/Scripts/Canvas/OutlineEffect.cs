@@ -16,27 +16,28 @@ public class OutlineEffect : MonoBehaviour
     public GameObject outlineObject;
     public PhotonView PV;
     private bool initialised = false;
-     void Start()
-     {
-         PV = GetComponent<PhotonView>();
+    
+    void Start()
+    {
+        PV = GetComponent<PhotonView>();
 
     }
 
-     private void Update()
-     {
-         if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount & initialised == false)
-         {
-             outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
-                 transform.position, gameObject.transform.rotation);
-             PV.RPC("glowSettings",RpcTarget.All,outlineObject.GetPhotonView().ViewID,PV.ViewID);
-             initialised = true;
+    private void Update()
+    {
+        if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount & initialised == false)
+        {
+            outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
+                transform.position, gameObject.transform.rotation);
+            PV.RPC("glowSettings",RpcTarget.All,outlineObject.GetPhotonView().ViewID,PV.ViewID);
+            initialised = true;
 
-         }
-     }
+        }
+    }
 
-     public void startGlowing(){
+    public void startGlowing(){
         if(outlineObject){
-        outlineObject.GetComponent<Renderer>().enabled = true;
+            outlineObject.GetComponent<Renderer>().enabled = true;
         }
     }
     

@@ -20,17 +20,13 @@ public class fryingMinigame : MonoBehaviour
     public SpriteAtlas imgAtlas;
     public string spriteName;
     public Camera UICamera;
-    bool pointsadded;
     private int team;
     
 
 
     void Start()
     {
-        
         set = false;
-        //GameEvents.current.assignPoints += UpdateDishPointsFrying;
-        pointsadded = false;    
         appliance = GetComponent<Appliance>();
     }
 
@@ -38,7 +34,6 @@ public class fryingMinigame : MonoBehaviour
 
         if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf)
         {
-            //Debug.LogError("??");
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
         }
         else 
@@ -79,38 +74,32 @@ public class fryingMinigame : MonoBehaviour
 
         if (transform.Find("Frying(Clone)") && appliance.isBeingInteractedWith){
             
-            //if (appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
-            {
-                if (backbutton) { 
-                backbutton.appliance = GetComponent<Appliance>();
-                    if (appliance.foundDish != null)
+            if (backbutton) { 
+            backbutton.appliance = GetComponent<Appliance>();
+                if (appliance.foundDish != null)
+                {
+                    friedFoodController = pan.friedFood;
+                    if (friedFoodController)
                     {
-                        friedFoodController = pan.friedFood;
-                        if (friedFoodController)
-                        {
-                            friedFoodController.dishSO = appliance.foundDish;
-                            friedFoodController.appliance = appliance;
+                        friedFoodController.dishSO = appliance.foundDish;
+                        friedFoodController.appliance = appliance;
 
-                            spriteName = GetSpriteName(friedFoodController.dishSO);
-                            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
-                            
-                        }
+                        spriteName = GetSpriteName(friedFoodController.dishSO);
+                        friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+                        
                     }
                 }
             }
         }
     }
+    
    public void UpdateDishPointsFrying() {
-       // Debug.Log("Outside");
-//        Debug.LogError("Inside Function: "+ appliance.isBeingInteractedWith);
         if (appliance.isBeingInteractedWith){
-            //Debug.Log("Inside");
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
-            dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)plate.totalPoints);
-            //dishOfFoundDish.points = (int)friedFoodController.points;
-            dishOfFoundDish.points = (int) plate.totalPoints;
-            Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)plate.totalPoints);
+                dishOfFoundDish.points = (int) plate.totalPoints;
+                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
         }
     }
