@@ -19,6 +19,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject userSettingsMenu;
     [SerializeField] private GameObject findLobbyMenu;
     [SerializeField] private GameObject changeTeam1;
     [SerializeField] private GameObject changeTeam2;
@@ -89,7 +90,7 @@ public class menuController : MonoBehaviourPunCallbacks
         return total;
     }
 
-    private void Start()
+    public void Start()
     {
         //PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -121,11 +122,17 @@ public class menuController : MonoBehaviourPunCallbacks
     public void BackToMainMenu()
     {
         findLobbyMenu.SetActive(false);
+        userSettingsMenu.SetActive(false);
     }
 
     public void FindLobby()
     {
         findLobbyMenu.SetActive(true);
+    }
+
+    public void OpenUserSettings()
+    {
+        userSettingsMenu.SetActive(true);
     }
 
 
@@ -226,7 +233,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void ChangeUsernameOnClick()
     {
-        connectPanel.SetActive(false);
+        userSettingsMenu.SetActive(false);
         usernameMenu.SetActive(true);
         startButton.SetActive(false);
     }
@@ -237,7 +244,19 @@ public class menuController : MonoBehaviourPunCallbacks
         connectPanel.SetActive(true);
         PlayerPrefs.SetString("username", usernameInput.text);
         PhotonNetwork.NickName = usernameInput.text;
+
+        // save player prefs to ensure works with WebGL
+        PlayerPrefs.Save();
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
+    }
+
+    // resets username to null :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    public void ResetUsername()
+    {
+        PlayerPrefs.SetString("username", null);
+        PhotonNetwork.NickName = null;
+        greetingMenu.text = "Username has not been set!";
+        BackToMainMenu();
     }
 
     // Create room here
