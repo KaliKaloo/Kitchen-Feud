@@ -24,6 +24,7 @@ public class cutController : MonoBehaviour
     public GameObject backButton;
     public GameObject StartButton;
     public int finalScore;
+    public AudioSource source;
 
     private int score = 100;
     private int num = 0;

@@ -66,7 +66,7 @@ public class EnableSmoke
 
 public class SmokeGrenade : MonoBehaviour
 {
-    private bool used = false;
+    private static bool used = false;
 
     readonly EnableSmoke enableSmoke = new EnableSmoke();
 
@@ -91,11 +91,25 @@ public class SmokeGrenade : MonoBehaviour
         }
     }
 
+    public void UseSmoke()
+    {
+        if (enableSmoke.GetPlayerState() && !used)
+        {
+                // lock player from using another smoke
+                used = true;
+                enableSmoke.UseSmoke();
+
+                InstantiateSmokeBomb();
+        }
+    }
+
     void InstantiateSmokeBomb() {
         enableSmoke.DisableSmokeSlot();
 
+        GameObject localPlayer = GameObject.Find("Local");
+
         // syncs smoke bomb on network
-        if (this.GetComponent<PhotonView>().IsMine)
-            PhotonNetwork.Instantiate("smoke_grenade", transform.position + (transform.forward * 2), transform.rotation, 0);
+        if (localPlayer.GetComponent<PhotonView>().IsMine)
+            PhotonNetwork.Instantiate("smoke_grenade", localPlayer.transform.position + (localPlayer.transform.forward * 2), localPlayer.transform.rotation, 0);
     }
 }

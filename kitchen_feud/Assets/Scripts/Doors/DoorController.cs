@@ -70,6 +70,9 @@ public class DoorController : MonoBehaviour
     void syncAnim(int viewiD,string x)
     {   
         PhotonView.Find(viewiD).GetComponent<Animator>().Play(x,0,0.0f);
+        //SOUND -----------------------------------------------------------------
+        PhotonView.Find(viewiD).GetComponent<AudioSource>().Play();
+        //-----------------------------------------------------------------------
     }
     [PunRPC]
     void syncIsOpened(int x)
@@ -93,4 +96,5 @@ public class DoorController : MonoBehaviour
     {
         count -= 1;
     }
+
 }

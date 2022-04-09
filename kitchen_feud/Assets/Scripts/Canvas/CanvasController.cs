@@ -18,6 +18,8 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
     private TicketController ticketController;
+    private GameObject currentTray;
+
     public List<GameObject> orderStands = new List<GameObject>(); 
     public GameObject orderNumberPrefab;
     public int teamNumber;
@@ -65,8 +67,9 @@ public class CanvasController : MonoBehaviour
     }
 
     // serve corresponding order depending on what justClicked equals
-    public void Serve(GameObject justClicked)
+    public async void Serve(GameObject justClicked)
     {
+        
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
             justClicked.GetComponent<PhotonView>().ViewID);
         
@@ -78,6 +81,7 @@ public class CanvasController : MonoBehaviour
        
         
         d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
+        
         
     }
 
@@ -218,4 +222,7 @@ public class CanvasController : MonoBehaviour
         ShowNewTicketWithID(o);
         
     }
+
+    
+
 }

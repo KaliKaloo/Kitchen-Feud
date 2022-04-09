@@ -41,6 +41,7 @@ MonoBehaviour:
   - addSecondsRPC
   - appendKickedBy
   - applianceBool
+  - changeLayer
   - clearAll
   - clearItems
   - clearKickedBy
@@ -68,7 +69,12 @@ MonoBehaviour:
   - onApplianceF
   - onTrayF
   - ovenGame
+  - PlayBoilingSound
   - playDing
+  - PlayDropSound
+  - PlayFireSound
+  - PlayServingSound
+  - PlaySmokeBombSound
   - pointSync
   - push
   - removeFromApplianceRPC
@@ -83,15 +89,21 @@ MonoBehaviour:
   - setEntered
   - setEnteredF
   - SetGrav
+  - setHBParent
+  - setHeldobj
+  - setHeldobjAsNull
   - setKickable
   - setKickableF
   - setMyC
-  - setObjParent
+  - setName
+  - setNTParent
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
   - setPlayed
+  - setPlayer
   - setPlayerPressing
+  - setSignParent
   - setStarted
   - setTeam
   - SetToF
@@ -99,10 +111,12 @@ MonoBehaviour:
   - SetToTrue
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
+  - StopBoilingSound
   - syncAnim
   - syncIsOpened
   - syncMat
   - syncSmoke
+  - syncSparks
   - synctele
   - trayBool
   - UpdateLobby

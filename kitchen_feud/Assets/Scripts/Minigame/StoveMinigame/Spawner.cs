@@ -76,6 +76,9 @@ public class Spawner : MonoBehaviour
         startButton.SetActive(false);
         if (PhotonNetwork.IsConnected)
             startSmoke();
+            //Sparks -------------------------------------
+            //startSparks();
+            //--------------------------------------------
 
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
@@ -143,6 +146,13 @@ public class Spawner : MonoBehaviour
 
         appliance.GetComponent<PhotonView>().RPC("syncSmoke", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
     }
+
+    //SPARKS ------------------------------------
+    /*private void startSparks(){
+
+        appliance.GetComponent<PhotonView>().RPC("syncSparks", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
+    }*/
+    //-------------------------------------------
 
 
 }

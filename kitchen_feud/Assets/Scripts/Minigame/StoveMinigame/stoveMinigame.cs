@@ -18,11 +18,13 @@ public class stoveMinigame : MonoBehaviour
 
     private Appliance appliance;
     public ExitStoveMinigame backbutton;
+    public AudioSource sound;
+    public bool hasPlayed;
 
     void Start()
     {
-		
-        //
+
+        //GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
     }
@@ -41,6 +43,7 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
+                
             }
             //if (GameObject.Find("StoveGameCanvas"))
             //{
@@ -76,4 +79,5 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
+
 }

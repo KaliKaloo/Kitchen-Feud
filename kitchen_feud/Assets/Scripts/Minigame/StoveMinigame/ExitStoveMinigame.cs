@@ -53,6 +53,12 @@ public class ExitStoveMinigame : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 
+		//TO FIX!
+		//SOUND ----------------------------------------------------------
+		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.All);
+		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
+		//----------------------------------------------------------------
+
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
