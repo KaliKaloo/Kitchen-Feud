@@ -580,7 +580,7 @@ PlayerSettings:
   webGLNameFilesAsHashes: 0
   webGLDataCaching: 1
   webGLDebugSymbols: 0
-  webGLEmscriptenArgs: 
+  webGLEmscriptenArgs: -s "BINARYEN_TRAP_MODE='clamp'" 
   webGLModulesDirectory: 
   webGLTemplate: PROJECT:AgoraTemplate2020
   webGLAnalyzeBuildSize: 0
