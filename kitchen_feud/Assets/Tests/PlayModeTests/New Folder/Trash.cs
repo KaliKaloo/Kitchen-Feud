@@ -38,6 +38,7 @@ public class TrashTest : PhotonTestSetup
         playerHold = obj.GetComponent<PlayerHolding>();
         GameObject trashObj = new GameObject();
         trash = trashObj.AddComponent<Trash>();
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
 
 
         yield return null;
