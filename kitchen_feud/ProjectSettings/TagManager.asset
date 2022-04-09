@@ -24,6 +24,8 @@ TagManager:
   - Dish
   - Kitchen1Portals
   - Kitchen2Portals
+  - Team1Oven
+  - Team2Oven
   layers:
   - Default
   - TransparentFX
@@ -36,7 +38,6 @@ TagManager:
   - Particle Effects
   - Pickable
   - ME
-  - 
   - 
   - 
   - 

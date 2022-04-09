@@ -32,17 +32,7 @@ public class ovenMiniGame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
                 canvasTag = appliance.kitchenNum;
-                if (canvasTag == 1){
-                    GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team2");
-                    foreach (GameObject obj in otherTeam){
-                        obj.SetActive(false);
-                    }
-                } else if (canvasTag == 2){
-                    GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team1");
-                    foreach (GameObject obj in otherTeam){
-                        obj.SetActive(false);
-                    }
-                }    
+ 
 
             }
         }
