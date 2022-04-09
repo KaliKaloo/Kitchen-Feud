@@ -11,7 +11,6 @@ public class cutController : MonoBehaviour
     public DishSO dish;
 
     public List<Sprite> newIngredients;
-    //public List<Sprite> dishSprites = new List<Sprite>();
     public List<Sprite> bombSprites = new List<Sprite>();
 
     public GameObject instructions;
@@ -25,8 +24,12 @@ public class cutController : MonoBehaviour
     public GameObject backButton;
     public GameObject StartButton;
     public int finalScore;
+    public AudioSource source;
 
     private int score = 100;
+    private int num = 0;
+
+
     public int Score
     {
         get { return score; }
@@ -37,7 +40,6 @@ public class cutController : MonoBehaviour
         }
     }
 
-    private int num = 0;
     public int Ingredient
     {
         get { return num; }
@@ -61,8 +63,6 @@ public class cutController : MonoBehaviour
         Score = 100;
         Ingredient = 0;
         finalScore = 0;
-
-        //stop spawning
     }
 
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
@@ -93,19 +93,19 @@ public class cutController : MonoBehaviour
         
         scoretext.text = "Score: " + Score;
         Ingredient = 0;
-
-        Ingredient1.sprite = newIngredients[0];
-        Ingredient2.sprite = newIngredients[1];
-        Ingredient3.sprite = newIngredients[2];
+        if (newIngredients.Count >= 1 && newIngredients[0])
+            Ingredient1.sprite = newIngredients[0];
+        if (newIngredients.Count >= 2 && newIngredients[1])
+           Ingredient2.sprite = newIngredients[1];
+        if (newIngredients.Count >= 3 && newIngredients[2])
+            Ingredient3.sprite = newIngredients[2];
 
     }
  
     public void calculateScore()
     {
         scoreSystem.SetActive(false);
-       
         
-        Debug.Log("Game Over");
         backButton.SetActive(true);
 
         finalScore = Score;

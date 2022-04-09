@@ -22,6 +22,8 @@ TagManager:
   - ItemCollider
   - OrderTower
   - Dish
+  - Kitchen1Portals
+  - Kitchen2Portals
   layers:
   - Default
   - TransparentFX
@@ -30,6 +32,7 @@ TagManager:
   - Water
   - UI
   - Cuttable
+  - UICollisions
   - Particle Effects
   - Pickable
   - ME

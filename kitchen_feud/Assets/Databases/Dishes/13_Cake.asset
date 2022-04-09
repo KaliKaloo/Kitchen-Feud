@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cake
   location: 0
-  Prefab: {fileID: 6265423231405801076, guid: 39d946c295fd44f1d81cbb93b079e772, type: 3}
+  Prefab: {fileID: 3087078832568634445, guid: ae8f6903456f4a449923684dbadd0a2b, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: d1f65e113d376d341b9c8ae648fd18a7, type: 3}
   canPickUp: 1
@@ -23,5 +23,6 @@ MonoBehaviour:
   dishID: DI36
   toCook: Oven
   cookingTime: 30
+  stoveFry: 0
   recipe:
   - {fileID: 11400000, guid: 476049991509449438ece77b8c15f45a, type: 2}

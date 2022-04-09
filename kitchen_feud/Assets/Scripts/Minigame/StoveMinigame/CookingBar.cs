@@ -30,7 +30,7 @@ public class CookingBar : MonoBehaviour
             cookedLevel = SetCookedLevel(slider.value);
             done = true;
             
-            GameEvents.current.assignPointsEventFunction();
+            //GameEvents.current.assignPointsEventFunction();
         }
     }
 

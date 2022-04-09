@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Egg-Mayo Sandwich
   location: 0
-  Prefab: {fileID: 3737447090136143940, guid: 1efaa49cf7c1ec64784346cb267a8750, type: 3}
+  Prefab: {fileID: 6812066693742539638, guid: 3556b1e27d5c5074599701df28505dbd, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 574061d02057fc14baa0b9464fd47352, type: 3}
   canPickUp: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI131632
   toCook: Sandwich Station
   cookingTime: 20
+  stoveFry: 0
   recipe:
   - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
   - {fileID: 11400000, guid: 18cc4705633ccc342bf91fb5469d5613, type: 2}

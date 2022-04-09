@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FryingAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 291acf19e6ef29142892df277948dc30, type: 3}
+    - {fileID: 2800000, guid: 710a706898e3e3343be364b1d59d40b4, type: 3}
+    - {fileID: 21300000, guid: eb5b0223b8b09b44e921f2687e9f676e, type: 3}
+    - {fileID: 2800000, guid: b3281c5ab1da250479b12810b5ee68bf, type: 3}
+    - {fileID: 2800000, guid: 54aac4d4d4b0e9144884d5085234367c, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: eb5b0223b8b09b44e921f2687e9f676e, type: 3}
+  - {fileID: 21300000, guid: 54aac4d4d4b0e9144884d5085234367c, type: 3}
+  - {fileID: 21300000, guid: 710a706898e3e3343be364b1d59d40b4, type: 3}
+  - {fileID: 21300000, guid: 291acf19e6ef29142892df277948dc30, type: 3}
+  - {fileID: 21300000, guid: b3281c5ab1da250479b12810b5ee68bf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - patty
+  - Pancake
+  - eggFried
+  - Eggy bread
+  - rice
+  m_RenderDataMap: {}
+  m_Tag: FryingAtlas
+  m_IsVariant: 0

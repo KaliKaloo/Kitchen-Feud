@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class EnableSmoke
 {
-    public static bool inEnemyKitchen = false;
+    private static bool inEnemyKitchen = false;
     public static GameObject smokeSlot;
     public static bool usedUp;
 
@@ -15,11 +15,18 @@ public class EnableSmoke
         inEnemyKitchen = false;
         usedUp = false;
     }
+    
 
     // Gets state of player whether in enemy kitchen or not
     public bool GetPlayerState()
     {
         return inEnemyKitchen;
+    }
+
+
+    public void SetPlayerState(bool state)
+    {
+        inEnemyKitchen = state;
     }
 
     // Initialize smoke slot so can be used in other functions
@@ -59,7 +66,7 @@ public class EnableSmoke
 
 public class SmokeGrenade : MonoBehaviour
 {
-    private bool used = false;
+    private static bool used = false;
 
     readonly EnableSmoke enableSmoke = new EnableSmoke();
 
@@ -84,11 +91,25 @@ public class SmokeGrenade : MonoBehaviour
         }
     }
 
+    public void UseSmoke()
+    {
+        if (enableSmoke.GetPlayerState() && !used)
+        {
+                // lock player from using another smoke
+                used = true;
+                enableSmoke.UseSmoke();
+
+                InstantiateSmokeBomb();
+        }
+    }
+
     void InstantiateSmokeBomb() {
         enableSmoke.DisableSmokeSlot();
 
+        GameObject localPlayer = GameObject.Find("Local");
+
         // syncs smoke bomb on network
-        if (this.GetComponent<PhotonView>().IsMine)
-            PhotonNetwork.Instantiate("smoke_grenade", transform.position + (transform.forward * 2), transform.rotation, 0);
+        if (localPlayer.GetComponent<PhotonView>().IsMine)
+            PhotonNetwork.Instantiate("smoke_grenade", localPlayer.transform.position + (localPlayer.transform.forward * 2), localPlayer.transform.rotation, 0);
     }
 }

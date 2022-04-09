@@ -16,7 +16,9 @@ public class pickableItem : Interactable
     public Tray tray2;
     public Appliance appliance;
     public SlotsController applianceSlots;
-   
+    //SOUND --------------------------------------------
+    public AudioSource dropSound;
+   //-----------------------------------------------------
     public override void Interact()
     {
         
@@ -45,11 +47,13 @@ public class pickableItem : Interactable
             }
         }
         else {
+            
             playerHold.dropItem();
             //playerHold.pickUpItem(gameObject, item);
         }
     }
-		public void removeFromTray(TraySO tray)
+    
+    public void removeFromTray(TraySO tray)
 	{
         
 		tray.ServingTray.Remove(item);
@@ -61,7 +65,7 @@ public class pickableItem : Interactable
         Interact();
     }
 
-
+ 
 
     [PunRPC]
     void SetGrav()
@@ -73,6 +77,8 @@ public class pickableItem : Interactable
     {
         PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }

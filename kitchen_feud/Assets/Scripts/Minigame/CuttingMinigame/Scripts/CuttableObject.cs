@@ -7,6 +7,7 @@ public class CuttableObject : MonoBehaviour
     public bool correctIngredient;
     public cutController CutController;
     public spawnCutBurst spawnCutBurst;
+    public AudioSource source;
 
     public void OnCollisionEnter2D (Collision2D collision)
     {
@@ -14,10 +15,13 @@ public class CuttableObject : MonoBehaviour
         if (collision.gameObject.tag == "Cut") {
             spawnCutBurst = GameObject.Find("spawnCutBurst").transform.GetComponent<spawnCutBurst>();
             spawnCutBurst.BurstEffect(gameObject);
+           
             
             Destroy(gameObject);
             CutController = GameObject.Find("CutController").transform.GetComponent<cutController>();
-            
+            //SOUND -----------------------------------
+            CutController.source.Play();
+            // ----------------------------------------
             
             if (!correctIngredient)
             {
@@ -34,6 +38,7 @@ public class CuttableObject : MonoBehaviour
             }
         }
     }
+
 
 
 }

@@ -37,22 +37,19 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - addPlayer
+  - addSecondsRPC
   - appendKickedBy
   - applianceBool
+  - changeLayer
   - clearAll
   - clearItems
   - clearKickedBy
   - ClickRpc
   - cookedDishG
   - decCount
+  - decrementDoor
   - destHB
-  - addSecondsRPC
-  - applianceBool
-  - clearAll
-  - clearItems
-  - ClickRpc
-  - cookedDishG
-  - decCount
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
@@ -61,18 +58,25 @@ MonoBehaviour:
   - doFd
   - EnablePushing
   - EnView
+  - falseForOthers
   - Fire
   - giveDamage
   - globalDestroy
+  - incrementDoor
   - loadS
   - makeTrayAcross
+  - movePan
   - onApplianceF
   - onTrayF
   - ovenGame
+  - PlayBoilingSound
   - playDing
+  - PlayDropSound
+  - PlayFireSound
+  - PlayServingSound
+  - PlaySmokeBombSound
   - pointSync
   - push
-  - pointSync
   - removeFromApplianceRPC
   - removeFromTray
   - removeOp
@@ -85,46 +89,60 @@ MonoBehaviour:
   - setEntered
   - setEnteredF
   - SetGrav
+  - setHBParent
+  - setHeldobj
+  - setHeldobjAsNull
   - setKickable
   - setKickableF
   - setMyC
-  - setObjParent
+  - setName
+  - setNTParent
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
   - setPlayed
+  - setPlayer
   - setPlayerPressing
+  - setSignParent
   - setStarted
-  - setParent
-  - SetParentAsNull
-  - SetParentAsSlot
-  - setPlayerPressing
   - setTeam
   - SetToF
   - SetToFalse
   - SetToTrue
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
-  - syncMat
-  - syncSmoke
-  - synctele
-  - addOp
-  - setEntered
-  - removeOp
-  - setEnteredF
-  - resetPlayerPressing
-  - setPlayerPressing
-  - resetIsPressed
-  - globalDestroy
+  - StopBoilingSound
   - syncAnim
   - syncIsOpened
-  - decrementDoor
-  - incrementDoor
+  - syncMat
+  - syncSmoke
+  - syncSparks
+  - synctele
   - trayBool
   - UpdateLobby
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - flip
+  - setFoodVals
+  - moveLeft
+  - moveRight
+  - setPlateStartVals
+  - setAppl
+  - syncSlider
+  - setParentP
+  - destP
+  - EnablePforAll
+  - resetTimerRPC
+  - setDishSO
+  - setPoints
+  - syncTotal
+  - setAddedF
+  - setSetF
+  - clearPlayers
+  - setGravScale
+  - SetParentPlate
+  - setParentPlate
   - appendKickedBy
   - clearKickedBy
   - destHB
@@ -146,6 +164,15 @@ MonoBehaviour:
   - setHeldobjAsNull
   - setPlayer
   - setSignParent
+  - setCurrentPlayers
+  - setPlayerC
+  - setNum
+  - enableMoving
+  - hideFryingUI
+  - enableBack
+  - setCanvActive
+  - glowSettings
+  - distort
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

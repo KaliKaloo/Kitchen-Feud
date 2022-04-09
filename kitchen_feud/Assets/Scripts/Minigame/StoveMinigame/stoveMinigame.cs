@@ -10,6 +10,7 @@ public class stoveMinigame : MonoBehaviour
 {
     [SerializeField] public GameObject stoveCanvas;
     [SerializeField] public GameObject startButton;
+    bool pointset = false;
 
     StoveScore stoveScore = new StoveScore();
 
@@ -17,16 +18,22 @@ public class stoveMinigame : MonoBehaviour
 
     private Appliance appliance;
     public ExitStoveMinigame backbutton;
+    public AudioSource sound;
+    public bool hasPlayed;
 
     void Start()
     {
-        GameEvents.current.assignPoints += UpdateDishPointsStove;
+
+        //GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
     }
 
     void Update(){
-        if(appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
+
+
+      
+        if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
@@ -36,19 +43,28 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
+                
             }
+            //if (GameObject.Find("StoveGameCanvas"))
+            //{
+            //    GameEvents.current.assignPoints += UpdateDishPointsStove;
+                
+                
+            //}
         }
     }
 
 
-   public void UpdateDishPointsStove() {
-        if (appliance.isBeingInteractedWith){
+    public void UpdateDishPointsStove()
+    {
+        if (appliance.isBeingInteractedWith)
+        {
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
-            if(dishOfFoundDish != null)
+            if (dishOfFoundDish != null)
             {
                 
-                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultipier();
+                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
 
                 // if player is team 2 but interacts with team1 stove, points doubled
                 if (stoveCanvas.tag == "Team1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
@@ -63,4 +79,5 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
+
 }

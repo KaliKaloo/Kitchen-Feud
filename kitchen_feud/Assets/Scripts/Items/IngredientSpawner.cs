@@ -30,7 +30,6 @@ public class IngredientSpawner : Interactable
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         Transform slot = playerHold.slot;
         if (player.transform.Find("slot").childCount== 0 && count > 0){
-            
             var obj = PhotonNetwork.Instantiate(Path.Combine( "IngredientPrefabs", ingredientPrefab.name), slot.position, Quaternion.identity);
             pickableItem item = obj.GetComponent<pickableItem>();
             playerHold.pickUpItem(obj, item.item);
@@ -43,6 +42,7 @@ public class IngredientSpawner : Interactable
     {
         count -= 1;
     }
+
     [PunRPC]
     void resetCount()
     {

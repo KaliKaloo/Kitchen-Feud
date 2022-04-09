@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class OvenFire : MonoBehaviour
 {
     Timer timer;
     bool startFire = false;
     Component[] PS;
+    public AudioSource fireSound;
 
     void Start()
     {
+        fireSound = transform.parent.GetComponentInChildren<AudioSource>();
         timer = transform.GetComponent<Timer>();
         PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
     }
@@ -22,7 +25,11 @@ public class OvenFire : MonoBehaviour
                 foreach(ParticleSystem p in PS){
                     p.Play();
                 }
+                //SOUND -------------------------------------------
+                fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
+                //-------------------------------------------------
                 startFire = true;
+
             }
         }
 
