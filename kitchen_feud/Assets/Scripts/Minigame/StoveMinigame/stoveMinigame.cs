@@ -23,13 +23,6 @@ public class stoveMinigame : MonoBehaviour
 
     void Start()
     {
-        //TO FIX!
-        //SOUND -----------------------------------------------------------------
-        /*
-        hasPlayed = false;
-        sound = GetComponent<AudioSource>();
-        */
-        //-----------------------------------------------------------------------
 
         //GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
@@ -42,7 +35,6 @@ public class stoveMinigame : MonoBehaviour
       
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
-            //TO REMOVE COMMENT - MUSIC
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
             
@@ -51,13 +43,6 @@ public class stoveMinigame : MonoBehaviour
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
-                //TO FIX!
-                //SOUND -----------------------------------------------------------------
-                
-                //this.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
-                //appliance.GetComponent<PhotonView>().RPC("PlayBoilingSound", RpcTarget.All);
-                //hasPlayed = true;
-                //-----------------------------------------------------------------------
                 
             }
             //if (GameObject.Find("StoveGameCanvas"))
@@ -94,10 +79,5 @@ public class stoveMinigame : MonoBehaviour
             }
         }
     }
-/*
-    [PunRPC]
-    void PlayBoilingSound() {
-        sound.Play();
-    }
-    */
+
 }

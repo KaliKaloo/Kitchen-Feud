@@ -187,7 +187,6 @@ public class PlayerVoiceManager : MonoBehaviour
 		if (x == 0)
 		{
 			//SOUND ------------------------------------------------
-			//add hitting sound! (it's on player)
 			obj.GetComponent<AudioSource>().Play();
 			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);

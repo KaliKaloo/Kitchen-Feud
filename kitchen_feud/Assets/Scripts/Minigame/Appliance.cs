@@ -193,13 +193,11 @@ public class Appliance : Interactable
                     minigameCanvas.gameObject.SetActive(true);
                     
                     //SOUND -------------------------------------------------------
-                    //minigameCanvas.GetComponent<AudioSource>().Play();
-                    
                     
                    if (this.gameObject.tag == "Stove") {
-                       myPv.RPC("PlayBoilingSound", RpcTarget.All);
-                    
+                       myPv.RPC("PlayBoilingSound", RpcTarget.All);  
                    }
+
                    //-------------------------------------------------------------
 
                     UIcamera.enabled = true;

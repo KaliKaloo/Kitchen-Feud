@@ -120,8 +120,7 @@ public class PlayerHolding : MonoBehaviour
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
             //SOUND ---------------------------------------------------------
-            //RPC to all
-            //FindObjectOfType<SoundEffectsManager>().dropSound.Play();
+
             this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.All);
 
             //---------------------------------------------------------------

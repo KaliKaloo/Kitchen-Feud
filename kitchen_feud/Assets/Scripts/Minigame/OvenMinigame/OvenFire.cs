@@ -26,9 +26,7 @@ public class OvenFire : MonoBehaviour
                     p.Play();
                 }
                 //SOUND -------------------------------------------
-                //fireSound.Play();
                 fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
-        
                 //-------------------------------------------------
                 startFire = true;
 

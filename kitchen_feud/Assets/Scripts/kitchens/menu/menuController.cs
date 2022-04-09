@@ -281,7 +281,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //TO REMOVE COMMENT
         rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         if (PhotonNetwork.IsMasterClient)
         {
@@ -294,7 +293,6 @@ public class menuController : MonoBehaviourPunCallbacks
             AddPlayerToLobby();
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
-        //TO REMOVE COMMENT
         rtcEngine.JoinChannel(x.ToString() + "Lobby");
         
         loadingScreen.SetActive(false);

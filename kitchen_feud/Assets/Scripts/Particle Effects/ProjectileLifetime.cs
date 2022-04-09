@@ -35,7 +35,6 @@ public class ProjectileLifetime : MonoBehaviour
         gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 
         //SOUND ------------------------------------------------------
-        //gameObject.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<PhotonView>().RPC("PlaySmokeBombSound", RpcTarget.All);
         // -----------------------------------------------------------
     }
