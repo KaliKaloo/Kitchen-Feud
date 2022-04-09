@@ -6868,7 +6868,6 @@ GameObject:
   - component: {fileID: 1915211348}
   - component: {fileID: 1915211347}
   - component: {fileID: 1915211349}
-  - component: {fileID: 1915211350}
   m_Layer: 0
   m_Name: VoiceManager
   m_TagString: Untagged
@@ -6888,6 +6887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bb5b522c1ae466ab3397b61ce4f720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internetSpeed: 0
   x: 0
 --- !u!4 &1915211348
 Transform:
@@ -6925,18 +6925,6 @@ MonoBehaviour:
   sceneViewId: 876
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1915211350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915211346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae2936d7fce84291b87459829ad5546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1957214434
 GameObject:
   m_ObjectHideFlags: 0
