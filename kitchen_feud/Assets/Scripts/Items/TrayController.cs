@@ -42,12 +42,10 @@ public class TrayController : MonoBehaviour
 
         foreach (Transform slot in ts.transform)
         {
-            // Destroy order stand prefab
+            // overwrite order stand prefab
             if (slot.tag == "OrderTower")
             {
                 slot.GetComponentInChildren<TextMeshProUGUI>().text ="";
-                // Destroy(slot.gameObject);
-                // Debug.Log(slot.GetComponent<PhotonView>().ViewID);
             }
 
             // else destroy items on tray, except from item collider

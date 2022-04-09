@@ -10,7 +10,6 @@ public class ovenMiniGame : MonoBehaviour
     public Timer timer;
     private Appliance appliance;
     public exitOven backbutton;
-    bool isFire = false;
     private int canvasTag;
 
     // Start is called before the first frame update

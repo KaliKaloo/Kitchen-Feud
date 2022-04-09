@@ -46,9 +46,6 @@ public class PhotonTestSetup
     //}
 
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-
     public class PhotonTestLobby : MonoBehaviourPunCallbacks
     {
 

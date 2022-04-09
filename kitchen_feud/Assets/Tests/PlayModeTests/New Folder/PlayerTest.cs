@@ -46,21 +46,11 @@ public class PlayerTests : PhotonTestSetup
         yield return null;
     }
 
-    //// A Test behaves as an ordinary method
-    //[Test]
-    //public void MovementSimplePasses()
-    //{
-    //    // Use the Assert class to test conditions
-    //}
-
-    //// A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    //// `yield return null;` to skip a frame.
+   
     [UnityTest]
     public IEnumerator CheckMovement()
     {
         //Assert.AreEqual("", h.getHealth());
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         Vector3 pos = rb.position;
         Vector3 movementForward = obj.transform.forward * 1;
@@ -83,12 +73,9 @@ public class PlayerTests : PhotonTestSetup
         pos = rb.position;
         rb.MovePosition(rb.position + movementLeft * 1 * Time.fixedDeltaTime);
         Assert.AreNotSame(rb.position.magnitude, pos.magnitude);
-
-
-
-
         yield return null;
     }
+
     [UnityTest]
     public IEnumerator pickUp()
     {
@@ -96,22 +83,19 @@ public class PlayerTests : PhotonTestSetup
         Assert.IsTrue(obj.transform.GetChild(2).childCount > 0);
         Assert.IsTrue(obj.transform.GetChild(2).GetChild(0).name == mushroom.name);
         playerHold.dropItem();
-
-
         yield return null;
     }
+
     [UnityTest]
     public IEnumerator dropItem()
     {
         playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
-
         playerHold.dropItem();
-
         Assert.IsTrue(obj.transform.GetChild(2).childCount == 0);
-
-
         yield return null;
     }
+
+
     [UnityTest]
     public IEnumerator ApplianceSlot()
     {
@@ -119,8 +103,9 @@ public class PlayerTests : PhotonTestSetup
         stove.addItem(mushroom, playerHold);
         Assert.IsTrue(stove.itemsOnTheAppliance.Count == 1);
         yield return null;
-
     }
+
+
     [UnityTest]
     public IEnumerator ApplianceCookTest()
     {
@@ -135,6 +120,22 @@ public class PlayerTests : PhotonTestSetup
 
         stove.player = null;
         yield return null;
+    }
+
+
+    [UnityTest]
+    public IEnumerator StoveMinigameTest()
+    {
+        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        stove.player = obj.transform;
+        stove.Interact();
+        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        stove.Interact();
+        stove.Interact();
+        Assert.IsTrue(GameObject.Find("StoveGameCanvas").activeSelf);
+
+        yield return null;
+
     }
 
 }
