@@ -60,16 +60,11 @@ public class Appliance : Interactable
         {
             PhotonView.Find(myPv.ViewID).TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
         }
-        //EVENT SYSTEM: LISTEN FROM AN EVENT (assignPoints) IN THE COOKINGBAR, IT CALLS UpdateDishPoints()
 
         if (pv.IsMine)
         {
-//            Debug.LogError("ettestt");
             if (!isBeingInteractedWith)
             {
-
-
-               
                     if (player.transform.Find("slot").childCount != 0)
                     {
                         this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.All, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
@@ -79,8 +74,6 @@ public class Appliance : Interactable
                     {
                         cookDish();
                     }
-                
-
             }
             else
             {

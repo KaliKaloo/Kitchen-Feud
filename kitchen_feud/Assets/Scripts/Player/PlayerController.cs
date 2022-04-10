@@ -41,23 +41,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
 				myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
 			}
-			if(myTeam == 1)
-            {
-				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
-            }
-            else
-            {
-				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
-			}
-
 			gameObject.layer = 9;
 			gameObject.transform.GetChild(0).gameObject.layer = 9;
 			gameObject.transform.GetChild(1).gameObject.layer = 9;
-
-
-           
 		}
-		
 	}
 
 	void Update()
