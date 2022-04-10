@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using UnityEngine.Windows.WebCam;
 
 // IMPORTANT:
 // timer and score parser class have been moved to separate scripts

@@ -115,13 +115,17 @@ public class Appliance : Interactable
                 {
                     if (this.name == "Oven1")
                     {
-                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"),
-                            transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
+                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.Euler(0, 90, 0));
+                        //SOUND -------------------------------------------------------
+                        minigameCanvas.GetComponent<AudioSource>().Play();
+                        //-------------------------------------------------------------
                     }
                     else
                     {
-                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"),
-                            transform.GetChild(0).position, Quaternion.identity);
+                        minigameCanvas = PhotonNetwork.Instantiate(Path.Combine("Canvas", "ovencanvas"), transform.GetChild(0).position, Quaternion.identity);
+                        //SOUND -------------------------------------------------------
+                        minigameCanvas.GetComponent<AudioSource>().Play();
+                        //-------------------------------------------------------------
                     }
 
                     myPv.RPC("setParent", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID, myPv.ViewID);
@@ -162,6 +166,7 @@ public class Appliance : Interactable
                         
                         minigameCanvas2.SetActive(true);
                         myPv.RPC("hideFryingUI",RpcTarget.All,minigameCanvas2.GetPhotonView().ViewID);
+                        
                         canvas.SetActive(false);
                         UIcamera.enabled = false;
                         UIcamera.enabled = true;
@@ -187,6 +192,14 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    
+                    //SOUND -------------------------------------------------------
+                    
+                   if (this.gameObject.tag == "Stove") {
+                       myPv.RPC("PlayBoilingSound", RpcTarget.All);  
+                   }
+
+                   //-------------------------------------------------------------
 
                     UIcamera.enabled = true;
                     playerController = player.GetComponent<PlayerController>();
@@ -348,12 +361,38 @@ public class Appliance : Interactable
     {
         ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        //try the first one, but with an array and then search for the one with the right name
+        //ParticleSystem PS = PhotonView.Find(viewID).gameObject.transform.Find("Particle System").GetComponent<ParticleSystem>();
+        //gameObject.transform.Find("Child Name").GetComponent();
+        //PS.Play();
     }
+
+    //SPARKS --------------------
+    /*[PunRPC]
+    void syncSparks(int viewID)
+    {
+        ParticleSystem PS = PhotonView.Find(viewID).gameObject.transform.Find("Sparks").GetComponent<ParticleSystem>();
+        PS.Play();
+    }*/
+    //---------------------------
+
     [PunRPC]
     void setParent(int canvasID,int ovenID)
     {
         PhotonView.Find(canvasID).transform.SetParent(PhotonView.Find(ovenID).transform);
     }
+
+    [PunRPC]
+    void PlayBoilingSound() {
+        if (GetComponent<stoveMinigame>().sound)
+            GetComponent<stoveMinigame>().sound.Play();
+    }
+    [PunRPC]
+	void StopBoilingSound() {
+        GetComponent<stoveMinigame>().sound.Stop();
+    }
+
+    
     [PunRPC]
     void addPlayer(int viewID,int appID)
     {

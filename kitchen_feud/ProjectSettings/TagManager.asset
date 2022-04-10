@@ -27,6 +27,8 @@ TagManager:
   - ExplodingBox
   - Balloon
   - Water
+  - Team1Oven
+  - Team2Oven
   layers:
   - Default
   - TransparentFX
@@ -40,7 +42,6 @@ TagManager:
   - Pickable
   - ME
   - Walls
-  - 
   - 
   - 
   - 

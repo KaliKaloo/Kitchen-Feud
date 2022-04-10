@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using Photon.Pun;
 
@@ -17,9 +18,12 @@ public class ItemCollider : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Ingredient") && collision.transform.parent)
+     
         {
 
-            // Get player
+
+            // Get playe
+            //collision.GetComponent<BoxCollider>().isTrigger = true;
             GameObject player = collision.transform.parent.parent.gameObject;
             PhotonView pv = player.GetComponent<PhotonView>();
             // Send player to appliance

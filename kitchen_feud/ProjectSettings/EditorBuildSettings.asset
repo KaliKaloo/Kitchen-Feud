@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 964c7775d29b916498a18c1aa866a842
   - enabled: 0
     path: Assets/Scenes/kitchens.unity
-    guid: f3e38abd6aa9a4d79907472e51980529
+    guid: 59febb8f1702433439de374390c32f0d
   - enabled: 1
     path: Assets/Scenes/kitchens_complex.unity
     guid: 1ee596fe44563934aaf4e68c84841bc0

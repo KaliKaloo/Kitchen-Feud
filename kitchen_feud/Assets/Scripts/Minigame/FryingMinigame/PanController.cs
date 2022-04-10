@@ -62,7 +62,7 @@ public class PanController : MonoBehaviour
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
              appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
-                mouseCursorSpeed = abs(Input.GetAxis("Mouse X") / Time.deltaTime);
+                mouseCursorSpeed = Mathf.Abs(Input.GetAxis("Mouse X") / Time.deltaTime);
                 if (speeds.Count == speedQueueCapacity)
                 {
 
@@ -119,10 +119,7 @@ public class PanController : MonoBehaviour
             }
         }
     }
-    public float abs(float x) {
-       float result = x < 0 ? -x : x;
-       return result;
-    }
+   
     [PunRPC]
     void movePan(int viewID,float mouseSpeed,int dir)
     {

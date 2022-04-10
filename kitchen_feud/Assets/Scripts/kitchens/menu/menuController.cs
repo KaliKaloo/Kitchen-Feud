@@ -205,6 +205,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
         Debug.Log("Connected");
+       
     }
 
     public void ChangeUsernameInput()
@@ -293,8 +294,33 @@ public class menuController : MonoBehaviourPunCallbacks
             AddPlayerToLobby();
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
+        string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
         
+        
+        rtcEngine.JoinChannel(x.ToString() + "Lobby");
+        if (band == "A")
+        {
+            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if (band == "B")
+        {
+            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if(band == "C")
+
+        {
+            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if (band == "D")
+        {
+            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }
+
         loadingScreen.SetActive(false);
 
            

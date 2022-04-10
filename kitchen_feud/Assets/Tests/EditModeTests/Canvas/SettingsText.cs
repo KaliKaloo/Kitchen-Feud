@@ -18,8 +18,6 @@ public class SettingsTextTests
         grandParent = new GameObject();  
         parent.transform.SetParent(grandParent.transform);
         obj.transform.SetParent(parent.transform);
-
-
         settingsText = obj.AddComponent<settingsText>();  
         obj.AddComponent<TextMeshProUGUI>();  
 
@@ -47,15 +45,32 @@ public class SettingsTextTests
     {
         grandParent.name = "Rotation";
         settingsText.updateText(50);
-        Assert.AreEqual("0.5", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("0.8", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
     [Test]
     public void updateIntTextRotation()
     {
         grandParent.name = "Rotation";
-        settingsText.updateText(100);
+        settingsText.updateText(60);
         Assert.AreEqual("1", obj.GetComponent<TextMeshProUGUI>().text);
+    }
+
+
+    [Test]
+    public void updateTextMusic()
+    {
+        grandParent.name = "Music Volume";
+        settingsText.updateText(0.55f);
+        Assert.AreEqual("5.5", obj.GetComponent<TextMeshProUGUI>().text);
+    }
+
+    [Test]
+    public void updateIntTextMusic()
+    {
+        grandParent.name = "Music Volume";
+        settingsText.updateText(0.7f);
+        Assert.AreEqual("7", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
   

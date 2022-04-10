@@ -119,6 +119,11 @@ public class PlayerHolding : MonoBehaviour
             }
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
+            //SOUND ---------------------------------------------------------
+
+            this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.All);
+
+            //---------------------------------------------------------------
             view.RPC("setHeldobjAsNull", RpcTarget.All, view.ViewID);
 
         }
@@ -156,4 +161,11 @@ public class PlayerHolding : MonoBehaviour
         PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
     }
 
+    [PunRPC]
+    void PlayDropSound() {
+        //FindObjectOfType<SoundEffectsManager>().dropSound.Play();
+        if(heldObj.GetComponent<AudioSource>() != null) heldObj.GetComponent<AudioSource>().Play();
+    }
+
+    
 }
