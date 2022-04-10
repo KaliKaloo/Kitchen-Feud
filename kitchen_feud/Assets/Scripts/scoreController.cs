@@ -36,6 +36,7 @@ public class scoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
         loadingScreen.SetActive(true);
 
@@ -47,6 +48,9 @@ public class scoreController : MonoBehaviour
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
 
         PlayerPrefs.Save();
+
+        Debug.Log(PlayerPrefs.GetInt("disconnected"));
+
         CustomProperties.PlayerResetStats.ResetAll();
 
         cleanupRoom = this.GetComponent<CleanupRoom>();

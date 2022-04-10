@@ -35,6 +35,8 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     void Start()
     {
         PlayerPrefs.SetString("lastLobby", null);
+        PlayerPrefs.SetInt("disconnected", 0);
+        PlayerPrefs.Save();
 
         LeavingGameCanvas.SetActive(false);
 
@@ -45,6 +47,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         ChooseAnimation();
         // Reset all player stats after stats are displayed
         CustomProperties.PlayerResetStats.ResetAll();
+
 
     }
 

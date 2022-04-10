@@ -130,8 +130,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnConnected()
     {
-        Debug.Log(PhotonNetwork.LocalPlayer.UserId);
-
         loadingScreen.SetActive(false);
         if (!CheckStringNullorEmpty(PlayerPrefs.GetString("lastLobby")))
         {
@@ -163,6 +161,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void HideReconnectMenu()
     {
+        PlayerPrefs.SetInt("disconnected", 0);
         reconnectMenu.SetActive(false);
     }
 
@@ -251,7 +250,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-        Debug.Log("Connected");
     }
 
     public void ChangeUsernameInput()
@@ -343,6 +341,9 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
+        // how long player's data is saved after disconnect (60 seconds here)
+        PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
+
         timer.SetServerTime();
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
@@ -358,34 +359,56 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        // tells player what their last joined lobby was so can reconnect if available
-        PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
-        PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
-
-        rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-        if (PhotonNetwork.IsMasterClient)
+        Debug.Log(PlayerPrefs.GetInt("disconnected"));
+        if (PlayerPrefs.GetInt("disconnected") == 1)
         {
-            x = rnd.Next(11, 101);
-            lobby["Lobby"] = x;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-        }
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                StartCoroutine(LoadSceneAsynchronously(1));
+
+                // Rejoin voice chat
+                rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+                x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+                rtcEngine.JoinChannel(x.ToString() + "Lobby");
+            } 
+            else
+            {
+                // to do what happens when master client disconnects
+            }
+        } 
+        // else if player not in disconnected state load normally
         else
         {
-            AddPlayerToLobby();
-            x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-        }
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
-        
-        loadingScreen.SetActive(false);
+            // tells player what their last joined lobby was so can reconnect if available
+            PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+            PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
 
-           
-        // Auto balance team on join
-        if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            SetTeam(2);
+            rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                x = rnd.Next(11, 101);
+                lobby["Lobby"] = x;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+            }
+            else
+            {
+                AddPlayerToLobby();
+                x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+            }
+            rtcEngine.JoinChannel(x.ToString() + "Lobby");
+
+            loadingScreen.SetActive(false);
+
+
+            // Auto balance team on join
+            if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            {
+                SetTeam(2);
+            }
+
+            this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
         }
 
-        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
     }
 
     public override void OnLeftRoom()
@@ -403,7 +426,9 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             lobbyError.text = "Lobby no longer exists!";
             PlayerPrefs.SetString("lastLobby", null);
-        } else
+            PlayerPrefs.SetInt("disconnected", 0);
+        }
+        else
         {
             lobbyError.text = "Lobby does not exist!";
         }
@@ -553,6 +578,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [PunRPC]
     void UpdateLobby(string roomName)
     {
+        PlayerPrefs.SetInt("disconnected", 0);
         InitializeLobby(roomName);
     }
 
