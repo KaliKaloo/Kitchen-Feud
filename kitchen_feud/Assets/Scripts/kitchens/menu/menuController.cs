@@ -359,7 +359,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log(PlayerPrefs.GetInt("disconnected"));
         if (PlayerPrefs.GetInt("disconnected") == 1)
         {
             if (!PhotonNetwork.IsMasterClient)

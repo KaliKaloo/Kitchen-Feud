@@ -49,8 +49,6 @@ public class scoreController : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        Debug.Log(PlayerPrefs.GetInt("disconnected"));
-
         CustomProperties.PlayerResetStats.ResetAll();
 
         cleanupRoom = this.GetComponent<CleanupRoom>();
