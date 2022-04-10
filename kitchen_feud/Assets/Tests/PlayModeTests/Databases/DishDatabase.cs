@@ -270,4 +270,31 @@ public class GetDishFromIngredients : PhotonTestSetup
         Assert.AreEqual(pizzaSO, foundDish);
     }
 
+
+
+    [Test]
+    public void getIngredientsNotADish()
+    {
+        GameObject dough = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "dough"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO doughSO = dough.GetComponent<IngredientItem>().item;
+        GameObject jam = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "jam"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO jamSO = jam.GetComponent<IngredientItem>().item;
+        List<IngredientSO> ingredients = new List<IngredientSO>{doughSO, jamSO};
+        DishSO foundDish =  Database.GetDishFromIngredients(ingredients);
+        Assert.IsNull(foundDish);
+    }
+
+
+    [Test]
+    public void getIngredientsDishAdditionalIngredient()
+    {
+        GameObject jam = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "jam"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO jamSO = jam.GetComponent<IngredientItem>().item;
+        GameObject uncookedCake = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "unCookedCake"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO uncookedSO = uncookedCake.GetComponent<IngredientItem>().item;
+        List<IngredientSO> ingredients = new List<IngredientSO>{jamSO, uncookedSO};
+        DishSO foundDish = Database.GetDishFromIngredients(ingredients);
+        Assert.IsNull(foundDish);
+    }
+
 }
