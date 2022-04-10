@@ -67,7 +67,7 @@ public class CanvasController : MonoBehaviour
     }
 
     // serve corresponding order depending on what justClicked equals
-    public async void Serve(GameObject justClicked)
+    public void Serve(GameObject justClicked)
     {
         
         justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
