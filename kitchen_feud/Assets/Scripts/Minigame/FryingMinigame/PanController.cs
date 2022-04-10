@@ -10,8 +10,6 @@ public class PanController : MonoBehaviour
     public float clampDistance = Screen.width/5;
     public Vector3 startLocation;
     public float mouseCursorSpeed;
-    
-    //the fried food needs to depend on the dish
     public FriedFoodController friedFood;
     public Appliance appliance;
     public PhotonView PV;
@@ -54,11 +52,6 @@ public class PanController : MonoBehaviour
         {
            PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
         }
-            //if (appliance.appliancePlayers.Count > 0 && PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != GameObject.Find("Kitchen 1").GetPhotonView().OwnerActorNr)
-            //{
-            //    GameObject.Find("Kitchen 1").GetPhotonView().TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
-            //}
-            //do that all if it's player1, add rpcs to player2
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
              appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
@@ -86,13 +79,11 @@ public class PanController : MonoBehaviour
                 if (Input.GetAxis("Mouse X") < 0 && (startLocation.x - lastLocation.x < clampDistance || startLocation.x < lastLocation.x)
                     && appliance.appliancePlayers.Count > 1)
                 {
-                    //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 0);
                     pan.Translate(Vector3.left * mouseCursorSpeed * 5 * Time.deltaTime);
                 }
                 if (Input.GetAxis("Mouse X") > 0 && (lastLocation.x - startLocation.x < clampDistance || startLocation.x > lastLocation.x)
                     && appliance.appliancePlayers.Count > 1)
                 {
-                    //PV.RPC("movePan", RpcTarget.All, PV.ViewID, mouseCursorSpeed, 1);
                     pan.Translate(Vector3.right * mouseCursorSpeed * 5 * Time.deltaTime);
                     if (avgSpeeds > speedLimit && haveAvg == true && pointsAssigned == false)
                     {
@@ -106,7 +97,6 @@ public class PanController : MonoBehaviour
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                     PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
-                    //foodInstancesCounter++;
                     pointsAssigned = false;
                     
                 }
@@ -119,20 +109,7 @@ public class PanController : MonoBehaviour
             }
         }
     }
-   
-    [PunRPC]
-    void movePan(int viewID,float mouseSpeed,int dir)
-    {
-        PanController pan = PhotonView.Find(viewID).GetComponent<PanController>();
-        if (dir == 0)
-        {
-            pan.pan.Translate(Vector3.left * mouseSpeed * 2 * Time.deltaTime);
-        }
-        else
-        {
-            pan.pan.Translate(Vector3.right * mouseSpeed * 2 * Time.deltaTime);
-        }
-    }
+
     [PunRPC]
     void setFoodVals(int viewID,int myID)
     {

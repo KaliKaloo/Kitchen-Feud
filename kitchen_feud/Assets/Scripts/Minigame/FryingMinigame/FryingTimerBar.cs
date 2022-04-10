@@ -30,7 +30,6 @@ public class FryingTimerBar : MonoBehaviour
             int seconds = Mathf.FloorToInt(time * 60f);
             if (time >= gameTime)
             {
-                //stopTimer = true;
                 time = 0;
                 slider.value = 0;
             }
@@ -45,9 +44,7 @@ public class FryingTimerBar : MonoBehaviour
         time = 0;
         if (slider)
             slider.value = 0;
-        //stopTimer = false;
         points = SetFriedLevel(tempTime);
-        //return SetFriedLevel(tempTime);
         
     }
 
