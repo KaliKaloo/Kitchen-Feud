@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 4850287822765907781}
   - component: {fileID: 4850287822765907780}
   m_Layer: 0
-  m_Name: panda_playerModel
+  m_Name: Player_panda_Model
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

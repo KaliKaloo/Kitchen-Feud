@@ -33,7 +33,7 @@ public class PhotonPlayer : MonoBehaviour
                 if (PV.IsMine)
                 {
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
-                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
+                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_cat_Model"),
                         GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
                     
                     foreach (GameObject obj in Team2){
@@ -46,7 +46,7 @@ public class PhotonPlayer : MonoBehaviour
                 if (PV.IsMine)
                 {
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
-                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "panda_playerModel"),
+                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_panda_Model"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
                     foreach (GameObject obj in Team1){
                         obj.SetActive(false);
