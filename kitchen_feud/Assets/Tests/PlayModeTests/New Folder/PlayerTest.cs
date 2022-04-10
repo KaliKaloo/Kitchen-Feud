@@ -24,7 +24,7 @@ public class PlayerTests : PhotonTestSetup
         mushroom = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "mushroom"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
-            "cat_playerModel"),
+            "Player_cat_Model"),
             new Vector3(-1.98f, 0.006363153f, -8.37f),
             Quaternion.identity,
             0
