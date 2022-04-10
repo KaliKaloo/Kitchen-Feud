@@ -52,7 +52,7 @@ public class fryingMinigame : MonoBehaviour
             pan = canv.GetComponentInChildren<PanController>();
             friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
             friedFoodController.dishSO = appliance.foundDish;
-            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(friedFoodController.dishSO.dishID).texture;
             
             int canvasTag = appliance.kitchenNum;
             if (canvasTag == 1){
@@ -84,8 +84,8 @@ public class fryingMinigame : MonoBehaviour
                         friedFoodController.dishSO = appliance.foundDish;
                         friedFoodController.appliance = appliance;
 
-                        spriteName = GetSpriteName(friedFoodController.dishSO);
-                        friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(GetSpriteName(friedFoodController.dishSO)).texture;
+                        spriteName = friedFoodController.dishSO.dishID;
+                        friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(spriteName).texture;
                         
                     }
                 }
@@ -102,13 +102,6 @@ public class fryingMinigame : MonoBehaviour
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
         }
-    }
-    public string GetSpriteName(DishSO dishSO) {
-        if(dishSO.dishID == "DI1415") return "patty";
-        if(dishSO.dishID == "DI1621") return "rice";
-        if(dishSO.dishID == "DI1316") return "Eggy bread";
-        if(dishSO.dishID == "DI1617") return "eggFried";
-        else return "Pancake";
     }
 
 }
