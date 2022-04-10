@@ -24,11 +24,9 @@ public class ExitFryingMinigame : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
 		appliance = transform.parent.parent.GetComponent<Appliance>();
 		minigameCanvas = transform.parent.gameObject;
-		//GameEvents.current.assignPoints += appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
 	}
 
 
-    // Update is called once per frame
     void TaskOnClick()
     {
 	    
@@ -42,7 +40,6 @@ public class ExitFryingMinigame : MonoBehaviour
 		PV.RPC("setCanvActive",RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		PV.RPC("setAddedF", RpcTarget.All, aV.ViewID);
 		
-        //minigameCanvas.gameObject.SetActive(false);
         if (appliance.itemsOnTheAppliance.Count > 0)
         {
             aV.RPC("clearItems", RpcTarget.All, aV.ViewID);
@@ -58,17 +55,12 @@ public class ExitFryingMinigame : MonoBehaviour
 		
 		PhotonView	view = appliance.GetComponent<PhotonView>();
 
-        //view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
         PV.RPC("EnablePforAll", RpcTarget.All, view.ViewID);
 
 		PV.RPC("globalDestroy",RpcTarget.All,minigameCanvas.GetPhotonView().ViewID);
 
-
-		//GameEvents.current.assignPoints -= appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying;
-		//GameEvents.current = null;
-		//PV.RPC("setSetF", RpcTarget.All, aV.ViewID);
-
     }
+
 	[PunRPC]
 	void globalDestroy(int viewID)
 	{
@@ -79,22 +71,19 @@ public class ExitFryingMinigame : MonoBehaviour
     {
 		List<int> x = PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
 
-
-		
+	
 		for (int i=0; i < x.Count; i++)
 		{
 			PhotonView.Find(x[i]).GetComponentInChildren<playerMvmt>().enabled = true;
 			PhotonView.Find(x[i]).GetComponentInChildren<PlayerController>().enabled = true;
 
-			//PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
 		}
 
 		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	
 		PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers.Clear();
 
-
-
     }
+
 	[PunRPC]
 	void setAddedF(int viewiD)
     {
@@ -106,12 +95,6 @@ public class ExitFryingMinigame : MonoBehaviour
 		Debug.Log("setF?");
 		Debug.Log(PhotonView.Find(viewiD).GetComponent<fryingMinigame>().set);
 		PhotonView.Find(viewiD).GetComponent<fryingMinigame>().set = false;
-    }
-
-    [PunRPC]
-    void enableMoving(int viewID)
-    {
-	    PhotonView.Find(viewID).GetComponentInChildren<playerMvmt>().enabled = true;
     }
 
     [PunRPC]

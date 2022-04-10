@@ -22,7 +22,6 @@ public class Plate : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
-       // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
         RectTransform rect = GetComponent<RectTransform>();
@@ -47,7 +46,6 @@ public class Plate : MonoBehaviour
                 Vector2 panPos = pan.transform.parent.gameObject.transform.parent.GetComponent<RectTransform>().position;
                 Vector2 platePos = gameObject.GetComponent<RectTransform>().position;
                 Vector3 EndPos = transform.parent.Find("End").transform.position;
-                //movement: only if it's player2, rpcs for player1
                 if (!(transform.position.x < EndPos.x))
                 {
                     if (Input.GetKey(KeyCode.LeftArrow))
@@ -90,10 +88,6 @@ public class Plate : MonoBehaviour
 
                 Debug.Log("total points:" + totalPoints);
 
-       
-
-
-
                 col.GetComponent<Rigidbody2D>().gravityScale = 0;
                 col.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
@@ -115,18 +109,7 @@ public class Plate : MonoBehaviour
         me.totalPoints = 0;
         me.friedFood = me.pan.friedFood;
     }
-    [PunRPC]
-    void moveLeft(int viewID)
-    {
-        PhotonView.Find(viewID).transform.Translate(Vector3.left * 10 * 45 * Time.deltaTime);
-    }
-    [PunRPC]
-    void moveRight(int viewID)
-    {
-        PhotonView.Find(viewID).transform.Translate(Vector3.right * 10 * 45 * Time.deltaTime);
 
-    }
-  
     [PunRPC]
     void syncTotal(int viewiD, float points)
     {
