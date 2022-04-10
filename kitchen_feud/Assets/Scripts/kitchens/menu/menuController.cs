@@ -98,12 +98,15 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.IsConnected)
         {
+            if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
+                PhotonNetwork.AuthValues = new AuthenticationValues(PlayerPrefs.GetString("userID"));
+
             PhotonNetwork.ConnectUsingSettings();
             loadingScreen.SetActive(true);
 
 
             SetTeam(1);
-            if (PlayerPrefs.GetString("username") != null && PlayerPrefs.GetString("username") != "")
+            if (!CheckStringNullorEmpty(PlayerPrefs.GetString("username")))
             {
                 greetingMenu.text = "Welcome back " + PlayerPrefs.GetString("username") + "!";
                 PhotonNetwork.NickName = PlayerPrefs.GetString("username");
@@ -127,8 +130,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnConnected()
     {
+        Debug.Log(PhotonNetwork.LocalPlayer.UserId);
+
         loadingScreen.SetActive(false);
-        if (PlayerPrefs.GetString("lastLobby") != null && PlayerPrefs.GetString("lastLobby") != "")
+        if (!CheckStringNullorEmpty(PlayerPrefs.GetString("lastLobby")))
         {
             reconnectMenu.SetActive(true);
         }
@@ -285,6 +290,13 @@ public class menuController : MonoBehaviourPunCallbacks
         BackToMainMenu();
     }
 
+    // resets id to null, restart game for changes to take effect :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    public void ResetUserID()
+    {
+        PlayerPrefs.SetString("userID", null);
+        BackToMainMenu();
+    }
+
     // Create room here
     public void CreateGame()
     {
@@ -348,6 +360,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         // tells player what their last joined lobby was so can reconnect if available
         PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+        PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
 
         rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
         if (PhotonNetwork.IsMasterClient)
@@ -417,6 +430,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+        PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
+
         loadingScreen.SetActive(false);
         lobby["Players"] = 1;
         timer.SetServerTime();
@@ -518,6 +533,14 @@ public class menuController : MonoBehaviourPunCallbacks
            yield return null;
         }
         loadingBarCanvas.SetActive(false);
+    }
+
+    // returns true if string is null or empty
+    private bool CheckStringNullorEmpty(string stringInput)
+    {
+        if (stringInput == null || stringInput == "")
+            return true;
+        return false;
     }
 
 
