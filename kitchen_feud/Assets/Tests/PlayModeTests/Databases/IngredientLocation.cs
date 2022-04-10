@@ -148,12 +148,82 @@ public class IngredientLocation : PhotonTestSetup
 
 
     
-    // public void cucumberLocation()
-    // {
-    //     GameObject cucumber = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "cucumber 1"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
-    //     IngredientSO cucumberSO = cucumber.GetComponent<IngredientItem>().item;
-    //     Assert.AreEqual(Location.Fridge, cucumberSO.location);
-    // }
+    public void marinaraLocation()
+    {
+        GameObject marinara = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "marinara"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO marinaraSO = marinara.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, marinaraSO.location);
+    }
+
+
+    public void peanutButterLocation()
+    {
+        GameObject PeanutButter = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "Peanut Butter"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO PeanutButterSO = PeanutButter.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, PeanutButterSO.location);
+    }
+
+
+
+    public void jamLocation()
+    {
+        GameObject jam = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "jam"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO jamSO = jam.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, jamSO.location);
+    }
+
+    public void pastaLocation()
+    {
+        GameObject pasta = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "pasta"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO pastaSO = pasta.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, pastaSO.location);
+    }
+    public void flourLocation()
+    {
+        GameObject flour = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "flour"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO flourSO = flour.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, flourSO.location);
+    }
+
+
+
+    public void mayoLocation()
+    {
+        GameObject mayo = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "mayo"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO mayoSO = mayo.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, mayoSO.location);
+    }
+
+    public void cheeseLocation()
+    {
+        GameObject cheese = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "cheese"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO cheeseSO = cheese.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, cheeseSO.location);
+    }
+
+
+    public void milkLocation()
+    {
+        GameObject milk = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "milk"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO milkSO = milk.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, milkSO.location);
+    }
+
+    public void doughLocation()
+    {
+        GameObject dough = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "PizzaDough"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO doughSO = dough.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, doughSO.location);
+    }
+
+
+    public void cakeLocation()
+    {
+        GameObject cake = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "cake"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        IngredientSO cakeSO = cake.GetComponent<IngredientItem>().item;
+        Assert.AreEqual(Location.Fridge, cakeSO.location);
+    }
+
 
 
    
