@@ -1,19 +1,17 @@
-
 using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.TestTools;
 using System.IO;
 
-public class DishDatabaseTests : PhotonTestSetup
+public class GetDishFromIngredients : PhotonTestSetup
 {
 
     [Test]
-    public void makeMushroomSoup()
+    public void getIngredientsMushroomSoup()
     {
         GameObject potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO potatoSO = potato.GetComponent<IngredientItem>().item;
@@ -28,7 +26,7 @@ public class DishDatabaseTests : PhotonTestSetup
 
 
     [Test]
-    public void makeBurger()
+    public void getIngredientsBurger()
     {
         GameObject patty = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "patty"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO pattySO = patty.GetComponent<IngredientItem>().item;
@@ -42,7 +40,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makeChips()
+    public void getIngredientsChips()
     {
         GameObject potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO potatoSO = potato.GetComponent<IngredientItem>().item;
@@ -55,7 +53,7 @@ public class DishDatabaseTests : PhotonTestSetup
 
 
     [Test]
-    public void makeEggRice()
+    public void getIngredientsEggRice()
     {
         GameObject egg = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "Egg"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO eggSO = egg.GetComponent<IngredientItem>().item;
@@ -70,7 +68,7 @@ public class DishDatabaseTests : PhotonTestSetup
 
 
     [Test]
-    public void makeEggyBread()
+    public void getIngredientsEggyBread()
     {
         GameObject egg = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "Egg"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO eggSO = egg.GetComponent<IngredientItem>().item;
@@ -84,7 +82,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makeSalad()
+    public void getIngredientsSalad()
     {
         GameObject tomato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "tomato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO tomatoSO = tomato.GetComponent<IngredientItem>().item;
@@ -100,7 +98,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
     
     [Test]
-    public void makeSandwich()
+    public void getIngredientsSandwich()
     {
         GameObject bread = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "bread"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO breadSO = bread.GetComponent<IngredientItem>().item;
@@ -117,7 +115,7 @@ public class DishDatabaseTests : PhotonTestSetup
 
 
     [Test]
-    public void makeTomatoSoup()
+    public void getIngredientsTomatoSoup()
     {
         GameObject potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO potatoSO = potato.GetComponent<IngredientItem>().item;
@@ -131,7 +129,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makeMushroomRisotto()
+    public void getIngredientsMushroomRisotto()
     {
         GameObject rice = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "rice"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO riceSO = rice.GetComponent<IngredientItem>().item;
@@ -146,7 +144,7 @@ public class DishDatabaseTests : PhotonTestSetup
 
 
     [Test]
-    public void makePasta()
+    public void getIngredientsPasta()
     {
         GameObject garlic = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "garlic"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO garlicSO = garlic.GetComponent<IngredientItem>().item;
@@ -163,7 +161,7 @@ public class DishDatabaseTests : PhotonTestSetup
     
     
     [Test]
-    public void makeFruitSalad()
+    public void getIngredientsFruitSalad()
     {
         GameObject apple = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "apple"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO appleSO = apple.GetComponent<IngredientItem>().item;
@@ -180,7 +178,7 @@ public class DishDatabaseTests : PhotonTestSetup
     
     
     [Test]
-    public void makeCake()
+    public void getIngredientsCake()
     {
         GameObject uncookedCake = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "unCookedCake"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO uncookedSO = uncookedCake.GetComponent<IngredientItem>().item;
@@ -192,7 +190,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
     
     [Test]
-    public void makePancakes()
+    public void getIngredientsPancakes()
     {
         GameObject egg = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "Egg"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO eggSO = egg.GetComponent<IngredientItem>().item;
@@ -209,7 +207,7 @@ public class DishDatabaseTests : PhotonTestSetup
     
     
     [Test]
-    public void makeEggMayo()
+    public void getIngredientsEggMayo()
     {
         GameObject egg = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "Egg"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO eggSO = egg.GetComponent<IngredientItem>().item;
@@ -225,7 +223,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makeCheeseOnion()
+    public void getIngredientsCheeseOnion()
     {
         GameObject bread = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "bread"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO breadSO = bread.GetComponent<IngredientItem>().item;
@@ -241,7 +239,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makePBJ()
+    public void getIngredientsPBJ()
     {
         GameObject bread = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "bread"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO breadSO = bread.GetComponent<IngredientItem>().item;
@@ -257,7 +255,7 @@ public class DishDatabaseTests : PhotonTestSetup
     }
 
     [Test]
-    public void makePizza()
+    public void getIngredientsPizza()
     {
         GameObject dough = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "dough"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         IngredientSO doughSO = dough.GetComponent<IngredientItem>().item;
