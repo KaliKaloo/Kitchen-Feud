@@ -17,7 +17,6 @@ public class PhotonPlayer : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-          //  PV.RPC("RPC_GetTeam", RpcTarget.MasterClient);
             Team1 = GameObject.FindGameObjectsWithTag("Team1");
             Team2 = GameObject.FindGameObjectsWithTag("Team2");
         }
@@ -47,7 +46,7 @@ public class PhotonPlayer : MonoBehaviour
                 if (PV.IsMine)
                 {
                     int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
-                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
+                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "panda_playerModel"),
                         GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
                     foreach (GameObject obj in Team1){
                         obj.SetActive(false);
