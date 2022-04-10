@@ -1,6 +1,6 @@
 {
     "name": "EditModeTests",
-    "rootNamespace": "",
+    "rootNamespace": " ",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
