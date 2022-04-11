@@ -1,20 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System;
-using System.Collections;
-using System.Net;
+
+
 using UnityEngine;
 using agora_gaming_rtc;
 using Photon.Pun;
-using System;
-using System.Text.RegularExpressions;
+using UnityEngine.Networking;
+using Debug = UnityEngine.Debug;
 using Hashtable  =  ExitGames.Client.Photon.Hashtable;
 using Random = System.Random;
 
 public class VoiceChatManager : MonoBehaviourPunCallbacks
 {
     private Hashtable internet = new Hashtable();
-
+    float time;
     private DateTime dt1;
     private DateTime dt2;
     public double internetSpeed;
@@ -25,7 +25,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     EnableSmoke enableSmoke = new EnableSmoke();
 
 
-   public static VoiceChatManager Instance;
+    public static VoiceChatManager Instance;
 
     void Awake()
     {
@@ -38,8 +38,8 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
-        
+
+
 
     }
 
@@ -47,28 +47,36 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     {
         rtcEngine = IRtcEngine.GetEngine(appID);
         rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
-        
+
         rtcEngine.OnLeaveChannel += OnleaveChannel;
-        rtcEngine.OnError  += OnError;
-        internetSpeed = CheckInternetSpeed();
+        rtcEngine.OnError += OnError;
+
+        StartCoroutine(CheckInternetSpeed());
+      
+        // internetSpeed = CheckInternetSpeed();
         if (internetSpeed > 1000)
         {
             internet["Band"] = "A";
 
-        }else if (internetSpeed < 1000 && internetSpeed > 700)
+        }
+        else if (internetSpeed < 1000 && internetSpeed > 700)
         {
             internet["Band"] = "B";
-        }else if (internetSpeed < 700 && internetSpeed < 400)
+        }
+        else if (internetSpeed < 700 && internetSpeed < 400)
         {
             internet["Band"] = "C";
-        }else if (internetSpeed < 0 && internetSpeed < 400)
+        }
+        else if (internetSpeed < 0 && internetSpeed < 400)
         {
             internet["Band"] = "D";
         }
+
         PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
     }
 
-    private void Update()
+
+private void Update()
     {
      
     }
@@ -119,7 +127,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         IRtcEngine.Destroy();
     }
   
-    public double CheckInternetSpeed()
+/*    public double CheckInternetSpeed()
     {
         // Create Object Of WebClient
         WebClient wc = new WebClient();
@@ -134,5 +142,78 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         dt2 = DateTime.Now;
         //To Calculate Speed in Kb Divide Value Of data by 1024 And Then by End Time Subtract Start Time To Know Download Per Second.
         return Math.Round((data.Length * 0.008f) / (dt2 - dt1).TotalSeconds, 2);            
-    }
+    }*/
+
+        /*public IEnumerator CheckInternetSpeed()
+        {
+            const string _echoServer = "https://www.google.com/pagesample/";
+            
+            UnityWebRequest wwww = new UnityWebRequest("www.photonengine.com");
+            wwww.downloadHandler = new DownloadHandlerBuffer();
+
+            wwww.SendWebRequest();
+            dt1 = DateTime.Now;
+            
+            while (!wwww.isDone)
+            {
+                Debug.Log("NO");
+            }
+            if(wwww.isDone)
+            {
+                dt2 = DateTime.Now;
+                //Debug.LogError(wwww.downloadedBytes);
+
+
+                Debug.Log("YES");
+            }
+            Debug.LogError(Math.Round(wwww.downloadedBytes * 0.008f /(dt2 - dt1).TotalSeconds,2));
+
+            yield return null;
+            
+
+
+            //ConnectionManager.Connected = !_request.isNetworkError && !_request.isHttpError && _request.responseCode == 200;
+        }*/
+        IEnumerator CheckInternetSpeed()
+        {
+
+
+            UnityWebRequest www = new UnityWebRequest("http://localhost:55105/");
+            www.downloadHandler = new DownloadHandlerBuffer();
+            yield return www.SendWebRequest();
+
+
+            while (time < 12)
+            {
+                time += Time.time;
+           
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(www.error);
+
+
+                }
+                else
+                {
+                    // Show results as text
+                    //Debug.Log(www.downloadHandler.text);
+
+                    // Or retrieve results as binary data
+                    byte[] results = www.downloadHandler.data;
+                    /*Debug.Log(www.result);
+                    Debug.Log(results.Length*0.008f);
+                    Debug.LogError(time);*/
+                    Debug.Log("Speed" + Math.Round(results.Length * 0.008f/time,2));
+                    yield break;
+                    
+                    //Debug.LogError(Math.Round(results.Length*0.08f/(dt2-dt1).TotalSeconds,2));
+
+                }
+            }
+        }
+
+
+
+
 }

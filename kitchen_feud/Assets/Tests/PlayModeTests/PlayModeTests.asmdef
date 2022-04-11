@@ -1,6 +1,6 @@
 {
     "name": "PlayModeTests",
-    "rootNamespace": "",
+    "rootNamespace": " ",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
