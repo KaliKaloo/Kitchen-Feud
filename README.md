@@ -29,9 +29,9 @@ The following secrets need to be added to this repository in order to run the wo
 
 | Key           | Description
 | :--           | :----------                                  |
-| UNITY_EMAIL   |  The Serial Key from the [Unity Subscriptions page](https://id.unity.com/en/subscriptions)           |
+| UNITY_EMAIL   | The email address that you use to login to Unity           |
 | UNITY_PASSWORD| The password that you use to login to Unity          |
-| UNITY_SERIAL  | The username to log into the server          |
+| UNITY_SERIAL  |  The Serial Key from the [Unity Subscriptions page](https://id.unity.com/en/subscriptions)         |
 | GITHUB_TOKEN  | [GitHub Token](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret) |
 | KEY           | The SSH *private* key to deploy to the external repository |
 |WEBHOOK_ID     | The Discord Webhook ID                       |
