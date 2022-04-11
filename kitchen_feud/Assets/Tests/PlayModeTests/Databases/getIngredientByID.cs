@@ -268,7 +268,7 @@ public class getIngredientByID : PhotonTestSetup
 
 
     [Test]
-    public void getNotIngredientByID()
+    public void getNullIngredientByID()
     {
         IngredientSO foundIngredient =  Database.GetIngredientByID("316");
         Assert.IsNull(foundIngredient);

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5552112262229500611}
   - component: {fileID: 4374079714628735365}
   m_Layer: 0
-  m_Name: Omellete
+  m_Name: Omelette
   m_TagString: Dish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
