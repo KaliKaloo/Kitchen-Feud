@@ -20,7 +20,7 @@ public class UI : PhotonTestSetup
     {
         
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
-            "cat_playerModel"),
+            "Player_cat_Model"),
             new Vector3(-1.98f, 0.006363153f, -8.37f),
             Quaternion.identity,
             0
