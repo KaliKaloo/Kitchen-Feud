@@ -295,9 +295,6 @@ public class menuController : MonoBehaviourPunCallbacks
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
         string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        
-        
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
         if (band == "A")
         {
             rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
@@ -320,6 +317,10 @@ public class menuController : MonoBehaviourPunCallbacks
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
         }
+        
+        
+        rtcEngine.JoinChannel(x.ToString() + "Lobby");
+
 
         loadingScreen.SetActive(false);
 

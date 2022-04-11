@@ -10,6 +10,7 @@ using Photon.Pun;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 using System.Text.RegularExpressions;
+using TMPro;
 using Hashtable  =  ExitGames.Client.Photon.Hashtable;
 using Random = System.Random;
 
@@ -24,6 +25,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     Random rnd = new Random();
     IRtcEngine rtcEngine;
     public int x;
+    private bool setInternetSpeed;
     EnableSmoke enableSmoke = new EnableSmoke();
 
 
@@ -47,6 +49,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        setInternetSpeed = false;
         rtcEngine = IRtcEngine.GetEngine(appID);
         rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
 
@@ -56,31 +59,36 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         StartCoroutine(CheckInternetSpeed());
       
         // internetSpeed = CheckInternetSpeed();
-        if (internetSpeed > 1000)
-        {
-            internet["Band"] = "A";
-
-        }
-        else if (internetSpeed < 1000 && internetSpeed > 700)
-        {
-            internet["Band"] = "B";
-        }
-        else if (internetSpeed < 700 && internetSpeed < 400)
-        {
-            internet["Band"] = "C";
-        }
-        else if (internetSpeed < 0 && internetSpeed < 400)
-        {
-            internet["Band"] = "D";
-        }
-
-        PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
+        Debug.Log(internetSpeed);
+        
     }
 
 
 private void Update()
     {
-     
+        if (internetSpeed > 0)
+        {
+            if (internetSpeed > 1000)
+            {
+                internet["Band"] = "A";
+
+            }
+            else if (internetSpeed < 1000 && internetSpeed > 700)
+            {
+                internet["Band"] = "B";
+            }
+            else if (internetSpeed < 700 && internetSpeed < 400)
+            {
+                internet["Band"] = "C";
+            }
+            else if (internetSpeed < 0 && internetSpeed < 400)
+            {
+                internet["Band"] = "D";
+            }
+
+            PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
+            setInternetSpeed = true;
+        }
     }
 
     void OnError(int error, string msg) {
@@ -180,35 +188,37 @@ private void Update()
         {
 
 
-            UnityWebRequest www = new UnityWebRequest("http://localhost:55105/");
+            UnityWebRequest www = new UnityWebRequest("www.google.co.uk");
             www.downloadHandler = new DownloadHandlerBuffer();
-            yield return www.SendWebRequest();
+             www.SendWebRequest();
+             dt1 = DateTime.Now;
 
+          
 
-            while (time < 12)
+            while (true)
             {
-                time += Time.time;
-           
 
-                if (www.result != UnityWebRequest.Result.Success)
+                if (www.isDone)
                 {
-                    Debug.Log(www.error);
-
-
-                }
-                else
-                {
-                    // Show results as text
-                    //Debug.Log(www.downloadHandler.text);
-
-                    // Or retrieve results as binary data
                     byte[] results = www.downloadHandler.data;
-                    internetSpeed = Math.Round(results.Length * 0.008f/time,2);
-                    yield break;
-                    
-                    //Debug.LogError(Math.Round(results.Length*0.08f/(dt2-dt1).TotalSeconds,2));
+                    internetSpeed = Math.Round(results.Length * 0.008f/ (DateTime.Now - dt1).TotalSeconds,2);
+                    /*Debug.Log(results.Length);
+                    Debug.Log((DateTime.Now - dt1).TotalSeconds);
+                    Debug.Log(Math.Round(results.Length * 0.008f/ (DateTime.Now - dt1).TotalSeconds,2));*/
 
+                    yield break;
                 }
+
+                if (www.result != UnityWebRequest.Result.Success && www.result != UnityWebRequest.Result.InProgress)
+                {    
+                    Debug.Log(www.error);
+                }
+                
+              
+
+                yield return internetSpeed;
+
+            
             }
         }
 
