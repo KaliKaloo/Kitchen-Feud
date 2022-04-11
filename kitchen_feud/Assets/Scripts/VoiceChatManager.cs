@@ -203,10 +203,7 @@ private void Update()
 
                     // Or retrieve results as binary data
                     byte[] results = www.downloadHandler.data;
-                    /*Debug.Log(www.result);
-                    Debug.Log(results.Length*0.008f);
-                    Debug.LogError(time);*/
-                    Debug.Log("Speed" + Math.Round(results.Length * 0.008f/time,2));
+                    internetSpeed = Math.Round(results.Length * 0.008f/time,2);
                     yield break;
                     
                     //Debug.LogError(Math.Round(results.Length*0.08f/(dt2-dt1).TotalSeconds,2));
