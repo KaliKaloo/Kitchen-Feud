@@ -372,6 +372,7 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             if (!PhotonNetwork.IsMasterClient)
             {
+                PlayerPrefs.SetInt("disconnected", 0);
                 StartCoroutine(LoadSceneAsynchronously(1));
 
                 // Rejoin voice chat
@@ -476,6 +477,8 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
             PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
+            PlayerPrefs.SetInt("disconnected", 0);
+
 
             loadingScreen.SetActive(false);
             lobby["Players"] = 1;
