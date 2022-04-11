@@ -27,8 +27,6 @@ public class destroyFood : MonoBehaviour
             {
                 PV.RPC("destP", RpcTarget.All, PV.ViewID);
             }
-            
-
            
         }
     }
