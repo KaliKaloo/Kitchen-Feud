@@ -266,4 +266,12 @@ public class getIngredientByID : PhotonTestSetup
         Assert.AreEqual(cakeSO, foundIngredient);
     }
 
+
+    [Test]
+    public void getNotIngredientByID()
+    {
+        IngredientSO foundIngredient =  Database.GetIngredientByID("316");
+        Assert.IsNull(foundIngredient);
+    }
+
 }
