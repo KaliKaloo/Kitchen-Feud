@@ -2,11 +2,15 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.Networking;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Collections;
+using System.Diagnostics;
+using System.Net.Http.Headers;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
+using Debug = UnityEngine.Debug;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -14,7 +18,11 @@ public class menuController : MonoBehaviourPunCallbacks
 {
 
     public static menuController Instance;
-   
+    private Hashtable internet = new Hashtable();
+    private DateTime dt1;
+    private DateTime dt2;
+    private bool setInternetSpeed;
+    public double internetSpeed;
     [SerializeField] private GameObject usernameMenu;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
@@ -92,7 +100,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private void Start()
     {
         //PhotonNetwork.AutomaticallySyncScene = true;
-
+        setInternetSpeed = false;
         if (!PhotonNetwork.IsConnected)
         {
             loadingScreen.SetActive(true);
@@ -205,7 +213,8 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
         Debug.Log("Connected");
-       
+
+
     }
 
     public void ChangeUsernameInput()
@@ -222,6 +231,7 @@ public class menuController : MonoBehaviourPunCallbacks
         connectPanel.SetActive(true);
         PhotonNetwork.NickName = usernameInput.text;
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
+        StartCoroutine(CheckInternetSpeed());
     }
 
     // Create room here
@@ -294,10 +304,8 @@ public class menuController : MonoBehaviourPunCallbacks
             AddPlayerToLobby();
             x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         }
+       
         string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        
-        
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
         if (band == "A")
         {
             rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
@@ -320,6 +328,9 @@ public class menuController : MonoBehaviourPunCallbacks
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
         }
+        
+        rtcEngine.JoinChannel(x.ToString() + "Lobby");
+
 
         loadingScreen.SetActive(false);
 
@@ -465,12 +476,76 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         loadingBarCanvas.SetActive(false);
     }
+    IEnumerator CheckInternetSpeed()
+    {
+
+        Stopwatch s = new Stopwatch();
+       
+        UnityWebRequest www = new UnityWebRequest("http://localhost:3000/");
+        www.downloadHandler = new DownloadHandlerBuffer();
+        www.SendWebRequest();
+        s.Start();
+        dt1 = DateTime.Now;
+
+          
+
+        while (true)
+        {
+
+            if (www.isDone)
+            {
+                byte[] results = www.downloadHandler.data;
+                internetSpeed = Math.Round(results.Length * 0.008f/ s.Elapsed.TotalSeconds,2);
+                /*Debug.Log("SIZE "+results.Length);
+                Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
+                Debug.Log("SPEED "+internetSpeed);*/
+                //Debug.Log(internetSpeed);
+
+                yield break;
+            }
+
+            if (www.result != UnityWebRequest.Result.Success && www.result != UnityWebRequest.Result.InProgress)
+            {    
+                Debug.Log(www.error);
+            }
+                
+              
+
+            yield return null;
+
+            
+        }
+    }
 
 
     // Update is called once per frame
     void Update()
     {
+        
         UpdateLobby();
+        if (internetSpeed > 0 && setInternetSpeed == false)
+        {
+            if (internetSpeed > 1000)
+            {
+                internet["Band"] = "A";
+
+            }
+            else if (internetSpeed < 1000 && internetSpeed > 700)
+            {
+                internet["Band"] = "B";
+            }
+            else if (internetSpeed < 700 && internetSpeed < 400)
+            {
+                internet["Band"] = "C";
+            }
+            else if (internetSpeed < 0 && internetSpeed < 400)
+            {
+                internet["Band"] = "D";
+            }
+
+            PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
+            setInternetSpeed = true;
+        }
     }
 
     [PunRPC]
