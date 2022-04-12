@@ -60,11 +60,15 @@ public class menuController : MonoBehaviourPunCallbacks
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
+    Hashtable scene = new Hashtable();
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
     {
         Instance = this;
+/*        ResetUsername();
+        ResetUserID();*/
+     //PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -95,13 +99,13 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        //PhotonNetwork.AutomaticallySyncScene = true;
-
+        PhotonNetwork.AutomaticallySyncScene = true;
+        Debug.LogError(PlayerPrefs.GetString("userID"));
         if (!PhotonNetwork.IsConnected)
         {
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
                 PhotonNetwork.AuthValues = new AuthenticationValues(PlayerPrefs.GetString("userID"));
-            
+             
             PhotonNetwork.ConnectUsingSettings();
             loadingScreen.SetActive(true);
 
@@ -137,6 +141,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void TryRejoin()
     {
         calledRejoin = true;
+        PlayerPrefs.SetString("rejoined","true");
         PhotonNetwork.RejoinRoom(PlayerPrefs.GetString("lastLobby"));
     }
 
@@ -347,6 +352,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         // after start button is pressed players can no longer join
+        
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
@@ -357,7 +363,11 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
-            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
+            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All); 
+
+            PhotonNetwork.LoadLevel(1);
+            
+           // GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
         }
         // if > 4 players load into a different scene 
         else 
@@ -368,12 +378,15 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Debug.LogError(PhotonNetwork.LocalPlayer.UserId);
+
         if (PlayerPrefs.GetInt("disconnected") == 1)
         {
             if (!PhotonNetwork.IsMasterClient)
             {
                 PlayerPrefs.SetInt("disconnected", 0);
-                StartCoroutine(LoadSceneAsynchronously(1));
+                StartCoroutine(LoadScene());
+                //StartCoroutine(LoadSceneAsynchronously(1));
 
                 // Rejoin voice chat
                 rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
@@ -388,6 +401,7 @@ public class menuController : MonoBehaviourPunCallbacks
         // else if player not in disconnected state load normally
         else if (!createLobby)
         {
+            Debug.LogError(391);
             // tells player what their last joined lobby was so can reconnect if available
             PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
             PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
@@ -431,6 +445,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        Debug.LogError(message + " " + returnCode);
         reconnectMenu.SetActive(false);
         loadingScreen.SetActive(false);
 
@@ -468,6 +483,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        Debug.Log("CREATED?");
         if (createLobby)
         {
             PlayerPrefs.SetString("lastLobby", null);
@@ -584,6 +600,20 @@ public class menuController : MonoBehaviourPunCallbacks
         loadingBarCanvas.SetActive(false);
     }
 
+    IEnumerator LoadScene()
+    {
+        lobbyMenu.SetActive(false);
+        loadingScreen.SetActive(true);
+        loadingBarCanvas.SetActive(true);
+        while (PhotonNetwork.LevelLoadingProgress < 1.0f)
+        {
+            loadingBar.value = PhotonNetwork.LevelLoadingProgress;
+            yield return null;
+        }
+        loadingBarCanvas.SetActive(false);
+        
+    }
+
     // returns true if string is null or empty
     private bool CheckStringNullorEmpty(string stringInput)
     {
@@ -597,6 +627,8 @@ public class menuController : MonoBehaviourPunCallbacks
     void Update()
     {
         UpdateLobby();
+        Debug.Log(PlayerPrefs.GetInt("disconnected"));
+   
     }
 
     [PunRPC]
@@ -612,9 +644,10 @@ public class menuController : MonoBehaviourPunCallbacks
         timer.ChangeTimerValue(newTime);
     }
     [PunRPC]
-    void loadS(int levelIndex)
+    void loadSceneP()
     {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
+        StartCoroutine(LoadScene());
+       // StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
    
   

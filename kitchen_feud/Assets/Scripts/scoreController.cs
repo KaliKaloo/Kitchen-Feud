@@ -106,8 +106,11 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                timer.StartTimer(this);
-                timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+              
+                 timer.StartTimer(this);
+                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                
+
                 music = FindObjectOfType<MusicManager>();
             }
         }
