@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
+using UnityEngine.UIElements;
 
 public class Agent : MonoBehaviour
 {
@@ -31,14 +32,17 @@ public class Agent : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            test = true;
+           
             float dist = RemainingDistance(agent.path.corners);
 
             if (tray)
             {
-                Debug.Log(tray.name);
-                agent.SetDestination(tray.transform.position);
-                 
+                if (!agent.hasPath)
+                {
+
+                    agent.SetDestination(tray.transform.position);
+                }
+
                 if (dist < 1.3f && dist != 0)
                 {
 
@@ -116,6 +120,13 @@ public class Agent : MonoBehaviour
             //    }
 
         }
+    }
+
+    public IEnumerator setD(NavMeshAgent agent, Vector3 targetpos)
+    {
+        yield return new WaitForSeconds(2);
+        agent.SetDestination(targetpos);
+
     }
 
 

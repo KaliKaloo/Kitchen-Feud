@@ -117,6 +117,7 @@ public class Tray : Interactable
     {
         PhotonView.Find(viewID).GetComponent<Tray>().SP = PhotonView.Find(destID).gameObject;
     }
+    [PunRPC]
     void PlayServingSound(int viewID) {
         PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Play();
     }
