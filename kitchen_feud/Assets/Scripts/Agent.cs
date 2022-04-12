@@ -13,6 +13,8 @@ public class Agent : MonoBehaviour
     public PlayerHolding playerHold;
     public PhotonView PV;
     public bool readyToServe;
+
+    private bool test = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +31,14 @@ public class Agent : MonoBehaviour
     {
         if (PV.IsMine)
         {
+            test = true;
             float dist = RemainingDistance(agent.path.corners);
 
             if (tray)
             {
+                Debug.Log(tray.name);
                 agent.SetDestination(tray.transform.position);
-
+                 
                 if (dist < 1.3f && dist != 0)
                 {
 
