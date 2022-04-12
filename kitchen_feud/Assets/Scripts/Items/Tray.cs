@@ -29,9 +29,11 @@ public class Tray : Interactable
 
         if (player.transform.Find("slot").childCount == 1)
         {
+
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
             {
+
                 //foreach (Transform slot in slots)
                 for (int i = 0; i < slots.Count; i++)
                 {
@@ -56,12 +58,14 @@ public class Tray : Interactable
         {
             canvasController.TrayOrderOptions(tray.name);
         }
+
+
+
     }
     
     [PunRPC]
     void addComps(int viewID, int objID)
     {
-
         PhotonView.Find(viewID).GetComponent<Tray>().tray.ServingTray.Add(PhotonView.Find(objID).GetComponent<pickableItem>().item);
         PhotonView.Find(viewID).GetComponent<Tray>().tray.objectsOnTray.Add(PhotonView.Find(objID).gameObject);
 

@@ -14,7 +14,7 @@
         "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor",
         "DatabaseASM",
         "PhotonChat",
-        "PhotonLibs"
+        "TrayASM"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
