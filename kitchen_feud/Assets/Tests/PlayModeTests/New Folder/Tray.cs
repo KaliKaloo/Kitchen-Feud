@@ -125,6 +125,40 @@ public class TrayTests : PhotonTestSetup
 
     }
 
+
+    [UnityTest]
+    public IEnumerator removeItem()
+    {
+       
+        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        Assert.AreEqual(mushroom, playerHold.heldObj);
+        tray.Interact();
+        Assert.IsNull(playerHold.heldObj);
+        Assert.AreEqual(1, tray.slots[0].transform.childCount);
+        Assert.AreEqual(1, tray.tray.ServingTray.Count);
+        mushroom.GetComponent<pickableItem>().player = obj.transform;
+        mushroom.GetComponent<pickableItem>().Interact();
+        tray.slots.Remove(mushroom.transform);
+        Assert.AreEqual(0, tray.slots[0].transform.childCount);
+        Assert.AreEqual(0, tray.tray.ServingTray.Count);
+        mushroom.transform.parent = null;
+        tray.tray.ServingTray.Clear();
+        yield return null;
+
+    }
+
+    [UnityTest]
+    public IEnumerator serveMenuActive()
+    {
+        tray.tray.trayID = "trayID";
+        tray.Interact();
+        Assert.IsTrue(tray.teamController.GetComponent<CanvasController>().orderMenu.activeSelf);
+        tray.teamController.GetComponent<CanvasController>().orderMenu.SetActive(false);
+
+        yield return null;
+    }
+
+
     [UnityTest]
     public IEnumerator serve()
     {
