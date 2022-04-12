@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455c8e0ca14365a4584a66696abe183c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internetSpeed: 0
   usernameMenu: {fileID: 2144464987}
   connectPanel: {fileID: 1505998624}
   lobbyMenu: {fileID: 1696240646}
