@@ -59,15 +59,11 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         StartCoroutine(CheckInternetSpeed());
 
 
-        // internetSpeed = CheckInternetSpeed();
 
     }
 
 
-    private void Update()
-    {
 
-    }
 
     void OnError(int error, string msg)
     {
@@ -98,12 +94,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined " + channelName.Substring(2));
     }
 
-    public override void OnConnectedToMaster()
-    {
-        //PhotonNetwork.JoinLobby();
 
-
-    }
 
 
 
@@ -124,53 +115,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         IRtcEngine.Destroy();
     }
 
-/*    public double CheckInternetSpeed()
-    {
-        // Create Object Of WebClient
-        WebClient wc = new WebClient();
 
-        //DateTime Variable To Store Download Start Time.
-        dt1 = DateTime.Now;
-
-        //Number Of Bytes Downloaded Are Stored In ‘data’
-        byte[] data = wc.DownloadData("https://www.google.co.uk");
-
-        //DateTime Variable To Store Download End Time.
-        dt2 = DateTime.Now;
-        //To Calculate Speed in Kb Divide Value Of data by 1024 And Then by End Time Subtract Start Time To Know Download Per Second.
-        return Math.Round((data.Length * 0.008f) / (dt2 - dt1).TotalSeconds, 2);            
-    }*/
-
-    /*public IEnumerator CheckInternetSpeed()
-    {
-        const string _echoServer = "https://www.google.com/pagesample/";
-        
-        UnityWebRequest wwww = new UnityWebRequest("www.photonengine.com");
-        wwww.downloadHandler = new DownloadHandlerBuffer();
-
-        wwww.SendWebRequest();
-        dt1 = DateTime.Now;
-        
-        while (!wwww.isDone)
-        {
-            Debug.Log("NO");
-        }
-        if(wwww.isDone)
-        {
-            dt2 = DateTime.Now;
-            //Debug.LogError(wwww.downloadedBytes);
-
-
-            Debug.Log("YES");
-        }
-        Debug.LogError(Math.Round(wwww.downloadedBytes * 0.008f /(dt2 - dt1).TotalSeconds,2));
-
-        yield return null;
-        
-
-
-        //ConnectionManager.Connected = !_request.isNetworkError && !_request.isHttpError && _request.responseCode == 200;
-    }*/
     IEnumerator CheckInternetSpeed()
     {
 
@@ -192,9 +137,9 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
             {
                 byte[] results = www.downloadHandler.data;
                 internetSpeed = Math.Round(results.Length * 0.008f / s.Elapsed.TotalSeconds, 2);
-                Debug.Log("SIZE " + results.Length);
+                /*Debug.Log("SIZE " + results.Length);
                 Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
-                Debug.Log("SPEED " + internetSpeed);
+                Debug.Log("SPEED " + internetSpeed);*/
                 //Debug.Log(internetSpeed);
 
                 yield break;

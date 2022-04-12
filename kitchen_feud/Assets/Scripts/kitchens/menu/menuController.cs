@@ -232,7 +232,6 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = usernameInput.text;
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
         StartCoroutine(CheckInternetSpeed());
-        Debug.LogError(PhotonNetwork.GetPing());
     }
 
     // Create room here
@@ -307,7 +306,6 @@ public class menuController : MonoBehaviourPunCallbacks
         }
        
         string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        Debug.Log("Band" + band);
         if (band == "A")
         {
             rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
@@ -498,9 +496,9 @@ public class menuController : MonoBehaviourPunCallbacks
             {
                 byte[] results = www.downloadHandler.data;
                 internetSpeed = Math.Round(results.Length * 0.008f/ s.Elapsed.TotalSeconds,2);
-                Debug.Log("SIZE "+results.Length);
+                /*Debug.Log("SIZE "+results.Length);
                 Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
-                Debug.Log("SPEED "+internetSpeed);
+                Debug.Log("SPEED "+internetSpeed);*/
                 //Debug.Log(internetSpeed);
 
                 yield break;
@@ -527,7 +525,6 @@ public class menuController : MonoBehaviourPunCallbacks
         UpdateLobby();
         if (internetSpeed > 0 && setInternetSpeed == false)
         {
-            Debug.Log("Speed :" + internetSpeed);
             if (internetSpeed > 1000)
             {
                 internet["Band"] = "A";
