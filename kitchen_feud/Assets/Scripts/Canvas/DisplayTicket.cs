@@ -13,7 +13,6 @@ public class DisplayTicket : MonoBehaviour
     public TextMeshProUGUI orderSideText;
     public TextMeshProUGUI orderDrinkText;
     public Dictionary<string, Sprite> dishes = new Dictionary<string, Sprite>();
-
     public string orderid;
     public int orderNumber;
 
@@ -27,7 +26,7 @@ public class DisplayTicket : MonoBehaviour
         if (size > 1) {
             orderSideText.text = o.dishes[1].name;
         }
-        else if (size == 3) {
+        if (size == 3) {
             orderDrinkText.text = o.dishes[2].name;
         }
         foreach (BaseFood d in o.dishes){
@@ -37,6 +36,7 @@ public class DisplayTicket : MonoBehaviour
             }
         }
         orderid = o.orderID;
+        //applianceTag;
     }
 
     [PunRPC]

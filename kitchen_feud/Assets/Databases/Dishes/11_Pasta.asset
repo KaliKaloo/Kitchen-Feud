@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pasta
   location: 0
-  Prefab: {fileID: 5819746606127231165, guid: 282356be8b4ac4c4786c7776e7ea4235, type: 3}
+  Prefab: {fileID: 6113155734327913322, guid: 282356be8b4ac4c4786c7776e7ea4235, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 585a92e961337bd40bfe030e850bd816, type: 3}
   canPickUp: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI262730
   toCook: Stove
   cookingTime: 20
+  stoveFry: 0
   recipe:
   - {fileID: 11400000, guid: 1797d73f097a21441bb8ac515ad3f3f6, type: 2}
   - {fileID: 11400000, guid: 1cc5e1742dd9f3c46bf6ce3a5b084109, type: 2}

@@ -32,9 +32,32 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        // if (playerHold.items.Count == 0 && tray.trayID != "")
-        // if not holding anything and tray has an order then prompt for serve
-        if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")
+        if (player.transform.Find("slot").childCount == 1)
+        {
+            //add object holding to tray slot if tray slot empty
+            if (tray.ServingTray.Count < 4)
+            {
+                //foreach (Transform slot in slots)
+                for (int i = 0; i < slots.Count; i++)
+                {
+                    if (slots[i].transform.childCount == 0)
+                    {
+                        playerHold.dropItem();
+
+                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
+                        objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                        break;
+                    }
+                }
+                pickable = objectHolding.GetComponent<pickableItem>();
+                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
+                if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+                {
+                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                }
+            }
+        }
+        else if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")
         {
             canvasController.TrayOrderOptions(tray.name);
         }
@@ -94,5 +117,9 @@ public class Tray : Interactable
     {
         PhotonView.Find(viewID).GetComponent<Tray>().SP = PhotonView.Find(destID).gameObject;
     }
+    void PlayServingSound(int viewID) {
+        PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Play();
+    }
+
 } 
  

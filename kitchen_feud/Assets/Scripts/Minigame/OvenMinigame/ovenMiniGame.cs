@@ -10,24 +10,30 @@ public class ovenMiniGame : MonoBehaviour
     public Timer timer;
     private Appliance appliance;
     public exitOven backbutton;
+    private int canvasTag;
 
     // Start is called before the first frame update
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
+
+        
     }
     
     void Update()
     {
-        if (transform.childCount == 8)
+        if (transform.GetComponentInChildren<Timer>())
         {
-            timer = transform.GetChild(7).GetComponent<Timer>();
-            backbutton = transform.GetChild(7).GetChild(0).GetChild(1).GetComponent<exitOven>();
+            timer = transform.GetComponentInChildren<Timer>();
+            backbutton = timer.GetComponentInChildren<exitOven>();
 
             if (appliance.isBeingInteractedWith)
             {
                 backbutton.appliance = GetComponent<Appliance>();
+                canvasTag = appliance.kitchenNum;
+ 
+
             }
         }
         if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){

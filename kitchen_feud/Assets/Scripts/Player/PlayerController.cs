@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.EventSystems;
 
 /* Controls the player. Here we choose our "focus" and where to move. */
 
@@ -36,30 +37,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
 			
 			this.name = "Local";
-        
-			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
-			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-			
-			if(myTeam == 1)
-            {
-				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID,"cat_red");
-            }
-            else
-            {
-				GetComponent<PhotonView>().RPC("syncMat", RpcTarget.All, GetComponent<PhotonView>().ViewID, "cat_blue");
+			if (PhotonNetwork.LocalPlayer.CustomProperties["Team"] != null)
+			{
+				view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+				myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
 			}
-
 			gameObject.layer = 9;
 			gameObject.transform.GetChild(0).gameObject.layer = 9;
 			gameObject.transform.GetChild(1).gameObject.layer = 9;
-
-
-           
 		}
-		
-		
 	}
-
 
 	void Update()
 	{
@@ -67,6 +54,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		{
 			if (Input.GetButtonDown("Fire1"))
 			{
+				if(EventSystem.current.IsPointerOverGameObject())
+					return;
+
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 

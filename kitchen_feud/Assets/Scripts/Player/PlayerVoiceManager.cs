@@ -3,12 +3,14 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
 	public Interactable focus;
 	public int myTeam;
+	
 	[SerializeField] private Camera cam;
 	PlayerHolding playerHold;
 	public GameObject healthbar1;
@@ -49,8 +51,13 @@ public class PlayerVoiceManager : MonoBehaviour
 		}
 		if (view.IsMine)
 		{
-			view.RPC("setTeam", RpcTarget.Others, view.ViewID, (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
-			myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			if (SceneManager.GetActiveScene().name != "kitchens Test")
+			{
+				view.RPC("setTeam", RpcTarget.Others, view.ViewID,
+					(int) PhotonNetwork.LocalPlayer.CustomProperties["Team"]);
+				myTeam = (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+			}
+
 			if (myTeam == 1)
 			{
 				view.RPC("setEntered", RpcTarget.All, view.ViewID, 1);
@@ -92,7 +99,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 100))
+				if (Physics.Raycast(ray, out hit, 40))
 				{
 					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
@@ -179,6 +186,9 @@ public class PlayerVoiceManager : MonoBehaviour
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 		if (x == 0)
 		{
+			//SOUND ------------------------------------------------
+			obj.GetComponent<AudioSource>().Play();
+			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
         }
         else

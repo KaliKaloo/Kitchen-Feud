@@ -37,42 +37,56 @@ MonoBehaviour:
   - addComps
   - addItemRPC
   - addOp
+  - addPlayer
+  - addSecondsRPC
   - appendKickedBy
   - applianceBool
+  - changeLayer
   - clearAll
   - clearItems
   - clearKickedBy
+  - clearPlayers
   - ClickRpc
   - cookedDishG
   - decCount
+  - decrementDoor
   - destHB
-  - addSecondsRPC
-  - applianceBool
-  - clearAll
-  - clearItems
-  - ClickRpc
-  - cookedDishG
-  - decCount
+  - destP
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
   - DisablePushing
   - DisableView
   - doFd
+  - enableBack
+  - enableMoving
+  - EnablePforAll
   - EnablePushing
   - EnView
+  - falseForOthers
   - Fire
+  - flip
   - giveDamage
   - globalDestroy
+  - glowSettings
+  - hideFryingUI
+  - incrementDoor
   - loadS
   - makeTrayAcross
+  - moveLeft
+  - movePan
+  - moveRight
   - onApplianceF
   - onTrayF
   - ovenGame
+  - PlayBoilingSound
   - playDing
+  - PlayDropSound
+  - PlayFireSound
+  - PlayServingSound
+  - PlaySmokeBombSound
   - pointSync
   - push
-  - pointSync
   - removeFromApplianceRPC
   - removeFromTray
   - removeOp
@@ -81,45 +95,52 @@ MonoBehaviour:
   - resetIsPressed
   - resetPlayerPressing
   - resetTimer
+  - resetTimerRPC
   - RespawnSpaceship
+  - setAddedF
+  - setAppl
+  - setCanvActive
+  - setDishSO
   - setEntered
   - setEnteredF
+  - setFoodVals
   - SetGrav
+  - setGravScale
+  - setHBParent
+  - setHeldobj
+  - setHeldobjAsNull
   - setKickable
   - setKickableF
   - setMyC
-  - setObjParent
+  - setName
+  - setNTParent
   - setParent
   - SetParentAsNull
   - SetParentAsSlot
+  - setParentP
+  - setParentPlate
+  - setPlateStartVals
   - setPlayed
+  - setPlayer
   - setPlayerPressing
+  - setPoints
+  - setSetF
+  - setSignParent
   - setStarted
-  - setParent
-  - SetParentAsNull
-  - SetParentAsSlot
-  - setPlayerPressing
   - setTeam
   - SetToF
   - SetToFalse
   - SetToTrue
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
-  - syncMat
-  - syncSmoke
-  - synctele
-  - addOp
-  - setEntered
-  - removeOp
-  - setEnteredF
-  - resetPlayerPressing
-  - setPlayerPressing
-  - resetIsPressed
-  - globalDestroy
+  - StopBoilingSound
   - syncAnim
   - syncIsOpened
-  - decrementDoor
-  - incrementDoor
+  - syncMat
+  - syncSlider
+  - syncSmoke
+  - synctele
+  - syncTotal
   - trayBool
   - UpdateLobby
   - UpdateScore1

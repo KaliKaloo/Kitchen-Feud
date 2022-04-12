@@ -1,159 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-public class GlobalTimer
-{
 
-    // SET TIMER HERE !!!!!!
-    private static int time = 600;
-    
-    private static int timer = time;
-    PhotonRoom room;
-
-    // changes original starting time, only do before game starts!
-    public int AddSubtractTimerValue(int newTime)
-    {
-        int intermediateTime = time + newTime;
-        if (intermediateTime < 60)
-        {
-            return 1;
-        } else if (intermediateTime > 1200)
-        {
-            return 2;
-        } else
-        {
-            timer = time = intermediateTime;
-            return 0;
-        }
-    }
-
-    public void ChangeTimerValue(int newTime)
-    {
-        timer = time = newTime >= 0 ? newTime : 0;
-    }
-
-    public int GetTotalTime(){
-        return time;
-    }
-
-    public int GetCurrentTime()
-    {
-        return timer;
-    }
-
-    public string ConvertSecondToMinutes(int seconds)
-    {
-        TimeSpan time = TimeSpan.FromSeconds(seconds);
-        string str = time.ToString(@"mm\:ss");
-        return str;
-    }
-
-    public string GetCurrentTimeString()
-    {
-        return ConvertSecondToMinutes(time);
-    }
-
-    // set the timer amount here 
-    public void InitializeTimer()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-
-            // how long the timer will last in seconds
-            timer = time;
-            ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
-            PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
-
-        }
-        else
-        {
-            // temporary fix
-            timer = TryTime();
-        }
-    }
-
-    // avoiding trying to access hashmap without master client loading
-    private int TryTime()
-    {
-        int currentTime;
-        try
-        {
-            currentTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        }
-        catch
-        {
-            currentTime = timer;
-        }
-        return currentTime;
-    }
-
-    // get current time from timer
-    public int GetTime()
-    {
-        return TryTime();
-    }
-
-    public bool OrderInterval()
-    {
-        int currentTime = TryTime();
-        int interval = currentTime % 20;
-        if (interval == 0)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-    // decrement timer
-    public void Decrement()
-    {
-        timer -= 1;
-        ExitGames.Client.Photon.Hashtable ht = PhotonNetwork.CurrentRoom.CustomProperties;
-        ht.Remove("Time");
-        ht.Add("Time", timer);
-        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
-    }
-}
-
-public class ParseScore
-{
-    private static int score1 = 0;
-    private static int score2 = 0;
-
-    public void UpdateScores(int newScore1, int newScore2)
-    {
-        score1 = newScore1;
-        score2 = newScore2;
-    }
-
-    public void AddScore1(int newScore1)
-    {
-        if ((score1 + newScore1) >= 0)
-            score1 += newScore1;
-    }
-
-    public void AddScore2(int newScore2)
-    {
-        if ((score2 + newScore2) >= 0)
-            score2 += newScore2;
-    }
-
-    public int GetScore1()
-    {
-        return score1;
-    }
-
-    public int GetScore2()
-    {
-        return score2;
-    }
-}
+// IMPORTANT:
+// timer and score parser class have been moved to separate scripts
+// CHECK scripts/menu folder for the relevant scripts
 
 public class scoreController : MonoBehaviour
 {
@@ -161,6 +17,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] private Text score2Text;
 
     [SerializeField] private Text timerText;
+    [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
 
@@ -170,21 +27,30 @@ public class scoreController : MonoBehaviour
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
 
-    private int totalTime;
     private MusicManager music;
+    private bool startGame = false;
+    private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
+    public PhotonView PV;
+    private CleanupRoom cleanupRoom;
 
     // Start is called before the first frame update
     void Start()
     {
+        PV = GetComponent<PhotonView>();
+        loadingScreen.SetActive(true);
+
+      
+        // send message to server that finished loading
+  
+
+        cleanupRoom = this.GetComponent<CleanupRoom>();
+
         // start scores at 0
         score1Text.text = ConvertScoreToString(scores.GetScore1());
         score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-        // start timer if not started yet
-        timer.InitializeTimer();
-        timerText.text = ConvertSecondToMinutes(timer.GetTime());
-        music = FindObjectOfType<MusicManager>();
     }
+
+
 
     // Converts an integer to a string with proper comma notation
     private string ConvertScoreToString(int score)
@@ -202,15 +68,49 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         // update scores every frame
-        score1Text.text = ConvertScoreToString(scores.GetScore1());
-        score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-        // increment every second
-        elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
+        if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
-            elapsed = elapsed % 1f;
-            OutputTime();
+            
+            if (startGame)
+            {
+                score1Text.text = ConvertScoreToString(scores.GetScore1());
+                score2Text.text = ConvertScoreToString(scores.GetScore2());
+
+                // increment every second
+                elapsed += Time.deltaTime;
+                if (elapsed >= 1f)
+                {
+                    elapsed = elapsed % 1f;
+                    OutputTime();
+                }
+            }
+            else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                // show waiting for others players menu
+
+            }
+            /*else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
+            {
+                // show waiting for others players menu
+            }*/
+            else
+            {
+                loadingScreen.SetActive(false);
+                startGame = true;
+                // start timer if not started yet
+                timer.InitializeTimer();
+                timerText.text = ConvertSecondToMinutes(timer.GetTime());
+                music = FindObjectOfType<MusicManager>();
+            }
+        }
+        else
+        {
+            loadingScreen.SetActive(false);
+            startGame = true;
+            // start timer if not started yet
+            timer.InitializeTimer();
+            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            music = FindObjectOfType<MusicManager>();
         }
     }
 
@@ -224,6 +124,8 @@ public class scoreController : MonoBehaviour
             timer.Decrement();
             timerText.text = ConvertSecondToMinutes(timer.GetTime());
         }
+
+        // SIGNAL FOR GAME OVER:
         else
         {
             // load game over screen and send final scores
@@ -235,6 +137,15 @@ public class scoreController : MonoBehaviour
                 ts.tray.objectsOnTray.Clear();
             }
             PhotonNetwork.LoadLevel("gameOver");
+            // calls this to clean objects which need resetting
+            cleanupRoom.Clean();
+                        
+            startGame = false;
+
+
+            // sends to server that game has finished
+            lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         }
 
     }

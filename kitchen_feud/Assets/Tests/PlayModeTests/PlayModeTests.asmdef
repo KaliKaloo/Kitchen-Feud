@@ -1,18 +1,28 @@
 {
     "name": "PlayModeTests",
-    "rootNamespace": "",
+    "rootNamespace": " ",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Main",
-        "PhotonUnityNetworking"
+        "PhotonUnityNetworking",
+        "PhotonRealtime",
+        "PhotonUnityNetworking.Demos",
+        "PhotonUnityNetworking.Editor",
+        "PhotonUnityNetworking.Utilities",
+        "PhotonUnityNetworking.Utilities.Culling.Editor",
+        "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor",
+        "DatabaseASM",
+        "PhotonChat",
+        "PhotonLibs"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "nunit.framework.dll",
+        "Photon3Unity3D.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
@@ -20,4 +30,4 @@
     ],
     "versionDefines": [],
     "noEngineReferences": false
-} 
+}

@@ -5,42 +5,33 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Hover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Hover : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject tooltip;
     private SpriteRenderer sprite;
-    private bool mouse_over = false;
     public TextMeshProUGUI dish;
     public DisplayTicket displayticket;
-    public Sprite img;
+    public GameObject RecipeCard;
+    public Texture2D cursorClickable;
+    public GlowController GlowController;
+   
 
-    void Update()
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (mouse_over)
-        {
-            Image hoverImage = tooltip.GetComponent<Image>();
-            
-            if (displayticket.dishes.ContainsKey(dish.text))
-            {
-                hoverImage.sprite = displayticket.dishes[dish.text];
+
+            if (!RecipeCard.activeInHierarchy){
+                GlowController.firstClick = true;
             }
-            tooltip.SetActive(true);
-        }
-    }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        mouse_over = true;
-        // Debug.Log("Mouse enter");
-        
-    }
+            if (displayticket.dishes.ContainsKey(dish.text)){
+                
+                GlowController.newClick = true;
+                RecipeCard.SetActive(true);
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        mouse_over = false;
-        // Debug.Log("Mouse exit");
-        tooltip.SetActive(false);
+                RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
+                GlowController.GlowAll(dish.text);
+               
+            }
     }
-
+    
 }
-

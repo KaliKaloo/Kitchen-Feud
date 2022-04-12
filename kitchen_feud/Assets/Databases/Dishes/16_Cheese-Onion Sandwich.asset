@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cheese-Onion Sandwich
   location: 0
-  Prefab: {fileID: 4245583861754353042, guid: b4384d07acc8cff42ac4e554818b002e, type: 3}
+  Prefab: {fileID: 2109497186057148387, guid: f1fbce6c8b7477a4d8ef5408ef09cfc7, type: 3}
   Type: 1
   img: {fileID: 21300000, guid: 44d28bcc703859145a18298d1e737b71, type: 3}
   canPickUp: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
   dishID: DI132033
   toCook: Sandwich Station
   cookingTime: 30
+  stoveFry: 0
   recipe:
   - {fileID: 11400000, guid: de65b7afc8fde424798a72f380cc13f8, type: 2}
   - {fileID: 11400000, guid: 7635ec658e4ae994a82d5c5779bf22f8, type: 2}

@@ -17,6 +17,15 @@ public class Interactable : MonoBehaviour
 	public Transform player;
 
 	bool hasInteracted = false;
+
+	//cursor changing on hover
+	public void OnMouseEnter(){
+       MouseControl.instance.Clickable();
+    }
+    
+    public void OnMouseExit(){
+        MouseControl.instance.Default();
+    }
 	
 	public virtual void Interact()
 	{

@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     public GameObject otherP;
     public string Speaker;
     public int team;
+    private string band;
+
 
 
     private void Awake()
@@ -30,26 +32,49 @@ public class AudioManager : MonoBehaviour
         MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
+        band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+        engine.LeaveChannel();
 
+
+        if (band == "A")
+        {
+            engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if (band == "B")
+        {
+            engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if(band == "C")
+
+        {
+            engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }else if (band == "D")
+        {
+            engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+        }
 
         if (myTeam == 1)
         {
-            engine.LeaveChannel();
+            
             engine.JoinChannel(randomInstance + "Team1");
+           
         }else if(myTeam == 2)
         {
-            engine.LeaveChannel();
             engine.JoinChannel(randomInstance + "Team2");
         }
+        
+ 
         
     }
 
 
 
-    private void Update()
-    {
-        // Debug.LogError(GameObject.FindGameObjectWithTag(Speaker).name);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -87,6 +112,8 @@ public class AudioManager : MonoBehaviour
                         pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
                     }
                 }
+         
+        
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);

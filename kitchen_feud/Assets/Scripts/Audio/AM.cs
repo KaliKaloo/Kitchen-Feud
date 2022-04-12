@@ -15,7 +15,7 @@ public class AM : MonoBehaviour
     public GameObject otherP;
     public string Speaker;
     public int team;
-
+    private string band;
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -25,6 +25,7 @@ public class AM : MonoBehaviour
     void Start()
     {   
         PV = GetComponent<PhotonView>();
+        band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
     }
 
 
@@ -38,8 +39,33 @@ public class AM : MonoBehaviour
             if (pFV.IsMine)
             {
                 engine.LeaveChannel();
+                if (band == "A")
+                {
+                    engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+                        AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+                }else if (band == "B")
+                {
+                    engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
+                        AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+                }else if(band == "C")
+
+                {
+                    engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
+                        AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+                }else if (band == "D")
+                {
+                    engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
+                        AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+                }
                 engine.JoinChannel(randomInstance + "Path");
+              
+
                 MusicManager.instance.changeBGM(3, 10, 0, 1);
+                MusicManager.instance.location = 3;
 
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+
 public class TrayItemCollider : MonoBehaviour
 {
     private GameObject parentObject;
@@ -23,6 +24,7 @@ public class TrayItemCollider : MonoBehaviour
     {
         if ((collision.CompareTag("Ingredient") || collision.CompareTag("Dish")) && collision.transform.parent)
         {
+
             GameObject player = collision.transform.parent.parent.gameObject;
             if (player.name == "Local")
             {

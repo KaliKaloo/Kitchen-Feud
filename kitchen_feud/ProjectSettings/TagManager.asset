@@ -24,6 +24,10 @@ TagManager:
   - Dish
   - Agent
   - ServingPoint1
+  - Kitchen1Portals
+  - Kitchen2Portals
+  - Team1Oven
+  - Team2Oven
   layers:
   - Default
   - TransparentFX
@@ -32,11 +36,11 @@ TagManager:
   - Water
   - UI
   - Cuttable
+  - UICollisions
   - Particle Effects
   - Pickable
   - ME
   - Agent
-  - 
   - 
   - 
   - 

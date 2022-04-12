@@ -45,12 +45,10 @@ public class TrayController : MonoBehaviour
         ts.findDestination(ts.GetComponent<PhotonView>().ViewID);
         foreach (Transform slot in ts.transform)
         {
-            // Destroy order stand prefab
+            // overwrite order stand prefab
             if (slot.tag == "OrderTower")
             {
                 slot.GetComponentInChildren<TextMeshProUGUI>().text ="";
-                // Destroy(slot.gameObject);
-                // Debug.Log(slot.GetComponent<PhotonView>().ViewID);
             }
 
             // else destroy items on tray, except from item collider
@@ -108,6 +106,8 @@ public class TrayController : MonoBehaviour
                 List<BaseFood> tray = ts.tray.ServingTray;
                 List<GameObject> onTray = ts.tray.objectsOnTray;
 
+                t.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, t.GetComponent<PhotonView>().ViewID);
+                
                 Order o = Database.GetOrderByID(orderid);
                 int currentScore = 0;
 
@@ -174,4 +174,6 @@ public class TrayController : MonoBehaviour
     {
         resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
     }
+
+
 }
