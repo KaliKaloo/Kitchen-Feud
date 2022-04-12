@@ -7,14 +7,10 @@
         "Main",
         "PhotonUnityNetworking",
         "PhotonRealtime",
-        "PhotonUnityNetworking.Demos",
-        "PhotonUnityNetworking.Editor",
-        "PhotonUnityNetworking.Utilities",
-        "PhotonUnityNetworking.Utilities.Culling.Editor",
-        "PhotonUnityNetworking.Utilities.PhotonPlayer.Editor",
         "DatabaseASM",
         "PhotonChat",
-        "TrayASM"
+        "TrayASM",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
