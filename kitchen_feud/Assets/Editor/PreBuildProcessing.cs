@@ -1,4 +1,4 @@
- #if UNITY_EDITOR
+/* #if UNITY_EDITOR
  using UnityEditor;
  using UnityEditor.Build;
  using UnityEditor.Build.Reporting;
@@ -12,4 +12,4 @@
          System.Environment.SetEnvironmentVariable("EMSDK_PYTHON", "/usr/local/bin/python3");
      }
  }
- #endif
+ #endif*/
