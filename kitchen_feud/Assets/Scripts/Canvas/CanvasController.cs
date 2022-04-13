@@ -107,44 +107,47 @@ public class CanvasController : MonoBehaviour
 
     public void ShowNewTicketWithID(string order)
     {
-        int orderN;
-        if (ticket1.activeSelf == true)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (ticket2.activeSelf == true)
+            int orderN;
+            if (ticket1.activeSelf == true)
             {
-                /*DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                ticket3.SetActive(true);
-                Ticket3.orderNumber = 3;
+                if (ticket2.activeSelf == true)
+                {
+                    /*DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
+                    ticket3.SetActive(true);
+                    Ticket3.orderNumber = 3;
+    
+                    orderN = DisplayOrderFromID(Ticket3, order);
+                    orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); */
+                    PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket3.GetPhotonView().ViewID, 3, order);
 
-                orderN = DisplayOrderFromID(Ticket3, order);
-                orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); */
-                PV.RPC("showTickets",RpcTarget.All,PV.ViewID,ticket3.GetPhotonView().ViewID,3,order);
+                }
 
+                else
+                {
+                    /*DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
+                    ticket2.SetActive(true);
+                    Ticket2.orderNumber = 2;
+                    orderN = DisplayOrderFromID(Ticket2, order);
+                    orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); */
+                    PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket2.GetPhotonView().ViewID, 2, order);
+
+
+                }
             }
 
             else
             {
-                /*DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-                ticket2.SetActive(true);
-                Ticket2.orderNumber = 2;
-                orderN = DisplayOrderFromID(Ticket2, order);
-                orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); */
-                PV.RPC("showTickets",RpcTarget.All,PV.ViewID,ticket2.GetPhotonView().ViewID,2,order);
-
+                /*DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
+                ticket1.SetActive(true);
+                Ticket1.orderNumber = 1;
+    
+                orderN = DisplayOrderFromID(Ticket1, order);
+                orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString();*/
+                PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket1.GetPhotonView().ViewID, 1, order);
 
             }
-        }
-
-        else
-        {
-            /*DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
-            ticket1.SetActive(true);
-            Ticket1.orderNumber = 1;
-
-            orderN = DisplayOrderFromID(Ticket1, order);
-            orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString();*/
-            PV.RPC("showTickets",RpcTarget.All,PV.ViewID,ticket1.GetPhotonView().ViewID,1,order);
-
         }
     }
 
@@ -222,10 +225,10 @@ public class CanvasController : MonoBehaviour
         TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
-        if (PhotonNetwork.CurrentRoom != null)
+        /*if (PhotonNetwork.CurrentRoom != null)
         {
             o.orderNumber /= PhotonNetwork.CurrentRoom.PlayerCount;
-        }
+        }*/
 
         ticket.SetUI(o);
         return o.orderNumber;
