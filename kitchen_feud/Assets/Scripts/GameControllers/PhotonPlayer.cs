@@ -39,11 +39,12 @@ public class PhotonPlayer : MonoBehaviour
         {
             if (!myAvatar && (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] != 0)
             {
+                Debug.LogError("RECREATING");
                 if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
                     if (PV.IsMine)
                     {
-
+                        
                         int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                         myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
                             GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);

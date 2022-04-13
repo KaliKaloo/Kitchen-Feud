@@ -60,13 +60,13 @@ public class kickPlayers : MonoBehaviour
         }
 
 
-        if (players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
+        if (PhotonNetwork.CurrentRoom != null && players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
         }
 
 
-        if (players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
+        if (PhotonNetwork.CurrentRoom != null && players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
            /* for (int i = 0; i < players.Length; i++)
             {
