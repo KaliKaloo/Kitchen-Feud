@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // IMPORTANT:
 // timer and score parser class have been moved to separate scripts
@@ -20,6 +21,7 @@ public class scoreController : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
+    Hashtable ht = new Hashtable();
 
     // updates end scores to compare in game over scene
     private static ParseScore scores = new ParseScore();
@@ -83,13 +85,25 @@ public class scoreController : MonoBehaviour
             {
                 score1Text.text = ConvertScoreToString(scores.GetScore1());
                 score2Text.text = ConvertScoreToString(scores.GetScore2());
-
-                // increment every second
-                elapsed += Time.deltaTime;
-                if (elapsed >= 1f)
+                if (PhotonNetwork.IsMasterClient)
                 {
-                    elapsed = elapsed % 1f;
-                    OutputTime();
+                    // increment every second
+                    elapsed += Time.deltaTime;
+                    if (elapsed >= 1f)
+                    {
+                        elapsed = elapsed % 1f;
+
+                        OutputTime();
+                        ht["time"] = timerText.text;
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+                    }
+                }
+                else
+                {
+                    if (PhotonNetwork.CurrentRoom.CustomProperties["time"] != null)
+                    {
+                        timerText.text = PhotonNetwork.CurrentRoom.CustomProperties["time"].ToString();
+                    }
                 }
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
@@ -106,10 +120,12 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-              
-                 timer.StartTimer(this);
-                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    timer.StartTimer(this);
+                    timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                }
+
 
                 music = FindObjectOfType<MusicManager>();
             }

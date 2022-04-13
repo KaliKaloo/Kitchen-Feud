@@ -68,7 +68,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
-     //PlayerPrefs.DeleteAll();
+//     PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
