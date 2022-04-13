@@ -297,7 +297,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	[PunRPC]
 	void setName(int viewiD,string name)
 	{
-		if (PhotonView.Find(viewiD).transform.GetChild(5))
+		if (PhotonView.Find(viewiD) && PhotonView.Find(viewiD).transform.GetChild(5))
 		{
 			PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0)
 				.GetComponentInChildren<TextMeshProUGUI>().text = name;
