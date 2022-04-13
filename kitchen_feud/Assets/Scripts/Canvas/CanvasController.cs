@@ -222,6 +222,11 @@ public class CanvasController : MonoBehaviour
         TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            o.orderNumber /= PhotonNetwork.CurrentRoom.PlayerCount;
+        }
+
         ticket.SetUI(o);
         return o.orderNumber;
 
@@ -261,7 +266,6 @@ public class CanvasController : MonoBehaviour
             ticket.SetActive(true);
             dTicket.orderNumber = num;
             int orderN = DisplayOrderFromID(dTicket, order);
-
             CC.orderStands[num - 1]
                 .GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString();
         }
