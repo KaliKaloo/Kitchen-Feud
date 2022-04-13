@@ -83,28 +83,28 @@ public class scoreController : MonoBehaviour
             
             if (startGame)
             {
+                OutputTime();
+
                 score1Text.text = ConvertScoreToString(scores.GetScore1());
                 score2Text.text = ConvertScoreToString(scores.GetScore2());
-                if (PhotonNetwork.IsMasterClient)
-                {
+           
                     // increment every second
-                    elapsed += Time.deltaTime;
+                    /*elapsed += Time.deltaTime;
                     if (elapsed >= 1f)
                     {
                         elapsed = elapsed % 1f;
 
                         OutputTime();
-                        ht["time"] = timerText.text;
-                        PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
+                  
                     }
-                }
+                
                 else
                 {
                     if (PhotonNetwork.CurrentRoom.CustomProperties["time"] != null)
                     {
                         timerText.text = PhotonNetwork.CurrentRoom.CustomProperties["time"].ToString();
                     }
-                }
+                }*/
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
             {
@@ -120,11 +120,12 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    timer.StartTimer(this);
-                    timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                }
+            
+                 timer.SetLocalTime();
+                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                 timer.StartTimer(this);
+
+                
 
 
                 music = FindObjectOfType<MusicManager>();
@@ -136,8 +137,9 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
+            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
-            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+
             music = FindObjectOfType<MusicManager>();
         }
     }
@@ -163,7 +165,12 @@ public class scoreController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
             }
-            PhotonNetwork.LoadLevel("gameOver");
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("gameOver");
+            }
+
             // calls this to clean objects which need resetting
             cleanupRoom.Clean();
                         

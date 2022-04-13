@@ -68,7 +68,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
-//    PlayerPrefs.DeleteAll();
+ //  PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -627,7 +627,6 @@ public class menuController : MonoBehaviourPunCallbacks
     void Update()
     {
         UpdateLobby();
-        Debug.Log(PlayerPrefs.GetInt("disconnected"));
    
     }
 

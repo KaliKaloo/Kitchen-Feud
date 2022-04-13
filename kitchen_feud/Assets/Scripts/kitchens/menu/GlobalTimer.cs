@@ -63,6 +63,12 @@ public class GlobalTimer
         return timer;
     }
 
+    public void SetLocalTime()
+    {
+        timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+        
+    }
+
     // resets the timer to original starting value
     // call every time the game ends
     public void ResetTimer()
@@ -97,7 +103,7 @@ public class GlobalTimer
         }
         else
         {
-            timer = GetTime();
+            timer = GetLocalTime();
         }
     }
 
@@ -121,8 +127,13 @@ public class GlobalTimer
         else
         {
             timerCoroutine = monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
+            if (PhotonNetwork.IsMasterClient)
+            {
+                SetServerTime();
+            }
         }
     }
+    
 
 
     // DEPRECATED: decrement timer
