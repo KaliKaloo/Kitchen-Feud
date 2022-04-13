@@ -45,6 +45,7 @@ public class FireOut : MonoBehaviour {
 
     private void OnParticleCollision(GameObject other)
     {
+        Debug.Log("hit");
         // if fire got wet decrease emission rate
         if (other.tag == "Water")
         {
