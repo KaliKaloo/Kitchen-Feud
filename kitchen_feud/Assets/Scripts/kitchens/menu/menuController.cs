@@ -50,6 +50,7 @@ public class menuController : MonoBehaviourPunCallbacks
     Random rnd = new Random();
     private bool calledRejoin = false;
     private bool createLobby = false;
+    private bool isDisconnected = false;
 
     [SerializeField] private Transform roomListContent;
 
@@ -68,7 +69,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
- //  PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -380,7 +381,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         Debug.LogError(PhotonNetwork.LocalPlayer.UserId);
 
-        if (PlayerPrefs.GetInt("disconnected") == 1)
+        if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
             if (!PhotonNetwork.IsMasterClient)
             {
@@ -431,7 +432,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
             this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
         }
-
+        isDisconnected = false;
     }
 
     public override void OnLeftRoom()
@@ -467,6 +468,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         Debug.Log("create room fail");
         loadingScreen.SetActive(false);
+        isDisconnected = true;
         reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }

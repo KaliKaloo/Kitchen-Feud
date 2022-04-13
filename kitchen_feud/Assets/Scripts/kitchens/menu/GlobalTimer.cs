@@ -55,7 +55,10 @@ public class GlobalTimer
     // gets the time from the server
     public int GetTime()
     {
-        return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+        if (PhotonNetwork.CurrentRoom.CustomProperties["Time"] != null)
+            return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+
+        return 0;
     }
 
     public int GetLocalTime()
@@ -65,8 +68,7 @@ public class GlobalTimer
 
     public void SetLocalTime()
     {
-        timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        
+        timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"] - 1;        
     }
 
     // resets the timer to original starting value
