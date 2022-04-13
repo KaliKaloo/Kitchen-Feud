@@ -33,9 +33,7 @@ public class GameSetup : MonoBehaviour
     private void Update()
     {
         if (Int32.Parse((GameObject.Find("Timer").GetComponentInChildren<Text>().text[3]).ToString()) ==  5)
-        {
-            Debug.Log("STARTED");
-                                     
+        {                                     
             started = true;
         }
        
