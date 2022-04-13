@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class scoreController : MonoBehaviour
 {
     [SerializeField] private Text score1Text;
     [SerializeField] private Text score2Text;
-
+    private bool gameOver;
     [SerializeField] private Text timerText;
     [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
@@ -38,6 +39,7 @@ public class scoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;    
         PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
         loadingScreen.SetActive(true);
@@ -155,8 +157,9 @@ public class scoreController : MonoBehaviour
         }
 
         // SIGNAL FOR GAME OVER:
-        else
+        else if(gameOver == false)
         {
+            
             // load game over screen and send final scores
             for (int i = 0; i < trays.Count; i++)
             {
@@ -168,7 +171,9 @@ public class scoreController : MonoBehaviour
 
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.LoadLevel("gameOver");
+            
+                    PhotonNetwork.LoadLevel("gameOver");
+               
             }
 
             // calls this to clean objects which need resetting
@@ -180,7 +185,10 @@ public class scoreController : MonoBehaviour
             // sends to server that game has finished
             lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+            gameOver = true;
+
         }
+
 
     }
 
