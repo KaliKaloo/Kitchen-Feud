@@ -30,9 +30,9 @@ public class exitOven : MonoBehaviour
 		GameEvents.current.assignPointsEventFunction();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		PV.RPC("globalDestroy", RpcTarget.AllBuffered, minigameCanvas.GetComponent<PhotonView>().ViewID);
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered, appliance.GetComponent<PhotonView>().ViewID);
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
+		PV.RPC("globalDestroy", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 	}
 	[PunRPC]
 	void globalDestroy(int viewID)

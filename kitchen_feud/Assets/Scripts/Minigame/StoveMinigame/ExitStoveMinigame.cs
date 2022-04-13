@@ -56,14 +56,14 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		//TO FIX!
 		//SOUND ----------------------------------------------------------
-		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.AllBuffered);
+		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.All);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
 		//----------------------------------------------------------------
 
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
-		view.RPC("EnablePushing",RpcTarget.AllBuffered,view.ViewID);
+		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
 
 		appliance.playerController.enabled = true;
 		appliance.player.GetComponentInChildren<Camera>().enabled = true;
