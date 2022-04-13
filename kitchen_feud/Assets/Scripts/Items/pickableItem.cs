@@ -30,13 +30,13 @@ public class pickableItem : Interactable
             }
 			else if (onTray == true){
                 playerHold.pickUpItem(gameObject, item);
-                tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.AllBuffered, this.GetComponent<PhotonView>().ViewID);
-                GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.AllBuffered);
+                tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
+                GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
 			}
             else if (onAppliance == true){
                 playerHold.pickUpItem(gameObject, item);
-                applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.AllBuffered, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
-                GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.AllBuffered);
+                applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
+                GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
             
             //if it's a dish print out its points

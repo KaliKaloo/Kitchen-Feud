@@ -47,16 +47,16 @@ public class TrayItemCollider : MonoBehaviour
                                 {
                                     playerHold.dropItem();
 
-                                    objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
+                                    objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
                                     objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                                     break;
                                 }
                             }
                             pickable = objectHolding.GetComponent<pickableItem>();
-                            pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.AllBuffered, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
+                            pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
                             if (objectHolding && player.GetComponent<PhotonView>().IsMine)
                             {
-                                parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.AllBuffered, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                                parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
                             }
                         }
                     }

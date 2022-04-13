@@ -39,16 +39,16 @@ public class Tray : Interactable
                     {
                         playerHold.dropItem();
 
-                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
+                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                         break;
                     }
                 }
                 pickable = objectHolding.GetComponent<pickableItem>();
-                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.AllBuffered, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
+                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
                 if (objectHolding && player.GetComponent<PhotonView>().IsMine)
                 {
-                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.AllBuffered, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
                 }
             }
         }

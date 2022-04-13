@@ -52,10 +52,10 @@ public class AM : MonoBehaviour
 
                     if (myPlayerC.entered1 == true)
                     {
-                        pFV.RPC("setEnteredF", RpcTarget.AllBuffered, pFV.ViewID, 1);
+                        pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
                         if (myTeam == 2)
                         {
-                            pFV.RPC("setPlayed", RpcTarget.AllBuffered, pFV.ViewID, 0);
+                            pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                         }
                     }
                 }
@@ -66,11 +66,11 @@ public class AM : MonoBehaviour
 
                     if (myPlayerC.entered2 == true)
                     {
-                        pFV.RPC("setEnteredF", RpcTarget.AllBuffered, pFV.ViewID, 2);
+                        pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
                        
                         if (myTeam == 1)
                         {
-                            pFV.RPC("setPlayed", RpcTarget.AllBuffered, pFV.ViewID, 0);
+                            pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                         }
                     }
                 }
