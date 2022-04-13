@@ -32,18 +32,7 @@ public class GameSetup : MonoBehaviour
 
     private void Update()
     {
-        if (Int32.Parse((GameObject.Find("Timer").GetComponentInChildren<Text>().text[3]).ToString()) ==  5)
-        {                                     
-            started = true;
-        }
-       
-        
-   
-        if (GameObject.Find("Timer").GetComponentInChildren<Text>().text == "00:00" && started == true)
-        {
-                Debug.LogError("Cleared");
-                PlayerPrefs.DeleteAll();
-        }
+  
     }
 
 /*
