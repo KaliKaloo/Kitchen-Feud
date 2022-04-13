@@ -33,13 +33,13 @@ public class ExitCuttingMinigame : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
 
 		PhotonView	view = appliance.player.GetComponent<PhotonView>();
 		
-		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		view.RPC("EnablePushing",RpcTarget.AllBuffered,view.ViewID);
 		
 		appliance.playerController.enabled = true;
 		appliance.UIcamera.enabled = false;

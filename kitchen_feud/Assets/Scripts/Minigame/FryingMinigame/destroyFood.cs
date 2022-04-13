@@ -25,7 +25,7 @@ public class destroyFood : MonoBehaviour
             pan.GetComponent<PanController>().foodInstancesCounter += 1;
             if (collision.GetComponent<FriedFoodController>().onPlate == false)
             {
-                PV.RPC("destP", RpcTarget.All, PV.ViewID);
+                PV.RPC("destP", RpcTarget.AllBuffered, PV.ViewID);
             }
             
 

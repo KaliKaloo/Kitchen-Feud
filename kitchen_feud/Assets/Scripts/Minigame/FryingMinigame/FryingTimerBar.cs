@@ -35,7 +35,7 @@ public class FryingTimerBar : MonoBehaviour
                 slider.value = 0;
             }
 
-            PV.RPC("syncSlider", RpcTarget.All, PV.ViewID, time);
+            PV.RPC("syncSlider", RpcTarget.AllBuffered, PV.ViewID, time);
         }
         
     }

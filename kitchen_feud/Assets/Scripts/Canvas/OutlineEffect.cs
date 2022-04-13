@@ -28,7 +28,7 @@ public class OutlineEffect : MonoBehaviour
          {
              outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
                  transform.position, gameObject.transform.rotation);
-             PV.RPC("glowSettings",RpcTarget.All,outlineObject.GetPhotonView().ViewID,PV.ViewID);
+             PV.RPC("glowSettings",RpcTarget.AllBuffered,outlineObject.GetPhotonView().ViewID,PV.ViewID);
              initialised = true;
 
          }

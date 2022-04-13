@@ -83,7 +83,7 @@ public class kickPlayers : MonoBehaviour
                 {
                     engine.LeaveChannel();
                     engine.JoinChannel(randomInstance + "Team1");
-                    PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
+                    PV.RPC("setMyC", RpcTarget.AllBuffered, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
             }
 
             if (Vector3.Distance(new Vector3(-7.35f, 0.201f, -4.27f), GameObject.Find("Local").transform.position) < 10 &&
@@ -92,7 +92,7 @@ public class kickPlayers : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team2");
-                PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
+                PV.RPC("setMyC", RpcTarget.AllBuffered, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
             }
         }
 
@@ -167,21 +167,21 @@ public class kickPlayers : MonoBehaviour
             if (obj.GetComponent<PlayerController>().myTeam == 1)
             {
                 
-                OV.RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(11.21f,0.201f, -3.37f));
-                OV.RPC("setEnteredF", RpcTarget.All, OV.ViewID, 2);
-                OV.RPC("setEntered", RpcTarget.All,OV.ViewID, 1);
-                PV.RPC("setMyC", RpcTarget.All, OV.ViewID,0);
-                OV.RPC("setKickableF", RpcTarget.All, OV.ViewID);
+                OV.RPC("synctele", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, new Vector3(11.21f,0.201f, -3.37f));
+                OV.RPC("setEnteredF", RpcTarget.AllBuffered, OV.ViewID, 2);
+                OV.RPC("setEntered", RpcTarget.AllBuffered,OV.ViewID, 1);
+                PV.RPC("setMyC", RpcTarget.AllBuffered, OV.ViewID,0);
+                OV.RPC("setKickableF", RpcTarget.AllBuffered, OV.ViewID);
                 Debug.Log(OV.transform.position);
 
             }
             else
             {
-                obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, new Vector3(-7.35f, 0.201f, -4.27f));
-                OV.RPC("setEnteredF", RpcTarget.All, OV.ViewID, 1);
-                OV.RPC("setEntered", RpcTarget.All, OV.ViewID, 2);
-                PV.RPC("setMyC", RpcTarget.All, OV.ViewID, 0);
-                OV.RPC("setKickableF", RpcTarget.All, OV.ViewID);
+                obj.GetComponent<PhotonView>().RPC("synctele", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, new Vector3(-7.35f, 0.201f, -4.27f));
+                OV.RPC("setEnteredF", RpcTarget.AllBuffered, OV.ViewID, 1);
+                OV.RPC("setEntered", RpcTarget.AllBuffered, OV.ViewID, 2);
+                PV.RPC("setMyC", RpcTarget.AllBuffered, OV.ViewID, 0);
+                OV.RPC("setKickableF", RpcTarget.AllBuffered, OV.ViewID);
 
             }
         }

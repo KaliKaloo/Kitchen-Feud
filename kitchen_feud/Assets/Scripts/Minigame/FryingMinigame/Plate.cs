@@ -21,7 +21,7 @@ public class Plate : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
+        PV.RPC("setPlateStartVals", RpcTarget.AllBuffered, PV.ViewID);
        // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
@@ -86,7 +86,7 @@ public class Plate : MonoBehaviour
             }
             else
             {
-                PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
+                PV.RPC("syncTotal", RpcTarget.AllBuffered, PV.ViewID, obj.points);
 
                 Debug.Log("total points:" + totalPoints);
 
@@ -96,7 +96,7 @@ public class Plate : MonoBehaviour
 
                 col.GetComponent<Rigidbody2D>().gravityScale = 0;
                 col.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
+                col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.AllBuffered, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
             }
             obj.collided = true;
 

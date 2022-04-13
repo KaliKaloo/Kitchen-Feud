@@ -62,7 +62,7 @@ public class stoveMinigame : MonoBehaviour
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
             if (dishOfFoundDish != null)
-            {
+            { 
                 
                 dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
 
@@ -73,7 +73,7 @@ public class stoveMinigame : MonoBehaviour
                 else if (stoveCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                     dishOfFoundDish.points = dishOfFoundDish.points * 2;
                 
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.OthersBuffered, (int)dishOfFoundDish.points);
 
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }

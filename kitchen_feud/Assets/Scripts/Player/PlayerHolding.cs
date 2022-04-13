@@ -53,7 +53,7 @@ public class PlayerHolding : MonoBehaviour
                 }
                 else
                 {
-                    this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
+                    this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
                     slotItem(obj, item);
                 }
@@ -80,7 +80,7 @@ public class PlayerHolding : MonoBehaviour
         PhotonView objPV = obj.GetComponent<PhotonView>();
         if (objPV)
         {
-            view.RPC("setHeldobj", RpcTarget.All, view.ViewID, objPV.ViewID);
+            view.RPC("setHeldobj", RpcTarget.AllBuffered, view.ViewID, objPV.ViewID);
         }
         else
         {
@@ -89,7 +89,7 @@ public class PlayerHolding : MonoBehaviour
 
         if (heldObj.GetComponent<Rigidbody>())
         {
-            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
+            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
 
             heldObj.layer = 8;
             foreach (Transform child in heldObj.transform)
@@ -117,14 +117,14 @@ public class PlayerHolding : MonoBehaviour
             {
                 child.gameObject.layer = 0;
             }
-            this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
+            this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.AllBuffered,
                          heldObj.GetComponent<PhotonView>().ViewID);
             //SOUND ---------------------------------------------------------
 
-            this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.All);
+            this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.AllBuffered);
 
             //---------------------------------------------------------------
-            view.RPC("setHeldobjAsNull", RpcTarget.All, view.ViewID);
+            view.RPC("setHeldobjAsNull", RpcTarget.AllBuffered, view.ViewID);
 
         }
     }

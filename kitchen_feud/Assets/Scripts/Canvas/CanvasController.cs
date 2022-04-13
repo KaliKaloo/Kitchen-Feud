@@ -90,7 +90,7 @@ public class CanvasController : MonoBehaviour
     public async void Serve(GameObject justClicked)
     {
         
-        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
+        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.AllBuffered,
             justClicked.GetComponent<PhotonView>().ViewID);
         
         orderMenu.SetActive(false);
@@ -100,7 +100,7 @@ public class CanvasController : MonoBehaviour
         TC.CompareOrder(d_ticket.orderid);
        
         
-        d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
+        d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.AllBuffered);
         
         
     }
@@ -172,10 +172,10 @@ public class CanvasController : MonoBehaviour
             // ONLY DO THIS TO TEAM 1
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
+                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.AllBuffered, leaderOrder.orderID);
                 } else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
             {
-                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
+                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.AllBuffered, leaderOrder.orderID);
             }
               
                
@@ -187,7 +187,7 @@ public class CanvasController : MonoBehaviour
             // ONLY DO THIS TO TEAM 2
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
             {
-                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
+                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.AllBuffered, leaderOrder1.orderID);
             }
                    
         }

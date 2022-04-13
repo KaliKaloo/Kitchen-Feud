@@ -19,7 +19,7 @@ public class IngredientSpawner : Interactable
         base.Update();
         int currentTime = timer.GetTime();
         if (currentTime <= totalTime/2 && !reset){
-            GetComponent<PhotonView>().RPC("resetCount", RpcTarget.All);
+            GetComponent<PhotonView>().RPC("resetCount", RpcTarget.AllBuffered);
         }
     }
 
@@ -33,7 +33,7 @@ public class IngredientSpawner : Interactable
             var obj = PhotonNetwork.Instantiate(Path.Combine( "IngredientPrefabs", ingredientPrefab.name), slot.position, Quaternion.identity);
             pickableItem item = obj.GetComponent<pickableItem>();
             playerHold.pickUpItem(obj, item.item);
-            GetComponent<PhotonView>().RPC("decCount", RpcTarget.All);
+            GetComponent<PhotonView>().RPC("decCount", RpcTarget.AllBuffered);
         }
     }
 
