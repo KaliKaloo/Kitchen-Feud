@@ -14,9 +14,7 @@ public class CanvasControllerTest : PhotonTestSetup
 
     GameObject obj;
 
-    CanvasController contr1;
-    CanvasController contr2;
-
+    CanvasController contr1, contr2;
 
 
     [UnitySetUp]
@@ -170,7 +168,6 @@ public class CanvasControllerTest : PhotonTestSetup
         Assert.AreEqual(orderNum+1, orderNum2);
 
     }
-   
-   
+
     
 }

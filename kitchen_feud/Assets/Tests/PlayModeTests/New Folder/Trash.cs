@@ -11,10 +11,7 @@ using System.IO;
 
 public class TrashTest : PhotonTestSetup
 {
-    GameObject obj;
-    GameObject mushroom;
-    GameObject chips;
-
+    GameObject obj, mushroom, chips;
 
     Trash trash;
 

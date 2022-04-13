@@ -9,7 +9,6 @@ using TMPro;
 
 public class CanvasController : MonoBehaviour
 {
-    //public GameObject makeTicket;
     public GameObject ticket1;
     public GameObject ticket2;
     public GameObject ticket3;

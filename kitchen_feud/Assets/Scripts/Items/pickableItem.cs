@@ -60,25 +60,19 @@ public class pickableItem : Interactable
 		onTray = false;
 	}
 
-    public void interactPublic()
-    {
-        Interact();
-    }
-
- 
-
     [PunRPC]
     void SetGrav()
     {
         this.GetComponent<Rigidbody>().useGravity = true;
     }
+
     [PunRPC]
     void setParent(int viewID,int viewID1)
     {
         PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }
