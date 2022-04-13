@@ -46,18 +46,7 @@ public class CanvasControllerTest : PhotonTestSetup
         yield return null;
     }
 
-
-
-    [Test]
-    public void UISetToFalse()
-    {
-        Assert.IsFalse(contr1.ticket1.activeSelf);
-        Assert.IsFalse(contr1.ticket2.activeSelf);
-        Assert.IsFalse(contr1.ticket3.activeSelf);
-        Assert.IsFalse(contr1.orderMenu.activeSelf);
-
-    }
-
+  
 
     [Test]
     public void k1t1TrayOrderOptions()
@@ -108,11 +97,78 @@ public class CanvasControllerTest : PhotonTestSetup
         Assert.AreEqual(contr2.ticket3, contr2.justClicked);
     }
 
-    [Test]
-    public void TaskOnClick(){
+    [UnityTest]
+    public IEnumerator TaskOnClickt1k1(){
+        contr1.ticket1.GetComponent<DisplayTicket>().orderMainText.text = "main dish";
+        contr1.ticket1.GetComponent<DisplayTicket>().orderSideText.text = "side dish";
+        contr1.TrayOrderOptions("Tray1-1");
+        contr1.ticket1.SetActive(true);
         contr1.TaskOnClick();
+        yield return null;
         Assert.IsFalse(contr1.orderMenu.activeSelf);
-        // Assert.AreEqual(contr2.ticket3, contr2.justClicked);
+        Assert.IsFalse(contr1.ticket1.activeSelf);
+
+        Assert.AreEqual("", contr1.ticket1.GetComponent<DisplayTicket>().orderMainText.text);
+        Assert.AreEqual("", contr1.ticket1.GetComponent<DisplayTicket>().orderSideText.text);
+
+    }
+    
+
+    [UnityTest]
+    public IEnumerator TaskOnClickt2k2(){
+        contr2.ticket2.GetComponent<DisplayTicket>().orderMainText.text = "main dish";
+        contr2.ticket2.GetComponent<DisplayTicket>().orderSideText.text = "side dish";
+        contr2.TrayOrderOptions("Tray2-2");
+        contr2.ticket2.SetActive(true);
+        contr2.TaskOnClick();
+        yield return null;
+        Assert.IsFalse(contr2.orderMenu.activeSelf);
+        Assert.IsFalse(contr2.ticket1.activeSelf);
+
+        Assert.AreEqual("", contr2.ticket2.GetComponent<DisplayTicket>().orderMainText.text);
+        Assert.AreEqual("", contr2.ticket2.GetComponent<DisplayTicket>().orderSideText.text);
+
+    }
+
+
+    
+    [Test]
+    public void t1NotActive()
+    {
+        contr1.ticket1.SetActive(false);
+        contr1.ticket2.SetActive(true);
+        contr1.ticket3.SetActive(true);
+        contr1.ShowNewTicketWithID("OR01");
+        Assert.IsTrue(contr1.ticket1.activeSelf);
+    }
+
+    [Test]
+    public void t2NotActive()
+    {
+        contr1.ticket1.SetActive(true);
+        contr1.ticket2.SetActive(false);
+        contr1.ticket3.SetActive(true);
+        contr1.ShowNewTicketWithID("OR01");
+        Assert.IsTrue(contr1.ticket2.activeSelf);
+    }
+
+
+    [Test]
+    public void t3NotActive()
+    {
+        contr1.ticket1.SetActive(true);
+        contr1.ticket2.SetActive(true);
+        contr1.ticket3.SetActive(false);
+        contr1.ShowNewTicketWithID("OR01");
+        Assert.IsTrue(contr1.ticket3.activeSelf);
+    }
+
+    [Test]
+    public void DisplayOrderFromID(){
+        int orderNum = contr1.DisplayOrderFromID(contr1.ticket1.GetComponent<DisplayTicket>(), "OR01");
+        int orderNum2 = contr1.DisplayOrderFromID(contr1.ticket1.GetComponent<DisplayTicket>(), "OR02");
+        Assert.AreEqual(orderNum+1, orderNum2);
+
     }
    
    
