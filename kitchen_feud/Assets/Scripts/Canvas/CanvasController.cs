@@ -120,7 +120,7 @@ public class CanvasController : MonoBehaviour
     
                     orderN = DisplayOrderFromID(Ticket3, order);
                     orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); */
-                    PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket3.GetPhotonView().ViewID, 3, order);
+                    PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket3.GetPhotonView().ViewID, 3, order);
 
                 }
 
@@ -131,7 +131,7 @@ public class CanvasController : MonoBehaviour
                     Ticket2.orderNumber = 2;
                     orderN = DisplayOrderFromID(Ticket2, order);
                     orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); */
-                    PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket2.GetPhotonView().ViewID, 2, order);
+                    PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket2.GetPhotonView().ViewID, 2, order);
 
 
                 }
@@ -145,7 +145,7 @@ public class CanvasController : MonoBehaviour
     
                 orderN = DisplayOrderFromID(Ticket1, order);
                 orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString();*/
-                PV.RPC("showTickets", RpcTarget.All, PV.ViewID, ticket1.GetPhotonView().ViewID, 1, order);
+                PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket1.GetPhotonView().ViewID, 1, order);
 
             }
         }
