@@ -10,12 +10,13 @@ using Photon.Pun;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 using System.Text.RegularExpressions;
+using TMPro;
 using Hashtable  =  ExitGames.Client.Photon.Hashtable;
 using Random = System.Random;
 
 public class VoiceChatManager : MonoBehaviourPunCallbacks
 {
-    private Hashtable internet = new Hashtable();
+
     float time;
     private DateTime dt1;
     private DateTime dt2;
@@ -24,6 +25,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     Random rnd = new Random();
     IRtcEngine rtcEngine;
     public int x;
+    private bool setInternetSpeed;
     EnableSmoke enableSmoke = new EnableSmoke();
 
 
@@ -47,6 +49,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        setInternetSpeed = false;
         rtcEngine = IRtcEngine.GetEngine(appID);
         rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
 
@@ -54,36 +57,16 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         rtcEngine.OnError += OnError;
 
         StartCoroutine(CheckInternetSpeed());
-      
-        // internetSpeed = CheckInternetSpeed();
-        if (internetSpeed > 1000)
-        {
-            internet["Band"] = "A";
 
-        }
-        else if (internetSpeed < 1000 && internetSpeed > 700)
-        {
-            internet["Band"] = "B";
-        }
-        else if (internetSpeed < 700 && internetSpeed < 400)
-        {
-            internet["Band"] = "C";
-        }
-        else if (internetSpeed < 0 && internetSpeed < 400)
-        {
-            internet["Band"] = "D";
-        }
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
+
     }
 
 
-private void Update()
+
+
+    void OnError(int error, string msg)
     {
-     
-    }
-
-    void OnError(int error, string msg) {
         Debug.Log("Error with Agora: " + error + "This is the message: " + msg);
     }
 
@@ -93,27 +76,27 @@ private void Update()
     }
 
     private void OnJoinChannelSuccess(string channelName, uint uid, int elapsed)
-    {   
+    {
         // if player enters enemy kitchen 
         if (((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1 && channelName.Substring(channelName.Length - 5) == "Team2") 
         || ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2 && channelName.Substring(channelName.Length - 5) == "Team1")) {
+            CustomProperties.PlayerMischievous.AddMischievousStat();
             enableSmoke.ChangePlayerState(true);
-        // if player joins another area
-        } else {
+            // if player joins another area
+        }
+        else
+        {
             enableSmoke.ChangePlayerState(false);
         }
+
         Debug.Log("Joined " + channelName.Substring(2));
     }
-    public override void OnConnectedToMaster()
-    {
-        //PhotonNetwork.JoinLobby();
-
-       
-    }
 
 
 
-    
+
+
+
     public IRtcEngine GetRtcEngine()
     {
         return rtcEngine;
@@ -124,95 +107,56 @@ private void Update()
     {
         rtcEngine.LeaveChannel();
     }
+
     private void OnDestroy()
     {
         IRtcEngine.Destroy();
     }
-  
-/*    public double CheckInternetSpeed()
-    {
-        // Create Object Of WebClient
-        WebClient wc = new WebClient();
 
-        //DateTime Variable To Store Download Start Time.
+
+    IEnumerator CheckInternetSpeed()
+    {
+
+
+        Stopwatch s = new Stopwatch();
+
+        UnityWebRequest www = new UnityWebRequest("http://localhost:3000/");
+        www.downloadHandler = new DownloadHandlerBuffer();
+        www.SendWebRequest();
+        s.Start();
         dt1 = DateTime.Now;
 
-        //Number Of Bytes Downloaded Are Stored In ‘data’
-        byte[] data = wc.DownloadData("https://www.google.co.uk");
 
-        //DateTime Variable To Store Download End Time.
-        dt2 = DateTime.Now;
-        //To Calculate Speed in Kb Divide Value Of data by 1024 And Then by End Time Subtract Start Time To Know Download Per Second.
-        return Math.Round((data.Length * 0.008f) / (dt2 - dt1).TotalSeconds, 2);            
-    }*/
 
-        /*public IEnumerator CheckInternetSpeed()
+        while (true)
         {
-            const string _echoServer = "https://www.google.com/pagesample/";
-            
-            UnityWebRequest wwww = new UnityWebRequest("www.photonengine.com");
-            wwww.downloadHandler = new DownloadHandlerBuffer();
 
-            wwww.SendWebRequest();
-            dt1 = DateTime.Now;
-            
-            while (!wwww.isDone)
+            if (www.isDone)
             {
-                Debug.Log("NO");
+                byte[] results = www.downloadHandler.data;
+                internetSpeed = Math.Round(results.Length * 0.008f / s.Elapsed.TotalSeconds, 2);
+                /*Debug.Log("SIZE " + results.Length);
+                Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
+                Debug.Log("SPEED " + internetSpeed);*/
+                //Debug.Log(internetSpeed);
+
+                yield break;
             }
-            if(wwww.isDone)
+
+            if (www.result != UnityWebRequest.Result.Success && www.result != UnityWebRequest.Result.InProgress)
             {
-                dt2 = DateTime.Now;
-                //Debug.LogError(wwww.downloadedBytes);
-
-
-                Debug.Log("YES");
+                Debug.Log(www.error);
             }
-            Debug.LogError(Math.Round(wwww.downloadedBytes * 0.008f /(dt2 - dt1).TotalSeconds,2));
+
+
 
             yield return null;
-            
 
 
-            //ConnectionManager.Connected = !_request.isNetworkError && !_request.isHttpError && _request.responseCode == 200;
-        }*/
-        IEnumerator CheckInternetSpeed()
-        {
-
-
-            UnityWebRequest www = new UnityWebRequest("http://localhost:55105/");
-            www.downloadHandler = new DownloadHandlerBuffer();
-            yield return www.SendWebRequest();
-
-
-            while (time < 12)
-            {
-                time += Time.time;
-           
-
-                if (www.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.Log(www.error);
-
-
-                }
-                else
-                {
-                    // Show results as text
-                    //Debug.Log(www.downloadHandler.text);
-
-                    // Or retrieve results as binary data
-                    byte[] results = www.downloadHandler.data;
-                    internetSpeed = Math.Round(results.Length * 0.008f/time,2);
-                    yield break;
-                    
-                    //Debug.LogError(Math.Round(results.Length*0.08f/(dt2-dt1).TotalSeconds,2));
-
-                }
-            }
         }
 
 
 
 
+    }
 }

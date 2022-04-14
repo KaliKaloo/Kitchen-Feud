@@ -16,12 +16,12 @@ public class SlotsController : MonoBehaviour {
         if(fullnessCount < 3) {
             for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount == 0) {
-                    heldObjArg.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
+                    heldObjArg.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                     heldObjArg.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                     fullnessCount++;
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
 
-                    pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
+                    pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.AllBuffered, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
                     heldObjArg.layer = 0;
                     foreach ( Transform child in heldObjArg.transform )
                     {
@@ -37,7 +37,7 @@ public class SlotsController : MonoBehaviour {
         for (int i =0;i<slots.Count;i++) {
                 if (slots[i].transform.childCount != 0) {
                     GameObject objectInSlot = slots[i].GetChild(0).gameObject;
-                    objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.All,
+                    objectInSlot.GetComponent<PhotonView>().RPC("DisableIngredientView", RpcTarget.AllBuffered,
                         objectInSlot.GetComponent<PhotonView>().ViewID);
                     fullnessCount--;
                 }

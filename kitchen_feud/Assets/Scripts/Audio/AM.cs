@@ -39,7 +39,6 @@ public class AM : MonoBehaviour
             if (pFV.IsMine)
             {
                 engine.LeaveChannel();
-                engine.JoinChannel(randomInstance + "Path");
                 if (band == "A")
                 {
                     engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
@@ -62,6 +61,8 @@ public class AM : MonoBehaviour
                         AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
                 }
+                engine.JoinChannel(randomInstance + "Path");
+              
 
                 MusicManager.instance.changeBGM(3, 10, 0, 1);
                 MusicManager.instance.location = 3;
