@@ -2,15 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using UnityEngine.Networking;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Collections;
-using System.Diagnostics;
-using System.Net.Http.Headers;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
-using Debug = UnityEngine.Debug;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -18,12 +14,9 @@ public class menuController : MonoBehaviourPunCallbacks
 {
 
     public static menuController Instance;
-    private Hashtable internet = new Hashtable();
-    private DateTime dt1;
-    private DateTime dt2;
-    private bool setInternetSpeed;
-    public double internetSpeed;
+   
     [SerializeField] private GameObject usernameMenu;
+    private bool setInternetSpeed;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -77,7 +70,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
-        //PlayerPrefs.DeleteAll();
+//        PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -108,13 +101,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-
+        setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
         Debug.LogError(PlayerPrefs.GetString("userID"));
-
-        //PhotonNetwork.AutomaticallySyncScene = true;
-        setInternetSpeed = false;
-
         if (!PhotonNetwork.IsConnected)
         {
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
@@ -266,7 +255,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-
     }
 
     public override void OnJoinedLobby()
@@ -279,11 +267,6 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             loadingScreen.SetActive(false);
         }
-
-        Debug.Log("Connected");
-
-
-
     }
 
     public void ChangeUsernameInput()
@@ -311,7 +294,6 @@ public class menuController : MonoBehaviourPunCallbacks
         // save player prefs to ensure works with WebGL
         PlayerPrefs.Save();
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
-        StartCoroutine(CheckInternetSpeed());
     }
 
     // resets username to null :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
@@ -399,7 +381,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.LogError(PhotonNetwork.LocalPlayer.UserId);
+     
 
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
@@ -422,45 +404,9 @@ public class menuController : MonoBehaviourPunCallbacks
         // else if player not in disconnected state load normally
         else if (!createLobby)
         {
-
-            
             // tells player what their last joined lobby was so can reconnect if available
             PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
             PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
-
-            AddPlayerToLobby();
-            x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-        }
-       
-        string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        if (band == "A")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if (band == "B")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if(band == "C")
-
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if (band == "D")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }
-        
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
-
-
-        loadingScreen.SetActive(false);
-
 
             rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
             if (PhotonNetwork.IsMasterClient)
@@ -474,6 +420,29 @@ public class menuController : MonoBehaviourPunCallbacks
                 AddPlayerToLobby();
                 x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
             }
+            string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+            if (band == "A")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+            }else if (band == "B")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+            }else if(band == "C")
+
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+            }else if (band == "D")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            
+            }
             rtcEngine.JoinChannel(x.ToString() + "Lobby");
 
             loadingScreen.SetActive(false);
@@ -486,10 +455,9 @@ public class menuController : MonoBehaviourPunCallbacks
             }
 
             this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
-            isDisconnected = false;
-
         }
-    
+        isDisconnected = false;
+    }
 
     public override void OnLeftRoom()
     {
@@ -657,46 +625,6 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         loadingBarCanvas.SetActive(false);
     }
-    IEnumerator CheckInternetSpeed()
-    {
-
-        Stopwatch s = new Stopwatch();
-       
-        UnityWebRequest www = new UnityWebRequest("http://localhost:3000/");
-        www.downloadHandler = new DownloadHandlerBuffer();
-        www.SendWebRequest();
-        s.Start();
-        dt1 = DateTime.Now;
-
-          
-
-        while (true)
-        {
-
-            if (www.isDone)
-            {
-                byte[] results = www.downloadHandler.data;
-                internetSpeed = Math.Round(results.Length * 0.008f/ s.Elapsed.TotalSeconds,2);
-                /*Debug.Log("SIZE "+results.Length);
-                Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
-                Debug.Log("SPEED "+internetSpeed);*/
-                //Debug.Log(internetSpeed);
-
-                yield break;
-            }
-
-            if (www.result != UnityWebRequest.Result.Success && www.result != UnityWebRequest.Result.InProgress)
-            {    
-                Debug.Log(www.error);
-            }
-                
-              
-
-            yield return null;
-
-            
-        }
-    }
 
     IEnumerator LoadScene()
     {
@@ -724,35 +652,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
         UpdateLobby();
-
    
-
-        if (internetSpeed > 0 && setInternetSpeed == false)
-        {
-            if (internetSpeed > 1000)
-            {
-                internet["Band"] = "A";
-
-            }
-            else if (internetSpeed < 1000 && internetSpeed > 700)
-            {
-                internet["Band"] = "B";
-            }
-            else if (internetSpeed < 700 && internetSpeed < 400)
-            {
-                internet["Band"] = "C";
-            }
-            else if (internetSpeed < 0 && internetSpeed < 400)
-            {
-                internet["Band"] = "D";
-            }
-
-            PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
-            setInternetSpeed = true;
-        }
-
     }
 
     [PunRPC]
@@ -776,5 +677,3 @@ public class menuController : MonoBehaviourPunCallbacks
    
   
 }
-
-
