@@ -7,7 +7,7 @@ public class OvenFire : MonoBehaviour
 {
     Timer timer;
     bool startFire = false;
-    Component[] PS;
+    ParticleSystem[] PS;
     public AudioSource fireSound;
 
     void Start()
@@ -34,4 +34,6 @@ public class OvenFire : MonoBehaviour
         }
 
     }
+
+
 }

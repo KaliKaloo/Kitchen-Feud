@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireOut : MonoBehaviour {
-
+    private ParticleSystem[] PS;
     private ParticleSystem fireParticles;
     private ParticleSystem.EmissionModule fireEmission;
     private bool notFound = false;
@@ -24,6 +24,7 @@ public class FireOut : MonoBehaviour {
             fireParticles = GetComponent<ParticleSystem>();
             fireEmission = fireParticles.emission;
             currentEmission = fireEmission.rateOverTime.constant;
+            PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
         }
         else
         {
@@ -40,6 +41,12 @@ public class FireOut : MonoBehaviour {
         if (currentEmission <= 0)
         {
             fireParticles.Stop();
+            Debug.Log("fire stopped");
+            foreach(ParticleSystem p in PS){
+                    Debug.Log(p.name);
+
+                    p.Stop();
+                }
         }
 	}
 
