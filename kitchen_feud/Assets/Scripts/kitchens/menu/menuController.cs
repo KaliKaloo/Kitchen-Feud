@@ -366,11 +366,9 @@ public class menuController : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
-            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All); 
+            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
 
             PhotonNetwork.LoadLevel(1);
-            
-           // GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
         }
         // if > 4 players load into a different scene 
         else 
@@ -672,7 +670,7 @@ public class menuController : MonoBehaviourPunCallbacks
     void loadSceneP()
     {
         StartCoroutine(LoadScene());
-       // StartCoroutine(LoadSceneAsynchronously(levelIndex));
+        //StartCoroutine(LoadSceneAsynchronously(1));
     }
    
   
