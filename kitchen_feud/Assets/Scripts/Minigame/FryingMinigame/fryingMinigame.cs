@@ -21,12 +21,13 @@ public class fryingMinigame : MonoBehaviour
     public string spriteName;
     public Camera UICamera;
     private int team;
-    private bool movementStopped;
+    public bool movementStopped;
     
 
 
     void Start()
     {
+        movementStopped = false;    
         set = false;
         appliance = GetComponent<Appliance>();
     }
@@ -37,11 +38,7 @@ public class fryingMinigame : MonoBehaviour
         {
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
             movementStopped = true;
-        }else if (transform.Find("Frying(Clone)"))
-        {
-            movementStopped = false;
         }
-       
 
         if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
         {
