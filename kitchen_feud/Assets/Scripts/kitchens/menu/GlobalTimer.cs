@@ -55,7 +55,7 @@ public class GlobalTimer
     // gets the time from the server
     public int GetTime()
     {
-        if (PhotonNetwork.CurrentRoom != null)
+        if (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.CustomProperties["Time"] != null)
             return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
 
         return 0;

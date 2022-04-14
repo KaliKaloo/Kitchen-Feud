@@ -45,10 +45,16 @@ public class scoreController : MonoBehaviour
 
       
         // send message to server that finished loading
-        int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
-        if (currentPlayers > 0)
-            lobby["Players"] = currentPlayers - 1;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        if (PhotonNetwork.CurrentRoom.CustomProperties["Players"] != null)
+        {
+            int currentPlayers = (int) PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+
+
+
+            if (currentPlayers > 0)
+                lobby["Players"] = currentPlayers - 1;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        }
 
         PlayerPrefs.Save();
 

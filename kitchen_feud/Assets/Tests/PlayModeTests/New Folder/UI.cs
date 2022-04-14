@@ -49,8 +49,11 @@ public class UI : PhotonTestSetup
         yield return new WaitForSeconds(0.1f);
         foreach (GameObject obj in Team1){
             Assert.IsTrue(obj.activeSelf);
+
+
         }
         foreach (GameObject obj in Team2){
+
             Assert.IsFalse(obj.activeSelf);
         }
 
