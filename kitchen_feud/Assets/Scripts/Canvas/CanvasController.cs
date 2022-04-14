@@ -55,14 +55,21 @@ public class CanvasController : MonoBehaviour
     {
         if (GameObject.Find("Local"))
         {
-            if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1&& GameObject.FindGameObjectWithTag("Team2") && GameObject.FindGameObjectWithTag("Team2").activeSelf)
-            {
-                GameObject.FindGameObjectWithTag("Team2").SetActive(false);
-            }else if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2&& GameObject.FindGameObjectWithTag("Team1") && GameObject.FindGameObjectWithTag("Team1").activeSelf)
-            {
-                GameObject.FindGameObjectWithTag("Team1").SetActive(false);
-      
 
+            if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1&& GameObject.FindGameObjectWithTag("Team2") && GameObject.FindGameObjectWithTag("Team2").activeSelf)
+            {
+                GameObject [] Team2 = GameObject.FindGameObjectsWithTag("Team2");
+                foreach (GameObject obj in Team2)
+                {
+                    obj.SetActive(false);
+                }
+            }else if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2&& GameObject.FindGameObjectWithTag("Team1") && GameObject.FindGameObjectWithTag("Team1").activeSelf)
+            {
+                GameObject [] Team1 = GameObject.FindGameObjectsWithTag("Team1");
+                foreach (GameObject obj in Team1)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
 

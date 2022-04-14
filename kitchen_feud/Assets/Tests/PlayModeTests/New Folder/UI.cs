@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
@@ -65,7 +64,7 @@ public class UI : PhotonTestSetup
     {
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 2;
         yield return new WaitForSeconds(0.1f);
-         foreach (GameObject obj in Team1){
+        foreach (GameObject obj in Team1){
             Assert.IsFalse(obj.activeSelf);
         }
         foreach (GameObject obj in Team2){

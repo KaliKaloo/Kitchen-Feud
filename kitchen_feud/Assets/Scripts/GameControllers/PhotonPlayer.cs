@@ -33,22 +33,18 @@ public class PhotonPlayer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-
-
     {
-
-
         if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] == null ||
             (int) PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != 1)
         {
             if (!myAvatar && (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] != 0)
             {
+
                 if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
 
                     if (PV.IsMine)
                     {
-
 
                         int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                         myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_cat_Model"),
@@ -60,25 +56,20 @@ public class PhotonPlayer : MonoBehaviour
 
                         }
                     }
-                }
-                    else
+                } else
+                {
+                    if (PV.IsMine)
                     {
-
-                        if (PV.IsMine)
+                        int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
+                        myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_panda_Model"),
+                            GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
+                        foreach (GameObject obj in Team1)
                         {
-
-                            int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
-                            myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_panda_Model"),
-                                GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                            foreach (GameObject obj in Team1)
-                            {
-                                obj.SetActive(false);
-                            }
-
-
-
+                            obj.SetActive(false);
                         }
+
                     }
+                }
             }
 
 
