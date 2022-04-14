@@ -12,13 +12,21 @@ public class GameOverAnimationController : MonoBehaviour
 
     [SerializeField] private GameObject GameOverController;
 
-    [SerializeField] private GameObject player1Model;
-    [SerializeField] private GameObject player2Model;
-    [SerializeField] private GameObject player3Model;
+    [SerializeField] private GameObject CatModel1;
+    [SerializeField] private GameObject CatModel2;
+    [SerializeField] private GameObject CatModel3;
 
-    private Animator player1ModelAnimator;
-    private Animator player2ModelAnimator;
-    private Animator player3ModelAnimator;
+    [SerializeField] private GameObject PandaModel1;
+    [SerializeField] private GameObject PandaModel2;
+    [SerializeField] private GameObject PandaModel3;
+
+    private Animator CatModelAnimator1;
+    private Animator CatModelAnimator2;
+    private Animator CatModelAnimator3;
+
+    private Animator PandaModelAnimator1;
+    private Animator PandaModelAnimator2;
+    private Animator PandaModelAnimator3;
 
 
     private gameOverMenu overMenu;
@@ -40,9 +48,13 @@ public class GameOverAnimationController : MonoBehaviour
 
         StartCoroutine(WaitForStart());
 
-        player1ModelAnimator = player1Model.GetComponent<Animator>();
-        player2ModelAnimator = player2Model.GetComponent<Animator>();
-        player3ModelAnimator = player3Model.GetComponent<Animator>();
+        CatModelAnimator1 = CatModel1.GetComponent<Animator>();
+        CatModelAnimator2 = CatModel2.GetComponent<Animator>();
+        CatModelAnimator3 = CatModel3.GetComponent<Animator>();
+
+        PandaModelAnimator1 = PandaModel1.GetComponent<Animator>();
+        PandaModelAnimator2 = PandaModel2.GetComponent<Animator>();
+        PandaModelAnimator3 = PandaModel3.GetComponent<Animator>();
 
         ResetAnimations();
 
@@ -58,8 +70,13 @@ public class GameOverAnimationController : MonoBehaviour
     // Update is called once per frame
     void ResetAnimations()
     {
-        player1ModelAnimator.SetInteger("Dance", 0);
-        player2ModelAnimator.SetInteger("Dance", 0);
-        player3ModelAnimator.SetInteger("Dance", 0);
+        CatModelAnimator1.SetInteger("Dance", 0);
+        CatModelAnimator2.SetInteger("Dance", 0);
+        CatModelAnimator3.SetInteger("Dance", 0);
+
+        PandaModelAnimator1.SetInteger("Dance", 0);
+        PandaModelAnimator2.SetInteger("Dance", 0);
+        PandaModelAnimator3.SetInteger("Dance", 0);
+
     }
 }

@@ -14,17 +14,25 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
 
     [SerializeField] private TextMeshProUGUI winnerText;
 
-    [SerializeField] private GameObject genericPlayer1;
-    [SerializeField] private GameObject genericPlayer2;
-    [SerializeField] private GameObject genericPlayer3;
+    [SerializeField] private GameObject CatPlayerModel1;
+    [SerializeField] private GameObject CatPlayerModel2;
+    [SerializeField] private GameObject CatPlayerModel3;
+
+    [SerializeField] private GameObject PandaPlayerModel1;
+    [SerializeField] private GameObject PandaPlayerModel2;
+    [SerializeField] private GameObject PandaPlayerModel3;
 
     [SerializeField] private TextMeshProUGUI stat1;
     [SerializeField] private TextMeshProUGUI stat2;
     [SerializeField] private TextMeshProUGUI stat3;
 
-    private Animator genericPlayer1Animator;
-    private Animator genericPlayer2Animator;
-    private Animator genericPlayer3Animator;
+    private GameObject GenericPlayerModel1;
+    private GameObject GenericPlayerModel2;
+    private GameObject GenericPlayerModel3;
+
+    private Animator GenericPlayerModel1Animator;
+    private Animator GenericPlayerModel2Animator;
+    private Animator GenericPlayerModel3Animator;
 
     private int winningTeam;
 
@@ -37,12 +45,12 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("lastLobby", null);
         PlayerPrefs.SetInt("disconnected", 0);
         PlayerPrefs.Save();
+/*
+        GenericPlayerModel1 = CatPlayerModel1;
+        GenericPlayerModel2 = CatPlayerModel2;
+        GenericPlayerModel3 = CatPlayerModel3;*/
 
         LeavingGameCanvas.SetActive(false);
-
-        genericPlayer1Animator = genericPlayer1.GetComponent<Animator>();
-        genericPlayer2Animator = genericPlayer2.GetComponent<Animator>();
-        genericPlayer3Animator = genericPlayer3.GetComponent<Animator>();
 
         ChooseAnimation();
         // Reset all player stats after stats are displayed
@@ -85,39 +93,40 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Skin the models in the scene to appropriate winning team
     private void SkinPlayers()
     {
-        Material newMat = Resources.Load("cat_red", typeof(Material)) as Material;
-
         if (winningTeam == 1)
         {
-            newMat = Resources.Load("cat_red", typeof(Material)) as Material;
+            GenericPlayerModel1 = CatPlayerModel1;
+            GenericPlayerModel2 = CatPlayerModel2;
+            GenericPlayerModel3 = CatPlayerModel3;
         }
         else if (winningTeam == 2)
         {
-            newMat = Resources.Load("cat_blue", typeof(Material)) as Material;
+            GenericPlayerModel1 = PandaPlayerModel1;
+            GenericPlayerModel2 = PandaPlayerModel2;
+            GenericPlayerModel3 = PandaPlayerModel3;
         }
 
         // if not draw colour models correctly
-        if (winningTeam > 0)
-        {
-            genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-            genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-            genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-        }
-        // if draw then split model colours up
-        else
-        {
-            Material newMat2 = Resources.Load("cat_blue", typeof(Material)) as Material;
-            genericPlayer1.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat;
-            genericPlayer2.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat2;
-            genericPlayer3.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = newMat2;
+        if (winningTeam == 0)
+        { 
+            GenericPlayerModel1 = CatPlayerModel1;
+            GenericPlayerModel2 = PandaPlayerModel2;
+            GenericPlayerModel3 = PandaPlayerModel3;
         }
 
+        GenericPlayerModel1.SetActive(true);
+        GenericPlayerModel2.SetActive(true);
+        GenericPlayerModel3.SetActive(true);
     }
 
     // Choose random animation depending on the outcome of the game
     // i.e. winning team chooses 3 dance animations, draw chooses 3 sad animations
     private void ChooseAnimation()
     {
+        GenericPlayerModel1Animator = GenericPlayerModel1.GetComponent<Animator>();
+        GenericPlayerModel2Animator = GenericPlayerModel2.GetComponent<Animator>();
+        GenericPlayerModel3Animator = GenericPlayerModel3.GetComponent<Animator>();
+
         List<int> animationList = new List<int>();
         int index;
         int current;
@@ -137,18 +146,17 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         animationList.RemoveAt(index);
 
         // set 1st model animation
-        genericPlayer1Animator.SetInteger("Dance", current);
+        GenericPlayerModel1Animator.SetInteger("Dance", current);
 
         // get next model animation
         index = random.Next(animationList.Count);
         current = animationList[index];
         animationList.RemoveAt(index);
 
-        genericPlayer2Animator.SetInteger("Dance", current);
+        GenericPlayerModel2Animator.SetInteger("Dance", current);
 
         // set last model's animation to remaining in list
-        genericPlayer3Animator.SetInteger("Dance", animationList[0]);
-
+        GenericPlayerModel3Animator.SetInteger("Dance", animationList[0]);
 
     }
 

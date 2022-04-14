@@ -9,7 +9,7 @@ public class GlobalTimer
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    private static int time = 60;
+    private static int time = 5;
     private readonly int startTime = time;
 
     private static int timer = time;
