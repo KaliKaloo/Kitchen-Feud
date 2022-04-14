@@ -36,12 +36,7 @@ public class fryingMinigame : MonoBehaviour
         {
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
         }
-        else 
-        {
-            if (GameObject.Find("Local")){
-                GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = true;
-            }
-        }
+       
 
         if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
         {
