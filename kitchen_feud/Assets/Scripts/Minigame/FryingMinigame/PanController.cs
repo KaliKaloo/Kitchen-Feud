@@ -130,7 +130,10 @@ public class PanController : MonoBehaviour
         FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
         FFC.timer = me.GetComponent<PanController>().timer;
         FFC.dishSO = appliance.foundDish;
-        FFC.GetComponent<Image>().sprite = imgAtlas.GetSprite(FFC.dishSO.dishID);
+        if (imgAtlas && FFC.dishSO)
+        {
+            FFC.GetComponent<Image>().sprite = imgAtlas.GetSprite(FFC.dishSO.dishID);
+        }
 
     }
 
