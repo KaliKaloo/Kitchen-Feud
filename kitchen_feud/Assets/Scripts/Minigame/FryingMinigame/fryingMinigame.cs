@@ -76,6 +76,7 @@ public class fryingMinigame : MonoBehaviour
                     friedFoodController = pan.friedFood;
                     if (friedFoodController)
                     {
+                        Debug.LogError("SETSPRITE");
                         friedFoodController.dishSO = appliance.foundDish;
                         friedFoodController.appliance = appliance;
 
