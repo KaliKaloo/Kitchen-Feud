@@ -47,7 +47,7 @@ public class fryingMinigame : MonoBehaviour
             pan = canv.GetComponentInChildren<PanController>();
             friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
             friedFoodController.dishSO = appliance.foundDish;
-            friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(friedFoodController.dishSO.dishID).texture;
+            friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(friedFoodController.dishSO.dishID);
             
             int canvasTag = appliance.kitchenNum;
             if (canvasTag == 1){
@@ -80,7 +80,7 @@ public class fryingMinigame : MonoBehaviour
                         friedFoodController.appliance = appliance;
 
                         spriteName = friedFoodController.dishSO.dishID;
-                        friedFoodController.GetComponent<RawImage>().texture = imgAtlas.GetSprite(spriteName).texture;
+                        friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(spriteName);
                         
                     }
                 }
