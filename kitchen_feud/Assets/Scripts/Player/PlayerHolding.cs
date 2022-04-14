@@ -91,8 +91,9 @@ public class PlayerHolding : MonoBehaviour
 
         if (heldObj.GetComponent<Rigidbody>()) 
         {
+
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
-            if (transform.name != "Agent(Clone)")
+            if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2"))
             {
                 heldObj.layer = 8;
                 foreach (Transform child in heldObj.transform)
@@ -101,6 +102,10 @@ public class PlayerHolding : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Update()
+    {
     }
 
     IEnumerator LockPickup()

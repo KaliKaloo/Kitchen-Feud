@@ -19,12 +19,21 @@ public class Tray : Interactable
     private CanvasController canvasController;
     public bool isReady;
     public PhotonView PV;
+    private int Team;
 
     private void Start()
     {
         PV = GetComponent<PhotonView>();
         isReady = false;
         canvasController = teamController.GetComponent<CanvasController>();
+        if (transform.parent.parent.name == "k1")
+        {
+            Team = 1;
+        }
+        else
+        {
+            Team = 2;
+        }
     }
 
     public override void Interact()
@@ -65,13 +74,28 @@ public class Tray : Interactable
 
     public void findDestination(int trayID)
     {
-        foreach (GameObject s in GameObject.FindGameObjectsWithTag("ServingPoint1"))
+        if (Team == 1)
         {
-            if (s.GetComponent<Serving>().used == false)
+            foreach (GameObject s in GameObject.FindGameObjectsWithTag("ServingPoint1"))
             {
-                PV.RPC("setDest",RpcTarget.All,trayID,s.GetPhotonView().ViewID);
-                s.GetComponent<PhotonView>().RPC("setUsed",RpcTarget.All,s.GetPhotonView().ViewID);
-                break;
+                if (s.GetComponent<Serving>().used == false)
+                {
+                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject s in GameObject.FindGameObjectsWithTag("ServingPoint2"))
+            {
+                if (s.GetComponent<Serving>().used == false)
+                {
+                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    break;
+                }
             }
         }
     }

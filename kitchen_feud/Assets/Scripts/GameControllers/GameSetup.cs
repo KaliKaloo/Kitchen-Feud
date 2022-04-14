@@ -9,6 +9,7 @@ public class GameSetup : MonoBehaviour
     public Transform[] spawnPoints1;
     public Transform[] spawnPoints2;
     public Transform[] WSP1;
+    public Transform[] WSP2;
 
 
     private void OnEnable()

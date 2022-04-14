@@ -28,6 +28,9 @@ TagManager:
   - Kitchen2Portals
   - Team1Oven
   - Team2Oven
+  - Waiter1
+  - Waiter2
+  - ServingPoint2
   layers:
   - Default
   - TransparentFX

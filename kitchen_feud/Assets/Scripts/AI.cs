@@ -8,7 +8,8 @@ using UnityEngine.AI;
 public class AI : MonoBehaviour
 {
     public GameObject Agent;
-    public List<GameObject> agents = new List<GameObject>();
+    public List<GameObject> agentsT1 = new List<GameObject>();
+    public List<GameObject> agentsT2 = new List<GameObject>();
     public PhotonView PV;
     
    
@@ -24,35 +25,64 @@ public class AI : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Agent").Length < 3)
+            if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Waiter1").Length < 3)
             {
-                if (GameObject.FindGameObjectsWithTag("Agent").Length == 0)
+                if (GameObject.FindGameObjectsWithTag("Waiter1").Length == 0)
                 {
-                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Agent"), (GameSetup.GS.WSP1[0].position), Quaternion.identity);
-                    agents.Add(Agent);
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), (GameSetup.GS.WSP1[0].position), Quaternion.identity);
+                    agentsT1.Add(Agent);
                     //Agent.GetComponent<PhotonView>().TransferOwnership(1000);
                     //Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[0].position.x, GameSetup.GS.WSP1[0].position.y, GameSetup.GS.WSP1[0].position.z));
                 }
-                else if (GameObject.FindGameObjectsWithTag("Agent").Length == 1)
+                else if (GameObject.FindGameObjectsWithTag("Waiter1").Length == 1)
                 {
-                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Agent"), GameSetup.GS.WSP1[1].position, Quaternion.identity);
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), GameSetup.GS.WSP1[1].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[1].position.x, GameSetup.GS.WSP1[1].position.y, GameSetup.GS.WSP1[1].position.z));
-                    agents.Add(Agent);
+                    agentsT1.Add(Agent);
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }
-                else if (GameObject.FindGameObjectsWithTag("Agent").Length == 2)
+                else if (GameObject.FindGameObjectsWithTag("Waiter1").Length == 2)
                 {
 
-                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Agent"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[2].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
-                    agents.Add(Agent);
+                    agentsT1.Add(Agent);
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }
             }
 
-            if (agents.Count == 3)
+            if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Waiter2").Length < 3)
+            {
+                if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 0)
+                {
+
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
+                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[0].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
+                    agentsT2.Add(Agent);
+                    // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
+
+                }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 1)
+                {
+
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
+                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[1].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
+                    agentsT2.Add(Agent);
+                    // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
+
+                }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 2)
+                {
+
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
+                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[2].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
+                    agentsT2.Add(Agent);
+                    // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
+
+                }
+            }
+
+            if (agentsT1.Count == 3)
             {
                 foreach (Transform ts in GameObject.Find("k1").transform.Find("Trays"))
                 {
@@ -61,7 +91,7 @@ public class AI : MonoBehaviour
                     {
 
 
-                        foreach (GameObject a in agents)
+                        foreach (GameObject a in agentsT1)
                         {
 
                             if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0)
@@ -72,6 +102,40 @@ public class AI : MonoBehaviour
                                 //Assign waiter to Tray
                                 ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
                                 a.GetComponent<PhotonView>().ViewID);
+
+                                break;
+
+                            }
+
+                        }
+
+                    }
+                }
+
+                //Agent.GetPhotonView().TransferOwnership(1000);
+
+            }
+            
+            if (agentsT2.Count == 3)
+            {
+                foreach (Transform ts in GameObject.Find("k2").transform.Find("Trays"))
+                {
+                    //Check if Tray is ready to be collected and doesn't already have a waiter assigned
+                    if (ts.GetComponent<Tray>().isReady && !ts.GetComponent<Tray>().Agent)
+                    {
+
+
+                        foreach (GameObject a in agentsT2)
+                        {
+
+                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0)
+                            {
+                                //Assign Tray to waiter
+                                a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
+                                    ts.GetComponent<PhotonView>().ViewID);
+                                //Assign waiter to Tray
+                                ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
+                                    a.GetComponent<PhotonView>().ViewID);
 
                                 break;
 
