@@ -37,11 +37,11 @@ public class PanController : MonoBehaviour
         foodInstancesCounter = 0;
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
         Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-        /*if (PV.IsMine)
+        if (PV.IsMine)
         {
              temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
             PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
-        }*/
+        }
 
 
         
