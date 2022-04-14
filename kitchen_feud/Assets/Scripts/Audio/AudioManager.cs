@@ -33,20 +33,9 @@ public class AudioManager : MonoBehaviour
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
         band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+        engine.LeaveChannel();
 
 
-
-        if (myTeam == 1)
-        {
-            engine.LeaveChannel();
-            engine.JoinChannel(randomInstance + "Team1");
-           
-        }else if(myTeam == 2)
-        {
-            engine.LeaveChannel();
-            engine.JoinChannel(randomInstance + "Team2");
-        }
-        
         if (band == "A")
         {
             engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
@@ -69,6 +58,18 @@ public class AudioManager : MonoBehaviour
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
         }
+
+        if (myTeam == 1)
+        {
+            
+            engine.JoinChannel(randomInstance + "Team1");
+           
+        }else if(myTeam == 2)
+        {
+            engine.JoinChannel(randomInstance + "Team2");
+        }
+        
+ 
         
     }
 

@@ -30,6 +30,7 @@ public class PlayerTests : PhotonTestSetup
             0
         );
         stove = GameObject.Find("stove1").GetComponent<Appliance>();
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
 
         playerHold = obj.GetComponent<PlayerHolding>();
         //h = obj.GetComponent<EnemyHealth>();

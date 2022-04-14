@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: 0abc19ff062950843a3a49b202e47ac3
+<<<<<<<< HEAD:kitchen_feud/Assets/InitTestScene637854801675362684.unity.meta
+guid: 204079b3fe6e38d419ed58e43614c60a
+========
+guid: adb822beb774bc249b7ddb45ef6cfaa6
+folderAsset: yes
+>>>>>>>> dev:kitchen_feud/Assets/Scripts/Photon.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

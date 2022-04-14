@@ -62,7 +62,11 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         currentScene = scene.buildIndex;
         if (currentScene == 1)
         {
-            CreatePlayer();
+            if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] == null ||
+                (int) PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != 1)
+            {
+                CreatePlayer();
+            }
         }
     }
 

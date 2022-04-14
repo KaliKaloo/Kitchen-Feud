@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Photon.Pun;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using Debug = UnityEngine.Debug;
 
 
 public class cookingMethod : PhotonTestSetup
@@ -12,6 +15,7 @@ public class cookingMethod : PhotonTestSetup
     [Test]
     public void cookingMethodMushroomSoup()
     {
+        
         GameObject mushroomSoup = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Mushroom Soup"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         DishSO mushroomSoupSO = (DishSO) mushroomSoup.GetComponent<pickableItem>().item;
         Assert.AreEqual("Stove", mushroomSoupSO.toCook);
@@ -21,6 +25,7 @@ public class cookingMethod : PhotonTestSetup
     [Test]
     public void cookingMethodBurger()
     {
+   
         GameObject burger = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Burger"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         DishSO burgerSO = (DishSO) burger.GetComponent<pickableItem>().item;
         Assert.AreEqual("Stove", burgerSO.toCook);

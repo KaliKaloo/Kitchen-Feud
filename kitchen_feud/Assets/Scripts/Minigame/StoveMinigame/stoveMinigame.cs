@@ -61,7 +61,7 @@ public class stoveMinigame : MonoBehaviour
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
             if (dishOfFoundDish != null)
-            {
+            { 
                 
                 dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
 

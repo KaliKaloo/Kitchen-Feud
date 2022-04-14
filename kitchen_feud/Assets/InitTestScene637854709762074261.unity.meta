@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: 32644cca36b72294f8986fb2f90b55c4
+<<<<<<<< HEAD:kitchen_feud/Assets/InitTestScene637854709762074261.unity.meta
+guid: b35392c2ee49377499f6bba1f93972c8
+========
+guid: 9379c07769a49da4d903f6aa749bf07a
+folderAsset: yes
+>>>>>>>> dev:kitchen_feud/Assets/Cutscenes.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -211,11 +211,10 @@ public class Appliance : Interactable
                 //instantiate the cooked dish
                 if (cookedDishLocal)
                 {
-                    if (appliancePlayers.Count < 2)
-                    {
+              
                         myPv.RPC("cookedDishG", RpcTarget.All, myPv.ViewID,
                             cookedDishLocal.GetComponent<PhotonView>().ViewID);
-                    }
+                    
 
                     Rigidbody dishRigidbody = cookedDish.GetComponent<Rigidbody>();
 

@@ -28,6 +28,7 @@ public class PhotonTestSetup
     public IEnumerator UnitySetUp()
     {
         yield return new WaitWhile(() => !lobby.ready);
+       //yield return null;
     }
 
     [OneTimeTearDown]

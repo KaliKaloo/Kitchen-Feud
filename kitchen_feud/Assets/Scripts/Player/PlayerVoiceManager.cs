@@ -154,7 +154,7 @@ public class PlayerVoiceManager : MonoBehaviour
 
 			if (entered1 == false && entered2 == false && !healthbar1)
 			{
-				view.RPC("setKickableF", RpcTarget.All, view.ViewID);
+				view.RPC("setKickableF", RpcTarget.AllBuffered, view.ViewID);
 			}
 		}
 	}
@@ -297,6 +297,10 @@ public class PlayerVoiceManager : MonoBehaviour
 	[PunRPC]
 	void setName(int viewiD,string name)
 	{
-		PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = name;
+		if (PhotonView.Find(viewiD) && PhotonView.Find(viewiD).transform.GetChild(5))
+		{
+			PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0)
+				.GetComponentInChildren<TextMeshProUGUI>().text = name;
+		}
 	}
 }
