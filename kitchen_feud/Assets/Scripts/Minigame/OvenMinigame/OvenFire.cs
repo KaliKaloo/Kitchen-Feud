@@ -9,6 +9,7 @@ public class OvenFire : MonoBehaviour
     bool startFire = false;
     ParticleSystem[] PS;
     public AudioSource fireSound;
+    public FireOut fireOut;
 
     void Start()
     {
@@ -24,7 +25,16 @@ public class OvenFire : MonoBehaviour
         if(!startFire){
             if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
-                    p.Play();
+
+                        p.Play();
+                        Debug.Log(p.name + "is playing");
+
+                        if(p.GetComponent<FireOut>()){
+                            fireOut = p.GetComponent<FireOut>();
+                            fireOut.enabled=true;
+                        }
+                    
+             
                 }
                 //SOUND -------------------------------------------
                 fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
@@ -33,6 +43,8 @@ public class OvenFire : MonoBehaviour
 
             }
         }
+
+    
 
     }
 
