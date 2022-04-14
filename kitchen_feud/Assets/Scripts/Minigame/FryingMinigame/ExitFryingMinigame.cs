@@ -80,7 +80,7 @@ public class ExitFryingMinigame : MonoBehaviour
 
 		}
 
-		PhotonView.Find(applID).GetComponent<fryingMinigame>().movementStopped = false;	
+	
 
 		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	
 		PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers.Clear();
