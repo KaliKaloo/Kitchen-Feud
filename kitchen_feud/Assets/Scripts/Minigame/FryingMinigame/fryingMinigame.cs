@@ -21,6 +21,7 @@ public class fryingMinigame : MonoBehaviour
     public string spriteName;
     public Camera UICamera;
     private int team;
+    private bool movementStopped;
     
 
 
@@ -32,9 +33,13 @@ public class fryingMinigame : MonoBehaviour
 
     void Update(){
 
-        if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf)
+        if (transform.Find("Frying(Clone)") && transform.Find("Frying(Clone)").gameObject.activeSelf && movementStopped == false)
         {
             GameObject.Find("Local").GetComponentInChildren<playerMvmt>().enabled = false;
+            movementStopped = true;
+        }else if (transform.Find("Frying(Clone)"))
+        {
+            movementStopped = false;
         }
        
 
