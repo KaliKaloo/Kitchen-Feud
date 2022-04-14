@@ -52,7 +52,6 @@ public class playerMvmt : MonoBehaviour
             //SideStepping animation
             if (Vertical == 0f && Horizontal != 0)
             {
-                Debug.LogError("SIDESTEP");
             }
 
             float dotProduct = Vector3.Dot(movement, transform.forward);

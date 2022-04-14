@@ -43,7 +43,6 @@ public class PhotonPlayer : MonoBehaviour
         {
             if (!myAvatar && (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] != 0)
             {
-                Debug.LogError("RECREATING");
                 if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
 

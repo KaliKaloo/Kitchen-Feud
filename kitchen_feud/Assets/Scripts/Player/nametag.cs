@@ -32,7 +32,6 @@ public class nametag : MonoBehaviour
                 else if (GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().nametag.transform
                              .Find("NameTag").GetComponentInChildren<TextMeshProUGUI>().text == "")
                 {
-                    Debug.Log("Called");
                     obj = GameObject.Find("Local");
                     obj.GetComponent<PhotonView>().RPC("setName", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID,PhotonNetwork.NickName);
 

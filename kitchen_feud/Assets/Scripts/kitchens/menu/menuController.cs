@@ -103,7 +103,6 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.LogError(PlayerPrefs.GetString("userID"));
         if (!PhotonNetwork.IsConnected)
         {
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
@@ -507,7 +506,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log("CREATED?");
         if (createLobby)
         {
             PlayerPrefs.SetString("lastLobby", null);
