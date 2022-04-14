@@ -61,6 +61,7 @@ public class PhotonPlayer : MonoBehaviour
 
                         }
                     }
+                }
                     else
                     {
 
@@ -79,17 +80,13 @@ public class PhotonPlayer : MonoBehaviour
 
                         }
                     }
-                }
-
-
-                scene["loaded"] = 1;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(scene);
-                //}
             }
 
 
-
-
+            scene["loaded"] = 1;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(scene);
+            //}
         }
+        
     }
 }
