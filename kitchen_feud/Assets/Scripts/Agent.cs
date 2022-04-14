@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
@@ -14,6 +15,7 @@ public class Agent : MonoBehaviour
     public PlayerHolding playerHold;
     public PhotonView PV;
     public bool readyToServe;
+    public GameObject agentTray;
 
     private bool test = false;
     // Start is called before the first frame update
@@ -32,6 +34,17 @@ public class Agent : MonoBehaviour
     {
         if (PV.IsMine)
         {
+            /*if (transform.CompareTag("Waiter1") && test == false)
+            {
+                Debug.LogError("SET?");
+                agent.SetDestination(GameObject.Find("Tray1 (1)").transform.position);
+                test = true;
+            }
+
+            if (dist < 1.3f && dist != 0)
+            {
+                playerHold.pickUpItem(GameObject.Find("Tray1 (1)"), GameObject.Find("Tray1 (1)").GetComponent<IngredientItem>().item);
+            }*/
            
             float dist = RemainingDistance(agent.path.corners);
 
@@ -43,8 +56,16 @@ public class Agent : MonoBehaviour
                     agent.SetDestination(tray.transform.position);
                 }
 
-                if (dist < 1.3f && dist != 0)
+                if (dist < 1.3f && dist != 0 && !agentTray)
                 {
+                    
+                        agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
+                            tray.transform.position,
+                            tray.transform.rotation);
+                        playerHold.pickUpItem(agentTray, null);
+
+                    
+
 
 
                     foreach (Transform t in tray.transform)
@@ -52,15 +73,17 @@ public class Agent : MonoBehaviour
 
                         if (t.name.Contains("Slot") && t.childCount > 0)
                         {
-                            playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
+                            agentTray.GetComponent<TraySlotting>().slotOnTray(t.GetChild(0).gameObject);                          
+                            //playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
                             //Set Tray to not Collectable;
-                            tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
-                            agent.ResetPath();
-                            readyToServe = true;
-                            break;
+                            
+                            //break;
                         }
 
                     }
+                    tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    agent.ResetPath();
+                    readyToServe = true;
                 }
 
 
@@ -87,37 +110,7 @@ public class Agent : MonoBehaviour
             }
 
 
-            //agent.SetDestination(GameObject.Find("Local").transform.position);
-            //if (Oven.GetComponentInChildren<Timer>())
-            //{
-            //    if (Oven.GetComponentInChildren<Timer>().timerFake == 35)
-            //    {
-            //        agent.SetDestination(Oven.GetComponentInChildren<Timer>().transform.position);
-            //        isMoving = true;
-
-            //    }
-
-            //    float dist = RemainingDistance(agent.path.corners);
-
-
-            //    if (dist <0.3 && dist !=0)
-            //    {
-            //        Debug.LogError("s");
-            //        Oven.GetComponentInChildren<Timer>().GetComponentInChildren<exitOven>().TaskOnClick();
-            //        if (Oven.GetComponent<Appliance>().cookedDish)
-            //        {
-            //            GetComponent<PlayerHolding>().pickUpItem(Oven.GetComponent<Appliance>().cookedDish,
-            //                Oven.GetComponent<Appliance>().cookedDish.GetComponent<pickableItem>().item);
-            //        }
-            //        isMoving = false;
-            //    }
-
-
-            //}
-            //  if(GetComponent<PlayerHolding>().slot.childCount != 0)
-            //    {
-            //        agent.SetDestination(GameObject.Find("k1").GetComponentInChildren<Tray>().transform.position);
-            //    }
+    
 
         }
     }
