@@ -2,15 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using UnityEngine.Networking;
 using System.Collections.Generic;
 using Photon.Realtime;
 using System.Collections;
-using System.Diagnostics;
-using System.Net.Http.Headers;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
-using Debug = UnityEngine.Debug;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -18,16 +14,15 @@ public class menuController : MonoBehaviourPunCallbacks
 {
 
     public static menuController Instance;
-    private Hashtable internet = new Hashtable();
-    private DateTime dt1;
-    private DateTime dt2;
-    private bool setInternetSpeed;
-    public double internetSpeed;
+   
     [SerializeField] private GameObject usernameMenu;
+    private bool setInternetSpeed;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject userSettingsMenu;
     [SerializeField] private GameObject findLobbyMenu;
+    [SerializeField] private GameObject reconnectMenu;
     [SerializeField] private GameObject changeTeam1;
     [SerializeField] private GameObject changeTeam2;
 
@@ -54,6 +49,9 @@ public class menuController : MonoBehaviourPunCallbacks
     IRtcEngine rtcEngine;
     public int x;
     Random rnd = new Random();
+    private bool calledRejoin = false;
+    private bool createLobby = false;
+    private bool isDisconnected = false;
 
     [SerializeField] private Transform roomListContent;
 
@@ -64,11 +62,15 @@ public class menuController : MonoBehaviourPunCallbacks
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
+    Hashtable scene = new Hashtable();
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
     {
         Instance = this;
+/*        ResetUsername();
+        ResetUserID();*/
+//        PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -97,35 +99,74 @@ public class menuController : MonoBehaviourPunCallbacks
         return total;
     }
 
-    private void Start()
+    public void Start()
     {
-        //PhotonNetwork.AutomaticallySyncScene = true;
         setInternetSpeed = false;
+        PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
         {
-            loadingScreen.SetActive(true);
+            if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
+                PhotonNetwork.AuthValues = new AuthenticationValues(PlayerPrefs.GetString("userID"));
+             
             PhotonNetwork.ConnectUsingSettings();
+            loadingScreen.SetActive(true);
+
+
             SetTeam(1);
-            loadingScreen.SetActive(false);
-            usernameMenu.SetActive(true);
-            startButton.SetActive(false);
+            if (!CheckStringNullorEmpty(PlayerPrefs.GetString("username")))
+            {
+                greetingMenu.text = "Welcome back " + PlayerPrefs.GetString("username") + "!";
+                PhotonNetwork.NickName = PlayerPrefs.GetString("username");
+                usernameMenu.SetActive(false);
+                connectPanel.SetActive(true);
+            } else
+            {
+                usernameMenu.SetActive(true);
+                startButton.SetActive(false);
+            }
         } 
         else
         {
+            // set photon's nickname to one stored in settings
+            PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString("username");
             greetingMenu.text = "Welcome back " + PhotonNetwork.LocalPlayer.NickName + "!";
             usernameMenu.SetActive(false);
             connectPanel.SetActive(true);
         }
     }
 
+/*    public override void OnConnected()
+    {
+        base.OnConnected();
+    }*/
+
+    public void TryRejoin()
+    {
+        calledRejoin = true;
+        PlayerPrefs.SetString("rejoined","true");
+        PhotonNetwork.RejoinRoom(PlayerPrefs.GetString("lastLobby"));
+    }
+
     public void BackToMainMenu()
     {
         findLobbyMenu.SetActive(false);
+        userSettingsMenu.SetActive(false);
     }
 
     public void FindLobby()
     {
         findLobbyMenu.SetActive(true);
+    }
+
+    public void OpenUserSettings()
+    {
+        userSettingsMenu.SetActive(true);
+    }
+
+    public void HideReconnectMenu()
+    {
+        PlayerPrefs.SetInt("disconnected", 0);
+        reconnectMenu.SetActive(false);
     }
 
 
@@ -181,9 +222,10 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LoadBackToLobbyMenu()
     {
         timerError.text = "";
+        timer.SetServerTime();
 
         // updates all users' timers based on changed settings from master
-        this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetCurrentTime());
+        this.GetComponent<PhotonView>().RPC("UpdateTimer", RpcTarget.Others, timer.GetTime());
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
@@ -212,9 +254,18 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
-        Debug.Log("Connected");
+    }
 
-
+    public override void OnJoinedLobby()
+    {
+        if (!CheckStringNullorEmpty(PlayerPrefs.GetString("lastLobby")) && !createLobby)
+        {
+            createLobby = true;
+            PhotonNetwork.CreateRoom(PlayerPrefs.GetString("lastLobby"), new Photon.Realtime.RoomOptions(), null);
+        } else
+        {
+            loadingScreen.SetActive(false);
+        }
     }
 
     public void ChangeUsernameInput()
@@ -225,13 +276,39 @@ public class menuController : MonoBehaviourPunCallbacks
             startButton.SetActive(false);
     }
 
+    public void ChangeUsernameOnClick()
+    {
+        userSettingsMenu.SetActive(false);
+        usernameMenu.SetActive(true);
+        startButton.SetActive(false);
+    }
+
     public void SetUsername()
     {
         usernameMenu.SetActive(false);
         connectPanel.SetActive(true);
+        PlayerPrefs.SetString("username", usernameInput.text);
         PhotonNetwork.NickName = usernameInput.text;
+
+        // save player prefs to ensure works with WebGL
+        PlayerPrefs.Save();
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
-        StartCoroutine(CheckInternetSpeed());
+    }
+
+    // resets username to null :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    public void ResetUsername()
+    {
+        PlayerPrefs.SetString("username", null);
+        PhotonNetwork.NickName = null;
+        greetingMenu.text = "Username has not been set!";
+        BackToMainMenu();
+    }
+
+    // resets id to null, restart game for changes to take effect :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    public void ResetUserID()
+    {
+        PlayerPrefs.SetString("userID", null);
+        BackToMainMenu();
     }
 
     // Create room here
@@ -245,6 +322,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void LeaveGame()
     {
         RemovePlayerFromLobby();
+        PlayerPrefs.SetString("lastLobby", null);
         lobbyError.text = "";
         connectPanel.SetActive(false);
         loadingScreen.SetActive(true);
@@ -276,12 +354,20 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         // after start button is pressed players can no longer join
+        
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
+        // how long player's data is saved after disconnect (60 seconds here)
+        PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
+
+        timer.SetServerTime();
+
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
         {
-            GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);           
+            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
+
+            PhotonNetwork.LoadLevel(1);
         }
         // if > 4 players load into a different scene 
         else 
@@ -292,74 +378,119 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-        if (PhotonNetwork.IsMasterClient)
+     
+
+        if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
-            x = rnd.Next(11, 101);
-            lobby["Lobby"] = x;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-        }
-        else
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                PlayerPrefs.SetInt("disconnected", 0);
+                StartCoroutine(LoadScene());
+                //StartCoroutine(LoadSceneAsynchronously(1));
+
+                // Rejoin voice chat
+                rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+                x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+                rtcEngine.JoinChannel(x.ToString() + "Lobby");
+            } 
+            else
+            {
+                // to do what happens when master client disconnects
+            }
+        } 
+        // else if player not in disconnected state load normally
+        else if (!createLobby)
         {
-            AddPlayerToLobby();
-            x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-        }
-       
-        string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        if (band == "A")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            // tells player what their last joined lobby was so can reconnect if available
+            PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+            PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
+
+            rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                x = rnd.Next(11, 101);
+                lobby["Lobby"] = x;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+            }
+            else
+            {
+                AddPlayerToLobby();
+                x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+            }
+            string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+            if (band == "A")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
-        }else if (band == "B")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            }else if (band == "B")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
-        }else if(band == "C")
+            }else if(band == "C")
 
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
-        }else if (band == "D")
-        {
-            rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
-                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
+            }else if (band == "D")
+            {
+                rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
+                    AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
             
+            }
+            rtcEngine.JoinChannel(x.ToString() + "Lobby");
+
+            loadingScreen.SetActive(false);
+
+
+            // Auto balance team on join
+            if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            {
+                SetTeam(2);
+            }
+
+            this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
         }
-        
-        rtcEngine.JoinChannel(x.ToString() + "Lobby");
-
-
-        loadingScreen.SetActive(false);
-
-           
-        // Auto balance team on join
-        if (CheckTeamBalance() == 2 && PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            SetTeam(2);
-        }
-
-        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
+        isDisconnected = false;
     }
 
     public override void OnLeftRoom()
     {
+        createLobby = false;
+
         lobbyMenu.SetActive(false);
+        loadingScreen.SetActive(false);
         connectPanel.SetActive(true);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        Debug.LogError(message + " " + returnCode);
+        reconnectMenu.SetActive(false);
         loadingScreen.SetActive(false);
-        lobbyError.text = "Lobby does not exist!";
+
+        if (calledRejoin)
+        {
+            lobbyError.text = "Lobby no longer exists!";
+            PlayerPrefs.SetString("lastLobby", null);
+            PlayerPrefs.SetInt("disconnected", 0);
+        }
+        else
+        {
+            lobbyError.text = "Lobby does not exist!";
+        }
+        calledRejoin = false;
         connectPanel.SetActive(true);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
+        Debug.Log("create room fail");
         loadingScreen.SetActive(false);
+        isDisconnected = true;
+        reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }
 
@@ -375,9 +506,23 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        loadingScreen.SetActive(false);
-        lobby["Players"] = 1;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        if (createLobby)
+        {
+            PlayerPrefs.SetString("lastLobby", null);
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
+            PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
+            PlayerPrefs.SetInt("disconnected", 0);
+
+
+            loadingScreen.SetActive(false);
+            lobby["Players"] = 1;
+            timer.SetServerTime();
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -476,81 +621,41 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         loadingBarCanvas.SetActive(false);
     }
-    IEnumerator CheckInternetSpeed()
+
+    IEnumerator LoadScene()
     {
-
-        Stopwatch s = new Stopwatch();
-       
-        UnityWebRequest www = new UnityWebRequest("http://localhost:3000/");
-        www.downloadHandler = new DownloadHandlerBuffer();
-        www.SendWebRequest();
-        s.Start();
-        dt1 = DateTime.Now;
-
-          
-
-        while (true)
+        lobbyMenu.SetActive(false);
+        loadingScreen.SetActive(true);
+        loadingBarCanvas.SetActive(true);
+        while (PhotonNetwork.LevelLoadingProgress < 1.0f)
         {
-
-            if (www.isDone)
-            {
-                byte[] results = www.downloadHandler.data;
-                internetSpeed = Math.Round(results.Length * 0.008f/ s.Elapsed.TotalSeconds,2);
-                /*Debug.Log("SIZE "+results.Length);
-                Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
-                Debug.Log("SPEED "+internetSpeed);*/
-                //Debug.Log(internetSpeed);
-
-                yield break;
-            }
-
-            if (www.result != UnityWebRequest.Result.Success && www.result != UnityWebRequest.Result.InProgress)
-            {    
-                Debug.Log(www.error);
-            }
-                
-              
-
+            loadingBar.value = PhotonNetwork.LevelLoadingProgress;
             yield return null;
-
-            
         }
+        loadingBarCanvas.SetActive(false);
+        
+    }
+
+    // returns true if string is null or empty
+    private bool CheckStringNullorEmpty(string stringInput)
+    {
+        if (stringInput == null || stringInput == "")
+            return true;
+        return false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
         UpdateLobby();
-        if (internetSpeed > 0 && setInternetSpeed == false)
-        {
-            if (internetSpeed > 1000)
-            {
-                internet["Band"] = "A";
-
-            }
-            else if (internetSpeed < 1000 && internetSpeed > 700)
-            {
-                internet["Band"] = "B";
-            }
-            else if (internetSpeed < 700 && internetSpeed < 400)
-            {
-                internet["Band"] = "C";
-            }
-            else if (internetSpeed < 0 && internetSpeed < 400)
-            {
-                internet["Band"] = "D";
-            }
-
-            PhotonNetwork.LocalPlayer.SetCustomProperties(internet);
-            setInternetSpeed = true;
-        }
+   
     }
 
     [PunRPC]
     void UpdateLobby(string roomName)
     {
+        PlayerPrefs.SetInt("disconnected", 0);
         InitializeLobby(roomName);
     }
 
@@ -560,12 +665,11 @@ public class menuController : MonoBehaviourPunCallbacks
         timer.ChangeTimerValue(newTime);
     }
     [PunRPC]
-    void loadS(int levelIndex)
+    void loadSceneP()
     {
-        StartCoroutine(LoadSceneAsynchronously(levelIndex));
+        StartCoroutine(LoadScene());
+        //StartCoroutine(LoadSceneAsynchronously(1));
     }
    
   
 }
-
-

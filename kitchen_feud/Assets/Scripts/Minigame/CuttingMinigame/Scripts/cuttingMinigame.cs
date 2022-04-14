@@ -42,7 +42,7 @@ public class cuttingMinigame : MonoBehaviour
              Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
                 
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, CutController.finalScore);
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.OthersBuffered, CutController.finalScore);
                 dishOfFoundDish.points = CutController.finalScore;
 
                 // if player is team 2 but interacts with team1 stove, points doubled

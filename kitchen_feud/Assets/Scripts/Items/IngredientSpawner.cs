@@ -17,7 +17,7 @@ public class IngredientSpawner : Interactable
     protected override void Update(){
 
         base.Update();
-        int currentTime = timer.GetTime();
+        int currentTime = timer.GetLocalTime();
         if (currentTime <= totalTime/2 && !reset){
             GetComponent<PhotonView>().RPC("resetCount", RpcTarget.All);
         }

@@ -22,7 +22,7 @@ public class MouseControl : MonoBehaviour
     }
     
     public void Default(){
-        Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
     
 }
