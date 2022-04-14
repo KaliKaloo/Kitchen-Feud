@@ -10,7 +10,6 @@ public class stoveMinigame : MonoBehaviour
 {
     [SerializeField] public GameObject stoveCanvas;
     [SerializeField] public GameObject startButton;
-    bool pointset = false;
 
     StoveScore stoveScore = new StoveScore();
 

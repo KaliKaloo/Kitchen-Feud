@@ -30,7 +30,6 @@ public class FryingTimerBar : MonoBehaviour
             int seconds = Mathf.FloorToInt(time * 60f);
             if (time >= gameTime)
             {
-                //stopTimer = true;
                 time = 0;
                 slider.value = 0;
             }
@@ -43,22 +42,17 @@ public class FryingTimerBar : MonoBehaviour
         
         float tempTime = time;
         time = 0;
-        slider.value = 0;
-        //stopTimer = false;
+        if (slider)
+            slider.value = 0;
         points = SetFriedLevel(tempTime);
-        //return SetFriedLevel(tempTime);
         
     }
 
     public float SetFriedLevel(float value)
     {
-        return (float)(100f - abs(50f- value*5))/5;
+        return (float)(100f - Mathf.Abs(50f- value*5))/5;
     }
 
-    public float abs(float x) {
-       float result = x < 0 ? -x : x;
-       return result;
-    }
     [PunRPC]
     void syncSlider(int viewID,float time)
     {

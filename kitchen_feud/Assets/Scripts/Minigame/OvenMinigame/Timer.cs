@@ -19,6 +19,8 @@ public class Timer : MonoBehaviour
     public exitOven backbutton;
     public GameObject sabotageButton;
     string applianceName;
+    public GameObject Team1Image;
+    public GameObject Team2Image;
     PhotonRoom room;
 
     void Start()
@@ -32,10 +34,20 @@ public class Timer : MonoBehaviour
 
         if(applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2){
             sabotageButton.SetActive(true);
+
         }
         else if (applianceName == "Oven2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1){
             sabotageButton.SetActive(true);
-        }   
+            GameObject.FindGameObjectWithTag("Team1Oven");
+        }
+
+        if (applianceName == "Oven1")
+        {
+            Team1Image.SetActive(true);
+        }else if (applianceName == "Oven2")
+        {
+            Team2Image.SetActive(true);
+        }
     }
 
     void Update()

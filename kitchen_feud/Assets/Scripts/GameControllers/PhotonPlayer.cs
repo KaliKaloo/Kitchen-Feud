@@ -9,22 +9,25 @@ public class PhotonPlayer : MonoBehaviour
     public PhotonView PV;
     public GameObject myAvatar;
     public int playersCount;
-    GameObject Team1;
-    GameObject Team2;
+
+
     public Hashtable scene = new Hashtable();
     public bool SceneLoaded;
 
-    // Start is called before the first frame update
+    GameObject[] Team1;
+    GameObject[] Team2;
+
+
     void Start()
     {
         SceneLoaded = false;
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-          //  PV.RPC("RPC_GetTeam", RpcTarget.MasterClient);
-            Team1 = GameObject.FindGameObjectWithTag("Team1");
-            Team2 = GameObject.FindWithTag("Team2");
-            
+
+            Team1 = GameObject.FindGameObjectsWithTag("Team1");
+            Team2 = GameObject.FindGameObjectsWithTag("Team2");
+
         }
     }
 
@@ -42,23 +45,33 @@ public class PhotonPlayer : MonoBehaviour
                 Debug.LogError("RECREATING");
                 if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
+
                     if (PV.IsMine)
                     {
                         
-                        int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
-                        myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
-                            GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-                        Team2.SetActive(false);
+
+                    int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
+                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_cat_Model"),
+                        GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
+                    
+                    foreach (GameObject obj in Team2){
+                        obj.SetActive(false);
+
                     }
                 }
                 else
                 {
+
                     if (PV.IsMine)
                     {
-                        int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
-                        myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "cat_playerModel"),
-                            GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
-                        Team1.SetActive(false);
+
+                    int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
+                    myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_panda_Model"),
+                        GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
+                    foreach (GameObject obj in Team1){
+                        obj.SetActive(false);
+                    }
+
 
 
                     }
