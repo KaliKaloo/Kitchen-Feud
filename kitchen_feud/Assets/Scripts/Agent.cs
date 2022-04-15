@@ -123,11 +123,10 @@ public class Agent : MonoBehaviour
                 {
                     agent.SetDestination(GameSetup.GS.WSP1[0].position);
                 }
-                float newDist = RemainingDistance(agent.path.corners);
-                float dist1 = agent.remainingDistance;
+                float remDist = agent.remainingDistance;
 
 
-                if (dist1 != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
+                if (remDist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
                 {
                     served = false;
                 }
