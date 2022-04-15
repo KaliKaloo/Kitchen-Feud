@@ -128,6 +128,8 @@ public class Agent : MonoBehaviour
 
                 if (remDist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
                 {
+                    agent.transform.rotation = Quaternion.identity;
+                    
                     served = false;
                 }
 
