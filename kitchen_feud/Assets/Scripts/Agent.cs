@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ public class Agent : MonoBehaviour
     public PhotonView PV;
     public bool readyToServe;
     public GameObject agentTray;
-
+    public bool served;
     private bool test = false;
     // Start is called before the first frame update
     void Start()
@@ -92,9 +93,11 @@ public class Agent : MonoBehaviour
             if (readyToServe)
             {
                 float newDist = RemainingDistance(agent.path.corners);
-                if (tray.SP)
+                if (tray.SP && !agent.hasPath)
                 {
                     agent.SetDestination(tray.SP.transform.position);
+                    tray.GetComponent<PhotonView>().RPC("setDestF",RpcTarget.All,tray.GetComponent<PhotonView>().ViewID);
+                    
                 }
 
                 //Find Serving point and assign it to tray using 
@@ -102,12 +105,35 @@ public class Agent : MonoBehaviour
                 {
                     tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                    
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
-
+                    
                     readyToServe = false;
+                    if(agentTray){PhotonNetwork.Destroy(agentTray);}
+                    
+                    served = true;
+                    
 
                 }
             }
+
+            if (served)
+            {
+                if (!agent.hasPath)
+                {
+                    agent.SetDestination(GameSetup.GS.WSP1[0].position);
+                }
+                float newDist = RemainingDistance(agent.path.corners);
+                float dist1 = agent.remainingDistance;
+
+
+                if (dist1 != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
+                {
+                    served = false;
+                }
+
+            }
+            
 
 
     
