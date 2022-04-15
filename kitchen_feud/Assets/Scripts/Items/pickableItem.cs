@@ -26,15 +26,15 @@ public class pickableItem : Interactable
 
         if (player.transform.Find("slot").childCount == 0) {
             if (onAppliance == false && onTray == false) {
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
             }
 			else if (onTray == true){
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
                 tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
 			}
             else if (onAppliance == true){
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
                 applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}

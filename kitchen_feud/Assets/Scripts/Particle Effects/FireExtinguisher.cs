@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireExtinguisher : Interactable
-{
+{ 
    // public BaseFood item; 
     private ParticleSystem PS; 
     private bool click = true;
+    PlayerHolding playerHold;
+
     public override void Interact()
     { 
-        if (click == false){
-            PS.Stop();
-            click = true;
+        playerHold = player.GetComponent<PlayerHolding>();
+        if (player.transform.Find("slot").childCount == 0) {
+                playerHold.pickUpItem(gameObject);
+                Debug.Log("pickup");
         }
         else {
-            click = false;
-            PS = gameObject.GetComponentInChildren<ParticleSystem>();
-            PS.Play();
+            
+            playerHold.dropItem();
         }
     }
 }
