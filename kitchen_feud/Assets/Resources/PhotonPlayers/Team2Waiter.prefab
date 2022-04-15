@@ -874,6 +874,7 @@ MonoBehaviour:
   PV: {fileID: 0}
   readyToServe: 0
   agentTray: {fileID: 0}
+  served: 0
 --- !u!114 &1174581375946679660
 MonoBehaviour:
   m_ObjectHideFlags: 0
