@@ -26,7 +26,7 @@ public class musicRandom : MonoBehaviour
 
     public static musicRandom instance;
 
-    private Track track;
+    private static Track track;
 
     
     void Awake(){
@@ -38,6 +38,7 @@ public class musicRandom : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        track = Track.k2_2;
         playRandom();      
     }
 
@@ -54,18 +55,18 @@ public class musicRandom : MonoBehaviour
     private void findTrackArray(){
         switch (track)
         {
-            case (Track)1:
+            case (Track)0:
                 musicClips = k1_1;
                 break;
 
-            case (Track)2:
+            case (Track)1:
                 musicClips = k1_2;
                 break;
 
-            case (Track)3:
+            case (Track)2:
                 musicClips = k2_1;
                 break;
-            case (Track)4:
+            case (Track)3:
                 musicClips = k2_2;
                 break;
 
@@ -76,6 +77,8 @@ public class musicRandom : MonoBehaviour
 
 
     public AudioClip GetRandomAudioClip() {
+
+
         findTrackArray();
         if (previousArray == null || previousArray.Length != musicClips.Length / 2) {
             previousArray = new int[musicClips.Length / 2];
