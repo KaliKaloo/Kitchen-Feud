@@ -31,6 +31,8 @@ TagManager:
   - Waiter1
   - Waiter2
   - ServingPoint2
+  - Customer2
+  - Customer1
   layers:
   - Default
   - TransparentFX
