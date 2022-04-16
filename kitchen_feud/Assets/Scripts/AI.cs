@@ -31,6 +31,7 @@ public class AI : MonoBehaviour
                 {
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), (GameSetup.GS.WSP1[0].position), Quaternion.identity);
                     agentsT1.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter1");
                     //Agent.GetComponent<PhotonView>().TransferOwnership(1000);
                     //Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[0].position.x, GameSetup.GS.WSP1[0].position.y, GameSetup.GS.WSP1[0].position.z));
                 }
@@ -39,6 +40,8 @@ public class AI : MonoBehaviour
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), GameSetup.GS.WSP1[1].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[1].position.x, GameSetup.GS.WSP1[1].position.y, GameSetup.GS.WSP1[1].position.z));
                     agentsT1.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter2");
+
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }
@@ -48,6 +51,8 @@ public class AI : MonoBehaviour
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP1[2].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
                     agentsT1.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter3");
+
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }
@@ -61,6 +66,8 @@ public class AI : MonoBehaviour
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[0].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
                     agentsT2.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter1");
+
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 1)
@@ -69,6 +76,8 @@ public class AI : MonoBehaviour
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[1].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
                     agentsT2.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter2");
+
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 2)
@@ -77,6 +86,8 @@ public class AI : MonoBehaviour
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
                     Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[2].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
                     agentsT2.Add(Agent);
+                    Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter3");
+
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
                 }
@@ -149,6 +160,25 @@ public class AI : MonoBehaviour
                 //Agent.GetPhotonView().TransferOwnership(1000);
 
             }
+
+            if (GameObject.Find("SP21").GetComponent<Serving>().used)
+            {
+                GameObject[] SP2s = GameObject.FindGameObjectsWithTag("ServingPoint2");
+                for (int i = 0; i < SP2s.Length;i++)
+                {
+                    SP2s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP2s[i].GetPhotonView().ViewID);
+                }
+            }
+            if (GameObject.Find("Serving Point (3)").GetComponent<Serving>().used)
+            {
+                GameObject[] SP1s = GameObject.FindGameObjectsWithTag("ServingPoint1");
+                for (int i = 0; i < SP1s.Length;i++)
+                {
+                    SP1s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP1s[i].GetPhotonView().ViewID);
+                }
+            }
+
+            
         }
         }
     }

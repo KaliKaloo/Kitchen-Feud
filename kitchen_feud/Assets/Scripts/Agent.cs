@@ -19,6 +19,7 @@ public class Agent : MonoBehaviour
     public GameObject agentTray;
     public bool served;
     private bool test = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -105,7 +106,7 @@ public class Agent : MonoBehaviour
                 {
                     tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
-                    
+
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
                     
                     readyToServe = false;
@@ -121,21 +122,31 @@ public class Agent : MonoBehaviour
             {
                 if (!agent.hasPath)
                 {
-                    agent.SetDestination(GameSetup.GS.WSP1[0].position);
+                    
+                    int index = int.Parse(agent.name[6].ToString());
+                    Debug.LogError(index);
+                    if (agent.CompareTag("Waiter1"))
+                    {
+                        agent.SetDestination(GameSetup.GS.WSP1[index - 1].position);
+                    }else if (agent.CompareTag("Waiter2"))
+                    {
+                        agent.SetDestination(GameSetup.GS.WSP2[index - 1].position);
+
+                    }
                 }
                 float remDist = agent.remainingDistance;
 
 
                 if (remDist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
                 {
+
                     agent.transform.rotation = Quaternion.identity;
                     
                     served = false;
                 }
 
             }
-            
-
+         
 
     
 
@@ -170,6 +181,12 @@ public class Agent : MonoBehaviour
 
         PhotonView.Find(agentID).GetComponent<Agent>().tray = null;
 
+    }
+
+    [PunRPC]
+    void setAgentName(int viewID, string x)
+    {
+        PhotonView.Find(viewID).name = x;
     }
 
 }
