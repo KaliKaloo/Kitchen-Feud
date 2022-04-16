@@ -28,13 +28,13 @@ public class DoorController : MonoBehaviour
             if (cube.gameObject.tag == "Player" && isOpened == false)
             {
 
-                PV.RPC("syncAnim", RpcTarget.All, mydoor.GetComponent<PhotonView>().ViewID, Open);
-                PV.RPC("syncIsOpened", RpcTarget.All, 1);
-                PV.RPC("incrementDoor", RpcTarget.All);
+                PV.RPC("syncAnim", RpcTarget.AllBuffered, mydoor.GetComponent<PhotonView>().ViewID, Open);
+                PV.RPC("syncIsOpened", RpcTarget.AllBuffered, 1);
+                PV.RPC("incrementDoor", RpcTarget.AllBuffered);
             }
             else if (cube.gameObject.tag == "Player" && isOpened == true)
             {
-                PV.RPC("incrementDoor", RpcTarget.All);
+                PV.RPC("incrementDoor", RpcTarget.AllBuffered);
 
             }
         }
@@ -50,13 +50,13 @@ public class DoorController : MonoBehaviour
             {
                 if (count > 1)
                 {
-                    PV.RPC("decrementDoor", RpcTarget.All);
+                    PV.RPC("decrementDoor", RpcTarget.AllBuffered);
                 }
                 else
                 {
-                    PV.RPC("syncAnim", RpcTarget.All, mydoor.GetComponent<PhotonView>().ViewID, Close);
-                    PV.RPC("syncIsOpened", RpcTarget.All, 0);
-                    PV.RPC("decrementDoor", RpcTarget.All);
+                    PV.RPC("syncAnim", RpcTarget.AllBuffered, mydoor.GetComponent<PhotonView>().ViewID, Close);
+                    PV.RPC("syncIsOpened", RpcTarget.AllBuffered, 0);
+                    PV.RPC("decrementDoor", RpcTarget.AllBuffered);
                 }
 
 

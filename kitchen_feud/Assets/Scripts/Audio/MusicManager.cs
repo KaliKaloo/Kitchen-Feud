@@ -40,7 +40,7 @@ public class MusicManager : MonoBehaviour
 
     void Update()
     {
-        if (!switched && !inMG && timer.GetCurrentTime() < (int)(totalTime*0.3)){
+        if (!switched && !inMG && timer.GetLocalTime() < (int)(totalTime*0.3)){
             if(location == 1 || location == 2){
                 switched = true;
                 changeBGM(location, 10, 0, 1);

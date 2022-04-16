@@ -17,6 +17,7 @@ public class playerMvmt : MonoBehaviour
     float Horizontal;
     float Vertical;
     Vector3 movement;
+    
 
     private Animator animator;
 
@@ -48,6 +49,10 @@ public class playerMvmt : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
+            //SideStepping animation
+            if (Vertical == 0f && Horizontal != 0)
+            {
+            }
 
             float dotProduct = Vector3.Dot(movement, transform.forward);
 

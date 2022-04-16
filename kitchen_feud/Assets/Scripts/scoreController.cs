@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // IMPORTANT:
 // timer and score parser class have been moved to separate scripts
@@ -15,11 +16,12 @@ public class scoreController : MonoBehaviour
 {
     [SerializeField] private Text score1Text;
     [SerializeField] private Text score2Text;
-
+    private bool gameOver;
     [SerializeField] private Text timerText;
     [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
+    Hashtable ht = new Hashtable();
 
     // updates end scores to compare in game over scene
     private static ParseScore scores = new ParseScore();
@@ -36,12 +38,27 @@ public class scoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;    
+        PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
         loadingScreen.SetActive(true);
 
       
         // send message to server that finished loading
-  
+        if (PhotonNetwork.CurrentRoom.CustomProperties["Players"] != null)
+        {
+            int currentPlayers = (int) PhotonNetwork.CurrentRoom.CustomProperties["Players"];
+
+
+
+            if (currentPlayers > 0)
+                lobby["Players"] = currentPlayers - 1;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        }
+
+        PlayerPrefs.Save();
+
+        CustomProperties.PlayerResetStats.ResetAll();
 
         cleanupRoom = this.GetComponent<CleanupRoom>();
 
@@ -73,16 +90,28 @@ public class scoreController : MonoBehaviour
             
             if (startGame)
             {
+                OutputTime();
+
                 score1Text.text = ConvertScoreToString(scores.GetScore1());
                 score2Text.text = ConvertScoreToString(scores.GetScore2());
+           
+                    // increment every second
+                    /*elapsed += Time.deltaTime;
+                    if (elapsed >= 1f)
+                    {
+                        elapsed = elapsed % 1f;
 
-                // increment every second
-                elapsed += Time.deltaTime;
-                if (elapsed >= 1f)
+                        OutputTime();
+                  
+                    }
+                
+                else
                 {
-                    elapsed = elapsed % 1f;
-                    OutputTime();
-                }
+                    if (PhotonNetwork.CurrentRoom.CustomProperties["time"] != null)
+                    {
+                        timerText.text = PhotonNetwork.CurrentRoom.CustomProperties["time"].ToString();
+                    }
+                }*/
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
             {
@@ -98,8 +127,14 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                timer.InitializeTimer();
-                timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            
+                 timer.SetLocalTime();
+                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                 timer.StartTimer(this);
+
+                
+
+
                 music = FindObjectOfType<MusicManager>();
             }
         }
@@ -109,7 +144,9 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
-            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            timer.StartTimer(this);
+
             music = FindObjectOfType<MusicManager>();
         }
     }
@@ -118,16 +155,16 @@ public class scoreController : MonoBehaviour
     void OutputTime()
     {
 
-        if (timer.GetTime() > 0)
+        if (timer.GetLocalTime() > 0)
         {
             // updates timer and text in timer
-            timer.Decrement();
-            timerText.text = ConvertSecondToMinutes(timer.GetTime());
+            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
         }
 
         // SIGNAL FOR GAME OVER:
-        else
+        else if(gameOver == false)
         {
+            
             // load game over screen and send final scores
             for (int i = 0; i < trays.Count; i++)
             {
@@ -136,7 +173,14 @@ public class scoreController : MonoBehaviour
                 ts.tray.ServingTray.Clear();
                 ts.tray.objectsOnTray.Clear();
             }
-            PhotonNetwork.LoadLevel("gameOver");
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+            
+                    PhotonNetwork.LoadLevel("gameOver");
+               
+            }
+
             // calls this to clean objects which need resetting
             cleanupRoom.Clean();
                         
@@ -146,7 +190,10 @@ public class scoreController : MonoBehaviour
             // sends to server that game has finished
             lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+            gameOver = true;
+
         }
+
 
     }
 

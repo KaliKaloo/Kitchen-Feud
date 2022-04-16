@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,6 +80,8 @@ public class ExitFryingMinigame : MonoBehaviour
 
 		}
 
+	
+
 		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	
 		PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers.Clear();
 
@@ -102,6 +105,6 @@ public class ExitFryingMinigame : MonoBehaviour
     {
 	    PhotonView.Find(viewID).GetComponent<Appliance>().canvas.SetActive(true);
     }
-  
+
 
 }

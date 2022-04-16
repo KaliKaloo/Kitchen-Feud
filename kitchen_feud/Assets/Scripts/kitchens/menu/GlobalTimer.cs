@@ -1,13 +1,16 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
 public class GlobalTimer
 {
 
+    private Coroutine timerCoroutine;
+
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    private static int time = 600;
+    private readonly int startTime = time;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
@@ -32,6 +35,13 @@ public class GlobalTimer
         }
     }
 
+    // sets the server's timer
+    public void SetServerTime()
+    {
+        hashTimer["Time"] = timer;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
+    }
+
     public void ChangeTimerValue(int newTime)
     {
         timer = time = newTime >= 0 ? newTime : 0;
@@ -42,11 +52,33 @@ public class GlobalTimer
         return time;
     }
 
-    public int GetCurrentTime()
+    // gets the time from the server
+    public int GetTime()
+    {
+        if (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.CustomProperties["Time"] != null)
+            return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+
+        return 0;
+    }
+
+    public int GetLocalTime()
     {
         return timer;
     }
 
+    public void SetLocalTime()
+    {
+        timer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"] - 1;        
+    }
+
+    // resets the timer to original starting value
+    // call every time the game ends
+    public void ResetTimer()
+    {
+        timer = time = startTime;
+    }
+
+    // Converts an int into a suitable string for timer
     public string ConvertSecondToMinutes(int seconds)
     {
         TimeSpan time = TimeSpan.FromSeconds(seconds);
@@ -54,12 +86,13 @@ public class GlobalTimer
         return str;
     }
 
+    // returns the current time in string format to be displayed on UI
     public string GetCurrentTimeString()
     {
         return ConvertSecondToMinutes(time);
     }
 
-    // set the timer amount here 
+    // set the timer amount here by getting it from the server
     public void InitializeTimer()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -67,39 +100,45 @@ public class GlobalTimer
 
             // how long the timer will last in seconds
             timer = time;
-            ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable() { { "Time", timer } };
-            PhotonNetwork.CurrentRoom.SetCustomProperties(ht);
-
+            hashTimer["Time"] = timer;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
         }
         else
         {
-            // temporary fix
-            timer = TryTime();
+            timer = GetLocalTime();
         }
     }
 
-    // avoiding trying to access hashmap without master client loading
-    private int TryTime()
+    // decrement the timer locally
+    // ENSURE all local timer values are the same when game starts
+    public void StartTimer(MonoBehaviour monoBehaviour)
     {
-        int currentTime;
-        try
-        {
-            currentTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        }
-        catch
-        {
-            currentTime = timer;
-        }
-        return currentTime;
+        monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
     }
 
-    // get current time from timer
-    public int GetTime()
+    private IEnumerator DecrementTimer(MonoBehaviour monoBehaviour)
     {
-        return TryTime();
-    }
+        yield return new WaitForSeconds(1);
 
-    // decrement timer
+        timer -= 1;
+
+        if (timer <= 0)
+        {
+            timerCoroutine = null;
+        } 
+        else
+        {
+            timerCoroutine = monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
+            if (PhotonNetwork.IsMasterClient)
+            {
+                SetServerTime();
+            }
+        }
+    }
+    
+
+
+    // DEPRECATED: decrement timer
     public void Decrement()
     {
         timer -= 1;
