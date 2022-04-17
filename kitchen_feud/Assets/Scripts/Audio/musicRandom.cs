@@ -38,17 +38,16 @@ public class musicRandom : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        track = Track.k2_2;
+        track = Track.k2_1;
         playRandom();      
     }
+
 
 
     public void playRandom(){
         audioSource.clip = GetRandomAudioClip();
         audioSource.Play();
         Invoke("playRandom", audioSource.clip.length);
-
-        
     }
 
 
@@ -78,7 +77,7 @@ public class musicRandom : MonoBehaviour
 
     public AudioClip GetRandomAudioClip() {
 
-
+        
         findTrackArray();
         if (previousArray == null || previousArray.Length != musicClips.Length / 2) {
             previousArray = new int[musicClips.Length / 2];

@@ -9,7 +9,8 @@ public class MusicManager2 : MonoBehaviour
     private static GlobalTimer timer = new GlobalTimer();
     private AudioSource track1, track2;
 
-    private AudioClip k1track1, k1track2, k1_MG, k2track1, k2track2, k2_MG, hallway;
+    private AudioClip k1track1, k1track2, k2track1, k2track2, hallway;
+    public AudioClip k1_MG, k2_MG ;
 
     private int totalTime;
 
@@ -40,14 +41,16 @@ public class MusicManager2 : MonoBehaviour
 
     void Update()
     {
+        // switch to part 2 tracks
         if (!switched && !inMG && timer.GetLocalTime() < (int)(totalTime*0.3)){
             if(location == 1 || location == 2){
                 switched = true;
                 changeBGM(location, 10, 0, 1);
             }
         }
+        musicRandom.instance.playRandom();      
         
-
+        //start playing
         if (!played){
             if (location == 1){
                 track1.clip = k1track1;
@@ -61,16 +64,11 @@ public class MusicManager2 : MonoBehaviour
             StartCoroutine(fadeTrack(track1, 10, 0));
         }
 
-        //set music volume
-        GameObject volumeSlider = GameObject.Find("Music Volume");
-        if (volumeSlider){
-            musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
-            if (track1.isPlaying && !track2.isPlaying)
-                track1.volume = musicVol;
-            else if (track2.isPlaying && !track1.isPlaying)
-                track2.volume = musicVol;
-        }
+        setVolume();
     }
+
+
+    
 
     private IEnumerator fadeTrack(AudioSource source, int FadeTime, float startVol){
         float timeElapsed = 0;
@@ -83,6 +81,7 @@ public class MusicManager2 : MonoBehaviour
 
 
     public void minigameSwitch(){
+        //switch to MG music
         AudioClip newTrack;
         newTrack = (location == 1) ? k1_MG : k2_MG;
         StartCoroutine(switchTrack(newTrack, 1, 0, 1));
@@ -91,25 +90,28 @@ public class MusicManager2 : MonoBehaviour
 
 
     public void minigameEnd(){
+        //change back to kitchen music
         changeBGM(location, 1, 0, 1);
     }
     
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
-        AudioClip newTrack;
         if (team == 1){
-            newTrack = switched ? k1track2 : k1track1;
+            musicRandom.instance.track = switched ? Track.k1_2 : Track.k1_1;
         }else if (team == 2){
-            newTrack = switched ? k2track2 : k2track1;
+            musicRandom.instance.track = switched ? Track.k2_2 : Track.k2_1;
         }else{
-            newTrack = hallway;
+            // newTrack = hallway;
         }
-        bool track1Switch = (track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2);
-        StartCoroutine(switchTrack(newTrack, FadeTime, minVol, maxVol));
+        // musicRandom.instance.playRandom();      
+
+        // bool track1Switch = (track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2);
+        // StartCoroutine(switchTrack(newTrack, FadeTime, minVol, maxVol));
     }
 
 
     private IEnumerator switchTrack(AudioClip newTrack, int FadeTime, float minVol, float maxVol){
+        //fade music between track switch
         float timeElapsed = 0;
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
@@ -153,6 +155,19 @@ public class MusicManager2 : MonoBehaviour
                 
                 track2.Stop();
             } 
+        }
+    }
+
+
+    private void setVolume(){
+        //set music volume
+        GameObject volumeSlider = GameObject.Find("Music Volume");
+        if (volumeSlider){
+            musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
+            if (track1.isPlaying && !track2.isPlaying)
+                track1.volume = musicVol;
+            else if (track2.isPlaying && !track1.isPlaying)
+                track2.volume = musicVol;
         }
     }
   
