@@ -363,7 +363,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
         timer.SetServerTime();
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 6)
         {
             GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
 
