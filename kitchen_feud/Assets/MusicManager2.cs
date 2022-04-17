@@ -24,13 +24,13 @@ public class MusicManager2 : MonoBehaviour
     public bool inMG = false;
     public float musicVol = 0.1f;
 
-    
+    //DONE
     void Awake(){
         if (instance == null){
             instance = this;
         }
     }
-    
+    //DONE
     void Start()
     {
         totalTime = timer.GetTotalTime();
@@ -48,7 +48,7 @@ public class MusicManager2 : MonoBehaviour
                 changeBGM(location, 10, 0, 1);
             }
         }
-        musicRandom.instance.playRandom();      
+        // musicRandom.instance.playRandom();      
         
         //start playing
         if (!played){
@@ -96,13 +96,13 @@ public class MusicManager2 : MonoBehaviour
     
     public void changeBGM(int team, int FadeTime, float minVol, float maxVol){
         StopAllCoroutines();
-        if (team == 1){
-            musicRandom.instance.track = switched ? Track.k1_2 : Track.k1_1;
-        }else if (team == 2){
-            musicRandom.instance.track = switched ? Track.k2_2 : Track.k2_1;
-        }else{
-            // newTrack = hallway;
-        }
+        // if (team == 1){
+        //     musicRandom.instance.track = switched ? Track.k1_2 : Track.k1_1;
+        // }else if (team == 2){
+        //     musicRandom.instance.track = switched ? Track.k2_2 : Track.k2_1;
+        // }else{
+        //     // newTrack = hallway;
+        // }
         // musicRandom.instance.playRandom();      
 
         // bool track1Switch = (track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2);
@@ -158,7 +158,7 @@ public class MusicManager2 : MonoBehaviour
         }
     }
 
-
+    // DONE
     private void setVolume(){
         //set music volume
         GameObject volumeSlider = GameObject.Find("Music Volume");

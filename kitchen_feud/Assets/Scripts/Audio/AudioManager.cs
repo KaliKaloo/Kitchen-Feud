@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
-        musicRandom.instance.team = myTeam;
+        MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
         band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
@@ -85,7 +85,7 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                MusicManager.instance.changeBGM(team, 10, 0, 1);
+                // MusicManager.instance.changeBGM(team, 10, 0, 1);
                 MusicManager.instance.location = team;
 
                 if (team == 1)
