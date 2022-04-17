@@ -24,6 +24,9 @@ TagManager:
   - Dish
   - Kitchen1Portals
   - Kitchen2Portals
+  - ExplodingBox
+  - Balloon
+  - Water
   - Team1Oven
   - Team2Oven
   layers:
@@ -38,8 +41,7 @@ TagManager:
   - Particle Effects
   - Pickable
   - ME
-  - 
-  - 
+  - Walls
   - 
   - 
   - 

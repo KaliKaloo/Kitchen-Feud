@@ -78,6 +78,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
+			else if (Input.GetKeyDown(KeyCode.Q) && player.transform.Find("slot").GetChild(0) ){
+				Transform fireExtinguisher = player.transform.Find("slot").GetChild(0);
+				ParticleSystem fire_ps = fireExtinguisher.GetComponentInChildren<ParticleSystem>();
+
+				if(fireExtinguisher.name == "fireExtinguisher"){
+					if(fire_ps && !fire_ps.isPlaying){
+						fire_ps.Play();
+					}else{
+						fire_ps.Stop();
+					}
+				}
+			}
 		}
 		
 	}

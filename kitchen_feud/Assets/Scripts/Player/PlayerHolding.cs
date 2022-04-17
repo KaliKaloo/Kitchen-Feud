@@ -38,7 +38,7 @@ public class PlayerHolding : MonoBehaviour
     PickupLock pickupLock = new PickupLock();
 
 
-    public void pickUpItem(GameObject obj, BaseFood item)
+    public void pickUpItem(GameObject obj)
     {
         // if serve canvas is enabled then dont let player pickup item
         if (!pickupLock.GetLock())
@@ -49,13 +49,14 @@ public class PlayerHolding : MonoBehaviour
             {
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
-                    slotItem(obj, item);
+                    slotItem(obj);
+
                 }
                 else
                 {
                     this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                    slotItem(obj, item);
+                    slotItem(obj);
                 }
             }
         }
@@ -73,7 +74,7 @@ public class PlayerHolding : MonoBehaviour
 
 
 
-    void slotItem(GameObject obj, BaseFood item)
+    void slotItem(GameObject obj)
     {
 
         
