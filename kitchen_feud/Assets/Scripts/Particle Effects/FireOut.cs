@@ -12,9 +12,8 @@ public class FireOut : MonoBehaviour {
     private ParticleSystem fireParticles;
     private ParticleSystem.EmissionModule fireEmission;
     private bool notFound = false;
-    private float currentEmission = 0;
+    public float currentEmission = 0;
     [SerializeField] private float fadeRate = 1;
-    public bool EnableScript = false;
 
     // Use this for initialization
     void Start()
@@ -34,8 +33,6 @@ public class FireOut : MonoBehaviour {
         }
     }
 
-
-	
 	void Update () {
         // if no particle system, do nothing
         if (notFound)
@@ -44,23 +41,20 @@ public class FireOut : MonoBehaviour {
         if (currentEmission <= 0)
         {
             fireParticles.Stop();
-            Debug.Log("fire stopped");
             foreach(ParticleSystem p in PS){
                 if(p.isPlaying){
                     
-
                     p.Stop();
-                    Debug.Log(p.name);
                 }
             }
             this.enabled = false;
+        
         }
 	}
 
+
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("hit");
-        // if fire got wet decrease emission rate
         if (other.tag == "Water")
         {
             currentEmission -= fadeRate;

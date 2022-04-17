@@ -4827,7 +4827,6 @@ GameObject:
   - component: {fileID: 2160941408420496604}
   - component: {fileID: 2246645968496200678}
   - component: {fileID: 2246749658892966388}
-  - component: {fileID: 6150447911786530205}
   m_Layer: 0
   m_Name: PS_Fire_Parent
   m_TagString: Untagged
@@ -9637,18 +9636,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &6150447911786530205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2155349878068669430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d950cdb43a0c7249b48c10089835dbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2155874997883468494
 GameObject:
   m_ObjectHideFlags: 0
@@ -24124,5 +24111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9557ddf1fe6964446b58d3b2e8c600f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeRate: 1
-  EnableScript: 0
+  fadeRate: 0.03

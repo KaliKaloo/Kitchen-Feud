@@ -1096,6 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8015cbe553d6ed74e82de3c78256d167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startFire: 0
   fireSound: {fileID: 0}
   fireOut: {fileID: 0}
 --- !u!82 &6402538452251051095
