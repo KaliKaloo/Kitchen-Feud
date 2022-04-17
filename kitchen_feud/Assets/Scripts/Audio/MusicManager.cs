@@ -10,8 +10,9 @@ public class MusicManager : MonoBehaviour
 
     private AudioSource track1, track2;
 
-
-    public AudioClip[] k1_1, k1_2, k2_1, k2_2, musicClips;
+    public MusicHolder k1_1, k1_2, k2_1, k2_2, musicClips;
+    // public AudioClip[] musicClips;
+//k1_1, k1_2, k2_1, k2_2,
     public AudioClip k1_MG, k2_MG ;
 
     private int audioClipIndex;
@@ -70,7 +71,7 @@ public class MusicManager : MonoBehaviour
     }
 
     public void playRandom(){
-        track1.clip = GetRandomAudioClip();
+        track1.clip = musicClips.GetRandomAudioClip();
         track1.Play();
         Invoke("playRandom", track1.clip.length);
     }
@@ -90,36 +91,7 @@ public class MusicManager : MonoBehaviour
     }
 
 
-    public AudioClip GetRandomAudioClip() {
-        if (previousArray == null || previousArray.Length != musicClips.Length / 2) {
-            previousArray = new int[musicClips.Length / 2];
-        }
-        if (previousArray.Length == 0) {
-            return null;
-        } else {
-            do {
-                audioClipIndex = Random.Range(0, musicClips.Length);
-            } while (PreviousArrayContainsAudioClipIndex());
-            previousArray[previousArrayIndex] = audioClipIndex;
-            previousArrayIndex++;
-            if (previousArrayIndex >= previousArray.Length) {
-                previousArrayIndex = 0;
-            }
-        }
-
-        return musicClips[audioClipIndex];
-    }
-
-    private bool PreviousArrayContainsAudioClipIndex() {
-        for (int i = 0; i < previousArray.Length; i++) {
-            if (previousArray[i] == audioClipIndex) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
+    
     private void setVolume(){
         GameObject volumeSlider = GameObject.Find("Music Volume");
         if (volumeSlider){
