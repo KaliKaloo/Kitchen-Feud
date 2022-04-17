@@ -16,10 +16,17 @@ public class pickableItem : Interactable
     public Tray tray2;
     public Appliance appliance;
     public SlotsController applianceSlots;
+
+    public Vector3 defaultScale;
     //SOUND --------------------------------------------
     public AudioSource dropSound;
    //-----------------------------------------------------
-    public override void Interact()
+   private void Start()
+   {
+       defaultScale = transform.localScale;
+   }
+
+   public override void Interact()
     {
         
         playerHold = player.GetComponent<PlayerHolding>();
@@ -79,6 +86,11 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
             PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+            if (PhotonView.Find(viewID1).name.Contains("Tray"))
+            {
+                PhotonView.Find(viewID).transform.localScale =
+                    PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
+            }
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }
