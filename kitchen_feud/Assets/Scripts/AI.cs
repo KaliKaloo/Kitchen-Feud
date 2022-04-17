@@ -58,7 +58,7 @@ public class AI : MonoBehaviour
                 }
             }
 
-            if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Waiter2").Length < 3)
+            if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Waiter2").Length < 2)
             {
                 if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 0)
                 {
@@ -80,7 +80,7 @@ public class AI : MonoBehaviour
 
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
-                }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 2)
+                }/*else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 2)
                 {
 
                     Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
@@ -90,7 +90,7 @@ public class AI : MonoBehaviour
 
                     // Agent.GetComponent<PhotonView>().TransferOwnership(1000);
 
-                }
+                }*/
             }
 
             if (agentsT1.Count == 3)
@@ -105,7 +105,7 @@ public class AI : MonoBehaviour
                         foreach (GameObject a in agentsT1)
                         {
 
-                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0)
+                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0 && a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
                             {
                                 //Assign Tray to waiter
                                 a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
@@ -127,7 +127,7 @@ public class AI : MonoBehaviour
 
             }
             
-            if (agentsT2.Count == 3)
+            if (agentsT2.Count == 2)
             {
                 foreach (Transform ts in GameObject.Find("k2").transform.Find("Trays"))
                 {
@@ -139,7 +139,7 @@ public class AI : MonoBehaviour
                         foreach (GameObject a in agentsT2)
                         {
 
-                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0)
+                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0&&a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
                             {
                                 //Assign Tray to waiter
                                 a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,

@@ -52,13 +52,18 @@ public class Agent : MonoBehaviour
 
             if (tray)
             {
+                Vector3 trayPos = tray.transform.position;
+
                 if (!agent.hasPath)
                 {
-
-                    agent.SetDestination(tray.transform.position);
+                    agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 1));
                 }
+                Debug.LogError(agent.pathStatus);
+                Debug.LogError(agent.remainingDistance);
+                
 
-                if (dist < 1.3f && dist != 0 && !agentTray)
+                if (agent.remainingDistance != Mathf.Infinity  && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 && 
+                    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 3)
                 {
                     
                         agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
@@ -104,13 +109,14 @@ public class Agent : MonoBehaviour
                 //Find Serving point and assign it to tray using 
                 if (newDist < 1.3f && newDist != 0)
                 {
+                    PhotonNetwork.Destroy(agentTray);
                     tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
 
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
                     
                     readyToServe = false;
-                    if(agentTray){PhotonNetwork.Destroy(agentTray);}
+                    
                     
                     served = true;
                     
