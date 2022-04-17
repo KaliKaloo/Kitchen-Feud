@@ -141,7 +141,7 @@ public class playerMvmt : MonoBehaviour
         if (PV.IsMine)
         {
             {
-                rb.MovePosition(rb.position + movement * mvmtSpeed * Time.fixedDeltaTime);
+                rb.velocity =  movement * mvmtSpeed ;
             }
         }
     }
