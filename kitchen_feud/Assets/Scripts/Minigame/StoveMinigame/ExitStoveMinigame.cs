@@ -38,6 +38,9 @@ public class ExitStoveMinigame : MonoBehaviour
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
 
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
+
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		//GameEvents.current.assignPointsEventFunction();

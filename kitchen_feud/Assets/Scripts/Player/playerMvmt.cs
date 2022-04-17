@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
+public class playerAnimator
+{
+    public static Animator animator;
+
+    public static void SetAnimator(Animator newAnimator)
+    {
+        animator = newAnimator;
+    }
+}
+
 public class playerMvmt : MonoBehaviour
 {
     public float rotatespeed;
@@ -37,6 +47,7 @@ public class playerMvmt : MonoBehaviour
         }
         //-------------------------------------------------------------------------
         animator = parent.GetComponent<Animator>();
+        playerAnimator.SetAnimator(animator);
 
     }
 

@@ -30,7 +30,6 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
-	    
 
 	    if (appliance)
 	    {
