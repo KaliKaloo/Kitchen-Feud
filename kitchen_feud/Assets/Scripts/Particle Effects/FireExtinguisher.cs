@@ -14,7 +14,6 @@ public class FireExtinguisher : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         if (player.transform.Find("slot").childCount == 0) {
                 playerHold.pickUpItem(gameObject);
-                Debug.Log("pickup");
         }
         else {
             

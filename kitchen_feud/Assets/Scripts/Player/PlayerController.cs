@@ -84,10 +84,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 				if(fireExtinguisher.name == "fireExtinguisher"){
 					if(fire_ps && !fire_ps.isPlaying){
-						Debug.Log("start q");
 						fire_ps.Play();
 					}else{
-						Debug.Log("stop q");
 						fire_ps.Stop();
 					}
 				}

@@ -26,10 +26,10 @@ public class OvenFire : MonoBehaviour
                 foreach(ParticleSystem p in PS){
                         if(p.GetComponent<FireOut>()){
                             fireOut = p.GetComponent<FireOut>();
-                            fireOut.currentEmission = 10;
+                            fireOut.startEmission = 10;
                             fireOut.enabled=true;
                         }
-                        p.Play();
+                    p.Play();
                 }
                 //SOUND -------------------------------------------
                 fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
