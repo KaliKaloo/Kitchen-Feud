@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	[SerializeField] private Camera secondaryCam;
-
+	private bool changed;
 	PlayerHolding playerHold;
 	public PhotonView view;
 	public int originalOwner;
@@ -55,9 +55,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		
 		if (view.IsMine)
 		{
-			if (view.OwnerActorNr != originalOwner)
+			if (view.OwnerActorNr != originalOwner && !changed)
 			{
 				view.TransferOwnership(1000);
+				changed = true;
 			}
 			if (Input.GetButtonDown("Fire1"))
 			{
