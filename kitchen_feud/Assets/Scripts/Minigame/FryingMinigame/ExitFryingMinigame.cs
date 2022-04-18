@@ -30,6 +30,7 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
+	    GameObject gamePlayer = GameObject.Find("Local");
 	    
 
 	    if (appliance)
@@ -37,7 +38,9 @@ public class ExitFryingMinigame : MonoBehaviour
 		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
 	    }
+	    
 		PhotonView aV = appliance.GetComponent<PhotonView>();
+		appliance.canvas.SetActive(true);
 		PV.RPC("setCanvActive",RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		PV.RPC("setAddedF", RpcTarget.AllBuffered, aV.ViewID);
 		
@@ -56,9 +59,12 @@ public class ExitFryingMinigame : MonoBehaviour
 		
 		PhotonView	view = appliance.GetComponent<PhotonView>();
 
-        PV.RPC("EnablePforAll", RpcTarget.AllBuffered, view.ViewID);
-
-		PV.RPC("globalDestroy",RpcTarget.AllBuffered,minigameCanvas.GetPhotonView().ViewID);
+        PV.RPC("clearApplPlayers", RpcTarget.AllBuffered, view.ViewID);
+        gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
+        gamePlayer.GetComponent<PlayerController>().enabled = true;
+        appliance.UIcamera.enabled =  false;
+        Destroy(minigameCanvas);
+	
 
     }
 
@@ -68,9 +74,9 @@ public class ExitFryingMinigame : MonoBehaviour
 		Destroy(PhotonView.Find(viewID).gameObject);
 	}
     [PunRPC]
-    void EnablePforAll(int applID)
+    void clearApplPlayers(int applID)
     {
-		List<int> x = PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
+		/*List<int> x = PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
 
 	
 		for (int i=0; i < x.Count; i++)
@@ -82,7 +88,7 @@ public class ExitFryingMinigame : MonoBehaviour
 
 	
 
-		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	
+		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	*/
 		PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers.Clear();
 
     }
