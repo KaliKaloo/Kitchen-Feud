@@ -137,9 +137,9 @@ public class PlayerVoiceManager : MonoBehaviour
 									if (obj.GetComponent<PlayerVoiceManager>().kickedBy.Count > 0)
 									{
 										GameObject.FindGameObjectWithTag("Kick").GetComponent<kickPlayers>().kickPlayer(obj);
-										view.RPC("destHB", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
-										view.RPC("setStarted", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
-										view.RPC("clearKickedBy", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
+										view.RPC("destHB", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID);
+										view.RPC("setStarted", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, 0);
+										view.RPC("clearKickedBy", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID);
 									}
 								}
 
