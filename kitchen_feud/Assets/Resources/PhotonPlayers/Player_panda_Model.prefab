@@ -607,6 +607,7 @@ MonoBehaviour:
   cam: {fileID: 5732737914250238453}
   secondaryCam: {fileID: 5732737912369520359}
   view: {fileID: 4850287822765907779}
+  originalOwner: 0
 --- !u!114 &4850287822765907777
 MonoBehaviour:
   m_ObjectHideFlags: 0
