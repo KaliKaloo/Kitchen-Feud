@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Update()
 	{
+		if (PlayerPrefs.GetInt("disconnected") == 1)
+		{
+			view.TransferOwnership(1000);
+		}
+		
 		if (view.IsMine)
 		{
 			if (Input.GetButtonDown("Fire1"))
