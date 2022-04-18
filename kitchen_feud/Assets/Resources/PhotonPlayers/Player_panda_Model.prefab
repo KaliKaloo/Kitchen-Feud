@@ -821,6 +821,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsStrafingLeft
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsCooking
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -12,6 +12,15 @@ public class playerAnimator
     {
         animator = newAnimator;
     }
+
+    public static void ResetBools()
+    {
+        animator.SetBool("IsStrafingRight", false);
+        animator.SetBool("IsStrafingLeft", false);
+        animator.SetBool("IsMovingForwards", false);
+        animator.SetBool("IsMovingBackwards", false);
+        animator.SetBool("IsCooking", false);
+    }
 }
 
 public class playerMvmt : MonoBehaviour
@@ -63,37 +72,28 @@ public class playerMvmt : MonoBehaviour
 
             float dotProduct = Vector3.Dot(movement, transform.forward);
 
+            if (Vertical == 0f && Horizontal != 0)
+            {
+                // strafe left
+                if (Horizontal < 0)
+                {
+                    animator.SetBool("IsStrafingLeft", true);
+                }
+                // strafe right
+                else if (Horizontal > 0)
+                    animator.SetBool("IsStrafingRight", true);
+            } 
             // if player moving forward
-            if (dotProduct > 0)
+            else if (dotProduct > 0)
                 animator.SetBool("IsMovingForwards", true);
             // if player moving backward
             else if (dotProduct < 0)
                 animator.SetBool("IsMovingBackwards", true);
             //SideStepping animation
-            else if (Vertical == 0f && Horizontal != 0)
-            {
-                // strafe left
-                if (Horizontal < 0)
-                    animator.SetBool("IsStrafingLeft", true);
-                // strafe right
-                else if (Horizontal > 0)
-                    animator.SetBool("IsStrafingRight", true);
-            } 
 
             //disable movement
             else {
-                // disable right
-                if (animator.GetBool("IsStrafingRight"))
-                    animator.SetBool("IsStrafingRight", false);
-                // disable left
-                else if (animator.GetBool("IsStrafingLeft"))
-                    animator.SetBool("IsStrafingLeft", false);
-                // disable backwards
-                else if (animator.GetBool("IsMovingBackwards"))
-                    animator.SetBool("IsMovingBackwards", false);
-                // disable forwards
-                else if (animator.GetBool("IsMovingForwards"))
-				    animator.SetBool("IsMovingForwards", false);
+                playerAnimator.ResetBools();
             }
                 
           

@@ -30,8 +30,10 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 
-	    if (appliance)
+		if (appliance)
 	    {
 		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
@@ -58,6 +60,7 @@ public class ExitFryingMinigame : MonoBehaviour
         PV.RPC("EnablePforAll", RpcTarget.All, view.ViewID);
 
 		PV.RPC("globalDestroy",RpcTarget.All,minigameCanvas.GetPhotonView().ViewID);
+
 
     }
 
