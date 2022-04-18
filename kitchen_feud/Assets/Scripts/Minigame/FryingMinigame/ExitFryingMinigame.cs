@@ -43,7 +43,7 @@ public class ExitFryingMinigame : MonoBehaviour
 		
         if (appliance.itemsOnTheAppliance.Count > 0)
         {
-            aV.RPC("clearItems", RpcTarget.All, aV.ViewID);
+            aV.RPC("clearItems", RpcTarget.AllBuffered, aV.ViewID);
 
 
 		}
