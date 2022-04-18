@@ -144,11 +144,11 @@ public class Appliance : Interactable
                         // player.GetComponentInChildren<Camera>().enabled = false;
                         canvas.SetActive(false);
 
-                        myPv.RPC("falseForOthers", RpcTarget.Others, myPv.ViewID,
+                        myPv.RPC("falseForOthers", RpcTarget.OthersBuffered, myPv.ViewID,
                             minigameCanvas2.GetPhotonView().ViewID);
                         minigameCanvas2.transform.SetParent(transform);
 
-                        myPv.RPC("setAppl", RpcTarget.All, minigameCanvas2.GetComponent<PhotonView>().ViewID,
+                        myPv.RPC("setAppl", RpcTarget.AllBuffered, minigameCanvas2.GetComponent<PhotonView>().ViewID,
                             myPv.ViewID);
                         //minigameCanvas2.GetComponentInChildren<Plate>().appliance = GetComponent<Appliance>();
                         //minigameCanvas2.transform.Find("PanGameObject").transform.GetChild(0).GetComponent<PanController>().appliance = GetComponent<Appliance>();
