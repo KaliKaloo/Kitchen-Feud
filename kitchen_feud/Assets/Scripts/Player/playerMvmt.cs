@@ -70,33 +70,31 @@ public class playerMvmt : MonoBehaviour
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
 
-            float dotProduct = Vector3.Dot(movement, transform.forward);
-
-            if (Vertical == 0f && Horizontal != 0)
-            {
-                // strafe left
-                if (Horizontal < 0)
-                {
-                    animator.SetBool("IsStrafingLeft", true);
-                }
-                // strafe right
-                else if (Horizontal > 0)
-                    animator.SetBool("IsStrafingRight", true);
-            } 
-            // if player moving forward
-            else if (dotProduct > 0)
+            // walk forward
+            if (Vertical > 0)
                 animator.SetBool("IsMovingForwards", true);
-            // if player moving backward
-            else if (dotProduct < 0)
-                animator.SetBool("IsMovingBackwards", true);
-            //SideStepping animation
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingForwards", false);
 
-            //disable movement
-            else {
-                playerAnimator.ResetBools();
-            }
-                
-          
+            // walk backwards
+            if (Vertical < 0)
+                animator.SetBool("IsMovingBackwards", true);
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingBackwards", false);
+
+            // strafe right
+            if (Horizontal > 0)
+                animator.SetBool("IsStrafingRight", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingRight", false);
+
+            // strafe left
+            if (Horizontal < 0)
+                animator.SetBool("IsStrafingLeft", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingLeft", false);
+
+
         }
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
