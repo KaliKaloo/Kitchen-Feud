@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	PlayerHolding playerHold;
 	public PhotonView view;
+	public int originalOwner;
 
 	void Start()
 	{
+		
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+	        originalOwner = view.OwnerActorNr;
 			
 			this.name = "Local";
 			if (PhotonNetwork.LocalPlayer.CustomProperties["Team"] != null)
@@ -49,13 +52,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Update()
 	{
-		if (PlayerPrefs.GetInt("disconnected") == 1)
-		{
-			view.TransferOwnership(1000);
-		}
 		
 		if (view.IsMine)
 		{
+			if (view.OwnerActorNr != originalOwner)
+			{
+				view.TransferOwnership(1000);
+			}
 			if (Input.GetButtonDown("Fire1"))
 			{
 				if(EventSystem.current.IsPointerOverGameObject())
