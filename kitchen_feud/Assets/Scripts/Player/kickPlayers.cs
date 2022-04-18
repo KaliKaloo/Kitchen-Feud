@@ -63,7 +63,6 @@ public class kickPlayers : MonoBehaviour
                 {
                     engine.LeaveChannel();
                     engine.JoinChannel(randomInstance + "Team1");
-                    Debug.LogError(randomInstance + "Team1");
                     PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
             }
 
@@ -73,7 +72,6 @@ public class kickPlayers : MonoBehaviour
             {
                 engine.LeaveChannel();
                 engine.JoinChannel(randomInstance + "Team2");
-                Debug.LogError(randomInstance + "Team2");
                 PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
             }
         }
