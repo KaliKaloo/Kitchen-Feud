@@ -53,13 +53,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	void Update()
 	{
 		
-		if (view.IsMine)
+		if (view.IsMine && name == "Local")
 		{
-			if (view.OwnerActorNr != originalOwner && !changed)
-			{
-				view.TransferOwnership(1000);
-				changed = true;
-			}
+			
 			if (Input.GetButtonDown("Fire1"))
 			{
 				if(EventSystem.current.IsPointerOverGameObject())
@@ -107,7 +103,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
 	{
-		if (view.IsMine)
+		if (view.IsMine && name =="Local")
 		{
 			float distance = Vector3.Distance(player.position, obj.GetComponent<Transform>().position);
 
