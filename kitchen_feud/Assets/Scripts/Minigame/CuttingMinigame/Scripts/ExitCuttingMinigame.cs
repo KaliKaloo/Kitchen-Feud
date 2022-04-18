@@ -40,7 +40,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 
 		
-		playerV.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		playerV.RPC("EnablePushing",RpcTarget.All,playerV.ViewID);
 		playerV.GetComponent<PlayerController>().enabled = true;
 	
 		appliance.UIcamera.enabled = false;

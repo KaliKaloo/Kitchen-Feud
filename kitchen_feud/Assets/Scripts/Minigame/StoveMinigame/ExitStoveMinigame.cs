@@ -64,7 +64,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-		playerV.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		playerV.RPC("EnablePushing",RpcTarget.All,playerV.ViewID);
 
 
 		gamePlayer.GetComponent<PlayerController>().enabled = true;
