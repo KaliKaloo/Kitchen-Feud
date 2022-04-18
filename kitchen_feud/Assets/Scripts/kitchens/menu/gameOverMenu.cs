@@ -93,6 +93,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Skin the models in the scene to appropriate winning team
     private void SkinPlayers()
     {
+        winningTeam = 2;
         if (winningTeam == 1)
         {
             GenericPlayerModel1 = CatPlayerModel1;

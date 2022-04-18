@@ -1330,7 +1330,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsMovingForwards
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: IsHolding
   - Type: 4
     SynchronizeType: 1

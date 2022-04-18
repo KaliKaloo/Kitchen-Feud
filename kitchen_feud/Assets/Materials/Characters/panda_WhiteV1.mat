@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: panda_WhiteV1
-  m_Shader: {fileID: -6465566751694194690, guid: 019d96b627d88b34a805e63c11de8984, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0789a31ac4f3efa46a4e3e23c53d9b70, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -82,8 +82,11 @@ Material:
     m_Floats:
     - Vector1_075db1c83c3249b08936b50b46e19a1f: -0.92
     - Vector1_19d6c0c316d74cceb88b0477f393ab42: 1
+    - Vector1_346a9ea112084e1aac123ee8cbe1d741: 0.7
+    - Vector1_ad7c0c74a62146ff89f29b8c25012fa8: 0.1
     - Vector1_b651c5f6289749919a67ce1ed58ef7f1: -0.21
     - Vector1_c6cc5f4b6e3b40d6a3030f7b7a40147a: -0.03
+    - Vector1_e01e31ddd79a414ca7ec116882c06f1a: 32
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -111,7 +114,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_05fea9ed337d4915a15875eeaa582d0a: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
+    - Color_1a90c6cc189f4a7f808028e0557a3dfc: {r: 1, g: 1, b: 1, a: 0}
+    - Color_7f1eb9c007744f24a64c11c60d641f89: {r: 1, g: 1, b: 1, a: 0}
     - Color_8119bb83809e49dd9c4606192b17cfcb: {r: 0.8784314, g: 0.84313726, b: 0.84313726, a: 0}
+    - Color_aff2ce8afaa1430cbf076532d5b1e976: {r: 8, g: 8, b: 8, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
