@@ -41,7 +41,6 @@ public class ExitFryingMinigame : MonoBehaviour
 	    
 		PhotonView aV = appliance.GetComponent<PhotonView>();
 		appliance.canvas.SetActive(true);
-		PV.RPC("setCanvActive",RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		PV.RPC("setAddedF", RpcTarget.AllBuffered, aV.ViewID);
 		
         if (appliance.itemsOnTheAppliance.Count > 0)
