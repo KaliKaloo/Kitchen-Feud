@@ -8,23 +8,17 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2;
+    private AudioSource track1, track2, track3;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, musicClips;
-    // public AudioClip[] musicClips;
-//k1_1, k1_2, k2_1, k2_2,
     public AudioClip k1_MG, k2_MG ;
-
-    private int audioClipIndex;
-    private int[] previousArray;
-    private int previousArrayIndex;
 
     public static MusicManager instance;
 
     // new ones
     private int totalTime, fadingTrack;
 
-    private bool switched = false;
+    private bool switched = false, MGStarted = false;
     public int location;
     public bool inMG = false;
     public float musicVol = 0.1f;
@@ -41,6 +35,8 @@ public class MusicManager : MonoBehaviour
         totalTime = timer.GetTotalTime();
         track1 = gameObject.AddComponent<AudioSource>();
         track2 = gameObject.AddComponent<AudioSource>();
+        track3 = gameObject.AddComponent<AudioSource>();
+
         // start playing
         setMusicClips();
         playRandom();
@@ -78,16 +74,22 @@ public class MusicManager : MonoBehaviour
 
     //switch to MG music
     public void minigameSwitch(){
-        AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
-        CancelInvoke("playRandom");
-        track1.Pause();
-        track1.clip = newTrack;
-        track1.Play();
+        if (!MGStarted){
+            AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
+            CancelInvoke("playRandom");
+            track1.Pause();
+            track3.clip = newTrack;
+            track3.Play();
+            MGStarted = true;
+        }
     }
 
 
     public void minigameEnd(){
-       playRandom();
+        track3.Stop();
+        track1.UnPause();
+        Invoke("playRandom", track1.clip.length - track1.time);
+        MGStarted = false;
     }
 
 
