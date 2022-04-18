@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
+
         MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
@@ -86,7 +87,8 @@ public class AudioManager : MonoBehaviour
             if (pFV.IsMine)
             {
                 // MusicManager.instance.changeBGM(team, 10, 0, 1);
-                MusicManager.instance.location = team;
+                MusicManager.instance.switchLocation(team);
+
 
                 if (team == 1)
                 {

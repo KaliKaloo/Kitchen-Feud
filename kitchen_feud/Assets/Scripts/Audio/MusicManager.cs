@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     private AudioSource track1, track2, track3;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, musicClips;
-    public AudioClip k1_MG, k2_MG ;
+    public AudioClip k1_MG, k2_MG, hallway ;
 
     public static MusicManager instance;
 
@@ -22,6 +22,8 @@ public class MusicManager : MonoBehaviour
     public int location;
     public bool inMG = false;
     public float musicVol = 0.1f;
+
+    private int oldTrack;
 
    
     void Awake(){
@@ -66,13 +68,27 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    public void switchLocation(int loc){
+        if (loc ==3) oldTrack = location;
+        location = loc;
+        if (location == 3) hallwaySwitch();
+        else kitchenSwitch();
+    }
+
     public void playRandom(){
         track1.clip = musicClips.GetRandomAudioClip();
         track1.Play();
         Invoke("playRandom", track1.clip.length);
     }
 
-    //switch to MG music
+
+    private void kitchenSwitch(){
+        if (oldTrack == location){
+            track3.Pause();
+            track1.UnPause();
+        }
+    }
+
     public void minigameSwitch(){
         if (!MGStarted){
             AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
@@ -84,7 +100,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-
     public void minigameEnd(){
         track3.Stop();
         track1.UnPause();
@@ -92,6 +107,14 @@ public class MusicManager : MonoBehaviour
         MGStarted = false;
     }
 
+
+    private void hallwaySwitch(){
+        CancelInvoke("playRandom");
+        track1.Pause();
+        track3.clip = hallway;
+        track3.Play();
+        track3.loop = true;
+    }
 
     
     private void setVolume(){

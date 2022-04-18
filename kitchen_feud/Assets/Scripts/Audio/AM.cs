@@ -65,7 +65,7 @@ public class AM : MonoBehaviour
               
 
                 // MusicManager.instance.changeBGM(3, 10, 0, 1);
-                MusicManager.instance.location = 3;
+                MusicManager.instance.switchLocation(3);
 
 
 

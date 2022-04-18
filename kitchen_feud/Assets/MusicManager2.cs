@@ -80,6 +80,7 @@ public class MusicManager2 : MonoBehaviour
     }
 
 
+//DONE
     public void minigameSwitch(){
         //switch to MG music
         AudioClip newTrack;
@@ -88,7 +89,7 @@ public class MusicManager2 : MonoBehaviour
         
     }
 
-
+//DONE
     public void minigameEnd(){
         //change back to kitchen music
         changeBGM(location, 1, 0, 1);
