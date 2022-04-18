@@ -70,7 +70,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
-//        PlayerPrefs.DeleteAll();
+      // PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -389,9 +389,9 @@ public class menuController : MonoBehaviourPunCallbacks
                 //StartCoroutine(LoadSceneAsynchronously(1));
 
                 // Rejoin voice chat
-                rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+                /*rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
                 x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-                rtcEngine.JoinChannel(x.ToString() + "Lobby");
+                rtcEngine.JoinChannel(x.ToString() + "Lobby");*/
             } 
             else
             {

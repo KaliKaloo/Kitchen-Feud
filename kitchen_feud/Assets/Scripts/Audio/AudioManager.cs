@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     IRtcEngine engine;
     int myTeam;
-    string randomInstance;
+    int randomInstance;
     public AudioSource ding;
     public PhotonView PV;
     public bool played;
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = menuController.Instance.x.ToString();
+        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
     }
     
     
