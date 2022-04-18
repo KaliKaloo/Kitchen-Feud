@@ -38,27 +38,27 @@ public class ExitFryingMinigame : MonoBehaviour
 
 	    }
 		PhotonView aV = appliance.GetComponent<PhotonView>();
-		PV.RPC("setCanvActive",RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
-		PV.RPC("setAddedF", RpcTarget.All, aV.ViewID);
+		PV.RPC("setCanvActive",RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
+		PV.RPC("setAddedF", RpcTarget.AllBuffered, aV.ViewID);
 		
         if (appliance.itemsOnTheAppliance.Count > 0)
         {
-            aV.RPC("clearItems", RpcTarget.All, aV.ViewID);
+            aV.RPC("clearItems", RpcTarget.AllBuffered, aV.ViewID);
 
 
 		}
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		if (appliance.cookedDish)
 		{
-			appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
+			appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
 		}
 
 		
 		PhotonView	view = appliance.GetComponent<PhotonView>();
 
-        PV.RPC("EnablePforAll", RpcTarget.All, view.ViewID);
+        PV.RPC("EnablePforAll", RpcTarget.AllBuffered, view.ViewID);
 
-		PV.RPC("globalDestroy",RpcTarget.All,minigameCanvas.GetPhotonView().ViewID);
+		PV.RPC("globalDestroy",RpcTarget.AllBuffered,minigameCanvas.GetPhotonView().ViewID);
 
     }
 
