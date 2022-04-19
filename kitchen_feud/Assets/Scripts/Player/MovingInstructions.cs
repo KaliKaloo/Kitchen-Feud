@@ -79,7 +79,7 @@ public class MovingInstructions : MonoBehaviour
             textWriter.writeText2("Collect the ingredients and put them on the glowing appliances");
         }
         // final initial instruction
-        else if (Text.text == "Go collect them and put them on the glowing appliances" && finished)
+        else if (Text.text == "Collect the ingredients and put them on the glowing appliances" && finished)
         {
             Text.text = "done";
             textWriter.writeText();
