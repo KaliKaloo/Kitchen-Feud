@@ -106,7 +106,7 @@ public class MovingInstructions : MonoBehaviour
         else if (Text.text == "" &&  globalClicked.enterEnemyKitchen)
         {
             Text.text = "You can throw smoke bombs, steal items or cook using their appliances for double points!";
-            textWriter.writeText2("Be careful, they can kick you out if you linger too long", 2f);
+            textWriter.writeText2("Be careful, they can kick you out by clicking on your player if you linger too long", 2f);
             InitializeTimer();
             started = true;
            
