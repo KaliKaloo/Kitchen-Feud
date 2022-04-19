@@ -38,6 +38,8 @@ public class Tray : Interactable
                 {
                     if (slots[i].transform.childCount == 0)
                     {
+                        globalClicked.trayInteract = true;
+
                         objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                         pickable = objectHolding.GetComponent<pickableItem>();

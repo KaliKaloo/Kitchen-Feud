@@ -8,7 +8,7 @@ public class globalClicked{
     public static bool clicked = false;
 
     public static bool applianceInteract = false;
-
+    public static bool trayInteract = false;
 }
 
 public class MovingInstructions : MonoBehaviour
@@ -96,7 +96,7 @@ public class MovingInstructions : MonoBehaviour
             
         }
         // final initial instruction
-        else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  LocalPlayer.GetComponent<PlayerController>().focus)
+        else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  globalClicked.trayInteract)
         {
             Text.text = "Remember that you're against another resturant.";
             textWriter.writeText2("Do your best!", 2f);
