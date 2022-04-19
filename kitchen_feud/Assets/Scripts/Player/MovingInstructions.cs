@@ -9,6 +9,8 @@ public class globalClicked{
 
     public static bool applianceInteract = false;
     public static bool trayInteract = false;
+    public static bool enterEnemyKitchen = false;
+
 }
 
 public class MovingInstructions : MonoBehaviour
@@ -17,7 +19,7 @@ public class MovingInstructions : MonoBehaviour
     private GameObject LocalPlayer;
     public GameObject mushroom1;
     public GameObject mushroom2;
-    private float time = 2.5f;
+    private float time = 13f;
     public float timer;
     private bool started = false;
     private bool finished = false;
@@ -46,7 +48,7 @@ public class MovingInstructions : MonoBehaviour
         else if (Text.text == "Nice! Feel free look up and down by holding right click and dragging" && Input.GetMouseButtonDown(1))
         {
             // Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
-            Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
+            Text.text = "";
 
             textWriter.writeText();
 
@@ -98,9 +100,30 @@ public class MovingInstructions : MonoBehaviour
         // final initial instruction
         else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  globalClicked.trayInteract)
         {
-            Text.text = "Remember that you're against another resturant.";
-            textWriter.writeText2("Do your best!", 2f);
+            Text.text = "Remember that you're against another resturant. You can go to their kitchen and sabotage them!";
+            textWriter.writeText2("", 2f);
         }
+        else if (Text.text == "" &&  globalClicked.enterEnemyKitchen)
+        {
+            Text.text = "You can throw smoke bombs, steal items or cook using their appliances for double points!";
+            textWriter.writeText2("Be careful, they can kick you out if you linger too long", 2f);
+            InitializeTimer();
+            started = true;
+           
+        }
+
+        if (started == true)
+        {
+            Decrement();
+
+
+            if (timer < 0)
+            {
+                gameObject.SetActive(false);
+                started = false;
+            }
+        }
+
     }
    
     public void Decrement()
