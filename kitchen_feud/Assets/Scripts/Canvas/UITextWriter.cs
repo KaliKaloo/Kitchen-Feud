@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 // attach to UI Text component (with the full text already there)
 
@@ -9,12 +10,12 @@ public class UITextWriter : MonoBehaviour
 	// how long for each letter to get displayed
 	private float typeDelay = 0.05f;
 
-	private Text txt;
+	private TextMeshProUGUI txt;
 	private string line;
 
 	void Awake()
 	{
-		txt = GetComponent<Text>();
+		txt = GetComponent<TextMeshProUGUI>();
 		line = txt.text;
 		txt.text = "";
 
