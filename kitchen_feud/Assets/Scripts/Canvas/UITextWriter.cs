@@ -9,6 +9,7 @@ public class UITextWriter : MonoBehaviour
 {
 	// how long for each letter to get displayed
 	private float typeDelay = 0.05f;
+	private float waitTime;
 
 	private TextMeshProUGUI txt;
 	private string line;
@@ -23,7 +24,18 @@ public class UITextWriter : MonoBehaviour
 		StopCoroutine("PlayText");
 		StartCoroutine("PlayText");
 	}
-	
+
+	public void writeText2(string nextLine, float newWaitTime=2f)
+	{
+		txt = GetComponent<TextMeshProUGUI>();
+		line = txt.text;
+		txt.text = "";
+
+		waitTime = newWaitTime;
+		// TODO: add optional delay when to start
+		StartCoroutine("PlayText2", nextLine);
+	}
+
 	IEnumerator PlayText()
 	{
 		foreach (char c in line)
@@ -31,6 +43,21 @@ public class UITextWriter : MonoBehaviour
 			txt.text += c;
 			yield return new WaitForSeconds(typeDelay);
 		}
+	}
+
+	IEnumerator PlayText2(string nextLine)
+	{
+		foreach (char c in line)
+		{
+			txt.text += c;
+			yield return new WaitForSeconds(typeDelay);
+		}
+
+		yield return new WaitForSeconds(waitTime);
+
+		txt.text = nextLine;
+		writeText();
+
 	}
 
 }

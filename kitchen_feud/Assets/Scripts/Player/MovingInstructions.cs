@@ -73,8 +73,10 @@ public class MovingInstructions : MonoBehaviour
         else if (Text.text == "Click on the dishes on the top left tickets to see the recipe" &&
             globalClicked.clicked)
         {
-            Text.text = "The colours on the reciepe card match the subrooms. It's where the ingredients are located. Collect the ingredients and put them on the glowing appliances";
-            textWriter.writeText();
+            // first instruction
+            Text.text = "The colours on the recipe card match the subrooms. It's where the ingredients are located.";
+            // second instruction shows after 2 seconds (see UI text writer script for delay)
+            textWriter.writeText2("Collect the ingredients and put them on the glowing appliances");
         }
         // final initial instruction
         else if (Text.text == "Go collect them and put them on the glowing appliances" && finished)
