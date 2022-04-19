@@ -85,14 +85,16 @@ public class MovingInstructions : MonoBehaviour
             Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
             textWriter.writeText();
         }
-        else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish") )
+        else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).childCount == 1 )
         {
-            Text.text = "Put the dish on the white tray that has the correct order number";
-            textWriter.writeText2("Then click on the tray to serve, or make more dishes",2f);
+            if(LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish")){
+                Text.text = "Put the dish on the white tray that has the correct order number";
+                textWriter.writeText2("Then click on the tray to serve, or make more dishes",2f);
+            }
+            
         }
-
         // final initial instruction
-        else if (Text.text == "Then click on the tray to serve, or make more dishes")
+        else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  LocalPlayer.GetComponent<PlayerController>().focus)
         {
             Text.text = "Remember that you're against another resturant. Do your best!";
             textWriter.writeText();
