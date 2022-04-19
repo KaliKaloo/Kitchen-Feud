@@ -7,6 +7,8 @@ using TMPro;
 public class globalClicked{
     public static bool clicked = false;
 
+    public static bool applianceInteract = false;
+
 }
 
 public class MovingInstructions : MonoBehaviour
@@ -76,12 +78,23 @@ public class MovingInstructions : MonoBehaviour
             // first instruction
             Text.text = "The colours on the recipe card match the subrooms. It's where the ingredients are located.";
             // second instruction shows after 2 seconds (see UI text writer script for delay)
-            textWriter.writeText2("Collect the ingredients and put them on the glowing appliances");
+            textWriter.writeText2("Collect the first ingredient and put them on the glowing appliance", 2f);
         }
-        // final initial instruction
-        else if (Text.text == "Collect the ingredients and put them on the glowing appliances" && finished)
+        else if (Text.text == "Collect the first ingredient and put them on the glowing appliance" && globalClicked.applianceInteract )
         {
-            Text.text = "done";
+            Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
+            textWriter.writeText();
+        }
+        else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish") )
+        {
+            Text.text = "Put the dish on the white tray that has the correct order number";
+            textWriter.writeText2("Then click on the tray to serve, or make more dishes",2f);
+        }
+
+        // final initial instruction
+        else if (Text.text == "Then click on the tray to serve, or make more dishes")
+        {
+            Text.text = "Remember that you're against another resturant. Do your best!";
             textWriter.writeText();
 
             InitializeTimer();

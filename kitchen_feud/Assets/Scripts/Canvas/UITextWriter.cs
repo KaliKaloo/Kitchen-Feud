@@ -25,7 +25,7 @@ public class UITextWriter : MonoBehaviour
 		StartCoroutine("PlayText");
 	}
 
-	public void writeText2(string nextLine, float newWaitTime=2f)
+	public void writeText2(string nextLine, float newWaitTime)
 	{
 		txt = GetComponent<TextMeshProUGUI>();
 		line = txt.text;

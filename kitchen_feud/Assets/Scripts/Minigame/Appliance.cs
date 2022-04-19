@@ -49,6 +49,7 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
+      
         
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
@@ -69,6 +70,8 @@ public class Appliance : Interactable
                     {
                         this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                             player.GetComponent<PhotonView>().ViewID);
+
+                        globalClicked.applianceInteract = true;
                     }
                     else
                     {
