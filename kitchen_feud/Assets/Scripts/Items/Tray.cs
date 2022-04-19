@@ -24,6 +24,7 @@ public class Tray : Interactable
 
     public override void Interact()
     {
+
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
@@ -38,7 +39,6 @@ public class Tray : Interactable
                 {
                     if (slots[i].transform.childCount == 0)
                     {
-                        globalClicked.trayInteract = true;
 
                         objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
@@ -62,6 +62,7 @@ public class Tray : Interactable
         }
         else if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")
         {
+            globalClicked.trayInteract = true;
             canvasController.TrayOrderOptions(tray.name);
         }
     }

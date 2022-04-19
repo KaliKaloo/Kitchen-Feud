@@ -426,7 +426,7 @@ public class Appliance : Interactable
     [PunRPC]
     void hideFryingUI(int canvID)
     {
-        PhotonView.Find(canvID).transform.Find("Waiting").gameObject.SetActive(false);
+        PhotonView.Find(canvID).transform.Find("instruction panel").gameObject.SetActive(false);
         PhotonView.Find(canvID).transform.Find("BackButton").gameObject.SetActive(false);
 
     }

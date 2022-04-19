@@ -50,7 +50,6 @@ public class TrayItemCollider : MonoBehaviour
 
                                     objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
                                     objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                                    globalClicked.trayInteract = true;
                                     break;
                                 }
                             }

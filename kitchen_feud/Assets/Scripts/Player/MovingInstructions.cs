@@ -47,9 +47,7 @@ public class MovingInstructions : MonoBehaviour
         }
         else if (Text.text == "Nice! Feel free look up and down by holding right click and dragging" && Input.GetMouseButtonDown(1))
         {
-            // Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
-            Text.text = "";
-
+            Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
             textWriter.writeText();
 
         }
@@ -66,16 +64,9 @@ public class MovingInstructions : MonoBehaviour
         {
             Text.text = "Click on the dishes on the top left tickets to see the recipe";
             textWriter.writeText();
-
-            
             
         }
-        else if (Text.text == "Nicely Done! You can drop items by clicking again anywhere" &&
-            LocalPlayer.transform.GetChild(2).childCount == 0)
-        {
-            Text.text = "Click on the dishes on the top left tickets to see the recipe";
-            textWriter.writeText();
-        }
+       
         else if (Text.text == "Click on the dishes on the top left tickets to see the recipe" &&
             globalClicked.clicked)
         {
@@ -87,11 +78,14 @@ public class MovingInstructions : MonoBehaviour
         else if (Text.text == "Collect the first ingredient and put them on the glowing appliance" && globalClicked.applianceInteract )
         {
             Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
-            textWriter.writeText();
+            // textWriter.writeText();
         }
         else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).childCount == 1 )
         {
+            Debug.Log("here");
             if(LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish")){
+                Debug.Log("now here");
+
                 Text.text = "Put the dish on the white tray that has the correct order number";
                 textWriter.writeText2("Then click on the tray to serve, or make more dishes",2f);
             }
@@ -101,12 +95,12 @@ public class MovingInstructions : MonoBehaviour
         else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  globalClicked.trayInteract)
         {
             Text.text = "Remember that you're against another resturant. You can go to their kitchen and sabotage them!";
-            textWriter.writeText2("", 2f);
+            textWriter.writeText2("", 3f);
         }
         else if (Text.text == "" &&  globalClicked.enterEnemyKitchen)
         {
-            Text.text = "You can throw smoke bombs, steal items or cook using their appliances for double points!";
-            textWriter.writeText2("Be careful, they can kick you out by clicking on your player if you linger too long", 2f);
+            Text.text = "In the enemy's kitchen, you can throw smoke bombs, steal items or cook using their appliances for double points!";
+            textWriter.writeText2("Be careful, they can kick you out by clicking on your player",3f);
             InitializeTimer();
             started = true;
            
