@@ -85,7 +85,8 @@ public class Spawner : MonoBehaviour
         newIngredients = new List<Sprite>(dishSprites);
 
         // start cooking animation
-        playerAnimator.animator.SetBool("IsCooking", true);
+        if (playerAnimator.animator != null)
+            playerAnimator.animator.SetBool("IsCooking", true);
 
         StartCoroutine(SpawnCorrectIngredient());
         StartCoroutine(SpawnBombObject());
