@@ -13,16 +13,17 @@ public class UITextWriter : MonoBehaviour
 	private TextMeshProUGUI txt;
 	private string line;
 
-	void Awake()
+	public void writeText()
 	{
 		txt = GetComponent<TextMeshProUGUI>();
 		line = txt.text;
 		txt.text = "";
 
 		// TODO: add optional delay when to start
+		StopCoroutine("PlayText");
 		StartCoroutine("PlayText");
 	}
-
+	
 	IEnumerator PlayText()
 	{
 		foreach (char c in line)
