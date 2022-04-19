@@ -45,7 +45,9 @@ public class MovingInstructions : MonoBehaviour
         }
         else if (Text.text == "Nice! Feel free look up and down by holding right click and dragging" && Input.GetMouseButtonDown(1))
         {
-            Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
+            // Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
+            Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
+
             textWriter.writeText();
 
         }
@@ -96,33 +98,9 @@ public class MovingInstructions : MonoBehaviour
         // final initial instruction
         else if (Text.text == "Then click on the tray to serve, or make more dishes" &&  LocalPlayer.GetComponent<PlayerController>().focus)
         {
-            Text.text = "Remember that you're against another resturant. Do your best!";
-            textWriter.writeText();
-
-            InitializeTimer();
-            started = true;
-            
+            Text.text = "Remember that you're against another resturant.";
+            textWriter.writeText2("Do your best!", 2f);
         }
-        if (started == true)
-        {
-            Decrement();
-
-
-            if (timer < 0)
-            {
-                gameObject.SetActive(false);
-               /* if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
-                {
-                    PhotonNetwork.Destroy(mushroom1);
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(mushroom2);
-                }*/
-                started = false;
-            }
-        }
-
     }
    
     public void Decrement()
