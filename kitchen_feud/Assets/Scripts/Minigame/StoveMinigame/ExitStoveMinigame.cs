@@ -33,6 +33,8 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		GameObject gamePlayer = GameObject.Find("Local");
+		PhotonView playerV = gamePlayer.GetPhotonView();
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
 		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		MusicManager.instance.minigameEnd();
@@ -59,19 +61,18 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		//TO FIX!
 		//SOUND ----------------------------------------------------------
-		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.All);
+		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.AllBuffered);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
 		//----------------------------------------------------------------
 
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-		PhotonView	view = appliance.player.GetComponent<PhotonView>();
-		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
+		playerV.RPC("EnablePushing",RpcTarget.AllBuffered,playerV.ViewID);
 
-		appliance.playerController.enabled = true;
-		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+
+		gamePlayer.GetComponent<PlayerController>().enabled = true;
 		appliance.UIcamera.enabled = false;
-		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
+		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}
 }

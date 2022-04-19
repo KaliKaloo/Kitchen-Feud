@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -35,6 +36,7 @@ public class playerMvmt : MonoBehaviour
     public PhotonView PV;
     float Horizontal;
     float Vertical;
+    private bool disableForOthers;
     Vector3 movement;
     
 
@@ -63,8 +65,13 @@ public class playerMvmt : MonoBehaviour
 
     private void Update()
     {
+        if (transform.parent.name != "Local" && !disableForOthers)
+        {
+            gameObject.SetActive(false);
+            disableForOthers = true;
+        }
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name =="Local")
         {
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
@@ -107,7 +114,7 @@ public class playerMvmt : MonoBehaviour
     private void LateUpdate()
     {
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name == "Local")
         {
             if (Input.GetMouseButton(1))
             {
@@ -159,10 +166,10 @@ public class playerMvmt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name =="Local")
         {
             {
-                rb.MovePosition(rb.position + movement * mvmtSpeed * Time.fixedDeltaTime);
+                rb.velocity =  movement * mvmtSpeed ;
             }
         }
     }

@@ -25,6 +25,8 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		GameObject gamePlayer = GameObject.Find("Local");
+		PhotonView playerV = gamePlayer.GetPhotonView();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		MusicManager.instance.minigameEnd();
@@ -40,12 +42,11 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
 
-		PhotonView view = appliance.player.GetComponent<PhotonView>();
 
-		view.RPC("EnablePushing", RpcTarget.AllBuffered, view.ViewID);
+		playerV.RPC("EnablePushing", RpcTarget.AllBuffered, playerV.ViewID);
 
-		appliance.playerController.enabled = true;
+		gamePlayer.GetComponent<PlayerController>().enabled = true;
 		appliance.UIcamera.enabled = false;
-		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
+		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }

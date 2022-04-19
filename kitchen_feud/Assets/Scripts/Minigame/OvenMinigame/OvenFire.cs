@@ -6,9 +6,10 @@ using Photon.Pun;
 public class OvenFire : MonoBehaviour
 {
     Timer timer;
-    bool startFire = false;
-    Component[] PS;
+    public bool startFire = false;
+    ParticleSystem[] PS;
     public AudioSource fireSound;
+    public FireOut fireOut;
 
     void Start()
     {
@@ -23,6 +24,11 @@ public class OvenFire : MonoBehaviour
         if(!startFire){
             if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
+                        if(p.GetComponent<FireOut>()){
+                            fireOut = p.GetComponent<FireOut>();
+                            fireOut.startEmission = 10;
+                            fireOut.enabled=true;
+                        }
                     p.Play();
                 }
                 //SOUND -------------------------------------------
@@ -32,6 +38,6 @@ public class OvenFire : MonoBehaviour
 
             }
         }
-
     }
+
 }
