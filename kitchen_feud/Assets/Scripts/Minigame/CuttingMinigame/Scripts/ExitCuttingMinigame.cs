@@ -13,8 +13,6 @@ public class ExitCuttingMinigame : MonoBehaviour
 	public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
-	
-
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -34,6 +32,9 @@ public class ExitCuttingMinigame : MonoBehaviour
 
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
+
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 		
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		

@@ -174,6 +174,8 @@ public class Appliance : Interactable
                             Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position,
                             transform.rotation);
 
+                        // start cooking animation
+                        playerAnimator.animator.SetBool("IsCooking", true);
                     }
                 }
                 else
