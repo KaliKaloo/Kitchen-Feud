@@ -36,17 +36,6 @@ public class Agent : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            /*if (transform.CompareTag("Waiter1") && test == false)
-            {
-                Debug.LogError("SET?");
-                agent.SetDestination(GameObject.Find("Tray1 (1)").transform.position);
-                test = true;
-            }
-
-            if (dist < 1.3f && dist != 0)
-            {
-                playerHold.pickUpItem(GameObject.Find("Tray1 (1)"), GameObject.Find("Tray1 (1)").GetComponent<IngredientItem>().item);
-            }*/
            
             float dist = RemainingDistance(agent.path.corners);
 
@@ -58,8 +47,7 @@ public class Agent : MonoBehaviour
                 {
                     agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 1));
                 }
-                Debug.LogError(agent.pathStatus);
-                Debug.LogError(agent.remainingDistance);
+        
                 
 
                 if (agent.remainingDistance != Mathf.Infinity  && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 && 
@@ -131,7 +119,6 @@ public class Agent : MonoBehaviour
                 {
                     
                     int index = int.Parse(agent.name[6].ToString());
-                    Debug.LogError(index);
                     if (agent.CompareTag("Waiter1"))
                     {
                         agent.SetDestination(GameSetup.GS.WSP1[index - 1].position);

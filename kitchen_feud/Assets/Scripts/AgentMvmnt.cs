@@ -40,8 +40,7 @@ public class AgentMvmnt : MonoBehaviour
             }
             else
             {
-                Debug.LogError(5);
-                Debug.LogError(animator.GetBool("IsMovingForwards"));
+             
                 if (animator.GetBool("IsMovingBackwards"))
                     animator.SetBool("IsMovingBackwards", false);
                 // disable forwards
