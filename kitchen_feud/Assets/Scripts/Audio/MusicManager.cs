@@ -50,10 +50,8 @@ public class MusicManager : MonoBehaviour
         // switch to part 2 tracks
         if (!switched && !inMG && timer.GetLocalTime() < (int)(totalTime*0.3)){
             if(location == 1 || location == 2){
-                CancelInvoke("playRandom");
-                setMusicClips();
-                playRandom();
                 switched = true;
+                setMusicClips();
             }
         }
         setVolume();
