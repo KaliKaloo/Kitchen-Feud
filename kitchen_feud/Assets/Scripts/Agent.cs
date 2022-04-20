@@ -69,7 +69,8 @@ public class Agent : MonoBehaviour
                         agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
                             tray.transform.position,
                             tray.transform.rotation);
-                        playerHold.pickUpItem(agentTray, null);
+                        playerHold.pickUpItem(agentTray);
+                        
 
                     
 
