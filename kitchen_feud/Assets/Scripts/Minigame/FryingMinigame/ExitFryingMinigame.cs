@@ -30,10 +30,12 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 	    GameObject gamePlayer = GameObject.Find("Local");
 	    
 
-	    if (appliance)
+		if (appliance)
 	    {
 		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
@@ -64,6 +66,7 @@ public class ExitFryingMinigame : MonoBehaviour
         appliance.UIcamera.enabled =  false;
         Destroy(minigameCanvas);
 	
+
 
     }
 
