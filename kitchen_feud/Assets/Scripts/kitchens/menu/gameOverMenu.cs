@@ -45,10 +45,6 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         PlayerPrefs.SetString("lastLobby", null);
         PlayerPrefs.SetInt("disconnected", 0);
         PlayerPrefs.Save();
-/*
-        GenericPlayerModel1 = CatPlayerModel1;
-        GenericPlayerModel2 = CatPlayerModel2;
-        GenericPlayerModel3 = CatPlayerModel3;*/
 
         LeavingGameCanvas.SetActive(false);
 
@@ -93,7 +89,6 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Skin the models in the scene to appropriate winning team
     private void SkinPlayers()
     {
-        winningTeam = 2;
         if (winningTeam == 1)
         {
             GenericPlayerModel1 = CatPlayerModel1;
