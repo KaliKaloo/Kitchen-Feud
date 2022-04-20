@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using ExitGames.Client.Photon.StructWrapping;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class PanController : MonoBehaviour
 {
@@ -37,7 +40,7 @@ public class PanController : MonoBehaviour
         if (PV.IsMine)
         {
              temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
-            PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
+            PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
         }
 
 
@@ -96,7 +99,7 @@ public class PanController : MonoBehaviour
                 {
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
-                    PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
+                    PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
                     pointsAssigned = false;
                     
                 }
@@ -115,12 +118,22 @@ public class PanController : MonoBehaviour
     {
         FriedFoodController FFC;
         GameObject me;
+        Appliance appliance;
+        SpriteAtlas imgAtlas;
+
         me = PhotonView.Find(myID).gameObject;
+        appliance = me.GetComponent<PanController>().appliance;
         FFC = PhotonView.Find(viewID).GetComponent<FriedFoodController>();
+        imgAtlas = appliance.GetComponent<fryingMinigame>().imgAtlas;
         me.GetComponent<PanController>().friedFood = FFC;
         FFC.pan = me.GetComponent<PanController>();
         FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
         FFC.timer = me.GetComponent<PanController>().timer;
+        FFC.dishSO = appliance.foundDish;
+        if (imgAtlas && FFC.dishSO)
+        {
+            FFC.GetComponent<Image>().sprite = imgAtlas.GetSprite(FFC.dishSO.dishID);
+        }
 
     }
 

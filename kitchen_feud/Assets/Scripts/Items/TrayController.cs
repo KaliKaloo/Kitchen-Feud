@@ -106,7 +106,7 @@ public class TrayController : MonoBehaviour
                 List<BaseFood> tray = ts.tray.ServingTray;
                 List<GameObject> onTray = ts.tray.objectsOnTray;
 
-                t.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.All, t.GetComponent<PhotonView>().ViewID);
+                t.GetComponent<PhotonView>().RPC("PlayServingSound", RpcTarget.AllBuffered, t.GetComponent<PhotonView>().ViewID);
                 
                 Order o = Database.GetOrderByID(orderid);
                 int currentScore = 0;
@@ -114,16 +114,19 @@ public class TrayController : MonoBehaviour
                 if(tray.Count>0)
                     currentScore += calcScore(onTray, tray, o.dishes);
 
+                // Adds player points to stats
+                CustomProperties.PlayerPoints.AddIndividualPlayerPoints(currentScore);
+
                 if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                 {
-                    this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.All, currentScore);
+                    this.GetComponent<PhotonView>().RPC("UpdateScore1", RpcTarget.AllBuffered, currentScore);
                 }
                 else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
                 {
-                    this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.All, currentScore);
+                    this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.AllBuffered, currentScore);
                 }
      
-                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.AllBuffered, ts.GetComponent<PhotonView>().ViewID);
                 break;
             }
 

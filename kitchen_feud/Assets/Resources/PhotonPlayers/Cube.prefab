@@ -125,3 +125,4 @@ MonoBehaviour:
   PV: {fileID: 1903856893098002475}
   myAvatar: {fileID: 0}
   playersCount: 0
+  SceneLoaded: 0

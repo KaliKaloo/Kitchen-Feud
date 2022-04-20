@@ -19,7 +19,7 @@ public class TimerTests
     [Test]
     public void TimerNotNull()
     {
-        int currTime = timer.GetCurrentTime();
+        int currTime = timer.GetLocalTime();
         Assert.NotNull(currTime, "time should not be null");
         Assert.AreEqual(timer.GetTotalTime(), currTime, "time should not be null");
 
@@ -30,7 +30,7 @@ public class TimerTests
     public void ChangeTimerZero()
     {
         timer.ChangeTimerValue(0);
-        Assert.AreEqual(0, timer.GetCurrentTime(), "time should be set to 0");
+        Assert.AreEqual(0, timer.GetLocalTime(), "time should be set to 0");
         Assert.AreEqual(0, timer.GetTotalTime(), "time should be set to 0");
 
     }
@@ -39,7 +39,7 @@ public class TimerTests
     public void ChangeTimerValue()
     {
         timer.ChangeTimerValue(300);
-        Assert.AreEqual(300, timer.GetCurrentTime(), "changing timer values does not update correctly");
+        Assert.AreEqual(300, timer.GetLocalTime(), "changing timer values does not update correctly");
         Assert.AreEqual(300, timer.GetTotalTime());
     }
 
@@ -47,7 +47,7 @@ public class TimerTests
     public void ChangeTimerNeg()
     {
         timer.ChangeTimerValue(-5);
-        Assert.AreEqual(0, timer.GetCurrentTime(), "time should be 0 if set to negative");
+        Assert.AreEqual(0, timer.GetLocalTime(), "time should be 0 if set to negative");
         Assert.AreEqual(0, timer.GetTotalTime());
 
     }
@@ -91,7 +91,7 @@ public class TimerTests
         timer.ChangeTimerValue(20);
         int val = timer.AddSubtractTimerValue(10);
         Assert.AreEqual(1, val);
-        Assert.AreEqual(20, timer.GetTime());
+        Assert.AreEqual(20, timer.GetLocalTime());
         Assert.AreEqual(20, timer.GetTotalTime());
     }
 
@@ -102,7 +102,7 @@ public class TimerTests
         timer.ChangeTimerValue(20);
         int val = timer.AddSubtractTimerValue(50);
         Assert.AreEqual(0, val);
-        Assert.AreEqual(70, timer.GetTime());
+        Assert.AreEqual(70, timer.GetLocalTime());
         Assert.AreEqual(70, timer.GetTotalTime());
     }
 
@@ -112,7 +112,7 @@ public class TimerTests
         timer.ChangeTimerValue(20);
         int val = timer.AddSubtractTimerValue(1200);
         Assert.AreEqual(2, val);
-        Assert.AreEqual(20, timer.GetTime());
+        Assert.AreEqual(20, timer.GetLocalTime());
         Assert.AreEqual(20, timer.GetTotalTime());
     }
 
@@ -122,7 +122,7 @@ public class TimerTests
         timer.ChangeTimerValue(70);
         int val = timer.AddSubtractTimerValue(10);
         Assert.AreEqual(0, val);
-        Assert.AreEqual(80, timer.GetTime());
+        Assert.AreEqual(80, timer.GetLocalTime());
         Assert.AreEqual(80, timer.GetTotalTime());
     }
 
@@ -132,7 +132,7 @@ public class TimerTests
         timer.ChangeTimerValue(70);
         int val = timer.AddSubtractTimerValue(1200);
         Assert.AreEqual(2, val);
-        Assert.AreEqual(70, timer.GetTime());
+        Assert.AreEqual(70, timer.GetLocalTime());
         Assert.AreEqual(70, timer.GetTotalTime());
     }
 
@@ -142,7 +142,7 @@ public class TimerTests
         timer.ChangeTimerValue(1200);
         int val = timer.AddSubtractTimerValue(20);
         Assert.AreEqual(2, val);
-        Assert.AreEqual(1200, timer.GetTime());
+        Assert.AreEqual(1200, timer.GetLocalTime());
         Assert.AreEqual(1200, timer.GetTotalTime());
 
     }
@@ -153,7 +153,7 @@ public class TimerTests
         timer.ChangeTimerValue(1250);
         int val = timer.AddSubtractTimerValue(-49);
         Assert.AreEqual(2, val);
-        Assert.AreEqual(1250, timer.GetTime());
+        Assert.AreEqual(1250, timer.GetLocalTime());
         Assert.AreEqual(1250, timer.GetTotalTime());
     }
 
@@ -163,7 +163,7 @@ public class TimerTests
         timer.ChangeTimerValue(1250);
         int val = timer.AddSubtractTimerValue(-100);
         Assert.AreEqual(0, val);
-        Assert.AreEqual(1150, timer.GetTime());
+        Assert.AreEqual(1150, timer.GetLocalTime());
         Assert.AreEqual(1150, timer.GetTotalTime());
     }
 
@@ -173,7 +173,7 @@ public class TimerTests
         timer.ChangeTimerValue(1250);
         int val = timer.AddSubtractTimerValue(-1200);
         Assert.AreEqual(1, val);
-        Assert.AreEqual(1250, timer.GetTime());
+        Assert.AreEqual(1250, timer.GetLocalTime());
         Assert.AreEqual(1250, timer.GetTotalTime());
     }
 
@@ -183,7 +183,7 @@ public class TimerTests
         timer.ChangeTimerValue(300);
         int val = timer.AddSubtractTimerValue(-50);
         Assert.AreEqual(0, val);
-        Assert.AreEqual(250, timer.GetTime());
+        Assert.AreEqual(250, timer.GetLocalTime());
         Assert.AreEqual(250, timer.GetTotalTime());
     }
 
@@ -193,7 +193,7 @@ public class TimerTests
         timer.ChangeTimerValue(300);
         int val = timer.AddSubtractTimerValue(-260);
         Assert.AreEqual(1, val);
-        Assert.AreEqual(300, timer.GetTime());
+        Assert.AreEqual(300, timer.GetLocalTime());
         Assert.AreEqual(300, timer.GetTotalTime());
     }
 

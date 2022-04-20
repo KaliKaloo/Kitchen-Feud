@@ -33,15 +33,15 @@ public class pickableItem : Interactable
 
         if (player.transform.Find("slot").childCount == 0) {
             if (onAppliance == false && onTray == false) {
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
             }
 			else if (onTray == true){
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
                 tray2.GetComponent<PhotonView>().RPC("removeFromTray", RpcTarget.All, this.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onTrayF", RpcTarget.All);
 			}
             else if (onAppliance == true){
-                playerHold.pickUpItem(gameObject, item);
+                playerHold.pickUpItem(gameObject);
                 applianceSlots.GetComponent<PhotonView>().RPC("removeFromApplianceRPC", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID, player.GetComponent<PhotonView>().ViewID);
                 GetComponent<PhotonView>().RPC("onApplianceF", RpcTarget.All);
 			}
@@ -85,12 +85,7 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
-            if (PhotonView.Find(viewID1).name.Contains("Tray"))
-            {
-                PhotonView.Find(viewID).transform.localScale =
-                    PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
-            }
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
 
     }

@@ -41,7 +41,8 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (player.transform.Find("slot").childCount == 1)
+        if (player.transform.Find("slot").childCount == 1&&
+                playerHold.GetComponent<PhotonView>().IsMine)
         {
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
@@ -51,19 +52,24 @@ public class Tray : Interactable
                 {
                     if (slots[i].transform.childCount == 0)
                     {
-                        playerHold.dropItem();
-
-                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
+                        objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                        pickable = objectHolding.GetComponent<pickableItem>();
+                
+                        pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.AllBuffered, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
+                        objectHolding.layer = 0;
+                        foreach ( Transform child in objectHolding.transform )
+                        {
+                            child.gameObject.layer = 0;
+                        }
+                        if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+                        {
+                            this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.AllBuffered, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                        }
                         break;
                     }
                 }
-                pickable = objectHolding.GetComponent<pickableItem>();
-                pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID);
-                if (objectHolding && player.GetComponent<PhotonView>().IsMine)
-                {
-                    this.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, this.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
-                }
+                
             }
         }
         else if (player.transform.Find("slot").childCount == 0 && tray.trayID != "")

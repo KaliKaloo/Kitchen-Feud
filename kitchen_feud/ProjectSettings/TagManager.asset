@@ -26,6 +26,9 @@ TagManager:
   - ServingPoint1
   - Kitchen1Portals
   - Kitchen2Portals
+  - ExplodingBox
+  - Balloon
+  - Water
   - Team1Oven
   - Team2Oven
   - Waiter1
@@ -47,6 +50,7 @@ TagManager:
   - ME
   - Agent
   - 
+  - Walls
   - 
   - 
   - 

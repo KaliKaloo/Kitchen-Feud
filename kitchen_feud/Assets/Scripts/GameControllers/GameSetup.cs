@@ -1,16 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSetup : MonoBehaviour
 {
     public static GameSetup GS;
+
+    private int zeroCount;
+
+    private bool started;
    // public int nextPlayersTeam;
     public Transform[] spawnPoints1;
     public Transform[] spawnPoints2;
     public Transform[] WSP1;
     public Transform[] WSP2;
 
+    private void Start()
+    {
+        started = false;
+        zeroCount = 0;
+    }
 
     private void OnEnable()
     {
@@ -19,6 +31,12 @@ public class GameSetup : MonoBehaviour
             GameSetup.GS = this;
         }
     }
+
+    private void Update()
+    {
+  
+    }
+
 /*
     public void UpdateTeam()
     {

@@ -14,7 +14,7 @@ public class kickPlayers : MonoBehaviour
     public List<int> oPl2;
     IRtcEngine engine;
     public static kickPlayers Instance;
-    string randomInstance;
+    int randomInstance;
     
 
 
@@ -22,13 +22,13 @@ public class kickPlayers : MonoBehaviour
     {
         Instance = this;
         engine = VoiceChatManager.Instance.GetRtcEngine();
-        randomInstance = menuController.Instance.x.ToString();
+//        randomInstance = menuController.Instance.x.ToString();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
         
         PV = GetComponent<PhotonView>();
 
@@ -47,13 +47,13 @@ public class kickPlayers : MonoBehaviour
         }
 
 
-        if (players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
+        if (PhotonNetwork.CurrentRoom != null && players.Length < PhotonNetwork.CurrentRoom.PlayerCount)
         {
             players = GameObject.FindGameObjectsWithTag("Player");
         }
 
 
-        if (players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
+        if (PhotonNetwork.CurrentRoom != null && players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
       
             

@@ -13,9 +13,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	public int myTeam;
 	[SerializeField] private Camera cam;
 	[SerializeField] private Camera secondaryCam;
-
+	private bool changed;
 	PlayerHolding playerHold;
 	public PhotonView view;
+	public int originalOwner;
 
 	void Start()
 	{
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 		}
         if (view.IsMine)
         {
+	        originalOwner = view.OwnerActorNr;
 			
 			this.name = "Local";
 			if (PhotonNetwork.LocalPlayer.CustomProperties["Team"] != null)
@@ -50,8 +52,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 	void Update()
 	{
-		if (view.IsMine)
+		
+		if (view.IsMine && name == "Local")
 		{
+			
 			if (Input.GetButtonDown("Fire1"))
 			{
 				if(EventSystem.current.IsPointerOverGameObject())
@@ -79,6 +83,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
+			else if (Input.GetKeyDown(KeyCode.Q) && player.transform.Find("slot").GetChild(0) ){
+				Transform fireExtinguisher = player.transform.Find("slot").GetChild(0);
+				ParticleSystem fire_ps = fireExtinguisher.GetComponentInChildren<ParticleSystem>();
+
+				if(fireExtinguisher.name == "fireExtinguisher"){
+					if(fire_ps && !fire_ps.isPlaying){
+						fire_ps.Play();
+					}else{
+						fire_ps.Stop();
+					}
+				}
+			}
 		}
 		
 	}
@@ -87,7 +103,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 	// Set our focus to a new focus
 	void SetFocus(Interactable newFocus, GameObject obj)
 	{
-		if (view.IsMine)
+		if (view.IsMine && name =="Local")
 		{
 			float distance = Vector3.Distance(player.position, obj.GetComponent<Transform>().position);
 
