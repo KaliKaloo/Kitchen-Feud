@@ -22,8 +22,6 @@ public class MusicManager : MonoBehaviour
     public bool inMG = false;
     public float musicVol = 0.1f;
 
-    private int oldTrack;
-
    
     void Awake(){
         if (instance == null){
@@ -39,7 +37,6 @@ public class MusicManager : MonoBehaviour
         track3 = gameObject.AddComponent<AudioSource>();
         track4 = gameObject.AddComponent<AudioSource>();
         track3.loop = true;
-
 
         // start playing
         setMusicClips();
@@ -95,24 +92,21 @@ public class MusicManager : MonoBehaviour
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
     
-        if (newTrack != track1.clip){
-            newAudio.clip = newTrack;
-            fadingTrack = 1;
-            track1CurrentVol = oldAudio.volume;
-            track2CurrentVol = newAudio.isPlaying ? newAudio.volume : 0;
+        newAudio.clip = newTrack;
+        fadingTrack = 1;
+        track1CurrentVol = oldAudio.volume;
+        track2CurrentVol = newAudio.isPlaying ? newAudio.volume : 0;
 
-            newAudio.Play();
+        newAudio.Play();
 
-            while (timeElapsed < fadeTime){
-                oldAudio.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
-                newAudio.volume = Mathf.Lerp(track2CurrentVol, musicVol, timeElapsed/fadeTime);
-                timeElapsed += Time.deltaTime;
-                yield return null;
+        while (timeElapsed < fadeTime){
+            oldAudio.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
+            newAudio.volume = Mathf.Lerp(track2CurrentVol, 1, timeElapsed/fadeTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
 
-            }
-            oldAudio.Stop();
-            
         }
+        oldAudio.Stop();
     }
 
 
@@ -121,14 +115,6 @@ public class MusicManager : MonoBehaviour
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
         Invoke("playRandom", track.clip.length);
-    }
-
-
-    private void kitchenSwitch(){
-        if (oldTrack == location){
-            track3.Pause();
-            track1.UnPause();
-        }
     }
 
 
