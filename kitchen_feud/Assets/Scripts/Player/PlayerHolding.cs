@@ -45,8 +45,10 @@ public class PlayerHolding : MonoBehaviour
         {
             StartCoroutine(LockPickup());
 
-            if (view.IsMine)
+            //if (view.IsMine)
             {
+
+
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     slotItem(obj);
@@ -77,7 +79,7 @@ public class PlayerHolding : MonoBehaviour
     void slotItem(GameObject obj)
     {
 
-        
+
         PhotonView objPV = obj.GetComponent<PhotonView>();
         if (objPV)
         {
@@ -88,16 +90,23 @@ public class PlayerHolding : MonoBehaviour
             heldObj = obj;
         }
 
-        if (heldObj.GetComponent<Rigidbody>())
+        if (heldObj.GetComponent<Rigidbody>() || heldObj.name == "TrayPrefab(Clone)") 
         {
-            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
 
-            heldObj.layer = 8;
-            foreach (Transform child in heldObj.transform)
+            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
+            if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2"))
             {
-                child.gameObject.layer = 8;
+                heldObj.layer = 8;
+                foreach (Transform child in heldObj.transform)
+                {
+                    child.gameObject.layer = 8;
+                }
             }
         }
+    }
+
+    private void Update()
+    {
     }
 
     IEnumerator LockPickup()
@@ -132,20 +141,24 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsSlot(int viewID)
     {
-        PhotonView.Find(viewID).gameObject.transform.SetParent(this.transform.GetChild(2).transform);
-        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
-        PhotonView.Find(viewID).gameObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = true;
+        GameObject obj = PhotonView.Find(viewID).gameObject;
+        obj.transform.SetParent(this.transform.GetChild(2).transform);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        if(obj.GetComponent<Rigidbody>()){
+            obj.GetComponent<Rigidbody>().isKinematic = true;
+            obj.GetComponent<Collider>().isTrigger = true;
+        }
         // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
     }
     [PunRPC]
     void SetParentAsNull(int viewID)
     {
         {
-            PhotonView.Find(viewID).gameObject.transform.SetParent(null);
-            PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+            GameObject obj = PhotonView.Find(viewID).gameObject;
+            obj.transform.SetParent(null);
+            obj.GetComponent<Rigidbody>().isKinematic = false;
+            obj.GetComponent<Collider>().isTrigger = false;
             // PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
             // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
             itemdropped = true;
