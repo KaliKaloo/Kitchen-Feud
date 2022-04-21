@@ -22,7 +22,7 @@ public class TraySlotting : MonoBehaviour
             {
                 PhotonView dPv = dish.GetPhotonView();
                 dPv.GetComponent<PhotonView>()
-                    .RPC("setParent", RpcTarget.All, dPv.ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                    .RPC("setParentTray", RpcTarget.All, dPv.ViewID, slots[i].GetComponent<PhotonView>().ViewID);
             }
         }
     }

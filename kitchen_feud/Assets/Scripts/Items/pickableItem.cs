@@ -90,6 +90,18 @@ public class pickableItem : Interactable
 
     }
     [PunRPC]
+    void setParentTray(int viewID,int viewID1)
+    {
+        PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
+        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+        PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        PhotonView.Find(viewID).transform.localScale =
+            PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+
+    }
+    [PunRPC]
     void trayBool(int viewID,int trayID)
     {
         PhotonView.Find(viewID).GetComponent<pickableItem>().onTray = true;
