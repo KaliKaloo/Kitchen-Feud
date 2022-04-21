@@ -36,6 +36,8 @@ TagManager:
   - ServingPoint2
   - Customer2
   - Customer1
+  - Owner1
+  - Owner2
   layers:
   - Default
   - TransparentFX
@@ -51,7 +53,6 @@ TagManager:
   - Agent
   - 
   - Walls
-  - 
   - 
   - 
   - 

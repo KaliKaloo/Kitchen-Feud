@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 4850287822765907780}
   m_Layer: 0
   m_Name: Owner_panda_Model
-  m_TagString: Player
+  m_TagString: Owner2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,6 +608,7 @@ MonoBehaviour:
   cam: {fileID: 5732737914250238453}
   secondaryCam: {fileID: 5732737912369520359}
   view: {fileID: 4850287822765907779}
+  originalOwner: 0
 --- !u!114 &4850287822765907777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +817,15 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsMovingBackwards
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsStrafingRight
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsStrafingLeft
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsCooking
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1423471326122498059}
   m_Layer: 0
   m_Name: Owner_cat_Model
-  m_TagString: Player
+  m_TagString: Owner1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   cam: {fileID: 2216191030710823112}
   secondaryCam: {fileID: 5992262761695865800}
   view: {fileID: 4338776926646805293}
+  originalOwner: 0
 --- !u!114 &873649799258480705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +471,15 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsMovingBackwards
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsStrafingRight
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsStrafingLeft
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsCooking
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
