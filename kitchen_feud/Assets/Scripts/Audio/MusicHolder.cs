@@ -16,7 +16,7 @@ public class MusicHolder
             previousArray = new int[tracks.Length / 2];
         }
         if (previousArray.Length == 0) {
-            return null;
+            return tracks[0];
         } else {
             do {
                 audioClipIndex = Random.Range(0, tracks.Length);
