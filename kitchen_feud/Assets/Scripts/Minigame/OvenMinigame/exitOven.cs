@@ -25,7 +25,7 @@ public class exitOven : MonoBehaviour
 		
 	}
 
-	void TaskOnClick()
+	public void TaskOnClick()
 	{
 		GameEvents.current.assignPointsEventFunction();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
@@ -34,6 +34,7 @@ public class exitOven : MonoBehaviour
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 	}
+
 	[PunRPC]
 	void globalDestroy(int viewID)
 	{

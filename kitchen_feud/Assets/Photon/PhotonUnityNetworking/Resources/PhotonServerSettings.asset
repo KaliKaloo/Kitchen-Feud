@@ -36,7 +36,6 @@ MonoBehaviour:
   RpcList:
   - addComps
   - addItemRPC
-  - addOp
   - addPlayer
   - addSecondsRPC
   - appendKickedBy
@@ -59,7 +58,6 @@ MonoBehaviour:
   - DisableView
   - doFd
   - enableBack
-  - enableMoving
   - EnablePforAll
   - EnablePushing
   - EnView
@@ -73,9 +71,6 @@ MonoBehaviour:
   - incrementDoor
   - loadS
   - makeTrayAcross
-  - moveLeft
-  - movePan
-  - moveRight
   - onApplianceF
   - onTrayF
   - ovenGame
@@ -83,32 +78,31 @@ MonoBehaviour:
   - playDing
   - PlayDropSound
   - PlayFireSound
-  - PlayServingSound
   - PlaySmokeBombSound
   - pointSync
   - push
   - removeFromApplianceRPC
   - removeFromTray
-  - removeOp
   - resetAcross
   - resetCount
-  - resetIsPressed
-  - resetPlayerPressing
   - resetTimer
   - resetTimerRPC
   - RespawnSpaceship
   - setAddedF
+  - setAgent
+  - setAgentF
   - setAppl
   - setCanvActive
-  - setDishSO
+  - setDest
   - setEntered
   - setEnteredF
   - setFoodVals
   - SetGrav
-  - setGravScale
   - setHBParent
   - setHeldobj
   - setHeldobjAsNull
+  - setIsReady
+  - setIsReadyF
   - setKickable
   - setKickableF
   - setMyC
@@ -122,7 +116,6 @@ MonoBehaviour:
   - setPlateStartVals
   - setPlayed
   - setPlayer
-  - setPlayerPressing
   - setPoints
   - setSetF
   - setSignParent
@@ -131,6 +124,10 @@ MonoBehaviour:
   - SetToF
   - SetToFalse
   - SetToTrue
+  - setTray
+  - setTrayNull
+  - setUsed
+  - setUsedF
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
   - StopBoilingSound
@@ -146,9 +143,13 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - PlayServingSound
+  - setDestF
+  - setAgentName
   - loadSceneP
   - showTickets
   - clearApplPlayers
+  - setParentTray
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

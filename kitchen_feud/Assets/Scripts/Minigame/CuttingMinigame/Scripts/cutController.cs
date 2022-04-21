@@ -84,7 +84,10 @@ public class cutController : MonoBehaviour
         instructions.SetActive(false);
         StartButton.SetActive(false);
         scoreSystem.SetActive(true);
-        
+
+        // start cooking animation
+        playerAnimator.animator.SetBool("IsCooking", true);
+
         //call ingredient spawner with a list od ingredient sprites
         IngredientSpawner.StartSpawn(newIngredients);
 

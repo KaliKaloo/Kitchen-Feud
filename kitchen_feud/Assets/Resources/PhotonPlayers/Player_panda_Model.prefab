@@ -797,11 +797,20 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsMovingForwards
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: IsHolding
   - Type: 4
     SynchronizeType: 1
     Name: IsMovingBackwards
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsStrafingRight
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsStrafingLeft
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsCooking
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
