@@ -44,6 +44,7 @@ public class Owner : MonoBehaviour
         {
             Debug.LogError("Hello");
             oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
+            agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
         }
     }
 

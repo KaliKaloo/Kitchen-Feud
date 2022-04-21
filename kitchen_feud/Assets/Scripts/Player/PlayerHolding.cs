@@ -94,7 +94,7 @@ public class PlayerHolding : MonoBehaviour
         {
 
             this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
-            if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2"))
+            if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2") && !transform.tag.Contains("Owner"))
             {
                 heldObj.layer = 8;
                 foreach (Transform child in heldObj.transform)
