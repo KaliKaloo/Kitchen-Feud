@@ -59,6 +59,7 @@ public class Owner : MonoBehaviour
                 agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                 faceforward = true;
                 anim.SetBool("IsTalking",true);
+
                 if (Int32.Parse(Score1.text) == Int32.Parse(Score2.text))
                 {
                     Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
@@ -67,6 +68,12 @@ public class Owner : MonoBehaviour
                 writer.writeText();
                 
             }
+
+            if (!writer.writing && anim.GetBool("IsTalking"))
+            {
+                anim.SetBool("IsTalking",false);
+            }
+            
         }
         
         /*if (!collected  && oven.GetComponent<Appliance>().minigameCanvas)

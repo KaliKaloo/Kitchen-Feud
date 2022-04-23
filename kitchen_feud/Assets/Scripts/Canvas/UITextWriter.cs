@@ -10,12 +10,14 @@ public class UITextWriter : MonoBehaviour
 	// how long for each letter to get displayed
 	private float typeDelay = 0.05f;
 	private float waitTime;
+	public bool writing;
 
 	private TextMeshProUGUI txt;
 	private string line;
 
 	public void writeText()
 	{
+		writing = true;
 		txt = GetComponent<TextMeshProUGUI>();
 		line = txt.text;
 		txt.text = "";
@@ -42,6 +44,10 @@ public class UITextWriter : MonoBehaviour
 		{
 			txt.text += c;
 			yield return new WaitForSeconds(typeDelay);
+			if (line.IndexOf(c) == line.Length - 1)
+			{
+				writing = false;
+			}
 		}
 	}
 
