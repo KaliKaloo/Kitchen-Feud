@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mainMenu.unity
     guid: 54168acedafa9374e82d60b44790174a
+  - enabled: 0
+    path: Assets/Scenes/kitchens tutorial.unity
+    guid: c4b7a898a28b29b46a4979edf0687fea
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: de051bd4b986ef74aaf3a9c1edd0183f

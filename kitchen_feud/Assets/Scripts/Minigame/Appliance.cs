@@ -49,6 +49,7 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
+      
         
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
@@ -69,6 +70,8 @@ public class Appliance : Interactable
                     {
                         this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                             player.GetComponent<PhotonView>().ViewID);
+
+                        globalClicked.applianceInteract = true;
                     }
                     else
                     {
@@ -425,7 +428,7 @@ public class Appliance : Interactable
     [PunRPC]
     void hideFryingUI(int canvID)
     {
-        PhotonView.Find(canvID).transform.Find("Waiting").gameObject.SetActive(false);
+        PhotonView.Find(canvID).transform.Find("instruction panel").gameObject.SetActive(false);
         PhotonView.Find(canvID).transform.Find("BackButton").gameObject.SetActive(false);
 
     }
