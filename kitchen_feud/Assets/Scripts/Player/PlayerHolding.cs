@@ -127,6 +127,13 @@ public class PlayerHolding : MonoBehaviour
             {
                 child.gameObject.layer = 0;
             }
+
+            if (heldObj.name == "fireExtinguisher")
+            {
+                heldObj.GetComponent<PhotonView>()
+                    .RPC("playPS", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
+            }
+
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
                          heldObj.GetComponent<PhotonView>().ViewID);
             //SOUND ---------------------------------------------------------
