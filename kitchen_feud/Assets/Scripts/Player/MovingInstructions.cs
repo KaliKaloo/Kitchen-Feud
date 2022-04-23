@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class globalClicked{
     public static bool enterEnemyKitchen = false;
 
 }
-
+/*
 public class MovingInstructions : MonoBehaviour
 {
     public TextMeshProUGUI Text;
@@ -128,3 +129,4 @@ public class MovingInstructions : MonoBehaviour
         timer = time;
     }
 }
+*/
