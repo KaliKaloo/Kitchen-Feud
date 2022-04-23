@@ -88,8 +88,9 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                // MusicManager.instance.changeBGM(team, 10, 0, 1);
-                MusicManager.instance.switchLocation(team);
+                // MusicManager.instance.switchLocation(team);
+                MusicManagerOld.instance.changeBGM(team, 10, 0, 1);
+                MusicManagerOld.instance.location = team;
 
 
                 if (team == 1)
