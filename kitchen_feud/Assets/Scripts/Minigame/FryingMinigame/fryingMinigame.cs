@@ -61,6 +61,8 @@ public class fryingMinigame : MonoBehaviour
             }
 
             set = true;
+            MusicManagerOld.instance.minigameSwitch();
+		    MusicManagerOld.instance.inMG = true;
         }else if (!transform.Find("Frying(Clone)")) {
             set = false;    
         }

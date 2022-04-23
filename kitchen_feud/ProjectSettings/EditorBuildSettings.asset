@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
     guid: 54168acedafa9374e82d60b44790174a
   - enabled: 0
-    path: Assets/Scenes/kitchens tutorial.unity
-    guid: c4b7a898a28b29b46a4979edf0687fea
-  - enabled: 1
-    path: Assets/Scenes/kitchens_music.unity
-    guid: 33c243728dce47241ae29e26c9a35b7c
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: de051bd4b986ef74aaf3a9c1edd0183f
+  - enabled: 0
+    path: Assets/Scenes/kitchens_music.unity
+    guid: 33c243728dce47241ae29e26c9a35b7c
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2
