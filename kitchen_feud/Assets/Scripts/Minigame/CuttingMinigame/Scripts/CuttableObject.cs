@@ -23,19 +23,19 @@ public class CuttableObject : MonoBehaviour
             CutController.source.Play();
             // ----------------------------------------
             
+            CutController.Ingredient += 1;
+
             if (!correctIngredient)
             {
-                     CutController.Score -= 10;
+                CutController.Score -= 10;
             }
-            else
+           
+               
+            if (CutController.Ingredient == 15)
             {
-                CutController.Ingredient += 1;
-                
-                if (CutController.Ingredient == 15)
-                {
-                    CutController.calculateScore();
-                }
+                CutController.calculateScore();
             }
+            
         }
     }
 
