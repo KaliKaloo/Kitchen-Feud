@@ -13,12 +13,12 @@ public class Hover : MonoBehaviour, IPointerClickHandler
     public GameObject RecipeCard;
     public Texture2D cursorClickable;
     public GlowController GlowController;
-   
+    
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
+            globalClicked.clicked = true;
             if (!RecipeCard.activeInHierarchy){
                 GlowController.firstClick = true;
             }

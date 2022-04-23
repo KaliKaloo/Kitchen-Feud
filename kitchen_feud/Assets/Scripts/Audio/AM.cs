@@ -8,7 +8,7 @@ using Photon.Pun;
 public class AM : MonoBehaviour
 {
     IRtcEngine engine;
-    string randomInstance;
+    int randomInstance;
     int myTeam;
     public PhotonView PV;
     public bool played;
@@ -20,7 +20,7 @@ public class AM : MonoBehaviour
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = menuController.Instance.x.ToString();
+        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
     }
     void Start()
     {   

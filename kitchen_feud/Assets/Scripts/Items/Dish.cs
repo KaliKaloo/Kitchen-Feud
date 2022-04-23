@@ -33,6 +33,7 @@ public class Dish : MonoBehaviour
         this.points = point;
     }
 
+
 }
 
 

@@ -70,7 +70,7 @@ public class menuController : MonoBehaviourPunCallbacks
         Instance = this;
 /*        ResetUsername();
         ResetUserID();*/
-//        PlayerPrefs.DeleteAll();
+      // PlayerPrefs.DeleteAll();
     }
 
     private void SetTeam(int teamNumber)
@@ -363,7 +363,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
         timer.SetServerTime();
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount <= 4)
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
         {
             GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
 
@@ -389,9 +389,9 @@ public class menuController : MonoBehaviourPunCallbacks
                 //StartCoroutine(LoadSceneAsynchronously(1));
 
                 // Rejoin voice chat
-                rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+                /*rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
                 x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-                rtcEngine.JoinChannel(x.ToString() + "Lobby");
+                rtcEngine.JoinChannel(x.ToString() + "Lobby");*/
             } 
             else
             {

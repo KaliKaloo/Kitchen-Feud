@@ -1,8 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+
+public class playerAnimator
+{
+    public static Animator animator;
+
+    public static void SetAnimator(Animator newAnimator)
+    {
+        animator = newAnimator;
+    }
+
+    public static void ResetBools()
+    {
+        animator.SetBool("IsStrafingRight", false);
+        animator.SetBool("IsStrafingLeft", false);
+        animator.SetBool("IsMovingForwards", false);
+        animator.SetBool("IsMovingBackwards", false);
+        animator.SetBool("IsCooking", false);
+    }
+}
 
 public class playerMvmt : MonoBehaviour
 {
@@ -16,6 +36,7 @@ public class playerMvmt : MonoBehaviour
     public PhotonView PV;
     float Horizontal;
     float Vertical;
+    private bool disableForOthers;
     Vector3 movement;
     
 
@@ -37,43 +58,50 @@ public class playerMvmt : MonoBehaviour
         }
         //-------------------------------------------------------------------------
         animator = parent.GetComponent<Animator>();
+        playerAnimator.SetAnimator(animator);
 
     }
 
 
     private void Update()
     {
+        if (transform.parent.name != "Local" && !disableForOthers)
+        {
+            gameObject.SetActive(false);
+            disableForOthers = true;
+        }
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name =="Local")
         {
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
-            //SideStepping animation
-            if (Vertical == 0f && Horizontal != 0)
-            {
-            }
 
-            float dotProduct = Vector3.Dot(movement, transform.forward);
+            // walk forward
+            if (Vertical > 0)
+                animator.SetBool("IsMovingForwards", true);
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingForwards", false);
 
-            // if player moving forward
-            if (dotProduct > 0)
-				animator.SetBool("IsMovingForwards", true);
-            // if player moving backward
-            else if (dotProduct < 0) 
-				animator.SetBool("IsMovingBackwards", true);
+            // walk backwards
+            if (Vertical < 0)
+                animator.SetBool("IsMovingBackwards", true);
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingBackwards", false);
 
-            //disable movement
-            else {
-                // disable backwards
-                if (animator.GetBool("IsMovingBackwards"))
-                    animator.SetBool("IsMovingBackwards", false);
-                // disable forwards
-                else if (animator.GetBool("IsMovingForwards"))
-				    animator.SetBool("IsMovingForwards", false);
-            }
-                
-          
+            // strafe right
+            if (Horizontal > 0)
+                animator.SetBool("IsStrafingRight", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingRight", false);
+
+            // strafe left
+            if (Horizontal < 0)
+                animator.SetBool("IsStrafingLeft", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingLeft", false);
+
+
         }
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
@@ -86,7 +114,7 @@ public class playerMvmt : MonoBehaviour
     private void LateUpdate()
     {
 
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name == "Local")
         {
             if (Input.GetMouseButton(1))
             {
@@ -138,10 +166,10 @@ public class playerMvmt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PV.IsMine)
+        if (PV.IsMine && transform.parent.name =="Local")
         {
             {
-                rb.MovePosition(rb.position + movement * mvmtSpeed * Time.fixedDeltaTime);
+                rb.velocity =  movement * mvmtSpeed ;
             }
         }
     }

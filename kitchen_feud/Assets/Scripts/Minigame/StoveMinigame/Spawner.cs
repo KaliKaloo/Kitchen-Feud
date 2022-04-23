@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] public GameObject team2Background;
     [SerializeField] public GameObject minigameCanvas;
     public GameObject backButton;
-    public GameObject topBar;
+    public GameObject instructions;
     public GameObject bottomBar;
 
     [SerializeField] public GameObject correctItem;
@@ -72,7 +72,7 @@ public class Spawner : MonoBehaviour
         stoveMinigameCounter.StartGame();
         stoveMinigameCounter.ResetCounter();
         
-        topBar.SetActive(false);
+        instructions.SetActive(false);
         startButton.SetActive(false);
         if (PhotonNetwork.IsConnected)
             startSmoke();
@@ -83,6 +83,10 @@ public class Spawner : MonoBehaviour
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
+
+        // start cooking animation
+        if (playerAnimator.animator != null)
+            playerAnimator.animator.SetBool("IsCooking", true);
 
         StartCoroutine(SpawnCorrectIngredient());
         StartCoroutine(SpawnBombObject());

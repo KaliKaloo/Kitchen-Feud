@@ -13,8 +13,6 @@ public class ExitCuttingMinigame : MonoBehaviour
 	public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
-	
-
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -23,6 +21,8 @@ public class ExitCuttingMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		GameObject gamePlayer = GameObject.Find("Local");
+		PhotonView playerV = gamePlayer.GetPhotonView();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		MusicManager.instance.minigameEnd();
@@ -32,17 +32,19 @@ public class ExitCuttingMinigame : MonoBehaviour
 
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
-		
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
-		
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
 
-		PhotonView view = appliance.player.GetComponent<PhotonView>();
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 		
-		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		
-		appliance.playerController.enabled = true;
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
+
+		
+		playerV.RPC("EnablePushing",RpcTarget.AllBuffered,playerV.ViewID);
+		playerV.GetComponent<PlayerController>().enabled = true;
+	
 		appliance.UIcamera.enabled = false;
-		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
+		playerV.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }

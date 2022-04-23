@@ -140,6 +140,7 @@ public class TrayControllerTests
     }
 
 
+/*
     [Test]
     public void resetOneTray()
     {
@@ -151,11 +152,12 @@ public class TrayControllerTests
         Assert.AreEqual(0, trayController.trays[0].GetComponent<Tray>().tray.objectsOnTray.Count);
 
     }
+*/
 
 
 
 
-    [Test]
+/*    [Test]
     public void resetAllTrays()
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
@@ -170,11 +172,11 @@ public class TrayControllerTests
         Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    }
+    }*/
 
 
 
-    [Test]
+/*    [Test]
     public void resetSomeTrays()
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
@@ -188,8 +190,9 @@ public class TrayControllerTests
         Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("tray2", trayController.trays[1].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    }
+    }*/
 
+/*
 
     [Test]
     public void resetMakeAllTrays()
@@ -211,9 +214,10 @@ public class TrayControllerTests
         Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
     }
+*/
 
 
-    [Test]
+/*    [Test]
     public void resetSomeMakeTrays()
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
@@ -232,8 +236,8 @@ public class TrayControllerTests
         Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("order 2", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    }
-
+    }*/
+/*
     [Test]
     public void makeResetTrays()
     {
@@ -255,9 +259,9 @@ public class TrayControllerTests
         Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
        
     }
+*/
 
-
-    [Test]
+    /*[Test]
     public void resetOrderTower()
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
@@ -273,8 +277,10 @@ public class TrayControllerTests
         Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
         Assert.AreEqual("", grandChild.GetComponentInChildren<TextMeshProUGUI>().text);
     }
-
+*/
+    /*
     [Test]
+
     public void resetNotOrderTower()
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
@@ -292,6 +298,7 @@ public class TrayControllerTests
 
 
     }
+*/
 
 
 

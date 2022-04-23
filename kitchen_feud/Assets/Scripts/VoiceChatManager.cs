@@ -82,7 +82,9 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         || ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2 && channelName.Substring(channelName.Length - 5) == "Team1")) {
             CustomProperties.PlayerMischievous.AddMischievousStat();
             enableSmoke.ChangePlayerState(true);
-            // if player joins another area
+            globalClicked.enterEnemyKitchen =true;
+
+        // if player joins another area    
         }
         else
         {

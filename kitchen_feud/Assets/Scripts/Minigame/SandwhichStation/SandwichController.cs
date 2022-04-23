@@ -12,6 +12,8 @@ public class SandwichController : MonoBehaviour
     [SerializeField] private GameObject minigameCanvas;
     public GameObject StartButton;
     public GameObject backButton;
+    public GameObject instructions;
+
     public GameObject GameUI;
     
     //public SpawnIngredient spawnIngredient; 
@@ -65,6 +67,7 @@ public class SandwichController : MonoBehaviour
     public void RestartGame()
     {
         StartButton.SetActive(true);
+        instructions.SetActive(true);
         backButton.SetActive(false);
         moving = false;
         Score = 0;
@@ -85,6 +88,7 @@ public class SandwichController : MonoBehaviour
     {
         RestartGame();
         StartButton.SetActive(false);
+        instructions.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
         moving = true;
@@ -95,6 +99,9 @@ public class SandwichController : MonoBehaviour
         
         List<string> ingredientIDs = InstantiateList(sandwichIngredients);
         idList = new List<string>(ingredientIDs);
+
+        // start cooking animation
+        playerAnimator.animator.SetBool("IsCooking", true);
 
         LayerSpawn.StartSpawn(idList);
 

@@ -16,7 +16,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	[SerializeField] private GameObject backButton;
 	[SerializeField] private GameObject startButton;
 	[SerializeField] private Text score;
-	[SerializeField] private GameObject topBar;
+	[SerializeField] private GameObject instructions;
 
 	public Appliance appliance;
 	StoveScore stoveScore = new StoveScore();
@@ -33,10 +33,15 @@ public class ExitStoveMinigame : MonoBehaviour
 	}
 
 	void TaskOnClick(){
+		GameObject gamePlayer = GameObject.Find("Local");
+		PhotonView playerV = gamePlayer.GetPhotonView();
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
 		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
+
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
@@ -45,7 +50,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
-		topBar.SetActive(true);
+		instructions.SetActive(true);
 		var xBound = Screen.width / 2;
         var lowerBound = pot.position.x - xBound;
         var upperBound = pot.position.x + xBound;
@@ -56,19 +61,18 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		//TO FIX!
 		//SOUND ----------------------------------------------------------
-		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.All);
+		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.AllBuffered);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
 		//----------------------------------------------------------------
 
-		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.All,appliance.GetComponent<PhotonView>().ViewID);
-		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.All);
-		PhotonView	view = appliance.player.GetComponent<PhotonView>();
-		view.RPC("EnablePushing",RpcTarget.All,view.ViewID);
+		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
+		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
+		playerV.RPC("EnablePushing",RpcTarget.AllBuffered,playerV.ViewID);
 
-		appliance.playerController.enabled = true;
-		appliance.player.GetComponentInChildren<Camera>().enabled = true;
+
+		gamePlayer.GetComponent<PlayerController>().enabled = true;
 		appliance.UIcamera.enabled = false;
-		appliance.player.GetComponentInChildren<playerMvmt>().enabled = true;
+		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}
 }
