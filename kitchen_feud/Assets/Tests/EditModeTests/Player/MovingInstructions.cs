@@ -30,7 +30,7 @@ public class MovingInstructionsTests
     public void InitializeTimer()
     {
         movingInstructions.InitializeTimer();
-        Assert.AreEqual(1.5f, movingInstructions.timer);
+        Assert.AreEqual(13f, movingInstructions.timer);
     }
 
    

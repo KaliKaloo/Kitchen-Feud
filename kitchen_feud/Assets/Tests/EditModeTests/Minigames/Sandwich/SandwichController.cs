@@ -22,6 +22,8 @@ public class SandwichControllerTests
         sandwichController.scoreText = obj.AddComponent<Text>();
         sandwichController.StartButton = new GameObject();
         sandwichController.backButton = new GameObject();
+        sandwichController.instructions = new GameObject();
+
         sandwichController.SandwichSpawner = obj.AddComponent<SandwichSpawner>();
         sandwichController.LayerSpawn = obj.AddComponent<LayerSpawn>();
 
