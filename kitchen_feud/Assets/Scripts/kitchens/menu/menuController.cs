@@ -520,6 +520,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
             loadingScreen.SetActive(false);
             lobby["Players"] = 1;
+            lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         }
