@@ -21,7 +21,7 @@ public class MusicManagerOld : MonoBehaviour
     public int location;
 
     public bool inMG = false;
-    public float musicVol = 0.5f;
+    public float musicVol = 1f;
 
     
     void Awake(){
