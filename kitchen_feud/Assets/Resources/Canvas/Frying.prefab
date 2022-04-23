@@ -1854,7 +1854,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Waiting for another player ...
+  m_text: 'Waiting for another player ...
+
+    Move the mouse to flip the food in
+    the pan. your partner will move the plate to catch it'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8331a6bffbe46bd4b8f7dd5df60d2fb6, type: 2}
   m_sharedMaterial: {fileID: 7282593155963796301, guid: 8331a6bffbe46bd4b8f7dd5df60d2fb6, type: 2}
