@@ -56,7 +56,7 @@ public class TrashTest : PhotonTestSetup
     [UnityTest]
     public IEnumerator trashIngredient()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         trash.player = obj.transform;
         trash.Interact();
@@ -70,7 +70,7 @@ public class TrashTest : PhotonTestSetup
     [UnityTest]
     public IEnumerator trashDish()
     {
-        playerHold.pickUpItem(chips, chips.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(chips);
         Assert.AreEqual(chips, playerHold.heldObj);
         trash.player = obj.transform;
         trash.Interact();

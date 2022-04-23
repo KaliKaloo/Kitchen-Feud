@@ -22,10 +22,20 @@ TagManager:
   - ItemCollider
   - OrderTower
   - Dish
+  - Agent
+  - ServingPoint1
   - Kitchen1Portals
   - Kitchen2Portals
+  - ExplodingBox
+  - Balloon
+  - Water
   - Team1Oven
   - Team2Oven
+  - Waiter1
+  - Waiter2
+  - ServingPoint2
+  - Customer2
+  - Customer1
   layers:
   - Default
   - TransparentFX
@@ -38,8 +48,9 @@ TagManager:
   - Particle Effects
   - Pickable
   - ME
+  - Agent
   - 
-  - 
+  - Walls
   - 
   - 
   - 
