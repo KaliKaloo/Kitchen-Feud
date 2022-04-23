@@ -38,6 +38,7 @@ public class ItemCollider : MonoBehaviour
             if (pv.IsMine && parentAppliance.canUse && playerHold && !playerHold.itemLock)
             {
                 // PLAY SOUND FOR SLOT HERE
+                globalClicked.applianceInteract = true;
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
                 playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.AllBuffered, playerHold.GetComponent<PhotonView>().ViewID);
