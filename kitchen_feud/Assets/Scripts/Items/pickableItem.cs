@@ -98,7 +98,7 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
         PhotonView.Find(viewID).transform.localScale =
-            PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+            PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
 
     }
     [PunRPC]
