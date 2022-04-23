@@ -82,9 +82,7 @@ public class MovingInstructions : MonoBehaviour
         }
         else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).childCount == 1 )
         {
-            Debug.Log("here");
             if(LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish")){
-                Debug.Log("now here");
 
                 Text.text = "Put the dish on the white tray that has the correct order number";
                 textWriter.writeText2("Then click on the tray to serve, or make more dishes",2f);
