@@ -84,6 +84,10 @@ public class Spawner : MonoBehaviour
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
         newIngredients = new List<Sprite>(dishSprites);
 
+        // start cooking animation
+        if (playerAnimator.animator != null)
+            playerAnimator.animator.SetBool("IsCooking", true);
+
         StartCoroutine(SpawnCorrectIngredient());
         StartCoroutine(SpawnBombObject());
     }

@@ -32,7 +32,10 @@ public class ExitSandwichMinigame : MonoBehaviour
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
 		SandwichController.RestartGame();
-		
+
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
+
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered, appliance.GetComponent<PhotonView>().ViewID);

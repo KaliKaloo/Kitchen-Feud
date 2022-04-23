@@ -100,6 +100,9 @@ public class SandwichController : MonoBehaviour
         List<string> ingredientIDs = InstantiateList(sandwichIngredients);
         idList = new List<string>(ingredientIDs);
 
+        // start cooking animation
+        playerAnimator.animator.SetBool("IsCooking", true);
+
         LayerSpawn.StartSpawn(idList);
 
         objectSpawn(sandwichIngredients);
