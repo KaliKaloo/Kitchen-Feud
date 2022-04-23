@@ -10,11 +10,12 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject video;
     [SerializeField] private GameObject skipButton;
     [SerializeField] private Text skipButtonText;
-
+    public int voteCount;
     private VideoPlayer videoPlayer;
     private menuController menu;
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private bool skipButtonPressed = false;
+    private PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,12 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         videoPlayer = video.GetComponent<VideoPlayer>();
         menu = GetComponent<menuController>();
         skipButtonText.text = "Skip";
+        PV = GetComponent<PhotonView>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void VoteSkipCutscene()
@@ -29,6 +36,7 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         // check if button hasn't been pressed
         if (!skipButtonPressed)
         {
+            PV.RPC("increment",RpcTarget.All,PV.ViewID);
             skipButtonPressed = true;
             // increment amount of people who pressed button on network
             if (customProperties["Skip"] != null)
@@ -39,9 +47,10 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    /*public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
         // check if skip property has been properly set by server
+        
         if (propertiesThatChanged["Skip"] != null)
         {
             // skip cutscene if amount of skips = number of players
@@ -52,8 +61,21 @@ public class CutsceneController : MonoBehaviourPunCallbacks
             else
                 skipButtonText.text = (int)propertiesThatChanged["Skip"] + "/" + (int)propertiesThatChanged["Skip"];
         }
-    }
+    }*/
 
+    [PunRPC]
+    void increment(int viewID)
+    {
+        int vC;
+        PhotonView.Find(viewID).GetComponent<CutsceneController>().voteCount++;
+        vC = PhotonView.Find(viewID).GetComponent<CutsceneController>().voteCount;
+        skipButtonText.text = vC + "/" + PhotonNetwork.CurrentRoom.PlayerCount;
+        if (vC == PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            menu.startGame();
+        }
+        
+    }
     // Stops the video for all players in lobby
     [PunRPC]
     void SkipCutscene()
