@@ -48,7 +48,6 @@ public class PlayerHolding : MonoBehaviour
             //if (view.IsMine)
             {
 
-
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     slotItem(obj);
@@ -78,22 +77,10 @@ public class PlayerHolding : MonoBehaviour
 
     void slotItem(GameObject obj)
     {
-
-
         PhotonView objPV = obj.GetComponent<PhotonView>();
-        if (objPV)
-        {
-            view.RPC("setHeldobj", RpcTarget.All, view.ViewID, objPV.ViewID);
-        }
-        else
-        {
-            heldObj = obj;
-        }
-
+        this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, view.ViewID, obj.GetComponent<PhotonView>().ViewID);
         if (heldObj.GetComponent<Rigidbody>() || heldObj.name == "TrayPrefab(Clone)") 
         {
-
-            this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
             if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2"))
             {
                 heldObj.layer = 8;
@@ -127,21 +114,26 @@ public class PlayerHolding : MonoBehaviour
             {
                 child.gameObject.layer = 0;
             }
-            this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
-                         heldObj.GetComponent<PhotonView>().ViewID);
-            //SOUND ---------------------------------------------------------
+
+            if (heldObj.name == "fireExtinguisher")
+            {
+                heldObj.GetComponent<PhotonView>()
+                    .RPC("stopPS", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
+            }
 
             this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.All);
 
-            //---------------------------------------------------------------
-            view.RPC("setHeldobjAsNull", RpcTarget.All, view.ViewID);
+            this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,view.ViewID,
+                         heldObj.GetComponent<PhotonView>().ViewID);
 
         }
     }
     [PunRPC]
-    void SetParentAsSlot(int viewID)
+    void SetParentAsSlot(int viewID,int heldObjId)
     {
-        GameObject obj = PhotonView.Find(viewID).gameObject;
+        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = PhotonView.Find(heldObjId).gameObject;
+
+        GameObject obj = PhotonView.Find(heldObjId).gameObject;
         obj.transform.SetParent(this.transform.GetChild(2).transform);
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -152,10 +144,11 @@ public class PlayerHolding : MonoBehaviour
         // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
     }
     [PunRPC]
-    void SetParentAsNull(int viewID)
+    void SetParentAsNull(int viewID, int heldObjId)
     {
         {
-            GameObject obj = PhotonView.Find(viewID).gameObject;
+            PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
+            GameObject obj = PhotonView.Find(heldObjId).gameObject;
             obj.transform.SetParent(null);
             obj.GetComponent<Rigidbody>().isKinematic = false;
             obj.GetComponent<Collider>().isTrigger = false;
@@ -164,16 +157,7 @@ public class PlayerHolding : MonoBehaviour
             itemdropped = true;
         }
     }
-    [PunRPC]
-    void setHeldobj(int viewID,int heldObjId)
-    {
-        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = PhotonView.Find(heldObjId).gameObject;
-    }
-    [PunRPC]
-    void setHeldobjAsNull(int viewID)
-    {
-        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
-    }
+   
 
     [PunRPC]
     void PlayDropSound() {
