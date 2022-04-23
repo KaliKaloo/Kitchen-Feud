@@ -131,7 +131,7 @@ public class PlayerHolding : MonoBehaviour
             if (heldObj.name == "fireExtinguisher")
             {
                 heldObj.GetComponent<PhotonView>()
-                    .RPC("playPS", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
+                    .RPC("stopPS", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
             }
 
             this.GetComponent<PhotonView>().RPC("SetParentAsNull", RpcTarget.All,
