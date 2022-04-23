@@ -51,7 +51,7 @@ public class TrayTests : PhotonTestSetup
     public IEnumerator oneItemOnTray()
     {
        
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
         Assert.IsNull(playerHold.heldObj);
@@ -68,13 +68,13 @@ public class TrayTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator twoItemsOnTray()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
         Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.tray.ServingTray.Count);
-        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(potato);
         Assert.AreEqual(potato, playerHold.heldObj);
         tray.Interact();
 
@@ -94,19 +94,19 @@ public class TrayTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator trayFull()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         tray.Interact();
-        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(potato);
         tray.Interact();
-        playerHold.pickUpItem(chips, chips.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(chips);
         tray.Interact();
         Assert.IsNull(playerHold.heldObj);
 
-        playerHold.pickUpItem(pancakes, pancakes.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(pancakes);
         tray.Interact();
         Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(4, tray.tray.ServingTray.Count);
-        playerHold.pickUpItem(cake, cake.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(cake);
         tray.Interact();
         Assert.AreEqual(cake, playerHold.heldObj);
         Assert.AreEqual(4, tray.tray.ServingTray.Count);
@@ -130,7 +130,7 @@ public class TrayTests : PhotonTestSetup
     public IEnumerator removeItem()
     {
        
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
         Assert.IsNull(playerHold.heldObj);

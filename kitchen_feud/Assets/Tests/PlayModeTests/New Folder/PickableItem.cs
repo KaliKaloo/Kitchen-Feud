@@ -61,7 +61,7 @@ public class PickableItemTests : PhotonTestSetup
     public void dropDish()
     {
         pickableItem pick = chips.GetComponent<pickableItem>();
-        playerHold.pickUpItem(chips, chips.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(chips);
         pick.player = obj.transform;
 
         pick.Interact();
@@ -73,7 +73,7 @@ public class PickableItemTests : PhotonTestSetup
     public void dropIngredient()
     {
         pickableItem pick = potato.GetComponent<pickableItem>();
-        playerHold.pickUpItem(potato, potato.GetComponent<pickableItem>().item);
+        playerHold.pickUpItem(potato);
         pick.player = obj.transform;
 
         pick.Interact();
