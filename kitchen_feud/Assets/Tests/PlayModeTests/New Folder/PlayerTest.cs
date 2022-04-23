@@ -80,7 +80,7 @@ public class PlayerTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator pickUp()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         Assert.IsTrue(obj.transform.GetChild(2).childCount > 0);
         Assert.IsTrue(obj.transform.GetChild(2).GetChild(0).name == mushroom.name);
@@ -91,7 +91,7 @@ public class PlayerTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator dropItem()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         playerHold.dropItem();
         Assert.IsNull(playerHold.heldObj);
@@ -113,10 +113,10 @@ public class PlayerTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator ApplianceCookTest()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         stove.player = obj.transform;
         stove.Interact();
-        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(potato);
         stove.Interact();
         stove.Interact();
         
@@ -130,10 +130,10 @@ public class PlayerTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator StoveMinigameTest()
     {
-        playerHold.pickUpItem(mushroom, mushroom.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(mushroom);
         stove.player = obj.transform;
         stove.Interact();
-        playerHold.pickUpItem(potato, potato.GetComponent<IngredientItem>().item);
+        playerHold.pickUpItem(potato);
         stove.Interact();
         stove.Interact();
         Assert.IsTrue(GameObject.Find("StoveGameCanvas").activeSelf);

@@ -40,7 +40,7 @@ public class PanController : MonoBehaviour
         if (PV.IsMine)
         {
              temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
-            PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
+            PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
         }
 
 
@@ -99,7 +99,7 @@ public class PanController : MonoBehaviour
                 {
                     Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
-                    PV.RPC("setFoodVals", RpcTarget.All, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
+                    PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
                     pointsAssigned = false;
                     
                 }

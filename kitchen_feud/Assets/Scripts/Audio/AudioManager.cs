@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     IRtcEngine engine;
     int myTeam;
-    string randomInstance;
+    int randomInstance;
     public AudioSource ding;
     public PhotonView PV;
     public bool played;
@@ -23,13 +23,16 @@ public class AudioManager : MonoBehaviour
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
         myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = menuController.Instance.x.ToString();
+        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
     }
     
     
     void Start()
     {
-        MusicManager.instance.location = myTeam;
+
+        MusicManagerOld.instance.location = myTeam;
+
+        // MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
         band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
@@ -85,17 +88,18 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                MusicManager.instance.changeBGM(team, 10, 0, 1);
-                MusicManager.instance.location = team;
+                // MusicManager.instance.changeBGM(team, 10, 0, 1);
+                MusicManager.instance.switchLocation(team);
+
 
                 if (team == 1)
                 {
-                    pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 1);
+                    pFV.RPC("setEntered", RpcTarget.AllBuffered, pFV.ViewID, 1);
                     
                 }
                 else
                 {
-                    pFV.RPC("setEntered", RpcTarget.All, pFV.ViewID, 2);
+                    pFV.RPC("setEntered", RpcTarget.AllBuffered, pFV.ViewID, 2);
 
                 }
                 engine.LeaveChannel();
@@ -109,15 +113,15 @@ public class AudioManager : MonoBehaviour
                             PV.RPC("playDing", RpcTarget.All, PV.ViewID);
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 1);
                         }
-                        pFV.RPC("setKickable", RpcTarget.All, pFV.ViewID);
+                        pFV.RPC("setKickable", RpcTarget.AllBuffered, pFV.ViewID);
                     }
                 }
          
         
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
-                    pFV.RPC("destHB", RpcTarget.All, pFV.ViewID);
-                    pFV.RPC("setKickableF", RpcTarget.All, pFV.ViewID);
+                    pFV.RPC("destHB", RpcTarget.AllBuffered, pFV.ViewID);
+                    pFV.RPC("setKickableF", RpcTarget.AllBuffered, pFV.ViewID);
                 }
             }
         }

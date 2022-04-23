@@ -34,8 +34,10 @@ public class stoveMinigame : MonoBehaviour
       
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
-            MusicManager.instance.minigameSwitch();
-            MusicManager.instance.inMG = true;
+            // MusicManager.instance.minigameSwitch();
+            // MusicManager.instance.inMG = true;
+            MusicManagerOld.instance.minigameSwitch();
+		    MusicManagerOld.instance.inMG = true;
             
             backbutton.appliance = GetComponent<Appliance>();
             if (appliance.foundDish != null)

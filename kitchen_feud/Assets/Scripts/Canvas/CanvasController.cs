@@ -88,8 +88,11 @@ public class CanvasController : MonoBehaviour
     // Sets justClicked to correct ticket given the tray name 
     public void TrayOrderOptions(string trayName)
     {
-        orderMenu.SetActive(true);
         justClicked = ticketController.GetCorrectTicket(trayName);
+        if (justClicked.activeSelf)
+        {
+            orderMenu.SetActive(true);
+        }
     }
 
     // serve corresponding order depending on what justClicked equals

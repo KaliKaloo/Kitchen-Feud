@@ -29,7 +29,6 @@ public class scoreController : MonoBehaviour
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
 
-    private MusicManager music;
     private bool startGame = false;
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     public PhotonView PV;
@@ -135,7 +134,6 @@ public class scoreController : MonoBehaviour
                 
 
 
-                music = FindObjectOfType<MusicManager>();
             }
         }
         else
@@ -147,7 +145,6 @@ public class scoreController : MonoBehaviour
             timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
 
-            music = FindObjectOfType<MusicManager>();
         }
     }
 
