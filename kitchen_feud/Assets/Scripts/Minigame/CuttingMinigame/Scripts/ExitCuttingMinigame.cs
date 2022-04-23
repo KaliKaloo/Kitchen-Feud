@@ -25,8 +25,10 @@ public class ExitCuttingMinigame : MonoBehaviour
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		MusicManager.instance.minigameEnd();
-		MusicManager.instance.inMG = false;
+		MusicManagerOld.instance.minigameEnd();
+		MusicManagerOld.instance.inMG = false;
+		// MusicManager.instance.minigameEnd();
+		// MusicManager.instance.inMG = false;
 
 		CutController.RestartGame();
 

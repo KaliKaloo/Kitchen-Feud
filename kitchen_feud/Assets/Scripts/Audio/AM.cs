@@ -64,8 +64,8 @@ public class AM : MonoBehaviour
                 engine.JoinChannel(randomInstance + "Path");
               
 
-                // MusicManager.instance.changeBGM(3, 10, 0, 1);
-                MusicManager.instance.switchLocation(3);
+                MusicManagerOld.instance.changeBGM(3, 10, 0, 1);
+                // MusicManager.instance.switchLocation(3);
 
 
 

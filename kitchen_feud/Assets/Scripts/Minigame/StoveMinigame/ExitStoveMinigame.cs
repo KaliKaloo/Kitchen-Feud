@@ -37,8 +37,10 @@ public class ExitStoveMinigame : MonoBehaviour
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
 		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
-		MusicManager.instance.minigameEnd();
-		MusicManager.instance.inMG = false;
+		// MusicManager.instance.minigameEnd();
+		// MusicManager.instance.inMG = false;
+		MusicManagerOld.instance.minigameEnd();
+		MusicManagerOld.instance.inMG = false;
 
 		// stop cooking animation
 		playerAnimator.animator.SetBool("IsCooking", false);
