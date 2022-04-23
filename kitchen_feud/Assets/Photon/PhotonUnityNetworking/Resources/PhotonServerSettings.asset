@@ -150,6 +150,8 @@ MonoBehaviour:
   - showTickets
   - clearApplPlayers
   - setParentTray
+  - playPS
+  - stopPS
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
