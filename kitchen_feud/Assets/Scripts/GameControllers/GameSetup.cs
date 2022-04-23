@@ -17,6 +17,8 @@ public class GameSetup : MonoBehaviour
     public Transform[] spawnPoints2;
     public Transform[] WSP1;
     public Transform[] WSP2;
+    public Transform OSP1;
+    public Transform OSP2;
 
     private void Start()
     {
