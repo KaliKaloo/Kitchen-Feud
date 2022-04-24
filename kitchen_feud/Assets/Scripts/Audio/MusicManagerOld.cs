@@ -21,7 +21,7 @@ public class MusicManagerOld : MonoBehaviour
     public int location;
 
     public bool inMG = false;
-    public float musicVol = 1f;
+    public float musicVol = 0.5f;
 
     
     void Awake(){
@@ -43,7 +43,7 @@ public class MusicManagerOld : MonoBehaviour
         if (!switched && !inMG && timer.GetLocalTime() < (int)(totalTime*0.3)){
             if(location == 1 || location == 2){
                 switched = true;
-                changeBGM(location, 10, 0, 1);
+                changeBGM(location, 5, 0, 1);
             }
         }
         
@@ -59,7 +59,7 @@ public class MusicManagerOld : MonoBehaviour
             track1.loop = true;
             track2.loop = true;
             played = true;
-            StartCoroutine(fadeTrack(track1, 10, 0));
+            StartCoroutine(fadeTrack(track1, 5, 0));
         }
 
         //set music volume
@@ -114,7 +114,6 @@ public class MusicManagerOld : MonoBehaviour
         float timeElapsed = 0;
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
-
         if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
             
             if (newTrack != track1.clip){
