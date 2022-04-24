@@ -7,7 +7,7 @@ using TMPro;
 
 public class DisplayTicket : MonoBehaviour
 {
-    public Text orderNumberText;
+    public TextMeshProUGUI orderNumberText;
    
     public TextMeshProUGUI orderMainText;
     public TextMeshProUGUI orderSideText;
