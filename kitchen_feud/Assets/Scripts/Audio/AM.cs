@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using agora_gaming_rtc;
 using Photon.Pun;
@@ -16,6 +17,7 @@ public class AM : MonoBehaviour
     public string Speaker;
     public int team;
     private string band;
+    EnableSmoke enableSmoke = new EnableSmoke();
     private void Awake()
     {
         engine = VoiceChatManager.Instance.GetRtcEngine();
@@ -98,6 +100,11 @@ public class AM : MonoBehaviour
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                         }
                     }
+                }
+
+                if (myTeam != team)
+                {
+                    enableSmoke.ChangePlayerState(false);
                 }
             }
         }
