@@ -29,9 +29,14 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started1;
 	public List<int> kickedBy;
 	public GameObject nametag;
+	public float pitchMin, pitchMax, volumeMin, volumeMax;
 	// Start is called before the first frame update
 	void Start()
 	{
+		pitchMin = 0.5f;
+		pitchMax = 3f;
+		volumeMin = 0.7f;
+		volumeMax = 1f;
 		entered1 = false;
 		entered2 = false;
 		started = false;
@@ -120,7 +125,8 @@ public class PlayerVoiceManager : MonoBehaviour
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setHBParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
+
+								view.RPC("setHBParent", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
 							}
 							else
 							{
@@ -187,6 +193,8 @@ public class PlayerVoiceManager : MonoBehaviour
 		if (x == 0)
 		{
 			//SOUND ------------------------------------------------
+			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
+			obj.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
 			obj.GetComponent<AudioSource>().Play();
 			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
