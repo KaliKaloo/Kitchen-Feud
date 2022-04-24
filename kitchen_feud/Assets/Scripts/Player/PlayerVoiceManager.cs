@@ -29,9 +29,14 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started1;
 	public List<int> kickedBy;
 	public GameObject nametag;
+	public float pitchMin, pitchMax, volumeMin, volumeMax;
 	// Start is called before the first frame update
 	void Start()
 	{
+		pitchMin = 0.5f;
+		pitchMax = 3f;
+		volumeMin = 0.7f;
+		volumeMax = 1f;
 		entered1 = false;
 		entered2 = false;
 		started = false;
@@ -187,6 +192,8 @@ public class PlayerVoiceManager : MonoBehaviour
 		if (x == 0)
 		{
 			//SOUND ------------------------------------------------
+			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
+			obj.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
 			obj.GetComponent<AudioSource>().Play();
 			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
