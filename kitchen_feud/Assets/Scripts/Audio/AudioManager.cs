@@ -110,8 +110,6 @@ public class AudioManager : MonoBehaviour
 
                 if (myTeam != team)
                 {
-                    Debug.LogError(myTeam);
-                    Debug.LogError(team);
                     enableSmoke.ChangePlayerState(true);
                     globalClicked.enterEnemyKitchen = true;
                     {
