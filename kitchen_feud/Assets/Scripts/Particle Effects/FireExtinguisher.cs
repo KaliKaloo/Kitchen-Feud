@@ -25,7 +25,7 @@ public class FireExtinguisher : Interactable
         else {
             
             playerHold.dropItem();
-            PV.RPC("stopPS",RpcTarget.AllBuffered,PV.ViewID);
+            PV.RPC("stopPS",RpcTarget.All,PV.ViewID);
         }
     }
 

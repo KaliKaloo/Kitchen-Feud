@@ -66,6 +66,9 @@ public class TrayController : MonoBehaviour
 
         for (int i = 0; i < trayItems.Count(); i++)
         {
+            
+            // trayDishes[i].GetComponent<pickableItem>().enabled = false;
+            trayDishes[i].GetComponent<PhotonView>().RPC("DisableItemPickable", RpcTarget.All, trayDishes[i].GetPhotonView().ViewID);
 
             if (trayItems[i].Type == ItemType.Ingredient)
             {

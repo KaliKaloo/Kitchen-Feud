@@ -8,16 +8,18 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+using TMPro;
+
 // IMPORTANT:
 // timer and score parser class have been moved to separate scripts
 // CHECK scripts/menu folder for the relevant scripts
 
 public class scoreController : MonoBehaviour
 {
-    [SerializeField] private Text score1Text;
-    [SerializeField] private Text score2Text;
+    [SerializeField] private TextMeshProUGUI score1Text;
+    [SerializeField] private TextMeshProUGUI score2Text;
     private bool gameOver;
-    [SerializeField] private Text timerText;
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;

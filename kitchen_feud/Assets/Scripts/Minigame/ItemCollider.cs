@@ -41,16 +41,18 @@ public class ItemCollider : MonoBehaviour
                 globalClicked.applianceInteract = true;
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
-                playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.AllBuffered, playerHold.GetComponent<PhotonView>().ViewID);
+                // playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.AllBuffered, playerHold.GetComponent<PhotonView>().ViewID);
             }
                 
         }
     }
 
     [PunRPC]
-    void addItemRPC(int viewID, int viewID1)
+    void addItemRPC(int heldViewID, int viewID1)
     {
-        parentAppliance.addItem(PhotonView.Find(viewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
+        PhotonView.Find(viewID1).GetComponent<PlayerHolding>().heldObj = null;
+
+        parentAppliance.addItem(PhotonView.Find(heldViewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
     }
 
 }
