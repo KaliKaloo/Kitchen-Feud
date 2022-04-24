@@ -93,7 +93,7 @@ public class SmokeGrenade : MonoBehaviour
 
     public void UseSmoke()
     {
-        if (enableSmoke.GetPlayerState() && !used)
+        if (!used)
         {
                 // lock player from using another smoke
                 used = true;
