@@ -15,6 +15,17 @@ public class Billboard : MonoBehaviour
         }
     }
 
+    void update(){
+        if (!cam){
+        
+            if (transform.parent)
+            {
+                cam = transform.parent.parent.GetChild(3);
+                
+            }
+        }
+    }
+ 
     void LateUpdate()
     {
 
