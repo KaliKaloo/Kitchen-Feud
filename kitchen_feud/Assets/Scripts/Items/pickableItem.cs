@@ -142,4 +142,9 @@ public class pickableItem : Interactable
 
         Destroy(PhotonView.Find(viewID).gameObject);
     }
+    [PunRPC]
+    void DisableItemPickable(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().enabled = false;
+    }
 }
