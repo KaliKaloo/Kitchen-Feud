@@ -118,7 +118,7 @@ public class PlayerHolding : MonoBehaviour
             if (heldObj.name == "fireExtinguisher")
             {
                 heldObj.GetComponent<PhotonView>()
-                    .RPC("stopPS", RpcTarget.AllBuffered, heldObj.GetComponent<PhotonView>().ViewID);
+                    .RPC("stopPS", RpcTarget.All, heldObj.GetComponent<PhotonView>().ViewID);
             }
 
             this.GetComponent<PhotonView>().RPC("PlayDropSound", RpcTarget.All);
@@ -162,7 +162,7 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void PlayDropSound() {
         //FindObjectOfType<SoundEffectsManager>().dropSound.Play();
-        if(heldObj.GetComponent<AudioSource>() != null) heldObj.GetComponent<AudioSource>().Play();
+        if(heldObj != null && heldObj.GetComponent<AudioSource>() != null) heldObj.GetComponent<AudioSource>().Play();
     }
 
     

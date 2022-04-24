@@ -191,6 +191,7 @@ MonoBehaviour:
   tray2: {fileID: 0}
   appliance: {fileID: 0}
   applianceSlots: {fileID: 0}
+  defaultScale: {x: 0, y: 0, z: 0}
   dropSound: {fileID: 0}
 --- !u!82 &-1173806883313229474
 AudioSource:

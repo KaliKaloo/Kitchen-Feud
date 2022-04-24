@@ -90,11 +90,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 				if(fireExtinguisher.name == "fireExtinguisher"){
 					if(fire_ps && !fire_ps.isPlaying){
-						firePV.RPC("playPS",RpcTarget.AllBuffered,firePV.ViewID);
+						firePV.RPC("playPS",RpcTarget.All,firePV.ViewID);
 						//fire_ps.Play();
 					}else{
 						//fire_ps.Stop();
-						firePV.RPC("stopPS",RpcTarget.AllBuffered,firePV.ViewID);
+						firePV.RPC("stopPS",RpcTarget.All,firePV.ViewID);
 					}
 				}
 			}
