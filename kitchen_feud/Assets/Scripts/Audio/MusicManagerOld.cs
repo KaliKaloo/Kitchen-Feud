@@ -57,6 +57,7 @@ public class MusicManagerOld : MonoBehaviour
             track1.volume = 0;
             track1.Play();
             track1.loop = true;
+            track2.loop = true;
             played = true;
             StartCoroutine(fadeTrack(track1, 10, 0));
         }
