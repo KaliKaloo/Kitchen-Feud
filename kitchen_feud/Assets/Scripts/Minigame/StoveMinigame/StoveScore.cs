@@ -76,8 +76,7 @@ public class StoveScore
 
     public float CalculateScore()
     {
-        // 
-        return (StoveMinigameCounter.correctIngredientCounter / maximum) * 100;
+        return ((float)StoveMinigameCounter.correctIngredientCounter / (float)maximum) * 100f;
     }
 
 }

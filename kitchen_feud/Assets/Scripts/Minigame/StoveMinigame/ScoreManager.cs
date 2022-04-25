@@ -15,32 +15,32 @@ public class ScoreManager : MonoBehaviour
     // ingredients get counted if completely fall through top
     void OnTriggerExit2D(Collider2D target)
     {
-        if (target.tag.ToString() == "Ingredient")
+        // if game has not ended count the points
+        if (!StoveMinigameCounter.end)
         {
-            Destroy(target.gameObject);
+            if (StoveMinigameCounter.collisionCounter < 20)
+            {
+                stoveMinigameCounter.AddCollisionCounter();
 
-            stoveScore.AddScore();
-            stoveMinigameCounter.AddCollisionCounter();
-            stoveMinigameCounter.AddCorrectIngredient();
+                if (target.tag.ToString() == "Ingredient")
+                {
+                    Destroy(target.gameObject);
 
-            score.text = "Score: " + StoveScore.Score + "/" + StoveScore.maximum;
-                        
-            if (StoveMinigameCounter.collisionCounter == 0)
+                    stoveScore.AddScore();
+                    stoveMinigameCounter.AddCorrectIngredient();
+
+                }
+            } else
             {
                 backbutton.SetActive(true);
+                stoveMinigameCounter.EndGame();
             }
-                
-        }        
+        }
     }
 
-    // bombs will get hit if you just touch them
-    void OnTriggerEnter2D(Collider2D target)
+    private void Update()
     {
-        if (target.tag.ToString() == "Bomb")
-        {
-            Destroy(target.gameObject);
-            stoveScore.AddBombMultiplier();
-        }
+        score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
     }
 }
 

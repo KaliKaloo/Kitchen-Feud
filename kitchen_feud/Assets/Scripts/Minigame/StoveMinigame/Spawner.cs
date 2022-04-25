@@ -99,7 +99,7 @@ public class Spawner : MonoBehaviour
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
 
-        if (StoveMinigameCounter.droppedCounter < 20)
+        if (StoveMinigameCounter.collisionCounter < 20)
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
@@ -127,7 +127,7 @@ public class Spawner : MonoBehaviour
 
         int randomBomb = Random.Range(0, bombs.Count);
 
-        if (StoveMinigameCounter.droppedCounter < 20)
+        if (StoveMinigameCounter.collisionCounter < 20)
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,
@@ -136,6 +136,7 @@ public class Spawner : MonoBehaviour
 
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
             obj.GetComponent<Image>().sprite = currentBomb;
+
             stoveMinigameCounter.AddDroppedCounter();
             StartCoroutine(SpawnBombObject());
         }

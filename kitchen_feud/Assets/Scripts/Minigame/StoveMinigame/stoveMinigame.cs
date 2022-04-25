@@ -63,8 +63,8 @@ public class stoveMinigame : MonoBehaviour
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
             if (dishOfFoundDish != null)
-            { 
-                
+            {
+
                 dishOfFoundDish.points = stoveScore.CalculateScore();
 
                 // if player is team 2 but interacts with team1 stove, points doubled
