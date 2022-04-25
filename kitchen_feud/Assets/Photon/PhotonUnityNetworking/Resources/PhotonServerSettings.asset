@@ -150,6 +150,8 @@ MonoBehaviour:
   - showTickets
   - clearApplPlayers
   - setParentTray
+  - SkipCutscene
+  - increment
   - playPS
   - stopPS
   - DisableItemPickable
