@@ -54,6 +54,8 @@ public class menuController : MonoBehaviourPunCallbacks
     private bool createLobby = false;
     private bool isDisconnected = false;
     public VideoPlayer vP;
+
+    public bool startCutscene =false;
     public GameObject cutScene;
    
 
@@ -366,6 +368,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
         // after start button is pressed players can no longer join
         cutScene.SetActive(true);
+        
         vP.Play();
      
     }

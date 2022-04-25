@@ -17,6 +17,8 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     private bool skipButtonPressed = false;
     private PhotonView PV;
 
+    bool switchScene = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +26,15 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         menu = GetComponent<menuController>();
         skipButtonText.text = "Skip";
         PV = GetComponent<PhotonView>();
+        videoPlayer.loopPointReached += CheckOver;
     }
 
-    private void Update()
+ 
+    void CheckOver(UnityEngine.Video.VideoPlayer videoPlayer)
     {
-        
+         menu.startGame();
     }
+    
 
     public void VoteSkipCutscene()
     {
