@@ -16,24 +16,17 @@ public class ScoreManager : MonoBehaviour
     void OnTriggerExit2D(Collider2D target)
     {
         // if game has not ended count the points
-        if (!StoveMinigameCounter.end)
+        if (!StoveMinigameCounter.end && StoveMinigameCounter.collisionCounter < 20)
         {
-            if (StoveMinigameCounter.collisionCounter < 20)
+            stoveMinigameCounter.AddCollisionCounter();
+
+            if (target.tag.ToString() == "Ingredient")
             {
-                stoveMinigameCounter.AddCollisionCounter();
+                Destroy(target.gameObject);
 
-                if (target.tag.ToString() == "Ingredient")
-                {
-                    Destroy(target.gameObject);
+                stoveScore.AddScore();
+                stoveMinigameCounter.AddCorrectIngredient();
 
-                    stoveScore.AddScore();
-                    stoveMinigameCounter.AddCorrectIngredient();
-
-                }
-            } else
-            {
-                backbutton.SetActive(true);
-                stoveMinigameCounter.EndGame();
             }
         }
     }
@@ -41,6 +34,14 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
+
+        if (StoveMinigameCounter.collisionCounter >= 20 || StoveMinigameCounter.end)
+        {
+            backbutton.SetActive(true);
+
+            // end game as failsafe
+            stoveMinigameCounter.EndGame();
+        }
     }
 }
 
