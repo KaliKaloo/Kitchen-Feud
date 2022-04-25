@@ -15,9 +15,9 @@ public class GroundCollision : MonoBehaviour
         Destroy(target.gameObject);
         if (target.tag.ToString() == "Ingredient")
         {
-            stoveMinigameCounter.MinusCollisionCounter();
+            stoveMinigameCounter.AddCollisionCounter();
 
-            if (stoveMinigameCounter.GetCollisionCounter() == 0)
+            if (StoveMinigameCounter.collisionCounter == 0)
             {
                 backbutton.SetActive(true);
             }

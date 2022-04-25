@@ -20,11 +20,12 @@ public class ScoreManager : MonoBehaviour
             Destroy(target.gameObject);
 
             stoveScore.AddScore();
-            stoveMinigameCounter.MinusCollisionCounter();
-            
-            score.text = "Score: " + StoveScore.Score + "/15";
+            stoveMinigameCounter.AddCollisionCounter();
+            stoveMinigameCounter.AddCorrectIngredient();
+
+            score.text = "Score: " + StoveScore.Score + "/" + StoveScore.maximum;
                         
-            if (stoveMinigameCounter.GetCollisionCounter() == 0)
+            if (StoveMinigameCounter.collisionCounter == 0)
             {
                 backbutton.SetActive(true);
             }

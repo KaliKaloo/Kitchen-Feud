@@ -20,7 +20,7 @@ public class StoveMinigameCounterTests
     public void startGame()
     {
         stoveCounter.StartGame();
-        Assert.IsFalse(stoveCounter.GetGameState());
+        Assert.IsFalse(StoveMinigameCounter.end);
     }
 
 
@@ -28,34 +28,43 @@ public class StoveMinigameCounterTests
     public void endGame()
     {
         stoveCounter.EndGame();
-        Assert.IsTrue(stoveCounter.GetGameState());
+        Assert.IsTrue(StoveMinigameCounter.end);
     }
 
 
     [Test]
     public void resetCounter()
     {
-        stoveCounter.ResetCounter();
-        Assert.AreEqual(15, stoveCounter.GetCounter());
-        Assert.AreEqual(15, stoveCounter.GetCollisionCounter());
+        StoveMinigameCounter.ResetCounters();
+        Assert.AreEqual(0, StoveMinigameCounter.collisionCounter);
+        Assert.AreEqual(0, StoveMinigameCounter.droppedCounter);
+        Assert.AreEqual(0, StoveMinigameCounter.correctIngredientCounter);
     }
 
 
     [Test]
-    public void minusCollisionCounter()
+    public void addCollisionCounter()
     {
-        stoveCounter.ResetCounter();
-        stoveCounter.MinusCollisionCounter();
-        Assert.AreEqual(14, stoveCounter.GetCollisionCounter());
+        StoveMinigameCounter.ResetCounters();
+        stoveCounter.AddCollisionCounter();
+        Assert.AreEqual(1, StoveMinigameCounter.collisionCounter);
     }
 
 
     [Test]
-    public void minusCounter()
+    public void addDroppedCounter()
     {
-        stoveCounter.ResetCounter();
-        stoveCounter.MinusCounter();
-        Assert.AreEqual(14, stoveCounter.GetCounter());
+        StoveMinigameCounter.ResetCounters();
+        stoveCounter.AddDroppedCounter();
+        Assert.AreEqual(1, StoveMinigameCounter.droppedCounter);
     }
-    
+
+    [Test]
+    public void addCorrectIngredient()
+    {
+        StoveMinigameCounter.ResetCounters();
+        stoveCounter.AddCorrectIngredient();
+        Assert.AreEqual(1, StoveMinigameCounter.correctIngredientCounter);
+    }
+
 }

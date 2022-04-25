@@ -48,7 +48,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		//GameEvents.current.assignPointsEventFunction();
-		score.text = "Score: 0/15";
+		score.text = "Score: 0/" + StoveScore.maximum;
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);

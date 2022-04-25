@@ -6,18 +6,31 @@ using Photon.Pun;
 
 public class StoveMinigameCounter
 {
-    public static int counter;
+    public static int droppedCounter;
     public static bool end;
     public static int collisionCounter;
+    public static int correctIngredientCounter;
 
-    public void MinusCollisionCounter()
+    public static void ResetCounters()
     {
-        collisionCounter -= 1;
+        droppedCounter = 0;
+        collisionCounter = 0;
+        correctIngredientCounter = 0;
     }
 
-    public int GetCollisionCounter()
+    public void AddCollisionCounter()
     {
-        return collisionCounter;
+        collisionCounter += 1;
+    }
+
+    public void AddCorrectIngredient()
+    {
+        correctIngredientCounter += 1;
+    }
+
+    public void AddDroppedCounter()
+    {
+        droppedCounter += 1;
     }
 
     public void StartGame()
@@ -28,27 +41,5 @@ public class StoveMinigameCounter
     public void EndGame()
     {
         end = true;
-        //Spawner.backButton.SetActive(true);
-    }
-
-    public bool GetGameState()
-    {
-        return end;
-    }
-
-    public void ResetCounter()
-    {
-        counter = 15;
-        collisionCounter = 15;
-    }
-
-    public void MinusCounter()
-    {
-        counter -= 1;
-    }
-
-    public int GetCounter()
-    {
-        return counter;
     }
 }

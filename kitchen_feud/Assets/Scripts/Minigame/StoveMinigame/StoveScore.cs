@@ -10,6 +10,8 @@ public class StoveScore
     private static float score;
     private static float bombMultiplier;
 
+    public static readonly int maximum = 20;
+
 
     public static float Score
     {
@@ -70,6 +72,12 @@ public class StoveScore
     {
         return (score / 15) * (1 - bombMultiplier);
         
+    }
+
+    public float CalculateScore()
+    {
+        // 
+        return (StoveMinigameCounter.correctIngredientCounter / maximum) * 100;
     }
 
 }
