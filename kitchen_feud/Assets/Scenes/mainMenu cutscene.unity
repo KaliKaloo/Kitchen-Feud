@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.99999905, g: 0, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1377,6 +1377,7 @@ MonoBehaviour:
   lobbyError: {fileID: 2128544199}
   x: 0
   vP: {fileID: 2081281875}
+  startCutscene: 0
   cutScene: {fileID: 518660923}
   roomListContent: {fileID: 1897489681}
   loadingScreen: {fileID: 1504039284}
@@ -2339,7 +2340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &518660924
 RectTransform:
   m_ObjectHideFlags: 0

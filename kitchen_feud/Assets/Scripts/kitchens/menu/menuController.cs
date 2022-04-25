@@ -368,7 +368,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
         // after start button is pressed players can no longer join
         cutScene.SetActive(true);
-        
         vP.Play();
      
     }
