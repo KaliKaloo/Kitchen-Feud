@@ -52,21 +52,6 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         }
     }
 
-    /*public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-    {
-        // check if skip property has been properly set by server
-        
-        if (propertiesThatChanged["Skip"] != null)
-        {
-            // skip cutscene if amount of skips = number of players
-            if ((int)propertiesThatChanged["Skip"] >= PhotonNetwork.CurrentRoom.PlayerCount)
-                GetComponent<PhotonView>().RPC("SkipCutscene", RpcTarget.All);
-
-            // change the button text to how many players have skipped so far
-            else
-                skipButtonText.text = (int)propertiesThatChanged["Skip"] + "/" + (int)propertiesThatChanged["Skip"];
-        }
-    }*/
 
     [PunRPC]
     void increment(int viewID)
@@ -86,10 +71,5 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     void SkipCutscene()
     {
         videoPlayer.Stop();
-
-
-        // start the game once all players voted
-        //GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
-        //PhotonNetwork.LoadLevel(1);
     }
 }
