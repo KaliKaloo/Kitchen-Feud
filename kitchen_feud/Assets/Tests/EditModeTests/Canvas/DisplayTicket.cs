@@ -32,7 +32,7 @@ public class DisplayTicketTest
         dish3.name = "water";
         order.orderID = "order ID";
         
-        displayTicket.orderNumberText = obj.AddComponent<Text>();
+        displayTicket.orderNumberText = obj.AddComponent<TextMeshProUGUI>();
         GameObject main = new GameObject();
         GameObject side = new GameObject();
         GameObject drink = new GameObject();

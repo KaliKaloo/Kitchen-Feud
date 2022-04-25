@@ -16,7 +16,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	[SerializeField] private GameObject backButton;
 	[SerializeField] private GameObject startButton;
 	[SerializeField] private Text score;
-	[SerializeField] private GameObject topBar;
+	[SerializeField] private GameObject instructions;
 
 	public Appliance appliance;
 	StoveScore stoveScore = new StoveScore();
@@ -37,8 +37,10 @@ public class ExitStoveMinigame : MonoBehaviour
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
 		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
-		MusicManager.instance.minigameEnd();
-		MusicManager.instance.inMG = false;
+		// MusicManager.instance.minigameEnd();
+		// MusicManager.instance.inMG = false;
+		MusicManagerOld.instance.minigameEnd();
+		MusicManagerOld.instance.inMG = false;
 
 		// stop cooking animation
 		playerAnimator.animator.SetBool("IsCooking", false);
@@ -50,7 +52,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
-		topBar.SetActive(true);
+		instructions.SetActive(true);
 		var xBound = Screen.width / 2;
         var lowerBound = pot.position.x - xBound;
         var upperBound = pot.position.x + xBound;

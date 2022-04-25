@@ -25,6 +25,8 @@ public class cutController : MonoBehaviour
     public GameObject StartButton;
     public int finalScore;
     public AudioSource source;
+    public float pitchMin, pitchMax, volumeMin, volumeMax;
+    public AudioClip[] diffSounds;
 
     private int score = 100;
     private int num = 0;

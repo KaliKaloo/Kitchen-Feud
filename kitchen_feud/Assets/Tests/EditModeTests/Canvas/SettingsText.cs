@@ -28,7 +28,7 @@ public class SettingsTextTests
     {
         grandParent.name = "Mvmt";
         settingsText.updateText(0.5f);
-        Assert.AreEqual("0.5", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("0.3", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
     [Test]
@@ -36,7 +36,7 @@ public class SettingsTextTests
     {
         grandParent.name = "Mvmt";
         settingsText.updateText(1);
-        Assert.AreEqual("1", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("0.6", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
 
@@ -45,7 +45,7 @@ public class SettingsTextTests
     {
         grandParent.name = "Rotation";
         settingsText.updateText(50);
-        Assert.AreEqual("0.8", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("5", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
     [Test]
@@ -53,7 +53,7 @@ public class SettingsTextTests
     {
         grandParent.name = "Rotation";
         settingsText.updateText(60);
-        Assert.AreEqual("1", obj.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("6", obj.GetComponent<TextMeshProUGUI>().text);
     }
 
 
