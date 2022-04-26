@@ -74,7 +74,6 @@ public class pickableItem : Interactable
     public IEnumerator removeKinematics(GameObject heldObj)
     {
         yield return new WaitForSeconds(0.5f);
-        Debug.LogError("Calll2");
         heldObj.GetComponent<Rigidbody>().isKinematic = true;
     }
 
