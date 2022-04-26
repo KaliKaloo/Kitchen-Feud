@@ -40,7 +40,6 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
-        Debug.Log("Setting Ready");
         ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
         ts.findDestination(ts.GetComponent<PhotonView>().ViewID);
         foreach (Transform slot in ts.transform)

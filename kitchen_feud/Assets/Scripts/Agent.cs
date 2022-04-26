@@ -98,6 +98,13 @@ public class Agent : MonoBehaviour
                 //Find Serving point and assign it to tray using 
                 if (newDist < 1.3f && newDist != 0)
                 {
+                    foreach(Transform slot in agentTray.transform)
+                    {
+                        if (slot.transform.childCount>0)
+                        {
+                            PhotonNetwork.Destroy(slot.transform.GetChild(0).gameObject);
+                        }
+                    }
                     PhotonNetwork.Destroy(agentTray);
                     tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
