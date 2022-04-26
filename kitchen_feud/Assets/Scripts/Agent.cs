@@ -189,6 +189,11 @@ public class Agent : MonoBehaviour
     {
         PhotonView.Find(viewID).name = x;
     }
+    [PunRPC]
+    void destroyAfterServed(int viewID)
+    {
+        Destroy(PhotonView.Find(viewID).gameObject);
+    }
 
 }
 
