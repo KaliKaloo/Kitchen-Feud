@@ -23,16 +23,22 @@ public class TrayController : MonoBehaviour
 
     public int teamNumber;
     public void makeTray(string orderID){
-        foreach (GameObject t in trays){
-            Tray ts = t.GetComponent<Tray>();
-            string trayID = ts.tray.trayID;
-            Debug.LogError("Hello");
-            if (ts.tray.trayID == "")
-            {
-                ts.tray.trayID = orderID;
-                break;
-            }
+        if(trays[0].GetComponent<Tray>().tray.trayID == "")
+        {
+            trays[0].GetComponent<Tray>().tray.trayID = orderID;
+
         }
+        else if(trays[1].GetComponent<Tray>().tray.trayID == "")
+        {
+            trays[1].GetComponent<Tray>().tray.trayID = orderID;
+
+        }
+        else if(trays[2].GetComponent<Tray>().tray.trayID == "")
+        {
+            trays[2].GetComponent<Tray>().tray.trayID = orderID;
+
+        }
+
     }
 
     public void resetTray(Tray ts)
