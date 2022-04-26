@@ -26,6 +26,7 @@ public class TrayController : MonoBehaviour
         foreach (GameObject t in trays){
             Tray ts = t.GetComponent<Tray>();
             string trayID = ts.tray.trayID;
+            Debug.LogError("Hello");
             if (ts.tray.trayID == "")
             {
                 ts.tray.trayID = orderID;
