@@ -71,6 +71,12 @@ public class pickableItem : Interactable
     {
         Interact();
     }
+    public IEnumerator removeKinematics(GameObject heldObj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.LogError("Calll2");
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
+    }
 
  
 
@@ -87,6 +93,7 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        StartCoroutine(removeKinematics(PhotonView.Find(viewID).gameObject));
 
     }
     [PunRPC]
