@@ -102,7 +102,7 @@ public class Agent : MonoBehaviour
                     {
                         if (slot.transform.childCount>0)
                         {
-                            PhotonNetwork.Destroy(slot.transform.GetChild(0).gameObject);
+                            PV.RPC("destroyAfterServed", RpcTarget.All, slot.transform.GetChild(0).GetComponent<PhotonView>().ViewID);
                         }
                     }
                     PhotonNetwork.Destroy(agentTray);
