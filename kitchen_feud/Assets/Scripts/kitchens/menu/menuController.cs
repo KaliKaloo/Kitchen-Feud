@@ -70,6 +70,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     Hashtable scene = new Hashtable();
+    PhotonView PV;
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
@@ -108,6 +109,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
@@ -367,8 +369,9 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
 
         // after start button is pressed players can no longer join
-        cutScene.SetActive(true);
-        vP.Play();
+        PV.RPC("playVideo", RpcTarget.All, PV.ViewID);
+        /*cutScene.SetActive(true);
+        vP.Play();*/
      
     }
 
@@ -687,6 +690,14 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         StartCoroutine(LoadScene());
         //StartCoroutine(LoadSceneAsynchronously(1));
+    }
+    [PunRPC]
+    void playVideo(int viewID)
+    {
+     menuController menuC =   PhotonView.Find(viewID).GetComponent<menuController>();
+        menuC.cutScene.SetActive(true);
+        menuC.vP.Play();
+
     }
    
   
