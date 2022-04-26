@@ -80,7 +80,7 @@ public class menuController : MonoBehaviourPunCallbacks
         ResetUserID();*/
       // PlayerPrefs.DeleteAll();
     }
-
+    
     private void SetTeam(int teamNumber)
     {
         customProperties["Team"] = teamNumber;
@@ -669,6 +669,13 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (!startLobbyButton.activeSelf)
+            {
+                startLobbyButton.SetActive(true);
+            }
+        }
         UpdateLobby();
    
     }
