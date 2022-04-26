@@ -88,7 +88,8 @@ public class scoreController : MonoBehaviour
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
-            
+
+
             if (startGame)
             {
                 OutputTime();
@@ -144,7 +145,7 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
-            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
 
         }
@@ -157,7 +158,10 @@ public class scoreController : MonoBehaviour
         if (timer.GetLocalTime() > 0)
         {
             // updates timer and text in timer
-            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            //Debug.LogError("Secs: " + timer.GetLocalTime() + "TIME: " + ConvertSecondToMinutes(timer.GetLocalTime()));
+
+            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            StartCoroutine(getLocalTime());
         }
 
         // SIGNAL FOR GAME OVER:
@@ -193,6 +197,12 @@ public class scoreController : MonoBehaviour
 
         }
 
+
+    }
+    public IEnumerator getLocalTime()
+    {
+        yield return new WaitForSeconds(1);
+        timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
 
     }
 

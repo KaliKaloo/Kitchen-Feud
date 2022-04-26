@@ -49,15 +49,13 @@ public class fryingMinigame : MonoBehaviour
             
             int canvasTag = appliance.kitchenNum;
             if (canvasTag == 1){
-                GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team2");
-                foreach (GameObject obj in otherTeam){
-                    obj.SetActive(false);
-                }
+                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
+                otherTeam.SetActive(false);
+      
             } else if (canvasTag == 2){
-                GameObject[] otherTeam = GameObject.FindGameObjectsWithTag("Team1");
-                foreach (GameObject obj in otherTeam){
-                    obj.SetActive(false);
-                }
+                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
+                otherTeam.SetActive(false);
+              
             }
 
             set = true;

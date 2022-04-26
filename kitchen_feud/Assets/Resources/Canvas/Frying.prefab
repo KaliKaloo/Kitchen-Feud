@@ -980,7 +980,7 @@ GameObject:
   - component: {fileID: 626672960715769993}
   m_Layer: 5
   m_Name: Image1
-  m_TagString: Team1
+  m_TagString: FryingBackground1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1624,7 +1624,7 @@ GameObject:
   - component: {fileID: 2957208034142376017}
   m_Layer: 5
   m_Name: Image2
-  m_TagString: Team2
+  m_TagString: FryingBackground2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
