@@ -49,6 +49,9 @@ public class TrayControllerTests
     {
         tray1.GetComponent<Tray>().tray.trayID = "tray1";
         trayController.trays.Add(tray1);
+        trayController.trays.Add(tray2);
+        trayController.trays.Add(tray3);
+
         trayController.makeTray("order 1");
         Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
     }

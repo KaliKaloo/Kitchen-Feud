@@ -135,7 +135,6 @@ public class Tray : Interactable
     [PunRPC]
     void setIsReadyF(int viewID)
     {
-        Debug.Log("SetToFalse1");
         PhotonView.Find(viewID).GetComponent<Tray>().isReady = false;
     }
     [PunRPC]

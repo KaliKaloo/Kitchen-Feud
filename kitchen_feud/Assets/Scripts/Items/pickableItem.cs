@@ -67,6 +67,18 @@ public class pickableItem : Interactable
 		onTray = false;
 	}
 
+    public void interactPublic()
+    {
+        Interact();
+    }
+    public IEnumerator removeKinematics(GameObject heldObj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+ 
+
     [PunRPC]
     void SetGrav()
     {
@@ -81,6 +93,7 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        StartCoroutine(removeKinematics(PhotonView.Find(viewID).gameObject));
 
     }
     [PunRPC]
@@ -91,8 +104,16 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
-        PhotonView.Find(viewID).transform.localScale =
-            PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+        if (PhotonView.Find(viewID).GetComponent<IngredientItem>())
+        {
+            PhotonView.Find(viewID).transform.localScale =
+                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
+        }else if (PhotonView.Find(viewID).GetComponent<Dish>())
+        {
+            PhotonView.Find(viewID).transform.localScale =
+                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+        }
+        
 
     }
     [PunRPC]
@@ -127,5 +148,10 @@ public class pickableItem : Interactable
     {
 
         Destroy(PhotonView.Find(viewID).gameObject);
+    }
+    [PunRPC]
+    void DisableItemPickable(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().enabled = false;
     }
 }

@@ -58,7 +58,6 @@ public class SandwichStation: MonoBehaviour
                 else if (sandwichCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                     dishOfFoundDish.points = dishOfFoundDish.points * 2;
 
-                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
             else
             {

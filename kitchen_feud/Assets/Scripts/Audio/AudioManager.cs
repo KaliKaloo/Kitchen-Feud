@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using agora_gaming_rtc;
+using Codice.Utils;
 using Photon.Pun;
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class AudioManager : MonoBehaviour
     public string Speaker;
     public int team;
     private string band;
+    EnableSmoke enableSmoke = new EnableSmoke();
 
 
 
@@ -88,8 +90,9 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                // MusicManager.instance.changeBGM(team, 10, 0, 1);
-                MusicManager.instance.switchLocation(team);
+                // MusicManager.instance.switchLocation(team);
+                MusicManagerOld.instance.changeBGM(team, 10, 0, 1);
+                MusicManagerOld.instance.location = team;
 
 
                 if (team == 1)
@@ -107,6 +110,8 @@ public class AudioManager : MonoBehaviour
 
                 if (myTeam != team)
                 {
+                    enableSmoke.ChangePlayerState(true);
+                    globalClicked.enterEnemyKitchen = true;
                     {
                         if (myPlayerC.played == false)
                         {
@@ -115,6 +120,11 @@ public class AudioManager : MonoBehaviour
                         }
                         pFV.RPC("setKickable", RpcTarget.AllBuffered, pFV.ViewID);
                     }
+                }
+                else
+                {
+                    enableSmoke.ChangePlayerState(false);
+
                 }
          
         
