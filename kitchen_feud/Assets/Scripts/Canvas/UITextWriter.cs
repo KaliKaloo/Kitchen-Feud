@@ -43,9 +43,12 @@ public class UITextWriter : MonoBehaviour
 		foreach (char c in line)
 		{
 			txt.text += c;
+			
+
 			yield return new WaitForSeconds(typeDelay);
-			if (line.IndexOf(c) == line.Length - 1)
+			if (txt.text.Length == line.Length)
 			{
+				
 				writing = false;
 			}
 		}

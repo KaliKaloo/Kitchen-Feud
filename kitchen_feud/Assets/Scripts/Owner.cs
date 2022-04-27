@@ -19,6 +19,7 @@ public class Owner : MonoBehaviour
 
     private bool collected;
     private bool toCollect;
+    private bool shouting;
     private GameObject playerToFollow;
     private Vector3 playerToFollowPos;
     public TextMeshProUGUI Text;
@@ -103,10 +104,11 @@ public class Owner : MonoBehaviour
                         playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
                         
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1,0,1));
-                        Text.text = p.NickName + "!";
+                        //Text.text = p.NickName + "!";
                         break;
                     }
                 }
+             
                 //Debug.LogError(p.NickName);
                 //Debug.LogError(p.CustomProperties["CookedDishes"]);
                 //Debug.LogError(p.CustomProperties["ViewID"]);
@@ -115,7 +117,20 @@ public class Owner : MonoBehaviour
             {
                 agent.ResetPath();
                 agent.transform.LookAt(playerToFollow.transform);
-                Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+
+                if (!shouting)
+                {
+                    Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+                    writer.writeText();
+                    shouting = true;
+                }
+                //Debug.LogError(writer.writing);
+                if(shouting && !writer.writing) {
+                    Debug.LogError("Stopped");
+                    shout = false;
+                    shouting = false;
+                }
+            
                 //shout = false;
             }
 
