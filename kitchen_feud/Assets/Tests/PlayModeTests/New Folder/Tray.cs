@@ -30,6 +30,7 @@ public class TrayTests : PhotonTestSetup
             Quaternion.identity,
             0
         );
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
         playerHold = obj.GetComponent<PlayerHolding>();
         GameObject trayObj = GameObject.Find("Tray1");
         tray = trayObj.GetComponent<Tray>();
@@ -38,15 +39,54 @@ public class TrayTests : PhotonTestSetup
     }
 
     [UnityTearDown]
-     public IEnumerator MovementTearDown()
+    public IEnumerator MovementTearDown()
     {
         if (obj != null)
             PhotonNetwork.Destroy(obj);
         yield return null;
     }
 
+    [UnityTest]
+    public IEnumerator setParent()
+    {
+        playerHold.pickUpItem(mushroom);
+        Assert.AreEqual(mushroom, playerHold.heldObj);
+        tray.Interact();
+        Assert.AreEqual(tray.slots[0].transform, playerHold.heldObj.transform.parent);
+        Assert.AreEqual(Vector3.zero, playerHold.heldObj.transform.localPosition);
+        tray.slots.Remove(mushroom.transform);
+        mushroom.transform.parent = null;
+        tray.tray.ServingTray.Clear();
+        yield return null;
+    }
 
-    
+    [UnityTest]
+    public IEnumerator trayBool()
+    {
+        playerHold.pickUpItem(mushroom);
+        Assert.AreEqual(mushroom, playerHold.heldObj);
+        tray.Interact();
+        Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
+        Assert.AreEqual(playerHold.heldObj.GetComponent<pickableItem>().Tray, tray.GetComponent<Tray>().tray);
+        tray.slots.Remove(mushroom.transform);
+        mushroom.transform.parent = null;
+        tray.tray.ServingTray.Clear();
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator layerSetToZero()
+    {
+        playerHold.pickUpItem(mushroom);
+        Assert.AreEqual(mushroom, playerHold.heldObj);
+        tray.Interact();
+        Assert.AreEqual(0, playerHold.heldObj.layer);
+        tray.slots.Remove(mushroom.transform);
+        mushroom.transform.parent = null;
+        tray.tray.ServingTray.Clear();
+        yield return null;
+    }
+
     [UnityTest]
     public IEnumerator oneItemOnTray()
     {
@@ -54,7 +94,8 @@ public class TrayTests : PhotonTestSetup
         playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
-        Assert.IsNull(playerHold.heldObj);
+        Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
+        Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.tray.ServingTray.Count);
         tray.slots.Remove(mushroom.transform);
@@ -71,14 +112,12 @@ public class TrayTests : PhotonTestSetup
         playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
-        Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.tray.ServingTray.Count);
         playerHold.pickUpItem(potato);
         Assert.AreEqual(potato, playerHold.heldObj);
         tray.Interact();
 
-        Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.slots[1].transform.childCount);
         Assert.AreEqual(2, tray.tray.ServingTray.Count);
@@ -100,11 +139,9 @@ public class TrayTests : PhotonTestSetup
         tray.Interact();
         playerHold.pickUpItem(chips);
         tray.Interact();
-        Assert.IsNull(playerHold.heldObj);
 
         playerHold.pickUpItem(pancakes);
         tray.Interact();
-        Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(4, tray.tray.ServingTray.Count);
         playerHold.pickUpItem(cake);
         tray.Interact();
@@ -133,7 +170,6 @@ public class TrayTests : PhotonTestSetup
         playerHold.pickUpItem(mushroom);
         Assert.AreEqual(mushroom, playerHold.heldObj);
         tray.Interact();
-        Assert.IsNull(playerHold.heldObj);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.tray.ServingTray.Count);
         mushroom.GetComponent<pickableItem>().player = obj.transform;
@@ -150,20 +186,11 @@ public class TrayTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator serveMenuActive()
     {
-        tray.tray.trayID = "trayID";
+         tray.tray.trayID = "trayID";
+        Transform t1 = GameObject.Find("Team1").transform.Find("ticket1-1");
+        t1.gameObject.SetActive(true);
         tray.Interact();
-        Assert.IsTrue(tray.teamController.GetComponent<CanvasController>().orderMenu.activeSelf);
-        tray.teamController.GetComponent<CanvasController>().orderMenu.SetActive(false);
-
-        yield return null;
-    }
-
-
-    [UnityTest]
-    public IEnumerator serve()
-    {
-        tray.tray.trayID = "trayID";
-        tray.Interact();
+        Assert.IsTrue(globalClicked.trayInteract);
         Assert.IsTrue(tray.teamController.GetComponent<CanvasController>().orderMenu.activeSelf);
         tray.teamController.GetComponent<CanvasController>().orderMenu.SetActive(false);
 

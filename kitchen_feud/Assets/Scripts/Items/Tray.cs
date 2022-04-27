@@ -42,20 +42,15 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (player.transform.Find("slot").childCount == 1&&
-                playerHold.GetComponent<PhotonView>().IsMine)
+        if (player.transform.Find("slot").childCount == 1 && playerHold.GetComponent<PhotonView>().IsMine)
         {
-
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
             {
-
-                //foreach (Transform slot in slots)
                 for (int i = 0; i < slots.Count; i++)
                 {
                     if (slots[i].transform.childCount == 0)
                     {
-
                         objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                         pickable = objectHolding.GetComponent<pickableItem>();

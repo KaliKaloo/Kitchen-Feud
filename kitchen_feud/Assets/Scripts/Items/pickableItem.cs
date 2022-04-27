@@ -122,8 +122,8 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).GetComponent<pickableItem>().onTray = true;
         PhotonView.Find(viewID).GetComponent<pickableItem>().Tray = PhotonView.Find(trayID).GetComponent<Tray>().tray;
         PhotonView.Find(viewID).GetComponent<pickableItem>().tray2 = PhotonView.Find(trayID).GetComponent<Tray>();
-
     }
+
     [PunRPC]
     void applianceBool(int viewID,int applianceID, int slotsID)
     {

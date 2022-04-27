@@ -51,7 +51,6 @@ public class TrayControllerTests
         trayController.trays.Add(tray1);
         trayController.trays.Add(tray2);
         trayController.trays.Add(tray3);
-
         trayController.makeTray("order 1");
         Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
     }
@@ -143,7 +142,6 @@ public class TrayControllerTests
     }
 
 
-/*
     [Test]
     public void resetOneTray()
     {
@@ -155,7 +153,6 @@ public class TrayControllerTests
         Assert.AreEqual(0, trayController.trays[0].GetComponent<Tray>().tray.objectsOnTray.Count);
 
     }
-*/
 
 
 
