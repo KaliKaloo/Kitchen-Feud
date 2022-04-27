@@ -109,9 +109,6 @@ public class Owner : MonoBehaviour
                     }
                 }
              
-                //Debug.LogError(p.NickName);
-                //Debug.LogError(p.CustomProperties["CookedDishes"]);
-                //Debug.LogError(p.CustomProperties["ViewID"]);
             }
             if((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
             {
@@ -131,7 +128,6 @@ public class Owner : MonoBehaviour
                     shouting = false;
                 }
             
-                //shout = false;
             }
 
 
