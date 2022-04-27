@@ -109,11 +109,12 @@ public class Owner : MonoBehaviour
 
             foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
             {
-                if((int)p.CustomProperties["CookedDishes"] == 0)
+                GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
                 {
-                    if (!agent.hasPath & !following)
+                    if (!following)
                     {
-                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        playerToFollow = player;
                         
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1,0,1));
                         //Text.text = p.NickName + "!";
@@ -135,13 +136,11 @@ public class Owner : MonoBehaviour
                 }
                 //Debug.LogError(writer.writing);
                 if(shouting && !writer.writing) {
-
-                    following = true;
-                    agent.ResetPath();
+                    anim.SetBool("IsShouting", false);
 
                     returnWithHeadShake();
                     Debug.LogError("Stopped");
-                    anim.SetBool("IsShouting", false);
+                   
                    
                     shout = false;
                     shouting = false;
@@ -191,6 +190,8 @@ public class Owner : MonoBehaviour
     void returnWithHeadShake()
     {
         Debug.LogError(agent.pathStatus);
+        following = true;
+        agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
         //agent.SetDestination(new Vector3(0,0,0));
         anim.SetBool("IsShakingHead", true);
