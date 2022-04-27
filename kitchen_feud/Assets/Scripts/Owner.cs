@@ -20,6 +20,7 @@ public class Owner : MonoBehaviour
     private bool collected;
     private bool toCollect;
     private bool following;
+    private bool calledName;
     private bool shouting;
     private GameObject playerToFollow;
     private Vector3 playerToFollowPos;
@@ -117,7 +118,11 @@ public class Owner : MonoBehaviour
                         playerToFollow = player;
                         
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1,0,1));
-                        //Text.text = p.NickName + "!";
+                        if (!calledName)
+                        {
+                            Text.text = p.NickName + "!";
+                            calledName = true;
+                        }
                         break;
                     }
                 }
@@ -140,8 +145,7 @@ public class Owner : MonoBehaviour
 
                     returnWithHeadShake();
                     Debug.LogError("Stopped");
-                   
-                   
+                    calledName = false;
                     shout = false;
                     shouting = false;
 
@@ -193,7 +197,6 @@ public class Owner : MonoBehaviour
         following = true;
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
-        //agent.SetDestination(new Vector3(0,0,0));
         anim.SetBool("IsShakingHead", true);
     }
     
