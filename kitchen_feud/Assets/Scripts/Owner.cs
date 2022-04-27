@@ -106,83 +106,85 @@ public class Owner : MonoBehaviour
         {
             shout = true;
         }
-        if (shout == true)
+        //if (shout == true)
+        //{
+
+        //    foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+        //    {
+        //        GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+        //        if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
+        //        {
+        //            if (!following)
+        //            {
+        //                playerToFollow = player;
+
+        //                agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+        //                if (!calledName)
+        //                {
+        //                    Text.text = p.NickName + "!";
+        //                    calledName = true;
+        //                }
+        //                break;
+        //            }
+        //        }
+
+        //    }
+        //    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+        //    {
+        //        agent.transform.LookAt(playerToFollow.transform);
+
+        //        if (!shouting)
+        //        {
+        //            anim.SetBool("IsShouting", true);
+        //            Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+        //            writer.writeText();
+        //            shouting = true;
+        //        }
+        //        //Debug.LogError(writer.writing);
+        //        if (shouting && !writer.writing)
+        //        {
+        //            anim.SetBool("IsShouting", false);
+
+        //            returnWithHeadShake();
+        //           // Debug.LogError("Stopped");
+        //            calledName = false;
+        //            shout = false;
+        //            shouting = false;
+
+
+        //        }
+
+        //    }
+
+
+        //}
+
+       
+
+        if (!collected && oven.GetComponent<Appliance>().minigameCanvas)
         {
-
-            foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
-            {
-                GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
-                {
-                    if (!following)
-                    {
-                        playerToFollow = player;
-
-                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                        if (!calledName)
-                        {
-                            Text.text = p.NickName + "!";
-                            calledName = true;
-                        }
-                        break;
-                    }
-                }
-
-            }
-            if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
-            {
-                agent.transform.LookAt(playerToFollow.transform);
-
-                if (!shouting)
-                {
-                    anim.SetBool("IsShouting", true);
-                    Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
-                    writer.writeText();
-                    shouting = true;
-                }
-                //Debug.LogError(writer.writing);
-                if (shouting && !writer.writing)
-                {
-                    anim.SetBool("IsShouting", false);
-
-                    returnWithHeadShake();
-                   // Debug.LogError("Stopped");
-                    calledName = false;
-                    shout = false;
-                    shouting = false;
-
-
-                }
-
-            }
-
+            collectFromOven();
+            collecting = true;
+            collected = true;
 
         }
 
+        if (collecting)
+        {
 
-        //if (!collected  && oven.GetComponent<Appliance>().minigameCanvas)
-        //{
-        //    collectFromOven();
-        //    collecting = true;
-        //    collected = true;
+            if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
+                 (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
+            {
+                if (oven.GetComponent<Appliance>().minigameCanvas)
+                {
+                    oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
+                    agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
 
-        //}
+                }
+                collecting = false;
+            }
 
-        //if (collecting)
-        //{
-
-        //    if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
-        //         (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
-        //    {
-        //        if (oven.GetComponent<Appliance>().minigameCanvas)
-        //        {
-        //            oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
-        //        }
-        //        agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
-        //        collecting = false;
-        //    }
-
-        //}
+        }
     }
 
     void collectFromOven()
