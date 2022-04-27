@@ -206,15 +206,11 @@ public class PlayerVoiceManager : MonoBehaviour
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 		if (x == 0)
 		{
-			// if(view.ViewID == viewID){
-				GameObject vg = obj.GetComponent<PlayerVoiceManager>().damageVignette.gameObject;
+			GameObject vg = obj.GetComponent<PlayerVoiceManager>().damageVignette.gameObject;
 			if (obj.GetComponent<PhotonView>().IsMine)
 			{
 				StartCoroutine(HurtFlash(vg));
 			}
-			// }
-			Debug.Log(view.ViewID);
-			Debug.Log(viewID);
 
 			//SOUND ------------------------------------------------
 			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
