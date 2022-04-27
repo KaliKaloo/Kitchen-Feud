@@ -18,6 +18,7 @@ public class Owner : MonoBehaviour
     private NavMeshAgent agent;
 
     private bool collected;
+    private bool collecting;
     private bool toCollect;
     private bool following;
     private bool calledName;
@@ -105,7 +106,7 @@ public class Owner : MonoBehaviour
         {
             shout = true;
         }
-        if(shout == true)
+        if (shout == true)
         {
 
             foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
@@ -116,8 +117,8 @@ public class Owner : MonoBehaviour
                     if (!following)
                     {
                         playerToFollow = player;
-                        
-                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1,0,1));
+
+                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                         if (!calledName)
                         {
                             Text.text = p.NickName + "!";
@@ -126,9 +127,9 @@ public class Owner : MonoBehaviour
                         break;
                     }
                 }
-             
+
             }
-            if((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+            if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
             {
                 agent.transform.LookAt(playerToFollow.transform);
 
@@ -140,38 +141,48 @@ public class Owner : MonoBehaviour
                     shouting = true;
                 }
                 //Debug.LogError(writer.writing);
-                if(shouting && !writer.writing) {
+                if (shouting && !writer.writing)
+                {
                     anim.SetBool("IsShouting", false);
 
                     returnWithHeadShake();
-                    Debug.LogError("Stopped");
+                   // Debug.LogError("Stopped");
                     calledName = false;
                     shout = false;
                     shouting = false;
 
-                    
+
                 }
-            
+
             }
 
 
         }
 
-        
-        /*if (!collected  && oven.GetComponent<Appliance>().minigameCanvas)
-        {
-            collectFromOven();
-            collected = true;
-        }
-        
 
-        if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
-            Math.Abs(agent.transform.position.x - oven.transform.position.x) < 1 && Math.Abs(agent.transform.position.z - oven.transform.position.z) < 2)
-        {
-            Debug.LogError("Hello");
-            oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
-            agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
-        }*/
+        //if (!collected  && oven.GetComponent<Appliance>().minigameCanvas)
+        //{
+        //    collectFromOven();
+        //    collecting = true;
+        //    collected = true;
+
+        //}
+
+        //if (collecting)
+        //{
+
+        //    if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
+        //         (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
+        //    {
+        //        if (oven.GetComponent<Appliance>().minigameCanvas)
+        //        {
+        //            oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
+        //        }
+        //        agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
+        //        collecting = false;
+        //    }
+
+        //}
     }
 
     void collectFromOven()
@@ -193,7 +204,7 @@ public class Owner : MonoBehaviour
 }
     void returnWithHeadShake()
     {
-        Debug.LogError(agent.pathStatus);
+        //Debug.LogError(agent.pathStatus);
         following = true;
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
