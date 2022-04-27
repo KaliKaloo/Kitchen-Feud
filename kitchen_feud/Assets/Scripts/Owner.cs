@@ -6,6 +6,7 @@ using Codice.Client.BaseCommands;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using Photon.Pun;
 using UnityEngine.UI;
 
 public class Owner : MonoBehaviour
@@ -17,17 +18,20 @@ public class Owner : MonoBehaviour
     private NavMeshAgent agent;
 
     private bool collected;
+    private bool toCollect;
+    private GameObject playerToFollow;
+    private Vector3 playerToFollowPos;
     public TextMeshProUGUI Text;
     public UITextWriter writer;
-    private Text Score1;
-    private Text Score2;
     private bool faceforward;
+    private static GlobalTimer timer = new GlobalTimer();
+    public ParseScore scores = new ParseScore();
+    public bool shout;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        Score1 = GameObject.Find("Score1").GetComponent<Text>();
-        Score2 = GameObject.Find("Score2").GetComponent<Text>();
+       
         
         writer = GameObject.Find("instruction type").GetComponentInChildren<UITextWriter>();
         Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
@@ -50,7 +54,7 @@ public class Owner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.LogError(anim.GetBool("IsTalking"));
+        
        
         if (team == 1)
         {
@@ -60,9 +64,17 @@ public class Owner : MonoBehaviour
                 faceforward = true;
                 anim.SetBool("IsTalking",true);
 
-                if (Int32.Parse(Score1.text) == Int32.Parse(Score2.text))
+                if (scores.GetScore1() == scores.GetScore2())
                 {
                     Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
+
+                }else if(scores.GetScore1() > scores.GetScore2())
+                {
+                    Text.text = "We're winning! Keep it up guys!";
+
+                }else if (scores.GetScore1() < scores.GetScore2())
+                {
+                    Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
                 }
                 writer.writeText();
@@ -75,6 +87,41 @@ public class Owner : MonoBehaviour
             }
             
         }
+        if(timer.GetLocalTime() == 280)
+        {
+            shout = true;
+        }
+        if(shout == true)
+        {
+
+            foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+            {
+                if((int)p.CustomProperties["CookedDishes"] == 0)
+                {
+                    if (!agent.hasPath)
+                    {
+                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        
+                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1,0,1));
+                        Text.text = p.NickName + "!";
+                        break;
+                    }
+                }
+                //Debug.LogError(p.NickName);
+                //Debug.LogError(p.CustomProperties["CookedDishes"]);
+                //Debug.LogError(p.CustomProperties["ViewID"]);
+            }
+            if((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+            {
+                agent.ResetPath();
+                agent.transform.LookAt(playerToFollow.transform);
+                Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+                //shout = false;
+            }
+
+
+        }
+
         
         /*if (!collected  && oven.GetComponent<Appliance>().minigameCanvas)
         {
