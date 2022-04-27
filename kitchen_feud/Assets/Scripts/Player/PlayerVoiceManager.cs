@@ -208,8 +208,10 @@ public class PlayerVoiceManager : MonoBehaviour
 		{
 			// if(view.ViewID == viewID){
 				GameObject vg = obj.GetComponent<PlayerVoiceManager>().damageVignette.gameObject;
-
+			if (obj.GetComponent<PhotonView>().IsMine)
+			{
 				StartCoroutine(HurtFlash(vg));
+			}
 			// }
 			Debug.Log(view.ViewID);
 			Debug.Log(viewID);
