@@ -19,6 +19,7 @@ public class Owner : MonoBehaviour
 
     private bool collected;
     private bool toCollect;
+    private bool following;
     private bool shouting;
     private GameObject playerToFollow;
     private Vector3 playerToFollowPos;
@@ -59,6 +60,17 @@ public class Owner : MonoBehaviour
        
         if (team == 1)
         {
+            if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
+                agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+            {
+                if (anim.GetBool("IsShakingHead"))
+                {
+                    anim.SetBool("IsShakingHead", false);
+                }
+                
+                agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            }
             if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance ==  0)
             {
                 agent.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -99,7 +111,7 @@ public class Owner : MonoBehaviour
             {
                 if((int)p.CustomProperties["CookedDishes"] == 0)
                 {
-                    if (!agent.hasPath)
+                    if (!agent.hasPath & !following)
                     {
                         playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
                         
@@ -112,7 +124,6 @@ public class Owner : MonoBehaviour
             }
             if((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
             {
-                agent.ResetPath();
                 agent.transform.LookAt(playerToFollow.transform);
 
                 if (!shouting)
@@ -124,10 +135,18 @@ public class Owner : MonoBehaviour
                 }
                 //Debug.LogError(writer.writing);
                 if(shouting && !writer.writing) {
+
+                    following = true;
+                    agent.ResetPath();
+
+                    returnWithHeadShake();
                     Debug.LogError("Stopped");
                     anim.SetBool("IsShouting", false);
+                   
                     shout = false;
                     shouting = false;
+
+                    
                 }
             
             }
@@ -169,5 +188,12 @@ public class Owner : MonoBehaviour
         
 
 }
+    void returnWithHeadShake()
+    {
+        Debug.LogError(agent.pathStatus);
+        agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+        //agent.SetDestination(new Vector3(0,0,0));
+        anim.SetBool("IsShakingHead", true);
+    }
     
 }
