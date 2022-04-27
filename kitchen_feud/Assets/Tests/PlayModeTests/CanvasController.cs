@@ -49,6 +49,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k1t1TrayOrderOptions()
     {
+        GameObject.Find("Team1").transform.Find("ticket1-1").gameObject.SetActive(true);
         contr1.TrayOrderOptions("Tray1-1");
         Assert.IsTrue(contr1.orderMenu.activeSelf);
         Assert.AreEqual(contr1.ticket1, contr1.justClicked);
@@ -57,6 +58,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k1t2TrayOrderOptions()
     {
+        GameObject.Find("Team1").transform.Find("ticket2-1").gameObject.SetActive(true);
         contr1.TrayOrderOptions("Tray2-1");
         Assert.IsTrue(contr1.orderMenu.activeSelf);
         Assert.AreEqual(contr1.ticket2, contr1.justClicked);
@@ -65,6 +67,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k1t3TrayOrderOptions()
     {
+       GameObject.Find("Team1").transform.Find("ticket3-1").gameObject.SetActive(true);
         contr1.TrayOrderOptions("Tray3-1");
         Assert.IsTrue(contr1.orderMenu.activeSelf);
         Assert.AreEqual(contr1.ticket3, contr1.justClicked);
@@ -74,6 +77,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k2t1TrayOrderOptions()
     {
+        GameObject.Find("Team2").transform.Find("ticket1-2").gameObject.SetActive(true);
         contr2.TrayOrderOptions("Tray1-2");
         Assert.IsTrue(contr2.orderMenu.activeSelf);
         Assert.AreEqual(contr2.ticket1, contr2.justClicked);
@@ -82,6 +86,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k2t2TrayOrderOptions()
     {
+        GameObject.Find("Team2").transform.Find("ticket2-2").gameObject.SetActive(true);
         contr2.TrayOrderOptions("Tray2-2");
         Assert.IsTrue(contr2.orderMenu.activeSelf);
         Assert.AreEqual(contr2.ticket2, contr2.justClicked);
@@ -90,6 +95,7 @@ public class CanvasControllerTest : PhotonTestSetup
     [Test]
     public void k2t3TrayOrderOptions()
     {
+        GameObject.Find("Team2").transform.Find("ticket3-2").gameObject.SetActive(true);
         contr2.TrayOrderOptions("Tray3-2");
         Assert.IsTrue(contr2.orderMenu.activeSelf);
         Assert.AreEqual(contr2.ticket3, contr2.justClicked);
@@ -121,7 +127,7 @@ public class CanvasControllerTest : PhotonTestSetup
         contr2.TaskOnClick();
         yield return null;
         Assert.IsFalse(contr2.orderMenu.activeSelf);
-        Assert.IsFalse(contr2.ticket1.activeSelf);
+        Assert.IsFalse(contr2.ticket2.activeSelf);
 
         Assert.AreEqual("", contr2.ticket2.GetComponent<DisplayTicket>().orderMainText.text);
         Assert.AreEqual("", contr2.ticket2.GetComponent<DisplayTicket>().orderSideText.text);

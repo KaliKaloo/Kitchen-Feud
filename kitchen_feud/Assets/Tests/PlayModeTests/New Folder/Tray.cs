@@ -186,7 +186,7 @@ public class TrayTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator serveMenuActive()
     {
-         tray.tray.trayID = "trayID";
+        tray.tray.trayID = "trayID";
         Transform t1 = GameObject.Find("Team1").transform.Find("ticket1-1");
         t1.gameObject.SetActive(true);
         tray.Interact();
