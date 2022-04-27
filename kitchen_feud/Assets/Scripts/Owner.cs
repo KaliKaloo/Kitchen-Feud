@@ -117,6 +117,7 @@ public class Owner : MonoBehaviour
 
                 if (!shouting)
                 {
+                    anim.SetBool("IsShouting", true);
                     Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
                     writer.writeText();
                     shouting = true;
@@ -124,6 +125,7 @@ public class Owner : MonoBehaviour
                 //Debug.LogError(writer.writing);
                 if(shouting && !writer.writing) {
                     Debug.LogError("Stopped");
+                    anim.SetBool("IsShouting", false);
                     shout = false;
                     shouting = false;
                 }
