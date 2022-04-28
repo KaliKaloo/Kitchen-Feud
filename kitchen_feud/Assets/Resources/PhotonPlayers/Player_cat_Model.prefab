@@ -1331,9 +1331,22 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsCooking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsTalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShouting
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShakingHead
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
+  - SynchronizeType: 0
+    LayerIndex: 2
 --- !u!82 &6824572492517137414
 AudioSource:
   m_ObjectHideFlags: 0

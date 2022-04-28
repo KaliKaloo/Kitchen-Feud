@@ -16,7 +16,7 @@ public class Owner : MonoBehaviour
     public GameObject oven;
 
     private NavMeshAgent agent;
-
+    private bool currentlyTalking;
     private bool collected;
     private bool collecting;
     private bool toCollect;
@@ -92,11 +92,12 @@ public class Owner : MonoBehaviour
                     Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
                 }
-                writer.writeText();
+                StartCoroutine(talking());
+                //writer.writeText();
                 
             }
 
-            if (!writer.writing && anim.GetBool("IsTalking"))
+            if (!currentlyTalking && anim.GetBool("IsTalking"))
             {
                 anim.SetBool("IsTalking",false);
             }
@@ -106,60 +107,62 @@ public class Owner : MonoBehaviour
         {
             shout = true;
         }
-        //if (shout == true)
-        //{
+      
+        if (shout == true)
+        {
 
-        //    foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
-        //    {
-        //        GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-        //        if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
-        //        {
-        //            if (!following)
-        //            {
-        //                playerToFollow = player;
+            foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+            {
+                GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
+                {
+                    if (!following)
+                    {
+                        playerToFollow = player;
 
-        //                agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-        //                if (!calledName)
-        //                {
-        //                    Text.text = p.NickName + "!";
-        //                    calledName = true;
-        //                }
-        //                break;
-        //            }
-        //        }
+                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                        if (!calledName)
+                        {
+                            Text.text = p.NickName + "!";
+                            calledName = true;
+                        }
+                        break;
+                    }
+                }
 
-        //    }
-        //    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
-        //    {
-        //        agent.transform.LookAt(playerToFollow.transform);
+            }
+            if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+            {
+                agent.transform.LookAt(playerToFollow.transform);
 
-        //        if (!shouting)
-        //        {
-        //            anim.SetBool("IsShouting", true);
-        //            Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
-        //            writer.writeText();
-        //            shouting = true;
-        //        }
-        //        //Debug.LogError(writer.writing);
-        //        if (shouting && !writer.writing)
-        //        {
-        //            anim.SetBool("IsShouting", false);
+                if (!shouting)
+                {
+                    anim.SetBool("IsShouting", true);
+                    Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+                    StartCoroutine(talking());
+                    //writer.writeText();
+                    shouting = true;
+                }
+                //Debug.LogError(writer.writing);
+                if (shouting && !currentlyTalking)
+                {
+                    anim.SetBool("IsShouting", false);
 
-        //            returnWithHeadShake();
-        //           // Debug.LogError("Stopped");
-        //            calledName = false;
-        //            shout = false;
-        //            shouting = false;
-
-
-        //        }
-
-        //    }
+                    returnWithHeadShake();
+                    // Debug.LogError("Stopped");
+                    calledName = false;
+                    shout = false;
+                    shouting = false;
 
 
-        //}
+                }
 
-       
+            }
+
+
+        }
+
+
 
         if (!collected && oven.GetComponent<Appliance>().minigameCanvas)
         {
@@ -204,6 +207,13 @@ public class Owner : MonoBehaviour
         
 
 }
+    private IEnumerator talking()
+    {
+        currentlyTalking = true;
+        yield return new WaitForSeconds(3);
+        currentlyTalking = false;
+        
+    }
     void returnWithHeadShake()
     {
         //Debug.LogError(agent.pathStatus);
