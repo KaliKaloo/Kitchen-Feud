@@ -334,13 +334,17 @@ public class Owner : MonoBehaviour
             {
                 if (team == 1)
                 {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+
                     returnNormally();
                 }
                 else if (team == 2)
                 {
+                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+
                     returnNormally2();
                 }
-                Text.text = "Ahh, got there before me!";
+                //Text.text = "Ahh, got there before me!";
                 collecting = false;
             }
         }
