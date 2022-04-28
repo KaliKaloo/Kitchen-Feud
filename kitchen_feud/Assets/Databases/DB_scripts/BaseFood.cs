@@ -15,7 +15,6 @@ public enum Location{
 public abstract class BaseFood : ScriptableObject
 {
     new public string name = "New Item";
-    public Location location;
     public GameObject Prefab;
     public ItemType Type;
     public Sprite img;

@@ -59,6 +59,15 @@ public class cookingMethod : PhotonTestSetup
 
     }
 
+
+    [Test]
+    public void cookingMethodOmelette()
+    {
+        GameObject omelette = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Omelette"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        DishSO omeletteSO = (DishSO) omelette.GetComponent<pickableItem>().item;
+        Assert.AreEqual("Stove", omeletteSO.toCook);
+    }
+
     [Test]
     public void cookingMethodSalad()
     {

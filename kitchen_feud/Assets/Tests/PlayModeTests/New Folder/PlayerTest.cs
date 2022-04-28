@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEditor;
 using System.Collections.Generic;
@@ -12,10 +11,11 @@ using System.IO;
 public class PlayerTests : PhotonTestSetup
 {
     GameObject obj;
-    GameObject mushroom;
-    GameObject potato;
+    GameObject mushroom, potato;
+
     PlayerHolding playerHold;
     Appliance stove;
+
 
     [UnitySetUp]
     public IEnumerator Setup()
@@ -141,5 +141,6 @@ public class PlayerTests : PhotonTestSetup
         yield return null;
 
     }
+
 
 }
