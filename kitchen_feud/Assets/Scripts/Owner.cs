@@ -49,7 +49,6 @@ public class Owner : MonoBehaviour
         PV = GetComponent<PhotonView>();
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
-        Debug.LogError(localPlayer.name);
         if (team == 1)
         {
             Owner1 = GameObject.Find("Owner1");
@@ -119,6 +118,7 @@ public class Owner : MonoBehaviour
 
                     if (scores.GetScore1() == scores.GetScore2())
                     {
+                        Debug.LogError("INSTRUCTIONS MAYVE??");
                         PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
@@ -162,7 +162,7 @@ public class Owner : MonoBehaviour
                 }
                 if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
                 {
-                    Debug.LogError("Hello");
+                    //Debug.LogError("Hello");
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                     faceforward = true;
                     anim.SetBool("IsTalking", true);
@@ -433,7 +433,7 @@ public class Owner : MonoBehaviour
         Debug.LogError(PhotonView.Find(playerID).IsMine);
         if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
-            Debug.LogError("TESTTT");
+            //Debug.LogError("TESTTT");
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
             o.Owner2.SetActive(true);
