@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: -3937308255390478617}
   - component: {fileID: -1613777265832825460}
   - component: {fileID: -6623489085525481428}
+  - component: {fileID: 5678404579956279889}
   m_Layer: 0
   m_Name: Owner_panda_Model
   m_TagString: Owner2
@@ -760,9 +761,22 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsCooking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsTalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShouting
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShakingHead
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
+  - SynchronizeType: 0
+    LayerIndex: 2
 --- !u!82 &4850287822765907780
 AudioSource:
   m_ObjectHideFlags: 0
@@ -914,6 +928,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &5678404579956279889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850287822765907776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4e76f8626f54c99b11a98bae91fea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 2
+  oven: {fileID: 0}
+  Owner1: {fileID: 0}
+  Owner2: {fileID: 0}
+  keyboard: {fileID: 0}
+  mouse: {fileID: 0}
+  Text: {fileID: 0}
+  writer: {fileID: 0}
+  shout: 0
 --- !u!1 &5589500099702628439
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5732737912369520357
 Transform:
   m_ObjectHideFlags: 0
@@ -1162,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5732737914250238449
 Transform:
   m_ObjectHideFlags: 0
@@ -1208,7 +1243,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 16511
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

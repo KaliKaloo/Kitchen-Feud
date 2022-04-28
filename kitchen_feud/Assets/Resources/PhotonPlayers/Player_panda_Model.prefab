@@ -811,9 +811,22 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsCooking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsTalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShouting
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsShakingHead
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
+  - SynchronizeType: 0
+    LayerIndex: 2
 --- !u!82 &4850287822765907780
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1218,7 +1231,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2175
+    m_Bits: 18559
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

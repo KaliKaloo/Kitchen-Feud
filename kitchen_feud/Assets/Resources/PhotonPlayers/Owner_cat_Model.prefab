@@ -596,6 +596,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 1
   oven: {fileID: 0}
+  Owner1: {fileID: 0}
+  Owner2: {fileID: 0}
+  keyboard: {fileID: 0}
+  mouse: {fileID: 0}
   Text: {fileID: 0}
   writer: {fileID: 0}
   shout: 0

@@ -17,12 +17,17 @@ public class Owner : MonoBehaviour
 
     private NavMeshAgent agent;
     private bool currentlyTalking;
+    private bool currentlyTalking2;
     private bool collected;
     private bool collecting;
     private bool toCollect;
     private bool following;
     private bool calledName;
     private bool shouting;
+    public GameObject Owner1;
+    public GameObject Owner2;
+    public GameObject keyboard;
+    public GameObject mouse;
     private GameObject playerToFollow;
     private Vector3 playerToFollowPos;
     public TextMeshProUGUI Text;
@@ -32,8 +37,29 @@ public class Owner : MonoBehaviour
     public ParseScore scores = new ParseScore();
     public bool shout;
     // Start is called before the first frame update
+    private void Awake()
+    {
+
+      
+    }
     void Start()
     {
+        if (team == 1)
+        {
+            Owner1 = GameObject.Find("Owner1");
+            Owner1.SetActive(false);
+
+        }
+        else if(team == 2)
+        {
+            Owner2 = GameObject.Find("Owner2");
+            Owner2.SetActive(false);
+
+
+        }
+        keyboard = GameObject.Find("keyboard controls");
+        mouse = GameObject.Find("mouse controls");
+
         anim = GetComponent<Animator>();
        
         
@@ -49,17 +75,19 @@ public class Owner : MonoBehaviour
         else if(team == 2)
         {
             oven = GameObject.Find("Oven2");
+            agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+
         }
 
-        
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-       
+
+
         if (team == 1)
         {
             if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
@@ -69,94 +97,166 @@ public class Owner : MonoBehaviour
                 {
                     anim.SetBool("IsShakingHead", false);
                 }
-                
+
                 agent.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             }
-            if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance ==  0)
+            if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
             {
                 agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                 faceforward = true;
-                anim.SetBool("IsTalking",true);
+                anim.SetBool("IsTalking", true);
 
                 if (scores.GetScore1() == scores.GetScore2())
                 {
                     Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
-                }else if(scores.GetScore1() > scores.GetScore2())
+                }
+                else if (scores.GetScore1() > scores.GetScore2())
                 {
                     Text.text = "We're winning! Keep it up guys!";
 
-                }else if (scores.GetScore1() < scores.GetScore2())
+                }
+                else if (scores.GetScore1() < scores.GetScore2())
                 {
                     Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
                 }
                 StartCoroutine(talking());
-                //writer.writeText();
-                
+
             }
 
             if (!currentlyTalking && anim.GetBool("IsTalking"))
             {
-                anim.SetBool("IsTalking",false);
+                anim.SetBool("IsTalking", false);
             }
-            
+
         }
-        if(timer.GetLocalTime() == 280)
+        else if (team == 2)
+        {
+            if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
+            agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+            {
+                if (anim.GetBool("IsShakingHead"))
+                {
+                    anim.SetBool("IsShakingHead", false);
+                }
+
+                agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            }
+            if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
+            {
+                agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                faceforward = true;
+                anim.SetBool("IsTalking", true);
+
+                if (scores.GetScore1() == scores.GetScore2())
+                {
+                    Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
+
+                }
+                else if (scores.GetScore1() > scores.GetScore2())
+                {
+                    Text.text = "We're winning! Keep it up guys!";
+
+                }
+                else if (scores.GetScore1() < scores.GetScore2())
+                {
+                    Text.text = "We're losing! We need to stop being lazy and push if we want to win";
+
+                }
+                StartCoroutine(talking());
+
+            }
+
+            if (!currentlyTalking && anim.GetBool("IsTalking"))
+            {
+                anim.SetBool("IsTalking", false);
+            }
+        }
+        if (timer.GetLocalTime() == 280)
         {
             shout = true;
         }
-      
+
         if (shout == true)
         {
 
             foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
             {
                 GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                if ((int)p.CustomProperties["CookedDishes"] == 0 && player.GetComponent<PlayerVoiceManager>().entered1)
+                if ((int)p.CustomProperties["CookedDishes"] == 0 && (int)p.CustomProperties["Team"] == team)
                 {
-                    if (!following)
+                    if (team == 1)
                     {
-                        playerToFollow = player;
-
-                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                        if (!calledName)
+                        if (player.GetComponent<PlayerVoiceManager>().entered1)
                         {
-                            Text.text = p.NickName + "!";
-                            calledName = true;
+                            if (!following)
+                            {
+                                playerToFollow = player;
+
+                                agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                                if (!calledName)
+                                {
+                                    Text.text = p.NickName + "!";
+                                    calledName = true;
+                                }
+                                break;
+                            }
                         }
-                        break;
+                    }
+                    else if (team == 2)
+                    {
+                        if (player.GetComponent<PlayerVoiceManager>().entered2)
+                        {
+                            if (!following)
+                            {
+                                playerToFollow = player;
+
+                                agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                                if (!calledName)
+                                {
+                                    Text.text = p.NickName + "!";
+                                    calledName = true;
+                                }
+                                break;
+                            }
+                        }
+
+
                     }
                 }
 
             }
-            if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+            Debug.LogError(agent.name);
+            Debug.LogError(playerToFollow.name);
+            if (playerToFollow)
             {
-                agent.transform.LookAt(playerToFollow.transform);
-
-                if (!shouting)
+                if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
                 {
-                    anim.SetBool("IsShouting", true);
-                    Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
-                    StartCoroutine(talking());
-                    //writer.writeText();
-                    shouting = true;
+                    agent.transform.LookAt(playerToFollow.transform);
+
+                    if (!shouting)
+                    {
+                        anim.SetBool("IsShouting", true);
+                        Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+                        StartCoroutine(talking());
+                        shouting = true;
+                    }
+                    if (shouting && !currentlyTalking)
+                    {
+                        anim.SetBool("IsShouting", false);
+
+                        returnWithHeadShake();
+                        calledName = false;
+                        shout = false;
+                        shouting = false;
+
+
+                    }
+
                 }
-                //Debug.LogError(writer.writing);
-                if (shouting && !currentlyTalking)
-                {
-                    anim.SetBool("IsShouting", false);
-
-                    returnWithHeadShake();
-                    // Debug.LogError("Stopped");
-                    calledName = false;
-                    shout = false;
-                    shouting = false;
-
-
-                }
-
             }
 
 
@@ -188,32 +288,49 @@ public class Owner : MonoBehaviour
             }
 
         }
+        if (collecting && !oven.GetComponent<Appliance>().minigameCanvas)
+        {
+            returnNormally();
+            Text.text = "Ahh, got there before me!";
+            collecting = false;
+        }
     }
 
     void collectFromOven()
     {
         Vector3 ovenDestination;
         Vector3 ovenPosition;
-  
+
 
         ovenPosition = oven.transform.position;
-        ovenDestination = new Vector3(ovenPosition.x , ovenPosition.y,ovenPosition.z - 1.6f);
+        ovenDestination = new Vector3(ovenPosition.x, ovenPosition.y, ovenPosition.z - 1.6f);
 
         if (!agent.hasPath)
         {
             agent.SetDestination(ovenDestination);
         }
-        
-        
 
-}
+
+
+    }
     private IEnumerator talking()
     {
+        keyboard.SetActive(false);
+        mouse.SetActive(false);    
+        if(team == 1)
+        {
+            Owner1.SetActive(true);
+        }else if(team == 2)
+        {
+            Owner2.SetActive(true);
+        }
         currentlyTalking = true;
         yield return new WaitForSeconds(3);
         currentlyTalking = false;
         
     }
+
+    
     void returnWithHeadShake()
     {
         //Debug.LogError(agent.pathStatus);
@@ -222,5 +339,10 @@ public class Owner : MonoBehaviour
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
         anim.SetBool("IsShakingHead", true);
     }
-    
+    void returnNormally()
+    {
+        agent.ResetPath();
+        agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+    }
+
 }
