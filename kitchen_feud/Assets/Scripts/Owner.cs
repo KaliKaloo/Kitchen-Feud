@@ -88,7 +88,7 @@ public class Owner : MonoBehaviour
     {
 
 
-        if (team == 1)
+        if (team == 1 && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myTeam == 1)
         {
             if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
                 agent.transform.rotation != Quaternion.Euler(0, 0, 0))
@@ -132,7 +132,7 @@ public class Owner : MonoBehaviour
             }
 
         }
-        else if (team == 2)
+        else if (team == 2 && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myTeam == 2)
         {
             if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
             agent.transform.rotation != Quaternion.Euler(0, 0, 0))
@@ -289,7 +289,13 @@ public class Owner : MonoBehaviour
         }
         if (collecting && !oven.GetComponent<Appliance>().minigameCanvas)
         {
-            returnNormally();
+            if (team == 1)
+            {
+                returnNormally();
+            }else if(team == 2)
+            {
+                returnNormally2();
+            }
             Text.text = "Ahh, got there before me!";
             collecting = false;
         }
@@ -350,6 +356,11 @@ public class Owner : MonoBehaviour
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+    }
+    void returnNormally2()
+    {
+        agent.ResetPath();
+        agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
     }
 
 }
