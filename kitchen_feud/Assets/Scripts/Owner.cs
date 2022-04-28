@@ -116,20 +116,20 @@ public class Owner : MonoBehaviour
 
                     if (scores.GetScore1() == scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!", localPlayerID);
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
                     }
                     else if (scores.GetScore1() > scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!", localPlayerID);
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
 
                         //Text.text = "We're winning! Keep it up guys!";
 
                     }
                     else if (scores.GetScore1() < scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win", localPlayerID);
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
 
                        // Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
@@ -166,21 +166,21 @@ public class Owner : MonoBehaviour
 
                     if (scores.GetScore1() == scores.GetScore2())
                     {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
 
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
                     }
                     else if (scores.GetScore1() > scores.GetScore2())
                     {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
 
                         //Text.text = "We're winning! Keep it up guys!";
 
                     }
                     else if (scores.GetScore1() < scores.GetScore2())
                     {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
 
                         //Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
@@ -269,12 +269,12 @@ public class Owner : MonoBehaviour
                             anim.SetBool("IsShouting", true);
                             if(team == 1)
                             {
-                                PV.RPC("setText", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage", localPlayerID);
+                                PV.RPC("setText", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage");
 
                             }
                             else if(team ==2)
                             {
-                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage", localPlayerID);
+                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage");
 
                             }
 
@@ -408,6 +408,8 @@ public class Owner : MonoBehaviour
     void setText(int viewID, string message, int playerID)
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
+        playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
+
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
       
         if( pVM.myTeam == 1 && pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
@@ -423,10 +425,12 @@ public class Owner : MonoBehaviour
     void setText2(int viewID, string message, int playerID)
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
+        playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-        Debug.LogError("PLAY THE ANIMATION?");
+        Debug.LogError(PhotonView.Find(playerID).IsMine);
         if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
+            Debug.LogError("TESTTT");
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
             o.Owner2.SetActive(true);
