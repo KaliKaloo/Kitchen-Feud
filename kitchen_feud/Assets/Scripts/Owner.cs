@@ -408,10 +408,10 @@ public class Owner : MonoBehaviour
         agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
     }
     [PunRPC]
-    void setText(int viewID, string message, int playerID)
+    void setText(int viewID, string message)
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
-        playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
+       int playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
 
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
       
@@ -425,10 +425,10 @@ public class Owner : MonoBehaviour
 
     }
     [PunRPC]
-    void setText2(int viewID, string message, int playerID)
+    void setText2(int viewID, string message)
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
-        playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
+        int playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
         Debug.LogError(PhotonView.Find(playerID).IsMine);
         if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
