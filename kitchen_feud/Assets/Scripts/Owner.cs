@@ -247,7 +247,7 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShouting", false);
 
-                        returnWithHeadShake();
+                        returnWithHeadShake2();
                         calledName = false;
                         shout = false;
                         shouting = false;
@@ -336,6 +336,14 @@ public class Owner : MonoBehaviour
         following = true;
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+        anim.SetBool("IsShakingHead", true);
+    }
+    void returnWithHeadShake2()
+    {
+        //Debug.LogError(agent.pathStatus);
+        following = true;
+        agent.ResetPath();
+        agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
         anim.SetBool("IsShakingHead", true);
     }
     void returnNormally()
