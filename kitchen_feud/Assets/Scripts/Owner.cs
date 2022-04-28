@@ -28,7 +28,7 @@ public class Owner : MonoBehaviour
     public GameObject Owner2;
     public GameObject keyboard;
     public GameObject mouse;
-    private GameObject playerToFollow;
+    public GameObject playerToFollow;
     private Vector3 playerToFollowPos;
     public TextMeshProUGUI Text;
     public UITextWriter writer;
