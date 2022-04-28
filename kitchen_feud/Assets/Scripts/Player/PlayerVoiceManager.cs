@@ -60,11 +60,11 @@ public class PlayerVoiceManager : MonoBehaviour
 
 			if (myTeam == 1)
 			{
-				view.RPC("setEntered", RpcTarget.All, view.ViewID, 1);
+				view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 1);
 			}
 			else 
 			{
-				view.RPC("setEntered", RpcTarget.All, view.ViewID, 2);
+				view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 2);
 			}
 		}
 	
