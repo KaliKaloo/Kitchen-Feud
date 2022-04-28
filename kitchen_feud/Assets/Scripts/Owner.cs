@@ -14,7 +14,7 @@ public class Owner : MonoBehaviour
     public int team;
     private Animator anim;
     public GameObject oven;
-
+    private GameObject localPlayer;
     private NavMeshAgent agent;
     private bool currentlyTalking;
     private bool currentlyTalking2;
@@ -44,6 +44,8 @@ public class Owner : MonoBehaviour
     }
     void Start()
     {
+        localPlayer = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
+        Debug.LogError(localPlayer.name);
         if (team == 1)
         {
             Owner1 = GameObject.Find("Owner1");
@@ -88,7 +90,7 @@ public class Owner : MonoBehaviour
     {
 
 
-        if (team == 1 && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myTeam == 1)
+        if (team == 1 && localPlayer.GetComponent<PlayerVoiceManager>().myTeam == 1 && localPlayer.GetComponent<PlayerVoiceManager>().entered1)
         {
             if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
                 agent.transform.rotation != Quaternion.Euler(0, 0, 0))
@@ -132,7 +134,7 @@ public class Owner : MonoBehaviour
             }
 
         }
-        else if (team == 2 && GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myTeam == 2)
+        else if (team == 2 && localPlayer.GetComponent<PlayerVoiceManager>().myTeam == 2 && localPlayer.GetComponent<PlayerVoiceManager>().entered2)
         {
             if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
             agent.transform.rotation != Quaternion.Euler(0, 0, 0))
