@@ -305,7 +305,7 @@ public class Owner : MonoBehaviour
 
 
 
-            if (!collected && oven.GetComponentInChildren<OvenFire>())
+            if (!collected && oven.transform.Find("ovencanvas(Clone)"))
             {
                 Debug.LogError("OVENNNN");
                 collectFromOven();
