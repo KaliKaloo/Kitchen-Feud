@@ -424,6 +424,7 @@ public class Owner : MonoBehaviour
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
+        Debug.LogError("PLAY THE ANIMATION?");
         if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
             o.keyboard.SetActive(false);
