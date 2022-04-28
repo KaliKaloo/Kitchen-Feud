@@ -72,17 +72,20 @@ public class Owner : MonoBehaviour
         writer = GameObject.Find("instruction type").GetComponentInChildren<UITextWriter>();
         Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
-        if (team == 1)
+        if (PhotonNetwork.IsMasterClient)
         {
-            oven = GameObject.Find("Oven1");
-            agent.SetDestination(new Vector3(12.61f,0.2f,-4.8f));
+            if (team == 1)
+            {
+                oven = GameObject.Find("Oven1");
+                agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
 
-        }
-        else if(team == 2)
-        {
-            oven = GameObject.Find("Oven2");
-            agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+            }
+            else if (team == 2)
+            {
+                oven = GameObject.Find("Oven2");
+                agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
 
+            }
         }
 
 
