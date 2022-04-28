@@ -23,6 +23,10 @@ public class MovingInstructions : MonoBehaviour
     public float timer;
     private bool started = false;
     private bool finished = false;
+    private bool enemyInstructions = false;
+
+    // how long in seconds enemy instructions have between when shown
+    private float enemyInstructionDelay = 6;
 
     void Start()
     {
@@ -89,7 +93,10 @@ public class MovingInstructions : MonoBehaviour
         }
         else if (globalClicked.enterEnemyKitchen)
         {
-            Text.text = "In the enemy's kitchen, you can throw smoke bombs, steal items or cook using their appliances for double points! Be careful, they can kick you out by clicking on your player";
+            // locks coroutine from being spammed after entered enemy kitchen
+            if (!enemyInstructions)
+                StartCoroutine(EnemyKitchenInstructions());
+
             InitializeTimer();
             started = true;
            
@@ -119,4 +126,35 @@ public class MovingInstructions : MonoBehaviour
     {
         timer = time;
     }
+
+    // randomly selects from a list of instructions when enter enemy kitchen
+    private IEnumerator EnemyKitchenInstructions()
+    {
+        enemyInstructions = true;
+
+        List<string> randomInstructionList = new List<string>
+        {
+            "Steal their ingredients!", "Throw a smoke bomb by pressing the button in the bottom right", "Cook in their kitchen for double points!"
+        };
+
+        // show a random instruction from list then remove it
+        int first = Random.Range(0, 2);
+        Text.text = randomInstructionList[first];
+        randomInstructionList.RemoveAt(first);
+
+        yield return new WaitForSeconds(enemyInstructionDelay);
+
+        // show a random instruction from remaining list then remove it
+        int second = Random.Range(0, 1);
+        Text.text = randomInstructionList[second];
+        randomInstructionList.RemoveAt(second);
+
+        yield return new WaitForSeconds(enemyInstructionDelay);
+
+        // show a last remaining instruction
+        Text.text = randomInstructionList[0];
+
+
+    }
+
 }

@@ -83,7 +83,7 @@ public class cutController : MonoBehaviour
         List<Sprite> dishSprites = InstantiateList(dish.recipe);
         newIngredients = new List<Sprite>(dishSprites);
         
-        instructions.SetActive(false);
+        //instructions.SetActive(false);
         StartButton.SetActive(false);
         scoreSystem.SetActive(true);
 

@@ -6,49 +6,50 @@ using Photon.Pun;
 
 public class StoveMinigameCounter
 {
-    public static int counter;
-    public static bool end;
+    // counts from 0-20 how many items have been dropped from the ceiling
+    public static int droppedCounter;
+
+    // counts from 0-20 how many items have been caught by the pot
+    // once reached 20 then game should end
     public static int collisionCounter;
 
-    public void MinusCollisionCounter()
+    // counts from 0-20 how many correct ingredients have been caught
+    public static int correctIngredientCounter;
+
+    public static bool end;
+
+    public static void ResetCounters()
     {
-        collisionCounter -= 1;
+        droppedCounter = 0;
+        collisionCounter = 0;
+        correctIngredientCounter = 0;
     }
 
-    public int GetCollisionCounter()
+    public void AddCollisionCounter()
     {
-        return collisionCounter;
+        collisionCounter += 1;
     }
 
+    public void AddCorrectIngredient()
+    {
+        correctIngredientCounter += 1;
+    }
+
+    public void AddDroppedCounter()
+    {
+        droppedCounter += 1;
+    }
+
+    // signal to start stove minigame
     public void StartGame()
     {
         end = false;
         
     }
+
+    // sets the state of the game to end
     public void EndGame()
     {
         end = true;
-        //Spawner.backButton.SetActive(true);
-    }
-
-    public bool GetGameState()
-    {
-        return end;
-    }
-
-    public void ResetCounter()
-    {
-        counter = 15;
-        collisionCounter = 15;
-    }
-
-    public void MinusCounter()
-    {
-        counter -= 1;
-    }
-
-    public int GetCounter()
-    {
-        return counter;
     }
 }

@@ -26,6 +26,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	void Start () {
+		score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
@@ -36,7 +37,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove();
-		//pot.transform.position = new Vector2(Screen.width / 2, Screen.height / 4.3f);
 		// MusicManager.instance.minigameEnd();
 		// MusicManager.instance.inMG = false;
 		MusicManagerOld.instance.minigameEnd();
@@ -47,9 +47,6 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		//GameEvents.current.assignPointsEventFunction();
-		score.text = "Score: 0/15";
-		stoveScore.ResetValues();
 		backButton.SetActive(false);
 		startButton.SetActive(true);
 		instructions.SetActive(true);
