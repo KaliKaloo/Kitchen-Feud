@@ -18,8 +18,8 @@ public class Owner : MonoBehaviour
     private NavMeshAgent agent;
     private bool currentlyTalking;
     private bool currentlyTalking2;
-    private bool collected;
-    private bool collecting;
+    public bool collected;
+    public bool collecting;
     private bool toCollect;
     private bool following;
     private bool calledName;
