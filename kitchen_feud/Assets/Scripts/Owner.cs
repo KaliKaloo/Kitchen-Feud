@@ -307,6 +307,7 @@ public class Owner : MonoBehaviour
 
             if (!collected && oven.GetComponent<Appliance>().minigameCanvas)
             {
+                Debug.LogError("OVENNNN");
                 collectFromOven();
                 collecting = true;
                 collected = true;
