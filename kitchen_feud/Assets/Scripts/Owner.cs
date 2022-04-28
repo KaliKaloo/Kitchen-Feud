@@ -197,7 +197,7 @@ public class Owner : MonoBehaviour
                     anim.SetBool("IsTalking", false);
                 }
             }
-            if (timer.GetLocalTime() == 280)
+            if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
             {
                 shout = true;
             }
@@ -305,48 +305,48 @@ public class Owner : MonoBehaviour
 
 
 
-            if (!collected && oven.transform.Find("ovencanvas(Clone)"))
-            {
-                Debug.LogError("OVENNNN");
-                collectFromOven();
-                collecting = true;
-                collected = true;
+            //if (!collected && oven.transform.Find("ovencanvas(Clone)"))
+            //{
+            //    Debug.LogError("OVENNNN");
+            //    collectFromOven();
+            //    collecting = true;
+            //    collected = true;
 
-            }
+            //}
 
-            if (collecting)
-            {
+            //if (collecting)
+            //{
 
-                if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
-                     (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
-                {
-                    if (oven.transform.Find("ovencanvas(Clone)"))
-                    {
-                        oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
-                        agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
-                        collecting = false;
+            //    if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
+            //         (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
+            //    {
+            //        if (oven.transform.Find("ovencanvas(Clone)"))
+            //        {
+            //            oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
+            //            agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
+            //            collecting = false;
 
-                    }
-                }
+            //        }
+            //    }
 
-            }
-            if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
-            {
-                if (team == 1)
-                {
-                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+            //}
+            //if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
+            //{
+            //    if (team == 1)
+            //    {
+            //        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
 
-                    returnNormally();
-                }
-                else if (team == 2)
-                {
-                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+            //        returnNormally();
+            //    }
+            //    else if (team == 2)
+            //    {
+            //        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
 
-                    returnNormally2();
-                }
-                //Text.text = "Ahh, got there before me!";
-                collecting = false;
-            }
+            //        returnNormally2();
+            //    }
+            //    //Text.text = "Ahh, got there before me!";
+            //    collecting = false;
+            //}
         }
     }
 
