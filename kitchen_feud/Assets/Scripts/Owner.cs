@@ -324,9 +324,9 @@ public class Owner : MonoBehaviour
                     {
                         oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
                         agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
+                        collecting = false;
 
                     }
-                    collecting = false;
                 }
 
             }
