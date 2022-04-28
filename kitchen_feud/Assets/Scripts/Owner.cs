@@ -305,7 +305,7 @@ public class Owner : MonoBehaviour
 
 
 
-            if (!collected && oven.GetComponent<Appliance>().minigameCanvas)
+            if (!collected && oven.GetComponentInChildren<OvenFire>())
             {
                 Debug.LogError("OVENNNN");
                 collectFromOven();
@@ -320,9 +320,9 @@ public class Owner : MonoBehaviour
                 if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
                      (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
                 {
-                    if (oven.GetComponent<Appliance>().minigameCanvas)
+                    if (oven.GetComponentInChildren<OvenFire>())
                     {
-                        oven.GetComponent<Appliance>().minigameCanvas.GetComponentInChildren<exitOven>().TaskOnClick();
+                        oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
                         agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
 
                     }
