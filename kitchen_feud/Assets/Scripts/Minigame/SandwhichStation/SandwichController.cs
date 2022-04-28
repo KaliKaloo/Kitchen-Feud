@@ -88,7 +88,7 @@ public class SandwichController : MonoBehaviour
     {
         RestartGame();
         StartButton.SetActive(false);
-        instructions.SetActive(false);
+        //instructions.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
         moving = true;

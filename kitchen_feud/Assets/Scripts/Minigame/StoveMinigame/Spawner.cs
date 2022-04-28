@@ -67,7 +67,7 @@ public class Spawner : MonoBehaviour
         stoveMinigameCounter.StartGame();
         StoveMinigameCounter.ResetCounters();
         
-        instructions.SetActive(false);
+        //instructions.SetActive(false);
         startButton.SetActive(false);
         if (PhotonNetwork.IsConnected)
             startSmoke();
