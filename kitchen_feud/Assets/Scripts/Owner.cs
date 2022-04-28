@@ -412,7 +412,7 @@ public class Owner : MonoBehaviour
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
         Debug.LogError("HERE");
-        if( pVM.myTeam == 1 && pVM.entered1)
+        if( pVM.myTeam == 1 && pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
@@ -426,7 +426,7 @@ public class Owner : MonoBehaviour
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-        if ( pVM.myTeam == 2 && pVM.entered2)
+        if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
