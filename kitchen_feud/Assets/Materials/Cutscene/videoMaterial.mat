@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: videoMaterial
-  m_Shader: {fileID: 4800000, guid: fbf7cf4ae896e4d4d980b4c81ae9dae5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 69a12fb287b2ebc4bbb90b02499533d3, type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -117,7 +117,7 @@ Material:
     - _Stencil: 1
     - _StencilComp: 3
     - _StencilOp: 0
-    - _StencilReadMask: 1
+    - _StencilReadMask: 0
     - _StencilWriteMask: 0
     - _Surface: 0
     - _UVSec: 0

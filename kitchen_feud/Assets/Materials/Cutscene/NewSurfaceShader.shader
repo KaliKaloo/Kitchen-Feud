@@ -1,4 +1,4 @@
- Shader "Unlit/VideoPlayerShader"
+Shader "Unlit/VideoPlayerShader"
  {
  
      Properties
