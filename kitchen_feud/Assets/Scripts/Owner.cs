@@ -217,7 +217,7 @@ public class Owner : MonoBehaviour
                     {
                         if (PhotonNetwork.IsMasterClient)
                         {
-                            Debug.LogError("HELLOOOO");
+                            Debug.LogError(player.name);
                         }
                         
                         if (player.GetComponent<PlayerVoiceManager>().entered2)
