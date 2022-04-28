@@ -202,7 +202,7 @@ public class Owner : MonoBehaviour
                                 if (PhotonNetwork.IsMasterClient)
                                 {
                                     agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                                    Debug.LogError("SET1");
+                                    //Debug.LogError("SET1");
                                 }
                                 if (!calledName)
                                 {
@@ -215,6 +215,10 @@ public class Owner : MonoBehaviour
                     }
                     else if (team == 2)
                     {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            Debug.LogError("HELLOOOO");
+                        }
                         
                         if (player.GetComponent<PlayerVoiceManager>().entered2)
                         {
@@ -225,7 +229,7 @@ public class Owner : MonoBehaviour
                                 if (PhotonNetwork.IsMasterClient)
                                 {
                                     agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                                    Debug.LogError("SET2");
+                                    //Debug.LogError("SET2");
                                 }
                                 if (!calledName)
                                 {
