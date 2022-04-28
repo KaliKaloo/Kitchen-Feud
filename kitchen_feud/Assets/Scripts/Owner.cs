@@ -320,7 +320,7 @@ public class Owner : MonoBehaviour
                 if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
                      (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
                 {
-                    if (oven.GetComponentInChildren<OvenFire>())
+                    if (oven.transform.Find("ovencanvas(Clone)"))
                     {
                         oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
                         agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
@@ -330,7 +330,7 @@ public class Owner : MonoBehaviour
                 }
 
             }
-            if (collecting && !oven.GetComponent<Appliance>().minigameCanvas)
+            if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
             {
                 if (team == 1)
                 {
