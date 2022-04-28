@@ -27,6 +27,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	public float timer1;
 	public bool started;
 	public bool started1;
+	public bool initialKitchenLocation;
 	public List<int> kickedBy;
 	public GameObject nametag;
 	// Start is called before the first frame update
@@ -58,14 +59,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				myTeam = (int) PhotonNetwork.LocalPlayer.CustomProperties["Team"];
 			}
 
-			if (myTeam == 1)
-			{
-				view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 1);
-			}
-			else 
-			{
-				view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 2);
-			}
+			
 		}
 	
 	}
@@ -77,6 +71,17 @@ public class PlayerVoiceManager : MonoBehaviour
 
 		if (view.IsMine)
 		{
+			if(!initialKitchenLocation && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+				if (myTeam == 1)
+				{
+					view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 1);
+				}
+				else
+				{
+					view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 2);
+				}
+			}
 			if(started == true)
             {
 				Increment();
