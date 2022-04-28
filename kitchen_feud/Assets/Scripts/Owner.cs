@@ -192,6 +192,8 @@ public class Owner : MonoBehaviour
                 {
                     if (team == 1)
                     {
+                        Debug.LogError(player.name);
+
                         if (player.GetComponent<PlayerVoiceManager>().entered1)
                         {
                             if (!following)
@@ -210,8 +212,10 @@ public class Owner : MonoBehaviour
                     }
                     else if (team == 2)
                     {
+                        
                         if (player.GetComponent<PlayerVoiceManager>().entered2)
                         {
+                            Debug.LogError(player.name);
                             if (!following)
                             {
                                 playerToFollow = player;
