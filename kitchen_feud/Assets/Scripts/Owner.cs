@@ -165,21 +165,21 @@ public class Owner : MonoBehaviour
 
                     if (scores.GetScore1() == scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!", localPlayerID);
 
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
                     }
                     else if (scores.GetScore1() > scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!", localPlayerID);
 
                         //Text.text = "We're winning! Keep it up guys!";
 
                     }
                     else if (scores.GetScore1() < scores.GetScore2())
                     {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win", localPlayerID);
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win", localPlayerID);
 
                         //Text.text = "We're losing! We need to stop being lazy and push if we want to win";
 
@@ -269,9 +269,18 @@ public class Owner : MonoBehaviour
                         if (!shouting)
                         {
                             anim.SetBool("IsShouting", true);
-                            PV.RPC("setText", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage", localPlayerID);
+                            if(team == 1)
+                            {
+                                PV.RPC("setText", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage", localPlayerID);
 
-                           // Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
+                            }
+                            else if(team ==2)
+                            {
+                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage", localPlayerID);
+
+                            }
+
+                            // Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
                             StartCoroutine(talking());
                             shouting = true;
                         }
@@ -403,20 +412,27 @@ public class Owner : MonoBehaviour
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
         Debug.LogError("HERE");
-        if(o.team == 1 && pVM.myTeam == 1 && pVM.entered1)
+        if( pVM.myTeam == 1 && pVM.entered1)
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
             o.Owner1.SetActive(true);
             o.Text.text = message;
-        }else if(o.team == 2 &&  pVM.myTeam == 2 && pVM.entered2)
+        } 
+
+    }
+    [PunRPC]
+    void setText2(int viewID, string message, int playerID)
+    {
+        Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
+        PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
+        if ( pVM.myTeam == 2 && pVM.entered2)
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
             o.Owner2.SetActive(true);
             o.Text.text = message;
         }
-
     }
 
 }
