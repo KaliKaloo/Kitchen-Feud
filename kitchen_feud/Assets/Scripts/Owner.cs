@@ -199,11 +199,10 @@ public class Owner : MonoBehaviour
                             if (!following)
                             {
                                 playerToFollow = player;
-                                if (PhotonNetwork.IsMasterClient)
-                                {
+                               
                                     agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                                     //Debug.LogError("SET1");
-                                }
+                                
                                 if (!calledName)
                                 {
                                     Text.text = p.NickName + "!";
@@ -226,11 +225,10 @@ public class Owner : MonoBehaviour
                             if (!following)
                             {
                                 playerToFollow = player;
-                                if (PhotonNetwork.IsMasterClient)
-                                {
+                               
                                     agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                                     //Debug.LogError("SET2");
-                                }
+                               
                                 if (!calledName)
                                 {
                                     Text.text = p.NickName + "!";
