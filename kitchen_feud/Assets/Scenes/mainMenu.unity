@@ -1275,14 +1275,15 @@ MonoBehaviour:
   currentTime: {fileID: 22218673}
   lobbyError: {fileID: 2128544199}
   x: 0
-  vP: {fileID: 496873194}
-  startCutscene: 0
-  cutScene: {fileID: 1430207592}
   roomListContent: {fileID: 1897489681}
   loadingScreen: {fileID: 1504039284}
   loadingBarCanvas: {fileID: 952752601}
   loadingBar: {fileID: 1162276311}
   startedGame: 0
+  cutsceneURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/CutsceneVideo.mp4
+  vP: {fileID: 496873194}
+  startCutscene: 0
+  cutScene: {fileID: 1430207592}
 --- !u!114 &273502801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,7 +2352,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
