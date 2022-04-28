@@ -42,6 +42,7 @@ MonoBehaviour:
   - applianceBool
   - changeLayer
   - clearAll
+  - clearApplPlayers
   - clearItems
   - clearKickedBy
   - clearPlayers
@@ -58,7 +59,6 @@ MonoBehaviour:
   - DisableView
   - doFd
   - enableBack
-  - EnablePforAll
   - EnablePushing
   - EnView
   - falseForOthers
@@ -69,7 +69,7 @@ MonoBehaviour:
   - glowSettings
   - hideFryingUI
   - incrementDoor
-  - loadS
+  - loadSceneP
   - makeTrayAcross
   - onApplianceF
   - onTrayF
@@ -78,6 +78,7 @@ MonoBehaviour:
   - playDing
   - PlayDropSound
   - PlayFireSound
+  - PlayServingSound
   - PlaySmokeBombSound
   - pointSync
   - push
@@ -91,9 +92,11 @@ MonoBehaviour:
   - setAddedF
   - setAgent
   - setAgentF
+  - setAgentName
   - setAppl
   - setCanvActive
   - setDest
+  - setDestF
   - setEntered
   - setEnteredF
   - setFoodVals
@@ -113,6 +116,7 @@ MonoBehaviour:
   - SetParentAsSlot
   - setParentP
   - setParentPlate
+  - setParentTray
   - setPlateStartVals
   - setPlayed
   - setPlayer
@@ -121,6 +125,7 @@ MonoBehaviour:
   - setSignParent
   - setStarted
   - setTeam
+  - setText
   - SetToF
   - SetToFalse
   - SetToTrue
@@ -130,6 +135,7 @@ MonoBehaviour:
   - setUsedF
   - ShowingWithOrderTeam1
   - ShowingWithOrderTeam2
+  - showTickets
   - StopBoilingSound
   - syncAnim
   - syncIsOpened
@@ -143,13 +149,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - PlayServingSound
-  - setDestF
-  - setAgentName
-  - loadSceneP
-  - showTickets
-  - clearApplPlayers
-  - setParentTray
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -688,6 +688,7 @@ MonoBehaviour:
   timer1: 0
   started: 0
   started1: 0
+  initialKitchenLocation: 0
   kickedBy: 
   nametag: {fileID: 0}
 --- !u!114 &4850287822765907785
