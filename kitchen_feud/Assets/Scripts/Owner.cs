@@ -209,7 +209,7 @@ public class Owner : MonoBehaviour
                     {
                         if (team == 1)
                         {
-                            Debug.LogError(player.name);
+                           // Debug.LogError(player.name);
 
                             if (player.GetComponent<PlayerVoiceManager>().entered1)
                             {
@@ -231,14 +231,11 @@ public class Owner : MonoBehaviour
                         }
                         else if (team == 2)
                         {
-                            if (PhotonNetwork.IsMasterClient)
-                            {
-                                Debug.LogError(player.name);
-                            }
+                          
 
                             if (player.GetComponent<PlayerVoiceManager>().entered2)
                             {
-                                Debug.LogError(player.name);
+                               // Debug.LogError(player.name);
                                 if (!following)
                                 {
                                     playerToFollow = player;
@@ -412,7 +409,7 @@ public class Owner : MonoBehaviour
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-        Debug.LogError("HERE");
+      
         if( pVM.myTeam == 1 && pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
         {
             o.keyboard.SetActive(false);
