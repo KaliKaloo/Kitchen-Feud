@@ -326,10 +326,9 @@ public class Owner : MonoBehaviour
 
         if (!agent.hasPath)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
+          
                 agent.SetDestination(ovenDestination);
-            }
+           
         }
 
 
