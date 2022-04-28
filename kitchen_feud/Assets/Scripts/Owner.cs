@@ -159,6 +159,7 @@ public class Owner : MonoBehaviour
                 }
                 if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
                 {
+                    Debug.LogError("Hello");
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                     faceforward = true;
                     anim.SetBool("IsTalking", true);
