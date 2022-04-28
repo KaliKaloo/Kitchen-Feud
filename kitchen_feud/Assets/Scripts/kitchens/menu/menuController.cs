@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
+using UnityEngine.Video;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -30,7 +31,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject settingsButton;
 
     [SerializeField] private GameObject roomListItemPrefab;
-
+    
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
     [SerializeField] private InputField joinGameInput;
@@ -52,17 +53,24 @@ public class menuController : MonoBehaviourPunCallbacks
     private bool calledRejoin = false;
     private bool createLobby = false;
     private bool isDisconnected = false;
+    public VideoPlayer vP;
+
+    public bool startCutscene =false;
+    public GameObject cutScene;
+   
 
     [SerializeField] private Transform roomListContent;
 
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
+    public bool startedGame;
 
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     Hashtable scene = new Hashtable();
+    PhotonView PV;
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     private void Awake()
@@ -72,7 +80,7 @@ public class menuController : MonoBehaviourPunCallbacks
         ResetUserID();*/
       // PlayerPrefs.DeleteAll();
     }
-
+    
     private void SetTeam(int teamNumber)
     {
         customProperties["Team"] = teamNumber;
@@ -101,6 +109,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
@@ -351,28 +360,39 @@ public class menuController : MonoBehaviourPunCallbacks
     }
 
     // Load level once game is started
-    public void StartGame()
+    public void StartScene()
     {
-        // after start button is pressed players can no longer join
-        
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
         // how long player's data is saved after disconnect (60 seconds here)
         PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
 
-        timer.SetServerTime();
+        // after start button is pressed players can no longer join
+        PV.RPC("playVideo", RpcTarget.All, PV.ViewID);
+        /*cutScene.SetActive(true);
+        vP.Play();*/
+     
+    }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
-        {
-            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
+    public void startGame()
+    {
 
-            PhotonNetwork.LoadLevel(1);
-        }
-        // if > 4 players load into a different scene 
-        else 
+        if (PhotonNetwork.IsMasterClient)
         {
-            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+            timer.SetServerTime();
+
+            if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
+            {
+                GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
+
+                PhotonNetwork.LoadLevel(1);
+            }
+            // if > 4 players load into a different scene 
+            else
+            {
+                this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
+            }
         }
     }
 
@@ -520,6 +540,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
             loadingScreen.SetActive(false);
             lobby["Players"] = 1;
+            lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         }
@@ -648,6 +669,13 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (!startLobbyButton.activeSelf)
+            {
+                startLobbyButton.SetActive(true);
+            }
+        }
         UpdateLobby();
    
     }
@@ -669,6 +697,14 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         StartCoroutine(LoadScene());
         //StartCoroutine(LoadSceneAsynchronously(1));
+    }
+    [PunRPC]
+    void playVideo(int viewID)
+    {
+     menuController menuC =   PhotonView.Find(viewID).GetComponent<menuController>();
+        menuC.cutScene.SetActive(true);
+        menuC.vP.Play();
+
     }
    
   

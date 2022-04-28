@@ -150,9 +150,13 @@ MonoBehaviour:
   - showTickets
   - clearApplPlayers
   - setParentTray
+  - SkipCutscene
+  - increment
   - playPS
   - stopPS
   - DisableItemPickable
+  - playVideo
+  - destroyAfterServed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

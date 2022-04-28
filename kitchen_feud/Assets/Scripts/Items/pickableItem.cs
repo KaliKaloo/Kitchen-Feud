@@ -71,6 +71,11 @@ public class pickableItem : Interactable
     {
         Interact();
     }
+    public IEnumerator removeKinematics(GameObject heldObj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
+    }
 
  
 
@@ -79,6 +84,7 @@ public class pickableItem : Interactable
     {
         this.GetComponent<Rigidbody>().useGravity = true;
     }
+
     [PunRPC]
     void setParent(int viewID,int viewID1)
     {
@@ -87,6 +93,7 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        StartCoroutine(removeKinematics(PhotonView.Find(viewID).gameObject));
 
     }
     [PunRPC]
@@ -115,8 +122,8 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).GetComponent<pickableItem>().onTray = true;
         PhotonView.Find(viewID).GetComponent<pickableItem>().Tray = PhotonView.Find(trayID).GetComponent<Tray>().tray;
         PhotonView.Find(viewID).GetComponent<pickableItem>().tray2 = PhotonView.Find(trayID).GetComponent<Tray>();
-
     }
+
     [PunRPC]
     void applianceBool(int viewID,int applianceID, int slotsID)
     {
