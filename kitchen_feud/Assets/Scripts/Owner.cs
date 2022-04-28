@@ -229,8 +229,7 @@ public class Owner : MonoBehaviour
                 }
 
             }
-            Debug.LogError(agent.name);
-            Debug.LogError(playerToFollow.name);
+            
             if (playerToFollow)
             {
                 if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
