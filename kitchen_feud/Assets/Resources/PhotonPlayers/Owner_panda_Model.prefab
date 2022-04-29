@@ -942,6 +942,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   oven: {fileID: 0}
+  collected: 0
+  collecting: 0
   Owner1: {fileID: 0}
   Owner2: {fileID: 0}
   keyboard: {fileID: 0}
