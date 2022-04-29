@@ -1,11 +1,11 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class globalClicked{
+public class globalClicked
+{
     public static bool clicked = false;
 
     public static bool applianceInteract = false;
@@ -13,7 +13,7 @@ public class globalClicked{
     public static bool enterEnemyKitchen = false;
 
 }
-/*
+
 public class MovingInstructions : MonoBehaviour
 {
     public TextMeshProUGUI Text;
@@ -33,7 +33,7 @@ public class MovingInstructions : MonoBehaviour
     {
         Text.text = "Welcome! You can now move around using WASD or Arrow Keys!";
         timer = time;
-   
+
     }
 
     void Update()
@@ -42,50 +42,53 @@ public class MovingInstructions : MonoBehaviour
         {
             LocalPlayer = GameObject.Find("Local");
         }
-        if (Text.text == "Welcome! You can now move around using WASD or Arrow Keys!" && (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
+        if (Text.text == "Welcome! You can now move around using WASD or Arrow Keys!" && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
             || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
         {
             Text.text = "Nice! Feel free look up and down by holding right click and dragging";
-            
+
         }
         else if (Text.text == "Nice! Feel free look up and down by holding right click and dragging" && Input.GetMouseButtonDown(1))
         {
             Text.text = "Brilliant! You can also pick up items inside the subrooms using left click!";
 
         }
-        
+
         else if (Text.text == "Brilliant! You can also pick up items inside the subrooms using left click!" &&
-            LocalPlayer.transform.GetChild(2).childCount != 0) {
+            LocalPlayer.transform.GetChild(2).childCount != 0)
+        {
             Text.text = "Nicely Done! You can drop items by clicking again anywhere";
 
 
 
-        }else if (Text.text == "Nicely Done! You can drop items by clicking again anywhere" &&
-            LocalPlayer.transform.GetChild(2).childCount == 0)
+        }
+        else if (Text.text == "Nicely Done! You can drop items by clicking again anywhere" &&
+           LocalPlayer.transform.GetChild(2).childCount == 0)
         {
             Text.text = "Click on the dishes on the top left tickets to see the recipe";
-            
+
         }
-       
+
         else if (Text.text == "Click on the dishes on the top left tickets to see the recipe" &&
             globalClicked.clicked)
         {
             Text.text = "The colours on the recipe card match the subrooms. It's where the ingredients are located. Collect the first ingredient and put them on the glowing appliance";
         }
-        else if (Text.text == "The colours on the recipe card match the subrooms. It's where the ingredients are located. Collect the first ingredient and put them on the glowing appliance" && globalClicked.applianceInteract )
+        else if (Text.text == "The colours on the recipe card match the subrooms. It's where the ingredients are located. Collect the first ingredient and put them on the glowing appliance" && globalClicked.applianceInteract)
         {
             Text.text = "Great, now collect the other ingredients and click on the appliance again to start cooking!";
         }
-        else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).childCount == 1 )
+        else if (Text.text == "Great, now collect the other ingredients and click on the appliance again to start cooking!" && LocalPlayer.transform.GetChild(2).childCount == 1)
         {
-            if(LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish")){
+            if (LocalPlayer.transform.GetChild(2).GetChild(0).CompareTag("Dish"))
+            {
 
                 Text.text = "Put the dish on the white tray that has the correct order number. Then click on the tray to serve, or make more dishes";
             }
-            
+
         }
         // final initial instruction
-        else if (Text.text == "Put the dish on the white tray that has the correct order number. Then click on the tray to serve, or make more dishes" &&  globalClicked.trayInteract)
+        else if (Text.text == "Put the dish on the white tray that has the correct order number. Then click on the tray to serve, or make more dishes" && globalClicked.trayInteract)
         {
             Text.text = "Remember that you're against another resturant. You can go to their kitchen and sabotage them!";
             InitializeTimer();
@@ -100,7 +103,7 @@ public class MovingInstructions : MonoBehaviour
 
             InitializeTimer();
             started = true;
-           
+
         }
 
         if (started == true)
@@ -111,13 +114,13 @@ public class MovingInstructions : MonoBehaviour
             if (timer < 0)
             {
                 started = false;
-                Text.text ="";  
+                Text.text = "";
             }
-            
+
         }
 
     }
-   
+
     public void Decrement()
     {
         timer -= Time.deltaTime;
@@ -159,4 +162,3 @@ public class MovingInstructions : MonoBehaviour
     }
 
 }
-*/

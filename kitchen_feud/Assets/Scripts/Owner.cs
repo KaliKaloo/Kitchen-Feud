@@ -195,7 +195,7 @@ public class Owner : MonoBehaviour
                     anim.SetBool("IsTalking", false);
                 }
             }
-            if (timer.GetLocalTime() == 280)
+            if (timer.GetLocalTime() == timer.GetLocalTime()/2 - 30)
             {
                 shout = true;
             }
