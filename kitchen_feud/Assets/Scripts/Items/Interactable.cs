@@ -20,7 +20,8 @@ public class Interactable : MonoBehaviour
 
 	//cursor changing on hover
 	public void OnMouseEnter(){
-       MouseControl.instance.Clickable();
+		if (MouseControl.instance)
+       		MouseControl.instance.Clickable();
     }
     
     public void OnMouseExit(){

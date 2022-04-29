@@ -18,7 +18,6 @@ public class TrayTests : PhotonTestSetup
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        
         mushroom = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "mushroom"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         potato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "potato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         chips = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Chips"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
@@ -71,6 +70,7 @@ public class TrayTests : PhotonTestSetup
         tray.tray.objectsOnTray.Remove(mushroom);
         mushroom.transform.parent = null;
         tray.tray.ServingTray.Clear();
+        playerHold.heldObj.GetComponent<pickableItem>().onTray=false;
         yield return null;
     }
 
