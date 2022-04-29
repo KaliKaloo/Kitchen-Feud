@@ -64,8 +64,8 @@ public class Spawner : MonoBehaviour
         else if (team2Background.activeSelf)
             parentCanvas = team2Background;
 
-        stoveMinigameCounter.StartGame();
         StoveMinigameCounter.ResetCounters();
+        stoveMinigameCounter.StartGame();
         
         //instructions.SetActive(false);
         startButton.SetActive(false);

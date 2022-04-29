@@ -32,6 +32,7 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started1;
 	public List<int> kickedBy;
 	public GameObject nametag;
+	public bool inMinigame;
 	public float pitchMin, pitchMax, volumeMin, volumeMax;
 	Transform damageVignette;
     // private Vignette vg; 
@@ -119,7 +120,7 @@ public class PlayerVoiceManager : MonoBehaviour
 					if (obj != null)
 					{
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
-							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
+							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam && !obj.GetComponent<PlayerVoiceManager>().inMinigame)
 						{
 							view.RPC("setStarted", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 1);
 							view.RPC("resetTimer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
@@ -294,7 +295,7 @@ public class PlayerVoiceManager : MonoBehaviour
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
-		rb.AddForce(direction * 0.3f, ForceMode.Impulse);
+		rb.AddForce(direction * 2, ForceMode.Impulse);
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)
@@ -331,5 +332,15 @@ public class PlayerVoiceManager : MonoBehaviour
 			PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0)
 				.GetComponentInChildren<TextMeshProUGUI>().text = name;
 		}
+	}
+	[PunRPC]
+	void setInMinigame(int viewID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = true;
+    }
+	[PunRPC]
+	void setInMinigameF(int viewID)
+	{
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = false;
 	}
 }

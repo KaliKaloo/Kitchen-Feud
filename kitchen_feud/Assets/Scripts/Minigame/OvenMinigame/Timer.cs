@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
     public exitOven backbutton;
     public GameObject sabotageButton;
     string applianceName;
+    private bool parentAssigned;
     public GameObject Team1Image;
     public GameObject Team2Image;
     PhotonRoom room;
@@ -29,31 +30,21 @@ public class Timer : MonoBehaviour
         // start scores at 0
        
         // start timer if not started yet
-        InitializeTimer();
-        timerText.text = ConvertSecondToMinutes(GetTime());
-        applianceName = transform.parent.name;
-
-        if(applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2){
-            sabotageButton.SetActive(true);
-
-        }
-        else if (applianceName == "Oven2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1){
-            sabotageButton.SetActive(true);
-            GameObject.FindGameObjectWithTag("Team1Oven");
-        }
-
-        if (applianceName == "Oven1")
-        {
-            Team1Image.SetActive(true);
-        }else if (applianceName == "Oven2")
-        {
-            Team2Image.SetActive(true);
-        }
+        
+        
     }
 
     void Update()
     {
-  
+
+        if (!parentAssigned && transform.parent) {
+
+            InitialiseCanvas();
+            InitializeTimer();
+            timerText.text = ConvertSecondToMinutes(GetTime());
+        }
+
+
         if (score < 0)
         {
             score = 0;
@@ -161,6 +152,32 @@ public class Timer : MonoBehaviour
     public void addSeconds(){
         GetComponent<PhotonView>().RPC("addSecondsRPC", RpcTarget.All, GetComponent<PhotonView>().ViewID);
    }
+    public void InitialiseCanvas()
+    {
+        applianceName = transform.parent.name;
+        
+
+        if (applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
+        {
+            sabotageButton.SetActive(true);
+
+        }
+        else if (applianceName == "Oven2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
+        {
+            sabotageButton.SetActive(true);
+            GameObject.FindGameObjectWithTag("Team1Oven");
+        }
+
+        if (applianceName == "Oven1")
+        {
+            Team1Image.SetActive(true);
+        }
+        else if (applianceName == "Oven2")
+        {
+            Team2Image.SetActive(true);
+        }
+        parentAssigned = true;
+    }
 
    [PunRPC]
    void addSecondsRPC(int viewID){
