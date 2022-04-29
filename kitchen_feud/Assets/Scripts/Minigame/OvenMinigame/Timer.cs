@@ -32,6 +32,8 @@ public class Timer : MonoBehaviour
         InitializeTimer();
         timerText.text = ConvertSecondToMinutes(GetTime());
         applianceName = transform.parent.name;
+        Debug.Log(transform.parent);
+        Debug.Log(transform.parent.name);
 
         if(applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2){
             sabotageButton.SetActive(true);
@@ -53,7 +55,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-  
+        Debug.Log(transform.parent.name);
         if (score < 0)
         {
             score = 0;
