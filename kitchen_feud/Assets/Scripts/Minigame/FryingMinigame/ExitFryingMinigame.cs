@@ -36,7 +36,7 @@ public class ExitFryingMinigame : MonoBehaviour
 		// stop cooking animation
 		playerAnimator.animator.SetBool("IsCooking", false);
 	    GameObject gamePlayer = GameObject.Find("Local");
-	    
+		gamePlayer.GetComponent<PlayerVoiceManager>().inMinigame = false;
 
 		if (appliance)
 	    {

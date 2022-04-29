@@ -22,6 +22,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 
 	void TaskOnClick(){
 		GameObject gamePlayer = GameObject.Find("Local");
+		gamePlayer.GetComponent<PlayerVoiceManager>().inMinigame = false;
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 

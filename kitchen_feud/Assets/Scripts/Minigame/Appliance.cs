@@ -137,6 +137,7 @@ public class Appliance : Interactable
                         //canvas.gameObject.SetActive(false);
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
                             new Vector3(0, 0, 0), transform.rotation);
+                        player.GetComponent<PlayerVoiceManager>().inMinigame = true;
 
                         UIcamera.enabled = true;
                         playerController = player.GetComponent<PlayerController>();
@@ -161,6 +162,7 @@ public class Appliance : Interactable
                     {
                         
                         minigameCanvas2.SetActive(true);
+                        player.GetComponent<PlayerVoiceManager>().inMinigame = true;
                         myPv.RPC("hideFryingUI",RpcTarget.AllBuffered,minigameCanvas2.GetPhotonView().ViewID);
                         
                         canvas.SetActive(false);
@@ -190,6 +192,7 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    player.GetComponent<PlayerVoiceManager>().inMinigame = true;
                     
                     //SOUND -------------------------------------------------------
                     
