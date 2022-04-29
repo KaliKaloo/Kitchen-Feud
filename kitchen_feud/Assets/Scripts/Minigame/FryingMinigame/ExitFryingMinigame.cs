@@ -37,7 +37,7 @@ public class ExitFryingMinigame : MonoBehaviour
 		playerAnimator.animator.SetBool("IsCooking", false);
 	    GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
-		playerV.RPC("setInMinigame", RpcTarget.All, playerV.ViewID);
+		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
 
 		
 

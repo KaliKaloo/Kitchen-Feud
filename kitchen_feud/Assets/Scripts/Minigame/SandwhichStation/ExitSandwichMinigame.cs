@@ -27,7 +27,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 	{
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
-		playerV.RPC("setInMinigame", RpcTarget.All, playerV.ViewID);
+		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
