@@ -150,6 +150,7 @@ public class TrayTests : PhotonTestSetup
         tray.tray.objectsOnTray.Remove(mushroom);
         tray.tray.objectsOnTray.Remove(potato);
         tray.tray.objectsOnTray.Remove(chips);
+        tray.tray.objectsOnTray.Remove(pancakes);
         mushroom.transform.parent = null;
         potato.transform.parent = null;
         chips.transform.parent = null;
@@ -174,7 +175,6 @@ public class TrayTests : PhotonTestSetup
         mushroom.GetComponent<pickableItem>().Interact();
         Assert.AreEqual(0, tray.slots[0].transform.childCount);
         Assert.AreEqual(0, tray.tray.ServingTray.Count);
-        tray.tray.objectsOnTray.Remove(mushroom);
         mushroom.transform.parent = null;
         tray.tray.ServingTray.Clear();
         yield return null;
