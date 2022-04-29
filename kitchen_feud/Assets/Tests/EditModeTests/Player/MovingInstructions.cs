@@ -1,6 +1,6 @@
 /*
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -31,7 +31,7 @@ public class MovingInstructionsTests
     public void InitializeTimer()
     {
         movingInstructions.InitializeTimer();
-        Assert.AreEqual(13f, movingInstructions.timer);
+        Assert.AreEqual(4f, movingInstructions.timer);
     }
 
    

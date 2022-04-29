@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
 
     // SET TIMER HERE !!!!!!
     private static int time = 40;
-    public Text timerText;
+    public TextMeshProUGUI timerText;
     public float timer = time;
     private float timerFake = time;
     public int score = 0;
@@ -52,6 +53,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+  
         if (score < 0)
         {
             score = 0;

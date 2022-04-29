@@ -1211,6 +1211,10 @@ MonoBehaviour:
   initialKitchenLocation: 0
   kickedBy: 
   nametag: {fileID: 0}
+  pitchMin: 0
+  pitchMax: 0
+  volumeMin: 0
+  volumeMax: 0
 --- !u!114 &6824572492517137435
 MonoBehaviour:
   m_ObjectHideFlags: 0

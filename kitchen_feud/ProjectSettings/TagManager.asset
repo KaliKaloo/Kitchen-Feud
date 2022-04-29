@@ -38,6 +38,8 @@ TagManager:
   - Customer1
   - Owner1
   - Owner2
+  - FryingBackground1
+  - FryingBackground2
   layers:
   - Default
   - TransparentFX
@@ -54,7 +56,6 @@ TagManager:
   - 
   - Walls
   - door
-  - 
   - 
   - 
   - 

@@ -2,9 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using TMPro;
+
+
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
@@ -30,15 +33,25 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool initialKitchenLocation;
 	public List<int> kickedBy;
 	public GameObject nametag;
+	public float pitchMin, pitchMax, volumeMin, volumeMax;
+	Transform damageVignette;
+    // private Vignette vg; 
 	// Start is called before the first frame update
 	void Start()
 	{
+		pitchMin = 0.5f;
+		pitchMax = 3f;
+		volumeMin = 0.7f;
+		volumeMax = 1f;
 		entered1 = false;
 		entered2 = false;
 		started = false;
 		started1 = false;
 		view = GetComponent<PhotonView>();
 		myC = 1;
+
+		damageVignette = GameObject.Find("PostProcessing Group").transform.GetChild(2);
+
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -125,7 +138,8 @@ public class PlayerVoiceManager : MonoBehaviour
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setHBParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
+
+								view.RPC("setHBParent", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
 							}
 							else
 							{
@@ -169,6 +183,12 @@ public class PlayerVoiceManager : MonoBehaviour
 		timer += Time.deltaTime;
 			
     }
+
+	IEnumerator HurtFlash(GameObject vg){
+		vg.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		vg.SetActive(false);
+	}
 	
 	[PunRPC]
 	void setHBParent(int viewID, int hBviewID)
@@ -191,10 +211,19 @@ public class PlayerVoiceManager : MonoBehaviour
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 		if (x == 0)
 		{
+			GameObject vg = obj.GetComponent<PlayerVoiceManager>().damageVignette.gameObject;
+			if (obj.GetComponent<PhotonView>().IsMine)
+			{
+				StartCoroutine(HurtFlash(vg));
+			}
+
 			//SOUND ------------------------------------------------
+			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
+			obj.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
 			obj.GetComponent<AudioSource>().Play();
 			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
+			
         }
         else
         {

@@ -150,6 +150,20 @@ MonoBehaviour:
   - UpdateScore2
   - UpdateTimer
   - setText2
+  - PlayServingSound
+  - setDestF
+  - setAgentName
+  - loadSceneP
+  - showTickets
+  - clearApplPlayers
+  - setParentTray
+  - SkipCutscene
+  - increment
+  - playPS
+  - stopPS
+  - DisableItemPickable
+  - playVideo
+  - destroyAfterServed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

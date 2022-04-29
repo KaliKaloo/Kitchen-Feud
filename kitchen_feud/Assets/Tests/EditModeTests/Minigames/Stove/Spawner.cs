@@ -39,7 +39,6 @@ public class SpawnerTests
     {
         spawner.StartGame();
 
-        Assert.IsFalse(spawner.instructions.activeSelf);
         Assert.IsFalse(spawner.startButton.activeSelf);
         Assert.AreEqual(0, spawner.newIngredients.Count);
         Assert.AreEqual(new List<Sprite>(){}, spawner.newIngredients);
@@ -56,7 +55,6 @@ public class SpawnerTests
 
         spawner.StartGame();
 
-        Assert.IsFalse(spawner.instructions.activeSelf);
         Assert.IsFalse(spawner.startButton.activeSelf);
         Assert.AreEqual(2, spawner.newIngredients.Count);
         Assert.AreEqual(ingredient1, spawner.newIngredients);
