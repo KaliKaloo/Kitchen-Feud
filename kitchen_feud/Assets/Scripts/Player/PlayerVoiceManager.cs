@@ -290,7 +290,6 @@ public class PlayerVoiceManager : MonoBehaviour
 	[PunRPC]
 	void push(int objID, int myID)
 	{
-		Debug.LogError("TEST");
 		GameObject obj = PhotonView.Find(objID).gameObject;
 		GameObject me = PhotonView.Find(myID).gameObject;
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
