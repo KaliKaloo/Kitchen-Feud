@@ -43,7 +43,6 @@ public class Timer : MonoBehaviour
             InitializeTimer();
             timerText.text = ConvertSecondToMinutes(GetTime());
         }
-        Debug.Log(transform.parent.name);
 
 
         if (score < 0)

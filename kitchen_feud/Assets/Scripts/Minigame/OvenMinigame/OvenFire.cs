@@ -15,13 +15,13 @@ public class OvenFire : MonoBehaviour
     void Start()
     {
         
-        PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
     }
 
     void Update()
     {
         if (!hasParent && transform.parent)
         {
+            PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
             fireSound = transform.parent.GetComponentInChildren<AudioSource>();
             hasParent = true;
         }
