@@ -334,4 +334,14 @@ public class PlayerVoiceManager : MonoBehaviour
 				.GetComponentInChildren<TextMeshProUGUI>().text = name;
 		}
 	}
+	[PunRPC]
+	void setInMinigame(int viewID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = true;
+    }
+	[PunRPC]
+	void setInMinigameF(int viewID)
+	{
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = false;
+	}
 }
