@@ -604,7 +604,6 @@ MonoBehaviour:
   mouse: {fileID: 0}
   playerToFollow: {fileID: 0}
   Text: {fileID: 0}
-  writer: {fileID: 0}
   shout: 0
   PV: {fileID: 0}
 --- !u!1 &1085704102467656990
