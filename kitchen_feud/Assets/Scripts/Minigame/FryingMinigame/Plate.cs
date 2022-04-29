@@ -48,7 +48,7 @@ public class Plate : MonoBehaviour
                 Vector3 EndPos = transform.parent.Find("End").transform.position;
                 if (!(transform.position.x < EndPos.x))
                 {
-                    if (Input.GetKey(KeyCode.LeftArrow))
+                    if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                     {
                         transform.Translate(Vector3.left * 10 * 50 * Time.deltaTime);
                     };
@@ -57,7 +57,7 @@ public class Plate : MonoBehaviour
                 float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
                 if (platePos.x < panPos.x)
                 {
-                    if (Input.GetKey(KeyCode.RightArrow))
+                    if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                     {
                         transform.Translate(Vector3.right * 10 * 50 * Time.deltaTime);
   
