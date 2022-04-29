@@ -128,12 +128,12 @@ public class playerMvmt : MonoBehaviour
                 playerBody.Rotate(Vector3.up*mouseX);
 
             }
-            else if (Input.GetKey(KeyCode.Z))
+            else if (Input.GetKey(KeyCode.Q))
             {
 
                 Cursor.lockState = CursorLockMode.Locked;
-                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+                float mouseX = rotatespeed * Time.deltaTime;
+                float mouseY =  rotatespeed * Time.deltaTime;
                 //xRotation -= mouseY;
                 xRotation -= rotatespeed * Time.deltaTime;
                 //xRotation = Mathf.Clamp(xRotation, -90f, 48f);
@@ -142,12 +142,12 @@ public class playerMvmt : MonoBehaviour
                 playerBody.Rotate(Vector3.up*mouseX);
 
             }
-            else if (Input.GetKey(KeyCode.C))
+            else if (Input.GetKey(KeyCode.E))
             {
 
                 Cursor.lockState = CursorLockMode.Locked;
-                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
+                float mouseX =  rotatespeed * Time.deltaTime;
+                float mouseY =  rotatespeed * Time.deltaTime;
                 //xRotation -= mouseY;
                 xRotation += rotatespeed * Time.deltaTime;
                 //xRotation = Mathf.Clamp(xRotation, -90f, 48f);

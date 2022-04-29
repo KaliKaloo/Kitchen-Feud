@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					// -------------------------------------------------------------------------
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Q) && player.transform.Find("slot").GetChild(0) ){
+			else if (Input.GetKeyDown(KeyCode.F) && player.transform.Find("slot").GetChild(0) ){
 				Transform fireExtinguisher = player.transform.Find("slot").GetChild(0);
 				ParticleSystem fire_ps = fireExtinguisher.GetComponentInChildren<ParticleSystem>();
 				PhotonView firePV = fireExtinguisher.GetComponent<PhotonView>();
