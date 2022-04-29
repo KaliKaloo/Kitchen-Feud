@@ -113,7 +113,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 40))
+				if (Physics.Raycast(ray, out hit, 5))
 				{
 					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
@@ -293,9 +293,12 @@ public class PlayerVoiceManager : MonoBehaviour
 		GameObject obj = PhotonView.Find(objID).gameObject;
 		GameObject me = PhotonView.Find(myID).gameObject;
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
-		Vector3 direction = obj.transform.position - me.transform.position;
-		direction.y = 0;
-		rb.AddForce(direction * 2, ForceMode.Impulse);
+		if (obj.GetComponent<PhotonView>().IsMine)
+		{
+			Vector3 direction = obj.transform.position - me.transform.position;
+			direction.y = 0;
+			rb.AddForce(direction * 3, ForceMode.Impulse);
+		}
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)

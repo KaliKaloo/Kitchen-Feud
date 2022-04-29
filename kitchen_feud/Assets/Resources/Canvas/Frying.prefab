@@ -1853,10 +1853,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Waiting for another player ...
+  m_text: 'Player one needs to move the mouse side to side to flip the dish. Player
+    Two can use the a and d keys to catch the dish. Flipping the dish when the bar
+    is in the middle will gain the most points.
 
-    Move the mouse to flip the food in
-    the pan. your partner will move the plate to catch it'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8331a6bffbe46bd4b8f7dd5df60d2fb6, type: 2}
   m_sharedMaterial: {fileID: 7282593155963796301, guid: 8331a6bffbe46bd4b8f7dd5df60d2fb6, type: 2}
@@ -1886,9 +1887,9 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 12
-  m_fontSizeMax: 45
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
