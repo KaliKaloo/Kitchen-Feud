@@ -289,12 +289,13 @@ public class PlayerVoiceManager : MonoBehaviour
 	[PunRPC]
 	void push(int objID, int myID)
 	{
+		Debug.LogError("TEST");
 		GameObject obj = PhotonView.Find(objID).gameObject;
 		GameObject me = PhotonView.Find(myID).gameObject;
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
-		rb.AddForce(direction * 100, ForceMode.Impulse);
+		rb.AddForce(direction * 1000, ForceMode.Impulse);
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)
