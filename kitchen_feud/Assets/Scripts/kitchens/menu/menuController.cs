@@ -53,11 +53,6 @@ public class menuController : MonoBehaviourPunCallbacks
     private bool calledRejoin = false;
     private bool createLobby = false;
     private bool isDisconnected = false;
-    public VideoPlayer vP;
-
-    public bool startCutscene =false;
-    public GameObject cutScene;
-   
 
     [SerializeField] private Transform roomListContent;
 
@@ -72,6 +67,13 @@ public class menuController : MonoBehaviourPunCallbacks
     Hashtable scene = new Hashtable();
     PhotonView PV;
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
+
+    
+    [Header("VideoController")]
+    public string cutsceneURL;
+    public VideoPlayer vP;
+    public bool startCutscene =false;
+    public GameObject cutScene;
 
     private void Awake()
     {
@@ -110,6 +112,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void Start()
     {
         PV = GetComponent<PhotonView>();
+        vP.url = cutsceneURL;
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
@@ -362,6 +365,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // Load level once game is started
     public void StartScene()
     {
+        lobbyMenu.SetActive(false);
+
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
 
@@ -370,8 +375,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
         // after start button is pressed players can no longer join
         PV.RPC("playVideo", RpcTarget.All, PV.ViewID);
-        /*cutScene.SetActive(true);
-        vP.Play();*/
      
     }
 
