@@ -55,7 +55,6 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(transform.parent.name);
         if (score < 0)
         {
             score = 0;
