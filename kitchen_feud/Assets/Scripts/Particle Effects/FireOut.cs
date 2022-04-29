@@ -13,7 +13,6 @@ public class FireOut : MonoBehaviour {
     private ParticleSystem.EmissionModule fireEmission;
     private bool notFound = false;
     private float currentEmission = 0;
-    public float startEmission;
     [SerializeField] private float fadeRate = 1;
 
     // Use this for initialization
@@ -35,7 +34,7 @@ public class FireOut : MonoBehaviour {
     }
 
 	void Update () {
-        fireEmission.rateOverTime = startEmission;
+
         // if no particle system, do nothing
         if (notFound)
             return;
@@ -54,6 +53,11 @@ public class FireOut : MonoBehaviour {
         }
 	}
 
+    public void resetEmission(){
+        fireEmission.rateOverTime = 10;
+        currentEmission = fireEmission.rateOverTime.constant;
+
+    }
 
     private void OnParticleCollision(GameObject other)
     {

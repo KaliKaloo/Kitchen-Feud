@@ -29,11 +29,11 @@ public class OvenFire : MonoBehaviour
         if(!startFire){
             if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
-                        if(p.GetComponent<FireOut>()){
-                            fireOut = p.GetComponent<FireOut>();
-                            fireOut.startEmission = 10;
-                            fireOut.enabled=true;
-                        }
+                    if(p.GetComponent<FireOut>()){
+                        fireOut = p.GetComponent<FireOut>();
+                        fireOut.resetEmission();
+                        fireOut.enabled=true;
+                    }
                     p.Play();
                 }
                 //SOUND -------------------------------------------
