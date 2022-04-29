@@ -18,6 +18,10 @@ public class ExitStoveMinigame : MonoBehaviour
 	[SerializeField] private Text score;
 	[SerializeField] private GameObject instructions;
 
+	[SerializeField] private GameObject background1;
+	[SerializeField] private GameObject background2;
+
+
 	public Appliance appliance;
 	StoveScore stoveScore = new StoveScore();
 	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
@@ -47,6 +51,12 @@ public class ExitStoveMinigame : MonoBehaviour
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
+		// Reset Counters
+		StoveMinigameCounter.ResetCounters();
+
+		// Destroy remaining prefabs
+		DestroyRemaining();
+		
 		backButton.SetActive(false);
 		startButton.SetActive(true);
 		instructions.SetActive(true);
@@ -73,5 +83,22 @@ public class ExitStoveMinigame : MonoBehaviour
 		appliance.UIcamera.enabled = false;
 		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 
+	}
+
+	private void DestroyRemaining()
+    {
+		GameObject currentBackground;
+
+		// gets corresponding background
+		if (background1.activeSelf)
+			currentBackground = background1;
+		else
+			currentBackground = background2;
+
+		// destroy game objects of background
+		for (var i = currentBackground.transform.childCount - 1; i >= 0; i--)
+		{
+			Object.Destroy(currentBackground.transform.GetChild(i).gameObject);
+		}
 	}
 }
