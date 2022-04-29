@@ -45,13 +45,13 @@ public class Agent : MonoBehaviour
 
                 if (!agent.hasPath)
                 {
-                    agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 1));
+                    agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 2));
                 }
         
                 
 
                 if (agent.remainingDistance != Mathf.Infinity  && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 && 
-                    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 3)
+                    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 4)
                 {
                     
                         agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
