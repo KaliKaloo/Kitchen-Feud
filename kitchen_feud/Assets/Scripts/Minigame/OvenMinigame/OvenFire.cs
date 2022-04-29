@@ -5,21 +5,26 @@ using Photon.Pun;
 
 public class OvenFire : MonoBehaviour
 {
-    Timer timer;
+    public Timer timer;
     public bool startFire = false;
     ParticleSystem[] PS;
     public AudioSource fireSound;
     public FireOut fireOut;
+    private bool hasParent;
 
     void Start()
     {
-        fireSound = transform.parent.GetComponentInChildren<AudioSource>();
-        timer = transform.GetComponent<Timer>();
+        
         PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
     }
 
     void Update()
     {
+        if (!hasParent && transform.parent)
+        {
+            fireSound = transform.parent.GetComponentInChildren<AudioSource>();
+            hasParent = true;
+        }
         //and condition if temperature is too high
         if(!startFire){
             if(timer.timer < -5){
