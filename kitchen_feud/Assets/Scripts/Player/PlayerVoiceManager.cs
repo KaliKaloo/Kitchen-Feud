@@ -113,7 +113,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 2))
+				if (Physics.Raycast(ray, out hit, 5))
 				{
 					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
@@ -297,7 +297,7 @@ public class PlayerVoiceManager : MonoBehaviour
 		{
 			Vector3 direction = obj.transform.position - me.transform.position;
 			direction.y = 0;
-			rb.AddForce(direction * 2, ForceMode.Impulse);
+			rb.AddForce(direction * 3, ForceMode.Impulse);
 		}
 	}
 	[PunRPC]
