@@ -296,7 +296,7 @@ public class PlayerVoiceManager : MonoBehaviour
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
 		Vector3 direction = obj.transform.position - me.transform.position;
 		direction.y = 0;
-		rb.AddForce(direction * 30, ForceMode.Impulse);
+		rb.AddForce(direction * 5, ForceMode.Impulse);
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)
