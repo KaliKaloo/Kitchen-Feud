@@ -113,7 +113,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 40))
+				if (Physics.Raycast(ray, out hit, 2))
 				{
 					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
