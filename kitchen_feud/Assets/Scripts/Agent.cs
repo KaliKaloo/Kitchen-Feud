@@ -34,7 +34,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PV.IsMine)
+        if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
            
             float dist = RemainingDistance(agent.path.corners);
