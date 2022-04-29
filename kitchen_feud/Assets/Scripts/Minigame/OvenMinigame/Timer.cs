@@ -36,6 +36,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+
         if (!parentAssigned && transform.parent) {
 
             InitialiseCanvas();
@@ -43,6 +44,8 @@ public class Timer : MonoBehaviour
             timerText.text = ConvertSecondToMinutes(GetTime());
         }
         Debug.Log(transform.parent.name);
+
+
         if (score < 0)
         {
             score = 0;
