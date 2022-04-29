@@ -10,4 +10,9 @@ public class MinigameHolder : MonoBehaviour
     void PlayFireSound(int viewID) {
         PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Play();
     }
+
+    [PunRPC]
+    void StopFireSound(int viewID) {
+        PhotonView.Find(viewID).gameObject.GetComponent<AudioSource>().Stop();
+    }
 }

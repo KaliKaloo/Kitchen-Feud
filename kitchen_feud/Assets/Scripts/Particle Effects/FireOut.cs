@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FireOut : MonoBehaviour {
     private ParticleSystem[] PS;
@@ -14,6 +15,7 @@ public class FireOut : MonoBehaviour {
     private bool notFound = false;
     private float currentEmission = 0;
     [SerializeField] private float fadeRate = 1;
+    public AudioSource fireSound;
 
     // Use this for initialization
     void Start()
@@ -48,6 +50,9 @@ public class FireOut : MonoBehaviour {
                     p.Stop();
                 }
             }
+            //SOUND -------------------------------------------
+            fireSound.gameObject.GetComponent<PhotonView>().RPC("StopFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
+            //-------------------------------------------------
             this.enabled = false;
         
         }
