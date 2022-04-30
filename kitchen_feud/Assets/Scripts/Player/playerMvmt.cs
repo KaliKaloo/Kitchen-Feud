@@ -129,10 +129,8 @@ public class playerMvmt : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.Q))
             {
-
                 float rotation = rotatespeed * Time.deltaTime;
-                xRotation += rotation;
-                transform.localRotation = Quaternion.Euler(0f, -xRotation, 0f);
+                xRotation -= rotation;
                 playerBody.Rotate(-Vector3.up*rotation);
 
             }
@@ -140,9 +138,7 @@ public class playerMvmt : MonoBehaviour
             {
                 float rotation = rotatespeed * Time.deltaTime;
                 xRotation += rotation;
-                transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
                 playerBody.Rotate(Vector3.up*rotation);
-
             }
             else
             {
