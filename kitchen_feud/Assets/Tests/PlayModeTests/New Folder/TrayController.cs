@@ -92,62 +92,62 @@ public class TrayControllerTests : PhotonTestSetup
     }
 
 
-    //[Test]
-    //public void resetMakeAllTrays()
-    //{
-    //    tray1.GetComponent<Tray>().tray.trayID = "tray1";
-    //    tray2.GetComponent<Tray>().tray.trayID = "tray2";
-    //    tray3.GetComponent<Tray>().tray.trayID = "tray3";
+    [Test]
+    public void resetMakeAllTrays()
+    {
+        tray1.GetComponent<Tray>().tray.trayID = "tray1";
+        tray2.GetComponent<Tray>().tray.trayID = "tray2";
+        tray3.GetComponent<Tray>().tray.trayID = "tray3";
        
-    //    trayController.resetTray(trayController.trays[0].GetComponent<Tray>());
-    //    trayController.resetTray(trayController.trays[1].GetComponent<Tray>());
-    //    trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
-    //    Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    //    trayController.makeTray("order 1");
-    //    Assert.AreEqual("order 1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    //}
+        trayController.resetTray(trayController.trays[0].GetComponent<Tray>());
+        trayController.resetTray(trayController.trays[1].GetComponent<Tray>());
+        trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
+        Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+        trayController.makeTray("order 1");
+        Assert.AreEqual("order 1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+    }
 
 
-    //[Test]
-    //public void resetSomeMakeTrays()
-    //{
-    //    tray1.GetComponent<Tray>().tray.trayID = "tray1";
-    //    tray2.GetComponent<Tray>().tray.trayID = "tray2";
-    //    tray3.GetComponent<Tray>().tray.trayID = "tray3";
-    //    trayController.resetTray(trayController.trays[1].GetComponent<Tray>());
-    //    trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
-    //    Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    //    trayController.makeTray("order 1");
-    //    trayController.makeTray("order 2");
-    //    Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("order 2", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    //}
+    [Test]
+    public void resetSomeMakeTrays()
+    {
+        tray1.GetComponent<Tray>().tray.trayID = "tray1";
+        tray2.GetComponent<Tray>().tray.trayID = "tray2";
+        tray3.GetComponent<Tray>().tray.trayID = "tray3";
+        trayController.resetTray(trayController.trays[1].GetComponent<Tray>());
+        trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
+        Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+        trayController.makeTray("order 1");
+        trayController.makeTray("order 2");
+        Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("order 2", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+    }
 
-    //[Test]
-    //public void makeResetTrays()
-    //{
-    //    tray1.GetComponent<Tray>().tray.trayID = "tray1";
-    //    tray2.GetComponent<Tray>().tray.trayID = "";
-    //    tray3.GetComponent<Tray>().tray.trayID = "";
-    //    trayController.makeTray("order 1");
-    //    trayController.makeTray("order 2");
-    //    Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("order 2", trayController.trays[2].GetComponent<Tray>().tray.trayID);
-    //    trayController.resetTray(trayController.trays[0].GetComponent<Tray>());
-    //    trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
-    //    Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
-    //    Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+    [Test]
+    public void makeResetTrays()
+    {
+        tray1.GetComponent<Tray>().tray.trayID = "tray1";
+        tray2.GetComponent<Tray>().tray.trayID = "";
+        tray3.GetComponent<Tray>().tray.trayID = "";
+        trayController.makeTray("order 1");
+        trayController.makeTray("order 2");
+        Assert.AreEqual("tray1", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("order 2", trayController.trays[2].GetComponent<Tray>().tray.trayID);
+        trayController.resetTray(trayController.trays[0].GetComponent<Tray>());
+        trayController.resetTray(trayController.trays[2].GetComponent<Tray>());
+        Assert.AreEqual("", trayController.trays[0].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("order 1", trayController.trays[1].GetComponent<Tray>().tray.trayID);
+        Assert.AreEqual("", trayController.trays[2].GetComponent<Tray>().tray.trayID);
        
-    //}
+    }
 
     [Test]
     public void resetOrderTower()

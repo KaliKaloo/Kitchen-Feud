@@ -206,19 +206,19 @@ public class CanvasController : MonoBehaviour
 
     }
 
-    //public int DisplayNewRandomOrder(DisplayTicket ticket)
-    //{
-    //    // RANDOM ORDER
-    //    Order o = Database.GetRandomOrder();
-    //    string orderID = o.orderID;
+    public int DisplayNewRandomOrder(DisplayTicket ticket)
+    {  
+        // RANDOM ORDER
+        Order o = Database.GetRandomOrder();
+        string orderID = o.orderID;
+       
+        TrayController tray_Controller = gameObject.GetComponent<TrayController>();
+        tray_Controller.makeTray(orderID);
+        o.orderNumber  = ++orderNum;
+        ticket.SetUI(o);
+        return o.orderNumber;
 
-    //    TrayController tray_Controller = gameObject.GetComponent<TrayController>();
-    //    tray_Controller.makeTray(orderID);
-    //    o.orderNumber = ++orderNum;
-    //    ticket.SetUI(o);
-    //    return o.orderNumber;
-
-    //}
+    }
 
     public Order GetNewRandomOrder()
     {
@@ -231,7 +231,7 @@ public class CanvasController : MonoBehaviour
         Order o = Database.GetOrderByID(order);
         string orderID = o.orderID;
 
-        TC.makeTray(orderID,TC.teamNumber);
+        TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
         /*if (PhotonNetwork.CurrentRoom != null)

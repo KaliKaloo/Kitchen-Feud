@@ -24,57 +24,28 @@ public class TrayController : MonoBehaviour
     }
 
     public int teamNumber;
-    public void makeTray(string orderID, int team){
-
+    public void makeTray(string orderID){
         if (PhotonNetwork.IsMasterClient)
         {
-            if (team == (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"])
+            if (trays[0].GetComponent<Tray>().tray.trayID == "")
             {
+                PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID, orderID);
+                //trays[0].GetComponent<Tray>().tray.trayID = orderID;
 
-
-                if (trays[0].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID, orderID);
-                    //trays[0].GetComponent<Tray>().tray.trayID = orderID;
-
-                }
-                else if (trays[1].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
-
-                    // trays[1].GetComponent<Tray>().tray.trayID = orderID;
-
-                }
-                else if (trays[2].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
-
-                    //trays[2].GetComponent<Tray>().tray.trayID = orderID;
-
-                }
             }
-            else
+            else if (trays[1].GetComponent<Tray>().tray.trayID == "")
             {
-                if (otherTrays[0].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID, orderID);
-                    //trays[0].GetComponent<Tray>().tray.trayID = orderID;
+                PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
 
-                }
-                else if (otherTrays[1].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
+                // trays[1].GetComponent<Tray>().tray.trayID = orderID;
 
-                    // trays[1].GetComponent<Tray>().tray.trayID = orderID;
+            }
+            else if (trays[2].GetComponent<Tray>().tray.trayID == "")
+            {
+                PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
 
-                }
-                else if (otherTrays[2].GetComponent<Tray>().tray.trayID == "")
-                {
-                    PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
+                //trays[2].GetComponent<Tray>().tray.trayID = orderID;
 
-                    //trays[2].GetComponent<Tray>().tray.trayID = orderID;
-
-                }
             }
         }
 
@@ -218,7 +189,7 @@ public class TrayController : MonoBehaviour
     }
     [PunRPC]
     void makeTrayAcross(string orderID) {
-        //makeTray(orderID);
+        makeTray(orderID);
     }
     [PunRPC]
     void resetAcross(int viewID)
