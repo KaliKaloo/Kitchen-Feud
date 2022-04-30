@@ -99,14 +99,14 @@ public class CanvasController : MonoBehaviour
     private void Serve(GameObject justClicked)
     {
         
-        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
-            justClicked.GetComponent<PhotonView>().ViewID);
+        //justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
+        //    justClicked.GetComponent<PhotonView>().ViewID);
         
         orderMenu.SetActive(false);
 
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
-        TC.CompareOrder(d_ticket.orderid);
+        TC.CompareOrder(d_ticket.orderid, justClicked.GetPhotonView().ViewID);
        
         
         d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);

@@ -119,7 +119,7 @@ public class TrayController : MonoBehaviour
         return total; 
     }
 
-    public void CompareOrder(string orderid)
+    public void CompareOrder(string orderid, int ticketID)
     {
         foreach (GameObject t in trays)
         {
@@ -150,7 +150,8 @@ public class TrayController : MonoBehaviour
                     this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.AllBuffered, currentScore);
                 }
      
-                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.AllBuffered, ts.GetComponent<PhotonView>().ViewID);
+                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.AllBuffered, ts.GetComponent<PhotonView>().ViewID, ticketID);
+
                 break;
             }
 
@@ -197,9 +198,10 @@ public class TrayController : MonoBehaviour
         makeTray(orderID);
     }
     [PunRPC]
-    void resetAcross(int viewID)
+    void resetAcross(int viewID, int ticketID)
     {
         resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
+        PhotonView.Find(ticketID).gameObject.SetActive(false);
     }
     [PunRPC]
     void makeTrayMaster(int trayID, string order)
