@@ -12,9 +12,11 @@ public class TrayController : MonoBehaviour
     public List<GameObject> trays = new List<GameObject>();
     public List<GameObject> otherTrays = new List<GameObject>();
     private static ParseScore scores = new ParseScore();
+    public PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         for (int i = 0; i < trays.Count; i++) {
             trays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
             otherTrays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
@@ -23,19 +25,25 @@ public class TrayController : MonoBehaviour
 
     public int teamNumber;
     public void makeTray(string orderID){
+        
         if(trays[0].GetComponent<Tray>().tray.trayID == "")
         {
-            trays[0].GetComponent<Tray>().tray.trayID = orderID;
+            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID,orderID);
+            //trays[0].GetComponent<Tray>().tray.trayID = orderID;
 
         }
         else if(trays[1].GetComponent<Tray>().tray.trayID == "")
         {
-            trays[1].GetComponent<Tray>().tray.trayID = orderID;
+            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
+
+           // trays[1].GetComponent<Tray>().tray.trayID = orderID;
 
         }
         else if(trays[2].GetComponent<Tray>().tray.trayID == "")
         {
-            trays[2].GetComponent<Tray>().tray.trayID = orderID;
+            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
+
+            //trays[2].GetComponent<Tray>().tray.trayID = orderID;
 
         }
 
@@ -186,6 +194,11 @@ public class TrayController : MonoBehaviour
     {
         resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
     }
-
+    [PunRPC]
+    void makeTrayMaster(int trayID, string order)
+    {
+        Tray tray = PhotonView.Find(trayID).GetComponent<Tray>();
+        tray.tray.trayID = order;
+    }
 
 }
