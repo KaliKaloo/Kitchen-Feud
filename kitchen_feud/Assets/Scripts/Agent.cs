@@ -19,6 +19,10 @@ public class Agent : MonoBehaviour
     public GameObject agentTray;
     public bool served;
     private bool test = false;
+    private bool goingToCollect;
+    private bool goingToServe;
+    private bool goingBack;
+    public Vector3 initialPos;
     
     // Start is called before the first frame update
     void Start()
@@ -28,12 +32,28 @@ public class Agent : MonoBehaviour
         Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
         PV = GetComponent<PhotonView>();
         readyToServe = false;
+        int index = int.Parse(agent.name[6].ToString());
+        if (agent.CompareTag("Waiter1"))
+        {
+            initialPos = GameSetup.GS.WSP1[index - 1].position;
+        }
+        else if (agent.CompareTag("Waiter2"))
+        {
+            initialPos = GameSetup.GS.WSP1[index - 1].position;
+
+
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if((agent.transform.position - initialPos).magnitude < 0.1f) {
+            agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
+        }
+
         if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
            
@@ -43,9 +63,11 @@ public class Agent : MonoBehaviour
             {
                 Vector3 trayPos = tray.transform.position;
 
-                if (!agent.hasPath)
+                if (!goingToCollect)
                 {
-                    agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 2));
+                    goingBack = false;
+                    agent.SetDestination(new Vector3(trayPos.x, trayPos.y, trayPos.z - 2));
+                    goingToCollect = true;
                 }
         
                 
@@ -89,11 +111,12 @@ public class Agent : MonoBehaviour
             if (readyToServe)
             {
                 float newDist = RemainingDistance(agent.path.corners);
-                if (tray.SP && !agent.hasPath)
+                if (tray.SP && !goingToServe)
                 {
                     Debug.LogError("Here");
                     agent.SetDestination(tray.SP.transform.position);
                     tray.SP = null;
+                    goingToServe = true;
                     //tray.GetComponent<PhotonView>().RPC("setDestF",RpcTarget.All,tray.GetComponent<PhotonView>().ViewID);
                     
                 }
@@ -111,15 +134,17 @@ public class Agent : MonoBehaviour
                     PhotonNetwork.Destroy(agentTray);
                     tray.Agent = null;
                     tray = null;
+                    goingToCollect = false;
                     //tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     //PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
 
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
-                    
+                    served = true;
+
                     readyToServe = false;
                     
                     
-                    served = true;
+                    
                     
 
                 }
@@ -127,31 +152,27 @@ public class Agent : MonoBehaviour
 
             if (served)
             {
-                if (!agent.hasPath)
+                goingToServe = false;
+                if (!goingBack)
                 {
-                    
-                    int index = int.Parse(agent.name[6].ToString());
-                    if (agent.CompareTag("Waiter1"))
-                    {
-                        agent.SetDestination(GameSetup.GS.WSP1[index - 1].position);
-                    }else if (agent.CompareTag("Waiter2"))
-                    {
-                        agent.SetDestination(GameSetup.GS.WSP2[index - 1].position);
+                    agent.SetDestination(initialPos);
+                    //int index = int.Parse(agent.name[6].ToString());
+                    //if (agent.CompareTag("Waiter1"))
+                    //{
+                    //    agent.SetDestination(GameSetup.GS.WSP1[index - 1].position);
+                    //}else if (agent.CompareTag("Waiter2"))
+                    //{
+                    //    agent.SetDestination(GameSetup.GS.WSP2[index - 1].position);
 
-                    }
-                }
-                float remDist = agent.remainingDistance;
-
-
-                if (remDist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
-                {
-
-                    agent.transform.rotation = Quaternion.identity;
-                    
+                    //}
+                    goingBack = true;
                     served = false;
+                    
                 }
+               
 
             }
+           
          
 
     
