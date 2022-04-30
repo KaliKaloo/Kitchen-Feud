@@ -108,11 +108,13 @@ public class AI : MonoBehaviour
                             if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0 && a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
                             {
                                 //Assign Tray to waiter
-                                a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
-                                    ts.GetComponent<PhotonView>().ViewID);
+                                a.GetComponent<Agent>().tray = ts.GetComponent<Tray>();
+                                //a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
+                                //    ts.GetComponent<PhotonView>().ViewID);
                                 //Assign waiter to Tray
-                                ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
-                                a.GetComponent<PhotonView>().ViewID);
+                                ts.GetComponent<Tray>().Agent = a;
+                                //ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
+                                //a.GetComponent<PhotonView>().ViewID);
 
                                 break;
 
@@ -142,11 +144,15 @@ public class AI : MonoBehaviour
                             if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0&&a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
                             {
                                 //Assign Tray to waiter
-                                a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
-                                    ts.GetComponent<PhotonView>().ViewID);
+                                a.GetComponent<Agent>().tray = ts.GetComponent<Tray>();
+
+                                //a.GetComponent<PhotonView>().RPC("setTray", RpcTarget.All, a.GetComponent<PhotonView>().ViewID,
+                                //    ts.GetComponent<PhotonView>().ViewID);
                                 //Assign waiter to Tray
-                                ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
-                                    a.GetComponent<PhotonView>().ViewID);
+                                ts.GetComponent<Tray>().Agent = a;
+
+                                //ts.GetComponent<PhotonView>().RPC("setAgent", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID,
+                                //    a.GetComponent<PhotonView>().ViewID);
 
                                 break;
 
@@ -166,7 +172,8 @@ public class AI : MonoBehaviour
                 GameObject[] SP2s = GameObject.FindGameObjectsWithTag("ServingPoint2");
                 for (int i = 0; i < SP2s.Length;i++)
                 {
-                    SP2s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP2s[i].GetPhotonView().ViewID);
+                    SP2s[i].GetComponent<Serving>().used = false;
+                    //SP2s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP2s[i].GetPhotonView().ViewID);
                 }
             }
             if (GameObject.Find("Serving Point (3)").GetComponent<Serving>().used)
@@ -174,7 +181,9 @@ public class AI : MonoBehaviour
                 GameObject[] SP1s = GameObject.FindGameObjectsWithTag("ServingPoint1");
                 for (int i = 0; i < SP1s.Length;i++)
                 {
-                    SP1s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP1s[i].GetPhotonView().ViewID);
+                    SP1s[i].GetComponent<Serving>().used = false;
+
+                    //SP1s[i].GetComponent<PhotonView>().RPC("setUsedF",RpcTarget.All,SP1s[i].GetPhotonView().ViewID);
                 }
             }
 

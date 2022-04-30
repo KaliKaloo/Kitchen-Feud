@@ -77,7 +77,8 @@ public class Agent : MonoBehaviour
                         }
 
                     }
-                    tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    //tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    tray.isReady = false;
                     agent.ResetPath();
                     readyToServe = true;
                 }
@@ -90,8 +91,10 @@ public class Agent : MonoBehaviour
                 float newDist = RemainingDistance(agent.path.corners);
                 if (tray.SP && !agent.hasPath)
                 {
+                    Debug.LogError("Here");
                     agent.SetDestination(tray.SP.transform.position);
-                    tray.GetComponent<PhotonView>().RPC("setDestF",RpcTarget.All,tray.GetComponent<PhotonView>().ViewID);
+                    tray.SP = null;
+                    //tray.GetComponent<PhotonView>().RPC("setDestF",RpcTarget.All,tray.GetComponent<PhotonView>().ViewID);
                     
                 }
 
@@ -106,8 +109,10 @@ public class Agent : MonoBehaviour
                         }
                     }
                     PhotonNetwork.Destroy(agentTray);
-                    tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
-                    PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                    tray.Agent = null;
+                    tray = null;
+                    //tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    //PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
 
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
                     
