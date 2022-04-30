@@ -39,7 +39,7 @@ public class Agent : MonoBehaviour
         }
         else if (agent.CompareTag("Waiter2"))
         {
-            initialPos = GameSetup.GS.WSP1[index - 1].position;
+            initialPos = GameSetup.GS.WSP2[index - 1].position;
 
 
         }
