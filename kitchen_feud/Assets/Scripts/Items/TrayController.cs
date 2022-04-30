@@ -29,14 +29,12 @@ public class TrayController : MonoBehaviour
         {
             if (trays[0].GetComponent<Tray>().tray.trayID == "")
             {
-                Debug.LogError(trays[0].name);
                 PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID, orderID);
                 //trays[0].GetComponent<Tray>().tray.trayID = orderID;
 
             }
             else if (trays[1].GetComponent<Tray>().tray.trayID == "")
             {
-                Debug.LogError(trays[1].name);
 
                 PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
 
@@ -45,7 +43,6 @@ public class TrayController : MonoBehaviour
             }
             else if (trays[2].GetComponent<Tray>().tray.trayID == "")
             {
-                Debug.LogError(trays[2].name);
 
                 PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
 
