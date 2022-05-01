@@ -11,7 +11,7 @@ public class TrayControllerTests
     GameObject tray1;
     GameObject tray2;
     GameObject tray3;
-
+ 
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
@@ -39,6 +39,7 @@ public class TrayControllerTests
     public void make1TrayEmpty()
     {
         tray1.GetComponent<Tray>().tray.trayID = "";
+        
         trayController.trays.Add(tray1);
         trayController.makeTray("order 1");
         Assert.AreEqual("order 1", trayController.trays[0].GetComponent<Tray>().tray.trayID);

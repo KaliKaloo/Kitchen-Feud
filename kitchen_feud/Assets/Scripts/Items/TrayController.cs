@@ -27,24 +27,22 @@ public class TrayController : MonoBehaviour
     public void makeTray(string orderID){
         if (trays[0].GetComponent<Tray>().tray.trayID == "")
         {
-            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[0].GetComponent<PhotonView>().ViewID, orderID);
-            //trays[0].GetComponent<Tray>().tray.trayID = orderID;
+            
+            trays[0].GetComponent<Tray>().tray.trayID = orderID;
 
         }
         else if (trays[1].GetComponent<Tray>().tray.trayID == "")
         {
 
-            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[1].GetComponent<PhotonView>().ViewID, orderID);
 
-            // trays[1].GetComponent<Tray>().tray.trayID = orderID;
+            trays[1].GetComponent<Tray>().tray.trayID = orderID;
 
         }
         else if (trays[2].GetComponent<Tray>().tray.trayID == "")
         {
 
-            PV.RPC("makeTrayMaster", RpcTarget.AllBuffered, trays[2].GetComponent<PhotonView>().ViewID, orderID);
 
-            //trays[2].GetComponent<Tray>().tray.trayID = orderID;
+            trays[2].GetComponent<Tray>().tray.trayID = orderID;
 
         }
 
@@ -198,11 +196,4 @@ public class TrayController : MonoBehaviour
         resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
         PhotonView.Find(ticketID).gameObject.SetActive(false);
     }
-    [PunRPC]
-    void makeTrayMaster(int trayID, string order)
-    {
-        Tray tray = PhotonView.Find(trayID).GetComponent<Tray>();
-        tray.tray.trayID = order;
-    }
-
 }
