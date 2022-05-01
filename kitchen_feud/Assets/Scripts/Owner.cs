@@ -40,7 +40,9 @@ public class Owner : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-
+        Debug.LogError(AI.Instance.owner1Avatar.name);
+        Owner1 = AI.Instance.owner1Avatar;
+        Owner2 = AI.Instance.owner2Avatar;
       
     }
     void Start()
@@ -48,19 +50,21 @@ public class Owner : MonoBehaviour
         PV = GetComponent<PhotonView>();
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
-        if (team == 1)
-        {
-            Owner1 = GameObject.Find("Owner1");
-            Owner1.SetActive(false);
-
-        }
-        else if(team == 2)
-        {
-            Owner2 = GameObject.Find("Owner2");
-            Owner2.SetActive(false);
+        //if (team == 1)
+        //{
+        //    Owner1 = GameObject.Find("Owner1");
+        //    Owner1.SetActive(false);
+            
 
 
-        }
+        //}
+        //else if(team == 2)
+        //{
+        //    Owner2 = GameObject.Find("Owner2");
+        //    Owner2.SetActive(false);
+
+
+        //}
         keyboard = GameObject.Find("keyboard controls");
         mouse = GameObject.Find("mouse controls");
 
