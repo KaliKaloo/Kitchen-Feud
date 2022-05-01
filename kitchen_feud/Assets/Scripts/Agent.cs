@@ -72,13 +72,15 @@ public class Agent : MonoBehaviour
                     agent.SetDestination(new Vector3(trayPos.x, trayPos.y, trayPos.z - 2));
                     goingToCollect = true;
                 }
-        
-                
 
-                if (agent.remainingDistance != Mathf.Infinity  && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 && 
-                    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 4)
-                {
-                    
+
+
+                //if (agent.remainingDistance != Mathf.Infinity && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 &&
+                //    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 4)
+                    if (agent.remainingDistance != Mathf.Infinity && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 &&
+                   (agent.transform.position - trayPos).magnitude < 2.5f)
+                    {
+                   // Debug.LogError((agent.transform.position - trayPos).magnitude);
                         agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
                             tray.transform.position,
                             tray.transform.rotation);
@@ -116,6 +118,7 @@ public class Agent : MonoBehaviour
                 float newDist = RemainingDistance(agent.path.corners);
                 if (tray.SP && !goingToServe)
                 {
+                    agent.ResetPath();
                     Debug.LogError("Here");
                     agent.SetDestination(tray.SP.transform.position);
                     tray.SP = null;
