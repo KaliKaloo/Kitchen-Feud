@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9067901246103840587}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.105001, y: 0.99149996, z: 0.07500033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -43,7 +43,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9067901246103840587}
   serializedVersion: 7
-  lengthInSec: 35
+  lengthInSec: 20
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -51,7 +51,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4863,8 +4863,16 @@ PrefabInstance:
       value: Bubbles
       objectReference: {fileID: 0}
     - target: {fileID: 1220786413541434302, guid: b1e28dfb553b5a047916bc84837f9b3e, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220786413541434302, guid: b1e28dfb553b5a047916bc84837f9b3e, type: 3}
+      propertyPath: lengthInSec
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220786413541434302, guid: b1e28dfb553b5a047916bc84837f9b3e, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1e28dfb553b5a047916bc84837f9b3e, type: 3}
@@ -4882,7 +4890,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3608615405750936708, guid: b166959f2f974ed46affe87782190f04, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608615405750936761, guid: b166959f2f974ed46affe87782190f04, type: 3}
       propertyPath: m_Name
@@ -4948,7 +4956,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5851970168259823516, guid: 230bad46d3625364db496682d28eeb65, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5851970168259823518, guid: 230bad46d3625364db496682d28eeb65, type: 3}
       propertyPath: m_RootOrder
