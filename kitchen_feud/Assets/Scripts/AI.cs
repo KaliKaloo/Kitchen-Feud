@@ -63,8 +63,8 @@ public class AI : MonoBehaviour
                 if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 0)
                 {
 
-                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
-                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[0].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP2[0].position, Quaternion.identity);
+                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[0].position.x, GameSetup.GS.WSP2[0].position.y, GameSetup.GS.WSP2[0].position.z));
                     agentsT2.Add(Agent);
                     Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter1");
 
@@ -73,8 +73,8 @@ public class AI : MonoBehaviour
                 }else if (GameObject.FindGameObjectsWithTag("Waiter2").Length == 1)
                 {
 
-                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP1[2].position, Quaternion.identity);
-                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[1].position.x, GameSetup.GS.WSP1[2].position.y, GameSetup.GS.WSP1[2].position.z));
+                    Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP2[1].position, Quaternion.identity);
+                    Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[1].position.x, GameSetup.GS.WSP2[1].position.y, GameSetup.GS.WSP2[1].position.z));
                     agentsT2.Add(Agent);
                     Agent.GetComponent<PhotonView>().RPC("setAgentName",RpcTarget.All,Agent.GetPhotonView().ViewID, "Waiter2");
 

@@ -449,6 +449,9 @@ MonoBehaviour:
   readyToServe: 0
   agentTray: {fileID: 0}
   served: 0
+  goingToCollect: 0
+  goingToServe: 0
+  goingBack: 0
   initialPos: {x: 0, y: 0, z: 0}
 --- !u!114 &5306724088064803952
 MonoBehaviour:

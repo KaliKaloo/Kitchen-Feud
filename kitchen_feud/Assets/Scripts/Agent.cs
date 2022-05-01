@@ -19,9 +19,9 @@ public class Agent : MonoBehaviour
     public GameObject agentTray;
     public bool served;
     private bool test = false;
-    private bool goingToCollect;
-    private bool goingToServe;
-    private bool goingBack;
+    public bool goingToCollect;
+    public bool goingToServe;
+    public bool goingBack;
     public Vector3 initialPos;
     
     // Start is called before the first frame update
@@ -49,14 +49,17 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((agent.transform.position - initialPos).magnitude < 0.1f) {
-            agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
-        }
+      
 
         if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
            
+            if ((agent.transform.position - initialPos).magnitude < 0.8f)
+            {
+                agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            
+
             float dist = RemainingDistance(agent.path.corners);
 
             if (tray)
@@ -135,6 +138,7 @@ public class Agent : MonoBehaviour
                     tray.Agent = null;
                     tray = null;
                     goingToCollect = false;
+                    Debug.LogError("SetToFLASE");
                     //tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     //PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
 
@@ -195,6 +199,17 @@ public class Agent : MonoBehaviour
         for (int i = 0; i < points.Length - 1; i++)
             distance += Vector3.Distance(points[i], points[i + 1]);
         return distance;
+    }
+    public void resetAgent()
+    {
+        PhotonNetwork.Destroy(agentTray);
+
+        tray = null;
+        readyToServe = false;
+        served = false;
+        goingBack = false;
+        goingToCollect = false;
+        goingToServe = false;
     }
     [PunRPC]
     void setTray(int agentID, int trayID) {
