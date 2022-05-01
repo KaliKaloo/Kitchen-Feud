@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.99999905, g: 0, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 106729446}
   - component: {fileID: 106729445}
   m_Layer: 5
-  m_Name: Cutscene Canvas
+  m_Name: VideoCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,6 +809,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 579914511}
   - {fileID: 496873193}
   - {fileID: 1854401717}
   - {fileID: 264315709}
@@ -1526,7 +1527,7 @@ RectTransform:
   m_Children:
   - {fileID: 679944459}
   m_Father: {fileID: 106729448}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1707,10 +1708,6 @@ MonoBehaviour:
   loadingBarCanvas: {fileID: 952752601}
   loadingBar: {fileID: 1162276311}
   startedGame: 0
-  cutsceneURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/CutsceneVideo.mp4
-  vP: {fileID: 496873194}
-  startCutscene: 0
-  cutScene: {fileID: 106729444}
 --- !u!114 &273502801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1745,10 +1742,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31002f2395d4f64499711b2cbac5ea5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  video: {fileID: 496873192}
   skipButton: {fileID: 264315708}
   skipButtonText: {fileID: 679944460}
   voteCount: 0
+  videoPlayer: {fileID: 496873194}
+  cutsceneURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/CutsceneVideo.mp4
+  instructionURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/MovingInstructions.mp4
+  videoCanvas: {fileID: 106729444}
 --- !u!1 &301874861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,7 +2806,7 @@ RectTransform:
   m_LocalScale: {x: 0.007891667, y: 0.007891667, z: 0.007891666}
   m_Children: []
   m_Father: {fileID: 106729448}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8012,6 +8012,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577891669}
   m_CullTransparentMesh: 1
+--- !u!1 &579914510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579914511}
+  - component: {fileID: 579914513}
+  - component: {fileID: 579914512}
+  m_Layer: 5
+  m_Name: Loading
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &579914511
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579914510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 106729448}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &579914512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579914510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &579914513
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579914510}
+  m_CullTransparentMesh: 1
 --- !u!1 &589760342
 GameObject:
   m_ObjectHideFlags: 0
@@ -9708,7 +9780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.9995117, y: 0.000030517578}
+  m_AnchoredPosition: {x: -6.9995117, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037355027
@@ -12602,7 +12674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.6450195, y: -92.00003}
+  m_AnchoredPosition: {x: 1.6450195, y: -92}
   m_SizeDelta: {x: -3.29, y: -248.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1525041594
@@ -18488,7 +18560,7 @@ GameObject:
   - component: {fileID: 1854401719}
   - component: {fileID: 1854401718}
   m_Layer: 5
-  m_Name: Cutscene Image
+  m_Name: Video Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18506,7 +18578,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 106729448}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39828,7 +39900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 1.6450508, y: 77.83488}
+  m_AnchoredPosition: {x: 1.6450508, y: 77.83487}
   m_SizeDelta: {x: 391.78, y: 91.32001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &2128544202

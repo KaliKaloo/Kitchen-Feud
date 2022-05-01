@@ -56,7 +56,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Transform roomListContent;
 
-    [SerializeField] private GameObject loadingScreen;
+    public GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
     public bool startedGame;
@@ -69,12 +69,7 @@ public class menuController : MonoBehaviourPunCallbacks
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
     
-    [Header("VideoController")]
-    public string cutsceneURL;
-    public VideoPlayer vP;
-    public bool startCutscene =false;
-    public GameObject cutScene;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -112,7 +107,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public void Start()
     {
         PV = GetComponent<PhotonView>();
-        vP.url = cutsceneURL;
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
@@ -380,22 +374,18 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void startGame()
     {
+        timer.SetServerTime();
 
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
         {
-            timer.SetServerTime();
+            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
 
-            if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
-            {
-                GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
-
-                PhotonNetwork.LoadLevel(1);
-            }
-            // if > 4 players load into a different scene 
-            else
-            {
-                this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-            }
+            PhotonNetwork.LoadLevel(1);
+        }
+        // if > 4 players load into a different scene 
+        else
+        {
+            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
         }
     }
 
@@ -700,14 +690,6 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         StartCoroutine(LoadScene());
         //StartCoroutine(LoadSceneAsynchronously(1));
-    }
-    [PunRPC]
-    void playVideo(int viewID)
-    {
-     menuController menuC =   PhotonView.Find(viewID).GetComponent<menuController>();
-        menuC.cutScene.SetActive(true);
-        menuC.vP.Play();
-
     }
    
   
