@@ -20,7 +20,7 @@ public class MusicManager : MonoBehaviour
     private bool switched = false, MGStarted = false;
     public int location;
     public bool inMG = false;
-    public float musicVol = 1f;
+    public float musicVol;
 
    
     void Awake(){
