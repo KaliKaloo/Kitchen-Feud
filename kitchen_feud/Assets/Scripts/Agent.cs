@@ -108,6 +108,7 @@ public class Agent : MonoBehaviour
             }
             if (readyToServe)
             {
+               
                 float newDist = RemainingDistance(agent.path.corners);
                 if (tray.SP && !goingToServe)
                 {
