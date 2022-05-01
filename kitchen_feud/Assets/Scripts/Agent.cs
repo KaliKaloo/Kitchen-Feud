@@ -116,7 +116,6 @@ public class Agent : MonoBehaviour
                 if (tray.SP && !goingToServe)
                 {
                     agent.ResetPath();
-                    Debug.LogError("Here");
                     agent.SetDestination(tray.SP.transform.position);
                     tray.SP = null;
                     goingToServe = true;
@@ -137,7 +136,6 @@ public class Agent : MonoBehaviour
                     tray.Agent = null;
                     tray = null;
                     goingToCollect = false;
-                    Debug.LogError("SetToFLASE");
 
                     //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
                     served = true;
