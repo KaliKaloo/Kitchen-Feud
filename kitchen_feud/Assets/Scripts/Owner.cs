@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
 using Photon.Pun;
+
 using UnityEngine.UI;
 
 public class Owner : MonoBehaviour
@@ -17,6 +18,7 @@ public class Owner : MonoBehaviour
     private GameObject localPlayer;
     private NavMeshAgent agent;
     private bool currentlyTalking;
+    private bool currentlyShouting;
     private bool currentlyTalking2;
     public bool collected;
     public bool collecting;
@@ -37,6 +39,9 @@ public class Owner : MonoBehaviour
     public bool shout;
     public PhotonView PV;
     private int localPlayerID;
+    private bool goThrowSmokeBomb;
+    private bool throwNow;
+    private System.Random rnd = new System.Random();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -98,9 +103,26 @@ public class Owner : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            if (!currentlyTalking && anim.GetBool("IsTalking"))
+            {
+                anim.SetBool("IsTalking", false);
+            }
+            if (currentlyTalking && !anim.GetBool("IsTalking"))
+            {
+                anim.SetBool("IsTalking", true);
+            }
+            if (!currentlyShouting && anim.GetBool("IsShouting"))
+            {
+                anim.SetBool("IsShouting", false);
+            }
+            if (currentlyShouting && !anim.GetBool("IsShouting"))
+            {
+                anim.SetBool("IsShouting", true);
+            }
 
             if (team == 1)
             {
+              
                 if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
                     agent.transform.rotation != Quaternion.Euler(0, 0, 0))
                 {
@@ -143,10 +165,37 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if (!currentlyTalking && anim.GetBool("IsTalking"))
+               // if(rnd.Next(1) == 1)
                 {
-                    anim.SetBool("IsTalking", false);
+                   // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
+                    if(timer.GetLocalTime() == 280)
+                    {
+                        goThrowSmokeBomb = true;
+                    }
                 }
+
+             
+
+                if (goThrowSmokeBomb)
+                {
+                    throwSmokeBomb();
+                    throwNow = true;
+                    goThrowSmokeBomb = false;
+                }
+                if (throwNow)
+                {
+               
+                    if((agent.transform.position - new Vector3(-13.3f, 0.2f,3.6f)).magnitude<1)
+                    {
+                        GetComponent<SmokeGrenade>().UseSmokeOwner(1);
+                        throwNow = false;
+                        //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
+                        agent.ResetPath();
+                        agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+
+                    }
+                }
+        
 
             }
             else if (team == 2)
@@ -194,12 +243,9 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if (!currentlyTalking && anim.GetBool("IsTalking"))
-                {
-                    anim.SetBool("IsTalking", false);
-                }
+     
             }
-            if (timer.GetLocalTime() == timer.GetLocalTime()/2 - 30)
+            if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
             {
                 shout = true;
             }
@@ -354,6 +400,19 @@ public class Owner : MonoBehaviour
                 //Text.text = "Ahh, got there before me!";
                 collecting = false;
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 
@@ -392,8 +451,16 @@ public class Owner : MonoBehaviour
         currentlyTalking = false;
         
     }
+    private IEnumerator startShouting()
+    {
 
-    
+        currentlyShouting = true;
+        yield return new WaitForSeconds(3);
+        currentlyShouting = false;
+
+    }
+
+
     void returnWithHeadShake()
     {
         //Debug.LogError(agent.pathStatus);
@@ -418,6 +485,21 @@ public class Owner : MonoBehaviour
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+    }
+    void throwSmokeBomb()
+    {
+        StartCoroutine(startShouting());
+        if (team == 1)
+        {
+            
+            PV.RPC("setText", RpcTarget.All, PV.ViewID, "I'm gonna go over to their kitchen and throw a smoke bomb!");
+            agent.SetDestination(new Vector3(-12.6f, 0.2f, 3.6f));
+        }else if(team == 2)
+        {
+            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "I'm gonna go over to their kitchen and throw a smoke bomb!");
+            agent.SetDestination(new Vector3(6.743f, 0.2f, 2.076f));
+
+        }
     }
     [PunRPC]
     void setText(int viewID, string message)
