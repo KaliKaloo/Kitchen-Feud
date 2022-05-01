@@ -25,7 +25,8 @@ public class Interactable : MonoBehaviour
     }
     
     public void OnMouseExit(){
-        MouseControl.instance.Default();
+		if (MouseControl.instance)
+        	MouseControl.instance.Default();
     }
 	
 	public virtual void Interact()

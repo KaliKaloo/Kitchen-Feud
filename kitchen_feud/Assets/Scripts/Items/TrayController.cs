@@ -12,9 +12,11 @@ public class TrayController : MonoBehaviour
     public List<GameObject> trays = new List<GameObject>();
     public List<GameObject> otherTrays = new List<GameObject>();
     private static ParseScore scores = new ParseScore();
+    public PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         for (int i = 0; i < trays.Count; i++) {
             trays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
             otherTrays[i].GetComponent<Tray>().tray.objectsOnTray.Clear();
@@ -23,18 +25,23 @@ public class TrayController : MonoBehaviour
 
     public int teamNumber;
     public void makeTray(string orderID){
-        if(trays[0].GetComponent<Tray>().tray.trayID == "")
+        if (trays[0].GetComponent<Tray>().tray.trayID == "")
         {
+            
             trays[0].GetComponent<Tray>().tray.trayID = orderID;
 
         }
-        else if(trays[1].GetComponent<Tray>().tray.trayID == "")
+        else if (trays[1].GetComponent<Tray>().tray.trayID == "")
         {
+
+
             trays[1].GetComponent<Tray>().tray.trayID = orderID;
 
         }
-        else if(trays[2].GetComponent<Tray>().tray.trayID == "")
+        else if (trays[2].GetComponent<Tray>().tray.trayID == "")
         {
+
+
             trays[2].GetComponent<Tray>().tray.trayID = orderID;
 
         }
@@ -47,7 +54,8 @@ public class TrayController : MonoBehaviour
 
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
-        ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
+        ts.isReady = true;
+        //ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
         ts.findDestination(ts.GetComponent<PhotonView>().ViewID);
         foreach (Transform slot in ts.transform)
         {
@@ -104,7 +112,7 @@ public class TrayController : MonoBehaviour
         return total; 
     }
 
-    public void CompareOrder(string orderid)
+    public void CompareOrder(string orderid, int ticketID)
     {
         foreach (GameObject t in trays)
         {
@@ -135,7 +143,8 @@ public class TrayController : MonoBehaviour
                     this.GetComponent<PhotonView>().RPC("UpdateScore2", RpcTarget.AllBuffered, currentScore);
                 }
      
-                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.AllBuffered, ts.GetComponent<PhotonView>().ViewID);
+                this.GetComponent<PhotonView>().RPC("resetAcross", RpcTarget.AllBuffered, ts.GetComponent<PhotonView>().ViewID, ticketID);
+
                 break;
             }
 
@@ -182,10 +191,9 @@ public class TrayController : MonoBehaviour
         makeTray(orderID);
     }
     [PunRPC]
-    void resetAcross(int viewID)
+    void resetAcross(int viewID, int ticketID)
     {
         resetTray(PhotonView.Find(viewID).GetComponent<Tray>());
+        PhotonView.Find(ticketID).gameObject.SetActive(false);
     }
-
-
 }
