@@ -11,7 +11,6 @@ using TMPro;
 
 public class CanvasController : MonoBehaviour
 {
-    //public GameObject makeTicket;
     public GameObject ticket1;
     public GameObject ticket2;
     public GameObject ticket3;
@@ -97,17 +96,17 @@ public class CanvasController : MonoBehaviour
     }
 
     // serve corresponding order depending on what justClicked equals
-    public void Serve(GameObject justClicked)
+    private void Serve(GameObject justClicked)
     {
         
-        justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
-            justClicked.GetComponent<PhotonView>().ViewID);
+        //justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
+        //    justClicked.GetComponent<PhotonView>().ViewID);
         
         orderMenu.SetActive(false);
 
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
-        TC.CompareOrder(d_ticket.orderid);
+        TC.CompareOrder(d_ticket.orderid, justClicked.GetPhotonView().ViewID);
        
         
         d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
@@ -115,51 +114,35 @@ public class CanvasController : MonoBehaviour
         
     }
 
-    public void ShowNewTicketWithID(string order)
+    public void ShowNewTicketWithID(Order LeaderOrder) // already inside an rpc
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            string order = LeaderOrder.orderID;
             int orderN;
             if (ticket1.activeSelf == true)
             {
                 if (ticket2.activeSelf == true)
                 {
-                    /*DisplayTicket Ticket3 = ticket3.GetComponent<DisplayTicket>();
-                    ticket3.SetActive(true);
-                    Ticket3.orderNumber = 3;
-    
-                    orderN = DisplayOrderFromID(Ticket3, order);
-                    orderStands[2].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString(); */
+                   
                     PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket3.GetPhotonView().ViewID, 3, order);
 
                 }
 
                 else
                 {
-                    /*DisplayTicket Ticket2 = ticket2.GetComponent<DisplayTicket>();
-                    ticket2.SetActive(true);
-                    Ticket2.orderNumber = 2;
-                    orderN = DisplayOrderFromID(Ticket2, order);
-                    orderStands[1].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString(); */
                     PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket2.GetPhotonView().ViewID, 2, order);
-
 
                 }
             }
 
             else
             {
-                /*DisplayTicket Ticket1 = ticket1.GetComponent<DisplayTicket>();
-                ticket1.SetActive(true);
-                Ticket1.orderNumber = 1;
-    
-                orderN = DisplayOrderFromID(Ticket1, order);
-                orderStands[0].GetComponentInChildren<TextMeshProUGUI>().text =orderN.ToString();*/
                 PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket1.GetPhotonView().ViewID, 1, order);
-
             }
         }
     }
+
 
     private bool CheckIfTicketsNotFull()
     {
@@ -175,34 +158,11 @@ public class CanvasController : MonoBehaviour
 
     private void UpdateOrders()
     {
-
-        // LEADER OF TEAM 1
-        if (CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient)
-        {
-            // OTHERS PART OF TEAM 1
+        if(CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient){
             Order leaderOrder = GetNewRandomOrder();
 
-            // ONLY DO THIS TO TEAM 1
-            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
-                {
-                    this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam1", RpcTarget.All, leaderOrder.orderID);
-                } else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
-            {
-                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder.orderID);
-            }
-              
-               
-            }
-            else if (CheckIfTicketsNotFull() && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
-            {
-                Order leaderOrder1 = GetNewRandomOrder();
+            ShowNewTicketWithID(leaderOrder);
 
-            // ONLY DO THIS TO TEAM 2
-            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
-            {
-                this.GetComponent<PhotonView>().RPC("ShowingWithOrderTeam2", RpcTarget.All, leaderOrder1.orderID);
-            }
-                   
         }
 
     }
@@ -235,10 +195,6 @@ public class CanvasController : MonoBehaviour
         TC.makeTray(orderID);
 
         o.orderNumber = ++orderNum;
-        /*if (PhotonNetwork.CurrentRoom != null)
-        {
-            o.orderNumber /= PhotonNetwork.CurrentRoom.PlayerCount;
-        }*/
 
         ticket.SetUI(o);
         return o.orderNumber;
@@ -251,42 +207,22 @@ public class CanvasController : MonoBehaviour
     }
 
     [PunRPC]
-    void ShowingWithOrderTeam1(string o)
-    {
-        
-        ShowNewTicketWithID(o);
-        
-    }
-
-    [PunRPC]
-    void ShowingWithOrderTeam2(string o)
-    {
-      
-        ShowNewTicketWithID(o);
-        
-    }
-
-    [PunRPC]
     void showTickets(int viewID, int ticketID, int num,string order)
     {
         CanvasController CC = PhotonView.Find(viewID).GetComponent<CanvasController>();
-     
         
-       // if (GameObject.Find("Local").GetComponent<PlayerController>().myTeam == CC.teamNumber)
         {
             GameObject ticket = PhotonView.Find(ticketID).gameObject;
             DisplayTicket dTicket = ticket.GetComponent<DisplayTicket>();
             ticket.SetActive(true);
             dTicket.orderNumber = num;
+           
             int orderN = DisplayOrderFromID(dTicket, order);
-            CC.orderStands[num - 1]
+             CC.orderStands[num - 1]
                 .GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString();
+           
         }
 
-
-
     }
-
-    
 
 }

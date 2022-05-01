@@ -38,14 +38,9 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        // boxCollider = bottomBar.GetComponent<BoxCollider2D>();
-        // boxCollider.size = new Vector3(Screen.width, bottomBar.transform.lossyScale.y, bottomBar.transform.lossyScale.z);
         stoveMinigameCounter.StartGame();
         
         stoveScore.ResetValues();
-        //Camera cam = Camera.main;
-        //float height = 2f * UICamera.orthographicSize;
-        //float width = height * UICamera.aspect;
         
         chosenY = (int)(2f * UICamera.orthographicSize);
         chosenX = (int)(chosenY  * UICamera.aspect);
@@ -69,10 +64,10 @@ public class Spawner : MonoBehaviour
         else if (team2Background.activeSelf)
             parentCanvas = team2Background;
 
+        StoveMinigameCounter.ResetCounters();
         stoveMinigameCounter.StartGame();
-        stoveMinigameCounter.ResetCounter();
         
-        instructions.SetActive(false);
+        //instructions.SetActive(false);
         startButton.SetActive(false);
         if (PhotonNetwork.IsConnected)
             startSmoke();
@@ -104,7 +99,7 @@ public class Spawner : MonoBehaviour
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
 
-        if (stoveMinigameCounter.GetCounter() > 0)
+        if (StoveMinigameCounter.collisionCounter < 20)
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
@@ -114,12 +109,12 @@ public class Spawner : MonoBehaviour
 
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
            
-            stoveMinigameCounter.MinusCounter();
+            stoveMinigameCounter.AddDroppedCounter();
             StartCoroutine(SpawnCorrectIngredient());
            
         } 
         
-        else if (stoveMinigameCounter.GetCounter() == 0)
+        else if (StoveMinigameCounter.droppedCounter == 20)
         {
             stoveMinigameCounter.EndGame();
             
@@ -132,7 +127,7 @@ public class Spawner : MonoBehaviour
 
         int randomBomb = Random.Range(0, bombs.Count);
 
-        if (stoveMinigameCounter.GetCounter() > 0)
+        if (StoveMinigameCounter.collisionCounter < 20)
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,
@@ -141,6 +136,8 @@ public class Spawner : MonoBehaviour
 
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
             obj.GetComponent<Image>().sprite = currentBomb;
+
+            stoveMinigameCounter.AddDroppedCounter();
             StartCoroutine(SpawnBombObject());
         }
     }

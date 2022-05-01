@@ -13,16 +13,10 @@ public class GroundCollision : MonoBehaviour
     void OnTriggerEnter2D(Collider2D target)
     {
         Destroy(target.gameObject);
-        if (target.tag.ToString() == "Ingredient")
-        {
-            stoveMinigameCounter.MinusCollisionCounter();
 
-            if (stoveMinigameCounter.GetCollisionCounter() == 0)
-            {
-                backbutton.SetActive(true);
-            }
+        if (StoveMinigameCounter.collisionCounter >= 20)
+        {
+            backbutton.SetActive(true);
         }
     }
-
-
 }

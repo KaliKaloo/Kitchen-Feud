@@ -112,6 +112,7 @@ MonoBehaviour:
   tray2: {fileID: 0}
   appliance: {fileID: 0}
   applianceSlots: {fileID: 0}
+  defaultScale: {x: 0, y: 0, z: 0}
   dropSound: {fileID: 0}
 --- !u!54 &312157261318955597
 Rigidbody:
@@ -140,8 +141,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20770872, y: 0.07057547, z: 0.26106057}
-  m_Center: {x: 0.018147886, y: 0.10728814, z: 0.023202807}
+  m_Size: {x: 0.20770872, y: 0.14254618, z: 0.26106057}
+  m_Center: {x: 0.018147886, y: 0.10355726, z: 0.023202807}
 --- !u!82 &7807237431865044048
 AudioSource:
   m_ObjectHideFlags: 0

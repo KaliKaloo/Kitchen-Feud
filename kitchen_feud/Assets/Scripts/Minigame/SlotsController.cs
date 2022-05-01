@@ -20,7 +20,6 @@ public class SlotsController : MonoBehaviour {
                     heldObjArg.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                     fullnessCount++;
                     pickableItem pickable = heldObjArg.GetComponent<pickableItem>();
-
                     pickable.GetComponent<PhotonView>().RPC("applianceBool", RpcTarget.AllBuffered, pickable.GetComponent<PhotonView>().ViewID, this.GetComponent<PhotonView>().ViewID,this.GetComponent<PhotonView>().ViewID);
                     heldObjArg.layer = 0;
                     foreach ( Transform child in heldObjArg.transform )
@@ -52,6 +51,7 @@ public class SlotsController : MonoBehaviour {
             fullnessCount--;
  
     }
+
 
     [PunRPC]
      void removeFromApplianceRPC(int appViewID, int objViewID,int playerID)

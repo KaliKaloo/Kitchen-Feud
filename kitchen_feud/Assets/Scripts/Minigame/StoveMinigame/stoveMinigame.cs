@@ -34,8 +34,10 @@ public class stoveMinigame : MonoBehaviour
       
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
-            MusicManager.instance.minigameSwitch();
-            MusicManager.instance.inMG = true;
+            // MusicManager.instance.minigameSwitch();
+            // MusicManager.instance.inMG = true;
+            MusicManagerOld.instance.minigameSwitch();
+		    MusicManagerOld.instance.inMG = true;
             
             backbutton.appliance = GetComponent<Appliance>();
             if (appliance.foundDish != null)
@@ -61,9 +63,9 @@ public class stoveMinigame : MonoBehaviour
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
 
             if (dishOfFoundDish != null)
-            { 
-                
-                dishOfFoundDish.points = spawner.dishSO.maxScore * stoveScore.FinalMultiplier();
+            {
+
+                dishOfFoundDish.points = stoveScore.CalculateScore();
 
                 // if player is team 2 but interacts with team1 stove, points doubled
                 if (stoveCanvas.tag == "Team1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)

@@ -35,7 +35,7 @@ public class PanController : MonoBehaviour
         haveAvg = false;
         speeds = new Queue<float>();
         foodInstancesCounter = 0;
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
+       // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
         Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
         if (PV.IsMine)
         {

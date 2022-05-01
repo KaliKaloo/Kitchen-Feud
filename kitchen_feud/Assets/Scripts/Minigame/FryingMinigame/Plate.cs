@@ -23,7 +23,7 @@ public class Plate : MonoBehaviour
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
+        //GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
         RectTransform rect = GetComponent<RectTransform>();
         GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width/1.4f, (rect.rect.height / 6.15f) + 100);
         GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, GetComponent<CapsuleCollider2D>().size.y/3);
@@ -48,7 +48,7 @@ public class Plate : MonoBehaviour
                 Vector3 EndPos = transform.parent.Find("End").transform.position;
                 if (!(transform.position.x < EndPos.x))
                 {
-                    if (Input.GetKey(KeyCode.LeftArrow))
+                    if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                     {
                         transform.Translate(Vector3.left * 10 * 50 * Time.deltaTime);
                     };
@@ -57,7 +57,7 @@ public class Plate : MonoBehaviour
                 float panW = pan.transform.parent.GetComponent<RectTransform>().rect.width;
                 if (platePos.x < panPos.x)
                 {
-                    if (Input.GetKey(KeyCode.RightArrow))
+                    if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                     {
                         transform.Translate(Vector3.right * 10 * 50 * Time.deltaTime);
   

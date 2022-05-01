@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-struct MusicInfo {
+public struct MusicInfo {
    public float time;
    public AudioClip track;
 

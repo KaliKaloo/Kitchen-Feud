@@ -42,18 +42,15 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (player.transform.Find("slot").childCount == 1&&
-                playerHold.GetComponent<PhotonView>().IsMine)
+        if (player.transform.Find("slot").childCount == 1 && playerHold.GetComponent<PhotonView>().IsMine)
         {
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)
             {
-                //foreach (Transform slot in slots)
                 for (int i = 0; i < slots.Count; i++)
                 {
                     if (slots[i].transform.childCount == 0)
                     {
-
                         objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.AllBuffered,
                         objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
                         pickable = objectHolding.GetComponent<pickableItem>();
@@ -79,6 +76,9 @@ public class Tray : Interactable
             globalClicked.trayInteract = true;
             canvasController.TrayOrderOptions(tray.name);
         }
+
+
+
     }
 
     public void findDestination(int trayID)
@@ -89,8 +89,10 @@ public class Tray : Interactable
             {
                 if (s.GetComponent<Serving>().used == false)
                 {
-                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
-                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
+                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<Serving>().used = true;
+                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }
@@ -101,8 +103,12 @@ public class Tray : Interactable
             {
                 if (s.GetComponent<Serving>().used == false)
                 {
-                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
-                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
+
+                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<Serving>().used = true;
+
+                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }
@@ -112,7 +118,6 @@ public class Tray : Interactable
     [PunRPC]
     void addComps(int viewID, int objID)
     {
-
         PhotonView.Find(viewID).GetComponent<Tray>().tray.ServingTray.Add(PhotonView.Find(objID).GetComponent<pickableItem>().item);
         PhotonView.Find(viewID).GetComponent<Tray>().tray.objectsOnTray.Add(PhotonView.Find(objID).gameObject);
 
@@ -131,7 +136,6 @@ public class Tray : Interactable
     [PunRPC]
     void setIsReadyF(int viewID)
     {
-        Debug.Log("SetToFalse1");
         PhotonView.Find(viewID).GetComponent<Tray>().isReady = false;
     }
     [PunRPC]

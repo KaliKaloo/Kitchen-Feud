@@ -27,10 +27,14 @@ public class ExitSandwichMinigame : MonoBehaviour
 	{
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
+		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
+
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		MusicManager.instance.minigameEnd();
-		MusicManager.instance.inMG = false;
+		// MusicManager.instance.minigameEnd();
+		// MusicManager.instance.inMG = false;
+		MusicManagerOld.instance.minigameEnd();
+		MusicManagerOld.instance.inMG = false;
 		SandwichController.RestartGame();
 
 		// stop cooking animation
