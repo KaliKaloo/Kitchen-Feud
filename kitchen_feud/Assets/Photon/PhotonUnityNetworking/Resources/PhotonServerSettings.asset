@@ -42,6 +42,7 @@ MonoBehaviour:
   - applianceBool
   - changeLayer
   - clearAll
+  - clearApplPlayers
   - clearItems
   - clearKickedBy
   - clearPlayers
@@ -51,14 +52,15 @@ MonoBehaviour:
   - decrementDoor
   - destHB
   - destP
+  - destroyAfterServed
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
+  - DisableItemPickable
   - DisablePushing
   - DisableView
   - doFd
   - enableBack
-  - EnablePforAll
   - EnablePushing
   - EnView
   - falseForOthers
@@ -68,9 +70,11 @@ MonoBehaviour:
   - globalDestroy
   - glowSettings
   - hideFryingUI
+  - increment
   - incrementDoor
-  - loadS
+  - loadSceneP
   - makeTrayAcross
+  - makeTrayMaster
   - onApplianceF
   - onTrayF
   - ovenGame
@@ -78,7 +82,10 @@ MonoBehaviour:
   - playDing
   - PlayDropSound
   - PlayFireSound
+  - playPS
+  - PlayServingSound
   - PlaySmokeBombSound
+  - playVideo
   - pointSync
   - push
   - removeFromApplianceRPC
@@ -91,16 +98,18 @@ MonoBehaviour:
   - setAddedF
   - setAgent
   - setAgentF
+  - setAgentName
   - setAppl
   - setCanvActive
   - setDest
+  - setDestF
   - setEntered
   - setEnteredF
   - setFoodVals
   - SetGrav
   - setHBParent
-  - setHeldobj
-  - setHeldobjAsNull
+  - setInMinigame
+  - setInMinigameF
   - setIsReady
   - setIsReadyF
   - setKickable
@@ -113,6 +122,7 @@ MonoBehaviour:
   - SetParentAsSlot
   - setParentP
   - setParentPlate
+  - setParentTray
   - setPlateStartVals
   - setPlayed
   - setPlayer
@@ -128,9 +138,11 @@ MonoBehaviour:
   - setTrayNull
   - setUsed
   - setUsedF
-  - ShowingWithOrderTeam1
-  - ShowingWithOrderTeam2
+  - showTickets
+  - SkipCutscene
   - StopBoilingSound
+  - StopFireSound
+  - stopPS
   - syncAnim
   - syncIsOpened
   - syncMat
@@ -143,24 +155,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - PlayServingSound
-  - setDestF
-  - setAgentName
-  - loadSceneP
-  - showTickets
-  - clearApplPlayers
-  - setParentTray
-  - SkipCutscene
-  - increment
-  - playPS
-  - stopPS
-  - DisableItemPickable
-  - playVideo
-  - destroyAfterServed
-  - StopFireSound
-  - setInMinigame
-  - setInMinigameF
-  - makeTrayMaster
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
