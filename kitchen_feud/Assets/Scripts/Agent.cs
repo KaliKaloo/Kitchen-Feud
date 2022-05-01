@@ -94,14 +94,10 @@ public class Agent : MonoBehaviour
                         if (t.name.Contains("Slot") && t.childCount > 0)
                         {
                             agentTray.GetComponent<TraySlotting>().slotOnTray(t.GetChild(0).gameObject);                          
-                            //playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
-                            //Set Tray to not Collectable;
-                            
-                            //break;
+                          
                         }
 
                     }
-                    //tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
                     tray.isReady = false;
                     agent.ResetPath();
                     readyToServe = true;
@@ -137,7 +133,6 @@ public class Agent : MonoBehaviour
                     tray = null;
                     goingToCollect = false;
 
-                    //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
                     served = true;
 
                     readyToServe = false;
