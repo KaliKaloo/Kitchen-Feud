@@ -89,8 +89,10 @@ public class Tray : Interactable
             {
                 if (s.GetComponent<Serving>().used == false)
                 {
-                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
-                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
+                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<Serving>().used = true;
+                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }
@@ -101,8 +103,12 @@ public class Tray : Interactable
             {
                 if (s.GetComponent<Serving>().used == false)
                 {
-                    PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
-                    s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
+                    PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
+
+                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
+                    s.GetComponent<Serving>().used = true;
+
+                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }

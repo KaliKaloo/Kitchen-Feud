@@ -19,6 +19,10 @@ public class Agent : MonoBehaviour
     public GameObject agentTray;
     public bool served;
     private bool test = false;
+    public bool goingToCollect;
+    public bool goingToServe;
+    public bool goingBack;
+    public Vector3 initialPos;
     
     // Start is called before the first frame update
     void Start()
@@ -28,32 +32,52 @@ public class Agent : MonoBehaviour
         Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
         PV = GetComponent<PhotonView>();
         readyToServe = false;
+        int index = int.Parse(agent.name[6].ToString());
+        if (agent.CompareTag("Waiter1"))
+        {
+            initialPos = GameSetup.GS.WSP1[index - 1].position;
+        }
+        else if (agent.CompareTag("Waiter2"))
+        {
+            initialPos = GameSetup.GS.WSP2[index - 1].position;
+
+
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
+      
+
         if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
            
+            if ((agent.transform.position - initialPos).magnitude < 0.8f)
+            {
+                agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            
+
             float dist = RemainingDistance(agent.path.corners);
 
             if (tray)
             {
                 Vector3 trayPos = tray.transform.position;
 
-                if (!agent.hasPath)
+                if (!goingToCollect)
                 {
-                    agent.SetDestination(new Vector3(trayPos.x,trayPos.y,trayPos.z - 2));
+                    goingBack = false;
+                    agent.SetDestination(new Vector3(trayPos.x, trayPos.y, trayPos.z - 2));
+                    goingToCollect = true;
                 }
-        
-                
 
-                if (agent.remainingDistance != Mathf.Infinity  && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 && 
-                    agent.transform.position.x > trayPos.x - 1 && agent.transform.position.z > trayPos.z - 4)
-                {
-                    
+
+
+                    if (agent.remainingDistance != Mathf.Infinity && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 &&
+                   (agent.transform.position - trayPos).magnitude < 2.5f)
+                    {
                         agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
                             tray.transform.position,
                             tray.transform.rotation);
@@ -70,14 +94,11 @@ public class Agent : MonoBehaviour
                         if (t.name.Contains("Slot") && t.childCount > 0)
                         {
                             agentTray.GetComponent<TraySlotting>().slotOnTray(t.GetChild(0).gameObject);                          
-                            //playerHold.pickUpItem(t.GetChild(0).gameObject, t.GetChild(0).GetComponent<IngredientItem>().item);
-                            //Set Tray to not Collectable;
-                            
-                            //break;
+                          
                         }
 
                     }
-                    tray.GetComponent<PhotonView>().RPC("setIsReadyF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
+                    tray.isReady = false;
                     agent.ResetPath();
                     readyToServe = true;
                 }
@@ -87,11 +108,14 @@ public class Agent : MonoBehaviour
             }
             if (readyToServe)
             {
+               
                 float newDist = RemainingDistance(agent.path.corners);
-                if (tray.SP && !agent.hasPath)
+                if (tray.SP && !goingToServe)
                 {
+                    agent.ResetPath();
                     agent.SetDestination(tray.SP.transform.position);
-                    tray.GetComponent<PhotonView>().RPC("setDestF",RpcTarget.All,tray.GetComponent<PhotonView>().ViewID);
+                    tray.SP = null;
+                    goingToServe = true;
                     
                 }
 
@@ -106,15 +130,16 @@ public class Agent : MonoBehaviour
                         }
                     }
                     PhotonNetwork.Destroy(agentTray);
-                    tray.GetComponent<PhotonView>().RPC("setAgentF", RpcTarget.All, tray.GetComponent<PhotonView>().ViewID);
-                    PV.RPC("setTrayNull", RpcTarget.All, PV.ViewID);
+                    tray.Agent = null;
+                    tray = null;
+                    goingToCollect = false;
 
-                    //tray.SP.GetPhotonView().RPC("setUsedF",RpcTarget.All,tray.SP.GetPhotonView().ViewID);
-                    
+                    served = true;
+
                     readyToServe = false;
                     
                     
-                    served = true;
+                    
                     
 
                 }
@@ -122,31 +147,19 @@ public class Agent : MonoBehaviour
 
             if (served)
             {
-                if (!agent.hasPath)
+                goingToServe = false;
+                if (!goingBack)
                 {
-                    
-                    int index = int.Parse(agent.name[6].ToString());
-                    if (agent.CompareTag("Waiter1"))
-                    {
-                        agent.SetDestination(GameSetup.GS.WSP1[index - 1].position);
-                    }else if (agent.CompareTag("Waiter2"))
-                    {
-                        agent.SetDestination(GameSetup.GS.WSP2[index - 1].position);
-
-                    }
-                }
-                float remDist = agent.remainingDistance;
-
-
-                if (remDist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0 )
-                {
-
-                    agent.transform.rotation = Quaternion.identity;
-                    
+                    agent.SetDestination(initialPos);
+            
+                    goingBack = true;
                     served = false;
+                    
                 }
+               
 
             }
+           
          
 
     
@@ -169,6 +182,17 @@ public class Agent : MonoBehaviour
         for (int i = 0; i < points.Length - 1; i++)
             distance += Vector3.Distance(points[i], points[i + 1]);
         return distance;
+    }
+    public void resetAgent()
+    {
+        PhotonNetwork.Destroy(agentTray);
+
+        tray = null;
+        readyToServe = false;
+        served = false;
+        goingBack = false;
+        goingToCollect = false;
+        goingToServe = false;
     }
     [PunRPC]
     void setTray(int agentID, int trayID) {
