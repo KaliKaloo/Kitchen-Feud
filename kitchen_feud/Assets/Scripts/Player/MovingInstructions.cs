@@ -20,6 +20,10 @@ public class MovingInstructions : MonoBehaviour
     private GameObject LocalPlayer;
     public GameObject mushroom1;
     public GameObject mushroom2;
+    public GameObject mouse;
+    public GameObject keyboard;
+    public GameObject owner1;
+    public GameObject owner2;
     private float time = 4f;
     public float timer;
     private bool started = false;
@@ -143,6 +147,13 @@ public class MovingInstructions : MonoBehaviour
 
         // show a random instruction from list then remove it
         int first = Random.Range(0, 2);
+        if(!mouse.activeSelf && !keyboard.activeSelf)
+        {
+            owner1.SetActive(false);
+            owner2.SetActive(false);
+            mouse.SetActive(true);
+            keyboard.SetActive(true);
+        }
         Text.text = randomInstructionList[first];
         randomInstructionList.RemoveAt(first);
 
