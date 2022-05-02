@@ -65,21 +65,7 @@ public class Owner : MonoBehaviour
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
 
-        //if (team == 1)
-        //{
-        //    Owner1 = GameObject.Find("Owner1");
-        //    Owner1.SetActive(false);
-            
 
-
-        //}
-        //else if(team == 2)
-        //{
-        //    Owner2 = GameObject.Find("Owner2");
-        //    Owner2.SetActive(false);
-
-
-        //}
         keyboard = GameObject.Find("keyboard controls");
         mouse = GameObject.Find("mouse controls");
 
@@ -329,6 +315,7 @@ public class Owner : MonoBehaviour
             }
 
             if (shout == true)
+
             {
 
                 foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
@@ -549,10 +536,20 @@ public class Owner : MonoBehaviour
     }
     private IEnumerator leavingKitchen()
     {
+        
         yield return new WaitForSeconds(8);
         StartCoroutine(talking());
-        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Alright guys, I'm going to go away, I'll return soon, we need to win!");
-        agent.SetDestination(spawnPoint);
+
+        if (team == 1)
+        {
+            PV.RPC("setText", RpcTarget.All, PV.ViewID, "Alright guys, I'm going to go away, I'll return soon, we need to win!");
+            agent.SetDestination(spawnPoint);
+        }
+        else if(team == 2)
+        {
+            PV.RPC("setText", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
+            agent.SetDestination(spawnPoint);
+        }
 
 
 
