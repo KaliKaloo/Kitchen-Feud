@@ -21,7 +21,7 @@ public class Owner : MonoBehaviour
     private bool currentlyShouting;
     private bool currentlyTalking2;
     private bool currentlyShouting2;
-
+    private bool returned;
     public bool collected;
     public bool collecting;
     private bool toCollect;
@@ -215,6 +215,16 @@ public class Owner : MonoBehaviour
                     if((transform.position - (new Vector3(12.61f, 0.2f, -4.8f))).magnitude < 1)
                     {
                         StartCoroutine(leavingKitchen());
+                        returningToKitchen = false;
+                        returned = true;
+                    }
+                }
+                if (returned)
+                {
+                    if((transform.position - spawnPoint).magnitude < 1)
+                    {
+                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        returned = false;
                     }
                 }
         
@@ -279,8 +289,7 @@ public class Owner : MonoBehaviour
                        StartCoroutine(startShouting());
 
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
-
-
+                        StartCoroutine(leavingKitchen());
 
 
                     }
@@ -303,7 +312,24 @@ public class Owner : MonoBehaviour
                         agent.ResetPath();
                         agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
                         thrownSmokeBomb = true;
+                        returningToKitchen = true;
 
+                    }
+                }
+                if (returningToKitchen)
+                {
+                    if((transform.position - new Vector3(-6.363f, 0.2f, -7)).magnitude < 1)
+                    {
+                        StartCoroutine(leavingKitchen());
+                        returned = true;
+                    }
+                }
+                if (returned)
+                {
+                    if((transform.position - spawnPoint).magnitude < 3)
+                    {
+                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        returned = false;  
                     }
                 }
 
