@@ -267,8 +267,7 @@ public class Owner : MonoBehaviour
                 }
                 if (otherOwner.thrownSmokeBomb)
                 {
-                    //if(rnd.Next(2) == 0)
-                    if(0 == 0)
+                    if(rnd.Next(2) == 0)
                     {
                         StartCoroutine(startShouting());
                         goThrowSmokeBomb = true;
