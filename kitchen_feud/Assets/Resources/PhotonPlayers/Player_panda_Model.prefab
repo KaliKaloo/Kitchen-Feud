@@ -691,6 +691,7 @@ MonoBehaviour:
   initialKitchenLocation: 0
   kickedBy: 
   nametag: {fileID: 0}
+  inMinigame: 0
   pitchMin: 0
   pitchMax: 0
   volumeMin: 0
@@ -1268,7 +1269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4b8b4794498a74d8dfc73fe5cae7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatespeed: 300
+  rotatespeed: 60
   mvmtSpeed: 8
   playerBody: {fileID: 5189413129841083898}
   rb: {fileID: 0}

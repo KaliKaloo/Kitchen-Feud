@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
     {
         score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
 
-        if (StoveMinigameCounter.collisionCounter >= 20 || StoveMinigameCounter.end)
+        if (StoveMinigameCounter.collisionCounter >= 20)
         {
             backbutton.SetActive(true);
 

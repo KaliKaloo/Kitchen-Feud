@@ -1211,6 +1211,7 @@ MonoBehaviour:
   initialKitchenLocation: 0
   kickedBy: 
   nametag: {fileID: 0}
+  inMinigame: 0
   pitchMin: 0
   pitchMax: 0
   volumeMin: 0

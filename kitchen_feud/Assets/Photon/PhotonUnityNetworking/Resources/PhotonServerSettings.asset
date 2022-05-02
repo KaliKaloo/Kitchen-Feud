@@ -74,6 +74,7 @@ MonoBehaviour:
   - incrementDoor
   - loadSceneP
   - makeTrayAcross
+  - makeTrayMaster
   - onApplianceF
   - onTrayF
   - ovenGame
@@ -107,6 +108,8 @@ MonoBehaviour:
   - setFoodVals
   - SetGrav
   - setHBParent
+  - setInMinigame
+  - setInMinigameF
   - setIsReady
   - setIsReadyF
   - setKickable
@@ -142,6 +145,10 @@ MonoBehaviour:
   - showTickets
   - SkipCutscene
   - StopBoilingSound
+  - showTickets
+  - SkipCutscene
+  - StopBoilingSound
+  - StopFireSound
   - stopPS
   - syncAnim
   - syncIsOpened
