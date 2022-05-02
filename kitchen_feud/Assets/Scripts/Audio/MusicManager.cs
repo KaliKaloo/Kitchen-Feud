@@ -92,6 +92,7 @@ public class MusicManager : MonoBehaviour
         float track2CurrentVol = 0;
         if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
             if (newTrack != track1.clip){
+                track2.loop = location == 3;
                 track2.clip = newTrack;
                 fadingTrack = 1;
                 track1CurrentVol = track1.volume;
@@ -113,7 +114,7 @@ public class MusicManager : MonoBehaviour
         } else {
             
             if (newTrack != track2.clip){
-
+                track1.loop = location == 3;
                 track1.clip = newTrack;
                 fadingTrack = 2;
                 track1CurrentVol = track1.isPlaying ? track1.volume : 0;
@@ -132,6 +133,7 @@ public class MusicManager : MonoBehaviour
             } 
         }
     }
+   
 
     private IEnumerator startTrack(){
         setMusicClips();
