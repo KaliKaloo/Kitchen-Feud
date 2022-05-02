@@ -29,6 +29,7 @@ public class Owner : MonoBehaviour
     private bool following;
     private bool calledName;
     private bool shouting;
+    private bool inKitchenSecondTime;
     public GameObject Owner1;
     public GameObject Owner2;
     public GameObject keyboard;
@@ -47,6 +48,7 @@ public class Owner : MonoBehaviour
     public bool thrownSmokeBomb;
     public Owner otherOwner;
     public Vector3 spawnPoint;
+    public Vector3 kitchenDestinationPoint;
     
 
     private System.Random rnd = new System.Random();
@@ -80,15 +82,17 @@ public class Owner : MonoBehaviour
             {
                 oven = GameObject.Find("Oven1");
                 spawnPoint = GameSetup.GS.OSP1.position;
-                agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+                kitchenDestinationPoint = new Vector3(12.61f, 0.2f, -4.8f);
+                agent.SetDestination(kitchenDestinationPoint);
 
             }
             else if (team == 2)
             {
                 oven = GameObject.Find("Oven2");
                 spawnPoint = GameSetup.GS.OSP2.position;
+                kitchenDestinationPoint = new Vector3(-6.363f, 0.2f, -7);
 
-                agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+                agent.SetDestination(kitchenDestinationPoint);
 
             }
         }
@@ -155,7 +159,6 @@ public class Owner : MonoBehaviour
 
                     if (scores.GetScore1() == scores.GetScore2())
                     {
-                        Debug.LogError("INSTRUCTIONS MAYVE??");
                         PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
@@ -227,6 +230,7 @@ public class Owner : MonoBehaviour
                         returned = false;
                     }
                 }
+       
         
 
             }
@@ -335,10 +339,24 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
+            if(timer.GetLocalTime() == timer.GetTotalTime() / 4)
             {
-                shout = true;
+                transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+                agent.SetDestination(kitchenDestinationPoint);
+                inKitchenSecondTime = true;
+                
             }
+            if (inKitchenSecondTime)
+            {
+                if ((transform.position - spawnPoint).magnitude < 1)
+                {
+                    shout = true;
+                }
+            }
+            //if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
+            //{
+            //    shout = true;
+            //}
 
             if (shout == true)
 
@@ -449,9 +467,8 @@ public class Owner : MonoBehaviour
 
 
 
-            if (!collected && oven.transform.Find("ovencanvas(Clone)"))
+            if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime()/8)
             {
-                Debug.LogError("OVENNNN");
                 if (oven.GetComponentInChildren<Timer>().timer == 5)
                 {
                     collectFromOven();
