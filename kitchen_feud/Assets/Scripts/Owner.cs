@@ -187,7 +187,7 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() == 280)
+                if(timer.GetLocalTime() == timer.GetTotalTime()/2 - 10)
                 {
                    // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
@@ -310,7 +310,7 @@ public class Owner : MonoBehaviour
 
 
             }
-            if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
+            if (timer.GetLocalTime() == 285)
             {
                 shout = true;
             }
