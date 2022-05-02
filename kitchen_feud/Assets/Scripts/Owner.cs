@@ -590,7 +590,7 @@ public class Owner : MonoBehaviour
         }
         else if(team == 2)
         {
-            PV.RPC("setText", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
+            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
             agent.SetDestination(spawnPoint);
         }
 

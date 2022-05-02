@@ -162,6 +162,7 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - playInstructionVideo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
