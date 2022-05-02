@@ -94,6 +94,7 @@ public class PlayerVoiceManager : MonoBehaviour
 				{
 					view.RPC("setEntered", RpcTarget.AllBuffered, view.ViewID, 2);
 				}
+				initialKitchenLocation = true;
 			}
 			if(started == true)
             {

@@ -20,6 +20,8 @@ public class Owner : MonoBehaviour
     private bool currentlyTalking;
     private bool currentlyShouting;
     private bool currentlyTalking2;
+    private bool currentlyShouting2;
+
     public bool collected;
     public bool collecting;
     private bool toCollect;
@@ -41,6 +43,10 @@ public class Owner : MonoBehaviour
     private int localPlayerID;
     private bool goThrowSmokeBomb;
     private bool throwNow;
+    public bool thrownSmokeBomb;
+    public Owner otherOwner;
+    
+
     private System.Random rnd = new System.Random();
     // Start is called before the first frame update
     private void Awake()
@@ -48,6 +54,7 @@ public class Owner : MonoBehaviour
         Debug.LogError(AI.Instance.owner1Avatar.name);
         Owner1 = AI.Instance.owner1Avatar;
         Owner2 = AI.Instance.owner2Avatar;
+
       
     }
     void Start()
@@ -55,6 +62,7 @@ public class Owner : MonoBehaviour
         PV = GetComponent<PhotonView>();
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
+
         //if (team == 1)
         //{
         //    Owner1 = GameObject.Find("Owner1");
@@ -101,8 +109,22 @@ public class Owner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+ 
+
         if (PhotonNetwork.IsMasterClient)
         {
+            if (!otherOwner)
+            {
+                if (team == 1)
+                {
+                    otherOwner = AI.Instance.Owner2.GetComponent<Owner>();
+
+                }
+                else if (team == 2)
+                {
+                    otherOwner = AI.Instance.Owner1.GetComponent<Owner>();
+                }
+            }
             if (!currentlyTalking && anim.GetBool("IsTalking"))
             {
                 anim.SetBool("IsTalking", false);
@@ -165,10 +187,10 @@ public class Owner : MonoBehaviour
 
                 }
 
-               // if(rnd.Next(1) == 1)
+                if(timer.GetLocalTime() == 280)
                 {
                    // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                    if(timer.GetLocalTime() == 280)
+                    if(rnd.Next(2) == 1)
                     {
                         goThrowSmokeBomb = true;
                     }
@@ -192,6 +214,7 @@ public class Owner : MonoBehaviour
                         //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
                         agent.ResetPath();
                         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+                        thrownSmokeBomb = true;
 
                     }
                 }
@@ -242,8 +265,51 @@ public class Owner : MonoBehaviour
                     StartCoroutine(talking());
 
                 }
+                if (otherOwner.thrownSmokeBomb)
+                {
+                    //if(rnd.Next(2) == 0)
+                    if(0 == 0)
+                    {
+                        StartCoroutine(startShouting());
+                        goThrowSmokeBomb = true;
 
-     
+
+
+                    }
+                    else
+                    {
+                       StartCoroutine(startShouting());
+
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
+
+
+
+
+                    }
+                    otherOwner.thrownSmokeBomb = false;
+                }
+                if (goThrowSmokeBomb)
+                {
+                    throwSmokeBomb();
+                    throwNow = true;
+                    goThrowSmokeBomb = false;
+                }
+                if (throwNow)
+                {
+
+                    if ((agent.transform.position - new Vector3(6.743f, 0.2f, 2.076f)).magnitude < 1)
+                    {
+                        GetComponent<SmokeGrenade>().UseSmokeOwner(2);
+                        throwNow = false;
+                        //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
+                        agent.ResetPath();
+                        agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+                        thrownSmokeBomb = true;
+
+                    }
+                }
+
+
             }
             if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
             {
@@ -446,17 +512,22 @@ public class Owner : MonoBehaviour
         //{
         //    Owner2.SetActive(true);
         //}
-        currentlyTalking = true;
-        yield return new WaitForSeconds(3);
-        currentlyTalking = false;
+    
+     
+            currentlyTalking = true;
+            yield return new WaitForSeconds(3);
+            currentlyTalking = false;
+        
+  
         
     }
     private IEnumerator startShouting()
     {
-
-        currentlyShouting = true;
-        yield return new WaitForSeconds(3);
-        currentlyShouting = false;
+   
+            currentlyShouting = true;
+            yield return new WaitForSeconds(3);
+            currentlyShouting = false;
+     
 
     }
 
@@ -496,7 +567,7 @@ public class Owner : MonoBehaviour
             agent.SetDestination(new Vector3(-12.6f, 0.2f, 3.6f));
         }else if(team == 2)
         {
-            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "I'm gonna go over to their kitchen and throw a smoke bomb!");
+            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh, we can't let them do this! I'm going to throw a smoke bomb too!");
             agent.SetDestination(new Vector3(6.743f, 0.2f, 2.076f));
 
         }
@@ -509,7 +580,7 @@ public class Owner : MonoBehaviour
 
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
       
-        if( pVM.myTeam == 1 && pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
+        if(  pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
@@ -525,7 +596,7 @@ public class Owner : MonoBehaviour
         int playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
         Debug.LogError(PhotonView.Find(playerID).IsMine);
-        if ( pVM.myTeam == 2 && pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
+        if ( pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
             //Debug.LogError("TESTTT");
             o.keyboard.SetActive(false);
