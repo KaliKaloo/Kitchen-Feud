@@ -25,6 +25,8 @@ public class cutController : MonoBehaviour
     public GameObject StartButton;
     public int finalScore;
     public AudioSource source;
+    public float pitchMin, pitchMax, volumeMin, volumeMax;
+    public AudioClip[] diffSounds;
 
     private int score = 100;
     private int num = 0;
@@ -81,10 +83,13 @@ public class cutController : MonoBehaviour
         List<Sprite> dishSprites = InstantiateList(dish.recipe);
         newIngredients = new List<Sprite>(dishSprites);
         
-        instructions.SetActive(false);
+        //instructions.SetActive(false);
         StartButton.SetActive(false);
         scoreSystem.SetActive(true);
-        
+
+        // start cooking animation
+        playerAnimator.animator.SetBool("IsCooking", true);
+
         //call ingredient spawner with a list od ingredient sprites
         IngredientSpawner.StartSpawn(newIngredients);
 

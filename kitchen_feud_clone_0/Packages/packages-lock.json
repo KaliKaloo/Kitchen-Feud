@@ -103,13 +103,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.settings-manager": {
-      "version": "1.0.3",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
     "com.unity.shadergraph": {
       "version": "10.8.1",
       "depth": 1,

@@ -36,13 +36,13 @@ MonoBehaviour:
   RpcList:
   - addComps
   - addItemRPC
-  - addOp
   - addPlayer
   - addSecondsRPC
   - appendKickedBy
   - applianceBool
   - changeLayer
   - clearAll
+  - clearApplPlayers
   - clearItems
   - clearKickedBy
   - clearPlayers
@@ -52,15 +52,15 @@ MonoBehaviour:
   - decrementDoor
   - destHB
   - destP
+  - destroyAfterServed
   - DestroyRpc
   - DestroySpaceship
   - DisableIngredientView
+  - DisableItemPickable
   - DisablePushing
   - DisableView
   - doFd
   - enableBack
-  - enableMoving
-  - EnablePforAll
   - EnablePushing
   - EnView
   - falseForOthers
@@ -70,12 +70,11 @@ MonoBehaviour:
   - globalDestroy
   - glowSettings
   - hideFryingUI
+  - increment
   - incrementDoor
-  - loadS
+  - loadSceneP
   - makeTrayAcross
-  - moveLeft
-  - movePan
-  - moveRight
+  - makeTrayMaster
   - onApplianceF
   - onTrayF
   - ovenGame
@@ -83,32 +82,36 @@ MonoBehaviour:
   - playDing
   - PlayDropSound
   - PlayFireSound
+  - playPS
   - PlayServingSound
   - PlaySmokeBombSound
+  - playVideo
   - pointSync
   - push
   - removeFromApplianceRPC
   - removeFromTray
-  - removeOp
   - resetAcross
   - resetCount
-  - resetIsPressed
-  - resetPlayerPressing
   - resetTimer
   - resetTimerRPC
   - RespawnSpaceship
   - setAddedF
+  - setAgent
+  - setAgentF
+  - setAgentName
   - setAppl
   - setCanvActive
-  - setDishSO
+  - setDest
+  - setDestF
   - setEntered
   - setEnteredF
   - setFoodVals
   - SetGrav
-  - setGravScale
   - setHBParent
-  - setHeldobj
-  - setHeldobjAsNull
+  - setInMinigame
+  - setInMinigameF
+  - setIsReady
+  - setIsReadyF
   - setKickable
   - setKickableF
   - setMyC
@@ -119,10 +122,10 @@ MonoBehaviour:
   - SetParentAsSlot
   - setParentP
   - setParentPlate
+  - setParentTray
   - setPlateStartVals
   - setPlayed
   - setPlayer
-  - setPlayerPressing
   - setPoints
   - setSetF
   - setSignParent
@@ -131,9 +134,15 @@ MonoBehaviour:
   - SetToF
   - SetToFalse
   - SetToTrue
-  - ShowingWithOrderTeam1
-  - ShowingWithOrderTeam2
+  - setTray
+  - setTrayNull
+  - setUsed
+  - setUsedF
+  - showTickets
+  - SkipCutscene
   - StopBoilingSound
+  - StopFireSound
+  - stopPS
   - syncAnim
   - syncIsOpened
   - syncMat
@@ -146,9 +155,6 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
-  - loadSceneP
-  - showTickets
-  - clearApplPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

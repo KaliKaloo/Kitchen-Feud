@@ -2,9 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using UnityEngine.UIElements;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using TMPro;
+
+
 public class PlayerVoiceManager : MonoBehaviour
 {
 	public Rigidbody player;
@@ -29,15 +32,26 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool started1;
 	public List<int> kickedBy;
 	public GameObject nametag;
+	public bool inMinigame;
+	public float pitchMin, pitchMax, volumeMin, volumeMax;
+	Transform damageVignette;
+    // private Vignette vg; 
 	// Start is called before the first frame update
 	void Start()
 	{
+		pitchMin = 0.5f;
+		pitchMax = 3f;
+		volumeMin = 0.7f;
+		volumeMax = 1f;
 		entered1 = false;
 		entered2 = false;
 		started = false;
 		started1 = false;
 		view = GetComponent<PhotonView>();
 		myC = 1;
+
+		damageVignette = GameObject.Find("PostProcessing Group").transform.GetChild(2);
+
 		if (PhotonNetwork.IsConnected)
 		{
 			view = GetComponent<PhotonView>();
@@ -99,14 +113,14 @@ public class PlayerVoiceManager : MonoBehaviour
 				Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 40))
+				if (Physics.Raycast(ray, out hit, 5))
 				{
 					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
 					if (obj != null)
 					{
 						if (obj.tag == "Player" && obj.GetComponent<PlayerVoiceManager>().isKickable &&
-							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam)
+							obj.GetComponent<PlayerController>().myTeam != GetComponent<PlayerController>().myTeam && !obj.GetComponent<PlayerVoiceManager>().inMinigame)
 						{
 							view.RPC("setStarted", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 1);
 							view.RPC("resetTimer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
@@ -120,7 +134,8 @@ public class PlayerVoiceManager : MonoBehaviour
 							if (!obj.GetComponent<PlayerVoiceManager>().healthbar1)
 							{
 								theirHealthBar = PhotonNetwork.Instantiate(Path.Combine("HealthBar", "Canvas 1"), obj.transform.GetChild(4).position, Quaternion.identity);
-								view.RPC("setHBParent", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
+
+								view.RPC("setHBParent", RpcTarget.AllBuffered, obj.GetComponent<PhotonView>().ViewID, theirHealthBar.GetComponent<PhotonView>().ViewID);
 							}
 							else
 							{
@@ -164,6 +179,12 @@ public class PlayerVoiceManager : MonoBehaviour
 		timer += Time.deltaTime;
 			
     }
+
+	IEnumerator HurtFlash(GameObject vg){
+		vg.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		vg.SetActive(false);
+	}
 	
 	[PunRPC]
 	void setHBParent(int viewID, int hBviewID)
@@ -186,10 +207,19 @@ public class PlayerVoiceManager : MonoBehaviour
 		HealthBar hb = obj.GetComponent<PlayerVoiceManager>().healthbar1.transform.GetChild(0).GetComponent<HealthBar>();
 		if (x == 0)
 		{
+			GameObject vg = obj.GetComponent<PlayerVoiceManager>().damageVignette.gameObject;
+			if (obj.GetComponent<PhotonView>().IsMine)
+			{
+				StartCoroutine(HurtFlash(vg));
+			}
+
 			//SOUND ------------------------------------------------
+			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
+			obj.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
 			obj.GetComponent<AudioSource>().Play();
 			// -----------------------------------------------------
 			hb.SetHealth(hb.slider.value - 0.3f);
+			
         }
         else
         {
@@ -263,9 +293,12 @@ public class PlayerVoiceManager : MonoBehaviour
 		GameObject obj = PhotonView.Find(objID).gameObject;
 		GameObject me = PhotonView.Find(myID).gameObject;
 		Rigidbody rb = obj.GetComponent<Rigidbody>();
-		Vector3 direction = obj.transform.position - me.transform.position;
-		direction.y = 0;
-		rb.AddForce(direction * 0.3f, ForceMode.Impulse);
+		if (obj.GetComponent<PhotonView>().IsMine)
+		{
+			Vector3 direction = obj.transform.position - me.transform.position;
+			direction.y = 0;
+			rb.AddForce(direction * 3, ForceMode.Impulse);
+		}
 	}
 	[PunRPC]
 	void setStarted(int viewID,int x)
@@ -302,5 +335,15 @@ public class PlayerVoiceManager : MonoBehaviour
 			PhotonView.Find(viewiD).transform.GetChild(5).transform.GetChild(0)
 				.GetComponentInChildren<TextMeshProUGUI>().text = name;
 		}
+	}
+	[PunRPC]
+	void setInMinigame(int viewID)
+    {
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = true;
+    }
+	[PunRPC]
+	void setInMinigameF(int viewID)
+	{
+		PhotonView.Find(viewID).GetComponent<PlayerVoiceManager>().inMinigame = false;
 	}
 }

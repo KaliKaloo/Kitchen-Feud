@@ -8,16 +8,18 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+using TMPro;
+
 // IMPORTANT:
 // timer and score parser class have been moved to separate scripts
 // CHECK scripts/menu folder for the relevant scripts
 
 public class scoreController : MonoBehaviour
 {
-    [SerializeField] private Text score1Text;
-    [SerializeField] private Text score2Text;
+    [SerializeField] private TextMeshProUGUI score1Text;
+    [SerializeField] private TextMeshProUGUI score2Text;
     private bool gameOver;
-    [SerializeField] private Text timerText;
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject loadingScreen;
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
@@ -29,7 +31,6 @@ public class scoreController : MonoBehaviour
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
 
-    private MusicManager music;
     private bool startGame = false;
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     public PhotonView PV;
@@ -87,7 +88,8 @@ public class scoreController : MonoBehaviour
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
-            
+
+
             if (startGame)
             {
                 OutputTime();
@@ -135,7 +137,6 @@ public class scoreController : MonoBehaviour
                 
 
 
-                music = FindObjectOfType<MusicManager>();
             }
         }
         else
@@ -144,10 +145,9 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
-            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
 
-            music = FindObjectOfType<MusicManager>();
         }
     }
 
@@ -158,7 +158,10 @@ public class scoreController : MonoBehaviour
         if (timer.GetLocalTime() > 0)
         {
             // updates timer and text in timer
-            timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            //Debug.LogError("Secs: " + timer.GetLocalTime() + "TIME: " + ConvertSecondToMinutes(timer.GetLocalTime()));
+
+            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+            StartCoroutine(getLocalTime());
         }
 
         // SIGNAL FOR GAME OVER:
@@ -194,6 +197,12 @@ public class scoreController : MonoBehaviour
 
         }
 
+
+    }
+    public IEnumerator getLocalTime()
+    {
+        yield return new WaitForSeconds(1);
+        timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
 
     }
 

@@ -20,22 +20,25 @@ public class CuttableObject : MonoBehaviour
             Destroy(gameObject);
             CutController = GameObject.Find("CutController").transform.GetComponent<cutController>();
             //SOUND -----------------------------------
+            CutController.source.clip = CutController.diffSounds[Random.Range(0, CutController.diffSounds.Length)];
+            CutController.source.pitch = Random.Range(CutController.pitchMin, CutController.pitchMax);
+            CutController.source.volume = Random.Range(CutController.volumeMin, CutController.volumeMax);
             CutController.source.Play();
             // ----------------------------------------
             
+            CutController.Ingredient += 1;
+
             if (!correctIngredient)
             {
-                     CutController.Score -= 10;
+                CutController.Score -= 10;
             }
-            else
+           
+               
+            if (CutController.Ingredient == 15)
             {
-                CutController.Ingredient += 1;
-                
-                if (CutController.Ingredient == 15)
-                {
-                    CutController.calculateScore();
-                }
+                CutController.calculateScore();
             }
+            
         }
     }
 

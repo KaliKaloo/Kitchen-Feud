@@ -16,10 +16,17 @@ public class pickableItem : Interactable
     public Tray tray2;
     public Appliance appliance;
     public SlotsController applianceSlots;
+
+    public Vector3 defaultScale;
     //SOUND --------------------------------------------
     public AudioSource dropSound;
    //-----------------------------------------------------
-    public override void Interact()
+   private void Start()
+   {
+       defaultScale = transform.localScale;
+   }
+
+   public override void Interact()
     {
         
         playerHold = player.GetComponent<PlayerHolding>();
@@ -64,6 +71,11 @@ public class pickableItem : Interactable
     {
         Interact();
     }
+    public IEnumerator removeKinematics(GameObject heldObj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
+    }
 
  
 
@@ -72,6 +84,7 @@ public class pickableItem : Interactable
     {
         this.GetComponent<Rigidbody>().useGravity = true;
     }
+
     [PunRPC]
     void setParent(int viewID,int viewID1)
     {
@@ -80,6 +93,27 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        StartCoroutine(removeKinematics(PhotonView.Find(viewID).gameObject));
+
+    }
+    [PunRPC]
+    void setParentTray(int viewID,int viewID1)
+    {
+        PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
+        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+        PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        if (PhotonView.Find(viewID).GetComponent<IngredientItem>())
+        {
+            PhotonView.Find(viewID).transform.localScale =
+                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
+        }else if (PhotonView.Find(viewID).GetComponent<Dish>())
+        {
+            PhotonView.Find(viewID).transform.localScale =
+                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+        }
+        
 
     }
     [PunRPC]
@@ -88,8 +122,8 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).GetComponent<pickableItem>().onTray = true;
         PhotonView.Find(viewID).GetComponent<pickableItem>().Tray = PhotonView.Find(trayID).GetComponent<Tray>().tray;
         PhotonView.Find(viewID).GetComponent<pickableItem>().tray2 = PhotonView.Find(trayID).GetComponent<Tray>();
-
     }
+
     [PunRPC]
     void applianceBool(int viewID,int applianceID, int slotsID)
     {
@@ -114,5 +148,10 @@ public class pickableItem : Interactable
     {
 
         Destroy(PhotonView.Find(viewID).gameObject);
+    }
+    [PunRPC]
+    void DisableItemPickable(int viewID)
+    {
+        PhotonView.Find(viewID).GetComponent<pickableItem>().enabled = false;
     }
 }

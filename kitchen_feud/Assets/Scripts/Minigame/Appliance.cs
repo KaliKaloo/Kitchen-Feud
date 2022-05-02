@@ -49,6 +49,7 @@ public class Appliance : Interactable
 
     public override void Interact()
     {
+      
         
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
@@ -69,6 +70,8 @@ public class Appliance : Interactable
                     {
                         this.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                             player.GetComponent<PhotonView>().ViewID);
+
+                        globalClicked.applianceInteract = true;
                     }
                     else
                     {
@@ -134,6 +137,8 @@ public class Appliance : Interactable
                         //canvas.gameObject.SetActive(false);
                         minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
                             new Vector3(0, 0, 0), transform.rotation);
+                        pv.RPC("setInMinigame", RpcTarget.All, pv.ViewID);
+
 
                         UIcamera.enabled = true;
                         playerController = player.GetComponent<PlayerController>();
@@ -158,6 +163,8 @@ public class Appliance : Interactable
                     {
                         
                         minigameCanvas2.SetActive(true);
+                        pv.RPC("setInMinigame", RpcTarget.All, pv.ViewID);
+
                         myPv.RPC("hideFryingUI",RpcTarget.AllBuffered,minigameCanvas2.GetPhotonView().ViewID);
                         
                         canvas.SetActive(false);
@@ -174,6 +181,8 @@ public class Appliance : Interactable
                             Path.Combine("DishPrefabs", foundDish.Prefab.name), transform.GetChild(0).position,
                             transform.rotation);
 
+                        // start cooking animation
+                        playerAnimator.animator.SetBool("IsCooking", true);
                     }
                 }
                 else
@@ -185,6 +194,7 @@ public class Appliance : Interactable
 
                     canvas.gameObject.SetActive(false);
                     minigameCanvas.gameObject.SetActive(true);
+                    pv.RPC("setInMinigame", RpcTarget.All, pv.ViewID);
                     
                     //SOUND -------------------------------------------------------
                     
@@ -424,7 +434,7 @@ public class Appliance : Interactable
     [PunRPC]
     void hideFryingUI(int canvID)
     {
-        PhotonView.Find(canvID).transform.Find("Waiting").gameObject.SetActive(false);
+        //PhotonView.Find(canvID).transform.Find("instruction panel").gameObject.SetActive(false);
         PhotonView.Find(canvID).transform.Find("BackButton").gameObject.SetActive(false);
 
     }

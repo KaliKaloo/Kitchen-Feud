@@ -24,8 +24,10 @@ public class SandwichStation: MonoBehaviour
     {
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
-            MusicManager.instance.minigameSwitch();
-		    MusicManager.instance.inMG = true;
+            // MusicManager.instance.minigameSwitch();
+		    // MusicManager.instance.inMG = true;
+            MusicManagerOld.instance.minigameSwitch();
+		    MusicManagerOld.instance.inMG = true;
             backbutton.appliance = GetComponent<Appliance>();
 
             if (appliance.foundDish != null)
@@ -56,7 +58,6 @@ public class SandwichStation: MonoBehaviour
                 else if (sandwichCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                     dishOfFoundDish.points = dishOfFoundDish.points * 2;
 
-                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
             else
             {

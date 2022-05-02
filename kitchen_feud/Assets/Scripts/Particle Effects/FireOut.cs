@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FireOut : MonoBehaviour {
     private ParticleSystem[] PS;
@@ -8,8 +9,8 @@ public class FireOut : MonoBehaviour {
     private ParticleSystem.EmissionModule fireEmission;
     private bool notFound = false;
     private float currentEmission = 0;
-    public float startEmission;
     [SerializeField] private float fadeRate = 1;
+    public AudioSource fireSound;
 
     // Use this for initialization
     void Start()
@@ -30,7 +31,7 @@ public class FireOut : MonoBehaviour {
     }
 
 	void Update () {
-        fireEmission.rateOverTime = startEmission;
+
         // if no particle system, do nothing
         if (notFound)
             return;
@@ -44,11 +45,19 @@ public class FireOut : MonoBehaviour {
                     p.Stop();
                 }
             }
+            //SOUND -------------------------------------------
+            fireSound.gameObject.GetComponent<PhotonView>().RPC("StopFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
+            //-------------------------------------------------
             this.enabled = false;
         
         }
 	}
 
+    public void resetEmission(){
+        fireEmission.rateOverTime = 10;
+        currentEmission = fireEmission.rateOverTime.constant;
+
+    }
 
     private void OnParticleCollision(GameObject other)
     {

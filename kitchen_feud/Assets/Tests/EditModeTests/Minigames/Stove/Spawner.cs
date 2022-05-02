@@ -20,7 +20,7 @@ public class SpawnerTests
         spawner.team1Background = new GameObject();
         spawner.team2Background = new GameObject();
         spawner.minigameCanvas = new GameObject();
-        spawner.topBar = new GameObject();
+        spawner.instructions = new GameObject();
         spawner.startButton = new GameObject();
         spawner.appliance = obj.AddComponent<Appliance>();
         spawner.dishSO = ScriptableObject.CreateInstance<DishSO>();
@@ -39,7 +39,6 @@ public class SpawnerTests
     {
         spawner.StartGame();
 
-        Assert.IsFalse(spawner.topBar.activeSelf);
         Assert.IsFalse(spawner.startButton.activeSelf);
         Assert.AreEqual(0, spawner.newIngredients.Count);
         Assert.AreEqual(new List<Sprite>(){}, spawner.newIngredients);
@@ -56,7 +55,6 @@ public class SpawnerTests
 
         spawner.StartGame();
 
-        Assert.IsFalse(spawner.topBar.activeSelf);
         Assert.IsFalse(spawner.startButton.activeSelf);
         Assert.AreEqual(2, spawner.newIngredients.Count);
         Assert.AreEqual(ingredient1, spawner.newIngredients);

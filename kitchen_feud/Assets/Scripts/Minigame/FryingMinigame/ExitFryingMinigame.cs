@@ -30,10 +30,18 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
+		MusicManagerOld.instance.minigameEnd();
+		MusicManagerOld.instance.inMG = false;
+		
+		// stop cooking animation
+		playerAnimator.animator.SetBool("IsCooking", false);
 	    GameObject gamePlayer = GameObject.Find("Local");
-	    
+		PhotonView playerV = gamePlayer.GetPhotonView();
+		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
 
-	    if (appliance)
+		
+
+		if (appliance)
 	    {
 		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
@@ -64,6 +72,7 @@ public class ExitFryingMinigame : MonoBehaviour
         appliance.UIcamera.enabled =  false;
         Destroy(minigameCanvas);
 	
+
 
     }
 

@@ -5,6 +5,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
+public class playerAnimator
+{
+    public static Animator animator;
+
+    public static void SetAnimator(Animator newAnimator)
+    {
+        animator = newAnimator;
+    }
+
+    public static void ResetBools()
+    {
+        animator.SetBool("IsStrafingRight", false);
+        animator.SetBool("IsStrafingLeft", false);
+        animator.SetBool("IsMovingForwards", false);
+        animator.SetBool("IsMovingBackwards", false);
+        animator.SetBool("IsCooking", false);
+    }
+}
+
 public class playerMvmt : MonoBehaviour
 {
     public float rotatespeed;
@@ -39,6 +58,7 @@ public class playerMvmt : MonoBehaviour
         }
         //-------------------------------------------------------------------------
         animator = parent.GetComponent<Animator>();
+        playerAnimator.SetAnimator(animator);
 
     }
 
@@ -56,31 +76,32 @@ public class playerMvmt : MonoBehaviour
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
-            //SideStepping animation
-            if (Vertical == 0f && Horizontal != 0)
-            {
-            }
 
-            float dotProduct = Vector3.Dot(movement, transform.forward);
+            // walk forward
+            if (Vertical > 0)
+                animator.SetBool("IsMovingForwards", true);
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingForwards", false);
 
-            // if player moving forward
-            if (dotProduct > 0)
-				animator.SetBool("IsMovingForwards", true);
-            // if player moving backward
-            else if (dotProduct < 0) 
-				animator.SetBool("IsMovingBackwards", true);
+            // walk backwards
+            if (Vertical < 0)
+                animator.SetBool("IsMovingBackwards", true);
+            else if (Vertical == 0)
+                animator.SetBool("IsMovingBackwards", false);
 
-            //disable movement
-            else {
-                // disable backwards
-                if (animator.GetBool("IsMovingBackwards"))
-                    animator.SetBool("IsMovingBackwards", false);
-                // disable forwards
-                else if (animator.GetBool("IsMovingForwards"))
-				    animator.SetBool("IsMovingForwards", false);
-            }
-                
-          
+            // strafe right
+            if (Horizontal > 0)
+                animator.SetBool("IsStrafingRight", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingRight", false);
+
+            // strafe left
+            if (Horizontal < 0)
+                animator.SetBool("IsStrafingLeft", true);
+            else if (Horizontal == 0)
+                animator.SetBool("IsStrafingLeft", false);
+
+
         }
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
@@ -97,7 +118,6 @@ public class playerMvmt : MonoBehaviour
         {
             if (Input.GetMouseButton(1))
             {
-
                 Cursor.lockState = CursorLockMode.Locked;
                 float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
                 float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
@@ -107,33 +127,18 @@ public class playerMvmt : MonoBehaviour
                 playerBody.Rotate(Vector3.up*mouseX);
 
             }
-            else if (Input.GetKey(KeyCode.Z))
+            else if (Input.GetKey(KeyCode.Q))
             {
-
-                Cursor.lockState = CursorLockMode.Locked;
-                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
-                //xRotation -= mouseY;
-                xRotation -= rotatespeed * Time.deltaTime;
-                //xRotation = Mathf.Clamp(xRotation, -90f, 48f);
-                //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
-                playerBody.Rotate(Vector3.up*mouseX);
+                float rotation = rotatespeed * Time.deltaTime;
+                xRotation -= rotation;
+                playerBody.Rotate(-Vector3.up*rotation);
 
             }
-            else if (Input.GetKey(KeyCode.C))
+            else if (Input.GetKey(KeyCode.E))
             {
-
-                Cursor.lockState = CursorLockMode.Locked;
-                float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
-                float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
-                //xRotation -= mouseY;
-                xRotation += rotatespeed * Time.deltaTime;
-                //xRotation = Mathf.Clamp(xRotation, -90f, 48f);
-                //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
-                playerBody.Rotate(Vector3.up*mouseX);
-
+                float rotation = rotatespeed * Time.deltaTime;
+                xRotation += rotation;
+                playerBody.Rotate(Vector3.up*rotation);
             }
             else
             {
