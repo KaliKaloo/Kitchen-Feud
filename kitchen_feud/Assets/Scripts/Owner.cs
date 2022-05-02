@@ -308,7 +308,7 @@ public class Owner : MonoBehaviour
                     }
                 }
 
-
+                
             }
             if (timer.GetLocalTime() == 285)
             {
@@ -338,7 +338,10 @@ public class Owner : MonoBehaviour
 
                                     if (!calledName)
                                     {
-                                        Text.text = p.NickName + "!";
+                                        PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+
+
+                                        //Text.text = p.NickName + "!";
                                         calledName = true;
                                     }
                                     break;
@@ -361,7 +364,9 @@ public class Owner : MonoBehaviour
 
                                     if (!calledName)
                                     {
-                                        Text.text = p.NickName + "!";
+                                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
+
+                                       // Text.text = p.NickName + "!";
                                         calledName = true;
                                     }
                                     break;
