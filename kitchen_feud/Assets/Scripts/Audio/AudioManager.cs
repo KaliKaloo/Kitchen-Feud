@@ -87,7 +87,6 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                MusicManager.instance.switchLocation(team);
 
                 if (team == 1)
                 {

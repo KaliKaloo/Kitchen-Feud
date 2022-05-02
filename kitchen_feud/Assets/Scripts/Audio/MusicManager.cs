@@ -35,23 +35,24 @@ public class MusicManager : MonoBehaviour
         track1 = gameObject.AddComponent<AudioSource>();
         track1.volume = 0;
         track2 = gameObject.AddComponent<AudioSource>();
+        track2.volume = 0;
+
 
         // start playing
-        Debug.Log("hm");
-
         StartCoroutine(startTrack());
     }
 
 
     void Update()
     {
-        // switch to part 2 tracks
+        // switch to part 2 tracks in latter part of game
         if (!switched && !inMG && timer.GetLocalTime() < (int)(totalTime*0.3)){
             if(location == 1 || location == 2){
                 switched = true;
                 setMusicClips();
             }
         }
+        //adjust volume
         GameObject volumeSlider = GameObject.Find("Music Volume");
         if (volumeSlider){
             setVolume(volumeSlider);
@@ -66,8 +67,6 @@ public class MusicManager : MonoBehaviour
         }else{
             musicClips = hallway;
         }
-        Debug.Log(location);
-
     }
 
     private AudioSource getAudioSource(){
@@ -79,40 +78,64 @@ public class MusicManager : MonoBehaviour
     }
 
     public void switchLocation(int loc){
-        AudioSource oldAudio = getAudioSource();
+        CancelInvoke("playRandom");
         location = loc;
-        AudioSource newAudio = getAudioSource();
         setMusicClips();
         AudioClip newTrack = musicClips.GetRandomAudioClip();
-        StartCoroutine(switchTrack(oldAudio, newAudio, newTrack));
+        StartCoroutine(switchTrack(newTrack));
     }
 
-    private IEnumerator switchTrack(AudioSource oldAudio, AudioSource newAudio, AudioClip newTrack){
+    private IEnumerator switchTrack(AudioClip newTrack){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
+
         float track2CurrentVol = 0;
-    
-        newAudio.clip = newTrack;
-        fadingTrack = 1;
-        track1CurrentVol = oldAudio.volume;
-        track2CurrentVol = newAudio.isPlaying ? newAudio.volume : 0;
+        if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
+            if (newTrack != track1.clip){
+                track2.clip = newTrack;
+                fadingTrack = 1;
+                track1CurrentVol = track1.volume;
+                track2CurrentVol = track2.isPlaying ? track2.volume : 0;
 
-        newAudio.Play();
+                track2.Play();
 
-        while (timeElapsed < fadeTime){
-            oldAudio.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
-            newAudio.volume = Mathf.Lerp(track2CurrentVol, 1, timeElapsed/fadeTime);
-            timeElapsed += Time.deltaTime;
-            yield return null;
+                while (timeElapsed < fadeTime){
+                    track1.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
+                    track2.volume = Mathf.Lerp(track2CurrentVol, musicVol, timeElapsed/fadeTime);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
 
+                }
+                track1.Stop();
+                
+            }
+
+        } else {
+            
+            if (newTrack != track2.clip){
+
+                track1.clip = newTrack;
+                fadingTrack = 2;
+                track1CurrentVol = track1.isPlaying ? track1.volume : 0;
+                track2CurrentVol = track2.volume;
+                track1.Play();
+
+                while (timeElapsed < fadeTime){
+                    track2.volume = Mathf.Lerp(track2CurrentVol, 0, timeElapsed/fadeTime);
+                    track1.volume = Mathf.Lerp(track1CurrentVol, musicVol, timeElapsed/fadeTime);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+
+                }
+                
+                track2.Stop();
+            } 
         }
-        oldAudio.Stop();
     }
 
     private IEnumerator startTrack(){
         setMusicClips();
         track1.clip = musicClips.GetRandomAudioClip();
-        Debug.Log(musicClips.GetRandomAudioClip());
         track1.Play();
         float timeElapsed = 0;
         while (timeElapsed < fadeTime){
