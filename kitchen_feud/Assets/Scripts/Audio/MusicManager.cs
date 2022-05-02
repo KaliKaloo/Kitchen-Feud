@@ -8,14 +8,14 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2, track3, track4;
+    private AudioSource track1, track2;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
     public AudioClip k1_MG, k2_MG ;
 
     public static MusicManager instance;
 
-    private int totalTime, fadingTrack, fadeTime = 10;
+    private int totalTime, fadingTrack, fadeTime = 5;
 
     private bool switched = false, MGStarted = false;
     public int location;
@@ -33,14 +33,13 @@ public class MusicManager : MonoBehaviour
     {
         totalTime = timer.GetTotalTime();
         track1 = gameObject.AddComponent<AudioSource>();
+        track1.volume = 0;
         track2 = gameObject.AddComponent<AudioSource>();
-        track3 = gameObject.AddComponent<AudioSource>();
-        track4 = gameObject.AddComponent<AudioSource>();
-        track3.loop = true;
 
         // start playing
-        setMusicClips();
-        playRandom();
+        Debug.Log("hm");
+
+        StartCoroutine(startTrack());
     }
 
 
@@ -53,7 +52,10 @@ public class MusicManager : MonoBehaviour
                 setMusicClips();
             }
         }
-        setVolume();
+        GameObject volumeSlider = GameObject.Find("Music Volume");
+        if (volumeSlider){
+            setVolume(volumeSlider);
+        }
     }
 
     void setMusicClips(){
@@ -64,16 +66,15 @@ public class MusicManager : MonoBehaviour
         }else{
             musicClips = hallway;
         }
+        Debug.Log(location);
 
     }
 
     private AudioSource getAudioSource(){
         if (location == 1){
             return track1;
-        }else if (location == 2){
-            return track2;
         }else{
-            return track3;
+            return track2;
         }
     }
 
@@ -81,13 +82,12 @@ public class MusicManager : MonoBehaviour
         AudioSource oldAudio = getAudioSource();
         location = loc;
         AudioSource newAudio = getAudioSource();
-        StartCoroutine(switchTrack(oldAudio, newAudio));
-    }
-
-
-    private IEnumerator switchTrack(AudioSource oldAudio, AudioSource newAudio){
         setMusicClips();
         AudioClip newTrack = musicClips.GetRandomAudioClip();
+        StartCoroutine(switchTrack(oldAudio, newAudio, newTrack));
+    }
+
+    private IEnumerator switchTrack(AudioSource oldAudio, AudioSource newAudio, AudioClip newTrack){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
         float track2CurrentVol = 0;
@@ -109,6 +109,19 @@ public class MusicManager : MonoBehaviour
         oldAudio.Stop();
     }
 
+    private IEnumerator startTrack(){
+        setMusicClips();
+        track1.clip = musicClips.GetRandomAudioClip();
+        Debug.Log(musicClips.GetRandomAudioClip());
+        track1.Play();
+        float timeElapsed = 0;
+        while (timeElapsed < fadeTime){
+            track1.volume = Mathf.Lerp(0, musicVol, timeElapsed/fadeTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        Invoke("playRandom", track1.clip.length);
+    }
 
     public void playRandom(){
         AudioSource track = getAudioSource();
@@ -119,36 +132,33 @@ public class MusicManager : MonoBehaviour
 
 
     public void minigameSwitch(){
-        if (!MGStarted){
-            AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
-            CancelInvoke("playRandom");
-            AudioSource track = location == 1 ? track1 : track2;
-            track.Pause();
-            track4.clip = newTrack;
-            track4.Play();
-            MGStarted = true;
-        }
+        // if (!MGStarted){
+        //     AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
+        //     CancelInvoke("playRandom");
+        //     AudioSource track = location == 1 ? track1 : track2;
+        //     track.Pause();
+        //     mgSource.clip = newTrack;
+        //     mgSource.Play();
+        //     MGStarted = true;
+        // }
     }
 
     public void minigameEnd(){
-        track4.Stop();
-        AudioSource track = location == 1 ? track1 : track2;
-        track.UnPause();
-        Invoke("playRandom", track.clip.length - track.time);
-        MGStarted = false;
+        // mgSource.Stop();
+        // AudioSource track = location == 1 ? track1 : track2;
+        // track.UnPause();
+        // Invoke("playRandom", track.clip.length - track.time);
+        // MGStarted = false;
     }
 
   
     
-    private void setVolume(){
-        GameObject volumeSlider = GameObject.Find("Music Volume");
-        if (volumeSlider){
-            musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
-            if (track1.isPlaying && !track2.isPlaying)
-                track1.volume = musicVol;
-            else if (track2.isPlaying && !track1.isPlaying)
-                track2.volume = musicVol;
-        }
+    private void setVolume(GameObject volumeSlider){
+        musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
+        if (track1.isPlaying && !track2.isPlaying)
+            track1.volume = musicVol;
+        else if (track2.isPlaying && !track1.isPlaying)
+            track2.volume = musicVol;
     }
    
 }
