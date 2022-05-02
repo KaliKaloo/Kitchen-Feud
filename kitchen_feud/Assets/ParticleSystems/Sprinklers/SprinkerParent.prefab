@@ -4882,6 +4882,10 @@ PrefabInstance:
       propertyPath: CollisionModule.type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198020576693072572, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 12286
+      objectReference: {fileID: 0}
     - target: {fileID: 198044518086439584, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4996,6 +5000,10 @@ PrefabInstance:
       propertyPath: CollisionModule.type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198020576693072572, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 12286
+      objectReference: {fileID: 0}
     - target: {fileID: 198044518086439584, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -5101,6 +5109,10 @@ PrefabInstance:
     - target: {fileID: 198020576693072572, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198020576693072572, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 12286
       objectReference: {fileID: 0}
     - target: {fileID: 198044518086439584, guid: 3d19250bdd4e0df4c8da855e85a8d70b, type: 3}
       propertyPath: playOnAwake
