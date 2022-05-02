@@ -25,6 +25,7 @@ public class Owner : MonoBehaviour
     public bool collected;
     public bool collecting;
     private bool toCollect;
+    private bool returningToKitchen;
     private bool following;
     private bool calledName;
     private bool shouting;
@@ -45,6 +46,7 @@ public class Owner : MonoBehaviour
     private bool throwNow;
     public bool thrownSmokeBomb;
     public Owner otherOwner;
+    public Vector3 spawnPoint;
     
 
     private System.Random rnd = new System.Random();
@@ -91,12 +93,15 @@ public class Owner : MonoBehaviour
             if (team == 1)
             {
                 oven = GameObject.Find("Oven1");
+                spawnPoint = GameSetup.GS.OSP1.position;
                 agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
 
             }
             else if (team == 2)
             {
                 oven = GameObject.Find("Oven2");
+                spawnPoint = GameSetup.GS.OSP2.position;
+
                 agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
 
             }
@@ -187,7 +192,7 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() == timer.GetTotalTime()/2 - 10)
+                if(timer.GetLocalTime() ==  285)
                 {
                    // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
@@ -215,7 +220,15 @@ public class Owner : MonoBehaviour
                         agent.ResetPath();
                         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
                         thrownSmokeBomb = true;
+                        returningToKitchen = true;
 
+                    }
+                }
+                if (returningToKitchen)
+                {
+                    if((transform.position - (new Vector3(12.61f, 0.2f, -4.8f))).magnitude < 1)
+                    {
+                        StartCoroutine(leavingKitchen());
                     }
                 }
         
@@ -310,7 +323,7 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if (timer.GetLocalTime() == 285)
+            if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
             {
                 shout = true;
             }
@@ -534,7 +547,16 @@ public class Owner : MonoBehaviour
      
 
     }
+    private IEnumerator leavingKitchen()
+    {
+        yield return new WaitForSeconds(8);
+        StartCoroutine(talking());
+        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Alright guys, I'm going to go away, I'll return soon, we need to win!");
+        agent.SetDestination(spawnPoint);
 
+
+
+    }
 
     void returnWithHeadShake()
     {
