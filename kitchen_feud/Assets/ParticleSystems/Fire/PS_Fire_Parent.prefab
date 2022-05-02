@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2246917235386665242}
   m_Layer: 0
   m_Name: PS_Fire_ALPHA
-  m_TagString: Untagged
+  m_TagString: Smoke
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24111,4 +24111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9557ddf1fe6964446b58d3b2e8c600f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startEmission: 0
   fadeRate: 0.03

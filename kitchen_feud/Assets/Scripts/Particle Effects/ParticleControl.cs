@@ -54,10 +54,7 @@ public class ParticleControl : MonoBehaviour
     }
 
     public void starRandomFire(){
-    //    int index = Random.Range(0, fireSlots.Count());
-
         GameObject slot = fireSlots[Random.Range(0, fireSlots.Capacity)];
-        //instatiate fire
         Debug.Log(slot.name);
 
         disableAppliance = slot.transform.parent;

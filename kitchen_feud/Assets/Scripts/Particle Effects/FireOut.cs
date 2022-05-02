@@ -1,9 +1,4 @@
-﻿/*
-    This script is placed on the fire particle.
-    It controls the fire extinguishing rate by reducing the emission each time a 'Water' particle collides with it.
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

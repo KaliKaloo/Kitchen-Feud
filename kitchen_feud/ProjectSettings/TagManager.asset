@@ -29,6 +29,7 @@ TagManager:
   - Water
   - Team1Oven
   - Team2Oven
+  - Smoke
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,7 @@ TagManager:
   - Pickable
   - ME
   - Walls
+  - 
   - 
   - 
   - 
