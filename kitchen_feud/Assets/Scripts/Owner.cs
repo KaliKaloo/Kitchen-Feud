@@ -441,11 +441,7 @@ public class Owner : MonoBehaviour
                     //shout = true;
                 }
             }
-            //if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
-            //{
-            //    shout = true;
-            //}
-
+       
             if (shout == true)
 
             {
@@ -475,7 +471,7 @@ public class Owner : MonoBehaviour
                     if (!following)
                     {
                         Photon.Realtime.Player p = getLowestCookedDishesByTeam(2);
-                        if (p)
+                        if (p != null)
                         {
                             playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
                         }
@@ -724,15 +720,6 @@ public class Owner : MonoBehaviour
     }
     private IEnumerator talking()
     {
-        //keyboard.SetActive(false);
-        //mouse.SetActive(false);    
-        //if(team == 1)
-        //{
-        //    Owner1.SetActive(true);
-        //}else if(team == 2)
-        //{
-        //    Owner2.SetActive(true);
-        //}
     
      
             currentlyTalking = true;
