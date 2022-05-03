@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2;
+    private AudioSource track1, track2, track;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
     public AudioClip k1_MG, k2_MG ;
@@ -69,13 +69,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private AudioSource getAudioSource(){
-        if (location == 1){
-            return track1;
-        }else{
-            return track2;
-        }
-    }
 
     public void switchLocation(int loc){
         CancelInvoke("playRandom");
@@ -99,6 +92,9 @@ public class MusicManager : MonoBehaviour
                 track2CurrentVol = track2.isPlaying ? track2.volume : 0;
 
                 track2.Play();
+                track = track2;
+                Invoke("playRandom", track2.clip.length);
+
 
                 while (timeElapsed < fadeTime){
                     track1.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
@@ -108,6 +104,7 @@ public class MusicManager : MonoBehaviour
 
                 }
                 track1.Stop();
+
                 
             }
 
@@ -120,6 +117,9 @@ public class MusicManager : MonoBehaviour
                 track1CurrentVol = track1.isPlaying ? track1.volume : 0;
                 track2CurrentVol = track2.volume;
                 track1.Play();
+                track = track1;
+                Invoke("playRandom", track1.clip.length);
+
 
                 while (timeElapsed < fadeTime){
                     track2.volume = Mathf.Lerp(track2CurrentVol, 0, timeElapsed/fadeTime);
@@ -145,11 +145,11 @@ public class MusicManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        track = track1;
         Invoke("playRandom", track1.clip.length);
     }
 
     public void playRandom(){
-        AudioSource track = getAudioSource();
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
         Invoke("playRandom", track.clip.length);
