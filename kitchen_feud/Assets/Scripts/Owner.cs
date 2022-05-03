@@ -17,9 +17,9 @@ public class Owner : MonoBehaviour
     public GameObject oven;
     private GameObject localPlayer;
     private NavMeshAgent agent;
-    private bool currentlyTalking;
+    public bool currentlyTalking;
     private bool firstTime;
-    private bool currentlyShouting;
+    public bool currentlyShouting;
     private bool currentlyTalking2;
     private bool currentlyShouting2;
     private bool returned;
