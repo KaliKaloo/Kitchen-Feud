@@ -117,12 +117,17 @@ public class Owner : MonoBehaviour
             {
                 if (team == 1)
                 {
-                    otherOwner = AI.Instance.Owner2.GetComponent<Owner>();
-
+                    if (AI.Instance.Owner1)
+                    {
+                        otherOwner = AI.Instance.Owner2.GetComponent<Owner>();
+                    }
                 }
                 else if (team == 2)
                 {
-                    otherOwner = AI.Instance.Owner1.GetComponent<Owner>();
+                    if (AI.Instance.Owner1)
+                    {
+                        otherOwner = AI.Instance.Owner1.GetComponent<Owner>();
+                    }
                 }
             }
             if (!currentlyTalking && anim.GetBool("IsTalking"))
