@@ -11,6 +11,7 @@ public class ParticleControl : MonoBehaviour
     ParticleSystem firePS;
     Transform disableAppliance;
     GameObject fire;
+    public int team;
 
 
     private static GlobalTimer timer = new GlobalTimer();
@@ -83,15 +84,28 @@ public class ParticleControl : MonoBehaviour
         }
     }
     [PunRPC]
-    void syncRandomTimes(int ViewID)
+    void syncRandomTimes(int ViewID,int team)
     {
         ParticleControl PC = PhotonView.Find(ViewID).GetComponent<ParticleControl>();
-        //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-        //PC.firstFireRandomTime = Random.Range(halfTime, 0);
-        //PC.secondFireRandomTime = Random.Range(halfTime, 0);
-        PC.sprinklerRandomTime = 290;
-        PC.firstFireRandomTime = 280;
-        PC.secondFireRandomTime = 270;
+        if(team == 1)
+        {
+            //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
+            //PC.firstFireRandomTime = Random.Range(halfTime, 0);
+            //PC.secondFireRandomTime = Random.Range(halfTime, 0);
+            PC.sprinklerRandomTime = 290;
+            PC.firstFireRandomTime = 280;
+            PC.secondFireRandomTime = 270;
+        }
+        else if(team == 2)
+        {
+            //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
+            //PC.firstFireRandomTime = Random.Range(halfTime, 0);
+            //PC.secondFireRandomTime = Random.Range(halfTime, 0);
+            PC.sprinklerRandomTime = 280;
+            PC.firstFireRandomTime = 290;
+            PC.secondFireRandomTime = 270;
+        }
+ 
 
 
 
