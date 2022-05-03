@@ -668,8 +668,23 @@ public class Owner : MonoBehaviour
                     {
                        
                             oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
-                            agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
-                            collecting = false;
+                            //agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
+                            if(team == 1)
+                        {
+                            PV.RPC("setText", RpcTarget.All, PV.ViewID, "I collected the dish from the Oven!");
+                             returnNormally();
+
+
+
+                        }
+                        else if (team == 2)
+                        {
+                            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "I collected the dish from the Oven!");
+                            returnNormally2();
+
+                        }
+                        collecting = false;
+                        
                         
 
                     }
