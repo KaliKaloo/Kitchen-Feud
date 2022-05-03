@@ -23,7 +23,6 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 	public Appliance appliance;
-	StoveScore stoveScore = new StoveScore();
 	StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
 	private float prevScore;
