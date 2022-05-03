@@ -225,7 +225,7 @@ public class Owner : MonoBehaviour
                 }
 
               //  if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15 && !decided)
-                if(timer.GetLocalTime() ==  270 && !decided)
+                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
                 {
                     //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                    // if(rnd.Next(2) == 1)
@@ -423,7 +423,7 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if(timer.GetLocalTime() == 200)
+            if(timer.GetLocalTime() == timer.GetTotalTime()/4)
             {
                 transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
                 agent.SetDestination(kitchenDestinationPoint);
@@ -492,66 +492,7 @@ public class Owner : MonoBehaviour
 
                     }
                 }
-                //foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
-                //{
-                //    GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                //    if ((int)p.CustomProperties["CookedDishes"] == 0 && (int)p.CustomProperties["Team"] == team)
-                //    {
-                //        if (team == 1)
-                //        {
-                //           // Debug.LogError(player.name);
 
-                //            if (player.GetComponent<PlayerVoiceManager>().entered1)
-                //            {
-                //                if (!following)
-                //                {
-                //                    playerToFollow = player;
-
-                //                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                //                    //Debug.LogError("SET1");
-
-                //                    if (!calledName)
-                //                    {
-                //                        PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
-
-
-                //                        //Text.text = p.NickName + "!";
-                //                        calledName = true;
-                //                    }
-                //                    break;
-                //                }
-                //            }
-                //        }
-                //        else if (team == 2)
-                //        {
-                          
-
-                //            if (player.GetComponent<PlayerVoiceManager>().entered2)
-                //            {
-                //               // Debug.LogError(player.name);
-                //                if (!following)
-                //                {
-                //                    playerToFollow = player;
-
-                //                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                //                    //Debug.LogError("SET2");
-
-                //                    if (!calledName)
-                //                    {
-                //                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
-
-                //                       // Text.text = p.NickName + "!";
-                //                        calledName = true;
-                //                    }
-                //                    break;
-                //                }
-                //            }
-
-
-                //        }
-                //    }
-
-                //}
 
                 if (playerToFollow)
                 {
