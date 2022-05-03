@@ -224,12 +224,12 @@ public class Owner : MonoBehaviour
 
                 }
 
-              //  if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15 && !decided)
-                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
+                if(timer.GetLocalTime() == 270 && !decided)
+               // if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
                 {
                     //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                   // if(rnd.Next(2) == 1)
-                    if(0 == 1)
+                    if(rnd.Next(2) == 1)
+        
                     {
                         stopLeaning = true;
                         goThrowSmokeBomb = true;
@@ -423,7 +423,7 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if(timer.GetLocalTime() == timer.GetTotalTime()/4)
+            if(timer.GetLocalTime() == 230)
             {
                 transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
                 agent.SetDestination(kitchenDestinationPoint);
@@ -777,7 +777,7 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-        if (timer.GetLocalTime() > timer.GetTotalTime() / 4)
+        if (timer.GetLocalTime() > 230)
         {
             firstTime = true;
         }
