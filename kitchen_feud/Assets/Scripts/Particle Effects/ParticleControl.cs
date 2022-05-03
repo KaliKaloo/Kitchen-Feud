@@ -19,18 +19,30 @@ public class ParticleControl : MonoBehaviour
     float firstFireRandomTime;
     float secondFireRandomTime;
     bool randomFire = false;
+    bool setTimes = false;
+    public PhotonView PV;
 
     void Start()
     {
         halfTime = timer.GetTotalTime()/2;
         //psParent = GetComponent<ParticleSystem>();
-        sprinklerRandomTime = Random.Range(halfTime,0);
-        firstFireRandomTime = Random.Range(halfTime,0);
-        secondFireRandomTime = Random.Range(halfTime,0);
+        //sprinklerRandomTime = Random.Range(halfTime,0);
+        //firstFireRandomTime = Random.Range(halfTime,0);
+        //secondFireRandomTime = Random.Range(halfTime,0);
+        PV = GetComponent<PhotonView>();
     }
 
     void Update(){
-        int currentTime = timer.GetTime();
+        int currentTime = timer.GetLocalTime();
+
+        if (PhotonNetwork.IsMasterClient && !setTimes)
+        {
+            if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID);
+                setTimes = true;
+            }
+        }
 
         if (firePS){
             if(firePS.isPlaying == false){
@@ -69,5 +81,20 @@ public class ParticleControl : MonoBehaviour
             randomFire = true;
             disableAppliance.GetComponent<Appliance>().isBeingInteractedWith = true;
         }
-    }   
+    }
+    [PunRPC]
+    void syncRandomTimes(int ViewID)
+    {
+        ParticleControl PC = PhotonView.Find(ViewID).GetComponent<ParticleControl>();
+        //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
+        //PC.firstFireRandomTime = Random.Range(halfTime, 0);
+        //PC.secondFireRandomTime = Random.Range(halfTime, 0);
+        PC.sprinklerRandomTime = 290;
+        PC.firstFireRandomTime = 280;
+        PC.secondFireRandomTime = 270;
+
+
+
+
+    }
 }
