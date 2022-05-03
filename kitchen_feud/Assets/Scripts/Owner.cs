@@ -26,7 +26,7 @@ public class Owner : MonoBehaviour
     public bool collected;
     public bool collecting;
     private bool toCollect;
-    private bool stopLeaning;
+    public bool stopLeaning;
     private bool returningToKitchen;
     private bool following;
     private bool calledName;
@@ -230,10 +230,10 @@ public class Owner : MonoBehaviour
                     }
                     else
                     {
+                        stopLeaning = true;
 
                         shout = true;
                         notThrowing = true;
-                        stopLeaning = true;
 
                     }
                     decided = true;
