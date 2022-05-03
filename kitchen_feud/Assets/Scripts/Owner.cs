@@ -49,6 +49,7 @@ public class Owner : MonoBehaviour
     public Owner otherOwner;
     public Vector3 spawnPoint;
     public Vector3 kitchenDestinationPoint;
+    public AudioSource audioSource;
     
 
     private System.Random rnd = new System.Random();
@@ -66,7 +67,7 @@ public class Owner : MonoBehaviour
         PV = GetComponent<PhotonView>();
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
-
+        audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
         keyboard = GameObject.Find("keyboard controls");
         mouse = GameObject.Find("mouse controls");
@@ -104,7 +105,7 @@ public class Owner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -135,6 +136,13 @@ public class Owner : MonoBehaviour
             if (currentlyShouting && !anim.GetBool("IsShouting"))
             {
                 anim.SetBool("IsShouting", true);
+            }
+            if (currentlyShouting || currentlyTalking)
+            {
+                audioSource.Play();
+            }else if(!currentlyTalking && !currentlyShouting)
+            {
+                //audioSource.Stop();
             }
 
             if (team == 1)
@@ -181,7 +189,7 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() ==  285)
+                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2)
                 {
                    // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
@@ -348,9 +356,11 @@ public class Owner : MonoBehaviour
             }
             if (inKitchenSecondTime)
             {
-                if ((transform.position - spawnPoint).magnitude < 1)
+                if ((transform.position - kitchenDestinationPoint).magnitude < 1)
                 {
-                    shout = true;
+                    StartCoroutine(waitBeforeShouting());
+                    //yield return new WaitForSeconds(2);
+                    //shout = true;
                 }
             }
             //if (timer.GetLocalTime() == timer.GetTotalTime()/2 - 30)
@@ -362,66 +372,105 @@ public class Owner : MonoBehaviour
 
             {
 
-                foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+                if(team == 1)
                 {
-                    GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                    if ((int)p.CustomProperties["CookedDishes"] == 0 && (int)p.CustomProperties["Team"] == team)
+                    if (!following)
                     {
-                        if (team == 1)
+                        Photon.Realtime.Player p = getLowestCookedDishesByTeam(1);
+                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                        if (!calledName)
                         {
-                           // Debug.LogError(player.name);
-
-                            if (player.GetComponent<PlayerVoiceManager>().entered1)
-                            {
-                                if (!following)
-                                {
-                                    playerToFollow = player;
-
-                                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                                    //Debug.LogError("SET1");
-
-                                    if (!calledName)
-                                    {
-                                        PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                            PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
 
 
-                                        //Text.text = p.NickName + "!";
-                                        calledName = true;
-                                    }
-                                    break;
-                                }
-                            }
+                            //Text.text = p.NickName + "!";
+                            calledName = true;
                         }
-                        else if (team == 2)
+
+                    }
+                }else if(team == 2)
+                {
+                    if (!following)
+                    {
+                        Photon.Realtime.Player p = getLowestCookedDishesByTeam(2);
+
+                        playerToFollow = PhotonView.Find((int)getLowestCookedDishesByTeam(1).CustomProperties["ViewID"]).gameObject;
+                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                        if (!calledName)
                         {
+                            if (p != null)
+                            {
+                                PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                            }
+
+
+                            //Text.text = p.NickName + "!";
+                            calledName = true;
+                        }
+
+                    }
+                }
+                //foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+                //{
+                //    GameObject player = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                //    if ((int)p.CustomProperties["CookedDishes"] == 0 && (int)p.CustomProperties["Team"] == team)
+                //    {
+                //        if (team == 1)
+                //        {
+                //           // Debug.LogError(player.name);
+
+                //            if (player.GetComponent<PlayerVoiceManager>().entered1)
+                //            {
+                //                if (!following)
+                //                {
+                //                    playerToFollow = player;
+
+                //                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                //                    //Debug.LogError("SET1");
+
+                //                    if (!calledName)
+                //                    {
+                //                        PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+
+
+                //                        //Text.text = p.NickName + "!";
+                //                        calledName = true;
+                //                    }
+                //                    break;
+                //                }
+                //            }
+                //        }
+                //        else if (team == 2)
+                //        {
                           
 
-                            if (player.GetComponent<PlayerVoiceManager>().entered2)
-                            {
-                               // Debug.LogError(player.name);
-                                if (!following)
-                                {
-                                    playerToFollow = player;
+                //            if (player.GetComponent<PlayerVoiceManager>().entered2)
+                //            {
+                //               // Debug.LogError(player.name);
+                //                if (!following)
+                //                {
+                //                    playerToFollow = player;
 
-                                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                                    //Debug.LogError("SET2");
+                //                    agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                //                    //Debug.LogError("SET2");
 
-                                    if (!calledName)
-                                    {
-                                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                //                    if (!calledName)
+                //                    {
+                //                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
 
-                                       // Text.text = p.NickName + "!";
-                                        calledName = true;
-                                    }
-                                    break;
-                                }
-                            }
+                //                       // Text.text = p.NickName + "!";
+                //                        calledName = true;
+                //                    }
+                //                    break;
+                //                }
+                //            }
 
 
-                        }
-                    }
+                //        }
+                //    }
 
-                }
+                //}
 
                 if (playerToFollow)
                 {
@@ -434,12 +483,46 @@ public class Owner : MonoBehaviour
                             anim.SetBool("IsShouting", true);
                             if(team == 1)
                             {
-                                PV.RPC("setText", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage");
+                                int netScore = scores.GetScore1() - scores.GetScore2();
+                                if (netScore > -80 && netScore < 0)
+                                {
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're losing by a small margin, I think you should go sabotage!");
+                                } else if (netScore < -80) { 
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! Can you please stop being lazy, or at least go sabotage");
+                                }else if(netScore < 150 && netScore > 0)
+                                {
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We need to increase the gap between our scores!");
+
+                                }else if(netScore > 150)
+                                {
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
+
+                                }
+
 
                             }
-                            else if(team ==2)
+                            else if(team == 2)
                             {
-                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You haven't cooked a single dish! I think you should go help sabotage");
+                                int netScore = scores.GetScore2() - scores.GetScore1();
+                                if (netScore > -80 && netScore < 0)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're losing by a small margin, I think you should go sabotage!");
+                                }
+                                else if (netScore < -80)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! Can you please stop being lazy, or at least go sabotage");
+                                }
+                                else if (netScore < 150 && netScore > 0)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We need to increase the gap between our scores!");
+
+                                }
+                                else if (netScore > 150)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
+
+                                }
+
 
                             }
 
@@ -467,7 +550,7 @@ public class Owner : MonoBehaviour
 
 
 
-            if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime()/8)
+            if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime()/6)
             {
                 if (oven.GetComponentInChildren<Timer>().timer == 5)
                 {
@@ -528,6 +611,41 @@ public class Owner : MonoBehaviour
 
         }
     }
+    public Photon.Realtime.Player getLowestCookedDishesByTeam(int team)
+    {
+        string property = "CookedDishes";
+        int lowest = 0;
+        string name = "";
+        Photon.Realtime.Player p = null;
+        if (team == 1)
+        {
+            foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+            {
+
+                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
+                    PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered1)
+                {
+                    lowest = (int)player.CustomProperties[property];
+                    name = player.NickName;
+                    p = player;
+                }
+            }
+        }else if(team == 2)
+        {
+            foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+            {
+
+                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
+                    PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered2)
+                {
+                    lowest = (int)player.CustomProperties[property];
+                    name = player.NickName;
+                    p = player;
+                }
+            }
+        }
+        return p;
+    }
 
     void collectFromOven()
     {
@@ -576,6 +694,11 @@ public class Owner : MonoBehaviour
             currentlyShouting = false;
      
 
+    }
+    private IEnumerator waitBeforeShouting()
+    {
+        yield return new WaitForSeconds(5);
+        shout = true;
     }
     private IEnumerator leavingKitchen()
     {
