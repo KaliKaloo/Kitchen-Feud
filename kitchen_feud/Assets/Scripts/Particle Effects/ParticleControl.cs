@@ -40,7 +40,7 @@ public class ParticleControl : MonoBehaviour
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
             {
-                PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID);
+                PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID,team);
                 setTimes = true;
             }
         }
