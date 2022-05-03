@@ -123,6 +123,8 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     enableSmoke.ChangePlayerState(false);
+                    globalClicked.enterEnemyKitchen = false;
+
 
                 }
          
