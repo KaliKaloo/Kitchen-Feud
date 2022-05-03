@@ -7,6 +7,7 @@ public class GroundCollision : MonoBehaviour
 {
     [SerializeField] public GameObject backbutton;
 
+
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
     void OnTriggerEnter2D(Collider2D target)
