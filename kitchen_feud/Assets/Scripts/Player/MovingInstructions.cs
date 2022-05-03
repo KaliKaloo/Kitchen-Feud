@@ -10,6 +10,10 @@ public class globalClicked{
     public static bool applianceInteract = false;
     public static bool trayInteract = false;
     public static bool enterEnemyKitchen = false;
+    public static bool enemyInstructions = false;
+
+    public static bool holdingFireEx = false;
+
 
 }
 
@@ -22,14 +26,14 @@ public class MovingInstructions : MonoBehaviour
     public float timer;
     private bool started = false;
     private bool finished = false;
-    // private bool enemyInstructions = false;
-    List<string> randomSabotageInstructions = new List<string>
-            {
-                "TIP: Steal their ingredients and dishes!", "TIP: Throw a smoke bomb by pressing the button in the bottom right", "TIP: Cook in their kitchen for double points!", "TIP: Add fake 10 seconds to their oven timer! This might cause a fire!", "TIP: Be careful, they can kick you out!"
-            };
+    private bool enemyInstructions = false;
 
     // how long in seconds enemy instructions have between when shown
     private float enemyInstructionDelay = 6;
+    List<string> randomInstructionList = new List<string>
+        {
+            "TIP: Steal their ingredients and dishes!", "TIP: Throw a smoke bomb by pressing the button in the bottom right", "TIP: Cook in their kitchen for double points!", "TIP: Add fake 10 seconds to their oven timer! This might cause a fire!", "TIP: Be careful, they can kick you out!"
+        };
 
     void Start()
     {
@@ -94,18 +98,20 @@ public class MovingInstructions : MonoBehaviour
             started = true;
 
         }
-        else if (globalClicked.enterEnemyKitchen)
+        if (globalClicked.enterEnemyKitchen)
         {
-            // show a random instruction from list then remove it
-            int first = Random.Range(0, randomSabotageInstructions.Count);
-            Text.text = randomSabotageInstructions[first];
-            randomSabotageInstructions.RemoveAt(first);
-            // globalClicked.enterEnemyKitchen = false;
+            // locks coroutine from being spammed after entered enemy kitchen
+            if (!globalClicked.enemyInstructions && randomInstructionList.Count > 0){
+                StartCoroutine(EnemyKitchenInstructions());
+            }
+        }
+        
 
+        if (globalClicked.holdingFireEx){
+            Text.text = "Tip: Press 'F' to use the fire extinguisher";
+            globalClicked.holdingFireEx = false;
             InitializeTimer();
             started = true;
-            
-           
         }
 
         if (started == true)
@@ -133,29 +139,32 @@ public class MovingInstructions : MonoBehaviour
         timer = time;
     }
 
-    // // randomly selects from a list of instructions when enter enemy kitchen
-    // private IEnumerator EnemyKitchenInstructions()
-    // {
-    //     // enemyInstructions = true;
+    // randomly selects from a list of instructions when enter enemy kitchen
+    private IEnumerator EnemyKitchenInstructions()
+    {
+        globalClicked.enemyInstructions = true;
 
+        // show a random instruction from list then remove it
         
+        int first = Random.Range(0, randomInstructionList.Count);
+        Text.text = randomInstructionList[first];
+        randomInstructionList.RemoveAt(first);
+        
+        yield return new WaitForSeconds(enemyInstructionDelay);
 
-    //     yield return new WaitForSeconds(enemyInstructionDelay);
+        Text.text = "";
 
-    //     Text.text = "";
-    //     globalClicked.enterEnemyKitchen = false;
+        // // show a random instruction from remaining list then remove it
+        // int second = Random.Range(0, 3);
+        // Text.text = randomInstructionList[second];
+        // randomInstructionList.RemoveAt(second);
 
-    //     // // show a random instruction from remaining list then remove it
-    //     // int second = Random.Range(0, 3);
-    //     // Text.text = randomInstructionList[second];
-    //     // randomInstructionList.RemoveAt(second);
+        // yield return new WaitForSeconds(enemyInstructionDelay);
 
-    //     // yield return new WaitForSeconds(enemyInstructionDelay);
-
-    //     // // show a last remaining instruction
-    //     // Text.text = randomInstructionList[0];
+        // // show a last remaining instruction
+        // Text.text = randomInstructionList[0];
 
 
-    // }
+    }
 
 }
