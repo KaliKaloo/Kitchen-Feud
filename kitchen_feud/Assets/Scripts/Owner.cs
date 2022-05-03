@@ -544,9 +544,10 @@ public class Owner : MonoBehaviour
 
                 if (playerToFollow)
                 {
+                    stopLeaning = false;
+
                     if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
                     {
-                        stopLeaning = false;
                         agent.transform.LookAt(playerToFollow.transform);
 
                         if (!shouting)
