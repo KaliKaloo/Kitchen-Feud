@@ -89,21 +89,17 @@ public class ParticleControl : MonoBehaviour
         ParticleControl PC = PhotonView.Find(ViewID).GetComponent<ParticleControl>();
         if(team == 1)
         {
-            //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            //PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            //PC.secondFireRandomTime = Random.Range(halfTime, 0);
-            PC.sprinklerRandomTime = 290;
-            PC.firstFireRandomTime = 280;
-            PC.secondFireRandomTime = 270;
+            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
+            PC.firstFireRandomTime = Random.Range(halfTime, 0);
+            PC.secondFireRandomTime = Random.Range(halfTime, 0);
+
         }
         else if(team == 2)
         {
-            //PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            //PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            //PC.secondFireRandomTime = Random.Range(halfTime, 0);
-            PC.sprinklerRandomTime = 280;
-            PC.firstFireRandomTime = 290;
-            PC.secondFireRandomTime = 270;
+            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
+            PC.firstFireRandomTime = Random.Range(halfTime, 0);
+            PC.secondFireRandomTime = Random.Range(halfTime, 0);
+
         }
  
 
