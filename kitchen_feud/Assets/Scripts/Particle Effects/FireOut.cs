@@ -1,9 +1,4 @@
-﻿/*
-    This script is placed on the fire particle.
-    It controls the fire extinguishing rate by reducing the emission each time a 'Water' particle collides with it.
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -50,9 +45,12 @@ public class FireOut : MonoBehaviour {
                     p.Stop();
                 }
             }
-            //SOUND -------------------------------------------
-            fireSound.gameObject.GetComponent<PhotonView>().RPC("StopFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
-            //-------------------------------------------------
+            if (fireSound){
+                 //SOUND -------------------------------------------
+                fireSound.gameObject.GetComponent<PhotonView>().RPC("StopFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
+                //-------------------------------------------------
+            }
+           
             this.enabled = false;
         
         }
