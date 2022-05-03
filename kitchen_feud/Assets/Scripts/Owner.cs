@@ -189,13 +189,14 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2)
+                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15)
                 {
                    // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
                     {
                         goThrowSmokeBomb = true;
                     }
+                    //else do something
                 }
 
              
