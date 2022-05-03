@@ -128,21 +128,21 @@ public class SandwichControllerTests
 
 
 
-    [Test]
-    public void checkStoppedIDTrue()
-    {
-        sandwichController.currentActiveID = "ID";
-        bool isStoppedID = sandwichController.checkStoppedID("ID");
-        Assert.IsTrue(isStoppedID);
-    }
+    // [Test]
+    // public void checkStoppedIDTrue()
+    // {
+    //     sandwichController.currentActiveID = "ID";
+    //     bool isStoppedID = sandwichController.checkStoppedID("ID");
+    //     Assert.IsTrue(isStoppedID);
+    // }
 
-    [Test]
-    public void checkStoppedIDFalse()
-    {
-        sandwichController.currentActiveID = "Wrong ID";
-        bool isStoppedID = sandwichController.checkStoppedID("ID");
-        Assert.IsFalse(isStoppedID);
-    }
+    // [Test]
+    // public void checkStoppedIDFalse()
+    // {
+    //     sandwichController.currentActiveID = "Wrong ID";
+    //     bool isStoppedID = sandwichController.checkStoppedID("ID");
+    //     Assert.IsFalse(isStoppedID);
+    // }
 
     [Test]
     public void StopGame()
