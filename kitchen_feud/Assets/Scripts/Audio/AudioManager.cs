@@ -124,6 +124,7 @@ public class AudioManager : MonoBehaviour
                 {
                     enableSmoke.ChangePlayerState(false);
 
+
                 }
          
         
