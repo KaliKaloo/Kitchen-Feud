@@ -126,7 +126,7 @@ public class SandwichController : MonoBehaviour
             objectPool.Add(obj);
         }
 
-        InvokeRepeating("NewRandomObject", 1, 1);
+        InvokeRepeating("NewRandomObject", 0, 2);
     }
 
     
@@ -138,12 +138,14 @@ public class SandwichController : MonoBehaviour
          // Activate new gameobject
          currentIndex = newIndex;
          objectPool[currentIndex].SetActive(true);
-         currentActiveID = objectPool[currentIndex].GetComponent<SandwichID>().Id;
+        
         
      }
 
     public bool checkStoppedID(string objectID){
-        return currentActiveID == objectID;
+        // currentActiveID = objectPool[currentIndex].GetComponent<SandwichID>().Id;
+        // return objectPool[objectID].activeSelf;
+        return objectPool[currentIndex].GetComponent<SandwichID>().Id == objectID;
     }
 
 

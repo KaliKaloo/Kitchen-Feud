@@ -155,6 +155,10 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - destroyFireForAll
+  - playSprinklers
+  - startFireRPC
+  - syncRandomTimes
   - playInstructionVideo
   DisableAutoOpenWizard: 1
   ShowSettings: 1

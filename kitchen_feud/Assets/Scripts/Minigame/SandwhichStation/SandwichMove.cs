@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class SandwichMove : MonoBehaviour, IPointerClickHandler
+public class SandwichMove : MonoBehaviour
 {
     public SandwichController SandwichController;
     public string LayerID;
     public float speed;
     public SpriteAtlas imgAtlas;
+    // public LayerMove LayerMove;
 
     private Vector3 locationA;
     private Vector3 locationB;
@@ -38,18 +39,17 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
 
     }   
 
-    
+    // public void OnPointerClick(PointerEventData eventData)
+    // {
+    //     Debug.Log("clicked");
+    //     if ((!stopped) && (SandwichController.checkStoppedID(LayerID))){
+    //         stopped = true;
+    //         SandwichController.moving = false;
+    //         SandwichController.CountStopped++;
+    //         StopMove();
+    //     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if ((!stopped) && (SandwichController.checkStoppedID(LayerID))){
-            stopped = true;
-            SandwichController.moving = false;
-            SandwichController.CountStopped++;
-            StopMove();
-        }
-
-    }
+    // }
 
     void Update() 
     {
@@ -60,7 +60,7 @@ public class SandwichMove : MonoBehaviour, IPointerClickHandler
     }
 
 
-    void StopMove()
+    public void StopMove()
     {
         Vector3 stoppedPosition = platform.localPosition;
         float distance = Vector3.Distance(platform.localPosition, perfectPosition);

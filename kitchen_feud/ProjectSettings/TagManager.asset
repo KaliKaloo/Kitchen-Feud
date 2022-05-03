@@ -31,6 +31,7 @@ TagManager:
   - Water
   - Team1Oven
   - Team2Oven
+  - Smoke
   - Waiter1
   - Waiter2
   - ServingPoint2
@@ -53,6 +54,7 @@ TagManager:
   - Agent
   - 
   - Walls
+  - 
   - 
   - 
   - 
