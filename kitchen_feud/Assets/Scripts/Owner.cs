@@ -295,7 +295,7 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
-                    Debug.LogError("HERE AGAINNNN");
+                    Debug.LogError("SL " + stopLeaning + "CS " + currentlyShouting + "CT " + currentlyTalking);
 
                     if (!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
