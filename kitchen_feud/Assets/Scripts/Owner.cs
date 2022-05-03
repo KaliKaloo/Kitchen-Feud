@@ -28,6 +28,7 @@ public class Owner : MonoBehaviour
     private bool returningToKitchen;
     private bool following;
     private bool calledName;
+    private bool notThrowing;
     private bool shouting;
     private bool inKitchenSecondTime;
     public GameObject Owner1;
@@ -50,6 +51,7 @@ public class Owner : MonoBehaviour
     public Vector3 spawnPoint;
     public Vector3 kitchenDestinationPoint;
     public AudioSource audioSource;
+    private bool decided;
     
 
     private System.Random rnd = new System.Random();
@@ -189,13 +191,20 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15)
+                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15 && !decided)
                 {
-                   // if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
+                    //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
                     {
                         goThrowSmokeBomb = true;
                     }
+                    else
+                    {
+                        shout = true;
+                        notThrowing = true;
+
+                    }
+                    decided = true;
                     //else do something
                 }
 
@@ -210,7 +219,7 @@ public class Owner : MonoBehaviour
                 if (throwNow)
                 {
                
-                    if((agent.transform.position - new Vector3(-13.3f, 0.2f,3.6f)).magnitude<1)
+                    if((transform.position - new Vector3(-13.3f, 0.2f,3.6f)).magnitude<1)
                     {
                         GetComponent<SmokeGrenade>().UseSmokeOwner(1);
                         throwNow = false;
@@ -287,6 +296,14 @@ public class Owner : MonoBehaviour
                     StartCoroutine(talking());
 
                 }
+
+                if(otherOwner.notThrowing)
+                {
+                    shout = true;
+                    notThrowing = false;
+                }
+
+
                 if (otherOwner.thrownSmokeBomb)
                 {
                     if(rnd.Next(2) == 0)
@@ -382,7 +399,10 @@ public class Owner : MonoBehaviour
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                         if (!calledName)
                         {
-                            PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                            if (p != null)
+                            {
+                                PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                            }
 
 
                             //Text.text = p.NickName + "!";
@@ -395,14 +415,14 @@ public class Owner : MonoBehaviour
                     if (!following)
                     {
                         Photon.Realtime.Player p = getLowestCookedDishesByTeam(2);
+                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
 
-                        playerToFollow = PhotonView.Find((int)getLowestCookedDishesByTeam(1).CustomProperties["ViewID"]).gameObject;
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                         if (!calledName)
                         {
                             if (p != null)
                             {
-                                PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
                             }
 
 
@@ -498,6 +518,10 @@ public class Owner : MonoBehaviour
                                 {
                                     PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
 
+                                }else if(netScore == 0)
+                                {
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're drawing! We can't afford laziness!");
+
                                 }
 
 
@@ -521,6 +545,11 @@ public class Owner : MonoBehaviour
                                 else if (netScore > 150)
                                 {
                                     PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
+
+                                }
+                                else if (netScore == 0)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're drawing! We can't afford laziness!");
 
                                 }
 
