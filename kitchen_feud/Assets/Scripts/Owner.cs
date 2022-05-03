@@ -129,6 +129,10 @@ public class Owner : MonoBehaviour
             }
             if (currentlyTalking && !anim.GetBool("IsTalking"))
             {
+                if(anim.GetBool("IsLeaning"))
+                {
+                    anim.SetBool("IsLeaning", false);
+                }
                 anim.SetBool("IsTalking", true);
             }
             if (!currentlyShouting && anim.GetBool("IsShouting"))
@@ -137,6 +141,10 @@ public class Owner : MonoBehaviour
             }
             if (currentlyShouting && !anim.GetBool("IsShouting"))
             {
+                if (anim.GetBool("IsLeaning"))
+                {
+                    anim.SetBool("IsLeaning", false);
+                }
                 anim.SetBool("IsShouting", true);
             }
             if (currentlyShouting || currentlyTalking)
@@ -144,7 +152,7 @@ public class Owner : MonoBehaviour
                 audioSource.Play();
             }else if(!currentlyTalking && !currentlyShouting)
             {
-                //audioSource.Stop();
+                
             }
 
             if (team == 1)
@@ -156,6 +164,10 @@ public class Owner : MonoBehaviour
                     if (anim.GetBool("IsShakingHead"))
                     {
                         anim.SetBool("IsShakingHead", false);
+                    }
+                    if(!currentlyTalking && !currentlyShouting)
+                    {
+                        anim.SetBool("IsLeaning", true);
                     }
 
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -261,7 +273,10 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
-
+                    if (!currentlyTalking && !currentlyShouting)
+                    {
+                        anim.SetBool("IsLeaning", true);
+                    }
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 }
