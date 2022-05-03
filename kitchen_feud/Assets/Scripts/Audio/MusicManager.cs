@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     private AudioSource track1, track2, track;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
-    public AudioClip k1_MG, k2_MG ;
+    public AudioClip k1_MG, k2_MG, suddenTrack ;
 
     public static MusicManager instance;
 
@@ -152,6 +152,8 @@ public class MusicManager : MonoBehaviour
     public void playRandom(){
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
+        setVolume();
+        track.volume = musicVol;
         Invoke("playRandom", track.clip.length);
     }
 
@@ -192,6 +194,23 @@ public class MusicManager : MonoBehaviour
             track2.volume = musicVol;
     }
    
+    public void suddenTrackChange(){
+        CancelInvoke("playRandom");
+        track.Stop();
+        track.clip = suddenTrack;
+        track.Play();
+        track.volume = sliderVol * 0.4f;
+        track.loop = true;
+
+    }
+
+    public void normalTrack(){
+        track.loop = false;
+        Invoke("playRandom", 0);
+    }
+
+
+
 
     float volNormaliser(){
         switch(location){ 
