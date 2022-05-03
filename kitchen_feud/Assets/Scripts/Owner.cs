@@ -223,7 +223,8 @@ public class Owner : MonoBehaviour
                 if(timer.GetLocalTime() ==  270 && !decided)
                 {
                     //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                    if(rnd.Next(2) == 1)
+                   // if(rnd.Next(2) == 1)
+                    if(0 == 1)
                     {
                         stopLeaning = true;
                         goThrowSmokeBomb = true;
@@ -544,10 +545,10 @@ public class Owner : MonoBehaviour
 
                 if (playerToFollow)
                 {
-                    stopLeaning = false;
 
                     if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
                     {
+
                         agent.transform.LookAt(playerToFollow.transform);
 
                         if (!shouting)
@@ -614,9 +615,11 @@ public class Owner : MonoBehaviour
                         if (shouting && !currentlyTalking)
                         {
                             anim.SetBool("IsShouting", false);
+                            stopLeaning = false;
 
                             returnWithHeadShake();
-                        
+
+
                             calledName = false;
                             shout = false;
                             shouting = false;
