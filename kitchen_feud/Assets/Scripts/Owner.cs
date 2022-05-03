@@ -351,7 +351,7 @@ public class Owner : MonoBehaviour
                 {
                     stopLeaning = true;
                     shout = true;
-                    notThrowing = false;
+                    otherOwner.notThrowing = false;
                 }
 
 
