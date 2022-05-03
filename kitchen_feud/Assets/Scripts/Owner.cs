@@ -431,6 +431,7 @@ public class Owner : MonoBehaviour
                 if ((transform.position - kitchenDestinationPoint).magnitude < 1)
                 {
                     StartCoroutine(waitBeforeShouting());
+                    inKitchenSecondTime = false;
                     //yield return new WaitForSeconds(2);
                     //shout = true;
                 }
