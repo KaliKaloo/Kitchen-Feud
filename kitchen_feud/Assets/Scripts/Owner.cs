@@ -615,6 +615,7 @@ public class Owner : MonoBehaviour
                             calledName = false;
                             shout = false;
                             shouting = false;
+                            playerToFollow = null;
 
 
                         }
