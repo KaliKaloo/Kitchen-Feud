@@ -298,7 +298,7 @@ public class Owner : MonoBehaviour
                     }
                     if (!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
-                        Debug.LogError(anim.GetBool("IsLeaning"));
+                        Debug.LogError("HERE AGAINNNN");
                         if (!anim.GetBool("IsLeaning"))
                         {
                             anim.SetBool("IsLeaning", true);
