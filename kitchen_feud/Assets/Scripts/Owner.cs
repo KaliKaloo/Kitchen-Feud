@@ -18,6 +18,7 @@ public class Owner : MonoBehaviour
     private GameObject localPlayer;
     private NavMeshAgent agent;
     private bool currentlyTalking;
+    private bool firstTime;
     private bool currentlyShouting;
     private bool currentlyTalking2;
     private bool currentlyShouting2;
@@ -25,6 +26,7 @@ public class Owner : MonoBehaviour
     public bool collected;
     public bool collecting;
     private bool toCollect;
+    private bool stopLeaning;
     private bool returningToKitchen;
     private bool following;
     private bool calledName;
@@ -150,9 +152,13 @@ public class Owner : MonoBehaviour
             if (currentlyShouting || currentlyTalking)
             {
                 audioSource.Play();
-            }else if(!currentlyTalking && !currentlyShouting)
+            }
+            if (stopLeaning)
             {
-                
+                if (anim.GetBool("IsLeaning"))
+                {
+                    anim.SetBool("IsLeaning", false);
+                }
             }
 
             if (team == 1)
@@ -165,16 +171,26 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
-                    if(!currentlyTalking && !currentlyShouting)
+                    if(!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
-                        anim.SetBool("IsLeaning", true);
+                        if (!anim.GetBool("IsLeaning"))
+                        {
+                            anim.SetBool("IsLeaning", true);
+                        }
                     }
+                    if (firstTime)
+                    {
+                        StartCoroutine(leavingKitchen());
+                        firstTime = false;  
+                    }
+               
 
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 }
                 if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
                 {
+                
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                     faceforward = true;
                     anim.SetBool("IsTalking", true);
@@ -203,17 +219,21 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15 && !decided)
+              //  if(timer.GetLocalTime() ==  timer.GetTotalTime()/2-15 && !decided)
+                if(timer.GetLocalTime() ==  270 && !decided)
                 {
                     //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
                     if(rnd.Next(2) == 1)
                     {
+                        stopLeaning = true;
                         goThrowSmokeBomb = true;
                     }
                     else
                     {
+
                         shout = true;
                         notThrowing = true;
+                        stopLeaning = true;
 
                     }
                     decided = true;
@@ -227,6 +247,7 @@ public class Owner : MonoBehaviour
                     throwSmokeBomb();
                     throwNow = true;
                     goThrowSmokeBomb = false;
+                    
                 }
                 if (throwNow)
                 {
@@ -234,6 +255,7 @@ public class Owner : MonoBehaviour
                     if((transform.position - new Vector3(-13.3f, 0.2f,3.6f)).magnitude<1)
                     {
                         GetComponent<SmokeGrenade>().UseSmokeOwner(1);
+                        stopLeaning = false;
                         throwNow = false;
                         //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
                         agent.ResetPath();
@@ -273,9 +295,17 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
-                    if (!currentlyTalking && !currentlyShouting)
+                    if (!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
-                        anim.SetBool("IsLeaning", true);
+                        Debug.LogError(anim.GetBool("IsLeaning"));
+                        if (!anim.GetBool("IsLeaning"))
+                        {
+                            anim.SetBool("IsLeaning", true);
+                        }
+                    }
+                    if (firstTime)
+                    {
+                        StartCoroutine(leavingKitchen());
                     }
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -359,7 +389,7 @@ public class Owner : MonoBehaviour
                         thrownSmokeBomb = true;
                         returningToKitchen = true;
 
-                    }
+                    }           
                 }
                 if (returningToKitchen)
                 {
@@ -512,6 +542,7 @@ public class Owner : MonoBehaviour
                 {
                     if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
                     {
+                        stopLeaning = false;
                         agent.transform.LookAt(playerToFollow.transform);
 
                         if (!shouting)
@@ -580,6 +611,7 @@ public class Owner : MonoBehaviour
                             anim.SetBool("IsShouting", false);
 
                             returnWithHeadShake();
+                        
                             calledName = false;
                             shout = false;
                             shouting = false;
@@ -768,6 +800,10 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
+        if (timer.GetLocalTime() > timer.GetTotalTime() / 4)
+        {
+            firstTime = true;
+        }
         //Debug.LogError(agent.pathStatus);
         following = true;
         agent.ResetPath();
