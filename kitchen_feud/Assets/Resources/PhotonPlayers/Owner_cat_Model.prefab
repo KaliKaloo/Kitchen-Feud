@@ -425,6 +425,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsShakingHead
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsLeaning
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
