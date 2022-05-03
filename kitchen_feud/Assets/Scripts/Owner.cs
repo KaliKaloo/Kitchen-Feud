@@ -289,8 +289,7 @@ public class Owner : MonoBehaviour
             }
             else if (team == 2)
             {
-                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
-                agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                if ((transform.position - kitchenDestinationPoint).magnitude<1)
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
@@ -308,7 +307,10 @@ public class Owner : MonoBehaviour
                     {
                         StartCoroutine(leavingKitchen());
                     }
-                    agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    if (agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                    {
+                        agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
 
                 }
                 if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
