@@ -13,13 +13,10 @@ EditorBuildSettings:
     guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/kitchens.unity
-    guid: d3142e9bc82a4e34cb458416ecb94895
+    guid: 26eafb126e60d5644a4493c9257bf4ee
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/kitchens 2.unity
-    guid: 4636ef01e2391754f8d3c6c65fec435d
+    path: Assets/Scenes/kitchens newUI.unity
+    guid: 553fad7d9b07f0e45ab591e99cf187d3
   - enabled: 1
     path: Assets/Scenes/gameOver.unity
     guid: 7443b865e1187a842a4a04533276e0d2

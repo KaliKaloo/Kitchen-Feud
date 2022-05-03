@@ -64,7 +64,8 @@ public class AM : MonoBehaviour
             
                 }
                 engine.JoinChannel(randomInstance + "Path");
-              
+                globalClicked.enterEnemyKitchen = false;
+                globalClicked.enemyInstructions = false;
 
                 // MusicManager.instance.switchLocation(3);
                 MusicManagerOld.instance.changeBGM(3, 10, 0, 1);
