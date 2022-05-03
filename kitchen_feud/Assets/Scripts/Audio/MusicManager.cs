@@ -194,22 +194,6 @@ public class MusicManager : MonoBehaviour
             track2.volume = musicVol;
     }
    
-    public void suddenTrackChange(){
-        CancelInvoke("playRandom");
-        track.Stop();
-        track.clip = suddenTrack;
-        track.Play();
-        track.volume = sliderVol * 0.4f;
-        track.loop = true;
-
-    }
-
-    public void normalTrack(){
-        track.loop = false;
-        Invoke("playRandom", 0);
-    }
-
-
 
 
     float volNormaliser(){

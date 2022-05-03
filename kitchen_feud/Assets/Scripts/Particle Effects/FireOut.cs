@@ -53,6 +53,7 @@ public class FireOut : MonoBehaviour {
             //SOUND -------------------------------------------
             fireSound.gameObject.GetComponent<PhotonView>().RPC("StopFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
             //-------------------------------------------------
+           
             this.enabled = false;
         
         }

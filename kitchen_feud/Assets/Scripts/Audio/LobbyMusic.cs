@@ -11,7 +11,7 @@ public class LobbyMusic : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.volume = 0.03f;
+        audioSource.volume = 0.05f;
         audioSource.clip = track1;
         audioSource.Play();
         Invoke("loopTrack2", track1.length);
