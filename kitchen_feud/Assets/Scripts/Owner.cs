@@ -344,6 +344,7 @@ public class Owner : MonoBehaviour
 
                 if(otherOwner.notThrowing)
                 {
+                    stopLeaning = true;
                     shout = true;
                     notThrowing = false;
                 }
@@ -353,6 +354,7 @@ public class Owner : MonoBehaviour
                 {
                     if(rnd.Next(2) == 0)
                     {
+                        stopLeaning = true;
                         StartCoroutine(startShouting());
                         goThrowSmokeBomb = true;
 
@@ -361,6 +363,7 @@ public class Owner : MonoBehaviour
                     }
                     else
                     {
+                        stopLeaning = true;
                        StartCoroutine(startShouting());
 
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
@@ -415,6 +418,7 @@ public class Owner : MonoBehaviour
                 transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
                 agent.SetDestination(kitchenDestinationPoint);
                 inKitchenSecondTime = true;
+                stopLeaning = false;
                 
             }
             if (inKitchenSecondTime)
@@ -776,6 +780,7 @@ public class Owner : MonoBehaviour
     private IEnumerator waitBeforeShouting()
     {
         yield return new WaitForSeconds(5);
+        stopLeaning = true;
         shout = true;
     }
     private IEnumerator leavingKitchen()
