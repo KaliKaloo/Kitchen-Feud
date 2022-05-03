@@ -20,7 +20,7 @@ public class MusicManager : MonoBehaviour
     private bool switched = false, MGStarted = false;
     public int location;
     public bool inMG = false;
-    public float musicVol;
+    private float musicVol, sliderVol = 0.5f;
 
    
     void Awake(){
@@ -36,7 +36,6 @@ public class MusicManager : MonoBehaviour
         track1.volume = 0;
         track2 = gameObject.AddComponent<AudioSource>();
         track2.volume = 0;
-
 
         // start playing
         StartCoroutine(startTrack());
@@ -55,7 +54,7 @@ public class MusicManager : MonoBehaviour
         //adjust volume
         GameObject volumeSlider = GameObject.Find("Music Volume");
         if (volumeSlider){
-            setVolume(volumeSlider);
+            settingsVolume(volumeSlider);
         }
     }
 
@@ -94,7 +93,7 @@ public class MusicManager : MonoBehaviour
                 track2.Play();
                 track = track2;
                 Invoke("playRandom", track2.clip.length);
-
+                setVolume();
 
                 while (timeElapsed < fadeTime){
                     track1.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
@@ -119,8 +118,7 @@ public class MusicManager : MonoBehaviour
                 track1.Play();
                 track = track1;
                 Invoke("playRandom", track1.clip.length);
-
-
+                setVolume();
                 while (timeElapsed < fadeTime){
                     track2.volume = Mathf.Lerp(track2CurrentVol, 0, timeElapsed/fadeTime);
                     track1.volume = Mathf.Lerp(track1CurrentVol, musicVol, timeElapsed/fadeTime);
@@ -140,6 +138,8 @@ public class MusicManager : MonoBehaviour
         track1.clip = musicClips.GetRandomAudioClip();
         track1.Play();
         float timeElapsed = 0;
+        setVolume();
+
         while (timeElapsed < fadeTime){
             track1.volume = Mathf.Lerp(0, musicVol, timeElapsed/fadeTime);
             timeElapsed += Time.deltaTime;
@@ -163,6 +163,7 @@ public class MusicManager : MonoBehaviour
             CancelInvoke("playRandom");
             AudioSource mgSource = track == track1 ? track2 : track1;
             mgSource.clip = newTrack;
+            setVolume();
             mgSource.volume = musicVol;
             mgSource.Play();
             MGStarted = true;
@@ -177,14 +178,31 @@ public class MusicManager : MonoBehaviour
         MGStarted = false;
     }
 
-  
+    private void setVolume(){
+        musicVol = sliderVol * volNormaliser();
+    }
     
-    private void setVolume(GameObject volumeSlider){
-        musicVol = volumeSlider.GetComponentInChildren<Slider>().value;
+    private void settingsVolume(GameObject volumeSlider){
+        sliderVol = volumeSlider.GetComponentInChildren<Slider>().value;
+        musicVol = sliderVol * volNormaliser();
+
         if (track1.isPlaying && !track2.isPlaying)
             track1.volume = musicVol;
         else if (track2.isPlaying && !track1.isPlaying)
             track2.volume = musicVol;
     }
    
+
+    float volNormaliser(){
+        switch(location){ 
+            case 1:
+                return 0.6f;
+            case 2:
+                return 0.6f;
+            case 3:
+                return 0.2f;
+            default:
+                return 1f;
+        }
+    }
 }
