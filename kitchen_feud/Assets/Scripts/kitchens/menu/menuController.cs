@@ -320,8 +320,12 @@ public class menuController : MonoBehaviourPunCallbacks
     // Create room here
     public void CreateGame()
     {
-        loadingScreen.SetActive(true);
-        PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+        if (createGameInput.text == ""){
+            lobbyError.text = "Please name a lobby";
+        }else{
+            loadingScreen.SetActive(true);
+            PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+        }
     }
 
     // Leave existing lobby
