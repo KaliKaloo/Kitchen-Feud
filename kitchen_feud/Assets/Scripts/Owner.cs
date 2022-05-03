@@ -289,15 +289,16 @@ public class Owner : MonoBehaviour
             }
             else if (team == 2)
             {
-                if ((transform.position - kitchenDestinationPoint).magnitude<1)
+                if ((transform.position - kitchenDestinationPoint).magnitude<1 && agent.transform.rotation != Quaternion.Euler(0, 0, 0))
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
+                    Debug.LogError("HERE AGAINNNN");
+
                     if (!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
-                        Debug.LogError("HERE AGAINNNN");
                         if (!anim.GetBool("IsLeaning"))
                         {
                             anim.SetBool("IsLeaning", true);
