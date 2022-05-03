@@ -418,7 +418,7 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if(timer.GetLocalTime() == timer.GetTotalTime() / 4)
+            if(timer.GetLocalTime() == 200)
             {
                 transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
                 agent.SetDestination(kitchenDestinationPoint);
@@ -626,6 +626,7 @@ public class Owner : MonoBehaviour
 
                             calledName = false;
                             shout = false;
+                            following = false;
                             shouting = false;
                             playerToFollow = null;
 
