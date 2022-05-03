@@ -4856,8 +4856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9557ddf1fe6964446b58d3b2e8c600f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEmission: 10
   fadeRate: 1
+  fireSound: {fileID: 0}
 --- !u!1 &4969156714743971619
 GameObject:
   m_ObjectHideFlags: 0
@@ -8647,7 +8647,7 @@ ParticleSystem:
     radiusScale: 0.2
     collidesWith:
       serializedVersion: 2
-      m_Bits: 2304
+      m_Bits: 10256
     maxCollisionShapes: 400
     quality: 0
     voxelSize: 0.5
@@ -24149,5 +24149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9557ddf1fe6964446b58d3b2e8c600f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEmission: 10
   fadeRate: 0.03
+  fireSound: {fileID: 0}

@@ -49,13 +49,11 @@ public class ParticleControl : MonoBehaviour
             if(firePS.isPlaying == false){
                 randomFire = false;
                 disableAppliance.GetComponent<Appliance>().isBeingInteractedWith = false;
-                Debug.Log("appliance abled");
                 Destroy(fire);
             }
         }
 
         if ((currentTime == firstFireRandomTime) || (currentTime == secondFireRandomTime)){
-            Debug.Log("random event");
             if (!randomFire){
                 starRandomFire();    
             }
@@ -68,7 +66,6 @@ public class ParticleControl : MonoBehaviour
 
     public void starRandomFire(){
         GameObject slot = fireSlots[Random.Range(0, fireSlots.Capacity)];
-        Debug.Log(slot.name);
 
         disableAppliance = slot.transform.parent;
         

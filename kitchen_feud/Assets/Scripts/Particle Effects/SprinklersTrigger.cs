@@ -30,13 +30,13 @@
 
 //     private void OnParticleCollision(GameObject other)
 //     {
-//         Debug.Log(triggerLevel*numberTriggers);
+//         Debug.Log("hit");
 //         if (other.tag == "Smoke")
 //         {
 //             currentCollisions += collisionRate;
 //         }
 //     }
-// }
+//}
 
 using System.Collections;
 using System.Collections.Generic;
@@ -56,15 +56,19 @@ public class SprinklersTrigger : MonoBehaviour
         PS = GetComponent<ParticleSystem>();
     }
 
+    void Update(){
+        if(currentCollisions == (triggerLevel*numberTriggers)){
+               PS.Play();
+
+            numberTriggers++;
+        }
+    }
+
     private void OnParticleCollision(GameObject other)
     {
         if (other.tag == "Smoke")
         {
             currentCollisions += collisionRate;
-            if(currentCollisions == triggerLevel*numberTriggers){
-                PS.Play();
-               numberTriggers++;
-            }
         }
     }
 }
