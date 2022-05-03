@@ -157,23 +157,24 @@ public class MusicManager : MonoBehaviour
 
 
     public void minigameSwitch(){
-        // if (!MGStarted){
-        //     AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
-        //     CancelInvoke("playRandom");
-        //     AudioSource track = location == 1 ? track1 : track2;
-        //     track.Pause();
-        //     mgSource.clip = newTrack;
-        //     mgSource.Play();
-        //     MGStarted = true;
-        // }
+        if (!MGStarted){
+            track.Pause();
+            AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
+            CancelInvoke("playRandom");
+            AudioSource mgSource = track == track1 ? track2 : track1;
+            mgSource.clip = newTrack;
+            mgSource.volume = musicVol;
+            mgSource.Play();
+            MGStarted = true;
+        }
     }
 
     public void minigameEnd(){
-        // mgSource.Stop();
-        // AudioSource track = location == 1 ? track1 : track2;
-        // track.UnPause();
-        // Invoke("playRandom", track.clip.length - track.time);
-        // MGStarted = false;
+        AudioSource mgSource = track == track1 ? track2 : track1;
+        mgSource.Stop();
+        track.UnPause();
+        Invoke("playRandom", track.clip.length - track.time);
+        MGStarted = false;
     }
 
   
