@@ -9,6 +9,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public GameObject backbutton;
     [SerializeField] public Text score;
 
+    public AudioSource source;
+    public float pitchMin, pitchMax, volumeMin, volumeMax;
+    public AudioClip[] diffSounds;
+
+
     StoveScore stoveScore = new StoveScore();
     public StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 
@@ -28,6 +33,10 @@ public class ScoreManager : MonoBehaviour
                 stoveMinigameCounter.AddCorrectIngredient();
 
             }
+            gameObject.GetComponent<AudioSource>().clip = diffSounds[Random.Range(0, diffSounds.Length)];
+            gameObject.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
+            gameObject.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

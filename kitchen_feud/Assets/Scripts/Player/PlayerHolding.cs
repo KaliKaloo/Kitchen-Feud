@@ -164,8 +164,11 @@ public class PlayerHolding : MonoBehaviour
 
     [PunRPC]
     void PlayDropSound() {
-        //FindObjectOfType<SoundEffectsManager>().dropSound.Play();
-        if(heldObj != null && heldObj.GetComponent<AudioSource>() != null) heldObj.GetComponent<AudioSource>().Play();
+        if(heldObj != null && heldObj.GetComponent<AudioSource>() != null) {
+            heldObj.GetComponent<AudioSource>().pitch = Random.Range(heldObj.GetComponent<pickableItem>().pitchMin, heldObj.GetComponent<pickableItem>().pitchMax);
+            heldObj.GetComponent<AudioSource>().volume = Random.Range(heldObj.GetComponent<pickableItem>().volumeMin, heldObj.GetComponent<pickableItem>().volumeMax);
+            heldObj.GetComponent<AudioSource>().Play();
+        }
     }
 
     
