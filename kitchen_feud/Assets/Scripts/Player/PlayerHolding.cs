@@ -69,7 +69,7 @@ public class PlayerHolding : MonoBehaviour
     }
     public  IEnumerator pick(GameObject obj)
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(0.5f);
         slotItem(obj);
         //obj.transform.localPosition = Vector3.zero;
         //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
