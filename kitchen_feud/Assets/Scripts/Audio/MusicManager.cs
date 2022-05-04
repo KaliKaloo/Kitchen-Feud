@@ -137,6 +137,7 @@ public class MusicManager : MonoBehaviour
         setMusicClips();
         track1.clip = musicClips.GetRandomAudioClip();
         track1.Play();
+        Invoke("playRandom", track1.clip.length);
         float timeElapsed = 0;
         setVolume();
 
@@ -146,15 +147,14 @@ public class MusicManager : MonoBehaviour
             yield return null;
         }
         track = track1;
-        Invoke("playRandom", track1.clip.length);
     }
 
     public void playRandom(){
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
+        Invoke("playRandom", track.clip.length);
         setVolume();
         track.volume = musicVol;
-        Invoke("playRandom", track.clip.length);
     }
 
 
