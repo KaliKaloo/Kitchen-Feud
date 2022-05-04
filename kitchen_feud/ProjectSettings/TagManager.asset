@@ -37,6 +37,8 @@ TagManager:
   - ServingPoint2
   - Customer2
   - Customer1
+  - Owner1
+  - Owner2
   - FryingBackground1
   - FryingBackground2
   layers:
@@ -54,8 +56,7 @@ TagManager:
   - Agent
   - 
   - Walls
-  - 
-  - 
+  - door
   - 
   - 
   - 

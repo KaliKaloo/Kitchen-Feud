@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using Codice.Client.BaseCommands;
+using Codice.Client.BaseCommands.Merge;
 using UnityEngine.AI;
 
 public class AI : MonoBehaviour
@@ -11,20 +13,43 @@ public class AI : MonoBehaviour
     public List<GameObject> agentsT1 = new List<GameObject>();
     public List<GameObject> agentsT2 = new List<GameObject>();
     public PhotonView PV;
-    
-   
+    private bool ownersSpawned;
+    private static GlobalTimer timer = new GlobalTimer();
+    private int totalTime = timer.GetTotalTime();
+    public GameObject Owner1;
+    public GameObject Owner2;
+    public GameObject owner1Avatar;
+    public GameObject owner2Avatar;
+    public static AI Instance;
+
+
+    private void Awake()
+    {
+        Instance = this;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-
+        owner1Avatar.SetActive(false);
+        owner2Avatar.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+ 
+
         if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
+         if (timer.GetLocalTime() == timer.GetTotalTime()/2 && !ownersSpawned)
+          //  if (timer.GetLocalTime() == 295 && !ownersSpawned)
+            {
+               Owner1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_cat_Model"), (GameSetup.GS.OSP1.position), Quaternion.identity);
+               Owner2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_panda_Model"), (GameSetup.GS.OSP2.position), Quaternion.identity);
+               ownersSpawned = true;
+            }
             if (GameObject.Find("Local") && GameObject.FindGameObjectsWithTag("Waiter1").Length < 3)
             {
                 if (GameObject.FindGameObjectsWithTag("Waiter1").Length == 0)

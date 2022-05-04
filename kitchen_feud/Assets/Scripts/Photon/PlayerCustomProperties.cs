@@ -31,6 +31,7 @@ namespace CustomProperties
     public class PlayerCookedDishes : PlayerCustomProperties
     {
         public static readonly string property = "CookedDishes";
+   
         public static void AddCookedDishes()
         {
             AddProperty(property, 1);
