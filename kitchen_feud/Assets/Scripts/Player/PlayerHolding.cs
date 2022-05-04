@@ -51,13 +51,16 @@ public class PlayerHolding : MonoBehaviour
                 if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     slotItem(obj);
-
+                    obj.transform.localPosition = Vector3.zero;
+                    obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
                 else
                 {
                     this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
                     slotItem(obj);
+                    obj.transform.localPosition = Vector3.zero;
+                    obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
             }
         }
@@ -138,8 +141,8 @@ public class PlayerHolding : MonoBehaviour
 
         GameObject obj = PhotonView.Find(heldObjId).gameObject;
         obj.transform.SetParent(this.transform.GetChild(2).transform);
-        obj.transform.localPosition = Vector3.zero;
-        obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        //obj.transform.localPosition = Vector3.zero;
+        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
         if(obj.GetComponent<Rigidbody>()){
             obj.GetComponent<Rigidbody>().isKinematic = true;
             obj.GetComponent<Collider>().isTrigger = true;
