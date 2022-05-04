@@ -36,7 +36,6 @@ public class scoreController : MonoBehaviour
     public PhotonView PV;
     private CleanupRoom cleanupRoom;
 
-    // Start is called before the first frame update
     void Start()
     {
         gameOver = false;    
@@ -88,42 +87,18 @@ public class scoreController : MonoBehaviour
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
-
-
             if (startGame)
             {
                 OutputTime();
-
                 score1Text.text = ConvertScoreToString(scores.GetScore1());
                 score2Text.text = ConvertScoreToString(scores.GetScore2());
            
-                    // increment every second
-                    /*elapsed += Time.deltaTime;
-                    if (elapsed >= 1f)
-                    {
-                        elapsed = elapsed % 1f;
-
-                        OutputTime();
-                  
-                    }
-                
-                else
-                {
-                    if (PhotonNetwork.CurrentRoom.CustomProperties["time"] != null)
-                    {
-                        timerText.text = PhotonNetwork.CurrentRoom.CustomProperties["time"].ToString();
-                    }
-                }*/
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
             {
                 // show waiting for others players menu
 
             }
-            /*else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
-            {
-                // show waiting for others players menu
-            }*/
             else
             {
                 loadingScreen.SetActive(false);
@@ -145,7 +120,6 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
-            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
 
         }
@@ -158,9 +132,6 @@ public class scoreController : MonoBehaviour
         if (timer.GetLocalTime() > 0)
         {
             // updates timer and text in timer
-            //Debug.LogError("Secs: " + timer.GetLocalTime() + "TIME: " + ConvertSecondToMinutes(timer.GetLocalTime()));
-
-            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             StartCoroutine(getLocalTime());
         }
 
