@@ -93,7 +93,10 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         if (vC == PhotonNetwork.CurrentRoom.PlayerCount)
         {
             cutsceneC.skipButton.SetActive(false);
-            cutsceneC.skipButtonInstructions.SetActive(true);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                cutsceneC.skipButtonInstructions.SetActive(true);
+            }
             cutsceneC.videoPlayer.Stop();
             videoPlayer.targetTexture.Release();
             StartCoroutine(tutorialLoadingScreen(viewID));
@@ -116,7 +119,10 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     void playInstructionVideo(int viewID)
     {
         CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
-        cutsceneC.skipButtonInstructions.SetActive(true);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            cutsceneC.skipButtonInstructions.SetActive(true);
+        }
         videoPlayer.targetTexture.Release();
         StartCoroutine(tutorialLoadingScreen(viewID));
 
