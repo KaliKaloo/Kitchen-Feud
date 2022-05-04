@@ -21,15 +21,11 @@ public class FireExtinguisher : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         if (player.transform.Find("slot").childCount == 0) {
                 playerHold.pickUpItem(gameObject);
-                Vector3 parentPos = transform.parent.position;
-                parentPos.y = 0.8f;
-
-                transform.position = parentPos;
-                transform.Rotate(-20,0,0);
+                globalClicked.holdingFireEx = true;
+                transform.Rotate(0,180,0);
         }
         else {
             playerHold.dropItem();
-            transform.Rotate(0,0,0);
             PV.RPC("stopPS",RpcTarget.All,PV.ViewID);
         }
     }
