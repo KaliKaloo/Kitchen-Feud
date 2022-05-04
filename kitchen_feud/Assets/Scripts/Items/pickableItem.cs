@@ -104,15 +104,15 @@ public class pickableItem : Interactable
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = true;
         PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
         PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
-        if (PhotonView.Find(viewID).GetComponent<IngredientItem>())
-        {
-            PhotonView.Find(viewID).transform.localScale =
-                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
-        }else if (PhotonView.Find(viewID).GetComponent<Dish>())
-        {
-            PhotonView.Find(viewID).transform.localScale =
-                PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
-        }
+        //if (PhotonView.Find(viewID).GetComponent<IngredientItem>())
+        //{
+        //    PhotonView.Find(viewID).transform.localScale =
+        //        PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale * 7;
+        //}else if (PhotonView.Find(viewID).GetComponent<Dish>())
+        //{
+        //    PhotonView.Find(viewID).transform.localScale =
+        //        PhotonView.Find(viewID).GetComponent<pickableItem>().defaultScale;
+        //}
         
 
     }
