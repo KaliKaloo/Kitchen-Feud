@@ -663,8 +663,7 @@ public class Owner : MonoBehaviour
         {
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
-
-                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
+                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
                     PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered1)
                 {
                     lowest = (int)player.CustomProperties[property];
@@ -677,7 +676,7 @@ public class Owner : MonoBehaviour
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
 
-                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
+                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
                     PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered2)
                 {
                     lowest = (int)player.CustomProperties[property];

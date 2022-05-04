@@ -178,7 +178,6 @@ public class MusicManager : MonoBehaviour
     }
 
     public void playRandom(){
-        Debug.Log("random");
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
         Invoke("playRandom", track.clip.length/pitch);
