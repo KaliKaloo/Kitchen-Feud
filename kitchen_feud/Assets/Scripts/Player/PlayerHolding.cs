@@ -33,11 +33,12 @@ public class PlayerHolding : MonoBehaviour
     public GameObject heldObj;
     public PhotonView view;
     public bool itemdropped = false;
-
+    public bool gainedOwnership;
+    public GameObject objToHold;
     public bool itemLock = false;
     PickupLock pickupLock = new PickupLock();
 
-
+    
     public void pickUpItem(GameObject obj)
     {
         // if serve canvas is enabled then dont let player pickup item
@@ -58,7 +59,9 @@ public class PlayerHolding : MonoBehaviour
                 {
                     this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                    StartCoroutine(pick(obj));
+                    gainedOwnership = true;
+                    objToHold = obj;
+                   // StartCoroutine(pick(obj));
     
                 }
             }
@@ -104,8 +107,16 @@ public class PlayerHolding : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
+        if (gainedOwnership)
+        {
+            slotItem(objToHold);
+            objToHold.transform.localPosition = Vector3.zero;
+            objToHold.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            gainedOwnership = false;
+            objToHold = null;
+        }
     }
 
     IEnumerator LockPickup()
