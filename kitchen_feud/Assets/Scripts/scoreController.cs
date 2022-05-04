@@ -90,7 +90,6 @@ public class scoreController : MonoBehaviour
                 int score2 = scores.GetScore2();
                 score1Text.text = ConvertScoreToString(score1);
                 score2Text.text = ConvertScoreToString(score2);
-                reactScore(score1, score2);
            
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
@@ -122,24 +121,6 @@ public class scoreController : MonoBehaviour
 
         }
     }
-
-
-    void reactScore(int score1, int score2){
-
-        int team = GameObject.Find("Local").GetComponent<PlayerController>().myTeam;
-        if (score1!= 0 && score2!= 0 && (score1*1.2 <= score2) || (score1*0.8 >= score2)){
-            if (team == 1){
-                MusicManager.instance.musicReact((int)score2/score1);
-            } else if (team == 2){
-                MusicManager.instance.musicReact((int)score1/score2);
-            }
-        }else{
-            MusicManager.instance.endReaction();
-
-        }
-       
-    }
-
 
 
 
