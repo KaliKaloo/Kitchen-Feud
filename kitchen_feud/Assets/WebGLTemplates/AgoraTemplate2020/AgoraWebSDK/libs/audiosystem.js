@@ -158,6 +158,13 @@ var AUDIO_PROFILE_TYPE = [
   { label: 6, value: "speech_low_quality" },
   { label: 7, value: "music_standard" },
 ];
+var CUSTOM_AUDIO_PROFILE_TYPE = [
+  // sample rate, bit rate, mono/stereo, speech/music codec
+  { label: 0, value: {sampleRate: 48000,sampleSize: 16777216,stereo: true,bitrate: 128,}},
+  { label: 1, value: {sampleRate: 48000,sampleSize: 65536,stereo: true,bitrate: 80,}},
+  { label: 1, value: {sampleRate: 48000,sampleSize: 65536,stereo: true,bitrate: 32,}},
+  { label: 1, value: {sampleRate: 32000,sampleSize: 65536,stereo: false,bitrate: 18,}},
+];
 
 // Sets the audio parameters and application scenarios.
 function SetAudioProfile(profile) {
@@ -166,4 +173,12 @@ function SetAudioProfile(profile) {
   }).then(() => {
     //console.log("JS Microphone audio track is set");
   });
+
+  function SetAudioProfileCustom(profile) {
+    AgoraRTC.createMicrophoneAudioTrack({
+      encoderConfig:CUSTOM_AUDIO_PROFILE_TYPE[profile].value ,
+    }).then(() => {
+      //console.log("JS Microphone audio track is set");
+    });
+}
 }
