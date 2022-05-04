@@ -94,24 +94,8 @@ public class MusicManager : MonoBehaviour
         track.pitch = 1f;
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
 
-
     }
 
-
-    private IEnumerator pitchTrack(bool pitchUp){
-        float timeElapsed = 0;
-        while (timeElapsed < 5){
-            if (pitchUp){
-                track.pitch = Mathf.Lerp(1, pitch, timeElapsed/fadeTime);
-            }else{
-                track.pitch = Mathf.Lerp(pitch, 1, timeElapsed/fadeTime);
-            }
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-        Invoke("playRandom", (track.clip.length - track.time)/pitch);
-
-    }
 
     private IEnumerator switchTrack(AudioClip newTrack){
         float timeElapsed = 0;

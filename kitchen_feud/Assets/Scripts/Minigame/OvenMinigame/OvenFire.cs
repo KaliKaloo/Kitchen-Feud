@@ -10,13 +10,8 @@ public class OvenFire : MonoBehaviour
     ParticleSystem[] PS;
     public AudioSource fireSound;
     public FireOut fireOut;
-    private bool hasParent, reacted = false;
+    private bool hasParent;
     public int team;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -37,7 +32,6 @@ public class OvenFire : MonoBehaviour
                         fireOut = p.GetComponent<FireOut>();
                         fireOut.resetEmission();
                         fireOut.enabled=true;
-                        reacted=false;
                     }
                     p.Play();
                 }
@@ -49,13 +43,15 @@ public class OvenFire : MonoBehaviour
                    
 
             }
-            //dynamic music reaction
-            PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
-            if (startFire && !reacted && playerVM.entered1 ){
-                MusicManager.instance.musicReact();
-                reacted = true;
-                fireOut.stoppedReaction = false;
-            }
+            
+           
+        }
+
+        //dynamic music reaction
+        PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
+        if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
+            MusicManager.instance.musicReact();
+            fireOut.stoppedReaction = false;
         }
     }
 
