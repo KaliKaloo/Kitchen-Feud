@@ -71,8 +71,8 @@ public class PlayerHolding : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         slotItem(obj);
-        //obj.transform.localPosition = Vector3.zero;
-        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     [PunRPC]
@@ -164,8 +164,8 @@ public class PlayerHolding : MonoBehaviour
             obj.GetComponent<Rigidbody>().isKinematic = true;
             obj.GetComponent<Collider>().isTrigger = true;
         }
-        obj.transform.localPosition = Vector3.zero;
-        obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        //obj.transform.localPosition = Vector3.zero;
+        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
         // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
     }
     [PunRPC]
