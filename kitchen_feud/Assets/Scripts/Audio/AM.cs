@@ -65,6 +65,9 @@ public class AM : MonoBehaviour
                 }
                 engine.JoinChannel(randomInstance + "Path");
               
+                globalClicked.enterEnemyKitchen = false;
+                globalClicked.enemyInstructions = false;
+
                 if (team == 1)
                 {
                     myTeam = myPlayerC.myTeam;

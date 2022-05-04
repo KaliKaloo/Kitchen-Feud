@@ -131,6 +131,8 @@ MonoBehaviour:
   - setSignParent
   - setStarted
   - setTeam
+  - setText
+  - setText2
   - SetToF
   - SetToFalse
   - SetToTrue
@@ -138,6 +140,11 @@ MonoBehaviour:
   - setTrayNull
   - setUsed
   - setUsedF
+  - ShowingWithOrderTeam1
+  - ShowingWithOrderTeam2
+  - showTickets
+  - SkipCutscene
+  - StopBoilingSound
   - showTickets
   - SkipCutscene
   - StopBoilingSound
@@ -155,6 +162,11 @@ MonoBehaviour:
   - UpdateScore1
   - UpdateScore2
   - UpdateTimer
+  - destroyFireForAll
+  - playSprinklers
+  - startFireRPC
+  - syncRandomTimes
+  - playInstructionVideo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

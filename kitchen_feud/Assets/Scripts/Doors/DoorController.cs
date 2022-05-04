@@ -25,7 +25,7 @@ public class DoorController : MonoBehaviour
         if (PV.IsMine)
         {
             // whenever anything enters the trigger, open the door
-            if (cube.gameObject.tag == "Player" && isOpened == false)
+            if ((cube.CompareTag("Player")|| cube.CompareTag("Owner1") || cube.CompareTag("Owner2")) && isOpened == false)
             {
 
                 PV.RPC("syncAnim", RpcTarget.AllBuffered, mydoor.GetComponent<PhotonView>().ViewID, Open);
@@ -46,7 +46,7 @@ public class DoorController : MonoBehaviour
 
 
             // whenever anything enters the trigger, open the door
-            if (cube.gameObject.tag == "Player" && isOpened == true)
+            if ((cube.CompareTag("Player")|| cube.CompareTag("Owner1") || cube.CompareTag("Owner2")) && isOpened)
             {
                 if (count > 1)
                 {

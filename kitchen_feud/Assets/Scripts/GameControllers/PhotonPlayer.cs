@@ -12,6 +12,7 @@ public class PhotonPlayer : MonoBehaviour
 
 
     public Hashtable scene = new Hashtable();
+    public Hashtable pViD = new Hashtable();
     public bool SceneLoaded;
 
     GameObject[] Team1;
@@ -49,7 +50,9 @@ public class PhotonPlayer : MonoBehaviour
                         int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints1.Length);
                         myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_cat_Model"),
                             GameSetup.GS.spawnPoints1[spawnPicker].position, Quaternion.identity);
-
+                        //saving PhotonView ID of local player
+                        pViD["ViewID"] = myAvatar.GetPhotonView().ViewID;
+                        PhotonNetwork.LocalPlayer.SetCustomProperties(pViD);
                         foreach (GameObject obj in Team2)
                         {
                             obj.SetActive(false);
@@ -63,6 +66,11 @@ public class PhotonPlayer : MonoBehaviour
                         int spawnPicker = Random.Range(0, GameSetup.GS.spawnPoints2.Length);
                         myAvatar = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Player_panda_Model"),
                             GameSetup.GS.spawnPoints2[spawnPicker].position, Quaternion.identity);
+                        //saving PhotonView ID of local player
+                        pViD["ViewID"] = myAvatar.GetPhotonView().ViewID;
+                        PhotonNetwork.LocalPlayer.SetCustomProperties(pViD);
+
+
                         foreach (GameObject obj in Team1)
                         {
                             obj.SetActive(false);

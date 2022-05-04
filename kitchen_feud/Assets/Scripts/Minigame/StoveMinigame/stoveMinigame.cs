@@ -62,8 +62,8 @@ public class stoveMinigame : MonoBehaviour
 
             if (dishOfFoundDish != null)
             {
-
-                dishOfFoundDish.points = stoveScore.CalculateScore();
+                int ingredientMultiplier = appliance.foundDish.recipe.Count - 1;
+                dishOfFoundDish.points = stoveScore.CalculateScore() + (30 * ingredientMultiplier);
 
                 // if player is team 2 but interacts with team1 stove, points doubled
                 if (stoveCanvas.tag == "Team1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GroundCollision : MonoBehaviour
 {
-    StoveScore stoveScore = new StoveScore();
     [SerializeField] public GameObject backbutton;
+
 
     StoveMinigameCounter stoveMinigameCounter = new StoveMinigameCounter();
 

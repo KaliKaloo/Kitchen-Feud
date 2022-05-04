@@ -7,22 +7,31 @@ using Photon.Pun;
 
 public class CutsceneController : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject video;
     [SerializeField] private GameObject skipButton;
     [SerializeField] private Text skipButtonText;
+    [SerializeField] private GameObject skipButtonInstructions;
+
     public int voteCount;
-    private VideoPlayer videoPlayer;
     private menuController menu;
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private bool skipButtonPressed = false;
     private PhotonView PV;
 
-    bool switchScene = false;
+    [Header("VideoController")]
+    public VideoPlayer videoPlayer;
+
+    public string cutsceneURL;
+    public string instructionURL;
+
+    public GameObject videoCanvas;
+    bool instructionPlayed =false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        videoPlayer = video.GetComponent<VideoPlayer>();
+        videoPlayer.targetTexture.Release();
+        videoPlayer.url = cutsceneURL;
         menu = GetComponent<menuController>();
         skipButtonText.text = "Skip";
         PV = GetComponent<PhotonView>();
@@ -32,7 +41,15 @@ public class CutsceneController : MonoBehaviourPunCallbacks
  
     void CheckOver(UnityEngine.Video.VideoPlayer videoPlayer)
     {
-         menu.startGame();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if(!instructionPlayed){
+                PV.RPC("playInstructionVideo", RpcTarget.All, PV.ViewID);
+            }
+            else{
+                menu.startGame();
+            }
+        }
     }
     
 
@@ -52,24 +69,56 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         }
     }
 
+    IEnumerator tutorialLoadingScreen (int viewID){
+        CutsceneController cutsceneC = PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        instructionPlayed = true;
+
+        cutsceneC.menu.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(3);
+        cutsceneC.videoPlayer.url = instructionURL;
+        cutsceneC.videoPlayer.Play();
+        cutsceneC.menu.loadingScreen.SetActive(false);
+    }
+
 
     [PunRPC]
     void increment(int viewID)
     {
         int vC;
+        CutsceneController cutsceneC = PhotonView.Find(viewID).GetComponent<CutsceneController>();
         PhotonView.Find(viewID).GetComponent<CutsceneController>().voteCount++;
-        vC = PhotonView.Find(viewID).GetComponent<CutsceneController>().voteCount;
-        skipButtonText.text = vC + "/" + PhotonNetwork.CurrentRoom.PlayerCount;
+        vC = cutsceneC.voteCount;
+        cutsceneC.skipButtonText.text = vC + "/" + PhotonNetwork.CurrentRoom.PlayerCount;
+
         if (vC == PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            menu.startGame();
+            cutsceneC.skipButton.SetActive(false);
+            cutsceneC.skipButtonInstructions.SetActive(true);
+            cutsceneC.videoPlayer.Stop();
+            videoPlayer.targetTexture.Release();
+            StartCoroutine(tutorialLoadingScreen(viewID));
+
+            
         }
-        
     }
-    // Stops the video for all players in lobby
+
     [PunRPC]
-    void SkipCutscene()
+    void playVideo(int viewID)
     {
-        videoPlayer.Stop();
+        CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        cutsceneC.skipButtonInstructions.SetActive(false);
+        cutsceneC.videoCanvas.SetActive(true);
+        cutsceneC.videoPlayer.Play();
+
+    }
+
+    [PunRPC]
+    void playInstructionVideo(int viewID)
+    {
+        CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        cutsceneC.skipButtonInstructions.SetActive(true);
+        videoPlayer.targetTexture.Release();
+        StartCoroutine(tutorialLoadingScreen(viewID));
+
     }
 }

@@ -120,6 +120,7 @@ public class AudioManager : MonoBehaviour
                     MusicManager.instance.endReaction();
                     enableSmoke.ChangePlayerState(false);
 
+
                 }
          
         

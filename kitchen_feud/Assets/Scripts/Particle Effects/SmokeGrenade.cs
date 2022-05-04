@@ -102,11 +102,28 @@ public class SmokeGrenade : MonoBehaviour
                 InstantiateSmokeBomb();
         }
     }
+    public void UseSmokeOwner(int team)
+    {
+      
+
+            InstantiateSmokeBombOwner(team);
+   
+    }
 
     void InstantiateSmokeBomb() {
         enableSmoke.DisableSmokeSlot();
 
         GameObject localPlayer = GameObject.Find("Local");
+
+        // syncs smoke bomb on network
+        if (localPlayer.GetComponent<PhotonView>().IsMine)
+            PhotonNetwork.Instantiate("smoke_grenade", localPlayer.transform.position + (localPlayer.transform.forward * 2), localPlayer.transform.rotation, 0);
+    }
+    void InstantiateSmokeBombOwner(int team)
+    {
+        enableSmoke.DisableSmokeSlot();
+
+        GameObject localPlayer = GameObject.FindGameObjectWithTag("Owner" + team);
 
         // syncs smoke bomb on network
         if (localPlayer.GetComponent<PhotonView>().IsMine)
