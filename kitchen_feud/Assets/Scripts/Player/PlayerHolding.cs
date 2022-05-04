@@ -58,10 +58,8 @@ public class PlayerHolding : MonoBehaviour
                 {
                     this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                  //  StartCoroutine(pick(obj));
-                    slotItem(obj);
-                    obj.transform.localPosition = Vector3.zero;
-                    obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                    StartCoroutine(pick(obj));
+    
                 }
             }
         }
