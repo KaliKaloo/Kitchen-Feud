@@ -11,6 +11,7 @@ public class OvenFire : MonoBehaviour
     public AudioSource fireSound;
     public FireOut fireOut;
     private bool hasParent;
+    public int team;
 
     void Start()
     {
@@ -19,10 +20,12 @@ public class OvenFire : MonoBehaviour
 
     void Update()
     {
+        
         if (!hasParent && transform.parent)
         {
             PS = transform.parent.GetComponentsInChildren<ParticleSystem>();
             fireSound = transform.parent.GetComponentInChildren<AudioSource>();
+            team = transform.parent.GetComponent<Appliance>().kitchenNum;
             hasParent = true;
         }
         //and condition if temperature is too high
