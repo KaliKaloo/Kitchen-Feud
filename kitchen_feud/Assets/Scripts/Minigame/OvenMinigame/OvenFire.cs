@@ -27,7 +27,7 @@ public class OvenFire : MonoBehaviour
         if(!startFire){
 
          
-            if(timer.timer < 35){ //cahnge back later
+            if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
                     if(p.GetComponent<FireOut>()){
                         fireOut = p.GetComponent<FireOut>();
