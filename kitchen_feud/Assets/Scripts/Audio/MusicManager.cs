@@ -96,12 +96,14 @@ public class MusicManager : MonoBehaviour
                 setVolume();
 
                 while (timeElapsed < fadeTime){
+                    if (fadingTrack == 2) yield break;
                     track1.volume = Mathf.Lerp(track1CurrentVol, 0, timeElapsed/fadeTime);
                     track2.volume = Mathf.Lerp(track2CurrentVol, musicVol, timeElapsed/fadeTime);
                     timeElapsed += Time.deltaTime;
                     yield return null;
 
                 }
+
                 track1.Stop();
 
                 
@@ -110,16 +112,18 @@ public class MusicManager : MonoBehaviour
         } else {
             
             if (newTrack != track2.clip){
+                fadingTrack = 2;
                 track1.loop = location == 3;
                 track1.clip = newTrack;
-                fadingTrack = 2;
-                track1CurrentVol = track1.isPlaying ? track1.volume : 0;
-                track2CurrentVol = track2.volume;
                 track1.Play();
                 track = track1;
                 Invoke("playRandom", track1.clip.length);
                 setVolume();
+                track2CurrentVol = track2.volume;
+                track1CurrentVol = track1.isPlaying ? track1.volume : 0;
+                Debug.Log(track1.isPlaying);
                 while (timeElapsed < fadeTime){
+                    if (fadingTrack == 1) yield break;
                     track2.volume = Mathf.Lerp(track2CurrentVol, 0, timeElapsed/fadeTime);
                     track1.volume = Mathf.Lerp(track1CurrentVol, musicVol, timeElapsed/fadeTime);
                     timeElapsed += Time.deltaTime;
