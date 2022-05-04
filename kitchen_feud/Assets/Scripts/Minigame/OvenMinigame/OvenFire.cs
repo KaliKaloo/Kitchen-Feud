@@ -58,6 +58,7 @@ public class OvenFire : MonoBehaviour
             MusicManager.instance.musicReact();
             foreach(ParticleSystem p in PS){
                 if(p.GetComponent<FireOut>()){
+                    fireOut = p.GetComponent<FireOut>();
                     fireOut.stoppedReaction = false;
                 }
             }
