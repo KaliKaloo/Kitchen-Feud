@@ -44,11 +44,15 @@ public class OvenFire : MonoBehaviour
                 //-------------------------------------------------
                 startFire = true;
 
-                    MusicManager.instance.musicReact();
-                    Debug.Log("Hi");
-                    reacted = true;
-                    fireOut.stoppedReaction = false;
+                   
 
+            }
+            //dynamic music reaction
+            PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
+            if (startFire && !reacted && playerVM.entered1 ){
+                MusicManager.instance.musicReact();
+                reacted = true;
+                fireOut.stoppedReaction = false;
             }
         }
     }

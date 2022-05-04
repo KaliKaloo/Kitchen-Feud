@@ -35,8 +35,8 @@ public class PlayerVoiceManager : MonoBehaviour
 	public bool inMinigame;
 	public float pitchMin, pitchMax, volumeMin, volumeMax;
 	Transform damageVignette;
-    // private Vignette vg; 
-	// Start is called before the first frame update
+
+
 	void Start()
 	{
 		pitchMin = 0.5f;
@@ -84,7 +84,6 @@ public class PlayerVoiceManager : MonoBehaviour
 	
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		
@@ -115,7 +114,6 @@ public class PlayerVoiceManager : MonoBehaviour
 
 				if (Physics.Raycast(ray, out hit, 5))
 				{
-					// Interactable interactable = hit.collider.GetComponent<Interactable>();
 					var obj = hit.collider.gameObject;
 					if (obj != null)
 					{

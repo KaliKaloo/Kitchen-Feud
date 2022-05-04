@@ -81,14 +81,20 @@ public class MusicManager : MonoBehaviour
 
     public void musicReact(){
         CancelInvoke("playRandom");
-        
         pitch = 1.3f;
-        StartCoroutine(pitchTrack(true));
+        track.pitch = 1.3f;
+        Invoke("playRandom", (track.clip.length - track.time)/pitch);
+
+
     }
 
      public void endReaction(){
         CancelInvoke("playRandom");
-        StartCoroutine(pitchTrack(false));
+        pitch = 1f;
+        track.pitch = 1f;
+        Invoke("playRandom", (track.clip.length - track.time)/pitch);
+
+
     }
 
 
