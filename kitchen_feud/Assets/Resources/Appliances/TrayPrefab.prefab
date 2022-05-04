@@ -223,9 +223,9 @@ GameObject:
   - component: {fileID: 8745415222825573397}
   - component: {fileID: 4384476313520570976}
   - component: {fileID: 4570995374120447135}
-  - component: {fileID: 7100665266440388163}
   - component: {fileID: 2272403408510772838}
   - component: {fileID: 1571320702088724435}
+  - component: {fileID: 5168779679869628407}
   m_Layer: 0
   m_Name: TrayPrefab
   m_TagString: Untagged
@@ -300,36 +300,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7100665266440388163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940555905768325906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510e0420b7b63b2419739f5dd62ed27e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 0}
-  isFocus: 0
-  player: {fileID: 0}
-  tray: {fileID: 11400000, guid: 333129de06bfb4126a83c73740ca37bc, type: 2}
-  item: {fileID: 0}
-  objectHolding: {fileID: 0}
-  slots:
-  - {fileID: 1133827816294995431}
-  - {fileID: 4113438068595410520}
-  - {fileID: 4322904179897945005}
-  - {fileID: 9132104131308925800}
-  currentPrefab: {fileID: 0}
-  Agent: {fileID: 0}
-  SP: {fileID: 0}
-  pickable: {fileID: 0}
-  teamController: {fileID: 0}
-  isReady: 0
-  PV: {fileID: 0}
 --- !u!114 &2272403408510772838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,3 +336,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1507216354692496199, guid: deaaaad0f18ba8a4e9976f3dc5176e7a, type: 3}
+--- !u!114 &5168779679869628407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940555905768325906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81ac77b2d28b4dc79166c2a428b022c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 1133827816294995431}
+  - {fileID: 4322904179897945005}
+  - {fileID: 4113438068595410520}
+  - {fileID: 9132104131308925800}
+  pV: {fileID: 0}
