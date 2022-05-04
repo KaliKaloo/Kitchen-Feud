@@ -14,9 +14,10 @@ public class scoreController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI score1Text;
     [SerializeField] private TextMeshProUGUI score2Text;
-    private bool gameOver;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject timesUpCanvas;
+
     public List<GameObject> trays = new List<GameObject>();
     float elapsed = 0f;
     Hashtable ht = new Hashtable();
@@ -26,8 +27,11 @@ public class scoreController : MonoBehaviour
 
     // global timer
     private static GlobalTimer timer = new GlobalTimer();
+    private Animator timesUpAnimator;
 
     private bool startGame = false;
+    private bool gameEnd = false;
+    private bool gameOver;
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     public PhotonView PV;
     private CleanupRoom cleanupRoom;
@@ -38,6 +42,7 @@ public class scoreController : MonoBehaviour
         PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
         loadingScreen.SetActive(true);
+        timesUpAnimator = timesUpCanvas.GetComponent<Animator>();
 
       
         // send message to server that finished loading
@@ -152,48 +157,63 @@ public class scoreController : MonoBehaviour
     // OutputTime is called once per second
     void OutputTime()
     {
-
-        if (timer.GetLocalTime() > 0)
+        if (!gameEnd)
         {
-            // updates timer and text in timer
-            StartCoroutine(getLocalTime());
-        }
-
-        // SIGNAL FOR GAME OVER:
-        else if(gameOver == false)
-        {
-            
-            // load game over screen and send final scores
-            for (int i = 0; i < trays.Count; i++)
+            if (timer.GetLocalTime() > 0)
             {
-                Tray ts = trays[i].GetComponent<Tray>();
-                ts.tray.trayID = null;
-                ts.tray.ServingTray.Clear();
-                ts.tray.objectsOnTray.Clear();
+                StartCoroutine(getLocalTime());
             }
 
-            if (PhotonNetwork.IsMasterClient)
+            // SIGNAL FOR GAME OVER:
+            else if (gameOver == false)
             {
-            
-                    PhotonNetwork.LoadLevel("gameOver");
-               
+
+                // load game over screen and send final scores
+                for (int i = 0; i < trays.Count; i++)
+                {
+                    Tray ts = trays[i].GetComponent<Tray>();
+                    ts.tray.trayID = null;
+                    ts.tray.ServingTray.Clear();
+                    ts.tray.objectsOnTray.Clear();
+                }
+
+                StartCoroutine(playTimesUpAnimation());
+
+                // stop checking time after
+                gameEnd = true;
+
             }
-
-            // calls this to clean objects which need resetting
-            cleanupRoom.Clean();
-                        
-            startGame = false;
-
-
-            // sends to server that game has finished
-            lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-            gameOver = true;
-
         }
-
-
     }
+
+    // plays animation and exits game
+    public IEnumerator playTimesUpAnimation()
+    {
+        timesUpCanvas.SetActive(true);
+        // play animation
+        timesUpAnimator.SetBool("StartGameOver", true);
+        yield return new WaitForSeconds(3);
+
+
+        // do game over
+        if (PhotonNetwork.IsMasterClient)
+            // this will auto sync with all clients
+            PhotonNetwork.LoadLevel("gameOver");
+
+        // calls this to clean objects which need resetting
+        cleanupRoom.Clean();
+        timesUpAnimator.SetBool("StartGameOver", false);
+        timesUpCanvas.SetActive(false);
+
+        startGame = false;
+
+        // sends to server that game has finished
+        lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        gameOver = true;
+    }
+
+
     public IEnumerator getLocalTime()
     {
         yield return new WaitForSeconds(1);
