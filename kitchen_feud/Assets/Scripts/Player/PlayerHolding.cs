@@ -109,7 +109,7 @@ public class PlayerHolding : MonoBehaviour
 
     void Update()
     {
-        if (gainedOwnership)
+        if (gainedOwnership && objToHold && objToHold.GetPhotonView().OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
         {
             slotItem(objToHold);
             objToHold.transform.localPosition = Vector3.zero;
