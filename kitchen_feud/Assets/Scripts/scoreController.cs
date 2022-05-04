@@ -131,13 +131,13 @@ public class scoreController : MonoBehaviour
                 if (team == 1){
                     float ratio = score2/score1;
                     float pitch = Mathf.Min(ratio, 1.3f);
-                    pitch = Mathf.Max(ratio, 0.7f);
-                    MusicManager.instance.musicReact(pitch);
+                    pitch = Mathf.Max(pitch, 0.7f);
+                    MusicManager.instance.musicReact(pitch/3);
                 } else if (team == 2){
                     float ratio = score1/score2;
                     float pitch = Mathf.Min(ratio, 1.3f);
-                    pitch = Mathf.Max(ratio, 0.7f);
-                    MusicManager.instance.musicReact(pitch);
+                    pitch = Mathf.Max(pitch, 0.7f);
+                    MusicManager.instance.musicReact(pitch/3);
                 }
             }else{
                 MusicManager.instance.endReaction();
