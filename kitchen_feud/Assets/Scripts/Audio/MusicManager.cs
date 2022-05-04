@@ -22,6 +22,8 @@ public class MusicManager : MonoBehaviour
     public bool inMG = false;
     private float musicVol, sliderVol = 0.5f;
 
+    private float pitch = 1;
+
    
     void Awake(){
         if (instance == null){
@@ -77,6 +79,24 @@ public class MusicManager : MonoBehaviour
         StartCoroutine(switchTrack(newTrack));
     }
 
+    public void musicReact(){
+        CancelInvoke("playRandom");
+        pitch = 1.3f;
+        StartCoroutine(pitchTrack());
+    }
+
+
+    private IEnumerator pitchTrack(){
+        float timeElapsed = 0;
+        while (timeElapsed < 5){
+            track.pitch = Mathf.Lerp(1, pitch, timeElapsed/fadeTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        Invoke("playRandom", (track.clip.length - track.time)/pitch);
+
+}
+
     private IEnumerator switchTrack(AudioClip newTrack){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
@@ -89,7 +109,7 @@ public class MusicManager : MonoBehaviour
                 track2.clip = newTrack;
                 track2.Play();
                 track = track2;
-                Invoke("playRandom", track2.clip.length);
+                Invoke("playRandom", track2.clip.length/pitch);
                 setVolume();
                 track1CurrentVol = track1.volume;
                 track2CurrentVol = track2.isPlaying ? track2.volume : 0;
@@ -114,7 +134,7 @@ public class MusicManager : MonoBehaviour
                 track1.clip = newTrack;
                 track1.Play();
                 track = track1;
-                Invoke("playRandom", track1.clip.length);
+                Invoke("playRandom", track1.clip.length/pitch);
                 setVolume();
                 track2CurrentVol = track2.volume;
                 track1CurrentVol = track1.isPlaying ? track1.volume : 0;
@@ -138,7 +158,7 @@ public class MusicManager : MonoBehaviour
         setMusicClips();
         track1.clip = musicClips.GetRandomAudioClip();
         track1.Play();
-        Invoke("playRandom", track1.clip.length);
+        Invoke("playRandom", track1.clip.length/pitch);
         float timeElapsed = 0;
         setVolume();
 
@@ -151,9 +171,10 @@ public class MusicManager : MonoBehaviour
     }
 
     public void playRandom(){
+        Debug.Log("random");
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
-        Invoke("playRandom", track.clip.length);
+        Invoke("playRandom", track.clip.length/pitch);
         setVolume();
         track.volume = musicVol;
     }
@@ -177,7 +198,7 @@ public class MusicManager : MonoBehaviour
         AudioSource mgSource = track == track1 ? track2 : track1;
         mgSource.Stop();
         track.UnPause();
-        Invoke("playRandom", track.clip.length - track.time);
+        Invoke("playRandom", (track.clip.length - track.time)/pitch);
         MGStarted = false;
     }
 
@@ -194,6 +215,8 @@ public class MusicManager : MonoBehaviour
         else if (track2.isPlaying && !track1.isPlaying)
             track2.volume = musicVol;
     }
+
+
    
 
 

@@ -12,6 +12,8 @@ public class OvenFire : MonoBehaviour
     public FireOut fireOut;
     private bool hasParent;
 
+    private bool reacted = false;
+
     void Start()
     {
         
@@ -27,6 +29,10 @@ public class OvenFire : MonoBehaviour
         }
         //and condition if temperature is too high
         if(!startFire){
+            if(timer.timer == 35 && !reacted) {
+                 MusicManager.instance.musicReact();
+                 reacted = true;}
+                 
             if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
                     if(p.GetComponent<FireOut>()){
