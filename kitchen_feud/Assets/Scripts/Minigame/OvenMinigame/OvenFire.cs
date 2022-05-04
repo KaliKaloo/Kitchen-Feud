@@ -56,7 +56,11 @@ public class OvenFire : MonoBehaviour
         if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
             MusicManager.instance.priorityPitch = true;
             MusicManager.instance.musicReact();
-            fireOut.stoppedReaction = false;
+            foreach(ParticleSystem p in PS){
+                if(p.GetComponent<FireOut>()){
+                    fireOut.stoppedReaction = false;
+                }
+            }
         }
     }
 
