@@ -11,6 +11,7 @@ public class ExitStoveMinigame : MonoBehaviour
 	public GameObject canvas;
     public GameObject minigameCanvas;
 	public GameObject player;
+	public Camera UICamera;
 
 	[SerializeField] private Rigidbody2D pot;
 	[SerializeField] private GameObject backButton;
@@ -80,7 +81,7 @@ public class ExitStoveMinigame : MonoBehaviour
 
 
 		gamePlayer.GetComponent<PlayerController>().enabled = true;
-		appliance.UIcamera.enabled = false;
+		UICamera.enabled = false;
 		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 
 	}

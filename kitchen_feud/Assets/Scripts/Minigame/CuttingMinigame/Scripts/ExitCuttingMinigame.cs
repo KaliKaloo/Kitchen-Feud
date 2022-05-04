@@ -13,6 +13,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 	public GameObject minigameCanvas;
 	public GameObject player;
 	public Appliance appliance;
+	public Camera UICamera;
 
 	void Start () {
 		Button btn = yourButton.GetComponent<Button>();
@@ -49,7 +50,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 		playerV.RPC("EnablePushing",RpcTarget.AllBuffered,playerV.ViewID);
 		playerV.GetComponent<PlayerController>().enabled = true;
 	
-		appliance.UIcamera.enabled = false;
+		UICamera.enabled = false;
 		playerV.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }

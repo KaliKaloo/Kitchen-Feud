@@ -14,6 +14,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 	public GameObject player;
 	public Appliance appliance;
 	public SandwichController SandwichController;
+	public Camera UICamera;
 
 
 	void Start()
@@ -50,7 +51,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 		playerV.RPC("EnablePushing", RpcTarget.AllBuffered, playerV.ViewID);
 
 		gamePlayer.GetComponent<PlayerController>().enabled = true;
-		appliance.UIcamera.enabled = false;
+		UICamera.enabled = false;
 		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
 	}
 }
