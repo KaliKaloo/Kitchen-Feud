@@ -61,7 +61,6 @@ public class Owner : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        Debug.LogError(AI.Instance.owner1Avatar.name);
         Owner1 = AI.Instance.owner1Avatar;
         Owner2 = AI.Instance.owner2Avatar;
 
@@ -304,7 +303,6 @@ public class Owner : MonoBehaviour
                     {
                         anim.SetBool("IsShakingHead", false);
                     }
-                    Debug.LogError("SL " + stopLeaning + "CS " + currentlyShouting + "CT " + currentlyTalking);
 
                     if (!stopLeaning && !currentlyShouting && !currentlyTalking)
                     {
@@ -325,7 +323,6 @@ public class Owner : MonoBehaviour
                 }
                 if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
                 {
-                    //Debug.LogError("Hello");
                     agent.transform.rotation = Quaternion.Euler(0, 0, 0);
                     faceforward = true;
                     anim.SetBool("IsTalking", true);
@@ -841,7 +838,6 @@ public class Owner : MonoBehaviour
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
         int playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-        Debug.LogError(PhotonView.Find(playerID).IsMine);
         if ( pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
         {
             //Debug.LogError("TESTTT");
