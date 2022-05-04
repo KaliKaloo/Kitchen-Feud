@@ -127,12 +127,18 @@ public class scoreController : MonoBehaviour
     void reactScore(int score1, int score2){
         int team = GameObject.Find("Local").GetComponent<PlayerController>().myTeam;
         if (!MusicManager.instance.priorityPitch && score1!= 0 && score2!= 0){
-            if (team == 2 && score1*0.8 >= score2){ // team 2 and losing
-                MusicManager.instance.musicReact((int)score1/score2);
-            }
-            else if (team == 1 && score2*0.8 >= score1){ //team 1 and losing
-                MusicManager.instance.musicReact((int)score2/score1);
-            }else{
+            if ((score1*1.2 <= score2) || (score1*0.8 >= score2)){
+                if (team == 1){
+                    float ratio = score2/score1;
+                    int pitch = Mathf.Max(ratio, 1.3f);
+                    int pitch = Mathf.Min(ratio, 0.7f);
+                    MusicManager.instance.musicReact();
+                } else if (team == 2){
+                    float ratio = (int)score1/score2;
+                    int pitch = Mathf.Max(ratio, 1.3f);
+                    int pitch = Mathf.Min(ratio, 0.7f);
+                    MusicManager.instance.musicReact((int)score1/score2);
+                }else{
                 MusicManager.instance.endReaction();
             }
         }
