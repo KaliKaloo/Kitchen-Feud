@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
-using Codice.Client.BaseCommands;
-using Codice.Client.BaseCommands.Merge;
 using UnityEngine.AI;
 
 public class AI : MonoBehaviour
