@@ -10,9 +10,7 @@ public class OvenFire : MonoBehaviour
     ParticleSystem[] PS;
     public AudioSource fireSound;
     public FireOut fireOut;
-    private bool hasParent;
-
-    private bool reacted = false;
+    private bool hasParent, reacted = false;
 
     void Start()
     {
@@ -29,16 +27,15 @@ public class OvenFire : MonoBehaviour
         }
         //and condition if temperature is too high
         if(!startFire){
-            if(timer.timer == 35 && !reacted) {
-                 MusicManager.instance.musicReact();
-                 reacted = true;}
-                 
-            if(timer.timer < -5){
+
+         
+            if(timer.timer < 35){ //cahnge back later
                 foreach(ParticleSystem p in PS){
                     if(p.GetComponent<FireOut>()){
                         fireOut = p.GetComponent<FireOut>();
                         fireOut.resetEmission();
                         fireOut.enabled=true;
+                        reacted=false;
                     }
                     p.Play();
                 }
@@ -46,6 +43,11 @@ public class OvenFire : MonoBehaviour
                 fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
                 //-------------------------------------------------
                 startFire = true;
+
+                    MusicManager.instance.musicReact();
+                    Debug.Log("Hi");
+                    reacted = true;
+                    fireOut.stoppedReaction = false;
 
             }
         }

@@ -81,21 +81,31 @@ public class MusicManager : MonoBehaviour
 
     public void musicReact(){
         CancelInvoke("playRandom");
+        
         pitch = 1.3f;
-        StartCoroutine(pitchTrack());
+        StartCoroutine(pitchTrack(true));
+    }
+
+     public void endReaction(){
+        CancelInvoke("playRandom");
+        StartCoroutine(pitchTrack(false));
     }
 
 
-    private IEnumerator pitchTrack(){
+    private IEnumerator pitchTrack(bool pitchUp){
         float timeElapsed = 0;
         while (timeElapsed < 5){
-            track.pitch = Mathf.Lerp(1, pitch, timeElapsed/fadeTime);
+            if (pitchUp){
+                track.pitch = Mathf.Lerp(1, pitch, timeElapsed/fadeTime);
+            }else{
+                track.pitch = Mathf.Lerp(pitch, 1, timeElapsed/fadeTime);
+            }
             timeElapsed += Time.deltaTime;
             yield return null;
         }
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
 
-}
+    }
 
     private IEnumerator switchTrack(AudioClip newTrack){
         float timeElapsed = 0;
