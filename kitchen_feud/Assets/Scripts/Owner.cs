@@ -13,7 +13,8 @@ using UnityEngine.UI;
 public class Owner : MonoBehaviour
 {
     public int team;
-    private Animator anim;
+    public Animator anim;
+    public bool playOnce;
     public GameObject oven;
     private GameObject localPlayer;
     private NavMeshAgent agent;
@@ -71,7 +72,8 @@ public class Owner : MonoBehaviour
         PV = GetComponent<PhotonView>();
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
-        audioSource = transform.GetChild(7).GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+       // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
         keyboard = GameObject.Find("keyboard controls");
         mouse = GameObject.Find("mouse controls");
@@ -154,9 +156,10 @@ public class Owner : MonoBehaviour
                 }
                 anim.SetBool("IsShouting", true);
             }
-            if (currentlyShouting || currentlyTalking)
+            if (!playOnce && (currentlyShouting || currentlyTalking))
             {
-                audioSource.Play();
+                StartCoroutine(playSounds());
+                playOnce = true;
             }
             if (stopLeaning)
             {
@@ -808,6 +811,12 @@ public class Owner : MonoBehaviour
             agent.SetDestination(new Vector3(6.743f, 0.2f, 2.076f));
 
         }
+    }
+    public IEnumerator playSounds()
+    {
+        audioSource.Play();
+        yield return new WaitForSeconds(5);
+        playOnce = false;
     }
     [PunRPC]
     void setText(int viewID, string message)
