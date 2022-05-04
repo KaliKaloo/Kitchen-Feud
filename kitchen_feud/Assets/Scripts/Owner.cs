@@ -21,8 +21,6 @@ public class Owner : MonoBehaviour
     public bool currentlyTalking;
     private bool firstTime;
     public bool currentlyShouting;
-    private bool currentlyTalking2;
-    private bool currentlyShouting2;
     private bool returned;
     public bool collected;
     public bool collecting;
@@ -39,7 +37,6 @@ public class Owner : MonoBehaviour
     public GameObject keyboard;
     public GameObject mouse;
     public GameObject playerToFollow;
-    private Vector3 playerToFollowPos;
     public TextMeshProUGUI Text;
     private bool faceforward;
     private static GlobalTimer timer = new GlobalTimer();
