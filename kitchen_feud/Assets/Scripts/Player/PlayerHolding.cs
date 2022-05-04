@@ -58,12 +58,20 @@ public class PlayerHolding : MonoBehaviour
                 {
                     //this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                    slotItem(obj);
-                    obj.transform.localPosition = Vector3.zero;
-                    obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                    StartCoroutine(pick(obj));
+                    //slotItem(obj);
+                    //obj.transform.localPosition = Vector3.zero;
+                    //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
             }
         }
+    }
+    public  IEnumerator pick(GameObject obj)
+    {
+        yield return new WaitForSeconds(2);
+        slotItem(obj);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     [PunRPC]
