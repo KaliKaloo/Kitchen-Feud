@@ -56,7 +56,7 @@ public class PlayerHolding : MonoBehaviour
                 }
                 else
                 {
-                    this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
+                    //this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
                     obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
                     slotItem(obj);
                     obj.transform.localPosition = Vector3.zero;
