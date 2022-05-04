@@ -447,7 +447,10 @@ public class Owner : MonoBehaviour
                     if (!following)
                     {
                         Photon.Realtime.Player p = getLowestCookedDishesByTeam(1);
-                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        if (p != null)
+                        {
+                            playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        }
                         agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
                         if (!calledName)
                         {
