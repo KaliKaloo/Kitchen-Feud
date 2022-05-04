@@ -54,6 +54,7 @@ public class OvenFire : MonoBehaviour
         //dynamic music reaction
         PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
         if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
+            MusicManager.instance.priorityPitch = true;
             MusicManager.instance.musicReact();
             fireOut.stoppedReaction = false;
         }

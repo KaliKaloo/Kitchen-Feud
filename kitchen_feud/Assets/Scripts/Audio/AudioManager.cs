@@ -103,7 +103,9 @@ public class AudioManager : MonoBehaviour
 
                 if (myTeam != team)
                 {
+                    MusicManager.instance.priorityPitch = true;
                     MusicManager.instance.musicReact();
+
                     enableSmoke.ChangePlayerState(true);
                     globalClicked.enterEnemyKitchen = true;
                     {
@@ -117,6 +119,7 @@ public class AudioManager : MonoBehaviour
                 }
                 else
                 {
+                    MusicManager.instance.priorityPitch = false;
                     MusicManager.instance.endReaction();
                     enableSmoke.ChangePlayerState(false);
 

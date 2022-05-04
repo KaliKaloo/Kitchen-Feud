@@ -56,6 +56,7 @@ public class FireOut : MonoBehaviour {
 
             //stop dynamic music reaction
             if(!stoppedReaction) {
+                MusicManager.instance.priorityPitch = false;
                 MusicManager.instance.endReaction();
                 stoppedReaction = true;
             }

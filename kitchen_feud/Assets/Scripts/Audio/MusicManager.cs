@@ -19,10 +19,12 @@ public class MusicManager : MonoBehaviour
 
     private bool switched = false, MGStarted = false;
     public int location;
-    public bool inMG = false;
+    public bool inMG = false, priorityPitch = false;
     private float musicVol, sliderVol = 0.5f;
 
     private float pitch = 1;
+
+
 
    
     void Awake(){
