@@ -130,7 +130,7 @@ public class scoreController : MonoBehaviour
             if (team == 2 && score1*0.8 >= score2){ // team 2 and losing
                 MusicManager.instance.musicReact((int)score1/score2);
             }
-            else if (team == 1 && score2*0.8 >= score1) //team 1 and losing
+            else if (team == 1 && score2*0.8 >= score1){ //team 1 and losing
                 MusicManager.instance.musicReact((int)score2/score1);
             }else{
                 MusicManager.instance.endReaction();
