@@ -80,13 +80,18 @@ public class MusicManager : MonoBehaviour
     }
 
     public void musicReact(){
+        musicReact(1.3f);
+    }
+
+
+    public void musicReact(float pitchParam){
         CancelInvoke("playRandom");
-        pitch = 1.3f;
-        track.pitch = 1.3f;
+        pitch = pitchParam;
+        track.pitch = pitchParam;
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
 
-
     }
+
 
      public void endReaction(){
         CancelInvoke("playRandom");

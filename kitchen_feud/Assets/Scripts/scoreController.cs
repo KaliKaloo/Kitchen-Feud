@@ -7,12 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-
 using TMPro;
 
-// IMPORTANT:
-// timer and score parser class have been moved to separate scripts
-// CHECK scripts/menu folder for the relevant scripts
 
 public class scoreController : MonoBehaviour
 {
@@ -90,8 +86,11 @@ public class scoreController : MonoBehaviour
             if (startGame)
             {
                 OutputTime();
-                score1Text.text = ConvertScoreToString(scores.GetScore1());
-                score2Text.text = ConvertScoreToString(scores.GetScore2());
+                int score1 = scores.GetScore1();
+                int score2 = scores.GetScore2();
+                score1Text.text = ConvertScoreToString(score1);
+                score2Text.text = ConvertScoreToString(score2);
+                reactScore(score1, score2);
            
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
@@ -104,10 +103,9 @@ public class scoreController : MonoBehaviour
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-            
-                 timer.SetLocalTime();
-                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                 timer.StartTimer(this);
+                timer.SetLocalTime();
+                timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                timer.StartTimer(this);
 
                 
 
@@ -124,6 +122,26 @@ public class scoreController : MonoBehaviour
 
         }
     }
+
+
+    void reactScore(int score1, int score2){
+
+        int team = GameObject.Find("Local").GetComponent<PlayerController>().myTeam;
+        if (score1!= 0 && score2!= 0 && (score1*1.2 <= score2) || (score1*0.8 >= score2)){
+            if (team == 1){
+                MusicManager.instance.musicReact((int)score2/score1);
+            } else if (team == 2){
+                MusicManager.instance.musicReact((int)score1/score2);
+            }
+        }else{
+            MusicManager.instance.endReaction();
+
+        }
+       
+    }
+
+
+
 
     // OutputTime is called once per second
     void OutputTime()
