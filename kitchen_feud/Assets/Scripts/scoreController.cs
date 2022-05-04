@@ -130,17 +130,17 @@ public class scoreController : MonoBehaviour
             if ((score1*1.2 <= score2) || (score1*0.8 >= score2)){
                 if (team == 1){
                     float ratio = score2/score1;
-                    float pitch = Mathf.Max(ratio, 1.3f);
-                    pitch = Mathf.Min(ratio, 0.7f);
+                    float pitch = Mathf.Min(ratio, 1.3f);
+                    pitch = Mathf.Max(ratio, 0.7f);
                     MusicManager.instance.musicReact(pitch);
                 } else if (team == 2){
                     float ratio = score1/score2;
-                    float pitch = Mathf.Max(ratio, 1.3f);
-                    pitch = Mathf.Min(ratio, 0.7f);
+                    float pitch = Mathf.Min(ratio, 1.3f);
+                    pitch = Mathf.Max(ratio, 0.7f);
                     MusicManager.instance.musicReact(pitch);
-                }else{
-                    MusicManager.instance.endReaction();
                 }
+            }else{
+                MusicManager.instance.endReaction();
             }
         }
        
