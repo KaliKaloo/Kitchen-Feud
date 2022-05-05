@@ -16,11 +16,11 @@ public class ParticleControl : MonoBehaviour
 
     private static GlobalTimer timer = new GlobalTimer();
     private int halfTime;
-    double sprinklerRandomTime;
-    float firstFireRandomTime;
-    float secondFireRandomTime;
-    bool randomFire = false;
-    bool setTimes = false;
+   public double sprinklerRandomTime;
+    public float firstFireRandomTime;
+    public float secondFireRandomTime;
+    public bool randomFire = false;
+    public bool setTimes = false;
     public PhotonView PV;
 
     void Start()
@@ -34,6 +34,7 @@ public class ParticleControl : MonoBehaviour
     }
 
     void Update(){
+        Debug.LogError("COUNTTT" + PhotonNetwork.CurrentRoom.PlayerCount);
         int currentTime = timer.GetLocalTime();
 
         if (PhotonNetwork.IsMasterClient && !setTimes)
