@@ -17,10 +17,7 @@ public class CleanupRoom : MonoBehaviour
         ht["loaded"] = 0;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
-        {
-            Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
-        }
+       
     }
     
     // Destroy all slots player is holding

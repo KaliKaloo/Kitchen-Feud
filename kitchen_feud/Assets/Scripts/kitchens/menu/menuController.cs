@@ -106,6 +106,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        {
+            Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
+        }
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
