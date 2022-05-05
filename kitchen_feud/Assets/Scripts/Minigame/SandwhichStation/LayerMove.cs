@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
         public void OnPointerClick(PointerEventData eventData)
         {
             // Debug.Log("clicked");
+            Debug.Log(eventData);
             if ((!SandwichMove.stopped) && (SandwichMove.SandwichController.checkStoppedID(SandwichMove.LayerID))){
                 SandwichMove.stopped = true;
                 SandwichMove.SandwichController.moving = false;

@@ -263,6 +263,8 @@ MonoBehaviour:
   heldObj: {fileID: 0}
   view: {fileID: 4338776926646805293}
   itemdropped: 0
+  gainedOwnership: 0
+  objToHold: {fileID: 0}
   itemLock: 0
 --- !u!114 &-8892825353978446714
 MonoBehaviour:
