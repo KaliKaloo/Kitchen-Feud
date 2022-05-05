@@ -178,6 +178,10 @@ MonoBehaviour:
   applianceSlots: {fileID: 0}
   defaultScale: {x: 0, y: 0, z: 0}
   dropSound: {fileID: 0}
+  pitchMin: 0
+  pitchMax: 0
+  volumeMin: 0
+  volumeMax: 0
 --- !u!82 &-2057655759201775086
 AudioSource:
   m_ObjectHideFlags: 0

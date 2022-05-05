@@ -30,8 +30,8 @@ public class ExitFryingMinigame : MonoBehaviour
 
     void TaskOnClick()
     {
-		MusicManagerOld.instance.minigameEnd();
-		MusicManagerOld.instance.inMG = false;
+		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
 		
 		// stop cooking animation
 		playerAnimator.animator.SetBool("IsCooking", false);

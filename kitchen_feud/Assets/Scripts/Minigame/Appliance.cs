@@ -363,7 +363,6 @@ public class Appliance : Interactable
     {
         ParticleSystem PS = PhotonView.Find(viewID).gameObject.GetComponentInChildren<ParticleSystem>();
         PS.Play();
-        Debug.Log(PS.name);
         //try the first one, but with an array and then search for the one with the right name
         //ParticleSystem PS = PhotonView.Find(viewID).gameObject.transform.Find("Particle System").GetComponent<ParticleSystem>();
         //gameObject.transform.Find("Child Name").GetComponent();

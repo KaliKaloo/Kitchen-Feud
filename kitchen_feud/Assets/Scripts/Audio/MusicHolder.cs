@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct MusicInfo {
-   public float time;
-   public AudioClip track;
-
-   public int trackIndex;
-};  
-
 
 [System.Serializable]
 public class MusicHolder
@@ -17,8 +10,6 @@ public class MusicHolder
     private int audioClipIndex;
     private int[] previousArray;
     private int previousArrayIndex;
-
-    private MusicInfo info;
 
 
     public AudioClip GetRandomAudioClip() {
@@ -48,16 +39,6 @@ public class MusicHolder
             }
         }
         return false;
-    }
-
-    public void setInfo(float time){
-        info.time = time;
-        info.trackIndex = audioClipIndex;
-        info.track = tracks[audioClipIndex];
-    }
-
-    public MusicInfo getInfo(){
-        return info;
     }
 
 

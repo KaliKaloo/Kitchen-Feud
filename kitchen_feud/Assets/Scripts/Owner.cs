@@ -447,18 +447,22 @@ public class Owner : MonoBehaviour
                     if (!following)
                     {
                         Photon.Realtime.Player p = getLowestCookedDishesByTeam(1);
-                        playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                        if (!calledName)
+                        if (p != null)
                         {
-                            if (p != null)
+                            playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+                        }
+                        if(playerToFollow){
+
+                            agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                            if (!calledName)
                             {
-                                PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                                if (p != null)
+                                {
+                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                                }
+                                //Text.text = p.NickName + "!";
+                                calledName = true;
                             }
-
-
-                            //Text.text = p.NickName + "!";
-                            calledName = true;
                         }
 
                     }
@@ -471,18 +475,19 @@ public class Owner : MonoBehaviour
                         {
                             playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
                         }
-
-                        agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                        if (!calledName)
-                        {
-                            if (p != null)
+                        if(playerToFollow){
+                            agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                            if (!calledName)
                             {
-                                PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                                if (p != null)
+                                {
+                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                                }
+
+
+                                //Text.text = p.NickName + "!";
+                                calledName = true;
                             }
-
-
-                            //Text.text = p.NickName + "!";
-                            calledName = true;
                         }
 
                     }
@@ -644,21 +649,10 @@ public class Owner : MonoBehaviour
                 //Text.text = "Ahh, got there before me!";
                 collecting = false;
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
+
+
     public Photon.Realtime.Player getLowestCookedDishesByTeam(int team)
     {
         string property = "CookedDishes";
@@ -669,8 +663,7 @@ public class Owner : MonoBehaviour
         {
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
-
-                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
+                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
                     PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered1)
                 {
                     lowest = (int)player.CustomProperties[property];
@@ -683,7 +676,7 @@ public class Owner : MonoBehaviour
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
 
-                if ((int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
+                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
                     PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered2)
                 {
                     lowest = (int)player.CustomProperties[property];
@@ -716,24 +709,22 @@ public class Owner : MonoBehaviour
     }
     private IEnumerator talking()
     {
-    
-     
-            currentlyTalking = true;
-            yield return new WaitForSeconds(3);
-            currentlyTalking = false;
-        
-  
+        currentlyTalking = true;
+        yield return new WaitForSeconds(3);
+        currentlyTalking = false;
         
     }
+
+
     private IEnumerator startShouting()
     {
-   
-            currentlyShouting = true;
-            yield return new WaitForSeconds(3);
-            currentlyShouting = false;
-     
+        currentlyShouting = true;
+        yield return new WaitForSeconds(3);
+        currentlyShouting = false;
 
     }
+
+
     private IEnumerator waitBeforeShouting()
     {
         yield return new WaitForSeconds(5);
@@ -757,8 +748,6 @@ public class Owner : MonoBehaviour
             agent.SetDestination(spawnPoint);
         }
 
-
-
     }
 
     void returnWithHeadShake()
@@ -767,7 +756,6 @@ public class Owner : MonoBehaviour
         {
             firstTime = true;
         }
-        //Debug.LogError(agent.pathStatus);
         following = true;
         agent.ResetPath();
         if (team == 1)

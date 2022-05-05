@@ -32,10 +32,8 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		// MusicManager.instance.minigameEnd();
-		// MusicManager.instance.inMG = false;
-		MusicManagerOld.instance.minigameEnd();
-		MusicManagerOld.instance.inMG = false;
+		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
 		SandwichController.RestartGame();
 
 		// stop cooking animation

@@ -31,9 +31,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
 
-        MusicManagerOld.instance.location = myTeam;
-
-        // MusicManager.instance.location = myTeam;
+        MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
         band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
@@ -89,10 +87,6 @@ public class AudioManager : MonoBehaviour
             myTeam = myPlayerC.myTeam;
             if (pFV.IsMine)
             {
-                // MusicManager.instance.switchLocation(team);
-                MusicManagerOld.instance.changeBGM(team, 10, 0, 1);
-                MusicManagerOld.instance.location = team;
-
 
                 if (team == 1)
                 {
@@ -109,6 +103,9 @@ public class AudioManager : MonoBehaviour
 
                 if (myTeam != team)
                 {
+                    MusicManager.instance.priorityPitch = true;
+                    MusicManager.instance.musicReact();
+
                     enableSmoke.ChangePlayerState(true);
                     globalClicked.enterEnemyKitchen = true;
                     {
@@ -122,6 +119,8 @@ public class AudioManager : MonoBehaviour
                 }
                 else
                 {
+                    MusicManager.instance.priorityPitch = false;
+                    MusicManager.instance.endReaction();
                     enableSmoke.ChangePlayerState(false);
 
 

@@ -29,10 +29,8 @@ public class ExitCuttingMinigame : MonoBehaviour
 
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
-		MusicManagerOld.instance.minigameEnd();
-		MusicManagerOld.instance.inMG = false;
-		// MusicManager.instance.minigameEnd();
-		// MusicManager.instance.inMG = false;
+		MusicManager.instance.minigameEnd();
+		MusicManager.instance.inMG = false;
 
 		CutController.RestartGame();
 
