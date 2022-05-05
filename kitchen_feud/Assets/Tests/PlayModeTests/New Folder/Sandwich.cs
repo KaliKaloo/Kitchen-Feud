@@ -148,9 +148,9 @@ public class SandwichTests : PhotonTestSetup
         Assert.IsTrue(sandwichStation.minigameCanvas.activeSelf);
         sandwichStation.minigameCanvas.GetComponentInChildren<SandwichController>().StartGame();
         Assert.IsFalse(sandwichStation.minigameCanvas.GetComponentInChildren<SandwichController>().StartButton.activeSelf);
+        yield return new WaitForSeconds(0.2f);
      
         sandwichStation.minigameCanvas.GetComponentInChildren<SandwichController>().backButton.GetComponent<ExitSandwichMinigame>().TaskOnClick();
-        yield return new WaitForSeconds(0.2f);
         Assert.IsFalse(sandwichStation.minigameCanvas.activeSelf);
 
         sandwichStation.itemsOnTheAppliance.Clear();
