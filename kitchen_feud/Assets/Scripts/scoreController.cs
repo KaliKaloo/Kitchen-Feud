@@ -112,6 +112,7 @@ public class scoreController : MonoBehaviour
                 // start timer if not started yet
                
                  timer.SetLocalTime();
+                timer.totalTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
                  timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                  timer.StartTimer(this);
 

@@ -10,7 +10,7 @@ public class GlobalTimer:MonoBehaviour
 
     // SET TIMER HERE !!!!!!
     private static int time = 5;
-    
+    public int totalTime;
     private readonly int startTime = time;
 
     private static int timer = time;
@@ -53,7 +53,7 @@ public class GlobalTimer:MonoBehaviour
 
     public int GetTotalTime()
     {
-        return time;
+        return totalTime;
     }
 
     // gets the time from the server
