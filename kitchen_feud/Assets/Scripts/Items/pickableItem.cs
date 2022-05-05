@@ -20,10 +20,15 @@ public class pickableItem : Interactable
     public Vector3 defaultScale;
     //SOUND --------------------------------------------
     public AudioSource dropSound;
+    public float pitchMin, pitchMax, volumeMin, volumeMax;
    //-----------------------------------------------------
    private void Start()
    {
        defaultScale = transform.localScale;
+       pitchMin = 0.5f;
+       pitchMax = 2f;
+       volumeMax = 1f;
+       volumeMin = 0.5f;
    }
 
    public override void Interact()

@@ -64,42 +64,46 @@ public class AM : MonoBehaviour
             
                 }
                 engine.JoinChannel(randomInstance + "Path");
+              
                 globalClicked.enterEnemyKitchen = false;
                 globalClicked.enemyInstructions = false;
-
-                // MusicManager.instance.switchLocation(3);
-                MusicManagerOld.instance.changeBGM(3, 10, 0, 1);
-                MusicManagerOld.instance.location = 3;
-
-
 
                 if (team == 1)
                 {
                     myTeam = myPlayerC.myTeam;
 
-
+                    //enter hallway
                     if (myPlayerC.entered1 == true)
                     {
+                        MusicManager.instance.switchLocation(3);
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 1);
                         if (myTeam == 2)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                         }
+                    }else{
+                        MusicManager.instance.switchLocation(1);
+
                     }
                 }
                 else
                 {
                     myTeam = myPlayerC.myTeam;
 
-
+                    //enter hallway
                     if (myPlayerC.entered2 == true)
                     {
+                        MusicManager.instance.switchLocation(3);
                         pFV.RPC("setEnteredF", RpcTarget.All, pFV.ViewID, 2);
                        
                         if (myTeam == 1)
                         {
                             pFV.RPC("setPlayed", RpcTarget.All, pFV.ViewID, 0);
                         }
+                    }
+                    else{
+                        MusicManager.instance.switchLocation(2);
+
                     }
                 }
 
