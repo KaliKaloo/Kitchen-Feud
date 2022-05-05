@@ -21,7 +21,7 @@ public class ExitCuttingMinigame : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
 	}
 
-	void TaskOnClick(){
+	public void TaskOnClick(){
 		GameObject gamePlayer = GameObject.Find("Local");
 		
 		PhotonView playerV = gamePlayer.GetPhotonView();
@@ -39,7 +39,6 @@ public class ExitCuttingMinigame : MonoBehaviour
 
 		// stop cooking animation
 		playerAnimator.animator.SetBool("IsCooking", false);
-		
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
