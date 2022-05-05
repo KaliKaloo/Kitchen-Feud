@@ -15,7 +15,7 @@ public class FireExBox : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         if(playerHold.transform.Find("slot").childCount == 1 && player.GetComponent<PhotonView>().IsMine){
             FireExt = playerHold.heldObj;
-            if(FireExt.name == "fireExtinguisher"){
+            if(FireExt.name == "fireExtinguisher" && slot.transform.childCount == 0 ){
                     FireExt.GetComponent<PhotonView>().RPC("putBackFireExt", RpcTarget.AllBuffered, FireExt.GetComponent<PhotonView>().ViewID, slot.GetComponent<PhotonView>().ViewID);
                     FireExt.layer = 0;
             }
