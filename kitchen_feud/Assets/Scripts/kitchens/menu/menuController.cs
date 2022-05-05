@@ -683,7 +683,7 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         if (PhotonNetwork.IsMasterClient && !decreased)
         {
-            IncreaseTimer();
+            DecreaseTimer();
             decreased = true;
         }
 
