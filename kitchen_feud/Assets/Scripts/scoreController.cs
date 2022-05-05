@@ -85,6 +85,7 @@ public class scoreController : MonoBehaviour
 
     void Update()
     {
+        
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
@@ -105,12 +106,16 @@ public class scoreController : MonoBehaviour
             }
             else
             {
+                
+                
+
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                timer.SetLocalTime();
-                timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                timer.StartTimer(this);
+               
+                 timer.SetLocalTime();
+                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                 timer.StartTimer(this);
 
                 
 

@@ -16,31 +16,39 @@ public class ParticleControl : MonoBehaviour
 
     private static GlobalTimer timer = new GlobalTimer();
     private int halfTime;
-    double sprinklerRandomTime;
-    float firstFireRandomTime;
-    float secondFireRandomTime;
-    bool randomFire = false;
-    bool setTimes = false;
+   public double sprinklerRandomTime;
+    public float firstFireRandomTime;
+    public float secondFireRandomTime;
+    public bool randomFire = false;
+    public bool setTimes = false;
     public PhotonView PV;
 
     void Start()
     {
-        halfTime = timer.GetTotalTime()/2;
-        //psParent = GetComponent<ParticleSystem>();
-        //sprinklerRandomTime = Random.Range(halfTime,0);
-        //firstFireRandomTime = Random.Range(halfTime,0);
-        //secondFireRandomTime = Random.Range(halfTime,0);
+        
+
         PV = GetComponent<PhotonView>();
     }
 
     void Update(){
         int currentTime = timer.GetLocalTime();
-
-        if (PhotonNetwork.IsMasterClient && !setTimes)
+   
+        if (PhotonNetwork.IsMasterClient && !setTimes  && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
             {
-                PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID,team);
+                halfTime = timer.GetTotalTime() / 2;
+                if (team == 1)
+                {
+                    PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
+
+                }
+                else if(team == 2)
+                {
+                    PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
+
+                }
+               
                 setTimes = true;
             }
         }
@@ -81,23 +89,14 @@ public class ParticleControl : MonoBehaviour
         }
     }
     [PunRPC]
-    void syncRandomTimes(int ViewID,int team)
+    void syncRandomTimes(int ViewID,int team, int num1, int num2, int num3)
     {
         ParticleControl PC = PhotonView.Find(ViewID).GetComponent<ParticleControl>();
-        if(team == 1)
-        {
-            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            PC.secondFireRandomTime = Random.Range(halfTime, 0);
 
-        }
-        else if(team == 2)
-        {
-            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            PC.secondFireRandomTime = Random.Range(halfTime, 0);
-
-        }
+        PC.sprinklerRandomTime = num1;
+        PC.firstFireRandomTime = num2;
+        PC.secondFireRandomTime = num3;
+    
  
 
 

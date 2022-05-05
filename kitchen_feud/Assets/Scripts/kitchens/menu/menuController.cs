@@ -49,6 +49,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text lobbyError;
     IRtcEngine rtcEngine;
     public int x;
+    private bool test;
     Random rnd = new Random();
     private bool calledRejoin = false;
     private bool createLobby = false;
@@ -60,11 +61,13 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
     public bool startedGame;
-
+    bool increased;
+    bool decreased;
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     Hashtable scene = new Hashtable();
+    Hashtable playAgain = new Hashtable();
     PhotonView PV;
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
@@ -106,6 +109,12 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
+        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        {
+            playAgain["loaded"] = 0;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
+        }
+   
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -668,6 +677,17 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (PhotonNetwork.IsMasterClient && !increased)
+        {
+            IncreaseTimer();
+            increased = true;
+        }
+        if (PhotonNetwork.IsMasterClient && !decreased)
+        {
+            DecreaseTimer();
+            decreased = true;
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             if (!startLobbyButton.activeSelf)

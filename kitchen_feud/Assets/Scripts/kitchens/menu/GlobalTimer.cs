@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using UnityEditor.SceneManagement;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GlobalTimer
 {
@@ -9,12 +11,25 @@ public class GlobalTimer
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    public static int time = 300;
+    public static int totalTime;
     private readonly int startTime = time;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
+    Hashtable total = new Hashtable();
+    public PhotonView PV;
+    private void Start()
+    {
+       
+        if (PhotonNetwork.IsMasterClient)
+        {
+            total["TotalTime"] = time;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(total);
+        }
 
+
+    }
 
     // changes original starting time, only do before game starts!
     public int AddSubtractTimerValue(int newTime)
@@ -31,6 +46,11 @@ public class GlobalTimer
         else
         {
             timer = time = intermediateTime;
+            total["TotalTime"] = intermediateTime;
+            if (PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.CurrentRoom.SetCustomProperties(total);
+            }
             return 0;
         }
     }
@@ -46,10 +66,36 @@ public class GlobalTimer
     {
         timer = time = newTime >= 0 ? newTime : 0;
     }
+    public void setTotalTime(int num)
+    {
+        totalTime = num;
+    }
 
     public int GetTotalTime()
     {
-        return time;
+
+
+
+        if (PhotonNetwork.IsConnected)
+        {
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                return time;
+            }
+            else
+            {
+
+                return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+
+            }
+        }
+        else
+        {
+            return time;
+        }
+       
+  
     }
 
     // gets the time from the server
@@ -63,7 +109,9 @@ public class GlobalTimer
 
     public int GetLocalTime()
     {
-        return timer;
+  
+            return timer;
+   
     }
 
     public void SetLocalTime()
@@ -145,4 +193,5 @@ public class GlobalTimer
         hashTimer["Time"] = timer;
         PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
     }
+    
 }
