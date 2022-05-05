@@ -259,8 +259,8 @@ public class menuController : MonoBehaviourPunCallbacks
     // decreases timer by 1 minute and updates text
     public void DecreaseTimer()
     {
-        //timerError.text = "";
-        //int timerCheck = timer.AddSubtractTimerValue(-60);
+        timerError.text = "";
+        int timerCheck = timer.AddSubtractTimerValue(-60);
         //if (timerCheck == 1)
         //    timerError.text = "Too short!";
         //else
