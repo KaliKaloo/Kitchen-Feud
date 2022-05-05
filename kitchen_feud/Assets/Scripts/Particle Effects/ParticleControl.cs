@@ -54,7 +54,7 @@ public class ParticleControl : MonoBehaviour
                     PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
 
                 }
-                PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID,team);
+               
                 setTimes = true;
             }
         }
