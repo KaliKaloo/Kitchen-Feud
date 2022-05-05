@@ -14,8 +14,9 @@ public class CleanupRoom : MonoBehaviour
     {
         CleanPlayerSlots();
         Debug.LogError("HELLOOO");
-        ht["loaded"] = null;
+        ht["loaded"] = 0;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
+
         if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
         {
             Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
