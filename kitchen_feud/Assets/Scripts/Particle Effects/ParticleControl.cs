@@ -25,7 +25,7 @@ public class ParticleControl : MonoBehaviour
 
     void Start()
     {
-        halfTime = timer.GetTotalTime()/2;
+        
         //psParent = GetComponent<ParticleSystem>();
         //sprinklerRandomTime = Random.Range(halfTime,0);
         //firstFireRandomTime = Random.Range(halfTime,0);
@@ -41,7 +41,8 @@ public class ParticleControl : MonoBehaviour
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
             {
-                if(team == 1)
+                halfTime = timer.GetTotalTime() / 2;
+                if (team == 1)
                 {
                     PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
 
