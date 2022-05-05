@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using UnityEditor.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class GlobalTimer:MonoBehaviour
+public class GlobalTimer
 {
 
     private Coroutine timerCoroutine;
@@ -20,7 +21,7 @@ public class GlobalTimer:MonoBehaviour
     public PhotonView PV;
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
+       
         if (PhotonNetwork.IsMasterClient)
         {
             total["TotalTime"] = time;
@@ -46,7 +47,10 @@ public class GlobalTimer:MonoBehaviour
         {
             timer = time = intermediateTime;
             total["TotalTime"] = intermediateTime;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(total);
+            if (PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.CurrentRoom.SetCustomProperties(total);
+            }
             return 0;
         }
     }
@@ -69,14 +73,29 @@ public class GlobalTimer:MonoBehaviour
 
     public int GetTotalTime()
     {
-        if (PhotonNetwork.IsMasterClient)
+
+
+
+        if (PhotonNetwork.IsConnected)
         {
-            return time;
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                return time;
+            }
+            else
+            {
+
+                return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+
+            }
         }
         else
         {
-            return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+            return time;
         }
+       
+  
     }
 
     // gets the time from the server

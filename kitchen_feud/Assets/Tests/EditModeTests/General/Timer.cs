@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+
 public class TimerTests
 {
 
@@ -143,6 +144,7 @@ public class TimerTests
         int val = timer.AddSubtractTimerValue(20);
         Assert.AreEqual(2, val);
         Assert.AreEqual(1200, timer.GetLocalTime());
+        
         Assert.AreEqual(1200, timer.GetTotalTime());
 
     }
