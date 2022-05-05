@@ -113,7 +113,7 @@ public class menuController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             IncreaseTimer();
-            //DecreaseTimer();
+            DecreaseTimer();
         }
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
