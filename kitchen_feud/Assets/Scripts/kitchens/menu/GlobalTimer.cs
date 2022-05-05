@@ -3,18 +3,22 @@ using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
-public class GlobalTimer
+public class GlobalTimer:MonoBehaviour
 {
 
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    private static int time = 300;
+    private static int time = 5;
+    
     private readonly int startTime = time;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
-
+    private void Start()
+    {
+        Debug.LogError("TIMEEEE   " + time);
+    }
 
     // changes original starting time, only do before game starts!
     public int AddSubtractTimerValue(int newTime)

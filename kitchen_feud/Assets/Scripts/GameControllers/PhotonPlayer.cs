@@ -35,6 +35,10 @@ public class PhotonPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"]!= null)
+        {
+            Debug.LogError("HERE IS THE VALUE" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
+        }
         if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] == null ||
             (int) PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != 1)
         {

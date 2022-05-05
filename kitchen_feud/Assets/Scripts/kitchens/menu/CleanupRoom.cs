@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 
 public class CleanupRoom : MonoBehaviour
 {
+    public Hashtable ht = new Hashtable();
     // cleans up room when called
     // put all things you need resetting/destroyed here
     public void Clean()
     {
         CleanPlayerSlots();
+        Debug.LogError("HELLOOO");
+        ht["loaded"] = 0;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
     }
     
     // Destroy all slots player is holding
