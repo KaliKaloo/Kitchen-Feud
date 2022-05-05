@@ -24,7 +24,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
 	}
 
-	void TaskOnClick()
+	public void TaskOnClick()
 	{
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();

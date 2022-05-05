@@ -59,6 +59,7 @@ public class Stove : PhotonTestSetup
         Assert.IsTrue(stove.minigameCanvas.activeSelf);
         stove.itemsOnTheAppliance.Clear();
         stove.isBeingInteractedWith = false;
+        stove.minigameCanvas.SetActive(false);
         yield return null;
     }
 
@@ -117,7 +118,7 @@ public class Stove : PhotonTestSetup
     }
 
 
-      [UnityTest]
+    [UnityTest]
     public IEnumerator exitMG()
     {
         playerHold.pickUpItem(mushroom);
@@ -131,7 +132,6 @@ public class Stove : PhotonTestSetup
         stove.GetComponent<stoveMinigame>().spawner.StartGame();
         Assert.IsFalse(stove.GetComponent<stoveMinigame>().spawner.startButton.activeSelf);
         stove.GetComponent<stoveMinigame>().spawner.backButton.GetComponent<ExitStoveMinigame>().TaskOnClick();
-        yield return new WaitForSeconds(0.2f);
         Assert.IsFalse(stove.minigameCanvas.activeSelf);
         stove.itemsOnTheAppliance.Clear();
         stove.isBeingInteractedWith = false;
