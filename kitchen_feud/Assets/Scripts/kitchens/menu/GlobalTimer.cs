@@ -50,6 +50,10 @@ public class GlobalTimer:MonoBehaviour
     {
         timer = time = newTime >= 0 ? newTime : 0;
     }
+    public void setTotalTime(int num)
+    {
+        totalTime = num;
+    }
 
     public int GetTotalTime()
     {
