@@ -74,7 +74,7 @@ public class GlobalTimer:MonoBehaviour
 
     public int GetLocalTime()
     {
-        return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"]);
+        return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
         //return timer;
     }
 
