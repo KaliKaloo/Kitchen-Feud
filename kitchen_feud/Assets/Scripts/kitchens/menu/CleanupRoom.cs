@@ -15,6 +15,7 @@ public class CleanupRoom : MonoBehaviour
         CleanPlayerSlots();
         Debug.LogError("HELLOOO");
         ht["loaded"] = 0;
+        ht["Time"] = 0;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
 
        

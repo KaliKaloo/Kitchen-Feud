@@ -17,7 +17,7 @@ public class GlobalTimer:MonoBehaviour
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
     private void Start()
     {
-        Debug.LogError("TIMEEEE   " + time);
+       
     }
 
     // changes original starting time, only do before game starts!

@@ -85,7 +85,7 @@ public class scoreController : MonoBehaviour
 
     void Update()
     {
-        Debug.LogError("START??  " + startGame);
+        
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
@@ -106,11 +106,11 @@ public class scoreController : MonoBehaviour
             }
             else
             {
-                
+                Debug.LogError("THIS IS THE TIMEEEE " + (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"]);
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-                Debug.LogError(PhotonNetwork.CurrentRoom.CustomProperties["Time"]);
+               
                  timer.SetLocalTime();
                  timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                  timer.StartTimer(this);
