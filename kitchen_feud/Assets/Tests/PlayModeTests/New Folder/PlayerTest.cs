@@ -33,9 +33,6 @@ public class PlayerTests : PhotonTestSetup
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
 
         playerHold = obj.GetComponent<PlayerHolding>();
-        //h = obj.GetComponent<EnemyHealth>();
-
-        //h.maxHealth = 100;
         yield return null;
     }
 
@@ -51,7 +48,6 @@ public class PlayerTests : PhotonTestSetup
     [UnityTest]
     public IEnumerator CheckMovement()
     {
-        //Assert.AreEqual("", h.getHealth());
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         Vector3 pos = rb.position;
         Vector3 movementForward = obj.transform.forward * 1;
@@ -119,27 +115,9 @@ public class PlayerTests : PhotonTestSetup
         playerHold.pickUpItem(potato);
         stove.Interact();
         stove.Interact();
-        
         Assert.IsTrue(stove.cookedDish.name.Contains("Mushroom Soup"));
-
         stove.player = null;
         yield return null;
-    }
-
-
-    [UnityTest]
-    public IEnumerator StoveMinigameTest()
-    {
-        playerHold.pickUpItem(mushroom);
-        stove.player = obj.transform;
-        stove.Interact();
-        playerHold.pickUpItem(potato);
-        stove.Interact();
-        stove.Interact();
-        Assert.IsTrue(GameObject.Find("StoveGameCanvas").activeSelf);
-
-        yield return null;
-
     }
 
 

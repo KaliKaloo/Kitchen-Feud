@@ -37,7 +37,9 @@ public class ExitStoveMinigame : MonoBehaviour
 		//GameEvents.current.assignPoints += appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
 	}
 
-	void TaskOnClick(){
+	public void TaskOnClick(){
+
+		Debug.Log("Exit");
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);

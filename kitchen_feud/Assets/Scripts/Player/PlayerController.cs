@@ -72,8 +72,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					{
 						SetFocus(interactable, obj);
 					}
-					// TEMPORARY - Player should not be able to drop item anywhere. 
-					// Drop only on counters, stove etcc
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();

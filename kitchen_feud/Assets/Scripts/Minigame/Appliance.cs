@@ -93,7 +93,6 @@ public class Appliance : Interactable
             checkForDish();
             if (foundMatchingDish)
             {
-
                 if (foundDish.stoveFry && !appliancePlayers.Contains(player.GetComponent<PhotonView>().ViewID))
                 {
 

@@ -144,7 +144,6 @@ public class Spawner : MonoBehaviour
 
 
     private void startSmoke(){
-
         appliance.GetComponent<PhotonView>().RPC("syncSmoke", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
     }
 

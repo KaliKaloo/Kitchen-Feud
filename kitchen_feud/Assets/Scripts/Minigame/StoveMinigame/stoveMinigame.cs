@@ -34,6 +34,7 @@ public class stoveMinigame : MonoBehaviour
             MusicManager.instance.inMG = true;
             
             backbutton.appliance = GetComponent<Appliance>();
+
             if (appliance.foundDish != null)
             {
                 spawner.dishSO = appliance.foundDish;
