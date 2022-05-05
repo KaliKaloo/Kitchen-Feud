@@ -66,6 +66,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     Hashtable scene = new Hashtable();
+    Hashtable playAgain = new Hashtable();
     PhotonView PV;
     //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
@@ -109,6 +110,8 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
         {
+            playAgain["loaded"] = 0;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
             Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
         }
    
