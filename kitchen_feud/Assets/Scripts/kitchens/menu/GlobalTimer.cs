@@ -75,14 +75,13 @@ public class GlobalTimer:MonoBehaviour
     public int GetLocalTime()
     {
         //return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        if (PhotonNetwork.IsMasterClient)
-        {
+      
             return timer;
-        }
-        else
-        {
-            return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
-        }
+      
+        //else
+        //{
+        //    return (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+        //}
     }
 
     public void SetLocalTime()
