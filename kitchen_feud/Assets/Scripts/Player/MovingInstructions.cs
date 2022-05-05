@@ -64,9 +64,10 @@ public class MovingInstructions : MonoBehaviour
             Text.text = "Brilliant! You can also pick up items inside the rooms using left click!";
 
         }
-        
+
         else if (Text.text == "Brilliant! You can also pick up items inside the rooms using left click!" &&
-            LocalPlayer.transform.GetChild(2).childCount != 0) {
+            LocalPlayer.transform.GetChild(2).childCount != 0)
+        {
             Text.text = "Nicely Done! You can drop items by clicking again anywhere";
 
 
@@ -94,11 +95,12 @@ public class MovingInstructions : MonoBehaviour
             {
 
                 Text.text = "Put the dish on the white tray that has the correct order number. Then click on the tray to serve, or make more dishes";
+                StartCoroutine(Tips("Tip One: The more ingredients a dish requires, the more points it will gain!", "Tip Two: Dishes that require two people to make, are worth more points! A multiplayer icon on the recipe card indicates two players are needed to cook the dish."));
             }
 
         }
         // final initial instruction
-        else if (Text.text == "Put the dish on the white tray that has the correct order number. Then click on the tray to serve, or make more dishes" && globalClicked.trayInteract)
+        else if (Text.text == "Tip Two: Dishes that require two people to make, are worth more points! A multiplayer icon on the recipe card indicates two players are needed to cook the dish." && globalClicked.trayInteract)
         {
             Text.text = "Remember that you're against another resturant. You can go to their kitchen and sabotage them!";
             InitializeTimer();
@@ -108,13 +110,15 @@ public class MovingInstructions : MonoBehaviour
         if (globalClicked.enterEnemyKitchen)
         {
             // locks coroutine from being spammed after entered enemy kitchen
-            if (!globalClicked.enemyInstructions && randomInstructionList.Count > 0){
+            if (!globalClicked.enemyInstructions && randomInstructionList.Count > 0)
+            {
                 StartCoroutine(EnemyKitchenInstructions());
             }
         }
-        
 
-        if (globalClicked.holdingFireEx){
+
+        if (globalClicked.holdingFireEx)
+        {
             Text.text = "Tip: Press 'F' to use the fire extinguisher";
             globalClicked.holdingFireEx = false;
             InitializeTimer();
@@ -145,6 +149,13 @@ public class MovingInstructions : MonoBehaviour
     {
         timer = time;
     }
+    public IEnumerator Tips(string msg1, string msg2)
+    {
+        yield return new WaitForSeconds(5);
+        Text.text = msg1;
+        yield return new WaitForSeconds(5);
+        Text.text = msg2;
+    }
 
     // randomly selects from a list of instructions when enter enemy kitchen
     private IEnumerator EnemyKitchenInstructions()
@@ -152,19 +163,19 @@ public class MovingInstructions : MonoBehaviour
         globalClicked.enemyInstructions = true;
 
         // show a random instruction from list then remove it
-        
-        if(!mouse.activeSelf && !keyboard.activeSelf)
+
+        if (!mouse.activeSelf && !keyboard.activeSelf)
         {
             owner1.SetActive(false);
             owner2.SetActive(false);
             mouse.SetActive(true);
             keyboard.SetActive(true);
         }
-        
+
         int first = Random.Range(0, randomInstructionList.Count);
         Text.text = randomInstructionList[first];
         randomInstructionList.RemoveAt(first);
-        
+
         yield return new WaitForSeconds(enemyInstructionDelay);
 
         Text.text = "";

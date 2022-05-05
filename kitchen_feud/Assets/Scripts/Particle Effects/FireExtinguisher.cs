@@ -33,6 +33,12 @@ public class FireExtinguisher : Interactable
         }
     }
 
+      public IEnumerator removeKinematics(GameObject heldObj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
     [PunRPC]
     void playPS(int viewID)
     {
@@ -43,6 +49,17 @@ public class FireExtinguisher : Interactable
     void stopPS(int viewID)
     {
         PhotonView.Find(viewID).GetComponentInChildren<ParticleSystem>().Stop();
+    }
+    [PunRPC]
+    void putBackFireExt(int viewID,int viewID1)
+    {
+        PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
+        PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
+        PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        PhotonView.Find(viewID).gameObject.GetComponent<Collider>().isTrigger = false;
+        PhotonView.Find(viewID).gameObject.transform.localRotation= Quaternion.Euler(Vector3.zero);
+        StartCoroutine(removeKinematics(PhotonView.Find(viewID).gameObject));
+
     }
     
 }

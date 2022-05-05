@@ -16,7 +16,7 @@ public class CutControllerTests
     public void setUp(){
         GameObject obj = new GameObject();
         cutController = obj.AddComponent<cutController>();
-        cutController.scoretext = obj.AddComponent<Text>();
+        //cutController.scoretext = obj.AddComponent<Text>();
         GameObject newObj = new GameObject();
         cutController.numtext = newObj.AddComponent<Text>();
         cutController.instructions = new GameObject();
@@ -40,7 +40,7 @@ public class CutControllerTests
         cutController.Score = 5;
         int score = cutController.Score;
         Assert.AreEqual(5, score);
-        Assert.AreEqual("Score: 5", cutController.scoretext.text);
+        //Assert.AreEqual("Score: 5", cutController.scoretext.text);
 
     }
 

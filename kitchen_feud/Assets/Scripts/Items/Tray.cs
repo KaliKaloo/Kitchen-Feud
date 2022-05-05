@@ -42,7 +42,7 @@ public class Tray : Interactable
         playerHold = player.GetComponent<PlayerHolding>();
         objectHolding = playerHold.heldObj;
 
-        if (player.transform.Find("slot").childCount == 1 && playerHold.GetComponent<PhotonView>().IsMine)
+        if (player.transform.Find("slot").childCount == 1 && playerHold.GetComponent<PhotonView>().IsMine && (objectHolding.CompareTag("Ingredient") || objectHolding.CompareTag("Dish")))
         {
             //add object holding to tray slot if tray slot empty
             if (tray.ServingTray.Count < 4)

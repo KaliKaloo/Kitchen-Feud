@@ -166,11 +166,13 @@ public class menuController : MonoBehaviourPunCallbacks
     public void BackToMainMenu()
     {
         findLobbyMenu.SetActive(false);
+        connectPanel.SetActive(true);
         userSettingsMenu.SetActive(false);
     }
 
     public void FindLobby()
     {
+        connectPanel.SetActive(false);
         findLobbyMenu.SetActive(true);
     }
 
