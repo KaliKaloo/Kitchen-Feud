@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-using UnityEditor.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GlobalTimer
