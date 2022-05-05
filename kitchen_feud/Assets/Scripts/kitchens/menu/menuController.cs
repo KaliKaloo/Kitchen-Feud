@@ -49,6 +49,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text lobbyError;
     IRtcEngine rtcEngine;
     public int x;
+    private bool test;
     Random rnd = new Random();
     private bool calledRejoin = false;
     private bool createLobby = false;
@@ -110,11 +111,7 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
         }
-        if (PhotonNetwork.IsMasterClient)
-        {
-            IncreaseTimer();
-            DecreaseTimer();
-        }
+   
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -260,9 +257,9 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         timerError.text = "";
         int timerCheck = timer.AddSubtractTimerValue(-60);
-        if (timerCheck == 1)
-            timerError.text = "Too short!";
-        else
+        //if (timerCheck == 1)
+        //    timerError.text = "Too short!";
+        //else
             currentTime.text = timer.GetCurrentTimeString();
     }
 
@@ -675,6 +672,12 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (lobbyMenu.activeSelf && !test && PhotonNetwork.IsMasterClient)
+        {
+            IncreaseTimer();
+            DecreaseTimer();
+            test = true;
+        }
         if (PhotonNetwork.IsMasterClient)
         {
             if (!startLobbyButton.activeSelf)

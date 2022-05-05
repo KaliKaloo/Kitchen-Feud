@@ -24,15 +24,15 @@ public class GlobalTimer:MonoBehaviour
     public int AddSubtractTimerValue(int newTime)
     {
         int intermediateTime = time + newTime;
-        if (intermediateTime < 60)
-        {
-            return 1;
-        }
-        else if (intermediateTime > 1200)
-        {
-            return 2;
-        }
-        else
+        //if (intermediateTime < 60)
+        //{
+        //    return 1;
+        //}
+        //else if (intermediateTime > 1200)
+        //{
+        //    return 2;
+        //}
+        //else
         {
             timer = time = intermediateTime;
             return 0;
