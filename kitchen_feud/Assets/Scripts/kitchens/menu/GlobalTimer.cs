@@ -57,14 +57,7 @@ public class GlobalTimer:MonoBehaviour
 
     public int GetTotalTime()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            return time;
-        }
-        else
-        {
-            return totalTime;
-        }
+        return time;
     }
 
     // gets the time from the server
