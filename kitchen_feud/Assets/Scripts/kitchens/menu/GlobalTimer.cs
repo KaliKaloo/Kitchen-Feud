@@ -10,7 +10,7 @@ public class GlobalTimer:MonoBehaviour
 
     // SET TIMER HERE !!!!!!
     private static int time = 5;
-    public int totalTime;
+    public static int totalTime;
     private readonly int startTime = time;
 
     private static int timer = time;
