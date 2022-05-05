@@ -30,9 +30,12 @@ public class LayerSpawn : MonoBehaviour
                 Vector3 newPosition = myParentObject.transform.position;
                 newPosition.z = 0;
                 myParentObject.transform.position = newPosition;
-        
 
-                Vector3 pos = new Vector3(chosenX/2, y * spacing, 0) ;
+                if(y == 1){
+                    spacing = chosenY/5;}
+                else{spacing = chosenY/7;}
+
+                Vector3 pos = new Vector3(chosenX/2, (y * spacing), 0) ;
                 GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
                 newObject.transform.SetParent(myParentObject.transform);
 

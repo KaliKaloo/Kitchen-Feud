@@ -828,6 +828,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsShakingHead
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsLeaning
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -1239,7 +1242,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 18559
+    m_Bits: 26751
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

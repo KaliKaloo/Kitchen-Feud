@@ -18,7 +18,7 @@ public class cutController : MonoBehaviour
     public Image Ingredient1;
     public Image Ingredient2;
     public Image Ingredient3;
-    public Text scoretext;
+    //public Text scoretext;
     public Text numtext;
 
     public GameObject backButton;
@@ -38,7 +38,7 @@ public class cutController : MonoBehaviour
         set
         {
             score = value;
-            scoretext.text = "Score: " + score;
+            //scoretext.text = "Score: " + score;
         }
     }
 
@@ -96,7 +96,7 @@ public class cutController : MonoBehaviour
         //call bomb spanwer with a list of "wrong" ingredient sprites
         BombSpawner.StartSpawn(bombSprites);
         
-        scoretext.text = "Score: " + Score;
+       //scoretext.text = "Score: " + Score;
         Ingredient = 0;
         if (newIngredients.Count >= 1 && newIngredients[0])
             Ingredient1.sprite = newIngredients[0];
