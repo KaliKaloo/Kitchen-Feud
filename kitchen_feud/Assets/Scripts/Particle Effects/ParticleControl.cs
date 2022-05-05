@@ -36,10 +36,7 @@ public class ParticleControl : MonoBehaviour
     void Update(){
         Debug.LogError("COUNTTT" + timer.GetTotalTime());
         int currentTime = timer.GetLocalTime();
-        if(PhotonNetwork.CurrentRoom.PlayerCount == GameObject.FindGameObjectsWithTag("Player").Length)
-        {
-            Debug.LogError("HUH?!?!");
-        }
+   
         if (PhotonNetwork.IsMasterClient && !setTimes  && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)

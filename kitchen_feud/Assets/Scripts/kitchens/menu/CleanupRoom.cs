@@ -13,7 +13,6 @@ public class CleanupRoom : MonoBehaviour
     public void Clean()
     {
         CleanPlayerSlots();
-        Debug.LogError("HELLOOO");
         ht["loaded"] = 0;
         ht["Time"] = 0;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
