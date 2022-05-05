@@ -675,7 +675,10 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-
+        if (PhotonNetwork.IsMasterClient)
+        {
+            IncreaseTimer();
+        }
         if (PhotonNetwork.IsMasterClient)
         {
             if (!startLobbyButton.activeSelf)
