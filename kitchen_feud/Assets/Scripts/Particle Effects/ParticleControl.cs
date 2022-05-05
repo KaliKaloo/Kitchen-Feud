@@ -26,15 +26,11 @@ public class ParticleControl : MonoBehaviour
     void Start()
     {
         
-        //psParent = GetComponent<ParticleSystem>();
-        //sprinklerRandomTime = Random.Range(halfTime,0);
-        //firstFireRandomTime = Random.Range(halfTime,0);
-        //secondFireRandomTime = Random.Range(halfTime,0);
+
         PV = GetComponent<PhotonView>();
     }
 
     void Update(){
-        Debug.LogError("COUNTTT" + timer.GetLocalTime());
         int currentTime = timer.GetLocalTime();
    
         if (PhotonNetwork.IsMasterClient && !setTimes  && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)

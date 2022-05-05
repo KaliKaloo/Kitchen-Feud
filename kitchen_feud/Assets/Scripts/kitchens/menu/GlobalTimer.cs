@@ -10,7 +10,7 @@ public class GlobalTimer:MonoBehaviour
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    public static int time = 5;
+    public static int time = 300;
     public static int totalTime;
     private readonly int startTime = time;
 
@@ -34,15 +34,15 @@ public class GlobalTimer:MonoBehaviour
     public int AddSubtractTimerValue(int newTime)
     {
         int intermediateTime = time + newTime;
-        //if (intermediateTime < 60)
-        //{
-        //    return 1;
-        //}
-        //else if (intermediateTime > 1200)
-        //{
-        //    return 2;
-        //}
-        //else
+        if (intermediateTime < 60)
+        {
+            return 1;
+        }
+        else if (intermediateTime > 1200)
+        {
+            return 2;
+        }
+        else
         {
             timer = time = intermediateTime;
             total["TotalTime"] = intermediateTime;

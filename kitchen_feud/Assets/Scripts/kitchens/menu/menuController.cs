@@ -263,9 +263,9 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         timerError.text = "";
         int timerCheck = timer.AddSubtractTimerValue(-60);
-        //if (timerCheck == 1)
-        //    timerError.text = "Too short!";
-        //else
+        if (timerCheck == 1)
+            timerError.text = "Too short!";
+        else
             currentTime.text = timer.GetCurrentTimeString();
     }
 
