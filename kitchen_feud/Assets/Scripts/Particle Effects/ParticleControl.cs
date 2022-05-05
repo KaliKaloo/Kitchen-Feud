@@ -41,6 +41,16 @@ public class ParticleControl : MonoBehaviour
         {
             if (GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
             {
+                if(team == 1)
+                {
+                    PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
+
+                }
+                else if(team == 2)
+                {
+                    PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID, team, Random.Range(halfTime, 0), Random.Range(halfTime, 0), Random.Range(halfTime, 0));
+
+                }
                 PV.RPC("syncRandomTimes", RpcTarget.All, PV.ViewID,team);
                 setTimes = true;
             }
@@ -82,23 +92,14 @@ public class ParticleControl : MonoBehaviour
         }
     }
     [PunRPC]
-    void syncRandomTimes(int ViewID,int team)
+    void syncRandomTimes(int ViewID,int team, int num1, int num2, int num3)
     {
         ParticleControl PC = PhotonView.Find(ViewID).GetComponent<ParticleControl>();
-        if(team == 1)
-        {
-            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            PC.secondFireRandomTime = Random.Range(halfTime, 0);
 
-        }
-        else if(team == 2)
-        {
-            PC.sprinklerRandomTime = Random.Range(halfTime, 0);
-            PC.firstFireRandomTime = Random.Range(halfTime, 0);
-            PC.secondFireRandomTime = Random.Range(halfTime, 0);
-
-        }
+        PC.sprinklerRandomTime = num1;
+        PC.firstFireRandomTime = num2;
+        PC.secondFireRandomTime = num3;
+    
  
 
 
