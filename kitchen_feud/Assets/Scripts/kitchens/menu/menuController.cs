@@ -110,6 +110,11 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
         }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            IncreaseTimer();
+            DecreaseTimer();
+        }
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         PhotonNetwork.AutomaticallySyncScene = true;
