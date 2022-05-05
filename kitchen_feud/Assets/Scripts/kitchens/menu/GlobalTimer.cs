@@ -21,6 +21,13 @@ public class GlobalTimer:MonoBehaviour
     private void Start()
     {
         PV = GetComponent<PhotonView>();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            total["TotalTime"] = time;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(total);
+        }
+
+
     }
 
     // changes original starting time, only do before game starts!
