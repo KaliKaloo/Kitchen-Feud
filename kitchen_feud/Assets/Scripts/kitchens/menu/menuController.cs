@@ -61,7 +61,8 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loadingBarCanvas;
     [SerializeField] private Slider loadingBar;
     public bool startedGame;
-
+    bool increased;
+    bool decreased;
     private static GlobalTimer timer = new GlobalTimer();
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
@@ -675,10 +676,17 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && !increased)
         {
             IncreaseTimer();
+            increased = true;
         }
+        if (PhotonNetwork.IsMasterClient && !decreased)
+        {
+            IncreaseTimer();
+            decreased = true;
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             if (!startLobbyButton.activeSelf)
