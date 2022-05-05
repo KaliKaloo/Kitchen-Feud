@@ -187,7 +187,7 @@ public class MusicManager : MonoBehaviour
 
 
     public void minigameSwitch(){
-        if (!MGStarted){
+        if (!MGStarted && track){
             track.Pause();
             AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
             CancelInvoke("playRandom");
