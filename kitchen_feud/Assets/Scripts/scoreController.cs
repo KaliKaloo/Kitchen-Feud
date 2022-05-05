@@ -107,12 +107,13 @@ public class scoreController : MonoBehaviour
             else
             {
                 Debug.LogError("THIS IS THE TIMEEEE " + (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"]);
+                timer.totalTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
+
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
                
                  timer.SetLocalTime();
-                timer.totalTime = (int)PhotonNetwork.CurrentRoom.CustomProperties["Time"];
                  timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                  timer.StartTimer(this);
 
