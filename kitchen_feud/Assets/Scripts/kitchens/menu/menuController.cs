@@ -113,7 +113,6 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             playAgain["loaded"] = 0;
             PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
-            Debug.LogError("THIS SHOULD BE NULL" + (int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
         }
    
         PV = GetComponent<PhotonView>();
