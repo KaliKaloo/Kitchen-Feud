@@ -13,11 +13,6 @@ public class OvenFire : MonoBehaviour
     private bool hasParent;
     public int team;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         
@@ -30,6 +25,8 @@ public class OvenFire : MonoBehaviour
         }
         //and condition if temperature is too high
         if(!startFire){
+
+         
             if(timer.timer < -5){
                 foreach(ParticleSystem p in PS){
                     if(p.GetComponent<FireOut>()){
@@ -47,6 +44,23 @@ public class OvenFire : MonoBehaviour
                 
                 startFire = true;
 
+                   
+
+            }
+            
+           
+        }
+
+        //dynamic music reaction
+        PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
+        if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
+            MusicManager.instance.priorityPitch = true;
+            MusicManager.instance.musicReact();
+            foreach(ParticleSystem p in PS){
+                if(p.GetComponent<FireOut>()){
+                    fireOut = p.GetComponent<FireOut>();
+                    fireOut.stoppedReaction = false;
+                }
             }
         }
     }

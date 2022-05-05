@@ -8,11 +8,12 @@ public class FireOut : MonoBehaviour {
     private ParticleSystem fireParticles;
     private ParticleSystem.EmissionModule fireEmission;
     private bool notFound = false;
+    public bool stoppedReaction = false;
     private float currentEmission = 0;
     [SerializeField] private float fadeRate = 1;
     public AudioSource fireSound;
 
-    // Use this for initialization
+
     void Start()
     {
         // Get Particle System and emission
@@ -52,6 +53,14 @@ public class FireOut : MonoBehaviour {
             }
            
             this.enabled = false;
+
+            //stop dynamic music reaction
+            if(!stoppedReaction) {
+                MusicManager.instance.priorityPitch = false;
+                MusicManager.instance.endReaction();
+                stoppedReaction = true;
+            }
+                 
         
         }
 	}

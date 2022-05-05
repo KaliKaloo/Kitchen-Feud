@@ -7,12 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-
 using TMPro;
 
-// IMPORTANT:
-// timer and score parser class have been moved to separate scripts
-// CHECK scripts/menu folder for the relevant scripts
 
 public class scoreController : MonoBehaviour
 {
@@ -40,7 +36,6 @@ public class scoreController : MonoBehaviour
     public PhotonView PV;
     private CleanupRoom cleanupRoom;
 
-    // Start is called before the first frame update
     void Start()
     {
         gameOver = false;    
@@ -93,51 +88,29 @@ public class scoreController : MonoBehaviour
         // update scores every frame
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
-
-
             if (startGame)
             {
                 OutputTime();
-
-                score1Text.text = ConvertScoreToString(scores.GetScore1());
-                score2Text.text = ConvertScoreToString(scores.GetScore2());
+                int score1 = scores.GetScore1();
+                int score2 = scores.GetScore2();
+                score1Text.text = ConvertScoreToString(score1);
+                score2Text.text = ConvertScoreToString(score2);
+                reactScore(score1, score2);
            
-                    // increment every second
-                    /*elapsed += Time.deltaTime;
-                    if (elapsed >= 1f)
-                    {
-                        elapsed = elapsed % 1f;
-
-                        OutputTime();
-                  
-                    }
-                
-                else
-                {
-                    if (PhotonNetwork.CurrentRoom.CustomProperties["time"] != null)
-                    {
-                        timerText.text = PhotonNetwork.CurrentRoom.CustomProperties["time"].ToString();
-                    }
-                }*/
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
             {
                 // show waiting for others players menu
 
             }
-            /*else if ((int)PhotonNetwork.CurrentRoom.CustomProperties["Players"] > 0)
-            {
-                // show waiting for others players menu
-            }*/
             else
             {
                 loadingScreen.SetActive(false);
                 startGame = true;
                 // start timer if not started yet
-            
-                 timer.SetLocalTime();
-                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                 timer.StartTimer(this);
+                timer.SetLocalTime();
+                timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                timer.StartTimer(this);
 
                 
 
@@ -150,11 +123,36 @@ public class scoreController : MonoBehaviour
             startGame = true;
             // start timer if not started yet
             timer.InitializeTimer();
-            //timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
             timer.StartTimer(this);
 
         }
     }
+
+
+    void reactScore(int score1, int score2){
+        int team = GameObject.Find("Local").GetComponent<PlayerController>().myTeam;
+        if (!MusicManager.instance.priorityPitch && score1!= 0 && score2!= 0){
+            if ((score1*1.2 <= score2) || (score1*0.8 >= score2)){
+                if (team == 1){
+                    float ratio = score2/score1;
+                    ratio = 1-(1-ratio)/4;
+                    float pitch = Mathf.Min(ratio, 1.3f);
+                    pitch = Mathf.Max(pitch, 0.7f);
+                    MusicManager.instance.musicReact(pitch);
+                } else if (team == 2){
+                    float ratio = score1/score2;
+                    ratio = 1-(1-ratio)/4;
+                    float pitch = Mathf.Min(ratio, 1.3f);
+                    pitch = Mathf.Max(pitch, 0.7f);
+                    MusicManager.instance.musicReact(pitch);
+                }
+            }else{
+                MusicManager.instance.endReaction();
+            }
+        }
+       
+    }
+
 
     // OutputTime is called once per second
     void OutputTime()

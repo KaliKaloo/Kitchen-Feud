@@ -22,22 +22,16 @@ public class stoveMinigame : MonoBehaviour
 
     void Start()
     {
-
-        //GameEvents.current.assignPoints += UpdateDishPointsStove;
         appliance = GetComponent<Appliance>();
         backbutton.gameObject.SetActive(false);
     }
 
     void Update(){
 
-
-      
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
-            // MusicManager.instance.minigameSwitch();
-            // MusicManager.instance.inMG = true;
-            MusicManagerOld.instance.minigameSwitch();
-		    MusicManagerOld.instance.inMG = true;
+            MusicManager.instance.minigameSwitch();
+            MusicManager.instance.inMG = true;
             
             backbutton.appliance = GetComponent<Appliance>();
             if (appliance.foundDish != null)
@@ -46,12 +40,7 @@ public class stoveMinigame : MonoBehaviour
                 spawner.appliance = appliance;
                 
             }
-            //if (GameObject.Find("StoveGameCanvas"))
-            //{
-            //    GameEvents.current.assignPoints += UpdateDishPointsStove;
-                
-                
-            //}
+           
         }
     }
 

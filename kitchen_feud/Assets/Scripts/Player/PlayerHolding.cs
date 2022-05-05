@@ -87,9 +87,13 @@ public class PlayerHolding : MonoBehaviour
 
             {
                 heldObj.layer = 8;
+
                 foreach (Transform child in heldObj.transform)
                 {
-                    child.gameObject.layer = 8;
+                    if (!child.GetComponent<ParticleSystem>()){
+                        child.gameObject.layer = 8;
+                    }
+                   
                 }
             }
         }
