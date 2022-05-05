@@ -40,6 +40,7 @@ public class MusicManager : MonoBehaviour
         track1.volume = 0;
         track2 = gameObject.AddComponent<AudioSource>();
         track2.volume = 0;
+        track = track1;
 
         // start playing
         StartCoroutine(startTrack());
@@ -174,7 +175,6 @@ public class MusicManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        track = track1;
     }
 
     public void playRandom(){
