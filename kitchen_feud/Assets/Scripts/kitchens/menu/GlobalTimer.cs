@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GlobalTimer:MonoBehaviour
 {
@@ -9,15 +10,17 @@ public class GlobalTimer:MonoBehaviour
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    private static int time = 5;
+    public static int time = 5;
     public static int totalTime;
     private readonly int startTime = time;
 
     private static int timer = time;
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
+    Hashtable total = new Hashtable();
+    public PhotonView PV;
     private void Start()
     {
-       
+        PV = GetComponent<PhotonView>();
     }
 
     // changes original starting time, only do before game starts!
@@ -35,6 +38,8 @@ public class GlobalTimer:MonoBehaviour
         //else
         {
             timer = time = intermediateTime;
+            total["TotalTime"] = intermediateTime;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(total);
             return 0;
         }
     }
@@ -57,7 +62,14 @@ public class GlobalTimer:MonoBehaviour
 
     public int GetTotalTime()
     {
-        return time;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            return time;
+        }
+        else
+        {
+            return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+        }
     }
 
     // gets the time from the server
@@ -155,4 +167,5 @@ public class GlobalTimer:MonoBehaviour
         hashTimer["Time"] = timer;
         PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
     }
+    
 }
