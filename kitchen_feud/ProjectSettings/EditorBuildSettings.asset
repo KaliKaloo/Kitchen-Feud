@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/kitchens - Music.unity
-    guid: b3d93940fc7514647a8e7550c0fe5ec3
   - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Scenes/kitchens.unity
     guid: 26eafb126e60d5644a4493c9257bf4ee
   - enabled: 0
