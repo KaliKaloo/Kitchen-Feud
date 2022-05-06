@@ -197,25 +197,27 @@ public class scoreController : MonoBehaviour
         timesUpCanvas.SetActive(true);
         // play animation
         timesUpAnimator.SetBool("StartGameOver", true);
+        cleanupRoom.Clean();
+        lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         yield return new WaitForSeconds(3);
 
-
-        // do game over
-        if (PhotonNetwork.IsMasterClient)
-            // this will auto sync with all clients
-            PhotonNetwork.LoadLevel("gameOver");
-
         // calls this to clean objects which need resetting
-        cleanupRoom.Clean();
+
         timesUpAnimator.SetBool("StartGameOver", false);
         timesUpCanvas.SetActive(false);
 
         startGame = false;
 
         // sends to server that game has finished
-        lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+
         gameOver = true;
+        // do game over
+        if (PhotonNetwork.IsMasterClient)
+            // this will auto sync with all clients
+            PhotonNetwork.LoadLevel("gameOver");
+
+
     }
 
 
