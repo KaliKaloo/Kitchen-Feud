@@ -109,11 +109,17 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
-        {
-            playAgain["loaded"] = 0;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
-        }
+        //if (PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] != null)
+        //{
+        //    if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] == 1)
+        //    {
+        //        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        //        {
+        //            playAgain["loaded"] = 0;
+        //            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
+        //        }
+        //    }
+        //}
    
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
