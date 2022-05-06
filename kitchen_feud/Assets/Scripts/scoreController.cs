@@ -194,12 +194,14 @@ public class scoreController : MonoBehaviour
     // plays animation and exits game
     public IEnumerator playTimesUpAnimation()
     {
+      
         timesUpCanvas.SetActive(true);
         // play animation
         timesUpAnimator.SetBool("StartGameOver", true);
         cleanupRoom.Clean();
         lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        
         yield return new WaitForSeconds(5);
 
         // calls this to clean objects which need resetting
@@ -208,14 +210,17 @@ public class scoreController : MonoBehaviour
         timesUpCanvas.SetActive(false);
 
         startGame = false;
-
+     
         // sends to server that game has finished
 
         gameOver = true;
         // do game over
         if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.DestroyAll();
             // this will auto sync with all clients
             PhotonNetwork.LoadLevel("gameOver");
+        }
 
 
     }

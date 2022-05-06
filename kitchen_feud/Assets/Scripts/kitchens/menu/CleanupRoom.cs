@@ -18,9 +18,9 @@ public class CleanupRoom : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         CleanPlayerSlots();
         cleanPlayers();
+  
 
 
-       
     }
     
     // Destroy all slots player is holding
