@@ -12,7 +12,7 @@ public class cutController : MonoBehaviour
 
     public List<Sprite> newIngredients;
     public List<Sprite> bombSprites = new List<Sprite>();
-
+    public cuttingMinigame cM;
     public GameObject instructions;
     public GameObject scoreSystem;
     public Image Ingredient1;
@@ -115,7 +115,11 @@ public class cutController : MonoBehaviour
 
         finalScore = Score;
         Debug.Log(finalScore);
-        GameEvents.current.assignPointsEventFunction();
+        if (cM)
+        {
+            cM.UpdateDishPointsCutting();
+        }
+        //GameEvents.current.assignPointsEventFunction();
        
     }
 }
