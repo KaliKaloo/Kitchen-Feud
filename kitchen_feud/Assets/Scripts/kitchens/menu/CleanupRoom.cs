@@ -17,6 +17,7 @@ public class CleanupRoom : MonoBehaviour
         ht["PlayingAgain"] = 1;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         CleanPlayerSlots();
+        cleanPlayers();
 
 
        
@@ -35,6 +36,19 @@ public class CleanupRoom : MonoBehaviour
             }
 
             localPlayer = null;
+        }
+    }
+    private void cleanPlayers()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            foreach(Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+            {
+                ht["loaded"] = 0;
+                ht["Time"] = 0;
+                ht["PlayingAgain"] = 1;
+                p.SetCustomProperties(ht);
+            }
         }
     }
 }
