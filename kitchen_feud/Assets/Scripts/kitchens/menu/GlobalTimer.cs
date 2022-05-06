@@ -11,7 +11,7 @@ public class GlobalTimer
     private Coroutine timerCoroutine;
 
     // SET TIMER HERE !!!!!!
-    public static int time = 300;
+    public static int time = 20;
     public static int totalTime;
     private readonly int startTime = time;
 
