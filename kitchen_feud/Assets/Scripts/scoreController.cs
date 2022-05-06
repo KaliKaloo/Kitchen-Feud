@@ -200,7 +200,7 @@ public class scoreController : MonoBehaviour
         cleanupRoom.Clean();
         lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         // calls this to clean objects which need resetting
 

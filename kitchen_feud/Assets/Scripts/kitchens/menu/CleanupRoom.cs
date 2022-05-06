@@ -40,7 +40,7 @@ public class CleanupRoom : MonoBehaviour
     }
     private void cleanPlayers()
     {
-        if (PhotonNetwork.IsMasterClient)
+       // if (PhotonNetwork.IsMasterClient)
         {
             foreach(Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
             {
