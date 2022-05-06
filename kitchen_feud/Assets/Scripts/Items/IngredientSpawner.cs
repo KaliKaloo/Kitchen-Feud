@@ -11,12 +11,17 @@ public class IngredientSpawner : Interactable
     private int count = 180;
     private static GlobalTimer timer = new GlobalTimer();
     private int totalTime = timer.GetTotalTime();
+    private bool timerSet;
 
     private bool reset;
 
    
     protected override void Update(){
-
+        if (timer.GetTotalTime() != 0 && !timerSet)
+        {
+            totalTime = timer.GetTotalTime();
+            timerSet = true;
+        }
         base.Update();
         int currentTime = timer.GetLocalTime();
         if (currentTime <= totalTime/2 && !reset){

@@ -85,8 +85,11 @@ public class GlobalTimer
             }
             else
             {
-
-                return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
+                {
+                    return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                }
+                else return 0;
 
             }
         }
