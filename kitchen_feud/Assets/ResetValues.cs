@@ -10,6 +10,8 @@ public class ResetValues : MonoBehaviour
     void Start()
     {
         ht["loaded"] = 0;
+        PlayerPrefs.DeleteKey("userID");
+        PlayerPrefs.Save();
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
     }
 
