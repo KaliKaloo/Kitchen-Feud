@@ -412,7 +412,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-     
+        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        {
+            Debug.LogError((int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
+        }
 
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
