@@ -341,7 +341,7 @@ public class menuController : MonoBehaviourPunCallbacks
             lobbyError.text = "Please name a lobby";
         }else{
             loadingScreen.SetActive(true);
-            PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+            PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
         }
     }
 
@@ -364,7 +364,7 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             connectPanel.SetActive(false);
             loadingScreen.SetActive(true);
-            PhotonNetwork.JoinRoom(joinGameInput.text);
+            PhotonNetwork.JoinRoom(joinGameInput.text.ToUpper());
         } else
         {
             lobbyError.text = "Cannot be empty";
