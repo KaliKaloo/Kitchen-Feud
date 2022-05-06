@@ -8,10 +8,10 @@ using System.IO;
 
 
 
-    public class Cutting: PhotonTestSetup
+public class Cutting: PhotonTestSetup
 {
     GameObject obj;
-    GameObject bread, tomato, cucumber, lettuce;
+    GameObject lettuce, tomato, cucumber;
 
     PlayerHolding playerHold;
     Appliance choppingBoard;
@@ -24,7 +24,6 @@ using System.IO;
         cucumber = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "cucumber 1"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         lettuce = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "lettuce"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         tomato = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "tomato"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
-        //lettuce = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "lettuce"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
 
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
             "Player_cat_Model"),
@@ -143,7 +142,6 @@ using System.IO;
 
         if (playerHold.slot.childCount >= 1)
             playerHold.dropItem();
-        //choppingBoard.Interact();
         Assert.IsTrue(choppingBoard.minigameCanvas.activeSelf);
         choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartGame();
         Assert.IsFalse(choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartButton.activeSelf);
@@ -154,9 +152,6 @@ using System.IO;
         choppingBoard.itemsOnTheAppliance.Clear();
         choppingBoard.isBeingInteractedWith = false;
         choppingBoard.minigameCanvas.SetActive(false);
-
-
-
 
 
         yield return null;
