@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2, track, mgSource;
+    private AudioSource track1, track2, track;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
     public AudioClip k1_MG, k2_MG, suddenTrack ;
@@ -36,9 +36,9 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         totalTime = timer.GetTotalTime();
-        track1 = gameObject.AddComponent<AudioSource>();
+        track1 = gameObject.transform.GetChild(0).GetComponent<AudioSource>();
         track1.volume = 0;
-        track2 = gameObject.AddComponent<AudioSource>();
+        track2 = gameObject.transform.GetChild(1).GetComponent<AudioSource>();
         track2.volume = 0;
         track = track1;
 
@@ -96,7 +96,7 @@ public class MusicManager : MonoBehaviour
     }
 
 
-     public void endReaction(){
+    public void endReaction(){
         CancelInvoke("playRandom");
         pitch = 1f;
         track.pitch = 1f;
@@ -191,7 +191,7 @@ public class MusicManager : MonoBehaviour
             track.Pause();
             AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
             CancelInvoke("playRandom");
-            mgSource = track == track1 ? track2 : track1;
+            AudioSource mgSource = track == track1 ? track2 : track1;
             mgSource.clip = newTrack;
             setVolume();
             mgSource.volume = musicVol;
@@ -201,6 +201,7 @@ public class MusicManager : MonoBehaviour
     }
 
     public void minigameEnd(){
+        AudioSource mgSource = track == track1 ? track2 : track1;
         mgSource.Stop();
         track.UnPause();
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
