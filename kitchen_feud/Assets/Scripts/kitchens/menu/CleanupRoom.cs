@@ -12,12 +12,12 @@ public class CleanupRoom : MonoBehaviour
     // put all things you need resetting/destroyed here
     public void Clean()
     {
-        ht["loaded"] = 0;
-        ht["Time"] = 0;
-        ht["PlayingAgain"] = 1;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
+        //ht["loaded"] = 0;
+        //ht["Time"] = 0;
+        //ht["PlayingAgain"] = 1;
+        //PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         CleanPlayerSlots();
-        cleanPlayers();
+      //  cleanPlayers();
   
 
 
