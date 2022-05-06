@@ -10,6 +10,7 @@ public class SandwichController : MonoBehaviour
     [SerializeField] private GameObject team1Background;
     [SerializeField] private GameObject team2Background;
     [SerializeField] private GameObject minigameCanvas;
+    public SandwichStation SandwichStation;
     public GameObject StartButton;
     public GameObject backButton;
     public GameObject instructions;
@@ -32,6 +33,8 @@ public class SandwichController : MonoBehaviour
     public int CountStopped;
     public int finalScore;
     private int score = 0;
+    public bool stopped;
+    
     public int Score
     {
         get { return score; }
@@ -43,8 +46,9 @@ public class SandwichController : MonoBehaviour
     }
 
     void Update(){
-        if (CountStopped == 4){
+        if (CountStopped == 4 && !stopped){
             StopGame();
+            stopped = true;
         }
     }
 
@@ -152,6 +156,10 @@ public class SandwichController : MonoBehaviour
     public void StopGame(){
         backButton.SetActive(true);
         finalScore = score;
-        GameEvents.current.assignPointsEventFunction();
+        if (SandwichStation)
+        {
+            SandwichStation.UpdateDishPointsSandwich();
+        }
+       // GameEvents.current.assignPointsEventFunction();
     }
 }

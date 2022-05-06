@@ -109,11 +109,17 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
-        {
-            playAgain["loaded"] = 0;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
-        }
+        //if (PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] != null)
+        //{
+        //    if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] == 1)
+        //    {
+        //        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        //        {
+        //            playAgain["loaded"] = 0;
+        //            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
+        //        }
+        //    }
+        //}
    
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
@@ -335,7 +341,7 @@ public class menuController : MonoBehaviourPunCallbacks
             lobbyError.text = "Please name a lobby";
         }else{
             loadingScreen.SetActive(true);
-            PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+            PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
         }
     }
 
@@ -358,7 +364,7 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             connectPanel.SetActive(false);
             loadingScreen.SetActive(true);
-            PhotonNetwork.JoinRoom(joinGameInput.text);
+            PhotonNetwork.JoinRoom(joinGameInput.text.ToUpper());
         } else
         {
             lobbyError.text = "Cannot be empty";
@@ -406,7 +412,10 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-     
+        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        {
+            Debug.LogError((int)PhotonNetwork.LocalPlayer.CustomProperties["loaded"]);
+        }
 
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {

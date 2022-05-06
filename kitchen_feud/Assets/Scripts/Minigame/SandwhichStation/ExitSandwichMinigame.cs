@@ -26,6 +26,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 
 	void TaskOnClick()
 	{
+		SandwichController.stopped = false;
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);

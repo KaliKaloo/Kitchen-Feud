@@ -27,23 +27,26 @@ public class Agent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        playerHold = GetComponent<PlayerHolding>();
-        Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
         PV = GetComponent<PhotonView>();
-        readyToServe = false;
-        int index = int.Parse(agent.name[6].ToString());
-        if (agent.CompareTag("Waiter1"))
+        if (PhotonNetwork.IsMasterClient)
         {
-            initialPos = GameSetup.GS.WSP1[index - 1].position;
+            agent = GetComponent<NavMeshAgent>();
+            playerHold = GetComponent<PlayerHolding>();
+            Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
+            
+            readyToServe = false;
+            int index = int.Parse(agent.name[6].ToString());
+            if (agent.CompareTag("Waiter1"))
+            {
+                initialPos = GameSetup.GS.WSP1[index - 1].position;
+            }
+            else if (agent.CompareTag("Waiter2"))
+            {
+                initialPos = GameSetup.GS.WSP2[index - 1].position;
+
+
+            }
         }
-        else if (agent.CompareTag("Waiter2"))
-        {
-            initialPos = GameSetup.GS.WSP2[index - 1].position;
-
-
-        }
-
     }
 
     // Update is called once per frame
