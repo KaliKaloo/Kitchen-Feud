@@ -27,12 +27,13 @@ public class Agent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         if (PhotonNetwork.IsMasterClient)
         {
             agent = GetComponent<NavMeshAgent>();
             playerHold = GetComponent<PlayerHolding>();
             Oven = GameObject.Find("Oven1").GetComponent<ovenMiniGame>().gameObject;
-            PV = GetComponent<PhotonView>();
+            
             readyToServe = false;
             int index = int.Parse(agent.name[6].ToString());
             if (agent.CompareTag("Waiter1"))
