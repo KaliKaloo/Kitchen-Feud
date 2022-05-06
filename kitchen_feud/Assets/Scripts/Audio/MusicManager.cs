@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2, track;
+    private AudioSource track1, track2, track, mgSource;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
     public AudioClip k1_MG, k2_MG, suddenTrack ;
@@ -191,7 +191,7 @@ public class MusicManager : MonoBehaviour
             track.Pause();
             AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
             CancelInvoke("playRandom");
-            AudioSource mgSource = track == track1 ? track2 : track1;
+            mgSource = track == track1 ? track2 : track1;
             mgSource.clip = newTrack;
             setVolume();
             mgSource.volume = musicVol;
@@ -201,7 +201,6 @@ public class MusicManager : MonoBehaviour
     }
 
     public void minigameEnd(){
-        AudioSource mgSource = track == track1 ? track2 : track1;
         mgSource.Stop();
         track.UnPause();
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
