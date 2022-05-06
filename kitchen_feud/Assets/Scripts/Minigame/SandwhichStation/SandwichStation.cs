@@ -63,7 +63,7 @@ public class SandwichStation: MonoBehaviour
                     else if (sandwichCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                         dishOfFoundDish.points = dishOfFoundDish.points * 2;
 
-                    dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, dishOfFoundDish.points);
+                    dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
 
 
                 }
