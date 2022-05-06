@@ -40,9 +40,11 @@ public class kickPlayers : MonoBehaviour
 
         if (GameObject.Find("Local"))
         {
-            if (!GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled)
+            GameObject localP = GameObject.Find("Local");
+
+            if (!localP.GetComponentInChildren<AudioListener>().enabled)
             {
-                GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled = true;
+                localP.GetComponentInChildren<AudioListener>().enabled = true;
             }
         }
 
@@ -55,28 +57,32 @@ public class kickPlayers : MonoBehaviour
 
         if (PhotonNetwork.CurrentRoom != null && players.Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
-      
-            
-                if (Vector3.Distance(new Vector3(11.21f,0.201f, -3.37f), GameObject.Find("Local").transform.position) < 10 &&
-                    GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myC == 0 &&
-                    GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 1)
+            if (GameObject.Find("Local"))
+            {
+                GameObject localP = GameObject.Find("Local");
+
+
+
+                if (Vector3.Distance(new Vector3(11.21f, 0.201f, -3.37f), localP.transform.position) < 10 &&
+                   localP.GetComponent<PlayerVoiceManager>().myC == 0 &&
+                   localP.GetComponent<PlayerController>().myTeam == 1)
                 {
                     engine.LeaveChannel();
                     engine.JoinChannel(randomInstance + "Team1");
-                    PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
+                    PV.RPC("setMyC", RpcTarget.All, localP.GetComponent<PhotonView>().ViewID, 1);
+                }
+
+                if (Vector3.Distance(new Vector3(-7.35f, 0.201f, -4.27f), localP.transform.position) < 10 &&
+                  localP.GetComponent<PlayerVoiceManager>().myC == 0 &&
+                   localP.GetComponent<PlayerController>().myTeam == 2)
+                {
+                    engine.LeaveChannel();
+                    engine.JoinChannel(randomInstance + "Team2");
+                    PV.RPC("setMyC", RpcTarget.All, localP.GetComponent<PhotonView>().ViewID, 1);
+                }
             }
 
-            if (Vector3.Distance(new Vector3(-7.35f, 0.201f, -4.27f), GameObject.Find("Local").transform.position) < 10 &&
-               GameObject.Find("Local").GetComponent<PlayerVoiceManager>().myC == 0 &&
-               GameObject.Find("Local").GetComponent<PlayerController>().myTeam == 2)
-            {
-                engine.LeaveChannel();
-                engine.JoinChannel(randomInstance + "Team2");
-                PV.RPC("setMyC", RpcTarget.All, GameObject.Find("Local").GetComponent<PhotonView>().ViewID, 1);
-            }
         }
-
-    
     }
 
     public void kickPlayer(GameObject obj)
