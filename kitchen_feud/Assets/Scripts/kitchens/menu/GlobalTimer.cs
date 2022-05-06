@@ -47,7 +47,7 @@ public class GlobalTimer
         {
             timer = time = intermediateTime;
             total["TotalTime"] = intermediateTime;
-            if (PhotonNetwork.IsConnected)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
                 PhotonNetwork.CurrentRoom.SetCustomProperties(total);
             }
@@ -85,8 +85,11 @@ public class GlobalTimer
             }
             else
             {
-
-                return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
+                {
+                    return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                }
+                else return 0;
 
             }
         }

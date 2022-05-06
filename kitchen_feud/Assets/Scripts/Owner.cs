@@ -74,9 +74,10 @@ public class Owner : MonoBehaviour
         mouse = GameObject.Find("mouse controls");
 
         anim = GetComponent<Animator>();
-       
-        
-        Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
+
+
+        //  Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
+      Text =   PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
         if (PhotonNetwork.IsMasterClient)
         {

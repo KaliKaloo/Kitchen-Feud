@@ -36,9 +36,9 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         totalTime = timer.GetTotalTime();
-        track1 = gameObject.AddComponent<AudioSource>();
+        track1 = gameObject.transform.GetChild(0).GetComponent<AudioSource>();
         track1.volume = 0;
-        track2 = gameObject.AddComponent<AudioSource>();
+        track2 = gameObject.transform.GetChild(1).GetComponent<AudioSource>();
         track2.volume = 0;
         track = track1;
 
@@ -96,7 +96,7 @@ public class MusicManager : MonoBehaviour
     }
 
 
-     public void endReaction(){
+    public void endReaction(){
         CancelInvoke("playRandom");
         pitch = 1f;
         track.pitch = 1f;
