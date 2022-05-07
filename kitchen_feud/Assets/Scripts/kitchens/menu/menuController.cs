@@ -690,10 +690,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsConnected)
-        {
-            Debug.LogError("CONNECTED");
-        }
+
         if (PhotonNetwork.IsMasterClient && !increased)
         {
             IncreaseTimer();
