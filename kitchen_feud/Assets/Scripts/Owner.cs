@@ -478,8 +478,10 @@ public class Owner : MonoBehaviour
                             //if(timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
                             if(timer.GetLocalTime() < 260)
                             {
+                               // firstTime = true;
+                               // StartCoroutine(leavingKitchen());
                                 returnWithHeadShake();
-                                shout = true;
+                                shout = false;
                             }
                         }
 
@@ -513,8 +515,10 @@ public class Owner : MonoBehaviour
                             //if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
                             if (timer.GetLocalTime() < 260)
                             {
+                                //firstTime = true;
+                                //StartCoroutine(leavingKitchen());
                                 returnWithHeadShake();
-                                shout = true;
+                                shout = false;
                             }
                         }
 
