@@ -530,6 +530,9 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         loadingScreen.SetActive(false);
         isDisconnected = true;
+
+        createLobby = false;
+
         reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }
