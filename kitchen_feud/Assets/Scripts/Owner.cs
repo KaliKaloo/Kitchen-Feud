@@ -227,20 +227,20 @@ public class Owner : MonoBehaviour
                 //if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
                 {
                     //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                    if(rnd.Next(2) == 1)
+                    //if(rnd.Next(2) == 1)
         
-                    {
-                        stopLeaning = true;
-                        goThrowSmokeBomb = true;
-                    }
-                    else
-                    {
+                    //{
+                    //    stopLeaning = true;
+                    //    goThrowSmokeBomb = true;
+                    //}
+                    //else
+                    //{
                         stopLeaning = true;
 
                         shout = true;
                         notThrowing = true;
 
-                    }
+                   // }
                     decided = true;
                     //else do something
                 }
