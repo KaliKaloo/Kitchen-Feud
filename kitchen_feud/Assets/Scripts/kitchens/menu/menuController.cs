@@ -562,9 +562,6 @@ public class menuController : MonoBehaviourPunCallbacks
             lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-            //GameObject room = PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
-            //room.transform.SetParent(roomListContent);
-            //room.transform.localPosition = Vector3.zero;
         }
     }
 
