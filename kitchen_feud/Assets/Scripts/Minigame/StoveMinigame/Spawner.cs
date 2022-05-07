@@ -99,7 +99,7 @@ public class Spawner : MonoBehaviour
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
 
-        if (StoveMinigameCounter.collisionCounter < 20)
+        if (StoveMinigameCounter.collisionCounter < StoveMinigameCounter.amount)
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
             GameObject obj = Instantiate(correctItem,
@@ -114,7 +114,7 @@ public class Spawner : MonoBehaviour
            
         } 
         
-        else if (StoveMinigameCounter.droppedCounter == 20)
+        else if (StoveMinigameCounter.droppedCounter == StoveMinigameCounter.amount)
         {
             stoveMinigameCounter.EndGame();
             
@@ -127,7 +127,7 @@ public class Spawner : MonoBehaviour
 
         int randomBomb = Random.Range(0, bombs.Count);
 
-        if (StoveMinigameCounter.collisionCounter < 20)
+        if (StoveMinigameCounter.collisionCounter < StoveMinigameCounter.amount)
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,

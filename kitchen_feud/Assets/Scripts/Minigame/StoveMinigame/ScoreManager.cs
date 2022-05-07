@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     void OnTriggerExit2D(Collider2D target)
     {
         // if game has not ended count the points
-        if (!StoveMinigameCounter.end && StoveMinigameCounter.collisionCounter < 20)
+        if (!StoveMinigameCounter.end && StoveMinigameCounter.collisionCounter < StoveMinigameCounter.amount)
         {
             stoveMinigameCounter.AddCollisionCounter();
 
@@ -44,7 +44,7 @@ public class ScoreManager : MonoBehaviour
     {
         score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
 
-        if (StoveMinigameCounter.collisionCounter >= 20)
+        if (StoveMinigameCounter.collisionCounter >= StoveMinigameCounter.amount)
         {
             backbutton.SetActive(true);
 
