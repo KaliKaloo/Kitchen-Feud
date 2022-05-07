@@ -760,7 +760,8 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-        if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+       // if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+       if(timer.GetLocalTime() > 210)
         {
             firstTime = true;
         }
