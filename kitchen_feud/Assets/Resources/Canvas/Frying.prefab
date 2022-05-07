@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 394, y: 0}
+  m_AnchoredPosition: {x: 478, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7368569941250914134
@@ -807,17 +807,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626672960686360808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.151417, y: 2.7258458, z: 3.3546805}
   m_Children: []
   m_Father: {fileID: 626672959719064780}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.29000002}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.9308, y: 29.4654}
-  m_SizeDelta: {x: 423.0415, y: 310.9228}
+  m_AnchoredPosition: {x: 28.8, y: 45.6}
+  m_SizeDelta: {x: 100, y: 79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &626672960686360802
 CanvasRenderer:
@@ -927,6 +927,8 @@ MonoBehaviour:
   foodInstancesCounter: 0
   timer: {fileID: 626672960984241044}
   temp: {fileID: 0}
+  iniialValsSet: 0
+  fM: {fileID: 0}
 --- !u!114 &6570660071015016991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1144,8 @@ MonoBehaviour:
   localPV: {fileID: 0}
   controllerPV: 0
   currentH: 0
+  setInitialVals: 0
+  fM: {fileID: 0}
 --- !u!70 &626672960781006354
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
