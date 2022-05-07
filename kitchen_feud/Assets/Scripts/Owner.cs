@@ -802,7 +802,7 @@ public class Owner : MonoBehaviour
     }
     public IEnumerator playSounds()
     {
-        PV.RPC("playSounds", RpcTarget.All, PV.ViewID);
+        PV.RPC("playOwner", RpcTarget.All, PV.ViewID);
       //  audioSource.Play();
         yield return new WaitForSeconds(3);
         playOnce = false;
