@@ -283,7 +283,8 @@ public class Owner : MonoBehaviour
                 {
                     if((transform.position - spawnPoint).magnitude < 1)
                     {
-                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
+                      //  transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                         returned = false;
                     }
                 }
@@ -413,7 +414,9 @@ public class Owner : MonoBehaviour
                 {
                     if((transform.position - spawnPoint).magnitude < 3)
                     {
-                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                       // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
+
                         returned = false;  
                     }
                 }
@@ -422,7 +425,9 @@ public class Owner : MonoBehaviour
             }
             if(timer.GetLocalTime() == timer.GetTotalTime()/4)
             {
-                transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+               // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+                PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
+
                 agent.SetDestination(kitchenDestinationPoint);
                 inKitchenSecondTime = true;
                 stopLeaning = false;
@@ -812,6 +817,7 @@ public class Owner : MonoBehaviour
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
+            o.Owner2.SetActive(false);
             o.Owner1.SetActive(true);
             o.Text.text = message;
         } 
@@ -828,9 +834,22 @@ public class Owner : MonoBehaviour
             //Debug.LogError("TESTTT");
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
+            o.Owner1.SetActive(false);
             o.Owner2.SetActive(true);
             o.Text.text = message;
         }
+    }
+    [PunRPC]
+    void hideOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+
+    }
+    [PunRPC]
+    void showOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+
     }
 
 }
