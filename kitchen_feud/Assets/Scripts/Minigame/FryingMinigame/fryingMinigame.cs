@@ -36,22 +36,22 @@ public class fryingMinigame : MonoBehaviour
 
      
 
-        if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
+        if (transform.Find("Frying(Clone)") && set == false && transform.Find("Pancake(Clone)"))
         {
 
-            int canvasTag = appliance.kitchenNum;
-            if (canvasTag == 1)
-            {
-                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
-                otherTeam.SetActive(false);
+            //int canvasTag = appliance.kitchenNum;
+            //if (canvasTag == 1)
+            //{
+            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
+            //    otherTeam.SetActive(false);
 
-            }
-            else if (canvasTag == 2)
-            {
-                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
-                otherTeam.SetActive(false);
+            //}
+            //else if (canvasTag == 2)
+            //{
+            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
+            //    otherTeam.SetActive(false);
 
-            }
+            //}
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
             GameObject canv = transform.Find("Frying(Clone)").gameObject;

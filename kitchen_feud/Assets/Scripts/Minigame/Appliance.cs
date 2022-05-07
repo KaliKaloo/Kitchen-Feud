@@ -135,8 +135,15 @@ public class Appliance : Interactable
                     if (!minigameCanvas2)
                     {
                         //canvas.gameObject.SetActive(false);
-                        minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
-                            new Vector3(0, 0, 0), transform.rotation);
+                        if (kitchenNum == 1)
+                        {
+                            minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
+                                new Vector3(0, 0, 0), transform.rotation);
+                        }else if(kitchenNum == 2)
+                        {
+                            minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying2"),
+                                new Vector3(0, 0, 0), transform.rotation);
+                        }
                         pv.RPC("setInMinigame", RpcTarget.All, pv.ViewID);
 
 
