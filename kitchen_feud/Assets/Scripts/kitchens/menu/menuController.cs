@@ -56,7 +56,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private bool createLobby = false;
     private bool isDisconnected = false;
 
-    [SerializeField] private Transform roomListContent;
+    [SerializeField] public Transform roomListContent;
 
     public GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
@@ -343,9 +343,8 @@ public class menuController : MonoBehaviourPunCallbacks
         }else{
             loadingScreen.SetActive(true);
             PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
-         GameObject room =    PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
-            room.transform.SetParent(roomListContent);
-            room.transform.localPosition = Vector3.zero;
+            Debug.LogError("??");
+       
         }
     }
 
@@ -561,6 +560,9 @@ public class menuController : MonoBehaviourPunCallbacks
             lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+            GameObject room = PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
+            room.transform.SetParent(roomListContent);
+            room.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -570,9 +572,9 @@ public class menuController : MonoBehaviourPunCallbacks
             Destroy(trans.gameObject);
         }
         for (int i = 0; i < roomList.Count; i++) {
-            
-           // PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"))
-           // Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+
+            // PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"))
+          //  Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
