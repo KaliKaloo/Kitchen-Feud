@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
+using ExitGames.Client.Photon.StructWrapping;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class FriedFoodController : MonoBehaviour
 {
@@ -21,9 +25,12 @@ public class FriedFoodController : MonoBehaviour
     public bool onPlate;
     public bool collided;
     public DishSO dishSO;
+    public Image img;
+    
 
     void Start()
     {
+        img = GetComponent<Image>();
         collided = false;
         onPlate = false;
         minYSpeed = 200;
@@ -45,6 +52,10 @@ public class FriedFoodController : MonoBehaviour
         if (!dishSO)
         {
             dishSO = appliance.foundDish;
+        }
+        if(!img.sprite && dishSO && appliance)
+        {
+            img.sprite = appliance.GetComponent<fryingMinigame>().imgAtlas.GetSprite(dishSO.dishID);
         }
     }
 

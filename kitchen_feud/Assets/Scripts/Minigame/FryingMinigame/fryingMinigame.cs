@@ -22,6 +22,7 @@ public class fryingMinigame : MonoBehaviour
     public Camera UICamera;
     private int team;
     public bool movementStopped;
+    public GameObject gameCanvas;
     
 
 
@@ -36,7 +37,7 @@ public class fryingMinigame : MonoBehaviour
 
      
 
-        if (transform.Find("Frying(Clone)") && set == false && transform.Find("Pancake(Clone)"))
+        if (gameCanvas && set == false)
         {
 
             //int canvasTag = appliance.kitchenNum;
@@ -54,13 +55,13 @@ public class fryingMinigame : MonoBehaviour
             //}
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
-            GameObject canv = transform.Find("Frying(Clone)").gameObject;
-            slider = canv.GetComponentInChildren<Slider>();
-            backbutton = canv.GetComponentInChildren<ExitFryingMinigame>();
-            plate = canv.GetComponentInChildren<Plate>();
-            pan = canv.GetComponentInChildren<PanController>();
-            friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
-            friedFoodController.dishSO = appliance.foundDish;
+            
+            slider = gameCanvas.GetComponentInChildren<Slider>();
+            backbutton = gameCanvas.GetComponentInChildren<ExitFryingMinigame>();
+            //plate = canv.GetComponentInChildren<Plate>();
+            //pan = canv.GetComponentInChildren<PanController>();
+           // friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
+            //friedFoodController.dishSO = appliance.foundDish;
             set = true;
 
             friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(friedFoodController.dishSO.dishID);
@@ -68,7 +69,7 @@ public class fryingMinigame : MonoBehaviour
 
     
             
-        }else if (!transform.Find("Frying(Clone)")) {
+        }else if (!gameCanvas) {
             set = false;    
         }
 
