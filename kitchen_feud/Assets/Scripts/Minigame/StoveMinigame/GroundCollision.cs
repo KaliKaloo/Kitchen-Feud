@@ -14,7 +14,7 @@ public class GroundCollision : MonoBehaviour
     {
         Destroy(target.gameObject);
 
-        if (StoveMinigameCounter.collisionCounter >= 20)
+        if (StoveMinigameCounter.collisionCounter >= StoveMinigameCounter.amount)
         {
             backbutton.SetActive(true);
         }
