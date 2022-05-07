@@ -41,7 +41,7 @@ public class ExitFryingMinigame : MonoBehaviour
 
 		
 
-		if (appliance)
+		if (appliance && PhotonView.Find(appliance.appliancePlayers[0]).IsMine)
 	    {
 		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
