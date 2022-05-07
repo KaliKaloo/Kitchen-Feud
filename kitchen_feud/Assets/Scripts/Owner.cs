@@ -473,6 +473,15 @@ public class Owner : MonoBehaviour
                                 calledName = true;
                             }
                         }
+                        else
+                        {
+                            //if(timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
+                            if(timer.GetLocalTime() < 260)
+                            {
+                                StartCoroutine(leavingKitchen());
+                                shout = true;
+                            }
+                        }
 
                     }
                 }else if(team == 2)
@@ -497,6 +506,15 @@ public class Owner : MonoBehaviour
 
                                 //Text.text = p.NickName + "!";
                                 calledName = true;
+                            }
+                        }
+                        else
+                        {
+                            //if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
+                            if (timer.GetLocalTime() < 260)
+                            {
+                                StartCoroutine(leavingKitchen());
+                                shout = true;
                             }
                         }
 
