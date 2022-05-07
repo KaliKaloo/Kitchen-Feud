@@ -312,6 +312,7 @@ public class Owner : MonoBehaviour
                     if (firstTime)
                     {
                         StartCoroutine(leavingKitchen());
+                        firstTime = false;
                     }
                     if (agent.transform.rotation != Quaternion.Euler(0, 0, 0))
                     {
@@ -485,6 +486,7 @@ public class Owner : MonoBehaviour
                         }
                         if(playerToFollow){
                             agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                          
                             if (!calledName)
                             {
                                 if (p != null)
@@ -505,7 +507,7 @@ public class Owner : MonoBehaviour
                 if (playerToFollow)
                 {
 
-                    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+                    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 3 * 3)
                     {
 
                         agent.transform.LookAt(playerToFollow.transform);
