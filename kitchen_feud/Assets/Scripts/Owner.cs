@@ -755,6 +755,7 @@ public class Owner : MonoBehaviour
             PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
             agent.SetDestination(spawnPoint);
         }
+        returned = true;
 
     }
 
