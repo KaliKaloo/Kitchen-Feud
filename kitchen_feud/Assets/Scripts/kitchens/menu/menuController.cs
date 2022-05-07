@@ -277,6 +277,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+
         PhotonNetwork.JoinLobby();
     }
 
@@ -333,6 +334,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         PlayerPrefs.SetString("userID", null);
         BackToMainMenu();
+
     }
 
     // Create room here
@@ -386,7 +388,7 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyMenu.SetActive(false);
 
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+       // PhotonNetwork.CurrentRoom.IsVisible = false;
 
         // how long player's data is saved after disconnect (60 seconds here)
         PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
@@ -560,9 +562,9 @@ public class menuController : MonoBehaviourPunCallbacks
             lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-            GameObject room = PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
-            room.transform.SetParent(roomListContent);
-            room.transform.localPosition = Vector3.zero;
+            //GameObject room = PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
+            //room.transform.SetParent(roomListContent);
+            //room.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -573,8 +575,8 @@ public class menuController : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < roomList.Count; i++) {
 
-            // PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"))
-          //  Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            
+         Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
@@ -691,6 +693,10 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (PhotonNetwork.IsConnected)
+        {
+            Debug.LogError("CONNECTED");
+        }
         if (PhotonNetwork.IsMasterClient && !increased)
         {
             IncreaseTimer();
