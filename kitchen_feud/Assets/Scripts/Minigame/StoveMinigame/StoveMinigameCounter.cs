@@ -6,6 +6,8 @@ using Photon.Pun;
 
 public class StoveMinigameCounter
 {
+    public static int amount = 10;
+
     // counts from 0-20 how many items have been dropped from the ceiling
     public static int droppedCounter;
 

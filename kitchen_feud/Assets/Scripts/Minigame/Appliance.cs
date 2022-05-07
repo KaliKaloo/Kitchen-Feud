@@ -135,8 +135,15 @@ public class Appliance : Interactable
                     if (!minigameCanvas2)
                     {
                         //canvas.gameObject.SetActive(false);
-                        minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
-                            new Vector3(0, 0, 0), transform.rotation);
+                        if (kitchenNum == 1)
+                        {
+                            minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying"),
+                                new Vector3(0, 0, 0), transform.rotation);
+                        }else if(kitchenNum == 2)
+                        {
+                            minigameCanvas2 = PhotonNetwork.Instantiate(Path.Combine("Canvas", "Frying2"),
+                                new Vector3(0, 0, 0), transform.rotation);
+                        }
                         pv.RPC("setInMinigame", RpcTarget.All, pv.ViewID);
 
 
@@ -282,11 +289,15 @@ public class Appliance : Interactable
     }
 
     public void checkForDish()
+
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
+      
+        
         
         if (foundDish != null)
         {
+            myPv.RPC("setFoundDish", RpcTarget.OthersBuffered, myPv.ViewID, foundDish.dishID);
             string applianceName = gameObject.tag;
             string howToCook = foundDish.toCook;
             
@@ -436,6 +447,13 @@ public class Appliance : Interactable
         //PhotonView.Find(canvID).transform.Find("instruction panel").gameObject.SetActive(false);
         PhotonView.Find(canvID).transform.Find("BackButton").gameObject.SetActive(false);
 
+    }
+    [PunRPC]
+    void setFoundDish(int viewID, string dishID)
+    {
+
+            PhotonView.Find(viewID).GetComponent<Appliance>().foundDish = Database.GetDishByID(dishID);
+       
     }
  
 }

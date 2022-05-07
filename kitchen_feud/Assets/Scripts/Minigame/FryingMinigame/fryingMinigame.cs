@@ -22,6 +22,7 @@ public class fryingMinigame : MonoBehaviour
     public Camera UICamera;
     private int team;
     public bool movementStopped;
+    public GameObject gameCanvas;
     
 
 
@@ -36,33 +37,39 @@ public class fryingMinigame : MonoBehaviour
 
      
 
-        if (transform.Find("Frying(Clone)") && set == false && GameObject.Find("Pancake(Clone)"))
+        if (gameCanvas && set == false)
         {
-            GameObject canv = transform.Find("Frying(Clone)").gameObject;
-            slider = canv.GetComponentInChildren<Slider>();
-            backbutton = canv.GetComponentInChildren<ExitFryingMinigame>();
-            plate = canv.GetComponentInChildren<Plate>();
-            pan = canv.GetComponentInChildren<PanController>();
-            friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
-            friedFoodController.dishSO = appliance.foundDish;
-            friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(friedFoodController.dishSO.dishID);
-            
-            int canvasTag = appliance.kitchenNum;
-            if (canvasTag == 1){
-                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
-                otherTeam.SetActive(false);
-      
-            } else if (canvasTag == 2){
-                GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
-                otherTeam.SetActive(false);
-              
-            }
 
-            set = true;
+            //int canvasTag = appliance.kitchenNum;
+            //if (canvasTag == 1)
+            //{
+            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
+            //    otherTeam.SetActive(false);
+
+            //}
+            //else if (canvasTag == 2)
+            //{
+            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
+            //    otherTeam.SetActive(false);
+
+            //}
             MusicManager.instance.minigameSwitch();
-		    MusicManager.instance.inMG = true;
+            MusicManager.instance.inMG = true;
             
-        }else if (!transform.Find("Frying(Clone)")) {
+            slider = gameCanvas.GetComponentInChildren<Slider>();
+            backbutton = gameCanvas.GetComponentInChildren<ExitFryingMinigame>();
+            //plate = canv.GetComponentInChildren<Plate>();
+            //pan = canv.GetComponentInChildren<PanController>();
+           // friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
+            //friedFoodController.dishSO = appliance.foundDish;
+            set = true;
+
+            friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(friedFoodController.dishSO.dishID);
+      
+
+    
+            
+        }else if (!gameCanvas) {
             set = false;    
         }
 
@@ -91,10 +98,11 @@ public class fryingMinigame : MonoBehaviour
         if (appliance.isBeingInteractedWith){
             Dish dishOfFoundDish = appliance.dishOfFoundDish;
             if(dishOfFoundDish != null){
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)plate.totalPoints);
+                
                 int ingredientMultiplier = appliance.foundDish.recipe.Count - 1;
                 
                 dishOfFoundDish.points = (int) plate.totalPoints *5 + (30 * ingredientMultiplier);
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
                 Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
             }
         }
