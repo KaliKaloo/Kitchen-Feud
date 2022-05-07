@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
+using System.IO;
 using UnityEngine.Video;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -342,6 +343,9 @@ public class menuController : MonoBehaviourPunCallbacks
         }else{
             loadingScreen.SetActive(true);
             PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+         GameObject room =    PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"), roomListContent.position, Quaternion.identity);
+            room.transform.SetParent(roomListContent);
+            room.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -566,7 +570,9 @@ public class menuController : MonoBehaviourPunCallbacks
             Destroy(trans.gameObject);
         }
         for (int i = 0; i < roomList.Count; i++) {
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            
+           // PhotonNetwork.Instantiate(Path.Combine("Room", "RoomListItem"))
+           // Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
