@@ -28,14 +28,14 @@ public class FriedFoodController : MonoBehaviour
         onPlate = false;
         minYSpeed = 200;
         maxYSpeed = 400;
-        gameObject.transform.SetParent(pan.gameObject.transform.parent);
-        gameObject.transform.localPosition = Vector3.zero;
+        //gameObject.transform.SetParent(pan.gameObject.transform.parent);
+        //gameObject.transform.localPosition = Vector3.zero;
         points = 0;
         PV = GetComponent<PhotonView>();
-        appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
+       // appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
 
-        dishSO = appliance.foundDish;
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.1f, Screen.height * 0.4f);
+       // dishSO = appliance.foundDish;
+       // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.1f, Screen.height * 0.4f);
         RectTransform rect = GetComponent<RectTransform>();
 
     }

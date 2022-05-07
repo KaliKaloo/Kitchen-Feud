@@ -124,11 +124,14 @@ public class PanController : MonoBehaviour
         me = PhotonView.Find(myID).gameObject;
         appliance = me.GetComponent<PanController>().appliance;
         FFC = PhotonView.Find(viewID).GetComponent<FriedFoodController>();
+        FFC.transform.SetParent(me.transform);
+        FFC.transform.localPosition = Vector3.zero;
         imgAtlas = appliance.GetComponent<fryingMinigame>().imgAtlas;
         me.GetComponent<PanController>().friedFood = FFC;
         FFC.pan = me.GetComponent<PanController>();
         FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
         FFC.timer = me.GetComponent<PanController>().timer;
+        FFC.appliance = appliance;
         FFC.dishSO = appliance.foundDish;
         if (imgAtlas && FFC.dishSO)
         {
