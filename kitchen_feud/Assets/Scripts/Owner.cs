@@ -413,11 +413,11 @@ public class Owner : MonoBehaviour
                 }
                 if (returned)
                 {
-                    if((transform.position - spawnPoint).magnitude < 1)
+                    if((transform.position - spawnPoint).magnitude < 3)
                     {
                        // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                         PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
-
+                        Debug.LogError("Hidden?!");
                         returned = false;  
                     }
                 }
@@ -802,8 +802,9 @@ public class Owner : MonoBehaviour
     }
     public IEnumerator playSounds()
     {
-        audioSource.Play();
-        yield return new WaitForSeconds(5);
+        PV.RPC("playSounds", RpcTarget.All, PV.ViewID);
+      //  audioSource.Play();
+        yield return new WaitForSeconds(3);
         playOnce = false;
     }
     [PunRPC]
@@ -851,6 +852,11 @@ public class Owner : MonoBehaviour
     {
         PhotonView.Find(ViewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
 
+    }
+    [PunRPC]
+    void playOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).GetComponent<Owner>().audioSource.Play();
     }
 
 }
