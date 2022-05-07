@@ -191,6 +191,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         PlayerPrefs.SetInt("disconnected", 0);
         isDisconnected = false;
+        PlayerPrefs.SetString("lastLobby", null);
         reconnectMenu.SetActive(false);
     }
 
@@ -343,11 +344,11 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (createGameInput.text == ""){
             lobbyError.text = "Please name a lobby";
-        }else{
+        }
+        else
+        {
             loadingScreen.SetActive(true);
             PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
-            Debug.LogError("??");
-       
         }
     }
 
@@ -418,8 +419,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-  
-
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
             if (!PhotonNetwork.IsMasterClient)
