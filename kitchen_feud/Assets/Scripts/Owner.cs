@@ -418,7 +418,6 @@ public class Owner : MonoBehaviour
                     {
                        // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                         PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
-                        Debug.LogError("Hidden?!");
                         returned = false;  
                     }
                 }
