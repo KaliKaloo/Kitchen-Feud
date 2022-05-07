@@ -190,6 +190,7 @@ public class menuController : MonoBehaviourPunCallbacks
     public void HideReconnectMenu()
     {
         PlayerPrefs.SetInt("disconnected", 0);
+        isDisconnected = false;
         reconnectMenu.SetActive(false);
     }
 
@@ -515,18 +516,19 @@ public class menuController : MonoBehaviourPunCallbacks
             lobbyError.text = "Lobby no longer exists!";
             PlayerPrefs.SetString("lastLobby", null);
             PlayerPrefs.SetInt("disconnected", 0);
+            isDisconnected = false;
         }
         else
         {
             lobbyError.text = "Lobby does not exist!";
         }
+
         calledRejoin = false;
         connectPanel.SetActive(true);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("create room fail");
         loadingScreen.SetActive(false);
         isDisconnected = true;
         reconnectMenu.SetActive(true);

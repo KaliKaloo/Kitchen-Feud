@@ -1576,6 +1576,7 @@ GameObject:
   - component: {fileID: 273502800}
   - component: {fileID: 273502802}
   - component: {fileID: 273502801}
+  - component: {fileID: 273502803}
   m_Layer: 5
   m_Name: MenuController
   m_TagString: Untagged
@@ -1686,6 +1687,20 @@ MonoBehaviour:
   cutsceneURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/CutsceneVideo.mp4
   instructionURL: https://kalikaloo.github.io/Games-Project-Kitchen-Feud-Assets/MovingInstructions.mp4
   videoCanvas: {fileID: 106729444}
+--- !u!114 &273502803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273502798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdade946adfe804eb7702404ada1919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content: {fileID: 1897489681}
+  _roomListing: {fileID: 7432153300816729523, guid: b2b336c8c6c0bd6459beed9163485ce7, type: 3}
 --- !u!1 &301874861
 GameObject:
   m_ObjectHideFlags: 0
@@ -19259,7 +19274,6 @@ GameObject:
   - component: {fileID: 1897489681}
   - component: {fileID: 1897489683}
   - component: {fileID: 1897489684}
-  - component: {fileID: 1897489682}
   m_Layer: 5
   m_Name: RoomContents
   m_TagString: Untagged
@@ -19286,20 +19300,6 @@ RectTransform:
   m_AnchoredPosition: {x: 11.11, y: 0.78}
   m_SizeDelta: {x: 1096.33, y: 369.34}
   m_Pivot: {x: 0.5, y: 0.43364778}
---- !u!114 &1897489682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897489680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abdade946adfe804eb7702404ada1919, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _content: {fileID: 1897489681}
-  _roomListing: {fileID: 7432153300816729523, guid: b2b336c8c6c0bd6459beed9163485ce7, type: 3}
 --- !u!222 &1897489683
 CanvasRenderer:
   m_ObjectHideFlags: 0
