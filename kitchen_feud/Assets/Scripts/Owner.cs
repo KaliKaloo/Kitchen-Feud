@@ -18,7 +18,7 @@ public class Owner : MonoBehaviour
     private GameObject localPlayer;
     private NavMeshAgent agent;
     public bool currentlyTalking;
-    private bool firstTime;
+    public bool firstTime;
     public bool currentlyShouting;
     private bool returned;
     public bool collected;
@@ -168,8 +168,7 @@ public class Owner : MonoBehaviour
             if (team == 1)
             {
               
-                if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
-                    agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 )
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
@@ -187,9 +186,11 @@ public class Owner : MonoBehaviour
                         StartCoroutine(leavingKitchen());
                         firstTime = false;  
                     }
-               
 
-                    agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
 
                 }
                 if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
@@ -223,24 +224,23 @@ public class Owner : MonoBehaviour
 
                 }
 
-                if(timer.GetLocalTime() == 270 && !decided)
-                //if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
+                //if(timer.GetLocalTime() == 270 && !decided)
+                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
                 {
-                    //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                    //if(rnd.Next(2) == 1)
-        
-                    //{
-                    //    stopLeaning = true;
-                    //    goThrowSmokeBomb = true;
-                    //}
-                    //else
-                    //{
-                        stopLeaning = true;
+                   // if (timer.GetLocalTime() == timer.GetTotalTime() / 4 - 10)
+                        if (rnd.Next(2) == 1)
+
+                        {
+                            stopLeaning = true;
+                            goThrowSmokeBomb = true;
+                        }
+                        else
+                        {
+                            stopLeaning = true;
 
                         shout = true;
                         notThrowing = true;
-
-                   // }
+                        }
                     decided = true;
                     //else do something
                 }
@@ -294,8 +294,8 @@ public class Owner : MonoBehaviour
             }
             else if (team == 2)
             {
-                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
-                agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0
+                )
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
@@ -314,9 +314,9 @@ public class Owner : MonoBehaviour
                         StartCoroutine(leavingKitchen());
                         firstTime = false;
                     }
-                    if (agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
                     {
-                        agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
                     }
 
                 }
@@ -425,8 +425,8 @@ public class Owner : MonoBehaviour
 
                 
             }
-            if(timer.GetLocalTime() == 210)
-           // if(timer.GetLocalTime() == timer.GetTotalTime()/4)
+            //if(timer.GetLocalTime() == 210)
+            if(timer.GetLocalTime() == timer.GetTotalTime()/4)
             {
                // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
                 PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
@@ -475,12 +475,11 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            //if(timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
-                            if(timer.GetLocalTime() < 260)
+                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1 / 4 + 5)
+                            //if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;
-                               // StartCoroutine(leavingKitchen());
-                              //  returnWithHeadShake();
+                      
                                 shout = false;
                             }
                         }
@@ -512,12 +511,11 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            //if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8)
-                            if (timer.GetLocalTime() < 260)
+                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1/4 + 5)
+                           // if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;
-                               // StartCoroutine(leavingKitchen());
-                               // returnWithHeadShake();
+                      
                                 shout = false;
                             }
                         }
@@ -785,8 +783,8 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-       // if (timer.GetLocalTime() > timer.GetTotalTime()/4)
-       if(timer.GetLocalTime() > 210)
+       if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+       //if(timer.GetLocalTime() > 210)
         {
             firstTime = true;
         }
