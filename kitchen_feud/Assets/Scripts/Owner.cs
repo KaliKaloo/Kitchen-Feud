@@ -376,6 +376,7 @@ public class Owner : MonoBehaviour
 
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
                         StartCoroutine(leavingKitchen());
+                        returned = true;
 
 
                     }
@@ -412,7 +413,7 @@ public class Owner : MonoBehaviour
                 }
                 if (returned)
                 {
-                    if((transform.position - spawnPoint).magnitude < 3)
+                    if((transform.position - spawnPoint).magnitude < 1)
                     {
                        // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                         PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
