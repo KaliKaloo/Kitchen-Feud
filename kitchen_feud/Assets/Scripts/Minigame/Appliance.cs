@@ -289,11 +289,15 @@ public class Appliance : Interactable
     }
 
     public void checkForDish()
+
     {
         foundDish = Database.GetDishFromIngredients(itemsOnTheAppliance);
+      
+        
         
         if (foundDish != null)
         {
+            myPv.RPC("setFoundDish", RpcTarget.OthersBuffered, myPv.ViewID, foundDish.dishID);
             string applianceName = gameObject.tag;
             string howToCook = foundDish.toCook;
             
@@ -443,6 +447,13 @@ public class Appliance : Interactable
         //PhotonView.Find(canvID).transform.Find("instruction panel").gameObject.SetActive(false);
         PhotonView.Find(canvID).transform.Find("BackButton").gameObject.SetActive(false);
 
+    }
+    [PunRPC]
+    void setFoundDish(int viewID, string dishID)
+    {
+
+            PhotonView.Find(viewID).GetComponent<Appliance>().foundDish = Database.GetDishByID(dishID);
+       
     }
  
 }
