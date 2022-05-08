@@ -16,7 +16,7 @@ public class Tray : Interactable
     public GameObject SP;
     public pickableItem pickable;
     public GameObject teamController;
-    private CanvasController canvasController;
+    public CanvasController canvasController;
     public bool isReady;
     public PhotonView PV;
     private int Team;
