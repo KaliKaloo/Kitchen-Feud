@@ -59,6 +59,8 @@ public class Owner : MonoBehaviour
     {
         Owner1 = AI.Instance.owner1Avatar;
         Owner2 = AI.Instance.owner2Avatar;
+        keyboard = AI.Instance.keyBoard;
+        mouse = AI.Instance.mouse;
 
       
     }
