@@ -670,7 +670,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.40837845
+    radiusThickness: 0.13793184
     donutRadius: 0.0001
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: -0, y: 0, z: 90}
@@ -753,7 +753,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 6.840708
+      value: 11.983119
       mode: 0
       spread: 0
       speed:
@@ -872,7 +872,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4983,6 +4983,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1616781409591171952, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
+      propertyPath: m_LengthScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
       propertyPath: ShapeModule.type
       value: 2
@@ -5017,15 +5021,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 6.513546
+      value: 11.875664
       objectReference: {fileID: 0}
     - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 0.386277
+      value: 0.17205733
       objectReference: {fileID: 0}
     - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
+      propertyPath: InitialModule.startRotationY.scalar
+      value: 3.1415925
       objectReference: {fileID: 0}
     - target: {fileID: 2575536907564633405, guid: 35f7fdeaec67e134694dd50fc6a416c9, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
