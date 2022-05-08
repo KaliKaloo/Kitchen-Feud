@@ -409,6 +409,7 @@ public class Owner : MonoBehaviour
                     if((transform.position - new Vector3(-6.363f, 0.2f, -7)).magnitude < 1)
                     {
                         StartCoroutine(leavingKitchen());
+                        returningToKitchen = false;
                         returned = true;
                     }
                 }
@@ -474,7 +475,7 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1 / 4 + 5)
+                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
                             //if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;
@@ -510,7 +511,7 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1/4 + 5)
+                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
                            // if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;
