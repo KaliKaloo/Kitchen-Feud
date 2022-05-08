@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3026285845085567191}
   - component: {fileID: 6753510509379694131}
   - component: {fileID: 7661715503848392806}
+  - component: {fileID: 8114004519288104303}
   m_Layer: 3
   m_Name: StoveWrongItem
   m_TagString: Bomb
@@ -114,3 +115,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8114004519288104303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347581615734531639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa99e83df31986469d07171a290e841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burstPrefab: {fileID: 6113574809214460973, guid: 77b219ae987702a44bd0f26695044328, type: 3}
