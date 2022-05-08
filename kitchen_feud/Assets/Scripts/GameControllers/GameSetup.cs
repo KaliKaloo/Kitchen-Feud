@@ -10,7 +10,7 @@ public class GameSetup : MonoBehaviour
     public static GameSetup GS;
 
     private int zeroCount;
-
+    public GameObject loadingCanvas;
     private bool started;
    // public int nextPlayersTeam;
     public Transform[] spawnPoints1;
