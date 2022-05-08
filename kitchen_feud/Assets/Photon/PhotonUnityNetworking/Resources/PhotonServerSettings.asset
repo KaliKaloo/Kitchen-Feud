@@ -171,6 +171,7 @@ MonoBehaviour:
   - hideOwner
   - showOwner
   - setFoundDish
+  - playOwner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

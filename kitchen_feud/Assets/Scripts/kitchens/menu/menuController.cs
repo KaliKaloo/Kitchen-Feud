@@ -190,6 +190,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public void HideReconnectMenu()
     {
         PlayerPrefs.SetInt("disconnected", 0);
+        isDisconnected = false;
+        PlayerPrefs.SetString("lastLobby", null);
         reconnectMenu.SetActive(false);
     }
 
@@ -342,11 +344,11 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (createGameInput.text == ""){
             lobbyError.text = "Please name a lobby";
-        }else{
+        }
+        else
+        {
             loadingScreen.SetActive(true);
             PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
-            Debug.LogError("??");
-       
         }
     }
 
@@ -417,8 +419,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-  
-
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
             if (!PhotonNetwork.IsMasterClient)
@@ -515,20 +515,24 @@ public class menuController : MonoBehaviourPunCallbacks
             lobbyError.text = "Lobby no longer exists!";
             PlayerPrefs.SetString("lastLobby", null);
             PlayerPrefs.SetInt("disconnected", 0);
+            isDisconnected = false;
         }
         else
         {
             lobbyError.text = "Lobby does not exist!";
         }
+
         calledRejoin = false;
         connectPanel.SetActive(true);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("create room fail");
         loadingScreen.SetActive(false);
         isDisconnected = true;
+
+        createLobby = false;
+
         reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }
@@ -562,18 +566,6 @@ public class menuController : MonoBehaviourPunCallbacks
             lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-        }
-    }
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        foreach (Transform trans in roomListContent) {
-            Destroy(trans.gameObject);
-        }
-        for (int i = 0; i < roomList.Count; i++) {
-
-            
-         Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
