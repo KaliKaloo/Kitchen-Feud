@@ -72,6 +72,7 @@ public class ExitFryingMinigame : MonoBehaviour
         gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
         gamePlayer.GetComponent<PlayerController>().enabled = true;
         appliance.UIcamera.enabled =  false;
+		PV.RPC("enableMe", RpcTarget.All, PV.ViewID);
         Destroy(minigameCanvas);
 	
 
@@ -86,21 +87,13 @@ public class ExitFryingMinigame : MonoBehaviour
     [PunRPC]
     void clearApplPlayers(int applID)
     {
-		/*List<int> x = PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers;
-
-	
-		for (int i=0; i < x.Count; i++)
-		{
-			PhotonView.Find(x[i]).GetComponentInChildren<playerMvmt>().enabled = true;
-			PhotonView.Find(x[i]).GetComponentInChildren<PlayerController>().enabled = true;
-
-		}
-
-	
-
-		PhotonView.Find(applID).GetComponent<Appliance>().UIcamera.enabled = false;	*/
 		PhotonView.Find(applID).GetComponent<Appliance>().appliancePlayers.Clear();
 
+    }
+	[PunRPC]
+	void enableMe(int ViewID)
+    {
+		PhotonView.Find(ViewID).gameObject.SetActive(true);
     }
 
 	[PunRPC]

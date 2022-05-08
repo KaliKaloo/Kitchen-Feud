@@ -29,6 +29,7 @@ public class PanController : MonoBehaviour
     public GameObject temp;
     public bool iniialValsSet;
     public fryingMinigame fM;
+    public GameObject backButton;
 
     void Start () {
 
@@ -40,7 +41,6 @@ public class PanController : MonoBehaviour
         foodInstancesCounter = 0;
        // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
         Vector2 panPos = pan.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition;
-        Debug.Log(pan.gameObject.name);
 
         if (PV.IsMine)
         {
@@ -116,7 +116,9 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter == 5)
                 {
-                    PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
+                    backButton.SetActive(true);
+                    //transform.parent.parent.transform.Find("BackButton")gameObject.SetActive(true);
+                   // PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
                 }
 
             }
