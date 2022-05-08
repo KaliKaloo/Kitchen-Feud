@@ -28,7 +28,7 @@ public class ExitFryingMinigame : MonoBehaviour
 	}
 
 
-    void TaskOnClick()
+    public void TaskOnClick()
     {
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;

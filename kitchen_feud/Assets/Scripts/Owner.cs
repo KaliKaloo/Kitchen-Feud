@@ -20,7 +20,7 @@ public class Owner : MonoBehaviour
     public bool currentlyTalking;
     public bool firstTime;
     public bool currentlyShouting;
-    private bool returned;
+    public bool returned;
     public bool collected;
     public bool collecting;
     private bool toCollect;
@@ -43,7 +43,7 @@ public class Owner : MonoBehaviour
     public bool shout;
     public PhotonView PV;
     private int localPlayerID;
-    private bool goThrowSmokeBomb;
+    public bool goThrowSmokeBomb;
     private bool throwNow;
     public bool thrownSmokeBomb;
     public Owner otherOwner;
@@ -111,6 +111,7 @@ public class Owner : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
+            if (agent.enabled) { 
             if (!otherOwner)
             {
                 if (team == 1)
@@ -661,22 +662,24 @@ public class Owner : MonoBehaviour
                 }
 
             }
-            if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
-            {
-                if (team == 1)
+                if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
                 {
-                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+                    if (team == 1)
+                    {
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
 
-                    returnNormally();
-                }
-                else if (team == 2)
-                {
-                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+                        returnNormally();
+                    }
+                    else if (team == 2)
+                    {
+                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
 
-                    returnNormally2();
+                        returnNormally2();
+                    }
+                    //Text.text = "Ahh, got there before me!";
+                    collecting = false;
+
                 }
-                //Text.text = "Ahh, got there before me!";
-                collecting = false;
             }
         }
     }
@@ -799,12 +802,12 @@ public class Owner : MonoBehaviour
         anim.SetBool("IsShakingHead", true);
     }
 
-    void returnNormally()
+    public void returnNormally()
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
     }
-    void returnNormally2()
+    public void returnNormally2()
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
