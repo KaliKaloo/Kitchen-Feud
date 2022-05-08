@@ -7,36 +7,36 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>EditModeTests</ModuleName>
       <Files>
-        <File uid="1" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/DisplayTicket.cs" />
-        <File uid="2" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/GlowController.cs" />
-        <File uid="3" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/OutlineEffect.cs" />
-        <File uid="4" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/SettingsController.cs" />
-        <File uid="5" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/SettingsText.cs" />
-        <File uid="6" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/TicketControllerTest.cs" />
-        <File uid="7" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/TrayTextTest.cs" />
-        <File uid="8" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Databases/SubroomObject.cs" />
-        <File uid="9" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Databases/SubroomSlot.cs" />
-        <File uid="10" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/ScoreInit.cs" />
-        <File uid="11" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/ScoreUpdate.cs" />
-        <File uid="12" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/Timer.cs" />
-        <File uid="13" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/InteractableTest.cs" />
-        <File uid="14" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/PickableItem.cs" />
-        <File uid="15" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/TrashTest.cs" />
-        <File uid="16" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/TrayController.cs" />
-        <File uid="17" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Appliance.cs" />
-        <File uid="18" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Cutting/CutController.cs" />
-        <File uid="19" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Frying/fryingTimerBar.cs" />
-        <File uid="20" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Oven/Timer.cs" />
-        <File uid="21" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichController.cs" />
-        <File uid="22" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichMove.cs" />
-        <File uid="23" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichSpawner.cs" />
-        <File uid="24" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/Spawner.cs" />
-        <File uid="25" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/StoveMinigameCounter.cs" />
-        <File uid="26" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/StoveScore.cs" />
-        <File uid="27" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Particle Effects/EnableSmokeTest.cs" />
-        <File uid="28" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/PickUpLockTest.cs" />
-        <File uid="29" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/PlayerHolding.cs" />
-        <File uid="30" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/healthBarTest.cs" />
+        <File uid="1" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/DisplayTicket.cs" />
+        <File uid="2" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/GlowController.cs" />
+        <File uid="3" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/OutlineEffect.cs" />
+        <File uid="4" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/SettingsController.cs" />
+        <File uid="5" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/SettingsText.cs" />
+        <File uid="6" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/TicketControllerTest.cs" />
+        <File uid="7" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Canvas/TrayTextTest.cs" />
+        <File uid="8" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Databases/SubroomObject.cs" />
+        <File uid="9" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Databases/SubroomSlot.cs" />
+        <File uid="10" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/ScoreInit.cs" />
+        <File uid="11" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/ScoreUpdate.cs" />
+        <File uid="12" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/General/Timer.cs" />
+        <File uid="13" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/InteractableTest.cs" />
+        <File uid="14" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/PickableItem.cs" />
+        <File uid="15" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/TrashTest.cs" />
+        <File uid="16" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Items/TrayController.cs" />
+        <File uid="17" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Appliance.cs" />
+        <File uid="18" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Cutting/CutController.cs" />
+        <File uid="19" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Frying/fryingTimerBar.cs" />
+        <File uid="20" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Oven/Timer.cs" />
+        <File uid="21" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichController.cs" />
+        <File uid="22" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichMove.cs" />
+        <File uid="23" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Sandwich/SandwichSpawner.cs" />
+        <File uid="24" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/Spawner.cs" />
+        <File uid="25" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/StoveMinigameCounter.cs" />
+        <File uid="26" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Minigames/Stove/StoveScore.cs" />
+        <File uid="27" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Particle Effects/EnableSmokeTest.cs" />
+        <File uid="28" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/PickUpLockTest.cs" />
+        <File uid="29" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/PlayerHolding.cs" />
+        <File uid="30" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/EditModeTests/Player/healthBarTest.cs" />
       </Files>
       <Classes>
         <Class>
@@ -3520,7 +3520,7 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>TrayASM</ModuleName>
       <Files>
-        <File uid="31" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/Tray/TraySO.cs" />
+        <File uid="31" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/Tray/TraySO.cs" />
       </Files>
       <Classes>
         <Class>
@@ -3547,26 +3547,26 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>PlayModeTests</ModuleName>
       <Files>
-        <File uid="32" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/DishDatabase.cs" />
-        <File uid="33" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/FryDish.cs" />
-        <File uid="34" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/GetDishByName.cs" />
-        <File uid="35" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/IngredientLocation.cs" />
-        <File uid="36" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/cookingMethod.cs" />
-        <File uid="37" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/getDishByID.cs" />
-        <File uid="38" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/getIngredientByID.cs" />
-        <File uid="39" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/FryingMiniGameTests.cs" />
-        <File uid="40" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/PickableItem.cs" />
-        <File uid="41" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/Tray.cs" />
-        <File uid="42" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/TrayController.cs" />
-        <File uid="43" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/PhotonTestSetup.cs" />
-        <File uid="44" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Cutting.cs" />
-        <File uid="45" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Oven.cs" />
-        <File uid="46" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Sandwich.cs" />
-        <File uid="47" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Stove.cs" />
-        <File uid="48" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/OwnerTests.cs" />
-        <File uid="49" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/PlayerTest.cs" />
-        <File uid="50" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/Trash.cs" />
-        <File uid="51" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/UI.cs" />
+        <File uid="32" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/DishDatabase.cs" />
+        <File uid="33" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/FryDish.cs" />
+        <File uid="34" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/GetDishByName.cs" />
+        <File uid="35" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/IngredientLocation.cs" />
+        <File uid="36" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/cookingMethod.cs" />
+        <File uid="37" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/getDishByID.cs" />
+        <File uid="38" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Databases/getIngredientByID.cs" />
+        <File uid="39" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/FryingMiniGameTests.cs" />
+        <File uid="40" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/PickableItem.cs" />
+        <File uid="41" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/Tray.cs" />
+        <File uid="42" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/TrayController.cs" />
+        <File uid="43" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/PhotonTestSetup.cs" />
+        <File uid="44" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Cutting.cs" />
+        <File uid="45" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Oven.cs" />
+        <File uid="46" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Sandwich.cs" />
+        <File uid="47" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/Minigames/Stove.cs" />
+        <File uid="48" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/OwnerTests.cs" />
+        <File uid="49" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/PlayerTest.cs" />
+        <File uid="50" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/Trash.cs" />
+        <File uid="51" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Tests/PlayModeTests/New Folder/UI.cs" />
       </Files>
       <Classes>
         <Class>
@@ -8548,112 +8548,112 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>Main</ModuleName>
       <Files>
-        <File uid="52" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/AI.cs" />
-        <File uid="53" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Agent.cs" />
-        <File uid="54" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/AgentMvmnt.cs" />
-        <File uid="55" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/AM.cs" />
-        <File uid="56" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/AudioManager.cs" />
-        <File uid="57" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/LobbyMusic.cs" />
-        <File uid="58" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/MusicHolder.cs" />
-        <File uid="59" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/MusicManager.cs" />
-        <File uid="60" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Billboard.cs" />
-        <File uid="61" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/Announcement.cs" />
-        <File uid="62" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/CanvasController.cs" />
-        <File uid="63" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/CustomEvents.cs" />
-        <File uid="64" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/DisplayTicket.cs" />
-        <File uid="65" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/GlowController.cs" />
-        <File uid="66" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/Hover.cs" />
-        <File uid="67" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/MouseControl.cs" />
-        <File uid="68" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/OutlineEffect.cs" />
-        <File uid="69" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/TicketController.cs" />
-        <File uid="70" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/ToolTipManager.cs" />
-        <File uid="71" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/TrayText.cs" />
-        <File uid="72" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/settingsController.cs" />
-        <File uid="73" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/settingsText.cs" />
-        <File uid="74" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Doors/DoorController.cs" />
-        <File uid="75" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameControllers/GameSetup.cs" />
-        <File uid="76" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameControllers/PhotonPlayer.cs" />
-        <File uid="77" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameEvents.cs" />
-        <File uid="78" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Dish.cs" />
-        <File uid="79" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/IngredientSpawner.cs" />
-        <File uid="80" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Interactable.cs" />
-        <File uid="81" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Trash.cs" />
-        <File uid="82" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Tray.cs" />
-        <File uid="83" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/TrayController.cs" />
-        <File uid="84" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/TrayItemCollider.cs" />
-        <File uid="85" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/pickableItem.cs" />
-        <File uid="86" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/Appliance.cs" />
-        <File uid="87" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/CuttableObject.cs" />
-        <File uid="88" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/ExitCuttingMinigame.cs" />
-        <File uid="89" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/IngredientMove.cs" />
-        <File uid="90" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/Knife.cs" />
-        <File uid="91" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/ObjectSpawner.cs" />
-        <File uid="92" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/cutController.cs" />
-        <File uid="93" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/cuttingMinigame.cs" />
-        <File uid="94" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/spawnCutBurst.cs" />
-        <File uid="95" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/EnableBackgrounds.cs" />
-        <File uid="96" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/ExitFryingMinigame.cs" />
-        <File uid="97" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/FriedFoodController.cs" />
-        <File uid="98" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/FryingTimerBar.cs" />
-        <File uid="99" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/PanController.cs" />
-        <File uid="100" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/Plate.cs" />
-        <File uid="101" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/destroyFood.cs" />
-        <File uid="102" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/fryingMinigame.cs" />
-        <File uid="103" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/ItemCollider.cs" />
-        <File uid="104" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/MinigameHolder.cs" />
-        <File uid="105" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/OvenFire.cs" />
-        <File uid="106" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/Timer.cs" />
-        <File uid="107" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/exitOven.cs" />
-        <File uid="108" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/ovenMiniGame.cs" />
-        <File uid="109" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/ExitSandwichMinigame.cs" />
-        <File uid="110" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/LayerMove.cs" />
-        <File uid="111" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/LayerSpawn.cs" />
-        <File uid="112" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichController.cs" />
-        <File uid="113" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichMove.cs" />
-        <File uid="114" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichSpawner.cs" />
-        <File uid="115" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichStation.cs" />
-        <File uid="116" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SlotsController.cs" />
-        <File uid="117" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/ExitStoveMinigame.cs" />
-        <File uid="118" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/GroundCollision.cs" />
-        <File uid="119" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/ScoreManager.cs" />
-        <File uid="120" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/Spawner.cs" />
-        <File uid="121" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveMinigameCounter.cs" />
-        <File uid="122" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveMovement.cs" />
-        <File uid="123" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveScore.cs" />
-        <File uid="124" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/stoveMinigame.cs" />
-        <File uid="125" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Owner.cs" />
-        <File uid="126" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/AddUIElements.cs" />
-        <File uid="127" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireExBox.cs" />
-        <File uid="128" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireExtinguisher.cs" />
-        <File uid="129" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireOut.cs" />
-        <File uid="130" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/ParticleControl.cs" />
-        <File uid="131" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/ProjectileLifetime.cs" />
-        <File uid="132" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/SmokeGrenade.cs" />
-        <File uid="133" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/SprinklersTrigger.cs" />
-        <File uid="134" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/PhotonRoom.cs" />
-        <File uid="135" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/HealthBar.cs" />
-        <File uid="136" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/MovingInstructions.cs" />
-        <File uid="137" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerCollision.cs" />
-        <File uid="138" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerController.cs" />
-        <File uid="139" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerHolding.cs" />
-        <File uid="140" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerVoiceManager.cs" />
-        <File uid="141" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/kickPlayers.cs" />
-        <File uid="142" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/nametag.cs" />
-        <File uid="143" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/playerMvmt.cs" />
-        <File uid="144" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Serving.cs" />
-        <File uid="145" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/TraySlotting.cs" />
-        <File uid="146" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/VoiceChatManager.cs" />
-        <File uid="147" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/CleanupRoom.cs" />
-        <File uid="148" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/CutsceneController.cs" />
-        <File uid="149" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/GameOverAnimationController.cs" />
-        <File uid="150" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/GlobalTimer.cs" />
-        <File uid="151" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/ParseScore.cs" />
-        <File uid="152" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/RoomListItem.cs" />
-        <File uid="153" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/RoomListMenu.cs" />
-        <File uid="154" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/gameOverMenu.cs" />
-        <File uid="155" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/menuController.cs" />
-        <File uid="156" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/scoreController.cs" />
-        <File uid="157" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Scripts/Photon/PlayerCustomProperties.cs" />
+        <File uid="52" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/AI.cs" />
+        <File uid="53" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Agent.cs" />
+        <File uid="54" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/AgentMvmnt.cs" />
+        <File uid="55" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/AM.cs" />
+        <File uid="56" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/AudioManager.cs" />
+        <File uid="57" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/LobbyMusic.cs" />
+        <File uid="58" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/MusicHolder.cs" />
+        <File uid="59" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Audio/MusicManager.cs" />
+        <File uid="60" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Billboard.cs" />
+        <File uid="61" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/Announcement.cs" />
+        <File uid="62" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/CanvasController.cs" />
+        <File uid="63" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/CustomEvents.cs" />
+        <File uid="64" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/DisplayTicket.cs" />
+        <File uid="65" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/GlowController.cs" />
+        <File uid="66" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/Hover.cs" />
+        <File uid="67" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/MouseControl.cs" />
+        <File uid="68" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/OutlineEffect.cs" />
+        <File uid="69" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/TicketController.cs" />
+        <File uid="70" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/ToolTipManager.cs" />
+        <File uid="71" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/TrayText.cs" />
+        <File uid="72" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/settingsController.cs" />
+        <File uid="73" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Canvas/settingsText.cs" />
+        <File uid="74" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Doors/DoorController.cs" />
+        <File uid="75" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameControllers/GameSetup.cs" />
+        <File uid="76" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameControllers/PhotonPlayer.cs" />
+        <File uid="77" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/GameEvents.cs" />
+        <File uid="78" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Dish.cs" />
+        <File uid="79" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/IngredientSpawner.cs" />
+        <File uid="80" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Interactable.cs" />
+        <File uid="81" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Trash.cs" />
+        <File uid="82" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/Tray.cs" />
+        <File uid="83" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/TrayController.cs" />
+        <File uid="84" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/TrayItemCollider.cs" />
+        <File uid="85" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Items/pickableItem.cs" />
+        <File uid="86" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/Appliance.cs" />
+        <File uid="87" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/CuttableObject.cs" />
+        <File uid="88" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/ExitCuttingMinigame.cs" />
+        <File uid="89" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/IngredientMove.cs" />
+        <File uid="90" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/Knife.cs" />
+        <File uid="91" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/ObjectSpawner.cs" />
+        <File uid="92" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/cutController.cs" />
+        <File uid="93" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/cuttingMinigame.cs" />
+        <File uid="94" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/CuttingMinigame/Scripts/spawnCutBurst.cs" />
+        <File uid="95" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/EnableBackgrounds.cs" />
+        <File uid="96" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/ExitFryingMinigame.cs" />
+        <File uid="97" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/FriedFoodController.cs" />
+        <File uid="98" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/FryingTimerBar.cs" />
+        <File uid="99" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/PanController.cs" />
+        <File uid="100" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/Plate.cs" />
+        <File uid="101" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/destroyFood.cs" />
+        <File uid="102" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/FryingMinigame/fryingMinigame.cs" />
+        <File uid="103" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/ItemCollider.cs" />
+        <File uid="104" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/MinigameHolder.cs" />
+        <File uid="105" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/OvenFire.cs" />
+        <File uid="106" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/Timer.cs" />
+        <File uid="107" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/exitOven.cs" />
+        <File uid="108" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/OvenMinigame/ovenMiniGame.cs" />
+        <File uid="109" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/ExitSandwichMinigame.cs" />
+        <File uid="110" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/LayerMove.cs" />
+        <File uid="111" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/LayerSpawn.cs" />
+        <File uid="112" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichController.cs" />
+        <File uid="113" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichMove.cs" />
+        <File uid="114" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichSpawner.cs" />
+        <File uid="115" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SandwhichStation/SandwichStation.cs" />
+        <File uid="116" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/SlotsController.cs" />
+        <File uid="117" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/ExitStoveMinigame.cs" />
+        <File uid="118" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/GroundCollision.cs" />
+        <File uid="119" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/ScoreManager.cs" />
+        <File uid="120" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/Spawner.cs" />
+        <File uid="121" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveMinigameCounter.cs" />
+        <File uid="122" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveMovement.cs" />
+        <File uid="123" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/StoveScore.cs" />
+        <File uid="124" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Minigame/StoveMinigame/stoveMinigame.cs" />
+        <File uid="125" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Owner.cs" />
+        <File uid="126" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/AddUIElements.cs" />
+        <File uid="127" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireExBox.cs" />
+        <File uid="128" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireExtinguisher.cs" />
+        <File uid="129" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/FireOut.cs" />
+        <File uid="130" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/ParticleControl.cs" />
+        <File uid="131" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/ProjectileLifetime.cs" />
+        <File uid="132" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/SmokeGrenade.cs" />
+        <File uid="133" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Particle Effects/SprinklersTrigger.cs" />
+        <File uid="134" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/PhotonRoom.cs" />
+        <File uid="135" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/HealthBar.cs" />
+        <File uid="136" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/MovingInstructions.cs" />
+        <File uid="137" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerCollision.cs" />
+        <File uid="138" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerController.cs" />
+        <File uid="139" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerHolding.cs" />
+        <File uid="140" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/PlayerVoiceManager.cs" />
+        <File uid="141" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/kickPlayers.cs" />
+        <File uid="142" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/nametag.cs" />
+        <File uid="143" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Player/playerMvmt.cs" />
+        <File uid="144" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Serving.cs" />
+        <File uid="145" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/TraySlotting.cs" />
+        <File uid="146" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/VoiceChatManager.cs" />
+        <File uid="147" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/CleanupRoom.cs" />
+        <File uid="148" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/CutsceneController.cs" />
+        <File uid="149" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/GameOverAnimationController.cs" />
+        <File uid="150" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/GlobalTimer.cs" />
+        <File uid="151" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/ParseScore.cs" />
+        <File uid="152" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/RoomListItem.cs" />
+        <File uid="153" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/RoomListMenu.cs" />
+        <File uid="154" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/gameOverMenu.cs" />
+        <File uid="155" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/kitchens/menu/menuController.cs" />
+        <File uid="156" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/scoreController.cs" />
+        <File uid="157" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Scripts/Photon/PlayerCustomProperties.cs" />
       </Files>
       <Classes>
         <Class>
@@ -17310,12 +17310,12 @@
               <Name>System.Void SprinklersTrigger::OnParticleCollision(UnityEngine.GameObject)</Name>
               <FileRef uid="133" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="18091" ordinal="0" offset="0" sl="28" sc="0" el="28" ec="0" bec="0" bev="0" fileid="133" />
-                <SequencePoint vc="0" uspid="18092" ordinal="0" offset="1" sl="29" sc="0" el="29" ec="0" bec="0" bev="0" fileid="133" />
-                <SequencePoint vc="0" uspid="18093" ordinal="0" offset="21" sl="30" sc="0" el="30" ec="0" bec="0" bev="0" fileid="133" />
-                <SequencePoint vc="0" uspid="18094" ordinal="0" offset="22" sl="31" sc="0" el="31" ec="0" bec="0" bev="0" fileid="133" />
-                <SequencePoint vc="0" uspid="18095" ordinal="0" offset="41" sl="32" sc="0" el="32" ec="0" bec="0" bev="0" fileid="133" />
-                <SequencePoint vc="0" uspid="18096" ordinal="0" offset="42" sl="33" sc="0" el="33" ec="0" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18091" ordinal="0" offset="0" sl="28" sc="5" el="28" ec="5" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18092" ordinal="0" offset="1" sl="29" sc="9" el="29" ec="9" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18093" ordinal="0" offset="21" sl="30" sc="9" el="30" ec="9" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18094" ordinal="0" offset="22" sl="31" sc="13" el="31" ec="13" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18095" ordinal="0" offset="41" sl="32" sc="9" el="32" ec="9" bec="0" bev="0" fileid="133" />
+                <SequencePoint vc="0" uspid="18096" ordinal="0" offset="42" sl="33" sc="5" el="33" ec="5" bec="0" bev="0" fileid="133" />
               </SequencePoints>
               <BranchPoints />
             </Method>
@@ -22052,10 +22052,10 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>DatabaseASM</ModuleName>
       <Files>
-        <File uid="158" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/BaseFood.cs" />
-        <File uid="159" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/Database.cs" />
-        <File uid="160" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/DishSO.cs" />
-        <File uid="161" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/Order.cs" />
+        <File uid="158" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/BaseFood.cs" />
+        <File uid="159" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/Database.cs" />
+        <File uid="160" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/DishSO.cs" />
+        <File uid="161" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/DB_scripts/Order.cs" />
       </Files>
       <Classes>
         <Class>
@@ -22290,7 +22290,7 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>PantryASM</ModuleName>
       <Files>
-        <File uid="162" fullPath="C:/Users/hamza/Documents/GitHub/Kitchen-Feud/kitchen_feud/Assets/Databases/Pantry/SubroomObject.cs" />
+        <File uid="162" fullPath="C:/Users/lokhe/Documents/year 3/Kitchen-Feud/kitchen_feud/Assets/Databases/Pantry/SubroomObject.cs" />
       </Files>
       <Classes>
         <Class>
