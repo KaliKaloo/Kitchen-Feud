@@ -130,6 +130,7 @@ public class scoreController : MonoBehaviour
                 {
                     Debug.LogError(count);
                     count = 0;
+                    counted = false;
                 }
 
         
