@@ -30,7 +30,6 @@ public class StoveBurst : MonoBehaviour
         GameObject newObject = Instantiate(burstPrefab, SpawnParent.transform.position,SpawnParent.transform.rotation);
         newObject.transform.position = new Vector3(newObject.transform.position.x,newObject.transform.position.y,0 );
 
-        Debug.Log(transform.parent.parent);
         
         newObject.transform.SetParent(transform.parent.parent);
         
