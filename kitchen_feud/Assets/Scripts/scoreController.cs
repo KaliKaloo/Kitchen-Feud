@@ -35,6 +35,7 @@ public class scoreController : MonoBehaviour
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     public PhotonView PV;
     private CleanupRoom cleanupRoom;
+    int count;
 
     void Start()
     {
@@ -99,23 +100,29 @@ public class scoreController : MonoBehaviour
                 reactScore(score1, score2);
            
             }
-            else if (GameObject.FindGameObjectsWithTag("Player").Length < PhotonNetwork.CurrentRoom.PlayerCount)
-            {
-                // show waiting for others players menu
-
-            }
+      
             else
             {
                 
-                
+                foreach(Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+                {
+                    if (p.CustomProperties["ViewID"] != null)
+                    {
+                        count += 1;
+                    }
+                }
+                if(count == PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    loadingScreen.SetActive(false);
+                    startGame = true;
+                    // start timer if not started yet
 
-                loadingScreen.SetActive(false);
-                startGame = true;
-                // start timer if not started yet
+                    timer.SetLocalTime();
+                    timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
+                    timer.StartTimer(this);
+                }
+
                
-                 timer.SetLocalTime();
-                 timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
-                 timer.StartTimer(this);
 
                 
 
