@@ -168,6 +168,10 @@ MonoBehaviour:
   - syncRandomTimes
   - playInstructionVideo
   - putBackFireExt
+  - hideOwner
+  - showOwner
+  - setFoundDish
+  - playOwner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

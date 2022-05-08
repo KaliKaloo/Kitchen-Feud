@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
+using ExitGames.Client.Photon.StructWrapping;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class FriedFoodController : MonoBehaviour
 {
@@ -21,21 +25,24 @@ public class FriedFoodController : MonoBehaviour
     public bool onPlate;
     public bool collided;
     public DishSO dishSO;
+    public Image img;
+    
 
     void Start()
     {
+        img = GetComponent<Image>();
         collided = false;
         onPlate = false;
         minYSpeed = 200;
         maxYSpeed = 400;
-        gameObject.transform.SetParent(pan.gameObject.transform.parent);
-        gameObject.transform.localPosition = Vector3.zero;
+        //gameObject.transform.SetParent(pan.gameObject.transform.parent);
+        //gameObject.transform.localPosition = Vector3.zero;
         points = 0;
         PV = GetComponent<PhotonView>();
-        appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
+       // appliance = transform.parent.GetComponentInChildren<PanController>().appliance;
 
-        dishSO = appliance.foundDish;
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.1f, Screen.height * 0.4f);
+       // dishSO = appliance.foundDish;
+       // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.1f, Screen.height * 0.4f);
         RectTransform rect = GetComponent<RectTransform>();
 
     }
@@ -45,6 +52,10 @@ public class FriedFoodController : MonoBehaviour
         if (!dishSO)
         {
             dishSO = appliance.foundDish;
+        }
+        if(!img.sprite && dishSO && appliance)
+        {
+            img.sprite = appliance.GetComponent<fryingMinigame>().imgAtlas.GetSprite(dishSO.dishID);
         }
     }
 

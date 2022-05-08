@@ -10,7 +10,7 @@ public class StoveScore
     private static float score;
     private static float bombMultiplier;
 
-    public static readonly int maximum = 20;
+    public static readonly int maximum = 10;
 
 
     public static float Score

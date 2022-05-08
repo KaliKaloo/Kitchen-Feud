@@ -7,6 +7,7 @@ using Photon.Realtime;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using agora_gaming_rtc;
+using System.IO;
 using UnityEngine.Video;
 using Random = System.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -55,7 +56,7 @@ public class menuController : MonoBehaviourPunCallbacks
     private bool createLobby = false;
     private bool isDisconnected = false;
 
-    [SerializeField] private Transform roomListContent;
+    [SerializeField] public Transform roomListContent;
 
     public GameObject loadingScreen;
     [SerializeField] private GameObject loadingBarCanvas;
@@ -109,11 +110,17 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
-        {
-            playAgain["loaded"] = 0;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
-        }
+        //if (PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] != null)
+        //{
+        //    if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] == 1)
+        //    {
+        //        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
+        //        {
+        //            playAgain["loaded"] = 0;
+        //            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
+        //        }
+        //    }
+        //}
    
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
@@ -183,6 +190,8 @@ public class menuController : MonoBehaviourPunCallbacks
     public void HideReconnectMenu()
     {
         PlayerPrefs.SetInt("disconnected", 0);
+        isDisconnected = false;
+        PlayerPrefs.SetString("lastLobby", null);
         reconnectMenu.SetActive(false);
     }
 
@@ -270,6 +279,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+
         PhotonNetwork.JoinLobby();
     }
 
@@ -326,6 +336,7 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         PlayerPrefs.SetString("userID", null);
         BackToMainMenu();
+
     }
 
     // Create room here
@@ -333,9 +344,11 @@ public class menuController : MonoBehaviourPunCallbacks
     {
         if (createGameInput.text == ""){
             lobbyError.text = "Please name a lobby";
-        }else{
+        }
+        else
+        {
             loadingScreen.SetActive(true);
-            PhotonNetwork.CreateRoom(createGameInput.text, new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+            PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
         }
     }
 
@@ -358,7 +371,7 @@ public class menuController : MonoBehaviourPunCallbacks
         {
             connectPanel.SetActive(false);
             loadingScreen.SetActive(true);
-            PhotonNetwork.JoinRoom(joinGameInput.text);
+            PhotonNetwork.JoinRoom(joinGameInput.text.ToUpper());
         } else
         {
             lobbyError.text = "Cannot be empty";
@@ -377,7 +390,7 @@ public class menuController : MonoBehaviourPunCallbacks
         lobbyMenu.SetActive(false);
 
         PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+       // PhotonNetwork.CurrentRoom.IsVisible = false;
 
         // how long player's data is saved after disconnect (60 seconds here)
         PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
@@ -406,8 +419,6 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-     
-
         if (PlayerPrefs.GetInt("disconnected") == 1 && isDisconnected)
         {
             if (!PhotonNetwork.IsMasterClient)
@@ -504,20 +515,24 @@ public class menuController : MonoBehaviourPunCallbacks
             lobbyError.text = "Lobby no longer exists!";
             PlayerPrefs.SetString("lastLobby", null);
             PlayerPrefs.SetInt("disconnected", 0);
+            isDisconnected = false;
         }
         else
         {
             lobbyError.text = "Lobby does not exist!";
         }
+
         calledRejoin = false;
         connectPanel.SetActive(true);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("create room fail");
         loadingScreen.SetActive(false);
         isDisconnected = true;
+
+        createLobby = false;
+
         reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }
@@ -551,16 +566,6 @@ public class menuController : MonoBehaviourPunCallbacks
             lobby["Skip"] = 0;
             timer.SetServerTime();
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
-        }
-    }
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        foreach (Transform trans in roomListContent) {
-            Destroy(trans.gameObject);
-        }
-        for (int i = 0; i < roomList.Count; i++) {
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
     }
 
@@ -677,6 +682,7 @@ public class menuController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+
         if (PhotonNetwork.IsMasterClient && !increased)
         {
             IncreaseTimer();

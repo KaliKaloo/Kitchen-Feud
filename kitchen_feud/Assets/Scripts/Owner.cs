@@ -18,7 +18,7 @@ public class Owner : MonoBehaviour
     private GameObject localPlayer;
     private NavMeshAgent agent;
     public bool currentlyTalking;
-    private bool firstTime;
+    public bool firstTime;
     public bool currentlyShouting;
     private bool returned;
     public bool collected;
@@ -74,9 +74,10 @@ public class Owner : MonoBehaviour
         mouse = GameObject.Find("mouse controls");
 
         anim = GetComponent<Animator>();
-       
-        
-        Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
+
+
+        //  Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
+      Text =   PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
         if (PhotonNetwork.IsMasterClient)
         {
@@ -167,8 +168,7 @@ public class Owner : MonoBehaviour
             if (team == 1)
             {
               
-                if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 &&
-                    agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 )
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
@@ -186,9 +186,11 @@ public class Owner : MonoBehaviour
                         StartCoroutine(leavingKitchen());
                         firstTime = false;  
                     }
-               
 
-                    agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
 
                 }
                 if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
@@ -225,21 +227,20 @@ public class Owner : MonoBehaviour
                 //if(timer.GetLocalTime() == 270 && !decided)
                 if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
                 {
-                    //if(timer.GetLocalTime() == timer.GetTotalTime()/4 - 10)
-                    if(rnd.Next(2) == 1)
-        
-                    {
-                        stopLeaning = true;
-                        goThrowSmokeBomb = true;
-                    }
-                    else
-                    {
-                        stopLeaning = true;
+                   // if (timer.GetLocalTime() == timer.GetTotalTime() / 4 - 10)
+                        if (rnd.Next(2) == 1)
+
+                        {
+                            stopLeaning = true;
+                            goThrowSmokeBomb = true;
+                        }
+                        else
+                        {
+                            stopLeaning = true;
 
                         shout = true;
                         notThrowing = true;
-
-                    }
+                        }
                     decided = true;
                     //else do something
                 }
@@ -282,7 +283,8 @@ public class Owner : MonoBehaviour
                 {
                     if((transform.position - spawnPoint).magnitude < 1)
                     {
-                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
+                      //  transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                         returned = false;
                     }
                 }
@@ -292,8 +294,8 @@ public class Owner : MonoBehaviour
             }
             else if (team == 2)
             {
-                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0 &&
-                agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0
+                )
                 {
                     if (anim.GetBool("IsShakingHead"))
                     {
@@ -310,10 +312,11 @@ public class Owner : MonoBehaviour
                     if (firstTime)
                     {
                         StartCoroutine(leavingKitchen());
+                        firstTime = false;
                     }
-                    if (agent.transform.rotation != Quaternion.Euler(0, 0, 0))
+                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
                     {
-                        agent.transform.rotation = Quaternion.Euler(0, 0, 0);
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
                     }
 
                 }
@@ -374,6 +377,7 @@ public class Owner : MonoBehaviour
 
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
                         StartCoroutine(leavingKitchen());
+                        returned = true;
 
 
                     }
@@ -412,16 +416,20 @@ public class Owner : MonoBehaviour
                 {
                     if((transform.position - spawnPoint).magnitude < 3)
                     {
-                        transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                       // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
                         returned = false;  
                     }
                 }
 
                 
             }
+            //if(timer.GetLocalTime() == 210)
             if(timer.GetLocalTime() == timer.GetTotalTime()/4)
             {
-                transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+               // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+                PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
+
                 agent.SetDestination(kitchenDestinationPoint);
                 inKitchenSecondTime = true;
                 stopLeaning = false;
@@ -464,6 +472,16 @@ public class Owner : MonoBehaviour
                                 calledName = true;
                             }
                         }
+                        else
+                        {
+                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1 / 4 + 5)
+                            //if (timer.GetLocalTime() < 260)
+                            {
+                                firstTime = true;
+                      
+                                shout = false;
+                            }
+                        }
 
                     }
                 }else if(team == 2)
@@ -477,6 +495,7 @@ public class Owner : MonoBehaviour
                         }
                         if(playerToFollow){
                             agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                          
                             if (!calledName)
                             {
                                 if (p != null)
@@ -489,6 +508,16 @@ public class Owner : MonoBehaviour
                                 calledName = true;
                             }
                         }
+                        else
+                        {
+                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1/4 + 5)
+                           // if (timer.GetLocalTime() < 260)
+                            {
+                                firstTime = true;
+                      
+                                shout = false;
+                            }
+                        }
 
                     }
                 }
@@ -497,7 +526,7 @@ public class Owner : MonoBehaviour
                 if (playerToFollow)
                 {
 
-                    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 2 * 2)
+                    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 3 * 3)
                     {
 
                         agent.transform.LookAt(playerToFollow.transform);
@@ -747,12 +776,14 @@ public class Owner : MonoBehaviour
             PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
             agent.SetDestination(spawnPoint);
         }
+        returned = true;
 
     }
 
     void returnWithHeadShake()
     {
-        if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+       if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+       //if(timer.GetLocalTime() > 210)
         {
             firstTime = true;
         }
@@ -795,8 +826,9 @@ public class Owner : MonoBehaviour
     }
     public IEnumerator playSounds()
     {
-        audioSource.Play();
-        yield return new WaitForSeconds(5);
+        PV.RPC("playOwner", RpcTarget.All, PV.ViewID);
+      //  audioSource.Play();
+        yield return new WaitForSeconds(3);
         playOnce = false;
     }
     [PunRPC]
@@ -811,6 +843,7 @@ public class Owner : MonoBehaviour
         {
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
+            o.Owner2.SetActive(false);
             o.Owner1.SetActive(true);
             o.Text.text = message;
         } 
@@ -827,9 +860,27 @@ public class Owner : MonoBehaviour
             //Debug.LogError("TESTTT");
             o.keyboard.SetActive(false);
             o.mouse.SetActive(false);
+            o.Owner1.SetActive(false);
             o.Owner2.SetActive(true);
             o.Text.text = message;
         }
+    }
+    [PunRPC]
+    void hideOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+
+    }
+    [PunRPC]
+    void showOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+
+    }
+    [PunRPC]
+    void playOwner(int ViewID)
+    {
+        PhotonView.Find(ViewID).GetComponent<Owner>().audioSource.Play();
     }
 
 }

@@ -39,13 +39,15 @@ public class ExitFryingMinigame : MonoBehaviour
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
 
-		
 
-		if (appliance)
-	    {
-		    appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
+		if (appliance.appliancePlayers.Count > 0)
+		{
+			if (appliance && PhotonView.Find(appliance.appliancePlayers[0]).IsMine)
+			{
+				appliance.GetComponent<fryingMinigame>().UpdateDishPointsFrying();
 
-	    }
+			}
+		}
 	    
 		PhotonView aV = appliance.GetComponent<PhotonView>();
 		appliance.canvas.SetActive(true);

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-using UnityEditor.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GlobalTimer
@@ -47,7 +46,7 @@ public class GlobalTimer
         {
             timer = time = intermediateTime;
             total["TotalTime"] = intermediateTime;
-            if (PhotonNetwork.IsConnected)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
                 PhotonNetwork.CurrentRoom.SetCustomProperties(total);
             }
@@ -85,8 +84,11 @@ public class GlobalTimer
             }
             else
             {
-
-                return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
+                {
+                    return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                }
+                else return 0;
 
             }
         }

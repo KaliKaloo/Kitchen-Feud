@@ -135,27 +135,32 @@ public class scoreController : MonoBehaviour
 
 
     void reactScore(int score1, int score2){
-        int team = GameObject.Find("Local").GetComponent<PlayerController>().myTeam;
-        if (!MusicManager.instance.priorityPitch && score1!= 0 && score2!= 0){
-            if ((score1*1.2 <= score2) || (score1*0.8 >= score2)){
-                if (team == 1){
-                    float ratio = score2/score1;
-                    ratio = 1-(1-ratio)/4;
-                    float pitch = Mathf.Min(ratio, 1.3f);
-                    pitch = Mathf.Max(pitch, 0.7f);
-                    MusicManager.instance.musicReact(pitch);
-                } else if (team == 2){
-                    float ratio = score1/score2;
-                    ratio = 1-(1-ratio)/4;
-                    float pitch = Mathf.Min(ratio, 1.3f);
-                    pitch = Mathf.Max(pitch, 0.7f);
-                    MusicManager.instance.musicReact(pitch);
+        if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null) {
+            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) {
+                GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
+
+                int team = localP.GetComponent<PlayerController>().myTeam;
+                if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0) {
+                    if ((score1 * 1.2 <= score2) || (score1 * 0.8 >= score2)) {
+                        if (team == 1) {
+                            float ratio = score2 / score1;
+                            ratio = 1 - (1 - ratio) / 4;
+                            float pitch = Mathf.Min(ratio, 1.3f);
+                            pitch = Mathf.Max(pitch, 0.7f);
+                            MusicManager.instance.musicReact(pitch);
+                        } else if (team == 2) {
+                            float ratio = score1 / score2;
+                            ratio = 1 - (1 - ratio) / 4;
+                            float pitch = Mathf.Min(ratio, 1.3f);
+                            pitch = Mathf.Max(pitch, 0.7f);
+                            MusicManager.instance.musicReact(pitch);
+                        }
+                    } else {
+                        MusicManager.instance.endReaction();
+                    }
                 }
-            }else{
-                MusicManager.instance.endReaction();
             }
         }
-       
     }
 
 
@@ -194,28 +199,35 @@ public class scoreController : MonoBehaviour
     // plays animation and exits game
     public IEnumerator playTimesUpAnimation()
     {
+      
         timesUpCanvas.SetActive(true);
         // play animation
         timesUpAnimator.SetBool("StartGameOver", true);
-        yield return new WaitForSeconds(3);
-
-
-        // do game over
-        if (PhotonNetwork.IsMasterClient)
-            // this will auto sync with all clients
-            PhotonNetwork.LoadLevel("gameOver");
+        cleanupRoom.Clean();
+        lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        
+        yield return new WaitForSeconds(5);
 
         // calls this to clean objects which need resetting
-        cleanupRoom.Clean();
+
         timesUpAnimator.SetBool("StartGameOver", false);
         timesUpCanvas.SetActive(false);
 
         startGame = false;
-
+     
         // sends to server that game has finished
-        lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+
         gameOver = true;
+        // do game over
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.DestroyAll();
+            // this will auto sync with all clients
+            PhotonNetwork.LoadLevel("gameOver");
+        }
+
+
     }
 
 

@@ -27,8 +27,11 @@ public class PanController : MonoBehaviour
     public FryingTimerBar timer;
     private bool pointsAssigned = false;
     public GameObject temp;
+    public bool iniialValsSet;
+    public fryingMinigame fM;
 
     void Start () {
+
         PV = GetComponent<PhotonView>();
         pan = transform.parent;
         startLocation = pan.position;
@@ -36,20 +39,27 @@ public class PanController : MonoBehaviour
         speeds = new Queue<float>();
         foodInstancesCounter = 0;
        // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
-        Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+        Vector2 panPos = pan.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition;
+        Debug.Log(pan.gameObject.name);
+
         if (PV.IsMine)
         {
              temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
             PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
         }
-
-
-        
     
     }
 
     void Update()
     {
+        if(appliance && !iniialValsSet)
+        {
+            fM = appliance.GetComponent<fryingMinigame>();
+            fM.gameCanvas = transform.parent.parent.gameObject;
+
+            fM.pan = GetComponent<PanController>();
+        }
+
         if(appliance.appliancePlayers.Count > 0) { 
         if (PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != PV.OwnerActorNr)
         {
@@ -97,7 +107,7 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter < foodInstances && friedFood == null)
                 {
-                    Vector2 panPos = pan.gameObject.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                    Vector2 panPos = pan.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                     PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
                     pointsAssigned = false;
@@ -124,16 +134,23 @@ public class PanController : MonoBehaviour
         me = PhotonView.Find(myID).gameObject;
         appliance = me.GetComponent<PanController>().appliance;
         FFC = PhotonView.Find(viewID).GetComponent<FriedFoodController>();
+        appliance.GetComponent<fryingMinigame>().friedFoodController = FFC;
+        FFC.appliance = appliance;
+        FFC.transform.SetParent(me.transform);
+        FFC.transform.localPosition = Vector3.zero;
         imgAtlas = appliance.GetComponent<fryingMinigame>().imgAtlas;
-        me.GetComponent<PanController>().friedFood = FFC;
-        FFC.pan = me.GetComponent<PanController>();
-        FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
-        FFC.timer = me.GetComponent<PanController>().timer;
         FFC.dishSO = appliance.foundDish;
         if (imgAtlas && FFC.dishSO)
         {
             FFC.GetComponent<Image>().sprite = imgAtlas.GetSprite(FFC.dishSO.dishID);
         }
+        me.GetComponent<PanController>().friedFood = FFC;
+        FFC.pan = me.GetComponent<PanController>();
+        FFC.gameCanvas = me.transform.parent.transform.parent.gameObject;
+        FFC.timer = me.GetComponent<PanController>().timer;
+        
+       
+   
 
     }
 

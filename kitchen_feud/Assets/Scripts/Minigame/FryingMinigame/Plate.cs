@@ -16,6 +16,8 @@ public class Plate : MonoBehaviour
     public PhotonView localPV;
     public int controllerPV;
     public float currentH;
+    public bool setInitialVals;
+    public fryingMinigame fM;
 
 
     void Start()
@@ -31,6 +33,11 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
+        if(appliance && !setInitialVals)
+        {
+            fM = appliance.GetComponent<fryingMinigame>();
+            fM.plate = GetComponent<Plate>();
+        }
         if (appliance.appliancePlayers.Count > 1)
         {
         

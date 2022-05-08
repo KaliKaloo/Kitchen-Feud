@@ -119,6 +119,8 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     void playInstructionVideo(int viewID)
     {
         CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        cutsceneC.skipButton.SetActive(false);
+
         if (PhotonNetwork.IsMasterClient)
         {
             cutsceneC.skipButtonInstructions.SetActive(true);
