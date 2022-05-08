@@ -34,6 +34,7 @@ public class scoreController : MonoBehaviour
     private bool gameOver;
     private ExitGames.Client.Photon.Hashtable lobby = new ExitGames.Client.Photon.Hashtable();
     public PhotonView PV;
+    private bool counted;
     private CleanupRoom cleanupRoom;
     int count;
 
@@ -103,13 +104,17 @@ public class scoreController : MonoBehaviour
       
             else
             {
-                
-                foreach(Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
+                if (!counted)
                 {
-                    if (p.CustomProperties["ViewID"] != null)
+                    foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
                     {
-                        count += 1;
+                        if (p.CustomProperties["ViewID"] != null)
+                        {
+
+                            count += 1;
+                        }
                     }
+                    counted = true;
                 }
                 if(count == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
@@ -121,12 +126,13 @@ public class scoreController : MonoBehaviour
                     timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                     timer.StartTimer(this);
                 }
+                else
+                {
+                    Debug.LogError(count);
+                    count = 0;
+                }
 
-               
-
-                
-
-
+        
             }
         }
         else
