@@ -128,7 +128,7 @@ public class scoreController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError(count);
+        
                     count = 0;
                     counted = false;
                 }
