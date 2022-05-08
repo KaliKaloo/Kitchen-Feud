@@ -952,6 +952,7 @@ MonoBehaviour:
   playOnce: 0
   oven: {fileID: 0}
   currentlyTalking: 0
+  firstTime: 0
   currentlyShouting: 0
   collected: 0
   collecting: 0
