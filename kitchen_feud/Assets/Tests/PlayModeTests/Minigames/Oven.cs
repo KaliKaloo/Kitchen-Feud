@@ -29,6 +29,7 @@ public class OvenTests : PhotonTestSetup {
             Quaternion.identity,
             0
         );
+        obj.name = "Local";
         oven1 = GameObject.Find("Oven1").GetComponent<Appliance>();
         oven2 = GameObject.Find("Oven2").GetComponent<Appliance>();
 
@@ -223,24 +224,64 @@ public class OvenTests : PhotonTestSetup {
     [UnityTest]
     public IEnumerator oven1Fire()
     {
-
         oven1.player = obj.transform;
         playerHold.pickUpItem(cake);
         oven1.Interact();
         oven1.Interact();
         Assert.IsTrue(oven1.minigameCanvas.activeSelf);
         Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        GameObject.Find("ovencanvas(Clone)").GetComponent<Timer>().ChangeTimerValue(-6);
         yield return new WaitForSeconds(0.2f);
+
+        ParticleSystem[] PS = GameObject.Find("ovencanvas(Clone)").transform.parent.GetComponentsInChildren<ParticleSystem>();
        
+        foreach(ParticleSystem p in PS){
+            if(p.GetComponent<FireOut>()){
+                FireOut fireOut = p.GetComponent<FireOut>();
+                Assert.IsTrue(fireOut.enabled);
+
+                fireOut.enabled=false;
+            }
+            p.Stop();
+        }
+
+        yield return new WaitForSeconds(0.2f);
+        oven1.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven1.itemsOnTheAppliance.Clear();
+        oven1.isBeingInteractedWith = false;
+    }
+
+    
+    [UnityTest]
+    public IEnumerator oven2Fire()
+    {
+        oven2.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        oven2.Interact();
+        oven2.Interact();
+        Assert.IsTrue(oven2.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        GameObject.Find("ovencanvas(Clone)").GetComponent<Timer>().ChangeTimerValue(-6);
+        ParticleSystem[] PS = GameObject.Find("ovencanvas(Clone)").transform.parent.GetComponentsInChildren<ParticleSystem>();
        
+        foreach(ParticleSystem p in PS){
+            if(p.GetComponent<FireOut>()){
+                FireOut fireOut = p.GetComponent<FireOut>();
+                Assert.IsTrue(fireOut.enabled);
+
+                fireOut.enabled=false;
+            }
+            p.Stop();
+        }
+
+        yield return new WaitForSeconds(0.2f);
         oven2.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
         yield return new WaitForSeconds(0.2f);
         Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
         oven2.itemsOnTheAppliance.Clear();
         oven2.isBeingInteractedWith = false;
-
-        yield return null;
-
     }
 
 
