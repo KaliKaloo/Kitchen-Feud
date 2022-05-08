@@ -50,7 +50,6 @@ public class Timer : MonoBehaviour
 
     public void ChangeTimerValue(int newTime)
     {
-        newTime = Mathf.Max(newTime, 0);
         timer = time = newTime;
     }
 
