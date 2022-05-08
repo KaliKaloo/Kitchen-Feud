@@ -220,4 +220,29 @@ public class OvenTests : PhotonTestSetup {
 
 
 
+    [UnityTest]
+    public IEnumerator oven1Fire()
+    {
+
+        oven1.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        oven1.Interact();
+        oven1.Interact();
+        Assert.IsTrue(oven1.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        yield return new WaitForSeconds(0.2f);
+       
+       
+        oven2.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven2.itemsOnTheAppliance.Clear();
+        oven2.isBeingInteractedWith = false;
+
+        yield return null;
+
+    }
+
+
+
 }

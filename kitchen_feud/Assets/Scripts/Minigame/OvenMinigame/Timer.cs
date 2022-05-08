@@ -10,7 +10,6 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
 
-    // SET TIMER HERE !!!!!!
     private static int time = 40;
     public TextMeshProUGUI timerText;
     public float timer = time;
@@ -25,15 +24,7 @@ public class Timer : MonoBehaviour
     public GameObject Team2Image;
     PhotonRoom room;
 
-    void Start()
-    {
-        // start scores at 0
-       
-        // start timer if not started yet
-        
-        
-    }
-
+    
     void Update()
     {
 
@@ -43,7 +34,6 @@ public class Timer : MonoBehaviour
             InitializeTimer();
             timerText.text = ConvertSecondToMinutes(GetTime());
         }
-
 
         if (score < 0)
         {
@@ -57,6 +47,7 @@ public class Timer : MonoBehaviour
             OutputTime();
         }
     }
+
     public void ChangeTimerValue(int newTime)
     {
         newTime = Mathf.Max(newTime, 0);
@@ -179,8 +170,8 @@ public class Timer : MonoBehaviour
         parentAssigned = true;
     }
 
-   [PunRPC]
-   void addSecondsRPC(int viewID){
+    [PunRPC]
+    void addSecondsRPC(int viewID){
         PhotonView.Find(viewID).GetComponent<Timer>().timerFake += 10f;
-   }
+    }
 }
