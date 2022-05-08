@@ -17,9 +17,17 @@ public class spawnCutBurst : MonoBehaviour
         newObject.transform.position = new Vector3(newObject.transform.position.x,newObject.transform.position.y,0 );
         
         ParticleSystem ps = newObject.GetComponent<ParticleSystem>();
-        var main = ps.main;
+
+        foreach (Transform child in newObject.transform){
+            ParticleSystem psChild = child.GetComponent<ParticleSystem>();
+            Debug.Log(psChild.name);
+            var main = psChild.main;
+            colorA.a = 1f;
+            main.startColor = new ParticleSystem.MinMaxGradient(colorA);
+        }
+        var main2 = ps.main;
         colorA.a = 1f;
-        main.startColor = new ParticleSystem.MinMaxGradient(colorA);
+        main2.startColor = new ParticleSystem.MinMaxGradient(colorA);
         
         Destroy(newObject,1f);
     }

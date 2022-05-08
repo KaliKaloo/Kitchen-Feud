@@ -41,6 +41,7 @@ TagManager:
   - Owner2
   - FryingBackground1
   - FryingBackground2
+  - Pot
   layers:
   - Default
   - TransparentFX
