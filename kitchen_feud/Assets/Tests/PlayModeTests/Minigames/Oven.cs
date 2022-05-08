@@ -65,6 +65,48 @@ public class OvenTests : PhotonTestSetup {
         yield return null;
     }
 
+
+    [UnityTest]
+    public IEnumerator oven1Team1()
+    {
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 1;
+        oven1.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        
+        oven1.Interact();
+        oven1.Interact();
+        Assert.IsTrue(oven1.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        yield return new WaitForSeconds(0.2f);
+        oven1.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven1.itemsOnTheAppliance.Clear();
+        oven1.isBeingInteractedWith = false;
+
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator oven1Team2()
+    {
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 2;
+        oven1.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        oven1.Interact();
+        oven1.Interact();
+        Assert.IsTrue(oven1.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        yield return new WaitForSeconds(0.2f);
+        oven1.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven1.itemsOnTheAppliance.Clear();
+        oven1.isBeingInteractedWith = false;
+
+        yield return null;
+    }
+
     [UnityTest]
     public IEnumerator correctIngredientsOven2()
     {
@@ -77,6 +119,47 @@ public class OvenTests : PhotonTestSetup {
         oven2.isBeingInteractedWith = false;
         oven2.minigameCanvas.SetActive(false);
         yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator oven2Team1()
+    {
+
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 1;
+
+        oven2.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        oven2.Interact();
+        oven2.Interact();
+        Assert.IsTrue(oven2.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        yield return new WaitForSeconds(0.2f);
+        oven2.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven2.itemsOnTheAppliance.Clear();
+        oven2.isBeingInteractedWith = false;
+
+        yield return null;
+    }
+
+
+    [UnityTest]
+    public IEnumerator oven2Team2()
+    {
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 2;
+        oven2.player = obj.transform;
+        playerHold.pickUpItem(cake);
+        oven2.Interact();
+        oven2.Interact();
+        Assert.IsTrue(oven2.minigameCanvas.activeSelf);
+        Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
+        yield return new WaitForSeconds(0.2f);
+        oven2.GetComponent<ovenMiniGame>().backbutton.TaskOnClick();
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsNull(GameObject.Find("ovencanvas(Clone)"));
+        oven2.itemsOnTheAppliance.Clear();
+        oven2.isBeingInteractedWith = false;
     }
 
 

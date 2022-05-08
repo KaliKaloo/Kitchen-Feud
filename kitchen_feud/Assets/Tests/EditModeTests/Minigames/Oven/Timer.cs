@@ -36,8 +36,8 @@ public class OvenTimerTests
     public void ChangeTimerValueNeg()
     {
         timer.ChangeTimerValue(-10);
-        Assert.AreEqual(0, timer.timer);
-        Assert.AreEqual(0, timer.GetTotalTime());
+        Assert.AreEqual(-10, timer.timer);
+        Assert.AreEqual(-10, timer.GetTotalTime());
 
     }
 

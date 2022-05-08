@@ -24,14 +24,13 @@ public class FryDish : PhotonTestSetup
         Assert.IsTrue(burgerSO.stoveFry);
     }
 
-// eventually change to frying
-    // [Test]
-    // public void isFryChips()
-    // {
-    //     GameObject chips = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Chips"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
-    //     DishSO chipsSO = (DishSO) chips.GetComponent<pickableItem>().item;
-    //     Assert.IsTrue(chipsSO.stoveFry);
-    // }
+    [Test]
+    public void isFryChips()
+    {
+        GameObject chips = PhotonNetwork.Instantiate(Path.Combine("DishPrefabs", "Chips"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
+        DishSO chipsSO = (DishSO) chips.GetComponent<pickableItem>().item;
+        Assert.IsFalse(chipsSO.stoveFry);
+    }
 
 
     [Test]
