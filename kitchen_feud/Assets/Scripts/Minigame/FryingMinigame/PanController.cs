@@ -116,7 +116,8 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter == 5)
                 {
-                    PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
+                    transform.parent.GetComponentInParent<ExitFryingMinigame>().gameObject.SetActive(true);
+                   // PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
                 }
 
             }
