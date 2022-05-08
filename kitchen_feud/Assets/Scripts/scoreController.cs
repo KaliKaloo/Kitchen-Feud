@@ -43,7 +43,6 @@ public class scoreController : MonoBehaviour
         gameOver = false;    
         PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
-        loadingScreen.SetActive(true);
         timesUpAnimator = timesUpCanvas.GetComponent<Animator>();
 
       

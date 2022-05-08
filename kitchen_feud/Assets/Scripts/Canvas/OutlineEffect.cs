@@ -15,17 +15,19 @@ public class OutlineEffect : MonoBehaviour
     public GameObject outlineObjectPrefab;
     public GameObject outlineObject;
     public PhotonView PV;
+    public GameObject loadingCanvas;
     private bool initialised = false;
     
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        loadingCanvas = GameSetup.GS.loadingCanvas;
 
     }
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount & initialised == false)
+        if (PhotonNetwork.IsMasterClient && !loadingCanvas.activeSelf & initialised == false)
         {
             outlineObject = PhotonNetwork.Instantiate(Path.Combine("Appliances", outlineObjectPrefab.name),
                 transform.position, gameObject.transform.rotation);
