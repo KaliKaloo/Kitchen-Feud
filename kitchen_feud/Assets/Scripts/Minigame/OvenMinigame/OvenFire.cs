@@ -26,10 +26,7 @@ public class OvenFire : MonoBehaviour
         //and condition if temperature is too high
         if(!startFire){
 
-                Debug.Log(timer.timer );
-         
             if(timer.timer < -5){
-                Debug.Log(PS);
                 foreach(ParticleSystem p in PS){
                     Debug.Log("work");
                     if(p.GetComponent<FireOut>()){

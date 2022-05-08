@@ -231,7 +231,6 @@ public class OvenTests : PhotonTestSetup {
         Assert.IsTrue(oven1.minigameCanvas.activeSelf);
         Assert.IsNotNull(GameObject.Find("ovencanvas(Clone)"));
         GameObject.Find("ovencanvas(Clone)").GetComponent<Timer>().ChangeTimerValue(-6);
-        yield return new WaitForSeconds(0.5f);
 
         ParticleSystem[] PS = GameObject.Find("ovencanvas(Clone)").transform.parent.GetComponentsInChildren<ParticleSystem>();
        
