@@ -48,7 +48,7 @@ public class playerMvmt : MonoBehaviour
         GameObject parent = transform.parent.gameObject;
         rb = GetComponentInParent<Rigidbody>();
         PV = GetComponentInParent<PhotonView>();
-        //SOUND -------------------------------------------------------------------
+        //SOUND
         if (GameObject.Find("Local"))
         {
             if (!GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled)
@@ -56,7 +56,7 @@ public class playerMvmt : MonoBehaviour
                 GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled = true;
             }
         }
-        //-------------------------------------------------------------------------
+
         animator = parent.GetComponent<Animator>();
         playerAnimator.SetAnimator(animator);
 

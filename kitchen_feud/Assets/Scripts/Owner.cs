@@ -54,7 +54,7 @@ public class Owner : MonoBehaviour
     
 
     private System.Random rnd = new System.Random();
-    // Start is called before the first frame update
+
     private void Awake()
     {
         Owner1 = AI.Instance.owner1Avatar;
@@ -70,7 +70,6 @@ public class Owner : MonoBehaviour
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
         audioSource = GetComponent<AudioSource>();
-        // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
         keyboard = AI.Instance.keyBoard;
         mouse = AI.Instance.mouse;
@@ -78,7 +77,6 @@ public class Owner : MonoBehaviour
         anim = GetComponent<Animator>();
 
 
-        //  Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
       Text =   PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
         if (PhotonNetwork.IsMasterClient)
@@ -106,11 +104,8 @@ public class Owner : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-
         if (PhotonNetwork.IsMasterClient)
         {
             if (agent.enabled) { 

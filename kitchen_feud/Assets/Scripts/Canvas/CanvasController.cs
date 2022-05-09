@@ -20,7 +20,6 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
     private TicketController ticketController;
-    private GameObject currentTray;
 
     public List<GameObject> orderStands = new List<GameObject>(); 
     public GameObject orderNumberPrefab;
@@ -28,7 +27,6 @@ public class CanvasController : MonoBehaviour
     private int orderNum;
 
     private static GlobalTimer timer = new GlobalTimer();
-    //private static RepeatLock rLock = new RepeatLock();
 
     void Start()
     {

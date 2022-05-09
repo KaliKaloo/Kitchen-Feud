@@ -47,16 +47,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     }
 
-    /* public override void OnJoinedRoom() {
-         base.OnJoinedRoom();
-
-
-         startGame();
-     }
-     void startGame()
-     {
-         PhotonNetwork.LoadLevel(1);
-     }*/
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.buildIndex;

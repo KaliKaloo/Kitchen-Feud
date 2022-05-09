@@ -46,24 +46,19 @@ public class PlayerHolding : MonoBehaviour
         {
             StartCoroutine(LockPickup());
 
-            //if (view.IsMine)
-            {
 
-                if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                {
-                    slotItem(obj);
-                    obj.transform.localPosition = Vector3.zero;
-                    obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                }
-                else
-                {
-                    this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
-                    obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
-                    //gainedOwnership = true;
-                    //objToHold = obj;
-                    StartCoroutine(pick(obj));
-    
-                }
+            if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                slotItem(obj);
+                obj.transform.localPosition = Vector3.zero;
+                obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            }
+            else
+            {
+                this.GetComponent<PhotonView>().RPC("changeLayer", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID, 0);
+                obj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
+                StartCoroutine(pick(obj));
+
             }
         }
     }
@@ -71,8 +66,6 @@ public class PlayerHolding : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         slotItem(obj);
-        //obj.transform.localPosition = Vector3.zero;
-        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     [PunRPC]
@@ -111,17 +104,7 @@ public class PlayerHolding : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //if (gainedOwnership && objToHold && objToHold.GetPhotonView().OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
-        //{
-        //    slotItem(objToHold);
-        //    objToHold.transform.localPosition = Vector3.zero;
-        //    objToHold.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        //    gainedOwnership = false;
-        //    objToHold = null;
-        //}
-    }
+
 
     IEnumerator LockPickup()
     {
@@ -162,16 +145,15 @@ public class PlayerHolding : MonoBehaviour
 
         GameObject obj = PhotonView.Find(heldObjId).gameObject;
         obj.transform.SetParent(this.transform.GetChild(2).transform);
-        //obj.transform.localPosition = Vector3.zero;
-        //obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
         if(obj.GetComponent<Rigidbody>()){
             obj.GetComponent<Rigidbody>().isKinematic = true;
             obj.GetComponent<Collider>().isTrigger = true;
         }
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2.86f, 2, 2.86f);
     }
+
+
     [PunRPC]
     void SetParentAsNull(int viewID, int heldObjId)
     {
@@ -181,8 +163,6 @@ public class PlayerHolding : MonoBehaviour
             obj.transform.SetParent(null);
             obj.GetComponent<Rigidbody>().isKinematic = false;
             obj.GetComponent<Collider>().isTrigger = false;
-            // PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().useGravity = true;
-            // PhotonView.Find(viewID).gameObject.transform.localScale = new Vector3(2, 2, 2);
             itemdropped = true;
         }
     }

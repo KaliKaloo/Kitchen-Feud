@@ -66,8 +66,6 @@ public class OutlineEffect : MonoBehaviour
         rendR.enabled = false;
         outline.GetComponent<Collider>().enabled = false;
 
-        /*this.rend = rend;
-        rend.enabled = false;*/
 
     }
 }

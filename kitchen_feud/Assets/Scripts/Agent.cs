@@ -24,7 +24,6 @@ public class Agent : MonoBehaviour
     public bool goingBack;
     public Vector3 initialPos;
     
-    // Start is called before the first frame update
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -49,7 +48,6 @@ public class Agent : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
       

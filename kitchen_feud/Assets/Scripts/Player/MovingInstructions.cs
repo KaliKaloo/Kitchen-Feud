@@ -180,16 +180,6 @@ public class MovingInstructions : MonoBehaviour
 
         Text.text = "";
 
-        // // show a random instruction from remaining list then remove it
-        // int second = Random.Range(0, 3);
-        // Text.text = randomInstructionList[second];
-        // randomInstructionList.RemoveAt(second);
-
-        // yield return new WaitForSeconds(enemyInstructionDelay);
-
-        // // show a last remaining instruction
-        // Text.text = randomInstructionList[0];
-
 
     }
 

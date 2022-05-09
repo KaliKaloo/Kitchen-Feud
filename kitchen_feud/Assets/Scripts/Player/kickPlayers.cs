@@ -22,10 +22,8 @@ public class kickPlayers : MonoBehaviour
     {
         Instance = this;
         engine = VoiceChatManager.Instance.GetRtcEngine();
-//        randomInstance = menuController.Instance.x.ToString();
     }
     
-    // Start is called before the first frame update
     void Start()
     {
         randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
@@ -34,7 +32,6 @@ public class kickPlayers : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

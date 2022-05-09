@@ -12,7 +12,6 @@ public class TrayItemCollider : MonoBehaviour
     private pickableItem pickable;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         parentObject = gameObject.transform.parent.gameObject;
@@ -41,7 +40,6 @@ public class TrayItemCollider : MonoBehaviour
                         //add object holding to tray slot if tray slot empty
                         if (tray.ServingTray.Count < 4)
                         {
-                            //foreach (Transform slot in slots)
                             for (int i = 0; i < slots.Count; i++)
                             {
                                 if (slots[i].transform.childCount == 0)

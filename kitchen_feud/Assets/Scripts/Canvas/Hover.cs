@@ -18,20 +18,20 @@ public class Hover : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-            globalClicked.clicked = true;
-            if (!RecipeCard.activeInHierarchy){
-                GlowController.firstClick = true;
-            }
+        globalClicked.clicked = true;
+        if (!RecipeCard.activeInHierarchy){
+            GlowController.firstClick = true;
+        }
 
-            if (displayticket.dishes.ContainsKey(dish.text)){
-                
-                GlowController.newClick = true;
-                RecipeCard.SetActive(true);
+        if (displayticket.dishes.ContainsKey(dish.text)){
+            
+            GlowController.newClick = true;
+            RecipeCard.SetActive(true);
 
-                RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
-                GlowController.GlowAll(dish.text);
-               
-            }
+            RecipeCard.GetComponent<Image>().sprite = displayticket.dishes[dish.text];
+            GlowController.GlowAll(dish.text);
+            
+        }
     }
     
 }

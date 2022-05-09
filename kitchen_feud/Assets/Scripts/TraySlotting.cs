@@ -8,7 +8,7 @@ public class TraySlotting : MonoBehaviour
     public List<Transform> slots = new List<Transform>();
 
     public PhotonView pV;
-    // Start is called before the first frame update
+
     void Start()
     {
         pV = GetComponent<PhotonView>();
@@ -25,10 +25,5 @@ public class TraySlotting : MonoBehaviour
                     .RPC("setParentTray", RpcTarget.All, dPv.ViewID, slots[i].GetComponent<PhotonView>().ViewID);
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

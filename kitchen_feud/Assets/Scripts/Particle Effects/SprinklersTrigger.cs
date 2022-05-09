@@ -9,7 +9,6 @@ public class SprinklersTrigger : MonoBehaviour
     public float currentCollisions;
     public float triggerLevel;
     int numberTriggers = 1;
-    // Start is called before the first frame update
 
     void Start()
     {

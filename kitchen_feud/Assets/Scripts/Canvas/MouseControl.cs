@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MouseControl : MonoBehaviour
 {
-    public Texture2D cursorClickable, cursorDefault;
+    public Texture2D cursorClickable;
     public static MouseControl instance;
     private bool set = false;
    
