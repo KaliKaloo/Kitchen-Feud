@@ -159,7 +159,7 @@ public class scoreController : MonoBehaviour
                 int team = localP.GetComponent<PlayerController>().myTeam;
                     if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0)
                     {
-                        if ((score1 * 1.2 <= score2) || (score1 * 0.8 >= score2))
+                        if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
                         {
                             if (team == 1)
                             {
