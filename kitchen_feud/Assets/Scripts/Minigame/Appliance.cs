@@ -45,6 +45,7 @@ public class Appliance : Interactable
         //minigameCanvas.SetActive(false);
         added = false;
         myPv = GetComponent<PhotonView>();
+        SlotsController = GetComponent<SlotsController>();
     }
 
     public override void Interact()
@@ -54,7 +55,7 @@ public class Appliance : Interactable
         PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
         playerRigidbody = player.GetComponent<Rigidbody>();
         //stoveSlotsController = this.GetComponent<StoveSlotsController>();
-        SlotsController = gameObject.GetComponent<SlotsController>();
+ 
         //view control
         pv = player.GetComponent<PhotonView>();
         if(myPv.Owner != GameObject.Find("Local").GetPhotonView().Owner)
@@ -280,7 +281,9 @@ public class Appliance : Interactable
             if (playerHold && playerHold.transform.Find("slot") && playerHold.transform.Find("slot").childCount != 0
                 )
             {
+                Debug.LogError(heldObjArg);
                 itemsOnTheAppliance.Add(heldObjArgItem.item);
+                Debug.LogError(heldObjArg);
                 SlotsController.PutOnAppliance(heldObjArg);
 
             }
