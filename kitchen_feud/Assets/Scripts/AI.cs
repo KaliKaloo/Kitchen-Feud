@@ -16,6 +16,8 @@ public class AI : MonoBehaviour
     private int totalTime = timer.GetTotalTime();
     public GameObject Owner1;
     public GameObject Owner2;
+    public GameObject keyBoard;
+    public GameObject mouse;
     public GameObject owner1Avatar;
     public GameObject owner2Avatar;
     public static AI Instance;

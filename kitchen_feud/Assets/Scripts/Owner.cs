@@ -59,6 +59,8 @@ public class Owner : MonoBehaviour
     {
         Owner1 = AI.Instance.owner1Avatar;
         Owner2 = AI.Instance.owner2Avatar;
+        keyboard = AI.Instance.keyBoard;
+        mouse = AI.Instance.mouse;
 
       
     }
@@ -68,10 +70,10 @@ public class Owner : MonoBehaviour
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
         audioSource = GetComponent<AudioSource>();
-       // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
+        // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
-        keyboard = GameObject.Find("keyboard controls");
-        mouse = GameObject.Find("mouse controls");
+        keyboard = AI.Instance.keyBoard;
+        mouse = AI.Instance.mouse;
 
         anim = GetComponent<Animator>();
 
@@ -334,14 +336,14 @@ public class Owner : MonoBehaviour
                         //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
 
                     }
-                    else if (scores.GetScore1() > scores.GetScore2())
+                    else if (scores.GetScore2() > scores.GetScore1())
                     {
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
 
                         //Text.text = "We're winning! Keep it up guys!";
 
                     }
-                    else if (scores.GetScore1() < scores.GetScore2())
+                    else if (scores.GetScore2() < scores.GetScore1())
                     {
                         PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
 
@@ -410,6 +412,7 @@ public class Owner : MonoBehaviour
                     if((transform.position - new Vector3(-6.363f, 0.2f, -7)).magnitude < 1)
                     {
                         StartCoroutine(leavingKitchen());
+                        returningToKitchen = false;
                         returned = true;
                     }
                 }
@@ -475,7 +478,7 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1 / 4 + 5)
+                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
                             //if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;
@@ -511,7 +514,7 @@ public class Owner : MonoBehaviour
                         }
                         else
                         {
-                            if (timer.GetLocalTime() < timer.GetTotalTime() * 3 / 8 && timer.GetLocalTime() > timer.GetTotalTime() * 1/4 + 5)
+                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
                            // if (timer.GetLocalTime() < 260)
                             {
                                 firstTime = true;

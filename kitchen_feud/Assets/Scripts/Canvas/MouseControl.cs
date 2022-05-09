@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MouseControl : MonoBehaviour
 {
     public Texture2D cursorClickable, cursorDefault;
     public static MouseControl instance;
+    private bool set = false;
    
     private void Awake(){
         if(instance == null){
@@ -16,7 +18,14 @@ public class MouseControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void Update()
+    {
+       if(SceneManager.GetActiveScene().name == "gameOver" && !set)
+        {
+            Cursor.visible = true;
+            set = true;
+        }
+    }
     public void Clickable(){
         Cursor.SetCursor(cursorClickable, Vector2.zero, CursorMode.Auto);
     }

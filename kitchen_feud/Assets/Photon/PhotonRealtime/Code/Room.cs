@@ -617,7 +617,7 @@ namespace Photon.Realtime
         /// <returns>Summary of this Room instance.</returns>
         public override string ToString()
         {
-            return string.Format("Room: '{0}' {1},{2} {4}/{3} players.", this.name, this.isVisible ? "visible" : "hidden", this.isOpen ? "open" : "closed", this.maxPlayers, this.PlayerCount);
+            return string.Format("Room: '{0}' {1}, {2} {4}/{3} players", this.name, this.isVisible ? "visible" : "hidden", this.isOpen ? "open" : "closed", this.maxPlayers, this.PlayerCount);
         }
 
         /// <summary>Returns a summary of this Room instance as longer string, including Custom Properties.</summary>

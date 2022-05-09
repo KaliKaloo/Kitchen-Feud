@@ -124,12 +124,12 @@ public class menuController : MonoBehaviourPunCallbacks
    
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
-        PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
         {
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
                 PhotonNetwork.AuthValues = new AuthenticationValues(PlayerPrefs.GetString("userID"));
-             
+
+            PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
             loadingScreen.SetActive(true);
 
