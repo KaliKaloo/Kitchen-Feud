@@ -281,9 +281,7 @@ public class Appliance : Interactable
             if (playerHold && playerHold.transform.Find("slot") && playerHold.transform.Find("slot").childCount != 0
                 )
             {
-                Debug.LogError(heldObjArg);
                 itemsOnTheAppliance.Add(heldObjArgItem.item);
-                Debug.LogError(heldObjArg);
                 SlotsController.PutOnAppliance(heldObjArg);
 
             }
