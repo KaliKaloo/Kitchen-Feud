@@ -104,6 +104,7 @@ public class PlayerTests : PhotonTestSetup
     public IEnumerator ApplianceSlot()
     {
         stove.player = obj.transform;
+        playerHold.pickUpItem(mushroom);
         stove.addItem(mushroom, playerHold);
         Assert.IsTrue(stove.itemsOnTheAppliance.Count == 1);
         yield return null;

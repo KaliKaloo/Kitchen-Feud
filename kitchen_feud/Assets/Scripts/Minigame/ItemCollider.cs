@@ -47,12 +47,12 @@ public class ItemCollider : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    void addItemRPC(int heldViewID, int viewID1)
-    {
-        PhotonView.Find(viewID1).GetComponent<PlayerHolding>().heldObj = null;
+    //[PunRPC]
+    //void addItemRPC(int heldViewID, int viewID1)
+    //{
+    //    PhotonView.Find(viewID1).GetComponent<PlayerHolding>().heldObj = null;
 
-        parentAppliance.addItem(PhotonView.Find(heldViewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
-    }
+    //    parentAppliance.addItem(PhotonView.Find(heldViewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
+    //}
 
 }

@@ -97,7 +97,10 @@ public class scoreController : MonoBehaviour
                 int score2 = scores.GetScore2();
                 score1Text.text = ConvertScoreToString(score1);
                 score2Text.text = ConvertScoreToString(score2);
-                reactScore(score1, score2);
+                if (timer.GetLocalTime() > 5)
+                {
+                    reactScore(score1, score2);
+                }
            
             }
       
@@ -150,26 +153,35 @@ public class scoreController : MonoBehaviour
     void reactScore(int score1, int score2){
         if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null) {
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) {
+                if (PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) { 
                 GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
 
                 int team = localP.GetComponent<PlayerController>().myTeam;
-                if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0) {
-                    if ((score1 * 1.2 <= score2) || (score1 * 0.8 >= score2)) {
-                        if (team == 1) {
-                            float ratio = score2 / score1;
-                            ratio = 1 - (1 - ratio) / 4;
-                            float pitch = Mathf.Min(ratio, 1.3f);
-                            pitch = Mathf.Max(pitch, 0.7f);
-                            MusicManager.instance.musicReact(pitch);
-                        } else if (team == 2) {
-                            float ratio = score1 / score2;
-                            ratio = 1 - (1 - ratio) / 4;
-                            float pitch = Mathf.Min(ratio, 1.3f);
-                            pitch = Mathf.Max(pitch, 0.7f);
-                            MusicManager.instance.musicReact(pitch);
+                    if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0)
+                    {
+                        if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
+                        {
+                            if (team == 1)
+                            {
+                                float ratio = score2 / score1;
+                                ratio = 1 - (1 - ratio) / 4;
+                                float pitch = Mathf.Min(ratio, 1.3f);
+                                pitch = Mathf.Max(pitch, 0.7f);
+                                MusicManager.instance.musicReact(pitch);
+                            }
+                            else if (team == 2)
+                            {
+                                float ratio = score1 / score2;
+                                ratio = 1 - (1 - ratio) / 4;
+                                float pitch = Mathf.Min(ratio, 1.3f);
+                                pitch = Mathf.Max(pitch, 0.7f);
+                                MusicManager.instance.musicReact(pitch);
+                            }
                         }
-                    } else {
-                        MusicManager.instance.endReaction();
+                        else
+                        {
+                            MusicManager.instance.endReaction();
+                        }
                     }
                 }
             }
