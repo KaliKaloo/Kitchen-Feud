@@ -97,7 +97,10 @@ public class scoreController : MonoBehaviour
                 int score2 = scores.GetScore2();
                 score1Text.text = ConvertScoreToString(score1);
                 score2Text.text = ConvertScoreToString(score2);
-                reactScore(score1, score2);
+                if (timer.GetLocalTime() < timer.GetTotalTime() - 5)
+                {
+                    reactScore(score1, score2);
+                }
            
             }
       
@@ -150,7 +153,7 @@ public class scoreController : MonoBehaviour
     void reactScore(int score1, int score2){
         if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null) {
             if ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) {
-                if (PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject) { 
+                if (PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) { 
                 GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
 
                 int team = localP.GetComponent<PlayerController>().myTeam;
