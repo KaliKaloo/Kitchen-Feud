@@ -117,7 +117,6 @@ public class CanvasController : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             string order = LeaderOrder.orderID;
-            int orderN;
             if (ticket1.activeSelf == true)
             {
                 if (ticket2.activeSelf == true)
