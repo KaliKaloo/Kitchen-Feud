@@ -70,10 +70,10 @@ public class Owner : MonoBehaviour
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
         audioSource = GetComponent<AudioSource>();
-       // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
+        // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
-        keyboard = GameObject.Find("keyboard controls");
-        mouse = GameObject.Find("mouse controls");
+        keyboard = AI.Instance.keyBoard;
+        mouse = AI.Instance.mouse;
 
         anim = GetComponent<Animator>();
 
