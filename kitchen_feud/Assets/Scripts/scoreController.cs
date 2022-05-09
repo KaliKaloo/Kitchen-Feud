@@ -97,7 +97,7 @@ public class scoreController : MonoBehaviour
                 int score2 = scores.GetScore2();
                 score1Text.text = ConvertScoreToString(score1);
                 score2Text.text = ConvertScoreToString(score2);
-                if (timer.GetLocalTime() < timer.GetTotalTime() - 5)
+                if (timer.GetLocalTime() > 5)
                 {
                     reactScore(score1, score2);
                 }
