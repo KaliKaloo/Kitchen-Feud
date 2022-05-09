@@ -116,9 +116,9 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter == 5)
                 {
-                    backButton.SetActive(true);
-                    //transform.parent.parent.transform.Find("BackButton")gameObject.SetActive(true);
-                   // PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
+                    //backButton.SetActive(true);
+                   // transform.parent.parent.transform.Find("BackButton")gameObject.SetActive(true);
+                    PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
                 }
 
             }
@@ -159,7 +159,7 @@ public class PanController : MonoBehaviour
     [PunRPC]
     void enableBack(int viewID)
     {
-        PhotonView.Find(viewID).transform.parent.parent.Find("BackButton").gameObject.SetActive(true);
+        PhotonView.Find(viewID).GetComponent<PanController>().backButton.gameObject.SetActive(true);
     }
   
 }
