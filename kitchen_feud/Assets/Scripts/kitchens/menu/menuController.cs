@@ -16,7 +16,7 @@ public class menuController : MonoBehaviourPunCallbacks
 {
 
     public static menuController Instance;
-   
+
     [SerializeField] private GameObject usernameMenu;
     private bool setInternetSpeed;
     [SerializeField] private GameObject connectPanel;
@@ -32,7 +32,7 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject settingsButton;
 
     [SerializeField] private GameObject roomListItemPrefab;
-    
+
     [SerializeField] private InputField usernameInput;
     [SerializeField] private InputField createGameInput;
     [SerializeField] private InputField joinGameInput;
@@ -50,7 +50,6 @@ public class menuController : MonoBehaviourPunCallbacks
     [SerializeField] private Text lobbyError;
     IRtcEngine rtcEngine;
     public int x;
-    private bool test;
     Random rnd = new Random();
     private bool calledRejoin = false;
     private bool createLobby = false;
@@ -70,29 +69,27 @@ public class menuController : MonoBehaviourPunCallbacks
     Hashtable scene = new Hashtable();
     Hashtable playAgain = new Hashtable();
     PhotonView PV;
-    //public string appId = "906fd9f2074e4b0491fcde55c280b9e5";
 
-    
-    
+
     private void Awake()
     {
         Instance = this;
-/*        ResetUsername();
-        ResetUserID();*/
-      // PlayerPrefs.DeleteAll();
     }
-    
+
+    // Sets player's custom property to given team number
     private void SetTeam(int teamNumber)
     {
         customProperties["Team"] = teamNumber;
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
     }
 
+    // Checks the amount of players existing on a particular team
     private int GetAmountOfPlayers(int team)
     {
         int total = 0;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
+            // make sure their team has been set yet, if not they are not loaded properly
             try
             {
                 if ((int)player.CustomProperties["Team"] == team)
@@ -110,22 +107,11 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        //if (PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] != null)
-        //{
-        //    if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayingAgain"] == 1)
-        //    {
-        //        if (PhotonNetwork.LocalPlayer.CustomProperties["loaded"] != null)
-        //        {
-        //            playAgain["loaded"] = 0;
-        //            PhotonNetwork.LocalPlayer.SetCustomProperties(playAgain);
-        //        }
-        //    }
-        //}
-   
         PV = GetComponent<PhotonView>();
         setInternetSpeed = false;
         if (!PhotonNetwork.IsConnected)
         {
+            // if their stored userID value is not null, then reconnect using that existing userID
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("userID")))
                 PhotonNetwork.AuthValues = new AuthenticationValues(PlayerPrefs.GetString("userID"));
 
@@ -133,20 +119,24 @@ public class menuController : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
             loadingScreen.SetActive(true);
 
-
+            // set team by default as 1
             SetTeam(1);
+
+            // if player has previously played, display their previous username
             if (!CheckStringNullorEmpty(PlayerPrefs.GetString("username")))
             {
                 greetingMenu.text = "Welcome back " + PlayerPrefs.GetString("username") + "!";
                 PhotonNetwork.NickName = PlayerPrefs.GetString("username");
                 usernameMenu.SetActive(false);
                 connectPanel.SetActive(true);
-            } else
+            }
+            // otherwise ask them to make a username
+            else
             {
                 usernameMenu.SetActive(true);
                 startButton.SetActive(false);
             }
-        } 
+        }
         else
         {
             // set photon's nickname to one stored in settings
@@ -157,18 +147,15 @@ public class menuController : MonoBehaviourPunCallbacks
         }
     }
 
-/*    public override void OnConnected()
-    {
-        base.OnConnected();
-    }*/
-
+    // try rejoining using their last lobby name
     public void TryRejoin()
     {
         calledRejoin = true;
-        PlayerPrefs.SetString("rejoined","true");
+        PlayerPrefs.SetString("rejoined", "true");
         PhotonNetwork.RejoinRoom(PlayerPrefs.GetString("lastLobby"));
     }
 
+    // goes back to the main menu
     public void BackToMainMenu()
     {
         findLobbyMenu.SetActive(false);
@@ -176,17 +163,20 @@ public class menuController : MonoBehaviourPunCallbacks
         userSettingsMenu.SetActive(false);
     }
 
+    // shows find lobby panel
     public void FindLobby()
     {
         connectPanel.SetActive(false);
         findLobbyMenu.SetActive(true);
     }
 
+    // shows settings menu in lobby
     public void OpenUserSettings()
     {
         userSettingsMenu.SetActive(true);
     }
 
+    // on pressing no on the reconnect menu, hides
     public void HideReconnectMenu()
     {
         PlayerPrefs.SetInt("disconnected", 0);
@@ -199,7 +189,6 @@ public class menuController : MonoBehaviourPunCallbacks
     // gets list of players in the lobby in string
     private string GetPlayers(int team)
     {
-        //string players = "Team " + team + ":"  + System.Environment.NewLine;
         string players = System.Environment.NewLine;
         // CHANGE HERE SO ONLY GRABS PLAYERS IN TEAM 1
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
@@ -224,7 +213,8 @@ public class menuController : MonoBehaviourPunCallbacks
         playerList2.text = GetPlayers(2);
 
         // won't allow normal user to start/edit game settings
-        if (!PhotonNetwork.IsMasterClient) {
+        if (!PhotonNetwork.IsMasterClient)
+        {
             startLobbyButton.SetActive(false);
             settingsButton.SetActive(false);
         }
@@ -256,6 +246,7 @@ public class menuController : MonoBehaviourPunCallbacks
     }
 
     // increases timer by 1 minute and updates text
+    // only to be used by master client!!!
     public void IncreaseTimer()
     {
         timerError.text = "";
@@ -266,7 +257,8 @@ public class menuController : MonoBehaviourPunCallbacks
             currentTime.text = timer.GetCurrentTimeString();
     }
 
-    // decreases timer by 1 minute and updates text
+    // decreases lobby timer by 1 minute and updates text
+    // only to be used by master client!!!
     public void DecreaseTimer()
     {
         timerError.text = "";
@@ -279,30 +271,35 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-
+        // Join Photon Master server
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
+        // check if their last lobby exists by creating a room with same name
         if (!CheckStringNullorEmpty(PlayerPrefs.GetString("lastLobby")) && !createLobby)
         {
             createLobby = true;
             PhotonNetwork.CreateRoom(PlayerPrefs.GetString("lastLobby"), new Photon.Realtime.RoomOptions(), null);
-        } else
+        }
+        else
         {
             loadingScreen.SetActive(false);
         }
     }
 
+    // continually checks whether the username you're entering is valid
     public void ChangeUsernameInput()
     {
+        // must be between 1 and 9 characters long, otherwise button will hide
         if (usernameInput.text.Length >= 1 && usernameInput.text.Length <= 9)
             startButton.SetActive(true);
         else
             startButton.SetActive(false);
     }
 
+    // Shows the change username menu
     public void ChangeUsernameOnClick()
     {
         userSettingsMenu.SetActive(false);
@@ -310,6 +307,7 @@ public class menuController : MonoBehaviourPunCallbacks
         startButton.SetActive(false);
     }
 
+    // Sets username using button
     public void SetUsername()
     {
         usernameMenu.SetActive(false);
@@ -322,7 +320,7 @@ public class menuController : MonoBehaviourPunCallbacks
         greetingMenu.text = "Welcome " + usernameInput.text + "!";
     }
 
-    // resets username to null :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    // resets username to null
     public void ResetUsername()
     {
         PlayerPrefs.SetString("username", null);
@@ -331,7 +329,7 @@ public class menuController : MonoBehaviourPunCallbacks
         BackToMainMenu();
     }
 
-    // resets id to null, restart game for changes to take effect :: ONLY USE FOR DEBUGGING REMOVE WHEN RELEASE
+    // resets id to null, restart game for changes to take effect
     public void ResetUserID()
     {
         PlayerPrefs.SetString("userID", null);
@@ -342,13 +340,14 @@ public class menuController : MonoBehaviourPunCallbacks
     // Create room here
     public void CreateGame()
     {
-        if (createGameInput.text == ""){
+        if (createGameInput.text == "")
+        {
             lobbyError.text = "Please name a lobby";
         }
         else
         {
             loadingScreen.SetActive(true);
-            PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8}, null);
+            PhotonNetwork.CreateRoom(createGameInput.text.ToUpper(), new Photon.Realtime.RoomOptions() { MaxPlayers = 8 }, null);
         }
     }
 
@@ -372,7 +371,8 @@ public class menuController : MonoBehaviourPunCallbacks
             connectPanel.SetActive(false);
             loadingScreen.SetActive(true);
             PhotonNetwork.JoinRoom(joinGameInput.text.ToUpper());
-        } else
+        }
+        else
         {
             lobbyError.text = "Cannot be empty";
         }
@@ -388,33 +388,22 @@ public class menuController : MonoBehaviourPunCallbacks
     public void StartScene()
     {
         lobbyMenu.SetActive(false);
-
+        // Game can no longer be played after scene has started
         PhotonNetwork.CurrentRoom.IsOpen = false;
-       // PhotonNetwork.CurrentRoom.IsVisible = false;
-
         // how long player's data is saved after disconnect (60 seconds here)
         PhotonNetwork.CurrentRoom.PlayerTtl = 60000;
-
         // after start button is pressed players can no longer join
         PV.RPC("playVideo", RpcTarget.All, PV.ViewID);
-     
     }
 
     public void startGame()
     {
+        // Set the time to whatever was set using the settings
         timer.SetServerTime();
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount <= 8)
-        {
-            GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
-
-            PhotonNetwork.LoadLevel(1);
-        }
-        // if > 4 players load into a different scene 
-        else
-        {
-            this.GetComponent<PhotonView>().RPC("loadS", RpcTarget.All, 1);
-        }
+        // Load into next scene
+        GetComponent<PhotonView>().RPC("loadSceneP", RpcTarget.All);
+        PhotonNetwork.LoadLevel(1);
     }
 
     public override void OnJoinedRoom()
@@ -425,18 +414,12 @@ public class menuController : MonoBehaviourPunCallbacks
             {
                 PlayerPrefs.SetInt("disconnected", 0);
                 StartCoroutine(LoadScene());
-                //StartCoroutine(LoadSceneAsynchronously(1));
-
-                // Rejoin voice chat
-                /*rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
-                x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
-                rtcEngine.JoinChannel(x.ToString() + "Lobby");*/
-            } 
+            }
             else
             {
                 // to do what happens when master client disconnects
             }
-        } 
+        }
         // else if player not in disconnected state load normally
         else if (!createLobby)
         {
@@ -445,6 +428,7 @@ public class menuController : MonoBehaviourPunCallbacks
             PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
 
             rtcEngine = VoiceChatManager.Instance.GetRtcEngine();
+            // TODO:: Explain pls hamza
             if (PhotonNetwork.IsMasterClient)
             {
                 x = rnd.Next(11, 101);
@@ -456,28 +440,31 @@ public class menuController : MonoBehaviourPunCallbacks
                 AddPlayerToLobby();
                 x = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
             }
-            string band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+            string band = (string)PhotonNetwork.LocalPlayer.CustomProperties["Band"];
             if (band == "A")
             {
                 rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
                     AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-            }else if (band == "B")
+
+            }
+            else if (band == "B")
             {
                 rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
                     AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-            }else if(band == "C")
+
+            }
+            else if (band == "C")
 
             {
                 rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
                     AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-            }else if (band == "D")
+
+            }
+            else if (band == "D")
             {
                 rtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
                     AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
+
             }
             rtcEngine.JoinChannel(x.ToString() + "Lobby");
 
@@ -497,8 +484,8 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        // Show lobby canvas
         createLobby = false;
-
         lobbyMenu.SetActive(false);
         loadingScreen.SetActive(false);
         connectPanel.SetActive(true);
@@ -506,12 +493,12 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.LogError(message + " " + returnCode);
         reconnectMenu.SetActive(false);
         loadingScreen.SetActive(false);
 
         if (calledRejoin)
         {
+            // if can't join room after trying to rejoin, stop
             lobbyError.text = "Lobby no longer exists!";
             PlayerPrefs.SetString("lastLobby", null);
             PlayerPrefs.SetInt("disconnected", 0);
@@ -528,20 +515,21 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
+        // Load back to lobby menu
         loadingScreen.SetActive(false);
         isDisconnected = true;
-
         createLobby = false;
-
         reconnectMenu.SetActive(true);
         connectPanel.SetActive(true);
     }
 
+    // Update lobby when a player enters the room
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
     }
 
+    // Update lobby when a player leaves the room
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         InitializeLobby(PhotonNetwork.CurrentRoom.ToString());
@@ -549,18 +537,18 @@ public class menuController : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        // if they could create a lobby with the same name as their last lobby, then it no longer exists
         if (createLobby)
         {
             PlayerPrefs.SetString("lastLobby", null);
             PhotonNetwork.LeaveRoom();
         }
+        // Create normal room otherwise
         else
         {
             PlayerPrefs.SetString("lastLobby", PhotonNetwork.CurrentRoom.Name);
             PlayerPrefs.SetString("userID", PhotonNetwork.LocalPlayer.UserId);
             PlayerPrefs.SetInt("disconnected", 0);
-
-
             loadingScreen.SetActive(false);
             lobby["Players"] = 1;
             lobby["Skip"] = 0;
@@ -569,6 +557,7 @@ public class menuController : MonoBehaviourPunCallbacks
         }
     }
 
+    // Adds a player count to the custom properties so that can be used to check who's loaded in
     private void AddPlayerToLobby()
     {
         int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
@@ -576,23 +565,20 @@ public class menuController : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
+    // Removes a player count from the custom properties
     private void RemovePlayerFromLobby()
     {
         int currentPlayers = (int)PhotonNetwork.CurrentRoom.CustomProperties["Players"];
         if (currentPlayers > 1)
             lobby["Players"] = currentPlayers - 1;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
     }
 
-    public void SwitchToTeam1() {
-        // CHANGE USER TO TEAM 1 HERE
-        SetTeam(1);
-        this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
-    }
-
-    public void SwitchToTeam2()
+    // When pressing on button to switch team, switches and tells everyone's lobby to update
+    // Set the teamNumber in inspector inside Unity!!!
+    public void SwitchToTeam(int teamNumber)
     {
-        SetTeam(2);
+        SetTeam(teamNumber);
         this.GetComponent<PhotonView>().RPC("UpdateLobby", RpcTarget.All, PhotonNetwork.CurrentRoom.ToString());
     }
 
@@ -610,6 +596,7 @@ public class menuController : MonoBehaviourPunCallbacks
             return 0;
     }
 
+    // based on balance of teams, will hide or unhide buttons to allow/disallow joining the other team
     private void UpdateTeamButtons()
     {
         int balance = CheckTeamBalance();
@@ -629,7 +616,7 @@ public class menuController : MonoBehaviourPunCallbacks
             changeTeam2.SetActive(false);
         }
     }
-    
+
     // Updates the lobby parts which need to be updated every frame
     void UpdateLobby()
     {
@@ -642,20 +629,7 @@ public class menuController : MonoBehaviourPunCallbacks
 
     }
 
-    IEnumerator LoadSceneAsynchronously(int levelIndex)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
-        lobbyMenu.SetActive(false);
-        loadingScreen.SetActive(true);
-        loadingBarCanvas.SetActive(true);
-        while (!operation.isDone)
-        {
-           loadingBar.value = operation.progress;
-           yield return null;
-        }
-        loadingBarCanvas.SetActive(false);
-    }
-
+    // Load next scene asynchronously (showing loading screen whilst actually loading)
     IEnumerator LoadScene()
     {
         lobbyMenu.SetActive(false);
@@ -667,7 +641,7 @@ public class menuController : MonoBehaviourPunCallbacks
             yield return null;
         }
         loadingBarCanvas.SetActive(false);
-        
+
     }
 
     // returns true if string is null or empty
@@ -702,7 +676,7 @@ public class menuController : MonoBehaviourPunCallbacks
             }
         }
         UpdateLobby();
-   
+
     }
 
     [PunRPC]
@@ -721,8 +695,5 @@ public class menuController : MonoBehaviourPunCallbacks
     void loadSceneP()
     {
         StartCoroutine(LoadScene());
-        //StartCoroutine(LoadSceneAsynchronously(1));
     }
-   
-  
 }
