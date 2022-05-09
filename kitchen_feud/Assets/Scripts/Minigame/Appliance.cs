@@ -277,7 +277,7 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             
 
-            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount != 0
+            if (playerHold && playerHold.transform.Find("slot") && playerHold.transform.Find("slot").childCount != 0
                 )
             {
                 itemsOnTheAppliance.Add(heldObjArgItem.item);
