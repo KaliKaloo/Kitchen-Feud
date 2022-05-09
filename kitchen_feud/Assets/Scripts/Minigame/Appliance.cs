@@ -277,8 +277,8 @@ public class Appliance : Interactable
             IngredientItem heldObjArgItem = heldObjArg.GetComponent<IngredientItem>();
             
 
-            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount != 0 &&
-                playerHold.GetComponent<PhotonView>().IsMine)
+            if (player && player.transform.Find("slot") && player.transform.Find("slot").childCount != 0
+                )
             {
                 itemsOnTheAppliance.Add(heldObjArgItem.item);
                 SlotsController.PutOnAppliance(heldObjArg);
