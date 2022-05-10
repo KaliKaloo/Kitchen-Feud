@@ -44,7 +44,8 @@ public class AI : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name != "kitchens Test")
             {
-                if (timer.GetLocalTime() == timer.GetTotalTime() / 2 && !ownersSpawned){
+                //if (timer.GetLocalTime() == timer.GetTotalTime() / 2 && !ownersSpawned){
+                if(timer.GetLocalTime() == 298 && !ownersSpawned) { 
                     Owner1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_cat_Model"), (GameSetup.GS.OSP1.position), Quaternion.identity);
                     Owner2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_panda_Model"), (GameSetup.GS.OSP2.position), Quaternion.identity);
                     ownersSpawned = true;
