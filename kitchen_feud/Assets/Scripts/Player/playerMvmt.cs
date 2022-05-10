@@ -107,8 +107,7 @@ public class playerMvmt : MonoBehaviour
         speedSlider = GameObject.Find("Speed");
         if (rotateSlider && speedSlider){
             mvmtSpeed = speedSlider.GetComponentInChildren<Slider>().value;
-            //rotatespeed = rotateSlider.GetComponentInChildren<Slider>().value;
-            rotatespeed = 300;
+            rotatespeed = rotateSlider.GetComponentInChildren<Slider>().value;
         }
 
     }
