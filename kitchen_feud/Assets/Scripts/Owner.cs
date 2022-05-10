@@ -15,15 +15,14 @@ public class Owner : MonoBehaviour
     public Animator anim;
     public bool playOnce;
     public GameObject oven;
-    private GameObject localPlayer;
     private NavMeshAgent agent;
+    public GameObject localPlayer;
     public bool currentlyTalking;
     public bool firstTime;
     public bool currentlyShouting;
     public bool returned;
     public bool collected;
     public bool collecting;
-    private bool toCollect;
     public bool stopLeaning;
     private bool returningToKitchen;
     private bool following;

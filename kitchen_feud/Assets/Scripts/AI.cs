@@ -13,7 +13,6 @@ public class AI : MonoBehaviour
     public PhotonView PV;
     private bool ownersSpawned;
     private static GlobalTimer timer = new GlobalTimer();
-    private int totalTime = timer.GetTotalTime();
     public GameObject Owner1;
     public GameObject Owner2;
     public GameObject keyBoard;

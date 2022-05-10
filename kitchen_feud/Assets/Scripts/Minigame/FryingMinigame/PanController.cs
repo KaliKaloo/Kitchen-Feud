@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
-using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
