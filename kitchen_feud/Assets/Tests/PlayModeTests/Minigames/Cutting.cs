@@ -144,6 +144,7 @@ public class Cutting: PhotonTestSetup
             playerHold.dropItem();
         Assert.IsTrue(choppingBoard.minigameCanvas.activeSelf);
         choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartGame();
+        yield return new WaitForSeconds(0.5f);
         Assert.IsFalse(choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartButton.activeSelf);
         yield return new WaitForSeconds(0.2f);
         choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().backButton.GetComponentInChildren<ExitCuttingMinigame>().TaskOnClick();
