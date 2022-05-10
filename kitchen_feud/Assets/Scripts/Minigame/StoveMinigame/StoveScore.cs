@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Setting the score for stove minigame to be parsed to other scripts
 public class StoveScore
 {
     private static int initialIngredients;
@@ -11,7 +12,6 @@ public class StoveScore
     private static float bombMultiplier;
 
     public static readonly int maximum = 10;
-
 
     public static float Score
     {
@@ -42,7 +42,6 @@ public class StoveScore
         get{  return currentIngredients; }
     }
 
-
     public void SetAmountInitialIngredients(int amount)
     {
         initialIngredients = amount;
@@ -56,24 +55,12 @@ public class StoveScore
         bombMultiplier = 0;
     }
 
-
     public void AddScore()
     {
         score += 1;
     }
 
-
-    public void AddBombMultiplier()
-    {
-        bombMultiplier += 0.1f;
-    }
-
-    public float FinalMultiplier()
-    {
-        return (score / 15) * (1 - bombMultiplier);
-        
-    }
-
+    // calculate score based on how many correct ingredients caught
     public float CalculateScore()
     {
         return ((float)StoveMinigameCounter.correctIngredientCounter / (float)maximum) * 100f;

@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// controls the animations for the models in game over screen
 public class GameOverAnimationController : MonoBehaviour
 {
-    // SCORES GO HERE
-    private int team1Score = 0;
-    private int team2Score = 0;
-
-
     [SerializeField] private GameObject GameOverController;
 
     [SerializeField] private GameObject CatModel1;
@@ -40,14 +36,13 @@ public class GameOverAnimationController : MonoBehaviour
     {
         overMenu = GameOverController.GetComponent<gameOverMenu>();
 
-        //get scores from score screen
-        team1Score = endScores.GetScore1();
-        team2Score = endScores.GetScore2();
+        //get scores and compare them
+        overMenu.CompareScore(endScores.GetScore1(), endScores.GetScore2());
 
-        overMenu.CompareScore(team1Score, team2Score);
-
+        // wait for canvas animations to finish
         StartCoroutine(WaitForStart());
 
+        // assign animators attached to the models
         CatModelAnimator1 = CatModel1.GetComponent<Animator>();
         CatModelAnimator2 = CatModel2.GetComponent<Animator>();
         CatModelAnimator3 = CatModel3.GetComponent<Animator>();
@@ -57,9 +52,9 @@ public class GameOverAnimationController : MonoBehaviour
         PandaModelAnimator3 = PandaModel3.GetComponent<Animator>();
 
         ResetAnimations();
-
     }
 
+    // enables game over controller script after 6 seconds
     private IEnumerator WaitForStart()
     {
         yield return new WaitForSeconds(6);
@@ -67,7 +62,6 @@ public class GameOverAnimationController : MonoBehaviour
         GameOverController.SetActive(true);
     }
 
-    // Update is called once per frame
     void ResetAnimations()
     {
         CatModelAnimator1.SetInteger("Dance", 0);
@@ -77,6 +71,5 @@ public class GameOverAnimationController : MonoBehaviour
         PandaModelAnimator1.SetInteger("Dance", 0);
         PandaModelAnimator2.SetInteger("Dance", 0);
         PandaModelAnimator3.SetInteger("Dance", 0);
-
     }
 }

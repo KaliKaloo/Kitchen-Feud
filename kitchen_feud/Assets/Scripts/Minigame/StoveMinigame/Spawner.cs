@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
+// spawns all ingredients in the stove minigame
 public class Spawner : MonoBehaviour
 {
-
     [SerializeField] public GameObject[] ingredients;
     [SerializeField] public GameObject bomb;
     [SerializeField] public GameObject startButton;
@@ -28,7 +28,6 @@ public class Spawner : MonoBehaviour
 
     private GameObject parentCanvas;
 
-    //public float xBounds, yBound;
     public List<Sprite> newIngredients;
     public List<Sprite> bombs;
 
@@ -39,14 +38,13 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         stoveMinigameCounter.StartGame();
-        
         stoveScore.ResetValues();
-        
         chosenY = (int)(2f * UICamera.orthographicSize);
         chosenX = (int)(chosenY  * UICamera.aspect);
         backButton.SetActive(false);
     }
 
+    // put all sprites in list based on parsed dish
     public List<Sprite> InstantiateList(List<IngredientSO> ingredients)
     {
         List<Sprite> dishSprites = new List<Sprite>();
@@ -59,6 +57,7 @@ public class Spawner : MonoBehaviour
 
     public void StartGame()
     {
+        // set correct background based on kitchen
         if (team1Background.activeSelf)
             parentCanvas = team1Background;
         else if (team2Background.activeSelf)
@@ -66,14 +65,11 @@ public class Spawner : MonoBehaviour
 
         StoveMinigameCounter.ResetCounters();
         stoveMinigameCounter.StartGame();
-        
-        //instructions.SetActive(false);
         startButton.SetActive(false);
+
         if (PhotonNetwork.IsConnected)
             startSmoke();
-            //Sparks -------------------------------------
-            //startSparks();
-            //--------------------------------------------
+
 
         List<Sprite> dishSprites = InstantiateList(dishSO.recipe);
         stoveScore.SetAmountInitialIngredients(dishSprites.Count);
@@ -83,22 +79,19 @@ public class Spawner : MonoBehaviour
         if (playerAnimator.animator != null)
             playerAnimator.animator.SetBool("IsCooking", true);
 
+        // start spawning items falling from ceiling
         StartCoroutine(SpawnCorrectIngredient());
         StartCoroutine(SpawnBombObject());
     }
 
-
-    public void StopGame(){
-        stoveMinigameCounter.EndGame();
-
-    }
-
     IEnumerator SpawnCorrectIngredient()
     {
+        // spawns randomly in a small interval
         yield return new WaitForSeconds(Random.Range(0.5f, 1));
 
         int randomIngredient = Random.Range(0, newIngredients.Count);
 
+        // only keep spawning if haven't caught max amount of ingredients
         if (StoveMinigameCounter.collisionCounter < StoveMinigameCounter.amount)
         {
             Sprite currentIngredient = newIngredients[randomIngredient];
@@ -106,12 +99,10 @@ public class Spawner : MonoBehaviour
                 new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
             obj.GetComponent<Image>().sprite = currentIngredient;
-
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
            
             stoveMinigameCounter.AddDroppedCounter();
             StartCoroutine(SpawnCorrectIngredient());
-           
         } 
         
         else if (StoveMinigameCounter.droppedCounter == StoveMinigameCounter.amount)
@@ -123,17 +114,17 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnBombObject()
     {
+        // spawns bombs slightly infrequently compared to other ingredients
         yield return new WaitForSeconds(Random.Range(1, 2));
-
         int randomBomb = Random.Range(0, bombs.Count);
 
+        // only keep spawning if haven't caught max amount of ingredients
         if (StoveMinigameCounter.collisionCounter < StoveMinigameCounter.amount)
         {
             Sprite currentBomb = bombs[randomBomb];
             GameObject obj = Instantiate(bomb,
                 new Vector3(Random.Range(0, chosenX), chosenY, 0), Quaternion.identity,
                 parentCanvas.transform);
-
             obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, 0);
             obj.GetComponent<Image>().sprite = currentBomb;
 
@@ -142,17 +133,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
-
+    // start smoke particles on stove appliance
     private void startSmoke(){
         appliance.GetComponent<PhotonView>().RPC("syncSmoke", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
     }
-
-    //SPARKS ------------------------------------
-    /*private void startSparks(){
-
-        appliance.GetComponent<PhotonView>().RPC("syncSparks", RpcTarget.All, appliance.GetComponent<PhotonView>().ViewID);
-    }*/
-    //-------------------------------------------
-
 
 }

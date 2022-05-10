@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
+// script to control exit behaviour of stove minigame
 public class ExitStoveMinigame : MonoBehaviour
 {
 	public Button yourButton;
@@ -28,7 +29,6 @@ public class ExitStoveMinigame : MonoBehaviour
 
 	private float prevScore;
 
-
 	void Start () {
 		score.text = "Caught: " + StoveMinigameCounter.collisionCounter + "/" + StoveScore.maximum;
 		Button btn = yourButton.GetComponent<Button>();
@@ -37,9 +37,8 @@ public class ExitStoveMinigame : MonoBehaviour
 		//GameEvents.current.assignPoints += appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
 	}
 
+	// on clicking the exit button (after the minigame has finished)
 	public void TaskOnClick(){
-
-		Debug.Log("Exit");
 		GameObject gamePlayer = GameObject.Find("Local");
 		PhotonView playerV = gamePlayer.GetPhotonView();
 		playerV.RPC("setInMinigameF", RpcTarget.All, playerV.ViewID);
@@ -69,7 +68,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 
-		//TO FIX!
 		//SOUND ----------------------------------------------------------
 		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.AllBuffered);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
@@ -78,14 +76,12 @@ public class ExitStoveMinigame : MonoBehaviour
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);
 		playerV.RPC("EnablePushing",RpcTarget.AllBuffered,playerV.ViewID);
-
-
 		gamePlayer.GetComponent<PlayerController>().enabled = true;
 		UICamera.enabled = false;
 		gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
-
 	}
 
+	// Any ingredients still remaining in the minigame are destroyed
 	private void DestroyRemaining()
     {
 		GameObject currentBackground;
@@ -96,7 +92,7 @@ public class ExitStoveMinigame : MonoBehaviour
 		else
 			currentBackground = background2;
 
-		// destroy game objects of background
+		// destroy child game objects of background (ingredients)
 		for (var i = currentBackground.transform.childCount - 1; i >= 0; i--)
 		{
 			Object.Destroy(currentBackground.transform.GetChild(i).gameObject);

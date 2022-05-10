@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+// lock to stop spamming picking/slotting items
 public class PickupLock
 {
     private static bool pickupLock = false;
@@ -17,7 +18,6 @@ public class PickupLock
     {
         pickupLock = false;
     }
-
 
     public bool GetLock()
     {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Controls the movement of the stove using RigidBody
 public class StoveMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D pot;
@@ -16,18 +18,16 @@ public class StoveMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Place pot and relevant items scaled to resolution
         int chosenY = (int)(2f * UICamera.orthographicSize);
         xBound = (int)(chosenY  * UICamera.aspect)/2;
-         
         pot = GetComponent<Rigidbody2D>();
-        //print(pot.position);
         lowerBound = pot.position.x - xBound;
         upperBound = pot.position.x + xBound;
         pot.position = new Vector3(Screen.width / 2, Screen.height / 5.5f,0);
-
-
     }
 
+    // Controlling the pot movement
     void FixedUpdate()
     {
         float h = Input.GetAxisRaw("Horizontal");

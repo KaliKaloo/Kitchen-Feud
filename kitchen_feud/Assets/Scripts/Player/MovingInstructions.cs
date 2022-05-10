@@ -37,6 +37,7 @@ public class MovingInstructions : MonoBehaviour
             "TIP: Steal their ingredients and dishes!", "TIP: Throw a smoke bomb by pressing the button in the bottom right", "TIP: Cook in their kitchen for double points!", "TIP: Add fake 10 seconds to their oven timer! This might cause a fire!", "TIP: Be careful, they can kick you out!"
         };
 
+    // starting instructions
     void Start()
     {
         Text.text = "Welcome! You can now move around using WASD or Arrow Keys!";
@@ -44,6 +45,7 @@ public class MovingInstructions : MonoBehaviour
 
     }
 
+    // continually checks what the current instruction is and changes based on certain events happening
     void Update()
     {
         if (LocalPlayer == null)

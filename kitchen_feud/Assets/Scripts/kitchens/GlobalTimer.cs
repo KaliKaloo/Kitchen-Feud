@@ -4,12 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+// Timer for server is established here, to be used globally for all scripts where necessary
 public class GlobalTimer
 {
 
     private Coroutine timerCoroutine;
 
-    // SET TIMER HERE !!!!!!
+    // default time set here
     public static int time = 300;
     public static int totalTime;
     private readonly int startTime = time;
@@ -18,16 +19,15 @@ public class GlobalTimer
     private ExitGames.Client.Photon.Hashtable hashTimer = new ExitGames.Client.Photon.Hashtable();
     Hashtable total = new Hashtable();
     public PhotonView PV;
+
     private void Start()
     {
-       
         if (PhotonNetwork.IsMasterClient)
         {
+            // set the servers time to whatever the master client has stored
             total["TotalTime"] = time;
             PhotonNetwork.CurrentRoom.SetCustomProperties(total);
         }
-
-
     }
 
     // changes original starting time, only do before game starts!
@@ -54,17 +54,18 @@ public class GlobalTimer
         }
     }
 
-    // sets the server's timer
     public void SetServerTime()
     {
         hashTimer["Time"] = timer;
         PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
     }
 
+    // timer should never go below 0
     public void ChangeTimerValue(int newTime)
     {
         timer = time = newTime >= 0 ? newTime : 0;
     }
+
     public void setTotalTime(int num)
     {
         totalTime = num;
@@ -72,18 +73,16 @@ public class GlobalTimer
 
     public int GetTotalTime()
     {
-
-
-
         if (PhotonNetwork.IsConnected)
         {
-
             if (PhotonNetwork.IsMasterClient)
             {
+                // use time stored locally
                 return time;
             }
             else
             {
+                // get time from server
                 if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
                 {
                     return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
@@ -94,10 +93,9 @@ public class GlobalTimer
         }
         else
         {
+            // use local time
             return time;
         }
-       
-  
     }
 
     // gets the time from the server
@@ -111,9 +109,7 @@ public class GlobalTimer
 
     public int GetLocalTime()
     {
-  
             return timer;
-   
     }
 
     public void SetLocalTime()
@@ -166,6 +162,7 @@ public class GlobalTimer
         monoBehaviour.StartCoroutine(DecrementTimer(monoBehaviour));
     }
 
+    // see above function
     private IEnumerator DecrementTimer(MonoBehaviour monoBehaviour)
     {
         yield return new WaitForSeconds(1);
@@ -185,15 +182,4 @@ public class GlobalTimer
             }
         }
     }
-    
-
-
-    // DEPRECATED: decrement timer
-    public void Decrement()
-    {
-        timer -= 1;
-        hashTimer["Time"] = timer;
-        PhotonNetwork.CurrentRoom.SetCustomProperties(hashTimer);
-    }
-    
 }

@@ -5,22 +5,14 @@ using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 
+// called when game ends 
 public class CleanupRoom : MonoBehaviour
 {
-    public Hashtable ht = new Hashtable();
     // cleans up room when called
     // put all things you need resetting/destroyed here
     public void Clean()
     {
-        //ht["loaded"] = 0;
-        //ht["Time"] = 0;
-        //ht["PlayingAgain"] = 1;
-        //PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         CleanPlayerSlots();
-      //  cleanPlayers();
-  
-
-
     }
     
     // Destroy all slots player is holding
@@ -36,19 +28,6 @@ public class CleanupRoom : MonoBehaviour
             }
 
             localPlayer = null;
-        }
-    }
-    private void cleanPlayers()
-    {
-       // if (PhotonNetwork.IsMasterClient)
-        {
-            foreach(Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
-            {
-                ht["loaded"] = 0;
-                ht["Time"] = 0;
-                ht["PlayingAgain"] = 1;
-                p.SetCustomProperties(ht);
-            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-
+// controls behaviour when item collides with tray
 public class TrayItemCollider : MonoBehaviour
 {
     private GameObject parentObject;
@@ -21,10 +21,12 @@ public class TrayItemCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
+        // slot item if an ingredient or dish
         if ((collision.CompareTag("Ingredient") || collision.CompareTag("Dish")) && collision.transform.parent)
         {
-
             GameObject player = collision.transform.parent.parent.gameObject;
+
+            // check if local player and not another play on network
             if (player.name == "Local")
             {
                 // Get player
@@ -34,30 +36,27 @@ public class TrayItemCollider : MonoBehaviour
                 {
                     GameObject objectHolding = playerHold.heldObj;
 
-                    // if player is holding an item
-                    if (player.transform.Find("slot").childCount == 1)
+                    // if player is holding an item and has room on tray
+                    if (player.transform.Find("slot").childCount == 1 && tray.ServingTray.Count < 4)
                     {
-                        //add object holding to tray slot if tray slot empty
-                        if (tray.ServingTray.Count < 4)
+                        for (int i = 0; i < slots.Count; i++)
                         {
-                            for (int i = 0; i < slots.Count; i++)
+                            if (slots[i].transform.childCount == 0)
                             {
-                                if (slots[i].transform.childCount == 0)
-                                {
-                                    playerHold.dropItem();
+                                playerHold.dropItem();
 
-                                    objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
-                                    objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
-                                    break;
-                                }
-                            }
-                            pickable = objectHolding.GetComponent<pickableItem>();
-                            pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
-                            if (objectHolding && player.GetComponent<PhotonView>().IsMine)
-                            {
-                                parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                                objectHolding.GetComponent<PhotonView>().RPC("setParent", RpcTarget.All,
+                                objectHolding.GetComponent<PhotonView>().ViewID, slots[i].GetComponent<PhotonView>().ViewID);
+                                break;
                             }
                         }
+                        pickable = objectHolding.GetComponent<pickableItem>();
+                        pickable.GetComponent<PhotonView>().RPC("trayBool", RpcTarget.All, pickable.GetComponent<PhotonView>().ViewID, parentObject.GetComponent<PhotonView>().ViewID);
+                        if (objectHolding && player.GetComponent<PhotonView>().IsMine)
+                        {
+                            parentObject.GetComponent<PhotonView>().RPC("addComps", RpcTarget.All, parentObject.GetComponent<PhotonView>().ViewID, objectHolding.GetComponent<PhotonView>().ViewID);
+                        }
+
                     }
                 }
             }

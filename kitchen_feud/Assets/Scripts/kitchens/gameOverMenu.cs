@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
+// controls the behaviour of the game over scene
 public class gameOverMenu : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject LeavingGameCanvas;
@@ -42,6 +42,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        // player can now leave without asking to rejoin
         PlayerPrefs.SetString("lastLobby", null);
         PlayerPrefs.SetInt("disconnected", 0);
         PlayerPrefs.Save();
@@ -49,6 +50,7 @@ public class gameOverMenu : MonoBehaviourPunCallbacks
         LeavingGameCanvas.SetActive(false);
 
         ChooseAnimation();
+
         // Reset all player stats after stats are displayed
         CustomProperties.PlayerResetStats.ResetAll();
 

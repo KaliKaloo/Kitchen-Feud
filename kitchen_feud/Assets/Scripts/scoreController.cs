@@ -205,7 +205,7 @@ public class scoreController : MonoBehaviour
                 StartCoroutine(getLocalTime());
             }
             // SIGNAL FOR GAME OVER:
-            else if (gameOver == false)
+            else if (!gameOver)
             {
                 // load game over screen and send final scores
                 for (int i = 0; i < trays.Count; i++)
@@ -216,7 +216,7 @@ public class scoreController : MonoBehaviour
                     ts.tray.objectsOnTray.Clear();
                 }
 
-                StartCoroutine(playTimesUpAnimation());
+                StartCoroutine(PlayTimesUpAnimation());
 
                 // stop checking time after
                 gameEnd = true;
@@ -226,7 +226,7 @@ public class scoreController : MonoBehaviour
     }
 
     // plays animation and exits game
-    public IEnumerator playTimesUpAnimation()
+    public IEnumerator PlayTimesUpAnimation()
     {
         timesUpCanvas.SetActive(true);
         // play animation

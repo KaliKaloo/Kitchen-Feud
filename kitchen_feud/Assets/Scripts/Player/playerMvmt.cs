@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
+// allows use of current animator between scripts
 public class playerAnimator
 {
     public static Animator animator;
@@ -13,21 +14,12 @@ public class playerAnimator
     {
         animator = newAnimator;
     }
-
-    public static void ResetBools()
-    {
-        animator.SetBool("IsStrafingRight", false);
-        animator.SetBool("IsStrafingLeft", false);
-        animator.SetBool("IsMovingForwards", false);
-        animator.SetBool("IsMovingBackwards", false);
-        animator.SetBool("IsCooking", false);
-    }
 }
 
 public class playerMvmt : MonoBehaviour
 {
     public float rotatespeed, mvmtSpeed;
-	GameObject rotateSlider, speedSlider;
+    GameObject rotateSlider, speedSlider;
     public Transform playerBody;
     float xRotation = 0.0f;
     public Rigidbody rb;
@@ -65,13 +57,14 @@ public class playerMvmt : MonoBehaviour
             disableForOthers = true;
         }
 
-        if (PV.IsMine && transform.parent.name =="Local")
+        if (PV.IsMine && transform.parent.name == "Local")
         {
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
 
-            //animations
+            // animations
+
             // walk forward
             if (Vertical > 0)
                 animator.SetBool("IsMovingForwards", true);
@@ -100,15 +93,17 @@ public class playerMvmt : MonoBehaviour
         }
 
         updateSettings();
-      
+
 
     }
 
     //mvmt and rotation settings
-    private void updateSettings(){
+    private void updateSettings()
+    {
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
-        if (rotateSlider && speedSlider){
+        if (rotateSlider && speedSlider)
+        {
             mvmtSpeed = speedSlider.GetComponentInChildren<Slider>().value;
             rotatespeed = rotateSlider.GetComponentInChildren<Slider>().value;
         }
@@ -117,7 +112,7 @@ public class playerMvmt : MonoBehaviour
     private void LateUpdate()
     {
         if (PV.IsMine && transform.parent.name == "Local")
-        {   
+        {
 
             // Rotation
             if (Input.GetMouseButton(1)) //right click drag
@@ -128,21 +123,21 @@ public class playerMvmt : MonoBehaviour
                 xRotation -= mouseY;
                 xRotation = Mathf.Clamp(xRotation, -90f, 48f); //clamp rotation
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                playerBody.Rotate(Vector3.up*mouseX);
+                playerBody.Rotate(Vector3.up * mouseX);
 
             }
             else if (Input.GetKey(KeyCode.Q))
             {
                 float rotation = rotatespeed * Time.deltaTime;
                 xRotation -= rotation;
-                playerBody.Rotate(-Vector3.up*rotation);
+                playerBody.Rotate(-Vector3.up * rotation);
 
             }
             else if (Input.GetKey(KeyCode.E))
             {
                 float rotation = rotatespeed * Time.deltaTime;
                 xRotation += rotation;
-                playerBody.Rotate(Vector3.up*rotation);
+                playerBody.Rotate(Vector3.up * rotation);
             }
             else
             {
@@ -154,10 +149,10 @@ public class playerMvmt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PV.IsMine && transform.parent.name =="Local")
+        if (PV.IsMine && transform.parent.name == "Local")
         {
             // mvmt
-            rb.velocity =  movement * mvmtSpeed ;
+            rb.velocity = movement * mvmtSpeed;
         }
     }
 

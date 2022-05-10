@@ -1,4 +1,4 @@
-
+// scores are stored here and used globally
 public class ParseScore
 {
     private static int score1 = 0;
@@ -10,12 +10,14 @@ public class ParseScore
         score2 = newScore2;
     }
 
+    // adds to team 1 and ensures doesn't go below 0
     public void AddScore1(int newScore1)
     {
         if ((score1 + newScore1) >= 0)
             score1 += newScore1;
     }
 
+    // adds to team 2 and ensures doesn't go below 0
     public void AddScore2(int newScore2)
     {
         if ((score2 + newScore2) >= 0)

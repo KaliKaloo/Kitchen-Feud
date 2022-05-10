@@ -24,7 +24,7 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     public string instructionURL;
 
     public GameObject videoCanvas;
-    bool instructionPlayed =false;
+    bool instructionPlayed = false;
 
 
     // Start is called before the first frame update
@@ -38,27 +38,28 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         videoPlayer.loopPointReached += CheckOver;
     }
 
- 
+
     void CheckOver(UnityEngine.Video.VideoPlayer videoPlayer)
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if(!instructionPlayed){
+            if (!instructionPlayed)
+            {
                 PV.RPC("playInstructionVideo", RpcTarget.All, PV.ViewID);
             }
-            else{
+            else
+            {
                 menu.startGame();
             }
         }
     }
-    
 
     public void VoteSkipCutscene()
     {
         // check if button hasn't been pressed
         if (!skipButtonPressed)
         {
-            PV.RPC("increment",RpcTarget.All,PV.ViewID);
+            PV.RPC("increment", RpcTarget.All, PV.ViewID);
             skipButtonPressed = true;
             // increment amount of people who pressed button on network
             if (customProperties["Skip"] != null)
@@ -69,7 +70,8 @@ public class CutsceneController : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator tutorialLoadingScreen (int viewID){
+    IEnumerator tutorialLoadingScreen(int viewID)
+    {
         CutsceneController cutsceneC = PhotonView.Find(viewID).GetComponent<CutsceneController>();
         instructionPlayed = true;
 
@@ -101,14 +103,14 @@ public class CutsceneController : MonoBehaviourPunCallbacks
             videoPlayer.targetTexture.Release();
             StartCoroutine(tutorialLoadingScreen(viewID));
 
-            
+
         }
     }
 
     [PunRPC]
     void playVideo(int viewID)
     {
-        CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        CutsceneController cutsceneC = PhotonView.Find(viewID).GetComponent<CutsceneController>();
         cutsceneC.skipButtonInstructions.SetActive(false);
         cutsceneC.videoCanvas.SetActive(true);
         cutsceneC.videoPlayer.Play();
@@ -118,7 +120,7 @@ public class CutsceneController : MonoBehaviourPunCallbacks
     [PunRPC]
     void playInstructionVideo(int viewID)
     {
-        CutsceneController cutsceneC =   PhotonView.Find(viewID).GetComponent<CutsceneController>();
+        CutsceneController cutsceneC = PhotonView.Find(viewID).GetComponent<CutsceneController>();
         cutsceneC.skipButton.SetActive(false);
 
         if (PhotonNetwork.IsMasterClient)
