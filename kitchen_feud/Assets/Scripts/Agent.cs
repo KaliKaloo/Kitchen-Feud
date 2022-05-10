@@ -12,13 +12,11 @@ public class Agent : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject Oven;
     public Tray tray;
-    bool isMoving;
     public PlayerHolding playerHold;
     public PhotonView PV;
     public bool readyToServe;
     public GameObject agentTray;
     public bool served;
-    private bool test = false;
     public bool goingToCollect;
     public bool goingToServe;
     public bool goingBack;
