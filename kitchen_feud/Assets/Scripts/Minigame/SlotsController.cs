@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; 
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+
 
 public class SlotsController : MonoBehaviour {
     public List<Transform> slots = new List<Transform>();
