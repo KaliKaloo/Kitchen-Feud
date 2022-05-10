@@ -53,7 +53,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 
     [UnityTearDown]
-    public IEnumerator MovementTearDown()
+    public IEnumerator TearDown()
     {
         if (obj != null)
             PhotonNetwork.Destroy(obj);

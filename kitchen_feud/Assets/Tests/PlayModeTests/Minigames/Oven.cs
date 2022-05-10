@@ -40,7 +40,7 @@ public class OvenTests : PhotonTestSetup {
 
 
     [UnityTearDown]
-    public IEnumerator MovementTearDown()
+    public IEnumerator TearDown()
     {
         if (obj != null)
             PhotonNetwork.Destroy(obj);
