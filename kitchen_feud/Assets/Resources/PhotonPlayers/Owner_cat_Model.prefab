@@ -508,6 +508,7 @@ MonoBehaviour:
   anim: {fileID: 7772909676096678396}
   playOnce: 0
   oven: {fileID: 0}
+  localPlayer: {fileID: 0}
   currentlyTalking: 0
   firstTime: 0
   currentlyShouting: 0
