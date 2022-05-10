@@ -81,9 +81,11 @@ public class cutController : MonoBehaviour
         List<Sprite> dishSprites = InstantiateList(dish.recipe);
         newIngredients = new List<Sprite>(dishSprites);
         
+        StartButton.SetActive(false);
         scoreSystem.SetActive(true);
 
         // start cooking animation
+        
         playerAnimator.animator.SetBool("IsCooking", true);
 
         //call ingredient spawner with a list od ingredient sprites
