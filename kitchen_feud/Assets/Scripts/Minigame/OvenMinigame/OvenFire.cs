@@ -23,31 +23,22 @@ public class OvenFire : MonoBehaviour
             team = transform.parent.GetComponent<Appliance>().kitchenNum;
             hasParent = true;
         }
-        //and condition if temperature is too high
-        if(!startFire){
-
-            if(timer.timer < -5){
-                foreach(ParticleSystem p in PS){
-                    Debug.Log("work");
-                    if(p.GetComponent<FireOut>()){
-                        fireOut = p.GetComponent<FireOut>();
-                        fireOut.resetEmission();
-                        fireOut.enabled=true;
-                    }
-                    p.Play();
+        //if temperature too high
+        if(!startFire && timer.timer < -5){
+            foreach(ParticleSystem p in PS){
+                if(p.GetComponent<FireOut>()){
+                    fireOut = p.GetComponent<FireOut>();
+                    fireOut.resetEmission();
+                    fireOut.enabled=true;
                 }
-                if (fireSound){
-                    //SOUND -------------------------------------------
-                    fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
-                    //-------------------------------------------------
-                }
-                
-                startFire = true;
-
-                   
-
+                p.Play();
+            }
+            if (fireSound){
+                //SOUND fx
+                fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
             }
             
+            startFire = true;
            
         }
 

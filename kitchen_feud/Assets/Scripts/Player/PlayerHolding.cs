@@ -45,8 +45,6 @@ public class PlayerHolding : MonoBehaviour
         if (!pickupLock.GetLock())
         {
             StartCoroutine(LockPickup());
-
-
             if (obj.GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 slotItem(obj);
@@ -84,21 +82,14 @@ public class PlayerHolding : MonoBehaviour
     {
         PhotonView objPV = obj.GetComponent<PhotonView>();
         this.GetComponent<PhotonView>().RPC("SetParentAsSlot", RpcTarget.All, view.ViewID, obj.GetComponent<PhotonView>().ViewID);
-        if (heldObj.GetComponent<Rigidbody>() || heldObj.name == "TrayPrefab(Clone)") 
+        if ((heldObj.GetComponent<Rigidbody>() || heldObj.name == "TrayPrefab(Clone)") && (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2") && !transform.tag.Contains("Owner")))
         {
-
-
-            if (!transform.CompareTag("Waiter1") && !transform.CompareTag("Waiter2") && !transform.tag.Contains("Owner"))
-
+            // change to pickable layer
+            heldObj.layer = 8;
+            foreach (Transform child in heldObj.transform)
             {
-                heldObj.layer = 8;
-
-                foreach (Transform child in heldObj.transform)
-                {
-                    if (!child.GetComponent<ParticleSystem>()){
-                        child.gameObject.layer = 8;
-                    }
-                   
+                if (!child.GetComponent<ParticleSystem>()){
+                    child.gameObject.layer = 8;
                 }
             }
         }
@@ -157,14 +148,12 @@ public class PlayerHolding : MonoBehaviour
     [PunRPC]
     void SetParentAsNull(int viewID, int heldObjId)
     {
-        {
-            PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
-            GameObject obj = PhotonView.Find(heldObjId).gameObject;
-            obj.transform.SetParent(null);
-            obj.GetComponent<Rigidbody>().isKinematic = false;
-            obj.GetComponent<Collider>().isTrigger = false;
-            itemdropped = true;
-        }
+        PhotonView.Find(viewID).GetComponent<PlayerHolding>().heldObj = null;
+        GameObject obj = PhotonView.Find(heldObjId).gameObject;
+        obj.transform.SetParent(null);
+        obj.GetComponent<Rigidbody>().isKinematic = false;
+        obj.GetComponent<Collider>().isTrigger = false;
+        itemdropped = true;
     }
    
 

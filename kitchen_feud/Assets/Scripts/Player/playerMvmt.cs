@@ -26,20 +26,15 @@ public class playerAnimator
 
 public class playerMvmt : MonoBehaviour
 {
-    public float rotatespeed;
-    public float mvmtSpeed;
-	GameObject rotateSlider;
-	GameObject speedSlider;
+    public float rotatespeed, mvmtSpeed;
+	GameObject rotateSlider, speedSlider;
     public Transform playerBody;
     float xRotation = 0.0f;
     public Rigidbody rb;
     public PhotonView PV;
-    float Horizontal;
-    float Vertical;
+    float Horizontal, Vertical;
     private bool disableForOthers;
     Vector3 movement;
-    
-
     private Animator animator;
 
 
@@ -48,7 +43,6 @@ public class playerMvmt : MonoBehaviour
         GameObject parent = transform.parent.gameObject;
         rb = GetComponentInParent<Rigidbody>();
         PV = GetComponentInParent<PhotonView>();
-        //SOUND
         if (GameObject.Find("Local"))
         {
             if (!GameObject.Find("Local").GetComponentInChildren<AudioListener>().enabled)
@@ -77,6 +71,7 @@ public class playerMvmt : MonoBehaviour
             Vertical = Input.GetAxis("Vertical");
             movement = transform.forward * Vertical + transform.right * Horizontal;
 
+            //animations
             // walk forward
             if (Vertical > 0)
                 animator.SetBool("IsMovingForwards", true);
@@ -103,26 +98,35 @@ public class playerMvmt : MonoBehaviour
 
 
         }
+
+        updateSettings();
+      
+
+    }
+
+    //mvmt and rotation settings
+    private void updateSettings(){
         rotateSlider = GameObject.Find("Rotation");
         speedSlider = GameObject.Find("Speed");
         if (rotateSlider && speedSlider){
             mvmtSpeed = speedSlider.GetComponentInChildren<Slider>().value;
             rotatespeed = rotateSlider.GetComponentInChildren<Slider>().value;
         }
-
     }
+
     private void LateUpdate()
     {
-
         if (PV.IsMine && transform.parent.name == "Local")
-        {
-            if (Input.GetMouseButton(1))
+        {   
+
+            // Rotation
+            if (Input.GetMouseButton(1)) //right click drag
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 float mouseX = Input.GetAxis("Mouse X") * rotatespeed * Time.deltaTime;
                 float mouseY = Input.GetAxis("Mouse Y") * rotatespeed * Time.deltaTime;
                 xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -90f, 48f);
+                xRotation = Mathf.Clamp(xRotation, -90f, 48f); //clamp rotation
                 transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
                 playerBody.Rotate(Vector3.up*mouseX);
 
@@ -152,9 +156,8 @@ public class playerMvmt : MonoBehaviour
     {
         if (PV.IsMine && transform.parent.name =="Local")
         {
-            {
-                rb.velocity =  movement * mvmtSpeed ;
-            }
+            // mvmt
+            rb.velocity =  movement * mvmtSpeed ;
         }
     }
 

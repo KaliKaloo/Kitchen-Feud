@@ -108,8 +108,6 @@ public class Timer : MonoBehaviour
         }
         timer -= 1;
         timerFake -=1;
-       
-     
     }
   
 
@@ -145,7 +143,6 @@ public class Timer : MonoBehaviour
     public void InitialiseCanvas()
     {
         applianceName = transform.parent.name;
-        
 
         if (applianceName == "Oven1" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2)
         {

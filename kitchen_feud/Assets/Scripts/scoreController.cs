@@ -158,39 +158,36 @@ public class scoreController : MonoBehaviour
         }
     }
 
+    // react to big score difference by music pitching
     void reactScore(int score1, int score2){
-        if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null) {
-            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) {
-                if (PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) { 
-                GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
-
-                int team = localP.GetComponent<PlayerController>().myTeam;
-                    if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null && ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) && 
+        PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) {
+            GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
+            int team = localP.GetComponent<PlayerController>().myTeam;
+            if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0) // give pitching priority to other events
+            {
+                if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
+                {
+                    if (team == 1)
                     {
-                        if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
-                        {
-                            if (team == 1)
-                            {
-                                float ratio = score2 / score1;
-                                ratio = 1 - (1 - ratio) / 4;
-                                float pitch = Mathf.Min(ratio, 1.3f);
-                                pitch = Mathf.Max(pitch, 0.7f);
-                                MusicManager.instance.musicReact(pitch);
-                            }
-                            else if (team == 2)
-                            {
-                                float ratio = score1 / score2;
-                                ratio = 1 - (1 - ratio) / 4;
-                                float pitch = Mathf.Min(ratio, 1.3f);
-                                pitch = Mathf.Max(pitch, 0.7f);
-                                MusicManager.instance.musicReact(pitch);
-                            }
-                        }
-                        else
-                        {
-                            MusicManager.instance.endReaction();
-                        }
+                        float ratio = score2 / score1;
+                        ratio = 1 - (1 - ratio) / 4;
+                        float pitch = Mathf.Min(ratio, 1.3f);
+                        pitch = Mathf.Max(pitch, 0.7f);
+                        MusicManager.instance.musicReact(pitch);
                     }
+                    else if (team == 2)
+                    {
+                        float ratio = score1 / score2;
+                        ratio = 1 - (1 - ratio) / 4;
+                        float pitch = Mathf.Min(ratio, 1.3f);
+                        pitch = Mathf.Max(pitch, 0.7f);
+                        MusicManager.instance.musicReact(pitch);
+                    }
+                }
+                else
+                {
+                    MusicManager.instance.endReaction();
                 }
             }
         }
@@ -207,11 +204,9 @@ public class scoreController : MonoBehaviour
                 // keep decrementing if not 0
                 StartCoroutine(getLocalTime());
             }
-
             // SIGNAL FOR GAME OVER:
             else if (gameOver == false)
             {
-
                 // load game over screen and send final scores
                 for (int i = 0; i < trays.Count; i++)
                 {
