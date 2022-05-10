@@ -237,8 +237,7 @@ public class Owner : MonoBehaviour
     }
 
     void enterSecondTime() {
-        if(timer.GetLocalTime() == 190)
-        //if (timer.GetLocalTime() == timer.GetTotalTime() / 4)
+        if (timer.GetLocalTime() == timer.GetTotalTime() / 4)
         {
             PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
 
@@ -396,7 +395,6 @@ public class Owner : MonoBehaviour
         {
             if ((transform.position - spawnPoint).magnitude < 3)
             {
-                // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                 PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
                 returned = false;
             }
@@ -429,14 +427,12 @@ public class Owner : MonoBehaviour
                     {
                         PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
                     }
-                    //Text.text = p.NickName + "!";
                     calledName = true;
                 }
             }
             else
             {
                 if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
-                //if (timer.GetLocalTime() < 260)
                 {
                     firstTime = true;
 
@@ -451,10 +447,8 @@ public class Owner : MonoBehaviour
     void ownerOneInitialAction()
     {
 
-        if(timer.GetLocalTime() == 270 && !decided)
-        //if (timer.GetLocalTime() == timer.GetTotalTime() / 2 - 15 && !decided)
+        if (timer.GetLocalTime() == timer.GetTotalTime() / 2 - 15 && !decided)
         {
-            // if (timer.GetLocalTime() == timer.GetTotalTime() / 4 - 10)
             if (rnd.Next(2) == 1)
 
             {
@@ -469,7 +463,6 @@ public class Owner : MonoBehaviour
                 notThrowing = true;
             }
             decided = true;
-            //else do something
         }
 
 
@@ -511,7 +504,6 @@ public class Owner : MonoBehaviour
             if ((transform.position - spawnPoint).magnitude < 1)
             {
                 PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
-                //  transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
                 returned = false;
             }
         }
@@ -521,7 +513,6 @@ public class Owner : MonoBehaviour
     void correctingAgentRotationTOne()
     {
         if((agent.transform.position - kitchenDestinationPoint).magnitude < 1)
-      //  if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
         {
             if (!faceforward)
             {
@@ -708,8 +699,7 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-       //if (timer.GetLocalTime() > timer.GetTotalTime()/4)
-       if(timer.GetLocalTime() > 210)
+        if (timer.GetLocalTime() > timer.GetTotalTime()/4)
         {
             firstTime = true;
         }

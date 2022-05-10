@@ -55,8 +55,6 @@ public class SlotsController : MonoBehaviour {
      void removeFromApplianceRPC(int appViewID, int objViewID,int playerID)
     {
         RemoveFromAppliance(PhotonView.Find(appViewID).GetComponent<Appliance>(), PhotonView.Find(objViewID).gameObject,PhotonView.Find(playerID).gameObject);
-
-
     }
 
 
