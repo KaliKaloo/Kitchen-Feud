@@ -54,22 +54,24 @@ public class Agent : MonoBehaviour
 
         if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
-
+            //make sure waiters are facing the right way
             fixRotation();
 
             if (tray)
             {
+                //go up to the tray and collect items
                 foundTray();
             }
 
             if (readyToServe)
             {
-
+                //go to customers and serve
                 collectedDish();
             }
 
             if (served)
             {
+                //return to original position
                 returnToWaitingPos();
             
             }
