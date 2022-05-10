@@ -89,7 +89,7 @@ public class Cutting: PhotonTestSetup
 
 
     [UnityTest]
-    public IEnumerator sandwichStationIncorrectIngredients()
+    public IEnumerator cuttingBoardIncorrectIngredients()
     {
         choppingBoard.player = obj.transform;
         playerHold.pickUpItem(lettuce);
@@ -138,13 +138,13 @@ public class Cutting: PhotonTestSetup
         choppingBoard.Interact();
         playerHold.pickUpItem(cucumber);
         choppingBoard.Interact();
-        choppingBoard.Interact();
 
         if (playerHold.slot.childCount >= 1)
             playerHold.dropItem();
+        choppingBoard.Interact();
+        
         Assert.IsTrue(choppingBoard.minigameCanvas.activeSelf);
         choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartGame();
-        yield return new WaitForSeconds(0.5f);
         Assert.IsFalse(choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().StartButton.activeSelf);
         yield return new WaitForSeconds(0.2f);
         choppingBoard.minigameCanvas.GetComponentInChildren<cutController>().backButton.GetComponentInChildren<ExitCuttingMinigame>().TaskOnClick();

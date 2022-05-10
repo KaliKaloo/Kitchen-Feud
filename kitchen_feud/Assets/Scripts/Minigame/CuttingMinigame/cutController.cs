@@ -84,8 +84,6 @@ public class cutController : MonoBehaviour
         StartButton.SetActive(false);
         scoreSystem.SetActive(true);
 
-        // start cooking animation
-        
         playerAnimator.animator.SetBool("IsCooking", true);
 
         //call ingredient spawner with a list od ingredient sprites
@@ -94,7 +92,6 @@ public class cutController : MonoBehaviour
         //call bomb spanwer with a list of "wrong" ingredient sprites
         BombSpawner.StartSpawn(bombSprites);
         
-       //scoretext.text = "Score: " + Score;
         Ingredient = 0;
         if (newIngredients.Count >= 1 && newIngredients[0])
             Ingredient1.sprite = newIngredients[0];
