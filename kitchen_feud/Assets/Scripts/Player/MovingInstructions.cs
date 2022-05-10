@@ -30,10 +30,7 @@ public class MovingInstructions : MonoBehaviour
     private float time = 4f;
     public float timer;
     private bool started = false;
-    private bool finished = false;
-    private bool enemyInstructions = false;
 
-    // how long in seconds enemy instructions have between when shown
     private float enemyInstructionDelay = 6;
     List<string> randomInstructionList = new List<string>
         {
@@ -125,6 +122,7 @@ public class MovingInstructions : MonoBehaviour
             started = true;
         }
 
+        //Timer to clear text once finished
         if (started == true)
         {
             Decrement();
@@ -162,8 +160,6 @@ public class MovingInstructions : MonoBehaviour
     {
         globalClicked.enemyInstructions = true;
 
-        // show a random instruction from list then remove it
-
         if (!mouse.activeSelf && !keyboard.activeSelf)
         {
             owner1.SetActive(false);
@@ -171,7 +167,6 @@ public class MovingInstructions : MonoBehaviour
             mouse.SetActive(true);
             keyboard.SetActive(true);
         }
-
         int first = Random.Range(0, randomInstructionList.Count);
         Text.text = randomInstructionList[first];
         randomInstructionList.RemoveAt(first);

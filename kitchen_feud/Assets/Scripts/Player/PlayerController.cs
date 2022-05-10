@@ -78,9 +78,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 						if (player.transform.Find("slot").childCount!= 0) playerHold.dropItem();
 						RemoveFocus();
 					}
-					// -------------------------------------------------------------------------
 				}
 			}
+
 			else if (Input.GetKeyDown(KeyCode.F) && player.transform.Find("slot") && player.transform.Find("slot").childCount == 1 ){
 				Transform fireExtinguisher = player.transform.Find("slot").GetChild(0);
 				ParticleSystem fire_ps = fireExtinguisher.GetComponentInChildren<ParticleSystem>();

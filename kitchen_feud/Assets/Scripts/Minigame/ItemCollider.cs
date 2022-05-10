@@ -15,21 +15,16 @@ public class ItemCollider : MonoBehaviour
         parentAppliance = parentObject.GetComponent<Appliance>();
     }
 
+    //On trigger slot item to appliance
     void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Ingredient") && collision.transform.parent)
      
         {
-
-
-            // Get playe
-            //collision.GetComponent<BoxCollider>().isTrigger = true;
             GameObject player = collision.transform.parent.parent.gameObject;
             PhotonView pv = player.GetComponent<PhotonView>();
-            // Send player to appliance
             parentAppliance.GetComponent<PhotonView>().RPC("setPlayer", RpcTarget.AllBuffered, parentAppliance.GetComponent<PhotonView>().ViewID,
                 pv.ViewID);
-            //parentAppliance.player = player.transform;
 
             PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
             parentAppliance.playerRigidbody = player.GetComponent<Rigidbody>();
@@ -37,22 +32,11 @@ public class ItemCollider : MonoBehaviour
 
             if (pv.IsMine && parentAppliance.canUse && playerHold && !playerHold.itemLock)
             {
-                // PLAY SOUND FOR SLOT HERE
                 globalClicked.applianceInteract = true;
                 parentObject.GetComponent<PhotonView>().RPC("addItemRPC", RpcTarget.AllBuffered, playerHold.heldObj.GetComponent<PhotonView>().ViewID,
                                     player.GetComponent<PhotonView>().ViewID);
-                // playerHold.GetComponent<PhotonView>().RPC("setHeldobjAsNull", RpcTarget.AllBuffered, playerHold.GetComponent<PhotonView>().ViewID);
             }
                 
         }
     }
-
-    //[PunRPC]
-    //void addItemRPC(int heldViewID, int viewID1)
-    //{
-    //    PhotonView.Find(viewID1).GetComponent<PlayerHolding>().heldObj = null;
-
-    //    parentAppliance.addItem(PhotonView.Find(heldViewID).gameObject, PhotonView.Find(viewID1).gameObject.GetComponent<PlayerHolding>());
-    //}
-
 }

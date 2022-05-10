@@ -66,18 +66,6 @@ public class PlayerHolding : MonoBehaviour
         slotItem(obj);
     }
 
-    [PunRPC]
-    void changeLayer(int viewID, int layer)
-    {
-        PhotonView.Find(viewID).gameObject.layer = layer;
-        foreach (Transform child in PhotonView.Find(viewID).gameObject.transform)
-        {
-            child.gameObject.layer = layer;
-        }
-    }
-
-
-
     void slotItem(GameObject obj)
     {
         PhotonView objPV = obj.GetComponent<PhotonView>();
@@ -96,11 +84,9 @@ public class PlayerHolding : MonoBehaviour
     }
 
 
-
     IEnumerator LockPickup()
     {
         itemLock = true;
-        // wait 0.5 seconds before can do anything else
         yield return new WaitForSeconds(0.5f);
         itemLock = false;
 
@@ -129,6 +115,17 @@ public class PlayerHolding : MonoBehaviour
 
         }
     }
+
+    [PunRPC]
+    void changeLayer(int viewID, int layer)
+    {
+        PhotonView.Find(viewID).gameObject.layer = layer;
+        foreach (Transform child in PhotonView.Find(viewID).gameObject.transform)
+        {
+            child.gameObject.layer = layer;
+        }
+    }
+
     [PunRPC]
     void SetParentAsSlot(int viewID,int heldObjId)
     {

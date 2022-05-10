@@ -27,8 +27,6 @@ public class ovenMiniGame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
                 canvasTag = appliance.kitchenNum;
- 
-
             }
         }
         if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){
@@ -40,7 +38,6 @@ public class ovenMiniGame : MonoBehaviour
     }
 
 
-    //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsOven()
     {
         if (appliance.isBeingInteractedWith)

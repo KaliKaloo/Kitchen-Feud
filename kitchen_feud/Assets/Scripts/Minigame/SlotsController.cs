@@ -8,8 +8,6 @@ using UnityEngine.EventSystems;
 
 public class SlotsController : MonoBehaviour {
     public List<Transform> slots = new List<Transform>();
-    // Appliance appliance;
-    //might need to set to 0 somwhere else
     private int fullnessCount = 0;
 
     public void PutOnAppliance(GameObject heldObjArg) {
