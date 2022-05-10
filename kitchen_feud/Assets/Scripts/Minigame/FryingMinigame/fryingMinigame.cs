@@ -40,28 +40,13 @@ public class fryingMinigame : MonoBehaviour
         if (gameCanvas && set == false)
         {
 
-            //int canvasTag = appliance.kitchenNum;
-            //if (canvasTag == 1)
-            //{
-            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground2");
-            //    otherTeam.SetActive(false);
-
-            //}
-            //else if (canvasTag == 2)
-            //{
-            //    GameObject otherTeam = GameObject.FindGameObjectWithTag("FryingBackground1");
-            //    otherTeam.SetActive(false);
-
-            //}
+   
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
             
             slider = gameCanvas.GetComponentInChildren<Slider>();
             backbutton = gameCanvas.GetComponentInChildren<ExitFryingMinigame>();
-            //plate = canv.GetComponentInChildren<Plate>();
-            //pan = canv.GetComponentInChildren<PanController>();
-           // friedFoodController = GameObject.Find("Pancake(Clone)").GetComponent<FriedFoodController>();
-            //friedFoodController.dishSO = appliance.foundDish;
+
             set = true;
 
             friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(friedFoodController.dishSO.dishID);
@@ -85,8 +70,6 @@ public class fryingMinigame : MonoBehaviour
                         friedFoodController.dishSO = appliance.foundDish;
                         friedFoodController.appliance = appliance;
 
-//                        spriteName = friedFoodController.dishSO.dishID;
-//                        friedFoodController.GetComponent<Image>().sprite = imgAtlas.GetSprite(spriteName);
                         
                     }
                 }

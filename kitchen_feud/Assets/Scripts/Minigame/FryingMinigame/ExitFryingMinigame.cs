@@ -73,7 +73,6 @@ public class ExitFryingMinigame : MonoBehaviour
         gamePlayer.GetComponent<PlayerController>().enabled = true;
         appliance.UIcamera.enabled =  false;
 
-		//PV.RPC("enableMe", RpcTarget.All, PV.ViewID);
         Destroy(minigameCanvas);
 	
 
