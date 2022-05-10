@@ -16,11 +16,9 @@ public class SandwichStation: MonoBehaviour
 
     void Start()
     {
-      //  GameEvents.current.assignPoints += UpdateDishPointsSandwich;
         appliance = GetComponent<Appliance>();
-       
-
     }
+
     void Update()
     {
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
@@ -34,7 +32,6 @@ public class SandwichStation: MonoBehaviour
             {
                 SandwichController.dish = appliance.foundDish;
             }
-
         }
     }
 
@@ -67,9 +64,6 @@ public class SandwichStation: MonoBehaviour
 
 
                 }
-
-
-
             }
             else
             {
@@ -78,6 +72,4 @@ public class SandwichStation: MonoBehaviour
         }
 
     }
-
-
 }

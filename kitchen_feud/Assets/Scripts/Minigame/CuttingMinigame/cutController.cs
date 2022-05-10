@@ -18,7 +18,6 @@ public class cutController : MonoBehaviour
     public Image Ingredient1;
     public Image Ingredient2;
     public Image Ingredient3;
-    //public Text scoretext;
     public Text numtext;
 
     public GameObject backButton;
@@ -38,7 +37,6 @@ public class cutController : MonoBehaviour
         set
         {
             score = value;
-            //scoretext.text = "Score: " + score;
         }
     }
 
@@ -83,8 +81,6 @@ public class cutController : MonoBehaviour
         List<Sprite> dishSprites = InstantiateList(dish.recipe);
         newIngredients = new List<Sprite>(dishSprites);
         
-        //instructions.SetActive(false);
-        StartButton.SetActive(false);
         scoreSystem.SetActive(true);
 
         // start cooking animation
@@ -119,7 +115,6 @@ public class cutController : MonoBehaviour
         {
             cM.UpdateDishPointsCutting();
         }
-        //GameEvents.current.assignPointsEventFunction();
        
     }
 }

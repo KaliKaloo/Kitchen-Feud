@@ -19,9 +19,8 @@ public class Knife : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             this.dragging = true;
+
             //to get the unity coordinates we need to access the camera\
-            //swipeStart = Input.mousePosition;
-            //Debug.Log(Input.mousePosition);
             swipeStart = UICamera.ScreenToWorldPoint(Input.mousePosition); 
         }
         else if (Input.GetMouseButtonUp(0) && this.dragging)
@@ -34,8 +33,7 @@ public class Knife : MonoBehaviour
     private void SpawnCut()
     {
         Vector2 swipeEnd = UICamera.ScreenToWorldPoint (Input.mousePosition);
-        //Vector2 swipeEnd = Input.mousePosition; 
-        //Debug.Log(Input.mousePosition);
+
         //instantiate and set position of line renderer
         GameObject cutInstance = Instantiate(this.cutPrefab, this.swipeStart, Quaternion.identity);
         cutInstance.GetComponent<LineRenderer>().SetPosition(0, this.swipeStart);
@@ -45,7 +43,7 @@ public class Knife : MonoBehaviour
         //change how collider of line works
         //the colliders position system is relative to where we start drawing the cut
         Vector2[] colliderPoints = new Vector2[2];
-        //colliderPoints[0] = Vector2.zero;
+
         colliderPoints[0] = Vector2.zero;
         colliderPoints[1] = swipeEnd - swipeStart;
         cutInstance.GetComponent<EdgeCollider2D>().points = colliderPoints;

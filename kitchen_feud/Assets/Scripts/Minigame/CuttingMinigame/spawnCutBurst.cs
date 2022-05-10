@@ -18,6 +18,7 @@ public class spawnCutBurst : MonoBehaviour
         
         ParticleSystem ps = newObject.GetComponent<ParticleSystem>();
 
+        //setting the color
         foreach (Transform child in newObject.transform){
             ParticleSystem psChild = child.GetComponent<ParticleSystem>();
             Debug.Log(psChild.name);
@@ -32,6 +33,7 @@ public class spawnCutBurst : MonoBehaviour
         Destroy(newObject,1f);
     }
 
+    // gets the average color of the sprite cut, to set the color of the PS
     Color AverageColorFromTexture(Texture2D tex)
     {
         Color32[] texColors = tex.GetPixels32();

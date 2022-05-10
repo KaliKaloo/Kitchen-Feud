@@ -27,7 +27,6 @@ public class SandwichMove : MonoBehaviour
     
     void Start()
     {
-        // perfectPosition = (Screen.width/2, Screen.height/2, 0);
         perfectPosition = platform.localPosition;
         
         locationA = leftLocation.localPosition;
@@ -38,18 +37,6 @@ public class SandwichMove : MonoBehaviour
         platform.GetComponent<Image>().sprite = imgAtlas.GetSprite(LayerID);
 
     }   
-
-    // public void OnPointerClick(PointerEventData eventData)
-    // {
-    //     Debug.Log("clicked");
-    //     if ((!stopped) && (SandwichController.checkStoppedID(LayerID))){
-    //         stopped = true;
-    //         SandwichController.moving = false;
-    //         SandwichController.CountStopped++;
-    //         StopMove();
-    //     }
-
-    // }
 
     void Update() 
     {

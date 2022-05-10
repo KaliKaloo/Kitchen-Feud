@@ -36,7 +36,6 @@ public class ObjectSpawner : MonoBehaviour
         newObject.transform.position = new Vector2(Random.Range(this.objectMinX, this.objectMaxX), this.objectY);
         newObject.transform.SetParent(transform);
 
-
         //instantiate a random sprite
         h = newObject.GetComponent<Image>();
         Sprite objectSprite = displaySprites[Random.Range(0, displaySprites.Count)];
