@@ -55,7 +55,6 @@ public class TrayController : MonoBehaviour
         ts.tray.ServingTray.Clear();
         ts.tray.objectsOnTray.Clear();
         ts.isReady = true;
-        //ts.GetComponent<PhotonView>().RPC("setIsReady", RpcTarget.All, ts.GetComponent<PhotonView>().ViewID);
         ts.findDestination(ts.GetComponent<PhotonView>().ViewID);
         foreach (Transform slot in ts.transform)
         {
@@ -68,7 +67,6 @@ public class TrayController : MonoBehaviour
             // else destroy items on tray, except from item collider
             if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
             {
-                
                 //Destroy(slot.GetChild(0).gameObject);
             }
         }
@@ -80,8 +78,6 @@ public class TrayController : MonoBehaviour
 
         for (int i = 0; i < trayItems.Count(); i++)
         {
-            
-            // trayDishes[i].GetComponent<pickableItem>().enabled = false;
             trayDishes[i].GetComponent<PhotonView>().RPC("DisableItemPickable", RpcTarget.All, trayDishes[i].GetPhotonView().ViewID);
 
             if (trayItems[i].Type == ItemType.Ingredient)
@@ -152,12 +148,6 @@ public class TrayController : MonoBehaviour
         
     }
 
-
-
-      
-        
-    
-
     private void OnApplicationQuit() {
         for(int i = 0; i< trays.Count; i++)
         {
@@ -171,9 +161,7 @@ public class TrayController : MonoBehaviour
             oTs.tray.ServingTray.Clear();
             oTs.tray.objectsOnTray.Clear();
         }
-
     }
-   
 
     [PunRPC]
     void UpdateScore1(int score)
