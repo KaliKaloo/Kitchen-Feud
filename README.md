@@ -39,6 +39,9 @@ The following secrets need to be added to this repository in order to run the wo
 | KEY           | The SSH *private* key to deploy to the external repository |
 |WEBHOOK_ID     | The Discord Webhook ID                       |
 | WEBHOOK_TOKEN | Discord token                                |
+| REPOSITORY | external repository in the format username/external-repository         |
+
+In the external repository where the game is hosted, you will need to add the corresponding *public* key as a deploy key.
  
 #### Using a Unity Free Account
 
