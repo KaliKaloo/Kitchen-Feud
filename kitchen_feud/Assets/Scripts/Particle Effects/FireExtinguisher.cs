@@ -21,12 +21,10 @@ public class FireExtinguisher : Interactable
                 playerHold.pickUpItem(gameObject);
                 globalClicked.holdingFireEx = true;
                 Vector3 parentPos = transform.parent.position;
-                parentPos.y = 0.8f;
                 transform.Rotate(0,180,0);
         }
         else {
             playerHold.dropItem();
-            transform.Rotate(0,0,0);
             PV.RPC("stopPS",RpcTarget.All,PV.ViewID);
         }
     }
@@ -51,6 +49,7 @@ public class FireExtinguisher : Interactable
     [PunRPC]
     void putBackFireExt(int viewID,int viewID1)
     {
+        PhotonView.Find(viewID).GetComponentInChildren<ParticleSystem>().Stop();
         PhotonView.Find(viewID).gameObject.transform.SetParent(PhotonView.Find(viewID1).gameObject.transform);
         PhotonView.Find(viewID).gameObject.transform.localPosition = Vector3.zero;
         PhotonView.Find(viewID).gameObject.GetComponent<Rigidbody>().isKinematic = false;
