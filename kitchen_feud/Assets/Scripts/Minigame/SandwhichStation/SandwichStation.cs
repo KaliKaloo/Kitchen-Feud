@@ -36,7 +36,6 @@ public class SandwichStation: MonoBehaviour
     }
 
 
-    //CALLED BY THE EVENT SYSTEM
     public void UpdateDishPointsSandwich()
     {
         if (appliance.isBeingInteractedWith)

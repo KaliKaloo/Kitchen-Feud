@@ -11,12 +11,9 @@ public class FriedFoodController : MonoBehaviour
 {
     public PanController pan;
     public PhotonView PV;
-    public Vector3 startLocation;
     public bool isFlipped = false;
     public FryingTimerBar timer;
     public float points;
-    public float minXSpeed;
-    public float maxXSpeed;
     public float Yspeed;
     public float minYSpeed;
     public float maxYSpeed;
