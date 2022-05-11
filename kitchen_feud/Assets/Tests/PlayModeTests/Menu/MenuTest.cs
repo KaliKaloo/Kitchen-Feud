@@ -65,7 +65,17 @@ public class MenuTest: MainMenuSetup
         yield return new WaitForSeconds(0.2f);
 
         GameObject.Find("MenuController").GetComponent<menuController>().CreateGame();
-       
+        yield return new WaitForSeconds(2f);
+
+        GameObject.Find("Settings").GetComponent<Button>().onClick.Invoke();
+        GameObject.Find("IncreaseTime").GetComponent<Button>().onClick.Invoke();
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject.Find("DecreaseTime").GetComponent<Button>().onClick.Invoke();
+        yield return new WaitForSeconds(0.2f);
+
+        Assert.AreEqual("05:00",  GameObject.Find("SettingsCanvas").transform.Find("Timer").transform.Find("Timer").transform.Find("Timer").GetComponent<Text>().text);
+
 
         yield return null;
     }
