@@ -17,12 +17,11 @@ public class MainMenuSetup
     [OneTimeSetUp]
     public void SetUp()
     {
+        PlayerPrefs.DeleteAll();
+        
         GameObject obj = new GameObject();
         lobby = obj.AddComponent<PhotonTestLobbyOne>();
         SceneManager.LoadScene("mainMenu");
-
-        // lobby.Connect();
-
     }
 
     [UnitySetUp]
@@ -30,15 +29,11 @@ public class MainMenuSetup
     {
 
         yield return null;
-        //yield return new WaitWhile(() => !lobby.ready);
     }
 
     [OneTimeTearDown]
     public void PhotonTearDown()
     {
-        //SceneManager.LoadScene("kitchens Test");
-        // yield return new WaitForSeconds(5);
- 
         SceneManager.LoadScene("kitchens Test");
         PhotonNetwork.Disconnect();
 
@@ -68,7 +63,6 @@ public class MainMenuSetup
 
         public override void OnCreatedRoom()
         {
-
             SceneManager.LoadScene("mainMenu");
             ready = true;
         }
