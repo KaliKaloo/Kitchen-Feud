@@ -37,13 +37,14 @@ public class AI : MonoBehaviour
 
     void Update()
     {
- 
+
 
         if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectsWithTag("Player").Length == PhotonNetwork.CurrentRoom.PlayerCount)
         {
             if (SceneManager.GetActiveScene().name != "kitchens Test")
             {
-                if (timer.GetLocalTime() == timer.GetTotalTime() / 2 && !ownersSpawned){
+                if (timer.GetLocalTime() == timer.GetTotalTime() / 2 && !ownersSpawned)
+                {
                     Owner1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_cat_Model"), (GameSetup.GS.OSP1.position), Quaternion.identity);
                     Owner2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_panda_Model"), (GameSetup.GS.OSP2.position), Quaternion.identity);
                     ownersSpawned = true;
@@ -51,7 +52,8 @@ public class AI : MonoBehaviour
             }
             else
             {
-                if (timer.GetLocalTime() == timer.GetTotalTime() -1 && !ownersSpawned){
+                if (timer.GetLocalTime() == timer.GetTotalTime() - 1 && !ownersSpawned)
+                {
                     Owner1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_cat_Model"), (GameSetup.GS.OSP1.position), Quaternion.identity);
                     Owner2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Owner_panda_Model"), (GameSetup.GS.OSP2.position), Quaternion.identity);
                     ownersSpawned = true;
@@ -105,7 +107,7 @@ public class AI : MonoBehaviour
 
 
             }
-            
+
             if (agentsT2.Count == 2)
             {
                 foreach (Transform ts in GameObject.Find("k2").transform.Find("Trays"))
@@ -118,15 +120,15 @@ public class AI : MonoBehaviour
                         foreach (GameObject a in agentsT2)
                         {
 
-                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0&&a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
+                            if (!a.GetComponent<Agent>().tray && a.transform.GetChild(2).childCount == 0 && a.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
                             {
                                 //Assign Tray to waiter
                                 a.GetComponent<Agent>().tray = ts.GetComponent<Tray>();
 
-                                
+
                                 //Assign waiter to Tray
                                 ts.GetComponent<Tray>().Agent = a;
-                        
+
                                 break;
 
                             }
@@ -142,7 +144,7 @@ public class AI : MonoBehaviour
             if (GameObject.Find("SP21").GetComponent<Serving>().used)
             {
                 GameObject[] SP2s = GameObject.FindGameObjectsWithTag("ServingPoint2");
-                for (int i = 0; i < SP2s.Length;i++)
+                for (int i = 0; i < SP2s.Length; i++)
                 {
                     SP2s[i].GetComponent<Serving>().used = false;
                 }
@@ -150,24 +152,24 @@ public class AI : MonoBehaviour
             if (GameObject.Find("Serving Point (3)").GetComponent<Serving>().used)
             {
                 GameObject[] SP1s = GameObject.FindGameObjectsWithTag("ServingPoint1");
-                for (int i = 0; i < SP1s.Length;i++)
+                for (int i = 0; i < SP1s.Length; i++)
                 {
                     SP1s[i].GetComponent<Serving>().used = false;
 
                 }
             }
 
-            
+
         }
-        }
+    }
 
     void createTeamOneWaiters()
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team1Waiter"), (GameSetup.GS.WSP1[i].position), Quaternion.identity);
             agentsT1.Add(Agent);
-            Agent.GetComponent<PhotonView>().RPC("setAgentName", RpcTarget.All, Agent.GetPhotonView().ViewID, "Waiter" + (i+1).ToString());
+            Agent.GetComponent<PhotonView>().RPC("setAgentName", RpcTarget.All, Agent.GetPhotonView().ViewID, "Waiter" + (i + 1).ToString());
         }
     }
 
@@ -178,7 +180,7 @@ public class AI : MonoBehaviour
             Agent = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers", "Team2Waiter"), GameSetup.GS.WSP2[i].position, Quaternion.identity);
             Agent.GetComponent<NavMeshAgent>().Warp(new Vector3(GameSetup.GS.WSP2[i].position.x, GameSetup.GS.WSP2[i].position.y, GameSetup.GS.WSP2[i].position.z));
             agentsT2.Add(Agent);
-            Agent.GetComponent<PhotonView>().RPC("setAgentName", RpcTarget.All, Agent.GetPhotonView().ViewID, "Waiter" + (i+1).ToString());
+            Agent.GetComponent<PhotonView>().RPC("setAgentName", RpcTarget.All, Agent.GetPhotonView().ViewID, "Waiter" + (i + 1).ToString());
         }
 
     }
