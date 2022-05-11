@@ -11,7 +11,7 @@ using Photon.Realtime;
 using UnityEngine.UI;
 
 public class MainMenuSetup
-    {
+{
     PhotonTestLobbyOne lobby = null;
 
     [OneTimeSetUp]
@@ -24,12 +24,6 @@ public class MainMenuSetup
         SceneManager.LoadScene("mainMenu");
     }
 
-    [UnitySetUp]
-    public IEnumerator UnitySetUp()
-    {
-
-        yield return null;
-    }
 
     [UnityTearDown]
     public IEnumerator PhotonTearDown()
@@ -39,38 +33,34 @@ public class MainMenuSetup
         PhotonNetwork.Disconnect();
         yield return new WaitForSeconds(4);
 
-
-
     }
-
-
-
-
-    public class PhotonTestLobbyOne : MonoBehaviourPunCallbacks
-    {
-
-        public bool ready = false;
-
-        public void Connect()
-        {
-            PhotonNetwork.OfflineMode = true;
-        }
-
-        public override void OnConnectedToMaster()
-        {
-            PhotonNetwork.CreateRoom(
-                "test",
-                new RoomOptions { MaxPlayers = 1 }
-            );
-        }
-
-        public override void OnCreatedRoom()
-        {
-            SceneManager.LoadScene("mainMenu");
-            ready = true;
-        }
-      
-    }
-   
 
 }
+
+
+public class PhotonTestLobbyOne : MonoBehaviourPunCallbacks
+{
+
+    public bool ready = false;
+
+    public void Connect()
+    {
+        PhotonNetwork.OfflineMode = true;
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.CreateRoom(
+            "test",
+            new RoomOptions { MaxPlayers = 1 }
+        );
+    }
+
+    public override void OnCreatedRoom()
+    {
+        SceneManager.LoadScene("mainMenu");
+        ready = true;
+    }
+    
+}
+
