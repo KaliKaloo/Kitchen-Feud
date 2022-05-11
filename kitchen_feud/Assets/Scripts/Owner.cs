@@ -50,7 +50,7 @@ public class Owner : MonoBehaviour
     public Vector3 kitchenDestinationPoint;
     public AudioSource audioSource;
     private bool decided;
-    
+
 
     private System.Random rnd = new System.Random();
 
@@ -61,7 +61,7 @@ public class Owner : MonoBehaviour
         keyboard = AI.Instance.keyBoard;
         mouse = AI.Instance.mouse;
 
-      
+
     }
     void Start()
     {
@@ -76,7 +76,7 @@ public class Owner : MonoBehaviour
         anim = GetComponent<Animator>();
 
 
-      Text =   PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
+        Text = PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
         if (PhotonNetwork.IsMasterClient)
         {
@@ -109,30 +109,31 @@ public class Owner : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             //only execute if NavMeshAgent Component is enabled
-            if (agent.enabled) {
-            //assign the other owner
-            if (!otherOwner)
+            if (agent.enabled)
             {
-               assignOtherOwners();
-            }
-            //Control Animations for both owners, i.e. when they should be talking, shouting etc.
-            controllingAnimationsForBothTeams();
+                //assign the other owner
+                if (!otherOwner)
+                {
+                    assignOtherOwners();
+                }
+                //Control Animations for both owners, i.e. when they should be talking, shouting etc.
+                controllingAnimationsForBothTeams();
 
-            if (team == 1)
-            {
-              //make sure owner faces the right way when in kitchen
-              correctingAgentRotationTOne();
-              //carry out the owner's initial actions.
-              ownerOneInitialAction();
-            }
-            else if (team == 2)
-            {
+                if (team == 1)
+                {
+                    //make sure owner faces the right way when in kitchen
+                    correctingAgentRotationTOne();
+                    //carry out the owner's initial actions.
+                    ownerOneInitialAction();
+                }
+                else if (team == 2)
+                {
                     //make sure owner faces the right way when in kitchen
                     correctingAgentRotationTOne();
                     //carry out the owner's initial actions.
                     ownerTwoInitialAction();
 
-            }
+                }
 
                 //Enter Kitchen Second Time
                 enterSecondTime();
@@ -143,7 +144,7 @@ public class Owner : MonoBehaviour
                 {
                     findPlayerToShout();
                 }
-    
+
                 if (playerToFollow)
                 {
 
@@ -153,7 +154,7 @@ public class Owner : MonoBehaviour
 
 
             //Collect dish from oven after a certain time has passed
-            if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime()/6)
+            if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime() / 6)
             {
                 if (oven.GetComponentInChildren<Timer>().timer == 5)
                 {
@@ -171,16 +172,16 @@ public class Owner : MonoBehaviour
 
             }
             //someone collects oven dish before Owner reaches the oven
-                if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
-                {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
-                        returnNormally();
-                         collecting = false;
+            if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
+            {
+                PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+                returnNormally();
+                collecting = false;
 
-                }
             }
         }
-    
+    }
+
 
 
     public Photon.Realtime.Player getLowestCookedDishesByTeam(int team)
@@ -193,7 +194,7 @@ public class Owner : MonoBehaviour
         {
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
-                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team && 
+                if (player.CustomProperties[property] != null && (int)player.CustomProperties[property] <= lowest && (int)player.CustomProperties["Team"] == team &&
                     PhotonView.Find((int)player.CustomProperties["ViewID"]).GetComponent<PlayerVoiceManager>().entered1)
                 {
                     lowest = (int)player.CustomProperties[property];
@@ -201,7 +202,8 @@ public class Owner : MonoBehaviour
                     p = player;
                 }
             }
-        }else if(team == 2)
+        }
+        else if (team == 2)
         {
             foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
             {
@@ -235,7 +237,8 @@ public class Owner : MonoBehaviour
         }
     }
 
-    void enterSecondTime() {
+    void enterSecondTime()
+    {
         if (timer.GetLocalTime() == timer.GetTotalTime() / 4)
         {
             PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
@@ -404,9 +407,12 @@ public class Owner : MonoBehaviour
         if (!following)
         {
             Photon.Realtime.Player p = null;
-            if (team == 1) {
+            if (team == 1)
+            {
                 p = getLowestCookedDishesByTeam(1);
-            }else if(team == 2) {
+            }
+            else if (team == 2)
+            {
                 p = getLowestCookedDishesByTeam(2);
             }
 
@@ -511,15 +517,16 @@ public class Owner : MonoBehaviour
 
     void correctingAgentRotationTOne()
     {
-        if((agent.transform.position - kitchenDestinationPoint).magnitude < 1)
+        if ((agent.transform.position - kitchenDestinationPoint).magnitude < 1)
         {
             if (!faceforward)
             {
                 int net = 0;
-                if(team == 1)
+                if (team == 1)
                 {
                     net = scores.GetScore1() - scores.GetScore2();
-                }else if (team == 2)
+                }
+                else if (team == 2)
                 {
                     net = scores.GetScore2() - scores.GetScore1();
 
@@ -644,9 +651,9 @@ public class Owner : MonoBehaviour
 
         if (!agent.hasPath)
         {
-          
-                agent.SetDestination(ovenDestination);
-           
+
+            agent.SetDestination(ovenDestination);
+
         }
 
 
@@ -657,7 +664,7 @@ public class Owner : MonoBehaviour
         currentlyTalking = true;
         yield return new WaitForSeconds(3);
         currentlyTalking = false;
-        
+
     }
 
 
@@ -678,7 +685,7 @@ public class Owner : MonoBehaviour
     }
     private IEnumerator leavingKitchen()
     {
-        
+
         yield return new WaitForSeconds(8);
         StartCoroutine(talking());
 
@@ -687,7 +694,7 @@ public class Owner : MonoBehaviour
             PV.RPC("setText", RpcTarget.All, PV.ViewID, "Alright guys, I'm going to go away, I'll return soon, we need to win!");
             agent.SetDestination(spawnPoint);
         }
-        else if(team == 2)
+        else if (team == 2)
         {
             PV.RPC("setText", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
             agent.SetDestination(spawnPoint);
@@ -698,7 +705,7 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-        if (timer.GetLocalTime() > timer.GetTotalTime()/4)
+        if (timer.GetLocalTime() > timer.GetTotalTime() / 4)
         {
             firstTime = true;
         }
@@ -707,7 +714,8 @@ public class Owner : MonoBehaviour
         if (team == 1)
         {
             agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
-        }else if(team == 2)
+        }
+        else if (team == 2)
         {
             agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
         }
@@ -729,10 +737,11 @@ public class Owner : MonoBehaviour
         StartCoroutine(startShouting());
         if (team == 1)
         {
-            
+
             PV.RPC("setText", RpcTarget.All, PV.ViewID, "I'm gonna go over to their kitchen and throw a smoke bomb!");
             agent.SetDestination(new Vector3(-12.6f, 0.2f, 3.6f));
-        }else if(team == 2)
+        }
+        else if (team == 2)
         {
             PV.RPC("setText", RpcTarget.All, PV.ViewID, "Arghh, we can't let them do this! I'm going to throw a smoke bomb too!");
             agent.SetDestination(new Vector3(6.743f, 0.2f, 2.076f));
@@ -749,7 +758,7 @@ public class Owner : MonoBehaviour
     void setText(int viewID, string message)
     {
         Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
-       int playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
+        int playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
 
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
         if (team == 1)
@@ -762,7 +771,8 @@ public class Owner : MonoBehaviour
                 o.Owner1.SetActive(true);
                 o.Text.text = message;
             }
-        }else if(team == 2)
+        }
+        else if (team == 2)
         {
             if (pVM.entered2 && pVM.GetComponent<PhotonView>().IsMine)
             {
