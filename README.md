@@ -56,7 +56,7 @@ Simply push to the main branch and the game will automatically deploy using gith
 5. Upload all these files to github repository
 6. Navigate to your repository > Settings > Pages and set source to master branch 
 
-Your game should now be accessible via https://<user-name>.github.io/<repo-name>
+Your game should now be accessible via https://&lt;user-name>.github.io/&lt;repo-name>
 
 ## Contributors
 * Team Manager: Linda Lomencikova
