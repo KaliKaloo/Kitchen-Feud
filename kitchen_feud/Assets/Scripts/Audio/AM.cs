@@ -20,9 +20,11 @@ public class AM : MonoBehaviour
     EnableSmoke enableSmoke = new EnableSmoke();
     private void Awake()
     {
-        engine = VoiceChatManager.Instance.GetRtcEngine();
-        myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+        if ( VoiceChatManager.Instance){
+            engine = VoiceChatManager.Instance.GetRtcEngine();
+            myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+        }
     }
     void Start()
     {   

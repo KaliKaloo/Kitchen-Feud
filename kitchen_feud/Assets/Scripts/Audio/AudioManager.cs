@@ -22,9 +22,12 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        engine = VoiceChatManager.Instance.GetRtcEngine();
-        myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+        if ( VoiceChatManager.Instance){
+
+            engine = VoiceChatManager.Instance.GetRtcEngine();
+            myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+        }
     }
     
     
@@ -35,7 +38,8 @@ public class AudioManager : MonoBehaviour
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
         band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
-        engine.LeaveChannel();
+        if (engine != null)
+            engine.LeaveChannel();
 
 
         if (band == "A")
@@ -70,8 +74,6 @@ public class AudioManager : MonoBehaviour
         {
             engine.JoinChannel(randomInstance + "Team2");
         }
-        
- 
         
     }
 
@@ -122,7 +124,6 @@ public class AudioManager : MonoBehaviour
                     MusicManager.instance.priorityPitch = false;
                     MusicManager.instance.endReaction();
                     enableSmoke.ChangePlayerState(false);
-
 
                 }
          
