@@ -14,7 +14,6 @@ public class PlayerTests : PhotonTestSetup
     GameObject mushroom, potato;
 
     PlayerHolding playerHold;
-    Appliance stove;
 
 
     [UnitySetUp]
@@ -29,7 +28,6 @@ public class PlayerTests : PhotonTestSetup
             Quaternion.identity,
             0
         );
-        stove = GameObject.Find("stove1").GetComponent<Appliance>();
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
 
         playerHold = obj.GetComponent<PlayerHolding>();
@@ -96,30 +94,7 @@ public class PlayerTests : PhotonTestSetup
     }
 
 
-    [UnityTest]
-    public IEnumerator ApplianceSlot()
-    {
-        stove.player = obj.transform;
-        playerHold.pickUpItem(mushroom);
-        stove.addItem(mushroom, playerHold);
-        Assert.IsTrue(stove.itemsOnTheAppliance.Count == 1);
-        yield return null;
-    }
-
-
-    [UnityTest]
-    public IEnumerator ApplianceCookTest()
-    {
-        playerHold.pickUpItem(mushroom);
-        stove.player = obj.transform;
-        stove.Interact();
-        playerHold.pickUpItem(potato);
-        stove.Interact();
-        stove.Interact();
-        Assert.IsTrue(stove.cookedDish.name.Contains("Mushroom Soup"));
-        stove.player = null;
-        yield return null;
-    }
+   
 
 
 }

@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 using System.IO;
 using UnityEngine.UI;
 
-public class Stove : PhotonTestSetup
+public class StoveT2 : PhotonTestSetup
 {
     GameObject obj;
     GameObject mushroom, potato, rice;
@@ -31,10 +31,11 @@ public class Stove : PhotonTestSetup
             Quaternion.identity,
             0
         );
+        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 2;
+
         stove = GameObject.Find("stove1").GetComponent<Appliance>();
         stove2 = GameObject.Find("stove2").GetComponent<Appliance>();
 
-        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
         playerHold = obj.GetComponent<PlayerHolding>();
         yield return null;
     }
@@ -89,83 +90,6 @@ public class Stove : PhotonTestSetup
         stove2.isBeingInteractedWith = false;
         stove2.minigameCanvas.SetActive(false);
         yield return null;
-    }
-
-
-    [UnityTest]
-    public IEnumerator correctCookedDish()
-    {
-        playerHold.pickUpItem(mushroom);
-        stove.player = obj.transform;
-        stove.Interact();
-        playerHold.pickUpItem(potato);
-        stove.Interact();
-        stove.Interact();
-        Assert.AreEqual("Mushroom Soup(Clone)", stove.cookedDish.name);
-        stove.minigameCanvas.SetActive(false);
-        stove.itemsOnTheAppliance.Clear();
-        stove.isBeingInteractedWith = false;
-        yield return null;
-
-    }
-
-
-    [UnityTest]
-    public IEnumerator StoveIncorrectIngredients()
-    {
-        stove.player = obj.transform;
-        playerHold.pickUpItem(rice);
-        stove.Interact();
-        stove.Interact();
-        Assert.IsFalse(stove.minigameCanvas.activeSelf);
-        stove.itemsOnTheAppliance.Clear();
-        stove.isBeingInteractedWith = false;
-        yield return null;
-
-    }
-
-    
-    [UnityTest]
-    public IEnumerator startMG()
-    {
-        playerHold.pickUpItem(mushroom);
-        stove.player = obj.transform;
-        stove.Interact();
-        playerHold.pickUpItem(potato);
-        stove.Interact();
-        stove.Interact();
-        Assert.IsTrue(stove.minigameCanvas.activeSelf);
-        yield return new WaitForSeconds(0.2f);
-        stove.GetComponent<stoveMinigame>().spawner.StartGame();
-        Assert.IsFalse(stove.GetComponent<stoveMinigame>().spawner.startButton.activeSelf);
-        stove.itemsOnTheAppliance.Clear();
-        stove.isBeingInteractedWith = false;
-        stove.minigameCanvas.SetActive(false);
-        yield return null;
-
-    }
-
-
-    [UnityTest]
-    public IEnumerator exitMG()
-    {
-        playerHold.pickUpItem(mushroom);
-        stove.player = obj.transform;
-        stove.Interact();
-        playerHold.pickUpItem(potato);
-        stove.Interact();
-        stove.Interact();
-        Assert.IsTrue(stove.minigameCanvas.activeSelf);
-        yield return new WaitForSeconds(0.2f);
-        stove.GetComponent<stoveMinigame>().spawner.StartGame();
-        Assert.IsFalse(stove.GetComponent<stoveMinigame>().spawner.startButton.activeSelf);
-        stove.GetComponent<stoveMinigame>().spawner.backButton.GetComponent<ExitStoveMinigame>().TaskOnClick();
-        Assert.IsFalse(stove.minigameCanvas.activeSelf);
-        stove.itemsOnTheAppliance.Clear();
-        stove.isBeingInteractedWith = false;
-        stove.minigameCanvas.SetActive(false);
-        yield return null;
-
     }
 
    

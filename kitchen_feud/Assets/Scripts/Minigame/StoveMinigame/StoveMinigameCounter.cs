@@ -43,14 +43,12 @@ public class StoveMinigameCounter
         droppedCounter += 1;
     }
 
-    // signal to start stove minigame
     public void StartGame()
     {
         end = false;
 
     }
 
-    // sets the state of the game to end
     public void EndGame()
     {
         end = true;
