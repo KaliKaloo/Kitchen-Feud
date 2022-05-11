@@ -38,13 +38,10 @@ public class MainMenuSetup
     {
         //SceneManager.LoadScene("kitchens Test");
         // yield return new WaitForSeconds(5);
+ 
         SceneManager.LoadScene("kitchens Test");
+        PhotonNetwork.Disconnect();
 
-        if (PhotonNetwork.IsConnectedAndReady)
-        {
-           // PhotonNetwork.LeaveRoom();
-            //PhotonNetwork.Disconnect();
-        }
 
     }
 

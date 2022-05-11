@@ -29,7 +29,7 @@ public class MusicManagerTests : PhotonTestSetup
       );
       PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
       obj.AddComponent<PhotonPlayer>();
-      
+ 
       yield return null;
    }
 
@@ -86,11 +86,14 @@ public class MusicManagerTests : PhotonTestSetup
    }
 
 
-   [Test]
-   public void endReaction()
+   [UnityTest]
+   public IEnumerator endReaction()
    {
+        Debug.Log("hshsh" + PhotonNetwork.IsConnected);
+        yield return new WaitForSeconds(2);
       MusicManager.instance.endReaction();
       Assert.AreEqual(1, MusicManager.instance.pitch);
+        yield return null;
    }
 
 

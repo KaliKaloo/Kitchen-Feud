@@ -18,6 +18,7 @@ public class PhotonTestSetup
     [OneTimeSetUp]
     public void SetUp()
     {
+       
         GameObject obj = new GameObject();
         lobby = obj.AddComponent<PhotonTestLobby>();
         lobby.Connect();
@@ -51,17 +52,19 @@ public class PhotonTestSetup
 
         public void Connect()
         {
-            if (!PhotonNetwork.IsConnected)
-            {
-                PhotonNetwork.OfflineMode = true;
-            }
-            else
-            {
-                PhotonNetwork.Disconnect();
+            Debug.Log("??" + PhotonNetwork.IsConnected);
+            PhotonNetwork.OfflineMode = true;
+            //if (!PhotonNetwork.IsConnected)
+            //{
+            //    PhotonNetwork.OfflineMode = true;
+            //}
+            //else
+            //{
+            //    PhotonNetwork.Disconnect();
+              
+            //   StartCoroutine(offlineMode());
 
-                StartCoroutine(offlineMode());
-
-            }
+            //}
             
         }
 
@@ -83,6 +86,7 @@ public class PhotonTestSetup
         {
             yield return new WaitForSeconds(2);
             PhotonNetwork.OfflineMode = true;
+            Debug.Log("66" + PhotonNetwork.IsConnected);
         }
     }
     

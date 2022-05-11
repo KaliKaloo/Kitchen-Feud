@@ -270,7 +270,10 @@ public class menuController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         // Join Photon Master server
-        PhotonNetwork.JoinLobby();
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnJoinedLobby()

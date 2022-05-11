@@ -22,22 +22,28 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if ( VoiceChatManager.Instance){
+        if (VoiceChatManager.Instance)
+        {
 
             engine = VoiceChatManager.Instance.GetRtcEngine();
             myTeam = (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-            randomInstance = (int) PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+
+            if (PhotonNetwork.CurrentRoom.CustomProperties["Lobby"] != null)
+            {
+                randomInstance = (int)PhotonNetwork.CurrentRoom.CustomProperties["Lobby"];
+            }
+
         }
     }
-    
-    
+
+
     void Start()
     {
 
         MusicManager.instance.location = myTeam;
         PV = GetComponent<PhotonView>();
         ding = GameObject.FindGameObjectWithTag(Speaker).GetComponent<AudioSource>();
-        band =(string) PhotonNetwork.LocalPlayer.CustomProperties["Band"];
+        band = (string)PhotonNetwork.LocalPlayer.CustomProperties["Band"];
         if (engine != null)
             engine.LeaveChannel();
 
@@ -46,35 +52,39 @@ public class AudioManager : MonoBehaviour
         {
             engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if (band == "B")
+
+        }
+        else if (band == "B")
         {
             engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY,
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if(band == "C")
+
+        }
+        else if (band == "C")
 
         {
             engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_STANDARD,
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
-        }else if (band == "D")
+
+        }
+        else if (band == "D")
         {
             engine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_SPEECH_STANDARD,
                 AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_MEETING);
-            
+
         }
 
         if (myTeam == 1)
         {
-            
+
             engine.JoinChannel(randomInstance + "Team1");
-           
-        }else if(myTeam == 2)
+
+        }
+        else if (myTeam == 2)
         {
             engine.JoinChannel(randomInstance + "Team2");
         }
-        
+
     }
 
 
@@ -93,7 +103,7 @@ public class AudioManager : MonoBehaviour
                 if (team == 1)
                 {
                     pFV.RPC("setEntered", RpcTarget.AllBuffered, pFV.ViewID, 1);
-                    
+
                 }
                 else
                 {
@@ -126,8 +136,8 @@ public class AudioManager : MonoBehaviour
                     enableSmoke.ChangePlayerState(false);
 
                 }
-         
-        
+
+
                 if (myTeam == team && myPlayerC.healthbar1)
                 {
                     pFV.RPC("destHB", RpcTarget.AllBuffered, pFV.ViewID);
@@ -136,7 +146,7 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-        
+
     }
 
     [PunRPC]
