@@ -83,11 +83,16 @@ public class GlobalTimer
             else
             {
                 // get time from server
-                if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
+                if (PhotonNetwork.CurrentRoom != null)
                 {
-                    return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                    if (PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"] != null)
+                    {
+                        return (int)PhotonNetwork.CurrentRoom.CustomProperties["TotalTime"];
+                    }
+                    else return 0;
                 }
                 else return 0;
+               
 
             }
         }
