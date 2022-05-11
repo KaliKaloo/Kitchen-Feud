@@ -45,21 +45,12 @@ public class FireExt : PhotonTestSetup
     }
 
 
-    // [OneTimeTearDown]
-    // public void OTTearDown()
-    // {
-    //     if (fireExtObj != null)
-    //         PhotonNetwork.Destroy(fireExtObj);
-    // }
-
-
-
     [UnityTest]
     public IEnumerator pickupFireExt()
     {
-        playerHold.pickUpItem(fireExtObj);
+        fireExtObj.GetComponent<FireExtinguisher>().Interact();
         Assert.AreEqual(fireExtObj, playerHold.heldObj);
-        playerHold.dropItem();
+        fireExtObj.GetComponent<FireExtinguisher>().Interact();
         yield return null;
 
     }
@@ -67,10 +58,10 @@ public class FireExt : PhotonTestSetup
 
     [UnityTest]
     public IEnumerator pickupDropFireExt()
-    {
-        playerHold.pickUpItem(fireExtObj);
+    {   
+        fireExtObj.GetComponent<FireExtinguisher>().Interact();
         Assert.AreEqual(fireExtObj, playerHold.heldObj);
-        playerHold.dropItem();
+        fireExtObj.GetComponent<FireExtinguisher>().Interact();
         Assert.IsNull(playerHold.heldObj);
         yield return null;
 
@@ -80,7 +71,7 @@ public class FireExt : PhotonTestSetup
     [UnityTest]
     public IEnumerator slotFireExt()
     {
-        playerHold.pickUpItem(fireExtObj);
+        fireExtObj.GetComponent<FireExtinguisher>().Interact();
         Assert.AreEqual(fireExtObj, playerHold.heldObj);
         fireBox.player = obj.transform;
         fireBox.Interact();

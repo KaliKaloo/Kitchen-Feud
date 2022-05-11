@@ -57,7 +57,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
     }
 
     [UnityTearDown]
-    public IEnumerator TearDown()
+    public IEnumerator MovementTearDown()
     {
         if (obj != null)
             PhotonNetwork.Destroy(obj);
@@ -243,7 +243,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         o.transform.position = o.oven.transform.position - new Vector3(1, 0, 1);
         o.GetComponent<NavMeshAgent>().enabled = true;
 
-             yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
 
         yield return null;
 

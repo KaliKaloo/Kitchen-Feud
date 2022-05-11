@@ -28,11 +28,10 @@ public class PhotonTestSetup
     public IEnumerator UnitySetUp()
     {
         yield return new WaitWhile(() => !lobby.ready);
-       //yield return null;
     }
 
     [OneTimeTearDown]
-    public void TearDown()
+    public void PhotonTearDown()
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
@@ -40,14 +39,6 @@ public class PhotonTestSetup
         if (fireExtObj != null)
             PhotonNetwork.Destroy(fireExtObj);
     }
-
-    //public GameObject CreatePhotonGameObject()
-    //{
-    //    GameObject obj = new GameObject();
-    //    PhotonView pv = obj.AddComponent<PhotonView>();
-    //    PhotonNetwork.AllocateViewID(pv);
-    //    return obj;
-    //}
 
 
     public class PhotonTestLobby : MonoBehaviourPunCallbacks
