@@ -8,12 +8,13 @@ using Photon.Realtime;
 using UnityEngine.TestTools;
 using System.IO;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Stove : PhotonTestSetup
 {
     GameObject obj;
     GameObject mushroom, potato, rice;
-
+    Hashtable ht = new Hashtable();
     PlayerHolding playerHold;
     Appliance stove, stove2;
 
@@ -33,8 +34,9 @@ public class Stove : PhotonTestSetup
         );
         stove = GameObject.Find("stove1").GetComponent<Appliance>();
         stove2 = GameObject.Find("stove2").GetComponent<Appliance>();
-
+        ht["ViewID"] = obj.GetPhotonView().ViewID;
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         playerHold = obj.GetComponent<PlayerHolding>();
         yield return null;
     }
@@ -68,6 +70,7 @@ public class Stove : PhotonTestSetup
         playerHold.pickUpItem(potato);
         stove.Interact();
         stove.Interact();
+        yield return new WaitForSeconds(3);
         Assert.IsTrue(stove.minigameCanvas.activeSelf);
         stove.itemsOnTheAppliance.Clear();
         stove.isBeingInteractedWith = false;
@@ -95,13 +98,20 @@ public class Stove : PhotonTestSetup
     [UnityTest]
     public IEnumerator correctCookedDish()
     {
+        stove.itemsOnTheAppliance.Clear();
         playerHold.pickUpItem(mushroom);
         stove.player = obj.transform;
         stove.Interact();
         playerHold.pickUpItem(potato);
         stove.Interact();
+    
         stove.Interact();
+        Debug.Log(stove.itemsOnTheAppliance.Count);
+
+
         Assert.AreEqual("Mushroom Soup(Clone)", stove.cookedDish.name);
+
+
         stove.minigameCanvas.SetActive(false);
         stove.itemsOnTheAppliance.Clear();
         stove.isBeingInteractedWith = false;

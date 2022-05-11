@@ -63,6 +63,7 @@ public class StoveT2 : PhotonTestSetup
     [UnityTest]
     public IEnumerator correctIngredients()
     {
+        stove.itemsOnTheAppliance.Clear();
         playerHold.pickUpItem(mushroom);
         stove.player = obj.transform;
         stove.Interact();
