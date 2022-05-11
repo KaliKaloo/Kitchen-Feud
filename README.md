@@ -44,6 +44,20 @@ The following secrets need to be added to this repository in order to run the wo
 
 If using a Unity Free account, the workflow file and Github secrets will need to be [updated](https://game.ci/docs/github/activation) correspondingly.
 
+## Deployment Instructions
+### Using GameCI
+Simply push to the main branch and the game will automatically deploy using github actions
+
+### Manual Deployment to Github Pages
+1. In the Unity Editor, navigate to Edit > Project Settings > Player > Webgl Settings > Resolution and Presentation
+2. Enter your preferred canvas width and height, and make sure the WebGL template is set to AgoraTemplate2020
+3. In File > Build settings, select WebGL, uncheck development build and build to chosen folder
+4. Move index.html, Build/, and TemplateData/ to the root of the git repository which you are using to host the game.
+5. Upload all these files to github repository
+6. Navigate to your repository > Settings > Pages and set source to master branch 
+
+Your game should now be accessible via https://<user-name>.github.io/<repo-name>
+
 ## Contributors
 * Team Manager: Linda Lomencikova
 * Lead Programmer: Lokhei Wong
