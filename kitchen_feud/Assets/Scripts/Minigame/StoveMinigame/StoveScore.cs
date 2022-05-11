@@ -9,7 +9,6 @@ public class StoveScore
     private static int initialIngredients;
     private static int currentIngredients;
     private static float score;
-    private static float bombMultiplier;
 
     public static readonly int maximum = 10;
 
@@ -22,14 +21,6 @@ public class StoveScore
         }
     }
 
-    public static float BombMultiplier
-    {
-        get{  return bombMultiplier; }
-        set
-        {
-            bombMultiplier = value;
-        }
-    }
 
     public static int InitialIngredients
     {
@@ -52,7 +43,6 @@ public class StoveScore
     {
         initialIngredients = currentIngredients = 3;
         score = 0;
-        bombMultiplier = 0;
     }
 
     public void AddScore()

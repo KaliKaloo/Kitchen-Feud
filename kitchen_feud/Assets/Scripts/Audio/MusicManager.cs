@@ -8,7 +8,9 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2, track, mgSource;
+    private AudioSource track1, track2, mgSource;
+
+    public AudioSource track;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
     public AudioClip k1_MG, k2_MG;
@@ -20,7 +22,8 @@ public class MusicManager : MonoBehaviour
     private bool switched = false, MGStarted = false;
     public int location;
     public bool inMG = false, priorityPitch = false;
-    private float musicVol, sliderVol = 0.5f,  pitch = 1;
+    private float musicVol, sliderVol = 0.5f;
+    public float pitch = 1;
 
    
     void Awake(){

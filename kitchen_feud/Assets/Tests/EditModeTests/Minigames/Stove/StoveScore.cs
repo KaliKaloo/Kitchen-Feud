@@ -28,7 +28,6 @@ public class StoveScoreTests
         stoveScore.ResetValues();
         Assert.AreEqual(3, StoveScore.InitialIngredients);
         Assert.AreEqual(3, StoveScore.CurrentIngredients);
-        Assert.AreEqual(0, StoveScore.BombMultiplier);
 
     }
 

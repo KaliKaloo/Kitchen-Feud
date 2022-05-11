@@ -34,7 +34,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
-		//GameEvents.current.assignPoints += appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
 	}
 
 	// on clicking the exit button (after the minigame has finished)
