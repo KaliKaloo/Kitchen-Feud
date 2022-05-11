@@ -25,7 +25,6 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
     Random rnd = new Random();
     IRtcEngine rtcEngine;
     public int x;
-    private bool setInternetSpeed;
     EnableSmoke enableSmoke = new EnableSmoke();
 
 
@@ -49,7 +48,6 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        setInternetSpeed = false;
         rtcEngine = IRtcEngine.GetEngine(appID);
         rtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
 

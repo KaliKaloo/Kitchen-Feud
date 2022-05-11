@@ -217,11 +217,11 @@ public class PlayerVoiceManager : MonoBehaviour
 				StartCoroutine(HurtFlash(vg));
 			}
 
-			//SOUND ------------------------------------------------
+			//SOUND fx
 			obj.GetComponent<AudioSource>().pitch = Random.Range(pitchMin, pitchMax);
 			obj.GetComponent<AudioSource>().volume = Random.Range(volumeMin, volumeMax);
 			obj.GetComponent<AudioSource>().Play();
-			// -----------------------------------------------------
+			
 			hb.SetHealth(hb.slider.value - 0.3f);
 			
         }

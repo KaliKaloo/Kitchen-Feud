@@ -11,7 +11,6 @@ public class AddUIElements : MonoBehaviour
     EnableSmoke enableSmoke = new EnableSmoke();
 
 
-    // Start is called before the first frame update
     void Start()
     {
         enableSmoke.SetUIForSmoke(smokeSlot);

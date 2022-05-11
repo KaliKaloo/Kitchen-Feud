@@ -120,7 +120,6 @@ public class TrayTests : PhotonTestSetup
         Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
         Assert.AreEqual(1, tray.slots[0].transform.childCount);
         Assert.AreEqual(1, tray.tray.ServingTray.Count);
-       // yield return new WaitForSeconds(5);
         tray.canvasController.Serve(GameObject.Find("ticket1-1"));
         yield return new WaitForSeconds(12);
         tray.tray.objectsOnTray.Remove(mushroom);

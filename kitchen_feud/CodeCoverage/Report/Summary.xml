@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>11/05/2022 - 02:01:15</Generatedon>
+    <Generatedon>11/05/2022 - 04:14:40</Generatedon>
     <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
     <Assemblies>6</Assemblies>
-    <Classes>175</Classes>
-    <Files>165</Files>
-    <Coveredlines>6875</Coveredlines>
-    <Uncoveredlines>2853</Uncoveredlines>
-    <Coverablelines>9728</Coverablelines>
-    <Totallines>17418</Totallines>
-    <Linecoverage>70.6</Linecoverage>
+    <Classes>176</Classes>
+    <Files>166</Files>
+    <Coveredlines>6960</Coveredlines>
+    <Uncoveredlines>2838</Uncoveredlines>
+    <Coverablelines>9798</Coverablelines>
+    <Totallines>17555</Totallines>
+    <Linecoverage>71</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
-    <Coveredmethods>901</Coveredmethods>
-    <Totalmethods>1159</Totalmethods>
-    <Methodcoverage>77.7</Methodcoverage>
+    <Coveredmethods>906</Coveredmethods>
+    <Totalmethods>1162</Totalmethods>
+    <Methodcoverage>77.9</Methodcoverage>
   </Summary>
   <Coverage>
     <Assembly name="DatabaseASM" classes="4" coverage="100" coveredlines="88" coverablelines="88" totallines="192" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100">
@@ -24,7 +24,7 @@
       <Class name="DishSO" coverage="100" coveredlines="1" coverablelines="1" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="Order" coverage="100" coveredlines="1" coverablelines="1" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
     </Assembly>
-    <Assembly name="EditModeTests" classes="30" coverage="99.2" coveredlines="1418" coverablelines="1429" totallines="2674" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="203" totalmethods="204" methodcoverage="99.5">
+    <Assembly name="EditModeTests" classes="30" coverage="99.2" coveredlines="1418" coverablelines="1429" totallines="2657" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="203" totalmethods="204" methodcoverage="99.5">
       <Class name="ApplianceTest" coverage="100" coveredlines="10" coverablelines="10" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="CutControllerTests" coverage="100" coveredlines="64" coverablelines="64" totallines="121" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
       <Class name="DisplayTicketTest" coverage="100" coveredlines="64" coverablelines="64" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
@@ -38,7 +38,7 @@
       <Class name="PickableItem" coverage="100" coveredlines="28" coverablelines="28" totallines="61" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
       <Class name="PickUpLockTest" coverage="100" coveredlines="15" coverablelines="15" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="PlayerHoldingTest" coverage="100" coveredlines="9" coverablelines="9" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
-      <Class name="SandwichControllerTests" coverage="100" coveredlines="74" coverablelines="74" totallines="157" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100" />
+      <Class name="SandwichControllerTests" coverage="100" coveredlines="74" coverablelines="74" totallines="140" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100" />
       <Class name="SandwichMoveTest" coverage="100" coveredlines="7" coverablelines="7" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="SandwichSpawnerTests" coverage="100" coveredlines="15" coverablelines="15" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="ScoreInit" coverage="100" coveredlines="11" coverablelines="11" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
@@ -56,8 +56,8 @@
       <Class name="TrayControllerTests" coverage="100" coveredlines="90" coverablelines="90" totallines="145" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="9" methodcoverage="100" />
       <Class name="TrayTextTest" coverage="100" coveredlines="13" coverablelines="13" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
     </Assembly>
-    <Assembly name="Main" classes="117" coverage="53.1" coveredlines="3187" coverablelines="6001" totallines="12254" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="420" totalmethods="676" methodcoverage="62.1">
-      <Class name="AddUIElements" coverage="100" coveredlines="4" coverablelines="4" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+    <Assembly name="Main" classes="117" coverage="52.8" coveredlines="3170" coverablelines="5993" totallines="12231" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="419" totalmethods="674" methodcoverage="62.1">
+      <Class name="AddUIElements" coverage="100" coveredlines="4" coverablelines="4" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="Agent" coverage="87.6" coveredlines="106" coverablelines="121" totallines="214" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="11" methodcoverage="72.7" />
       <Class name="AgentMvmnt" coverage="100" coveredlines="28" coverablelines="28" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="AI" coverage="78.3" coveredlines="87" coverablelines="111" totallines="189" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
@@ -66,7 +66,7 @@
       <Class name="Appliance" coverage="88.5" coveredlines="217" coverablelines="245" totallines="413" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="21" totalmethods="24" methodcoverage="87.5" />
       <Class name="AudioManager" coverage="1.2" coveredlines="1" coverablelines="81" totallines="146" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="5" methodcoverage="20" />
       <Class name="Billboard" coverage="40" coveredlines="12" coverablelines="30" totallines="50" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
-      <Class name="CanvasController" coverage="80.1" coveredlines="97" coverablelines="121" totallines="219" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="16" methodcoverage="75" />
+      <Class name="CanvasController" coverage="85.1" coveredlines="103" coverablelines="121" totallines="219" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="13" totalmethods="16" methodcoverage="81.2" />
       <Class name="CleanupRoom" coverage="0" coveredlines="0" coverablelines="15" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
       <Class name="CustomEvents" coverage="0" coveredlines="0" coverablelines="16" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
       <Class name="CustomProperties.PlayerCookedDishes" coverage="23.5" coveredlines="4" coverablelines="17" totallines="166" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
@@ -84,22 +84,22 @@
       <Class name="DisplayTicket" coverage="88.8" coveredlines="24" coverablelines="27" totallines="53" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="4" methodcoverage="75" />
       <Class name="DoorController" coverage="89.2" coveredlines="50" coverablelines="56" totallines="101" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
       <Class name="EnableBackgrounds" coverage="58.3" coveredlines="7" coverablelines="12" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
-      <Class name="EnableSmoke" coverage="100" coveredlines="35" coverablelines="35" totallines="132" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
+      <Class name="EnableSmoke" coverage="100" coveredlines="35" coverablelines="35" totallines="131" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
       <Class name="ExitCuttingMinigame" coverage="78.2" coveredlines="18" coverablelines="23" totallines="53" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
       <Class name="ExitFryingMinigame" coverage="77" coveredlines="47" coverablelines="61" totallines="114" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="8" methodcoverage="50" />
       <Class name="exitOven" coverage="100" coveredlines="16" coverablelines="16" totallines="45" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="ExitSandwichMinigame" coverage="79.1" coveredlines="19" coverablelines="24" totallines="56" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
-      <Class name="ExitStoveMinigame" coverage="77.7" coveredlines="35" coverablelines="45" totallines="101" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="4" methodcoverage="75" />
+      <Class name="ExitStoveMinigame" coverage="77.7" coveredlines="35" coverablelines="45" totallines="99" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="4" methodcoverage="75" />
       <Class name="FireExBox" coverage="100" coveredlines="10" coverablelines="10" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
-      <Class name="FireExtinguisher" coverage="86.4" coveredlines="32" coverablelines="37" totallines="67" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="7" methodcoverage="85.7" />
-      <Class name="FireOut" coverage="42" coveredlines="21" coverablelines="50" totallines="81" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="5" methodcoverage="80" />
+      <Class name="FireExtinguisher" coverage="86.1" coveredlines="31" coverablelines="36" totallines="65" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="6" methodcoverage="83.3" />
+      <Class name="FireOut" coverage="42" coveredlines="21" coverablelines="50" totallines="80" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="5" methodcoverage="80" />
       <Class name="FriedFoodController" coverage="24.5" coveredlines="15" coverablelines="61" totallines="119" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="10" methodcoverage="30" />
       <Class name="fryingMinigame" coverage="51.1" coveredlines="22" coverablelines="43" totallines="94" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="FryingTimerBar" coverage="84.3" coveredlines="27" coverablelines="32" totallines="59" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
       <Class name="GameEvents" coverage="100" coveredlines="8" coverablelines="8" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="GameOverAnimationController" coverage="0" coveredlines="0" coverablelines="25" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
       <Class name="gameOverMenu" coverage="0" coveredlines="0" coverablelines="91" totallines="193" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="9" methodcoverage="0" />
-      <Class name="GameSetup" coverage="100" coveredlines="10" coverablelines="10" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="GameSetup" coverage="100" coveredlines="6" coverablelines="6" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="globalClicked" coverage="100" coveredlines="6" coverablelines="6" totallines="183" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="GlobalTimer" coverage="74" coveredlines="77" coverablelines="104" totallines="185" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="13" totalmethods="17" methodcoverage="76.4" />
       <Class name="GlowController" coverage="71.2" coveredlines="67" coverablelines="94" totallines="146" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="9" methodcoverage="88.8" />
@@ -107,7 +107,7 @@
       <Class name="HealthBar" coverage="100" coveredlines="9" coverablelines="9" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="Hover" coverage="0" coveredlines="0" coverablelines="12" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
       <Class name="IngredientMove" coverage="0" coveredlines="0" coverablelines="4" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
-      <Class name="IngredientSpawner" coverage="59.3" coveredlines="19" coverablelines="32" totallines="56" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="6" methodcoverage="66.6" />
+      <Class name="IngredientSpawner" coverage="40.6" coveredlines="13" coverablelines="32" totallines="56" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="6" methodcoverage="50" />
       <Class name="Interactable" coverage="51.7" coveredlines="15" coverablelines="29" totallines="58" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="7" methodcoverage="57.1" />
       <Class name="ItemCollider" coverage="80" coveredlines="16" coverablelines="20" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="kickPlayers" coverage="0" coveredlines="0" coverablelines="66" totallines="121" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
@@ -115,7 +115,7 @@
       <Class name="LayerMove" coverage="0" coveredlines="0" coverablelines="8" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
       <Class name="LayerSpawn" coverage="100" coveredlines="34" coverablelines="34" totallines="59" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="LobbyMusic" coverage="0" coveredlines="0" coverablelines="12" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
-      <Class name="menuController" coverage="0" coveredlines="0" coverablelines="426" totallines="699" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="49" methodcoverage="0" />
+      <Class name="menuController" coverage="0" coveredlines="0" coverablelines="425" totallines="697" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="49" methodcoverage="0" />
       <Class name="MinigameHolder" coverage="50" coveredlines="3" coverablelines="6" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
       <Class name="MouseControl" coverage="0" coveredlines="0" coverablelines="23" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
       <Class name="MovingInstructions" coverage="40.1" coveredlines="41" coverablelines="102" totallines="183" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="7" methodcoverage="71.4" />
@@ -126,7 +126,7 @@
       <Class name="OutlineEffect" coverage="92.3" coveredlines="36" coverablelines="39" totallines="71" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
       <Class name="OvenFire" coverage="100" coveredlines="37" coverablelines="37" totallines="61" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="ovenMiniGame" coverage="93" coveredlines="40" coverablelines="43" totallines="78" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
-      <Class name="Owner" coverage="79.1" coveredlines="445" coverablelines="562" totallines="797" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="25" totalmethods="29" methodcoverage="86.2" />
+      <Class name="Owner" coverage="74.5" coveredlines="419" coverablelines="562" totallines="797" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="25" totalmethods="29" methodcoverage="86.2" />
       <Class name="PanController" coverage="73.1" coveredlines="71" coverablelines="97" totallines="166" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="5" methodcoverage="80" />
       <Class name="ParseScore" coverage="83.3" coveredlines="20" coverablelines="24" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="7" methodcoverage="85.7" />
       <Class name="ParticleControl" coverage="58.3" coveredlines="35" coverablelines="60" totallines="106" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="6" methodcoverage="83.3" />
@@ -141,48 +141,49 @@
       <Class name="PlayerHolding" coverage="82.7" coveredlines="77" coverablelines="93" totallines="167" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="10" methodcoverage="80" />
       <Class name="playerMvmt" coverage="65.5" coveredlines="59" coverablelines="90" totallines="160" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
       <Class name="PlayerVoiceManager" coverage="31.7" coveredlines="73" coverablelines="230" totallines="353" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="21" methodcoverage="38" />
-      <Class name="ProjectileLifetime" coverage="100" coveredlines="16" coverablelines="16" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="ProjectileLifetime" coverage="100" coveredlines="16" coverablelines="16" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="RoomListItem" coverage="0" coveredlines="0" coverablelines="7" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
       <Class name="RoomListMenu" coverage="0" coveredlines="0" coverablelines="48" totallines="79" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
       <Class name="SandwichController" coverage="84.7" coveredlines="78" coverablelines="92" totallines="161" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="12" methodcoverage="91.6" />
       <Class name="SandwichMove" coverage="50" coveredlines="17" coverablelines="34" totallines="78" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="7" methodcoverage="57.1" />
       <Class name="SandwichSpawner" coverage="100" coveredlines="16" coverablelines="16" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="SandwichStation" coverage="42.1" coveredlines="16" coverablelines="38" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
-      <Class name="scoreController" coverage="20.5" coveredlines="32" coverablelines="156" totallines="269" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="10" methodcoverage="50" />
+      <Class name="scoreController" coverage="20" coveredlines="31" coverablelines="155" totallines="268" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="10" methodcoverage="50" />
       <Class name="ScoreManager" coverage="23" coveredlines="6" coverablelines="26" totallines="61" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
       <Class name="ServeLock" coverage="100" coveredlines="7" coverablelines="7" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="Serving" coverage="14.2" coveredlines="1" coverablelines="7" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
       <Class name="settingsController" coverage="62.5" coveredlines="10" coverablelines="16" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
       <Class name="settingsText" coverage="100" coveredlines="10" coverablelines="10" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="SlotsController" coverage="100" coveredlines="37" coverablelines="37" totallines="58" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
-      <Class name="SmokeGrenade" coverage="45.9" coveredlines="17" coverablelines="37" totallines="132" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="8" methodcoverage="75" />
+      <Class name="SmokeGrenade" coverage="45.9" coveredlines="17" coverablelines="37" totallines="131" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="8" methodcoverage="75" />
       <Class name="spawnCutBurst" coverage="0" coveredlines="0" coverablelines="33" totallines="56" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
       <Class name="Spawner" coverage="58.8" coveredlines="40" coverablelines="68" totallines="141" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
-      <Class name="SprinklersTrigger" coverage="43.7" coveredlines="7" coverablelines="16" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="4" methodcoverage="75" />
+      <Class name="SprinklersTrigger" coverage="81.2" coveredlines="13" coverablelines="16" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="StoveBurst" coverage="0" coveredlines="0" coverablelines="12" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
       <Class name="stoveMinigame" coverage="94.1" coveredlines="32" coverablelines="34" totallines="70" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="StoveMinigameCounter" coverage="100" coveredlines="21" coverablelines="21" totallines="58" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
-      <Class name="StoveMovement" coverage="88.2" coveredlines="15" coverablelines="17" totallines="45" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="StoveMovement" coverage="88.2" coveredlines="15" coverablelines="17" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="StoveScore" coverage="88.4" coveredlines="23" coverablelines="26" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="11" methodcoverage="90.9" />
       <Class name="TicketController" coverage="100" coveredlines="13" coverablelines="13" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
       <Class name="Timer" coverage="76.9" coveredlines="80" coverablelines="104" totallines="173" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="15" methodcoverage="80" />
       <Class name="ToolTipManager" coverage="0" coveredlines="0" coverablelines="18" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
       <Class name="Trash" coverage="100" coveredlines="10" coverablelines="10" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
-      <Class name="Tray" coverage="71.4" coveredlines="70" coverablelines="98" totallines="163" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="13" methodcoverage="53.8" />
+      <Class name="Tray" coverage="80.6" coveredlines="79" coverablelines="98" totallines="163" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="13" methodcoverage="53.8" />
       <Class name="TrayController" coverage="50" coveredlines="62" coverablelines="124" totallines="187" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="12" methodcoverage="58.3" />
       <Class name="TrayItemCollider" coverage="28.8" coveredlines="13" coverablelines="45" totallines="80" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="5" methodcoverage="60" />
       <Class name="TraySlotting" coverage="28.5" coveredlines="4" coverablelines="14" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
       <Class name="TrayText" coverage="100" coveredlines="6" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
-      <Class name="VoiceChatManager" coverage="0" coveredlines="0" coverablelines="64" totallines="158" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
+      <Class name="VoiceChatManager" coverage="0" coveredlines="0" coverablelines="63" totallines="156" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
     </Assembly>
     <Assembly name="PantryASM" classes="2" coverage="100" coveredlines="21" coverablelines="21" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100">
       <Class name="SubroomObject" coverage="100" coveredlines="14" coverablelines="14" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
       <Class name="SubroomSlot" coverage="100" coveredlines="7" coverablelines="7" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
     </Assembly>
-    <Assembly name="PlayModeTests" classes="21" coverage="98.7" coveredlines="2159" coverablelines="2187" totallines="3720" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="263" totalmethods="264" methodcoverage="99.6">
+    <Assembly name="PlayModeTests" classes="22" coverage="99.8" coveredlines="2261" coverablelines="2265" totallines="3896" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="269" totalmethods="269" methodcoverage="100">
+      <Class name="CanvasControllerTest" coverage="100" coveredlines="102" coverablelines="102" totallines="180" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="14" totalmethods="14" methodcoverage="100" />
       <Class name="cookingMethod" coverage="100" coveredlines="90" coverablelines="90" totallines="172" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" totalmethods="18" methodcoverage="100" />
       <Class name="Cutting" coverage="98.9" coveredlines="95" coverablelines="96" totallines="162" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
-      <Class name="FireExt" coverage="72.5" coveredlines="37" coverablelines="51" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
+      <Class name="FireExt" coverage="100" coveredlines="37" coverablelines="37" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
       <Class name="FryDish" coverage="100" coveredlines="90" coverablelines="90" totallines="164" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" totalmethods="18" methodcoverage="100" />
       <Class name="FryingMiniGameTests" coverage="100" coveredlines="48" coverablelines="48" totallines="107" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="GetDishByID" coverage="100" coveredlines="112" coverablelines="112" totallines="188" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="19" totalmethods="19" methodcoverage="100" />
@@ -191,15 +192,15 @@
       <Class name="getIngredientByID" coverage="100" coveredlines="160" coverablelines="160" totallines="277" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="27" totalmethods="27" methodcoverage="100" />
       <Class name="IngredientLocation" coverage="100" coveredlines="130" coverablelines="130" totallines="239" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="26" totalmethods="26" methodcoverage="100" />
       <Class name="OvenTests" coverage="100" coveredlines="243" coverablelines="243" totallines="371" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" totalmethods="18" methodcoverage="100" />
-      <Class name="OwnerTests" coverage="100" coveredlines="147" coverablelines="147" totallines="253" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="9" methodcoverage="100" />
-      <Class name="PhotonTestSetup" coverage="72.9" coveredlines="27" coverablelines="37" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="13" methodcoverage="92.3" />
+      <Class name="OwnerTests" coverage="100" coveredlines="147" coverablelines="147" totallines="253" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
+      <Class name="PhotonTestSetup" coverage="100" coveredlines="27" coverablelines="27" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
       <Class name="PickableItemTests" coverage="100" coveredlines="70" coverablelines="70" totallines="140" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
       <Class name="PlayerTests" coverage="100" coveredlines="68" coverablelines="68" totallines="125" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
       <Class name="SandwichTests" coverage="98.9" coveredlines="97" coverablelines="98" totallines="169" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
       <Class name="Stove" coverage="100" coveredlines="85" coverablelines="85" totallines="144" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
       <Class name="TrashTest" coverage="100" coveredlines="33" coverablelines="33" totallines="79" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
-      <Class name="TrayControllerTests" coverage="100" coveredlines="116" coverablelines="116" totallines="187" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100" />
-      <Class name="TrayTests" coverage="100" coveredlines="149" coverablelines="149" totallines="222" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="12" methodcoverage="100" />
+      <Class name="TrayControllerTests" coverage="100" coveredlines="116" coverablelines="116" totallines="184" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="10" methodcoverage="100" />
+      <Class name="TrayTests" coverage="100" coveredlines="149" coverablelines="149" totallines="221" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="12" methodcoverage="100" />
       <Class name="UI" coverage="93.9" coveredlines="31" coverablelines="33" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
     </Assembly>
     <Assembly name="TrayASM" classes="1" coverage="100" coveredlines="2" coverablelines="2" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100">

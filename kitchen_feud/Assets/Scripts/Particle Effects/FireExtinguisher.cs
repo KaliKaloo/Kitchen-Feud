@@ -5,9 +5,7 @@ using Photon.Pun;
 
 public class FireExtinguisher : Interactable
 { 
-   // public BaseFood item;
     private ParticleSystem PS; 
-    private bool click = true;
     PlayerHolding playerHold;
     private PhotonView PV;
 

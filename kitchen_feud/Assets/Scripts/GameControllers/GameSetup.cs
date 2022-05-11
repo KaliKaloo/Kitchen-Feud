@@ -9,9 +9,7 @@ public class GameSetup : MonoBehaviour
 {
     public static GameSetup GS;
 
-    private int zeroCount;
     public GameObject loadingCanvas;
-    private bool started;
     public Transform[] spawnPoints1;
     public Transform[] spawnPoints2;
     public Transform[] WSP1;
@@ -19,11 +17,7 @@ public class GameSetup : MonoBehaviour
     public Transform OSP1;
     public Transform OSP2;
 
-    private void Start()
-    {
-        started = false;
-        zeroCount = 0;
-    }
+   
 
     private void OnEnable()
     {

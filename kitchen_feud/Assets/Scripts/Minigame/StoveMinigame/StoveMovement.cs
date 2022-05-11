@@ -15,7 +15,6 @@ public class StoveMovement : MonoBehaviour
     private float upperBound;
     public Camera UICamera;
 
-    // Start is called before the first frame update
     void Start()
     {
         // Place pot and relevant items scaled to resolution

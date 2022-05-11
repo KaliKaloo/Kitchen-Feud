@@ -75,7 +75,6 @@ public class SmokeGrenade : MonoBehaviour
         enableSmoke.RestartState();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // if player in enemy kitchen

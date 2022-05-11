@@ -18,7 +18,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public static menuController Instance;
 
     [SerializeField] private GameObject usernameMenu;
-    private bool setInternetSpeed;
     [SerializeField] private GameObject connectPanel;
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -108,7 +107,6 @@ public class menuController : MonoBehaviourPunCallbacks
     public void Start()
     {
         PV = GetComponent<PhotonView>();
-        setInternetSpeed = false;
         if (!PhotonNetwork.IsConnected)
         {
             // if their stored userID value is not null, then reconnect using that existing userID
