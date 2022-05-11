@@ -198,6 +198,7 @@ public class OvenTests : PhotonTestSetup {
     [UnityTest]
     public IEnumerator canvasAppearsOven1()
     {
+        yield return new WaitForSeconds(3);
         oven1.player = obj.transform;
         playerHold.pickUpItem(cake);
         oven1.Interact();

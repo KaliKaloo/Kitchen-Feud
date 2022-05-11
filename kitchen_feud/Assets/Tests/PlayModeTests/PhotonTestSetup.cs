@@ -33,7 +33,10 @@ public class PhotonTestSetup
     [OneTimeTearDown]
     public void PhotonTearDown()
     {
-        PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.OfflineMode)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
         PhotonNetwork.Disconnect();
         GameObject fireExtObj = GameObject.Find("fireExtinguisher");;
         if (fireExtObj != null)
@@ -48,7 +51,18 @@ public class PhotonTestSetup
 
         public void Connect()
         {
-            PhotonNetwork.OfflineMode = true;
+            if (!PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.OfflineMode = true;
+            }
+            else
+            {
+                PhotonNetwork.Disconnect();
+
+                StartCoroutine(offlineMode());
+
+            }
+            
         }
 
         public override void OnConnectedToMaster()
@@ -65,5 +79,11 @@ public class PhotonTestSetup
             SceneManager.LoadScene("kitchens Test");
             ready = true;
         }
+        public IEnumerator offlineMode()
+        {
+            yield return new WaitForSeconds(2);
+            PhotonNetwork.OfflineMode = true;
+        }
     }
+    
 }

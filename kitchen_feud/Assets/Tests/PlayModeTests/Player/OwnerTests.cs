@@ -66,22 +66,20 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
     [UnityTest]
     public IEnumerator ownerCreated()
     {
+        //set player's initial position
         obj.transform.position = new Vector3(12.61f, 0.2f, -4.8f);
+        //set player's team
         ht["Team"] = 1;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
-        //timer.changeTimerOnly(30);
-        Debug.Log(timer.GetLocalTime());
-       yield return new WaitForSeconds(1);
+       yield return new WaitForSeconds(1.5f);
+        //check if owner has been spawned in
         Assert.IsTrue(GameObject.FindGameObjectsWithTag("Owner1").Length == 1); 
-        Debug.Log(timer.GetLocalTime());
-        
+       //Get the Owners 
         o = GameObject.FindGameObjectWithTag("Owner1").GetComponent<Owner>();
-
-        o1 = GameObject.FindGameObjectWithTag("Owner1").GetComponent<Owner>();
-
 
         o.GetComponent<NavMeshAgent>().ResetPath();
         o.GetComponent<NavMeshAgent>().enabled = false;
+
         obj.GetComponent<PlayerVoiceManager>().entered2 = false;
         obj.GetComponent<PlayerVoiceManager>().entered1 = true;
         yield return new WaitForSeconds(0.5f);
@@ -90,10 +88,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         yield return new WaitForSeconds(0.5f);
         o.shout = true;
         yield return new WaitForSeconds(0.5f);
+        Assert.IsTrue(o.currentlyTalking);
         o.currentlyTalking = false;
-      //  yield return new WaitForSeconds(3);
 
-        // yield return new WaitForSeconds(0.5f);
         yield return null;
     }
 
@@ -105,15 +102,14 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         //timer.changeTimerOnly(30);
         Debug.Log(timer.GetLocalTime());
-        //  yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(1.5f);
         Assert.IsTrue(GameObject.FindGameObjectsWithTag("Owner1").Length == 1);
         Debug.Log(timer.GetLocalTime());
-
+        //getting both owners
         o = GameObject.FindGameObjectWithTag("Owner1").GetComponent<Owner>();
-
         o1 = GameObject.FindGameObjectWithTag("Owner2").GetComponent<Owner>();
-
-
+        //teleporting owners to save time
         o.GetComponent<NavMeshAgent>().ResetPath();
         o.GetComponent<NavMeshAgent>().enabled = false;
         obj.GetComponent<PlayerVoiceManager>().entered2 = false;
@@ -122,20 +118,24 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         o.transform.position = new Vector3(12.61f, 0.2f, -4.8f);
         o.GetComponent<NavMeshAgent>().enabled = true;
         yield return new WaitForSeconds(0.4f);
+        //owner one throws smoke bomb
         o.goThrowSmokeBomb = true;
         yield return new WaitForSeconds(0.4f);
+        Assert.IsTrue(o.currentlyShouting);
         o1.currentlyShouting = false;
         o.currentlyShouting = false;
         o.GetComponent<NavMeshAgent>().enabled = false;
         o1.GetComponent<NavMeshAgent>().enabled = false;
-        //yield return new WaitForSeconds(2);
-
+        //teleporting owner to other kitchen
         o.transform.position = new Vector3(-13.3f, 0.2f, 3.6f);
         o1.transform.position = new Vector3(6.743f, 0.2f, 2.076f);
 
         o.GetComponent<NavMeshAgent>().enabled = true;
         o1.GetComponent<NavMeshAgent>().enabled = true;
         yield return new WaitForSeconds(1f);
+        //check if owner has thrown smoke bomb
+        Assert.IsTrue(GameObject.Find("smoke_grenade(Clone)"));
+        //yield return new WaitForSeconds(10f);
         o.GetComponent<NavMeshAgent>().enabled = false;
         o1.GetComponent<NavMeshAgent>().enabled = false;
         o.transform.position = new Vector3(12.61f, 0.2f, -4.8f);
@@ -197,7 +197,10 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         obj.transform.position = new Vector3(12.61f, 0.2f, -4.8f);
         yield return new WaitForSeconds(0.3f);
         o = GameObject.FindGameObjectWithTag("Owner1").GetComponent<Owner>();
-        o.GetComponent<NavMeshAgent>().ResetPath();
+        //if (o.GetComponent<NavMeshAgent>())
+        //{
+        //    o.GetComponent<NavMeshAgent>().ResetPath();
+        //}
         o.GetComponent<NavMeshAgent>().enabled = false;
         o.transform.position = new Vector3(12.61f, 0.2f, -4.8f);
         o.GetComponent<NavMeshAgent>().enabled = true;
@@ -215,7 +218,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         obj.transform.position = new Vector3(-6.363f, 0.2f, -7);
         yield return new WaitForSeconds(0.5f);
         o = GameObject.FindGameObjectWithTag("Owner2").GetComponent<Owner>();
-        o.GetComponent<NavMeshAgent>().ResetPath();
+        //o.GetComponent<NavMeshAgent>().ResetPath();
         o.GetComponent<NavMeshAgent>().enabled = false;
         o.transform.position = new Vector3(-6.363f, 0.2f, -7);
         o.GetComponent<NavMeshAgent>().enabled = true;
@@ -230,7 +233,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
     {
 
         obj.transform.position = new Vector3(-6.363f, 0.2f, -7);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         o = GameObject.FindGameObjectWithTag("Owner2").GetComponent<Owner>();
         playerHold.pickUpItem(cake);
         o.oven.GetComponent<Appliance>().player = obj.transform;
