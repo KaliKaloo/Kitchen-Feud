@@ -12,7 +12,6 @@ public class ovenMiniGame : MonoBehaviour
 
     void Start()
     {
-        GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
     }
     
