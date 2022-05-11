@@ -25,7 +25,6 @@ public class Plate : MonoBehaviour
         PV = GetComponent<PhotonView>();
         PV.RPC("setPlateStartVals", RpcTarget.All, PV.ViewID);
         timer = transform.parent.GetComponentInChildren<FryingTimerBar>();
-        //GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width * 0.21f, Screen.height * 0.37f);
         RectTransform rect = GetComponent<RectTransform>();
         GetComponent<CapsuleCollider2D>().size = new Vector2(rect.rect.width/1.4f, (rect.rect.height / 6.15f) + 100);
         GetComponent<CapsuleCollider2D>().offset = new Vector2(GetComponent<CapsuleCollider2D>().offset.x, GetComponent<CapsuleCollider2D>().size.y/3);
@@ -76,7 +75,7 @@ public class Plate : MonoBehaviour
     }
        
     
- 
+ //what happens after flipped item collides with plate
     void OnTriggerEnter2D(Collider2D col)
     {
         
@@ -91,19 +90,21 @@ public class Plate : MonoBehaviour
             }
             else
             {
+                //synchronising points across the network
                 PV.RPC("syncTotal", RpcTarget.All, PV.ViewID, obj.points);
 
                 Debug.Log("total points:" + totalPoints);
-
+                //Get item to stick on to the plate
                 col.GetComponent<Rigidbody2D>().gravityScale = 0;
                 col.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 col.GetComponent<PhotonView>().RPC("setParentPlate", RpcTarget.All, col.GetComponent<PhotonView>().ViewID, PV.ViewID);
             }
             obj.collided = true;
-
+            //making items stack on top of each other using an aribtrary amount for height
             currentH += 22.5f;
             col.GetComponent<FriedFoodController>().onPlate = true;
             pan.friedFood = null;
+            //incrementing the amount of items flipped (max is 5)
             pan.foodInstancesCounter += 1;
             
         }

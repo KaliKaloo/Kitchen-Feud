@@ -12,19 +12,16 @@ public class Agent : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject Oven;
     public Tray tray;
-    bool isMoving;
     public PlayerHolding playerHold;
     public PhotonView PV;
     public bool readyToServe;
     public GameObject agentTray;
     public bool served;
-    private bool test = false;
     public bool goingToCollect;
     public bool goingToServe;
     public bool goingBack;
     public Vector3 initialPos;
     
-    // Start is called before the first frame update
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -49,118 +46,32 @@ public class Agent : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
       
 
         if (PV.IsMine && PhotonNetwork.IsMasterClient)
         {
-           
-            if ((agent.transform.position - initialPos).magnitude < 0.8f)
-            {
-                agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            }
-            
-
-            float dist = RemainingDistance(agent.path.corners);
+            //make sure waiters are facing the right way
+            fixRotation();
 
             if (tray)
             {
-                Vector3 trayPos = tray.transform.position;
-
-                if (!goingToCollect)
-                {
-                    goingBack = false;
-                    agent.SetDestination(new Vector3(trayPos.x, trayPos.y, trayPos.z - 2));
-                    goingToCollect = true;
-                }
-
-
-
-                    if (agent.remainingDistance != Mathf.Infinity && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 &&
-                   (agent.transform.position - trayPos).magnitude < 2.5f)
-                    {
-                        agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
-                            tray.transform.position,
-                            tray.transform.rotation);
-                        playerHold.pickUpItem(agentTray);
-                        
-
-                    
-
-
-
-                    foreach (Transform t in tray.transform)
-                    {
-
-                        if (t.name.Contains("Slot") && t.childCount > 0)
-                        {
-                            agentTray.GetComponent<TraySlotting>().slotOnTray(t.GetChild(0).gameObject);                          
-                          
-                        }
-
-                    }
-                    tray.isReady = false;
-                    agent.ResetPath();
-                    readyToServe = true;
-                }
-
-
-
+                //go up to the tray and collect items
+                foundTray();
             }
+
             if (readyToServe)
             {
-               
-                float newDist = RemainingDistance(agent.path.corners);
-                if (tray.SP && !goingToServe)
-                {
-                    agent.ResetPath();
-                    agent.SetDestination(tray.SP.transform.position);
-                    tray.SP = null;
-                    goingToServe = true;
-                    
-                }
-
-                //Find Serving point and assign it to tray using 
-                if (newDist < 1.3f && newDist != 0)
-                {
-                    foreach(Transform slot in agentTray.transform)
-                    {
-                        if (slot.transform.childCount>0)
-                        {
-                            PV.RPC("destroyAfterServed", RpcTarget.All, slot.transform.GetChild(0).GetComponent<PhotonView>().ViewID);
-                        }
-                    }
-                    PhotonNetwork.Destroy(agentTray);
-                    tray.Agent = null;
-                    tray = null;
-                    goingToCollect = false;
-
-                    served = true;
-
-                    readyToServe = false;
-                    
-                    
-                    
-                    
-
-                }
+                //go to customers and serve
+                collectedDish();
             }
 
             if (served)
             {
-                goingToServe = false;
-                if (!goingBack)
-                {
-                    agent.SetDestination(initialPos);
+                //return to original position
+                returnToWaitingPos();
             
-                    goingBack = true;
-                    served = false;
-                    
-                }
-               
-
             }
            
          
@@ -169,14 +80,101 @@ public class Agent : MonoBehaviour
 
         }
     }
+    void collectedDish() {
 
-    public IEnumerator setD(NavMeshAgent agent, Vector3 targetpos)
-    {
-        yield return new WaitForSeconds(2);
-        agent.SetDestination(targetpos);
+   
+       
+
+            float newDist = RemainingDistance(agent.path.corners);
+            if (tray.SP && !goingToServe)
+            {
+                agent.ResetPath();
+                agent.SetDestination(tray.SP.transform.position);
+                tray.SP = null;
+                goingToServe = true;
+
+            }
+
+            //Find Serving point and assign it to tray using 
+            if (newDist < 1.3f && newDist != 0)
+            {
+                foreach (Transform slot in agentTray.transform)
+                {
+                    if (slot.transform.childCount > 0)
+                    {
+                        PV.RPC("destroyAfterServed", RpcTarget.All, slot.transform.GetChild(0).GetComponent<PhotonView>().ViewID);
+                    }
+                }
+                PhotonNetwork.Destroy(agentTray);
+                tray.Agent = null;
+                tray = null;
+                goingToCollect = false;
+
+                served = true;
+
+                readyToServe = false;
+            }
 
     }
 
+    void returnToWaitingPos()
+    {
+        goingToServe = false;
+        if (!goingBack)
+        {
+            agent.SetDestination(initialPos);
+
+            goingBack = true;
+            served = false;
+
+        }
+    }
+    void foundTray()
+    {
+
+       
+            Vector3 trayPos = tray.transform.position;
+
+            if (!goingToCollect)
+            {
+                goingBack = false;
+                agent.SetDestination(new Vector3(trayPos.x, trayPos.y, trayPos.z - 2));
+                goingToCollect = true;
+            }
+
+
+
+            if (agent.remainingDistance != Mathf.Infinity && agent.remainingDistance < 0.3f && agent.remainingDistance != 0 &&
+           (agent.transform.position - trayPos).magnitude < 2.5f)
+            {
+                agentTray = PhotonNetwork.Instantiate(Path.Combine("Appliances", "TrayPrefab"),
+                    tray.transform.position,
+                    tray.transform.rotation);
+                playerHold.pickUpItem(agentTray);
+
+                foreach (Transform t in tray.transform)
+                {
+
+                    if (t.name.Contains("Slot") && t.childCount > 0)
+                    {
+                        agentTray.GetComponent<TraySlotting>().slotOnTray(t.GetChild(0).gameObject);
+
+                    }
+
+                }
+                tray.isReady = false;
+                agent.ResetPath();
+                readyToServe = true;
+            }
+        
+    }
+    void fixRotation()
+    {
+        if ((agent.transform.position - initialPos).magnitude < 0.8f)
+        {
+            agent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+    }
 
     public float RemainingDistance(Vector3[] points)
     {
@@ -186,17 +184,7 @@ public class Agent : MonoBehaviour
             distance += Vector3.Distance(points[i], points[i + 1]);
         return distance;
     }
-    public void resetAgent()
-    {
-        PhotonNetwork.Destroy(agentTray);
 
-        tray = null;
-        readyToServe = false;
-        served = false;
-        goingBack = false;
-        goingToCollect = false;
-        goingToServe = false;
-    }
     [PunRPC]
     void setTray(int agentID, int trayID) {
 

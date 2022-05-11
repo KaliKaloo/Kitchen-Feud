@@ -23,43 +23,36 @@ public class OvenFire : MonoBehaviour
             team = transform.parent.GetComponent<Appliance>().kitchenNum;
             hasParent = true;
         }
-        //and condition if temperature is too high
-        if(!startFire){
 
-         
-            if(timer.timer < -5){
-                foreach(ParticleSystem p in PS){
-                    if(p.GetComponent<FireOut>()){
-                        fireOut = p.GetComponent<FireOut>();
-                        fireOut.resetEmission();
-                        fireOut.enabled=true;
-                    }
-                    p.Play();
+        //IF timer below -5, start fire
+        if(!startFire && timer.timer < -5){
+            foreach(ParticleSystem p in PS){
+                if(p.GetComponent<FireOut>()){
+                    fireOut = p.GetComponent<FireOut>();
+                    fireOut.resetEmission();
+                    fireOut.enabled=true;
                 }
-                if (fireSound){
-                    //SOUND -------------------------------------------
-                    fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
-                    //-------------------------------------------------
-                }
-                
-                startFire = true;
-
-                   
-
+                p.Play();
+            }
+            if (fireSound){
+                fireSound.gameObject.GetComponent<PhotonView>().RPC("PlayFireSound", RpcTarget.All, fireSound.gameObject.GetComponent<PhotonView>().ViewID);
             }
             
+            startFire = true;
            
         }
 
         //dynamic music reaction
-        PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
-        if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
-            MusicManager.instance.priorityPitch = true;
-            MusicManager.instance.musicReact();
-            foreach(ParticleSystem p in PS){
-                if(p.GetComponent<FireOut>()){
-                    fireOut = p.GetComponent<FireOut>();
-                    fireOut.stoppedReaction = false;
+        if (GameObject.Find("Local")){
+            PlayerVoiceManager playerVM =  GameObject.Find("Local").GetComponentInChildren<PlayerVoiceManager>();
+            if (startFire && (playerVM.entered1 && team == 1) || (playerVM.entered2 && team == 2)){
+                MusicManager.instance.priorityPitch = true;
+                MusicManager.instance.musicReact();
+                foreach(ParticleSystem p in PS){
+                    if(p.GetComponent<FireOut>()){
+                        fireOut = p.GetComponent<FireOut>();
+                        fireOut.stoppedReaction = false;
+                    }
                 }
             }
         }

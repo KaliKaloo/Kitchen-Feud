@@ -30,16 +30,14 @@ public class MovingInstructions : MonoBehaviour
     private float time = 4f;
     public float timer;
     private bool started = false;
-    private bool finished = false;
-    private bool enemyInstructions = false;
 
-    // how long in seconds enemy instructions have between when shown
     private float enemyInstructionDelay = 6;
     List<string> randomInstructionList = new List<string>
         {
             "TIP: Steal their ingredients and dishes!", "TIP: Throw a smoke bomb by pressing the button in the bottom right", "TIP: Cook in their kitchen for double points!", "TIP: Add fake 10 seconds to their oven timer! This might cause a fire!", "TIP: Be careful, they can kick you out!"
         };
 
+    // starting instructions
     void Start()
     {
         Text.text = "Welcome! You can now move around using WASD or Arrow Keys!";
@@ -47,6 +45,7 @@ public class MovingInstructions : MonoBehaviour
 
     }
 
+    // continually checks what the current instruction is and changes based on certain events happening
     void Update()
     {
         if (LocalPlayer == null)
@@ -125,6 +124,7 @@ public class MovingInstructions : MonoBehaviour
             started = true;
         }
 
+        //Timer to clear text once finished
         if (started == true)
         {
             Decrement();
@@ -162,8 +162,6 @@ public class MovingInstructions : MonoBehaviour
     {
         globalClicked.enemyInstructions = true;
 
-        // show a random instruction from list then remove it
-
         if (!mouse.activeSelf && !keyboard.activeSelf)
         {
             owner1.SetActive(false);
@@ -171,7 +169,6 @@ public class MovingInstructions : MonoBehaviour
             mouse.SetActive(true);
             keyboard.SetActive(true);
         }
-
         int first = Random.Range(0, randomInstructionList.Count);
         Text.text = randomInstructionList[first];
         randomInstructionList.RemoveAt(first);
@@ -179,16 +176,6 @@ public class MovingInstructions : MonoBehaviour
         yield return new WaitForSeconds(enemyInstructionDelay);
 
         Text.text = "";
-
-        // // show a random instruction from remaining list then remove it
-        // int second = Random.Range(0, 3);
-        // Text.text = randomInstructionList[second];
-        // randomInstructionList.RemoveAt(second);
-
-        // yield return new WaitForSeconds(enemyInstructionDelay);
-
-        // // show a last remaining instruction
-        // Text.text = randomInstructionList[0];
 
 
     }

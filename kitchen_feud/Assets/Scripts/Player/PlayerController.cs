@@ -72,17 +72,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 					{
 						SetFocus(interactable, obj);
 					}
-					// TEMPORARY - Player should not be able to drop item anywhere. 
-					// Drop only on counters, stove etcc
 					else
 					{
 						PlayerHolding playerHold = player.GetComponent<PlayerHolding>();
 						if (player.transform.Find("slot").childCount!= 0) playerHold.dropItem();
 						RemoveFocus();
 					}
-					// -------------------------------------------------------------------------
 				}
 			}
+
 			else if (Input.GetKeyDown(KeyCode.F) && player.transform.Find("slot") && player.transform.Find("slot").childCount == 1 ){
 				Transform fireExtinguisher = player.transform.Find("slot").GetChild(0);
 				ParticleSystem fire_ps = fireExtinguisher.GetComponentInChildren<ParticleSystem>();
@@ -91,9 +89,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 				if(fireExtinguisher.name == "fireExtinguisher"){
 					if(fire_ps && !fire_ps.isPlaying){
 						firePV.RPC("playPS",RpcTarget.All,firePV.ViewID);
-						//fire_ps.Play();
 					}else{
-						//fire_ps.Stop();
 						firePV.RPC("stopPS",RpcTarget.All,firePV.ViewID);
 					}
 				}

@@ -12,7 +12,6 @@ public class GameSetup : MonoBehaviour
     private int zeroCount;
     public GameObject loadingCanvas;
     private bool started;
-   // public int nextPlayersTeam;
     public Transform[] spawnPoints1;
     public Transform[] spawnPoints2;
     public Transform[] WSP1;
@@ -34,23 +33,4 @@ public class GameSetup : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-  
-    }
-
-/*
-    public void UpdateTeam()
-    {
-        if (nextPlayersTeam == 1)
-        {
-            nextPlayersTeam = 2;
-        }
-        else
-        {
-            nextPlayersTeam = 1;
-        }
-
-    }
-*/
 }

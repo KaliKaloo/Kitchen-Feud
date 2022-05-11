@@ -31,9 +31,11 @@ public class LayerSpawn : MonoBehaviour
                 newPosition.z = 0;
                 myParentObject.transform.position = newPosition;
 
+                //setting the spacing for the sandwich layers to spawn. the most bottom one has a different spacing so that it is on the counter and above intstrucions.
                 if(y == 1){
                     spacing = chosenY/5;}
-                else{spacing = chosenY/7;}
+                else{
+                    spacing = chosenY/7;}
 
                 Vector3 pos = new Vector3(chosenX/2, (y * spacing), 0) ;
                 GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);

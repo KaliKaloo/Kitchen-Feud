@@ -16,7 +16,7 @@ public class Tray : Interactable
     public GameObject SP;
     public pickableItem pickable;
     public GameObject teamController;
-    private CanvasController canvasController;
+    public CanvasController canvasController;
     public bool isReady;
     public PhotonView PV;
     private int Team;
@@ -90,9 +90,7 @@ public class Tray : Interactable
                 if (s.GetComponent<Serving>().used == false)
                 {
                     PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
-                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
                     s.GetComponent<Serving>().used = true;
-                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }
@@ -104,11 +102,7 @@ public class Tray : Interactable
                 if (s.GetComponent<Serving>().used == false)
                 {
                     PhotonView.Find(trayID).GetComponent<Tray>().SP = s;
-
-                    //PV.RPC("setDest", RpcTarget.All, trayID, s.GetPhotonView().ViewID);
                     s.GetComponent<Serving>().used = true;
-
-                    //s.GetComponent<PhotonView>().RPC("setUsed", RpcTarget.All, s.GetPhotonView().ViewID);
                     break;
                 }
             }

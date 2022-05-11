@@ -9,7 +9,7 @@ public class nametag : MonoBehaviour
 {
     private GameObject obj;
     public PhotonView PV;
-    // Start is called before the first frame update
+
     void Start()
     {
         PV = GetComponent<PhotonView>();

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
-using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
@@ -39,7 +37,6 @@ public class PanController : MonoBehaviour
         haveAvg = false;
         speeds = new Queue<float>();
         foodInstancesCounter = 0;
-       // GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width  * 0.33f, Screen.height *0.49f);
         Vector2 panPos = pan.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition;
 
         if (PV.IsMine)
@@ -52,6 +49,7 @@ public class PanController : MonoBehaviour
 
     void Update()
     {
+        //setting initial values of the fryingMinigame script attached to appliance
         if(appliance && !iniialValsSet)
         {
             fM = appliance.GetComponent<fryingMinigame>();
@@ -60,7 +58,8 @@ public class PanController : MonoBehaviour
             fM.pan = GetComponent<PanController>();
         }
 
-        if(appliance.appliancePlayers.Count > 0) { 
+        if(appliance.appliancePlayers.Count > 0) {
+        //checking if the first player to click on the appliance is the owner of the Pan
         if (PhotonView.Find(appliance.appliancePlayers[0]).OwnerActorNr != PV.OwnerActorNr)
         {
            PV.TransferOwnership(PhotonView.Find(appliance.appliancePlayers[0]).Owner);
@@ -68,6 +67,7 @@ public class PanController : MonoBehaviour
             if (GameObject.Find("Local").GetComponent<PhotonView>().ViewID ==
              appliance.appliancePlayers[0] && GameObject.Find("Local").GetComponent<PhotonView>().IsMine)
             {
+                //using the mouse movement to flip the item
                 mouseCursorSpeed = Mathf.Abs(Input.GetAxis("Mouse X") / Time.deltaTime);
                 if (speeds.Count == speedQueueCapacity)
                 {
@@ -107,6 +107,7 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter < foodInstances && friedFood == null)
                 {
+                    //Instantiating a new item when a previous one has been flipped
                     Vector2 panPos = pan.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition;
                     var temp = PhotonNetwork.Instantiate(Path.Combine("Minigames", "Pancake"), panPos, friedFoodPrefab.transform.rotation);
                     PV.RPC("setFoodVals", RpcTarget.AllBuffered, temp.GetComponent<PhotonView>().ViewID, PV.ViewID);
@@ -116,9 +117,7 @@ public class PanController : MonoBehaviour
 
                 if (foodInstancesCounter == 5)
                 {
-                    backButton.SetActive(true);
-                    //transform.parent.parent.transform.Find("BackButton")gameObject.SetActive(true);
-                   // PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
+                    PV.RPC("enableBack", RpcTarget.All, PV.ViewID);
                 }
 
             }
@@ -128,6 +127,7 @@ public class PanController : MonoBehaviour
     [PunRPC]
     void setFoodVals(int viewID,int myID)
     {
+        //setting values of the item to be flipped
         FriedFoodController FFC;
         GameObject me;
         Appliance appliance;
@@ -159,7 +159,8 @@ public class PanController : MonoBehaviour
     [PunRPC]
     void enableBack(int viewID)
     {
-        PhotonView.Find(viewID).transform.parent.parent.Find("BackButton").gameObject.SetActive(true);
+        //enabling the back button for the frying minigame
+        PhotonView.Find(viewID).GetComponent<PanController>().backButton.gameObject.SetActive(true);
     }
   
 }

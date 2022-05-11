@@ -46,23 +46,4 @@ public class StoveScoreTests
         Assert.AreEqual(-9, StoveScore.Score);
     }
 
-    [Test]
-    public void AddBombMultiplier(){
-        StoveScore.BombMultiplier = 0.5f;
-        stoveScore.AddBombMultiplier();
-        Assert.AreEqual(0.6f, StoveScore.BombMultiplier);
-    }
-
-
-    [Test]
-    public void FinalMultiplier(){
-        StoveScore.Score = 3;
-        StoveScore.BombMultiplier = 0.5f;
-        float finalScore = stoveScore.FinalMultiplier();
-        Assert.AreEqual(0.1f, finalScore);
-    }
-
-
-
-
 }

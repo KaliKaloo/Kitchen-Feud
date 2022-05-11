@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Photon.Pun; 
+using Photon.Pun;
 
 public class stoveMinigame : MonoBehaviour
 {
@@ -26,25 +26,24 @@ public class stoveMinigame : MonoBehaviour
         backbutton.gameObject.SetActive(false);
     }
 
-    void Update(){
-
+    void Update()
+    {
         if (appliance.isBeingInteractedWith && appliance.player && appliance.player.GetComponent<PhotonView>().IsMine)
         {
             MusicManager.instance.minigameSwitch();
             MusicManager.instance.inMG = true;
-            
+
             backbutton.appliance = GetComponent<Appliance>();
+
             if (appliance.foundDish != null)
             {
                 spawner.dishSO = appliance.foundDish;
                 spawner.appliance = appliance;
-                
             }
-           
         }
     }
 
-
+    // updates dish's points based on score given from the minigame
     public void UpdateDishPointsStove()
     {
         if (appliance.isBeingInteractedWith)
@@ -62,10 +61,8 @@ public class stoveMinigame : MonoBehaviour
                 // if player is team 1 but interacts with team2 stove, points doubled
                 else if (stoveCanvas.tag == "Team2" && (int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1)
                     dishOfFoundDish.points = dishOfFoundDish.points * 2;
-                
-                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
 
-                Debug.Log("UpdateDishPoints: " + dishOfFoundDish.points);
+                dishOfFoundDish.GetComponent<PhotonView>().RPC("pointSync", RpcTarget.Others, (int)dishOfFoundDish.points);
             }
         }
     }

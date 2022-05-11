@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 public class ExitFryingMinigame : MonoBehaviour
@@ -28,7 +23,7 @@ public class ExitFryingMinigame : MonoBehaviour
 	}
 
 
-    void TaskOnClick()
+    public void TaskOnClick()
     {
 		MusicManager.instance.minigameEnd();
 		MusicManager.instance.inMG = false;
@@ -72,7 +67,7 @@ public class ExitFryingMinigame : MonoBehaviour
         gamePlayer.GetComponentInChildren<playerMvmt>().enabled = true;
         gamePlayer.GetComponent<PlayerController>().enabled = true;
         appliance.UIcamera.enabled =  false;
-		PV.RPC("enableMe", RpcTarget.All, PV.ViewID);
+
         Destroy(minigameCanvas);
 	
 

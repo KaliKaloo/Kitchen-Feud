@@ -12,6 +12,7 @@ public class MusicHolder
     private int previousArrayIndex;
 
 
+    //get pseudo-random clip from array
     public AudioClip GetRandomAudioClip() {
         if (previousArray == null || previousArray.Length != tracks.Length / 2) {
             previousArray = new int[tracks.Length / 2];
@@ -21,7 +22,7 @@ public class MusicHolder
         } else {
             do {
                 audioClipIndex = Random.Range(0, tracks.Length);
-            } while (PreviousArrayContainsAudioClipIndex());
+            } while (PreviousArrayContainsAudioClipIndex()); //check track hasn't been played recently
             previousArray[previousArrayIndex] = audioClipIndex;
             previousArrayIndex++;
             if (previousArrayIndex >= previousArray.Length) {

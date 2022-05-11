@@ -8,10 +8,10 @@ public class MusicManager : MonoBehaviour
 {
     private static GlobalTimer timer = new GlobalTimer();
 
-    private AudioSource track1, track2, track;
+    private AudioSource track1, track2, track, mgSource;
 
     public MusicHolder k1_1, k1_2, k2_1, k2_2, hallway, musicClips;
-    public AudioClip k1_MG, k2_MG, suddenTrack ;
+    public AudioClip k1_MG, k2_MG;
 
     public static MusicManager instance;
 
@@ -20,11 +20,7 @@ public class MusicManager : MonoBehaviour
     private bool switched = false, MGStarted = false;
     public int location;
     public bool inMG = false, priorityPitch = false;
-    private float musicVol, sliderVol = 0.5f;
-
-    private float pitch = 1;
-
-
+    private float musicVol, sliderVol = 0.5f,  pitch = 1;
 
    
     void Awake(){
@@ -63,6 +59,8 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+
+
     void setMusicClips(){
         if (location == 1){
             musicClips = switched ? k1_2 : k1_1;
@@ -73,10 +71,10 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-
     public void switchLocation(int loc){
         CancelInvoke("playRandom");
         location = loc;
+        //get track according to location
         setMusicClips();
         AudioClip newTrack = musicClips.GetRandomAudioClip();
         StartCoroutine(switchTrack(newTrack));
@@ -86,7 +84,7 @@ public class MusicManager : MonoBehaviour
         musicReact(1.3f);
     }
 
-
+    // react to event by pitching
     public void musicReact(float pitchParam){
         CancelInvoke("playRandom");
         pitch = pitchParam;
@@ -95,7 +93,7 @@ public class MusicManager : MonoBehaviour
 
     }
 
-
+    // set pitch to normal
     public void endReaction(){
         CancelInvoke("playRandom");
         pitch = 1f;
@@ -104,12 +102,13 @@ public class MusicManager : MonoBehaviour
 
     }
 
-
+    // cross-fading between 2 tracks
     private IEnumerator switchTrack(AudioClip newTrack){
         float timeElapsed = 0;
         float track1CurrentVol = 0;
-
         float track2CurrentVol = 0;
+
+        //if track 2 is the track to fade into
         if ((track1.isPlaying  && !track2.isPlaying)|| (track1.isPlaying && track2.isPlaying && fadingTrack == 2)){
             if (newTrack != track1.clip){
                 fadingTrack = 1;
@@ -169,7 +168,7 @@ public class MusicManager : MonoBehaviour
         Invoke("playRandom", track1.clip.length/pitch);
         float timeElapsed = 0;
         setVolume();
-
+        // fade into start track
         while (timeElapsed < fadeTime){
             track1.volume = Mathf.Lerp(0, musicVol, timeElapsed/fadeTime);
             timeElapsed += Time.deltaTime;
@@ -177,6 +176,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    //play pseudo-random clip from array of clips from Music Holder
     public void playRandom(){
         track.clip = musicClips.GetRandomAudioClip();
         track.Play();
@@ -185,13 +185,13 @@ public class MusicManager : MonoBehaviour
         track.volume = musicVol;
     }
 
-
+    //switch to MG music
     public void minigameSwitch(){
         if (!MGStarted && track){
             track.Pause();
             AudioClip newTrack = (location == 1) ? k1_MG : k2_MG;
             CancelInvoke("playRandom");
-            AudioSource mgSource = track == track1 ? track2 : track1;
+            mgSource = track == track1 ? track2 : track1;
             mgSource.clip = newTrack;
             setVolume();
             mgSource.volume = musicVol;
@@ -200,8 +200,8 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    //switch back to kitchen music
     public void minigameEnd(){
-        AudioSource mgSource = track == track1 ? track2 : track1;
         mgSource.Stop();
         track.UnPause();
         Invoke("playRandom", (track.clip.length - track.time)/pitch);
@@ -212,10 +212,10 @@ public class MusicManager : MonoBehaviour
         musicVol = sliderVol * volNormaliser();
     }
     
+    //adjust volume volume according to settings
     private void settingsVolume(GameObject volumeSlider){
         sliderVol = volumeSlider.GetComponentInChildren<Slider>().value;
         musicVol = sliderVol * volNormaliser();
-
         if (track1.isPlaying && !track2.isPlaying)
             track1.volume = musicVol;
         else if (track2.isPlaying && !track1.isPlaying)
@@ -225,7 +225,7 @@ public class MusicManager : MonoBehaviour
 
    
 
-
+    //normalise volume of tracks according to location
     float volNormaliser(){
         switch(location){ 
             case 1:

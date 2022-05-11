@@ -8,18 +8,19 @@ public class StoveMinigameCounter
 {
     public static int amount = 10;
 
-    // counts from 0-20 how many items have been dropped from the ceiling
+    // counts from 0 -> amount how many items have been dropped from the ceiling
     public static int droppedCounter;
 
-    // counts from 0-20 how many items have been caught by the pot
-    // once reached 20 then game should end
+    // counts from 0 -> amount how many items have been caught by the pot
+    // once reached amount the game should end
     public static int collisionCounter;
 
-    // counts from 0-20 how many correct ingredients have been caught
+    // counts from 0 -> amount how many correct ingredients have been caught
     public static int correctIngredientCounter;
 
     public static bool end;
 
+    // call then when game ends/starts
     public static void ResetCounters()
     {
         droppedCounter = 0;
@@ -46,7 +47,7 @@ public class StoveMinigameCounter
     public void StartGame()
     {
         end = false;
-        
+
     }
 
     // sets the state of the game to end

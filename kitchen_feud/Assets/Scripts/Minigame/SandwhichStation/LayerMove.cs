@@ -5,12 +5,11 @@ using UnityEngine.EventSystems;
 
     public class LayerMove : MonoBehaviour, IPointerClickHandler
     {
-    
+
         public SandwichMove SandwichMove;
     
         public void OnPointerClick(PointerEventData eventData)
         {
-            // Debug.Log("clicked");
          
             if ((!SandwichMove.stopped) && (SandwichMove.SandwichController.checkStoppedID(SandwichMove.LayerID))){
                 SandwichMove.stopped = true;

@@ -81,8 +81,7 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
         if (((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1 && channelName.Substring(channelName.Length - 5) == "Team2") 
         || ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2 && channelName.Substring(channelName.Length - 5) == "Team1")) {
             CustomProperties.PlayerMischievous.AddMischievousStat();
-            //enableSmoke.ChangePlayerState(true);
-           // globalClicked.enterEnemyKitchen =true;
+         
 
         // if player joins another area    
         }
@@ -137,11 +136,6 @@ public class VoiceChatManager : MonoBehaviourPunCallbacks
             {
                 byte[] results = www.downloadHandler.data;
                 internetSpeed = Math.Round(results.Length * 0.008f / s.Elapsed.TotalSeconds, 2);
-                /*Debug.Log("SIZE " + results.Length);
-                Debug.Log("STOPTIME" + s.Elapsed.TotalSeconds);
-                Debug.Log("SPEED " + internetSpeed);*/
-                //Debug.Log(internetSpeed);
-
                 yield break;
             }
 

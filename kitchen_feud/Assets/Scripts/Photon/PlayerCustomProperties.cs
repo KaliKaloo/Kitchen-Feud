@@ -5,6 +5,7 @@ using Photon.Pun;
 
 namespace CustomProperties
 {
+    // Statistics for players are tracked here
     public class PlayerCustomProperties
     {
         private static ExitGames.Client.Photon.Hashtable property = new ExitGames.Client.Photon.Hashtable();

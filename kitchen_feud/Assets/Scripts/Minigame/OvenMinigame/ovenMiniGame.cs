@@ -5,20 +5,15 @@ using Photon.Pun;
 
 public class ovenMiniGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // public GameObject oven;
     public Timer timer;
     private Appliance appliance;
     public exitOven backbutton;
     private int canvasTag;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameEvents.current.assignPoints += UpdateDishPointsOven;
         appliance = GetComponent<Appliance>();
-
-        
     }
     
     void Update()
@@ -32,8 +27,6 @@ public class ovenMiniGame : MonoBehaviour
             {
                 backbutton.appliance = GetComponent<Appliance>();
                 canvasTag = appliance.kitchenNum;
- 
-
             }
         }
         if(gameObject.GetComponentInChildren<ParticleSystem>().isPlaying){
@@ -43,9 +36,6 @@ public class ovenMiniGame : MonoBehaviour
             appliance.canUse = true;
         }
     }
-
-
-    //CALLED BY THE EVENT SYSTEM
 
 
     public void UpdateDishPointsOven()

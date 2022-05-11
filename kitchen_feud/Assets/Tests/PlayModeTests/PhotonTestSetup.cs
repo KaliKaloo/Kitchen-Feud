@@ -36,6 +36,9 @@ public class PhotonTestSetup
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
+        GameObject fireExtObj = GameObject.Find("fireExtinguisher");;
+        if (fireExtObj != null)
+            PhotonNetwork.Destroy(fireExtObj);
     }
 
     //public GameObject CreatePhotonGameObject()

@@ -1,15 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; 
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+
 
 public class SlotsController : MonoBehaviour {
     public List<Transform> slots = new List<Transform>();
-    // Appliance appliance;
-    //might need to set to 0 somwhere else
     private int fullnessCount = 0;
 
     public void PutOnAppliance(GameObject heldObjArg) {
@@ -57,8 +52,6 @@ public class SlotsController : MonoBehaviour {
      void removeFromApplianceRPC(int appViewID, int objViewID,int playerID)
     {
         RemoveFromAppliance(PhotonView.Find(appViewID).GetComponent<Appliance>(), PhotonView.Find(objViewID).gameObject,PhotonView.Find(playerID).gameObject);
-
-
     }
 
 

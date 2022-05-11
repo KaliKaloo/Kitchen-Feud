@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CustomEvents : EventTrigger
 {
-    // public TextMeshProUGUI dish;
     public override void OnPointerEnter(PointerEventData eventData){
         if (gameObject.GetComponent<Hover>()){
                 if (gameObject.GetComponent<Hover>().dish.text != ""){

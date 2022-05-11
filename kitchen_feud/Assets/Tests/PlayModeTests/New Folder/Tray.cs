@@ -6,6 +6,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.TestTools;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.IO;
 public class TrayTests : PhotonTestSetup
 {
@@ -13,6 +14,7 @@ public class TrayTests : PhotonTestSetup
     GameObject mushroom, potato, chips, cake, pancakes;
     PlayerHolding playerHold;
     Tray tray;
+    Hashtable ht = new Hashtable();
 
     
     [UnitySetUp]
@@ -29,6 +31,8 @@ public class TrayTests : PhotonTestSetup
             Quaternion.identity,
             0
         );
+        ht["ViewID"] = obj.GetComponent<PhotonView>().ViewID;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
         playerHold = obj.GetComponent<PlayerHolding>();
         GameObject trayObj = GameObject.Find("Tray1");
@@ -38,7 +42,7 @@ public class TrayTests : PhotonTestSetup
     }
 
     [UnityTearDown]
-    public IEnumerator MovementTearDown()
+    public IEnumerator TearDown()
     {
         if (obj != null)
             PhotonNetwork.Destroy(obj);
@@ -105,6 +109,26 @@ public class TrayTests : PhotonTestSetup
 
     }
 
+    [UnityTest]
+    public IEnumerator serveTray()
+    {
+       
+        playerHold.pickUpItem(mushroom);
+        Assert.AreEqual(mushroom, playerHold.heldObj);
+        tray.Interact();
+        Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
+        Assert.IsTrue(playerHold.heldObj.GetComponent<pickableItem>().onTray);
+        Assert.AreEqual(1, tray.slots[0].transform.childCount);
+        Assert.AreEqual(1, tray.tray.ServingTray.Count);
+       // yield return new WaitForSeconds(5);
+        tray.canvasController.Serve(GameObject.Find("ticket1-1"));
+        yield return new WaitForSeconds(12);
+        tray.tray.objectsOnTray.Remove(mushroom);
+        mushroom.transform.parent = null;
+        tray.tray.ServingTray.Clear();
+        yield return null;
+
+    }
 
     [UnityTest]
     public IEnumerator twoItemsOnTray()

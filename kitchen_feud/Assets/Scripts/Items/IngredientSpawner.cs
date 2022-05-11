@@ -11,9 +11,7 @@ public class IngredientSpawner : Interactable
     private int count = 180;
     private static GlobalTimer timer = new GlobalTimer();
     private int totalTime = timer.GetTotalTime();
-    private bool timerSet;
-
-    private bool reset;
+    private bool timerSet, reset;
 
    
     protected override void Update(){

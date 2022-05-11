@@ -16,9 +16,6 @@ public class GlowController : MonoBehaviour
 
     public List<GameObject> appliancesToGlow = new List<GameObject>();
 
-    private string glowLocation;
-
-
 
     void Start(){
         teamNumber = gameObject.GetComponent<CanvasController>().teamNumber;

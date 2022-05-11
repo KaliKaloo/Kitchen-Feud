@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Changes the background of minigames based on what kitchen player is in
 public class EnableBackgrounds : MonoBehaviour
 {
     [SerializeField] public GameObject canvas;
@@ -14,7 +15,6 @@ public class EnableBackgrounds : MonoBehaviour
         {
             team1Background.SetActive(true);
             team2Background.SetActive(false);
-            
         }
         else if (canvas.tag == "Team2")
         {

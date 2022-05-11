@@ -951,9 +951,11 @@ MonoBehaviour:
   anim: {fileID: 4850287822765907782}
   playOnce: 0
   oven: {fileID: 0}
+  localPlayer: {fileID: 0}
   currentlyTalking: 0
   firstTime: 0
   currentlyShouting: 0
+  returned: 0
   collected: 0
   collecting: 0
   stopLeaning: 0
@@ -965,6 +967,7 @@ MonoBehaviour:
   Text: {fileID: 0}
   shout: 0
   PV: {fileID: 0}
+  goThrowSmokeBomb: 0
   thrownSmokeBomb: 0
   otherOwner: {fileID: 0}
   spawnPoint: {x: 0, y: 0, z: 0}

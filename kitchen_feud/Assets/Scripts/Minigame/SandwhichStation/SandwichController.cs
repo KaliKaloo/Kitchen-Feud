@@ -92,7 +92,6 @@ public class SandwichController : MonoBehaviour
     {
         RestartGame();
         StartButton.SetActive(false);
-        //instructions.SetActive(false);
         GameUI.SetActive(true);
         Score = 0;
         moving = true;
@@ -147,8 +146,6 @@ public class SandwichController : MonoBehaviour
      }
 
     public bool checkStoppedID(string objectID){
-        // currentActiveID = objectPool[currentIndex].GetComponent<SandwichID>().Id;
-        // return objectPool[objectID].activeSelf;
         return objectPool[currentIndex].GetComponent<SandwichID>().Id == objectID;
     }
 
@@ -160,6 +157,5 @@ public class SandwichController : MonoBehaviour
         {
             SandwichStation.UpdateDishPointsSandwich();
         }
-       // GameEvents.current.assignPointsEventFunction();
     }
 }

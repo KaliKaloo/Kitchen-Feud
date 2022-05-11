@@ -10,6 +10,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
 
 
+// Handles the score and timer logic
+// All scores are parsed to this script and displayed appropriately
+// This also checks whether the game has ended by continually checking the timer
 public class scoreController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI score1Text;
@@ -44,25 +47,23 @@ public class scoreController : MonoBehaviour
         PlayerPrefs.SetInt("disconnected", 1);
         PV = GetComponent<PhotonView>();
         timesUpAnimator = timesUpCanvas.GetComponent<Animator>();
+        cleanupRoom = this.GetComponent<CleanupRoom>();
 
-      
         // send message to server that finished loading
         if (PhotonNetwork.CurrentRoom.CustomProperties["Players"] != null)
         {
             int currentPlayers = (int) PhotonNetwork.CurrentRoom.CustomProperties["Players"];
-
-
 
             if (currentPlayers > 0)
                 lobby["Players"] = currentPlayers - 1;
             PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         }
 
+        // Save internal values of webGL
         PlayerPrefs.Save();
 
+        // Reset all stats
         CustomProperties.PlayerResetStats.ResetAll();
-
-        cleanupRoom = this.GetComponent<CleanupRoom>();
 
         // start scores at 0
         score1Text.text = ConvertScoreToString(scores.GetScore1());
@@ -77,6 +78,7 @@ public class scoreController : MonoBehaviour
         return String.Format("{0:n0}", score);
     }
 
+    // Changes seconds into a more readable format of Minutes:Seconds
     private string ConvertSecondToMinutes(int seconds)
     {
         TimeSpan time = TimeSpan.FromSeconds(seconds);
@@ -87,11 +89,13 @@ public class scoreController : MonoBehaviour
     void Update()
     {
         
-        // update scores every frame
+        // Run game normally if not prompted into test world
         if (SceneManager.GetActiveScene().name != "kitchens Test")
         {
+            // when the game has started
             if (startGame)
             {
+                // continually update scores
                 OutputTime();
                 int score1 = scores.GetScore1();
                 int score2 = scores.GetScore2();
@@ -103,9 +107,9 @@ public class scoreController : MonoBehaviour
                 }
            
             }
-      
             else
             {
+                // once loaded in they get counted so the server knows they've loaded
                 if (!counted)
                 {
                     foreach (Photon.Realtime.Player p in PhotonNetwork.CurrentRoom.Players.Values)
@@ -118,19 +122,22 @@ public class scoreController : MonoBehaviour
                     }
                     counted = true;
                 }
+
+                // once everyone in the game has "counted" then the game is ready
                 if(count == PhotonNetwork.CurrentRoom.PlayerCount)
                 {
                     loadingScreen.SetActive(false);
                     startGame = true;
-                    // start timer if not started yet
 
+                    // start timer if not started yet
                     timer.SetLocalTime();
                     timerText.text = ConvertSecondToMinutes(timer.GetLocalTime());
                     timer.StartTimer(this);
                 }
+
+                // keep waiting whilst not all players loaded
                 else
                 {
-        
                     count = 0;
                     counted = false;
                 }
@@ -138,6 +145,8 @@ public class scoreController : MonoBehaviour
         
             }
         }
+
+        // Perform test sequence
         else
         {
             loadingScreen.SetActive(false);
@@ -149,60 +158,55 @@ public class scoreController : MonoBehaviour
         }
     }
 
-
+    // react to big score difference by music pitching
     void reactScore(int score1, int score2){
-        if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null) {
-            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) {
-                if (PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) { 
-                GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
-
-                int team = localP.GetComponent<PlayerController>().myTeam;
-                    if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != null && ((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"] != 0) && 
+        PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject != null) {
+            GameObject localP = PhotonView.Find((int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"]).gameObject;
+            int team = localP.GetComponent<PlayerController>().myTeam;
+            if (!MusicManager.instance.priorityPitch && score1 != 0 && score2 != 0) // give pitching priority to other events
+            {
+                if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
+                {
+                    if (team == 1)
                     {
-                        if ((score1 * 1.2 <= score2) || (score2 * 1.2 <= score1))
-                        {
-                            if (team == 1)
-                            {
-                                float ratio = score2 / score1;
-                                ratio = 1 - (1 - ratio) / 4;
-                                float pitch = Mathf.Min(ratio, 1.3f);
-                                pitch = Mathf.Max(pitch, 0.7f);
-                                MusicManager.instance.musicReact(pitch);
-                            }
-                            else if (team == 2)
-                            {
-                                float ratio = score1 / score2;
-                                ratio = 1 - (1 - ratio) / 4;
-                                float pitch = Mathf.Min(ratio, 1.3f);
-                                pitch = Mathf.Max(pitch, 0.7f);
-                                MusicManager.instance.musicReact(pitch);
-                            }
-                        }
-                        else
-                        {
-                            MusicManager.instance.endReaction();
-                        }
+                        float ratio = score2 / score1;
+                        ratio = 1 - (1 - ratio) / 4;
+                        float pitch = Mathf.Min(ratio, 1.3f);
+                        pitch = Mathf.Max(pitch, 0.7f);
+                        MusicManager.instance.musicReact(pitch);
                     }
+                    else if (team == 2)
+                    {
+                        float ratio = score1 / score2;
+                        ratio = 1 - (1 - ratio) / 4;
+                        float pitch = Mathf.Min(ratio, 1.3f);
+                        pitch = Mathf.Max(pitch, 0.7f);
+                        MusicManager.instance.musicReact(pitch);
+                    }
+                }
+                else
+                {
+                    MusicManager.instance.endReaction();
                 }
             }
         }
     }
 
 
-    // OutputTime is called once per second
+    // OutputTime checks if the game is over based on the timer
     void OutputTime()
     {
         if (!gameEnd)
         {
             if (timer.GetLocalTime() > 0)
             {
+                // keep decrementing if not 0
                 StartCoroutine(getLocalTime());
             }
-
             // SIGNAL FOR GAME OVER:
-            else if (gameOver == false)
+            else if (!gameOver)
             {
-
                 // load game over screen and send final scores
                 for (int i = 0; i < trays.Count; i++)
                 {
@@ -212,7 +216,7 @@ public class scoreController : MonoBehaviour
                     ts.tray.objectsOnTray.Clear();
                 }
 
-                StartCoroutine(playTimesUpAnimation());
+                StartCoroutine(PlayTimesUpAnimation());
 
                 // stop checking time after
                 gameEnd = true;
@@ -222,27 +226,26 @@ public class scoreController : MonoBehaviour
     }
 
     // plays animation and exits game
-    public IEnumerator playTimesUpAnimation()
+    public IEnumerator PlayTimesUpAnimation()
     {
-      
         timesUpCanvas.SetActive(true);
         // play animation
         timesUpAnimator.SetBool("StartGameOver", true);
+
+        // calls this to clean objects which need resetting
         cleanupRoom.Clean();
+
+        // sends to server that game has finished
         lobby["Players"] = PhotonNetwork.CountOfPlayersInRooms;
         PhotonNetwork.CurrentRoom.SetCustomProperties(lobby);
         
+        // Wait 5 secs for them to read Times up canvas
         yield return new WaitForSeconds(5);
-
-        // calls this to clean objects which need resetting
 
         timesUpAnimator.SetBool("StartGameOver", false);
         timesUpCanvas.SetActive(false);
 
         startGame = false;
-     
-        // sends to server that game has finished
-
         gameOver = true;
         // do game over
         if (PhotonNetwork.IsMasterClient)
@@ -254,7 +257,6 @@ public class scoreController : MonoBehaviour
 
 
     }
-
 
     public IEnumerator getLocalTime()
     {

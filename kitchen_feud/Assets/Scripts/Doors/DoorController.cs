@@ -13,6 +13,7 @@ public class DoorController : MonoBehaviour
     public PhotonView PV;
     public int count;
     public bool isOpened;
+   
     private void Start()
     {
         isOpened = false;
@@ -70,10 +71,10 @@ public class DoorController : MonoBehaviour
     void syncAnim(int viewiD,string x)
     {   
         PhotonView.Find(viewiD).GetComponent<Animator>().Play(x,0,0.0f);
-        //SOUND -----------------------------------------------------------------
+        //SOUND
         PhotonView.Find(viewiD).GetComponent<AudioSource>().Play();
-        //-----------------------------------------------------------------------
     }
+
     [PunRPC]
     void syncIsOpened(int x)
     {

@@ -24,7 +24,7 @@ public class ExitSandwichMinigame : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
 	}
 
-	void TaskOnClick()
+	public void TaskOnClick()
 	{
 		SandwichController.stopped = false;
 		GameObject gamePlayer = GameObject.Find("Local");

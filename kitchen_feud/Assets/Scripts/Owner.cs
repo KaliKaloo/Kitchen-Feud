@@ -15,15 +15,14 @@ public class Owner : MonoBehaviour
     public Animator anim;
     public bool playOnce;
     public GameObject oven;
-    private GameObject localPlayer;
     private NavMeshAgent agent;
+    public GameObject localPlayer;
     public bool currentlyTalking;
     public bool firstTime;
     public bool currentlyShouting;
-    private bool returned;
+    public bool returned;
     public bool collected;
     public bool collecting;
-    private bool toCollect;
     public bool stopLeaning;
     private bool returningToKitchen;
     private bool following;
@@ -43,7 +42,7 @@ public class Owner : MonoBehaviour
     public bool shout;
     public PhotonView PV;
     private int localPlayerID;
-    private bool goThrowSmokeBomb;
+    public bool goThrowSmokeBomb;
     private bool throwNow;
     public bool thrownSmokeBomb;
     public Owner otherOwner;
@@ -54,7 +53,7 @@ public class Owner : MonoBehaviour
     
 
     private System.Random rnd = new System.Random();
-    // Start is called before the first frame update
+
     private void Awake()
     {
         Owner1 = AI.Instance.owner1Avatar;
@@ -70,7 +69,6 @@ public class Owner : MonoBehaviour
         localPlayerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
         localPlayer = PhotonView.Find(localPlayerID).gameObject;
         audioSource = GetComponent<AudioSource>();
-        // audioSource = transform.GetChild(7).GetComponent<AudioSource>();
 
         keyboard = AI.Instance.keyBoard;
         mouse = AI.Instance.mouse;
@@ -78,7 +76,6 @@ public class Owner : MonoBehaviour
         anim = GetComponent<Animator>();
 
 
-        //  Text = GameObject.Find("instruction type").GetComponentInChildren<TextMeshProUGUI>();
       Text =   PhotonView.Find(205).GetComponentInChildren<TextMeshProUGUI>();
         agent = GetComponent<NavMeshAgent>();
         if (PhotonNetwork.IsMasterClient)
@@ -106,520 +103,56 @@ public class Owner : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-
+        //Master client controls all owner actions
         if (PhotonNetwork.IsMasterClient)
         {
+            //only execute if NavMeshAgent Component is enabled
+            if (agent.enabled) {
+            //assign the other owner
             if (!otherOwner)
             {
-                if (team == 1)
-                {
-                    if (AI.Instance.Owner1)
-                    {
-                        otherOwner = AI.Instance.Owner2.GetComponent<Owner>();
-                    }
-                }
-                else if (team == 2)
-                {
-                    if (AI.Instance.Owner1)
-                    {
-                        otherOwner = AI.Instance.Owner1.GetComponent<Owner>();
-                    }
-                }
+               assignOtherOwners();
             }
-            if (!currentlyTalking && anim.GetBool("IsTalking"))
-            {
-                anim.SetBool("IsTalking", false);
-            }
-            if (currentlyTalking && !anim.GetBool("IsTalking"))
-            {
-                if(anim.GetBool("IsLeaning"))
-                {
-                    anim.SetBool("IsLeaning", false);
-                }
-                anim.SetBool("IsTalking", true);
-            }
-            if (!currentlyShouting && anim.GetBool("IsShouting"))
-            {
-                anim.SetBool("IsShouting", false);
-            }
-            if (currentlyShouting && !anim.GetBool("IsShouting"))
-            {
-                if (anim.GetBool("IsLeaning"))
-                {
-                    anim.SetBool("IsLeaning", false);
-                }
-                anim.SetBool("IsShouting", true);
-            }
-            if (!playOnce && (currentlyShouting || currentlyTalking))
-            {
-                StartCoroutine(playSounds());
-                playOnce = true;
-            }
-            if (stopLeaning)
-            {
-                if (anim.GetBool("IsLeaning"))
-                {
-                    anim.SetBool("IsLeaning", false);
-                }
-            }
+            //Control Animations for both owners, i.e. when they should be talking, shouting etc.
+            controllingAnimationsForBothTeams();
 
             if (team == 1)
             {
-              
-                if (agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0 )
-                {
-                    if (anim.GetBool("IsShakingHead"))
-                    {
-                        anim.SetBool("IsShakingHead", false);
-                    }
-                    if(!stopLeaning && !currentlyShouting && !currentlyTalking)
-                    {
-                        if (!anim.GetBool("IsLeaning"))
-                        {
-                            anim.SetBool("IsLeaning", true);
-                        }
-                    }
-                    if (firstTime)
-                    {
-                        StartCoroutine(leavingKitchen());
-                        firstTime = false;  
-                    }
-
-                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                    }
-
-                }
-                if (!faceforward && agent.transform.position.x > 12 && agent.transform.position.z < -4 && agent.remainingDistance == 0)
-                {
-                
-                    agent.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    faceforward = true;
-                    anim.SetBool("IsTalking", true);
-
-                    if (scores.GetScore1() == scores.GetScore2())
-                    {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
-                        //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
-
-                    }
-                    else if (scores.GetScore1() > scores.GetScore2())
-                    {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
-
-                        //Text.text = "We're winning! Keep it up guys!";
-
-                    }
-                    else if (scores.GetScore1() < scores.GetScore2())
-                    {
-                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
-
-                       // Text.text = "We're losing! We need to stop being lazy and push if we want to win";
-
-                    }
-                    StartCoroutine(talking());
-
-                }
-
-                //if(timer.GetLocalTime() == 270 && !decided)
-                if(timer.GetLocalTime() ==  timer.GetTotalTime()/2 - 15 && !decided)
-                {
-                   // if (timer.GetLocalTime() == timer.GetTotalTime() / 4 - 10)
-                        if (rnd.Next(2) == 1)
-
-                        {
-                            stopLeaning = true;
-                            goThrowSmokeBomb = true;
-                        }
-                        else
-                        {
-                            stopLeaning = true;
-
-                        shout = true;
-                        notThrowing = true;
-                        }
-                    decided = true;
-                    //else do something
-                }
-
-             
-
-                if (goThrowSmokeBomb)
-                {
-                    throwSmokeBomb();
-                    throwNow = true;
-                    goThrowSmokeBomb = false;
-                    
-                }
-                if (throwNow)
-                {
-               
-                    if((transform.position - new Vector3(-13.3f, 0.2f,3.6f)).magnitude<1)
-                    {
-                        GetComponent<SmokeGrenade>().UseSmokeOwner(1);
-                        stopLeaning = false;
-                        throwNow = false;
-                        //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
-                        agent.ResetPath();
-                        agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
-                        thrownSmokeBomb = true;
-                        returningToKitchen = true;
-
-                    }
-                }
-                if (returningToKitchen)
-                {
-                    if((transform.position - (new Vector3(12.61f, 0.2f, -4.8f))).magnitude < 1)
-                    {
-                        StartCoroutine(leavingKitchen());
-                        returningToKitchen = false;
-                        returned = true;
-                    }
-                }
-                if (returned)
-                {
-                    if((transform.position - spawnPoint).magnitude < 1)
-                    {
-                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
-                      //  transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
-                        returned = false;
-                    }
-                }
-       
-        
-
+              //make sure owner faces the right way when in kitchen
+              correctingAgentRotationTOne();
+              //carry out the owner's initial actions.
+              ownerOneInitialAction();
             }
             else if (team == 2)
             {
-                if (agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0
-                )
-                {
-                    if (anim.GetBool("IsShakingHead"))
-                    {
-                        anim.SetBool("IsShakingHead", false);
-                    }
+                    //make sure owner faces the right way when in kitchen
+                    correctingAgentRotationTOne();
+                    //carry out the owner's initial actions.
+                    ownerTwoInitialAction();
 
-                    if (!stopLeaning && !currentlyShouting && !currentlyTalking)
-                    {
-                        if (!anim.GetBool("IsLeaning"))
-                        {
-                            anim.SetBool("IsLeaning", true);
-                        }
-                    }
-                    if (firstTime)
-                    {
-                        StartCoroutine(leavingKitchen());
-                        firstTime = false;
-                    }
-                    if (transform.rotation != Quaternion.Euler(0, 0, 0))
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                    }
-
-                }
-                if (!faceforward && agent.transform.position.x < -6f && agent.transform.position.z < -5.7f && agent.remainingDistance == 0)
-                {
-                    agent.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    faceforward = true;
-                    anim.SetBool("IsTalking", true);
-
-                    if (scores.GetScore1() == scores.GetScore2())
-                    {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
-
-                        //Text.text = "We're drawing. We need to step up our game if we want to get the edge over them!";
-
-                    }
-                    else if (scores.GetScore2() > scores.GetScore1())
-                    {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
-
-                        //Text.text = "We're winning! Keep it up guys!";
-
-                    }
-                    else if (scores.GetScore2() < scores.GetScore1())
-                    {
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
-
-                        //Text.text = "We're losing! We need to stop being lazy and push if we want to win";
-
-                    }
-                    StartCoroutine(talking());
-
-                }
-
-                if(otherOwner.notThrowing)
-                {
-                    stopLeaning = true;
-                    shout = true;
-                    otherOwner.notThrowing = false;
-                }
-
-
-                if (otherOwner.thrownSmokeBomb)
-                {
-                    if(rnd.Next(2) == 0)
-                    {
-                        stopLeaning = true;
-                        StartCoroutine(startShouting());
-                        goThrowSmokeBomb = true;
-
-
-
-                    }
-                    else
-                    {
-                        stopLeaning = true;
-                       StartCoroutine(startShouting());
-
-                        PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
-                        StartCoroutine(leavingKitchen());
-                        returned = true;
-
-
-                    }
-                    otherOwner.thrownSmokeBomb = false;
-                }
-                if (goThrowSmokeBomb)
-                {
-                    throwSmokeBomb();
-                    throwNow = true;
-                    goThrowSmokeBomb = false;
-                }
-                if (throwNow)
-                {
-
-                    if ((agent.transform.position - new Vector3(6.743f, 0.2f, 2.076f)).magnitude < 1)
-                    {
-                        GetComponent<SmokeGrenade>().UseSmokeOwner(2);
-                        throwNow = false;
-                        //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
-                        agent.ResetPath();
-                        agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
-                        thrownSmokeBomb = true;
-                        returningToKitchen = true;
-
-                    }           
-                }
-                if (returningToKitchen)
-                {
-                    if((transform.position - new Vector3(-6.363f, 0.2f, -7)).magnitude < 1)
-                    {
-                        StartCoroutine(leavingKitchen());
-                        returningToKitchen = false;
-                        returned = true;
-                    }
-                }
-                if (returned)
-                {
-                    if((transform.position - spawnPoint).magnitude < 3)
-                    {
-                       // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
-                        PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
-                        returned = false;  
-                    }
-                }
-
-                
             }
-            //if(timer.GetLocalTime() == 210)
-            if(timer.GetLocalTime() == timer.GetTotalTime()/4)
-            {
-               // transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
-                PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
 
-                agent.SetDestination(kitchenDestinationPoint);
-                inKitchenSecondTime = true;
-                stopLeaning = false;
-                
-            }
-            if (inKitchenSecondTime)
-            {
-                if ((transform.position - kitchenDestinationPoint).magnitude < 1)
+                //Enter Kitchen Second Time
+                enterSecondTime();
+
+
+                if (shout == true)
+
                 {
-                    StartCoroutine(waitBeforeShouting());
-                    inKitchenSecondTime = false;
-                    //yield return new WaitForSeconds(2);
-                    //shout = true;
+                    findPlayerToShout();
                 }
-            }
-       
-            if (shout == true)
-
-            {
-
-                if(team == 1)
-                {
-                    if (!following)
-                    {
-                        Photon.Realtime.Player p = getLowestCookedDishesByTeam(1);
-                        if (p != null)
-                        {
-                            playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                        }
-                        if(playerToFollow){
-
-                            agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                            if (!calledName)
-                            {
-                                if (p != null)
-                                {
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
-                                }
-                                //Text.text = p.NickName + "!";
-                                calledName = true;
-                            }
-                        }
-                        else
-                        {
-                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
-                            //if (timer.GetLocalTime() < 260)
-                            {
-                                firstTime = true;
-                      
-                                shout = false;
-                            }
-                        }
-
-                    }
-                }else if(team == 2)
-                {
-                    if (!following)
-                    {
-                        Photon.Realtime.Player p = getLowestCookedDishesByTeam(2);
-                        if (p != null)
-                        {
-                            playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
-                        }
-                        if(playerToFollow){
-                            agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
-                          
-                            if (!calledName)
-                            {
-                                if (p != null)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, p.NickName + "!");
-                                }
-
-
-                                //Text.text = p.NickName + "!";
-                                calledName = true;
-                            }
-                        }
-                        else
-                        {
-                            if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
-                           // if (timer.GetLocalTime() < 260)
-                            {
-                                firstTime = true;
-                      
-                                shout = false;
-                            }
-                        }
-
-                    }
-                }
-
-
+    
                 if (playerToFollow)
                 {
 
-                    if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 3 * 3)
-                    {
-
-                        agent.transform.LookAt(playerToFollow.transform);
-
-                        if (!shouting)
-                        {
-                            anim.SetBool("IsShouting", true);
-                            if(team == 1)
-                            {
-                                int netScore = scores.GetScore1() - scores.GetScore2();
-                                if (netScore > -80 && netScore < 0)
-                                {
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're losing by a small margin, I think you should go sabotage!");
-                                } else if (netScore < -80) { 
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! Can you please stop being lazy, or at least go sabotage");
-                                }else if(netScore < 150 && netScore > 0)
-                                {
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We need to increase the gap between our scores!");
-
-                                }else if(netScore > 150)
-                                {
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
-
-                                }else if(netScore == 0)
-                                {
-                                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're drawing! We can't afford laziness!");
-
-                                }
-
-
-                            }
-                            else if(team == 2)
-                            {
-                                int netScore = scores.GetScore2() - scores.GetScore1();
-                                if (netScore > -80 && netScore < 0)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're losing by a small margin, I think you should go sabotage!");
-                                }
-                                else if (netScore < -80)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! Can you please stop being lazy, or at least go sabotage");
-                                }
-                                else if (netScore < 150 && netScore > 0)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We need to increase the gap between our scores!");
-
-                                }
-                                else if (netScore > 150)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
-
-                                }
-                                else if (netScore == 0)
-                                {
-                                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're drawing! We can't afford laziness!");
-
-                                }
-
-
-                            }
-
-                            // Text.text = "You haven't cooked a single dish! I think you should go help sabotage";
-                            StartCoroutine(talking());
-                            shouting = true;
-                        }
-                        if (shouting && !currentlyTalking)
-                        {
-                            anim.SetBool("IsShouting", false);
-                            stopLeaning = false;
-
-                            returnWithHeadShake();
-
-
-                            calledName = false;
-                            shout = false;
-                            following = false;
-                            shouting = false;
-                            playerToFollow = null;
-
-
-                        }
-
-                    }
+                    followPlayer();
                 }
-
-
             }
 
 
-
+            //Collect dish from oven after a certain time has passed
             if (!collected && oven.transform.Find("ovencanvas(Clone)") && timer.GetLocalTime() < timer.GetTotalTime()/6)
             {
                 if (oven.GetComponentInChildren<Timer>().timer == 5)
@@ -633,56 +166,21 @@ public class Owner : MonoBehaviour
 
             if (collecting)
             {
-
-                if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
-                     (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
-                {
-                    if (oven.transform.Find("ovencanvas(Clone)"))
-                    {
-                       
-                            oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
-                            //agent.GetComponent<PlayerHolding>().pickUpItem(oven.GetComponent<Appliance>().cookedDish);
-                            if(team == 1)
-                        {
-                            PV.RPC("setText", RpcTarget.All, PV.ViewID, "I collected the dish from the Oven!");
-                             returnNormally();
-
-
-
-                        }
-                        else if (team == 2)
-                        {
-                            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "I collected the dish from the Oven!");
-                            returnNormally2();
-
-                        }
-                        collecting = false;
-                        
-                        
-
-                    }
-                }
+                //Pressing Collect on OvenCanvas
+                pressingCollectOnOven();
 
             }
-            if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
-            {
-                if (team == 1)
+            //someone collects oven dish before Owner reaches the oven
+                if (collecting && !oven.transform.Find("ovencanvas(Clone)"))
                 {
-                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
+                        returnNormally();
+                         collecting = false;
 
-                    returnNormally();
                 }
-                else if (team == 2)
-                {
-                    PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Ahh, got there before me!");
-
-                    returnNormally2();
-                }
-                //Text.text = "Ahh, got there before me!";
-                collecting = false;
             }
         }
-    }
+    
 
 
     public Photon.Realtime.Player getLowestCookedDishesByTeam(int team)
@@ -718,6 +216,421 @@ public class Owner : MonoBehaviour
             }
         }
         return p;
+    }
+
+    void pressingCollectOnOven()
+    {
+        if (agent.remainingDistance < Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete &&
+                   (agent.transform.position - oven.transform.position).sqrMagnitude < 4)
+        {
+            if (oven.transform.Find("ovencanvas(Clone)"))
+            {
+
+                oven.GetComponentInChildren<OvenFire>().GetComponentInChildren<exitOven>().TaskOnClick();
+                PV.RPC("setText", RpcTarget.All, PV.ViewID, "I collected the dish from the Oven!");
+                returnNormally();
+                collecting = false;
+
+            }
+        }
+    }
+
+    void enterSecondTime() {
+        if (timer.GetLocalTime() == timer.GetTotalTime() / 4)
+        {
+            PV.RPC("showOwner", RpcTarget.All, PV.ViewID);
+
+            agent.SetDestination(kitchenDestinationPoint);
+            inKitchenSecondTime = true;
+            stopLeaning = false;
+
+        }
+        if (inKitchenSecondTime)
+        {
+            if ((transform.position - kitchenDestinationPoint).magnitude < 1)
+            {
+                StartCoroutine(waitBeforeShouting());
+                inKitchenSecondTime = false;
+
+            }
+        }
+    }
+
+
+
+
+    void followPlayer()
+    {
+
+        if ((agent.transform.position - playerToFollow.transform.position).sqrMagnitude < 3 * 3)
+        {
+
+            agent.transform.LookAt(playerToFollow.transform);
+
+            if (!shouting)
+            {
+                anim.SetBool("IsShouting", true);
+                int netScore = 0;
+                if (team == 1)
+                {
+                    netScore = scores.GetScore1() - scores.GetScore2();
+                }
+                else if (team == 2)
+                {
+                    netScore = scores.GetScore2() - scores.GetScore1();
+                }
+
+                if (netScore > -80 && netScore < 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're losing by a small margin, I think you should go sabotage!");
+                }
+                else if (netScore < -80)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! Can you please stop being lazy, or at least go sabotage");
+                }
+                else if (netScore < 150 && netScore > 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We need to increase the gap between our scores!");
+
+                }
+                else if (netScore > 150)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're winning but we can't get lazy!");
+
+                }
+                else if (netScore == 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "You've cooked the least amount of dishes! We're drawing! We can't afford laziness!");
+
+                }
+
+                StartCoroutine(talking());
+                shouting = true;
+            }
+            if (shouting && !currentlyTalking)
+            {
+                anim.SetBool("IsShouting", false);
+                stopLeaning = false;
+
+                returnWithHeadShake();
+
+
+                calledName = false;
+                shout = false;
+                following = false;
+                shouting = false;
+                playerToFollow = null;
+
+
+            }
+        }
+    }
+
+    void ownerTwoInitialAction()
+    {
+        if (otherOwner.notThrowing)
+        {
+            stopLeaning = true;
+            shout = true;
+            otherOwner.notThrowing = false;
+        }
+
+
+        if (otherOwner.thrownSmokeBomb)
+        {
+            if (rnd.Next(2) == 0)
+            {
+                stopLeaning = true;
+                StartCoroutine(startShouting());
+                goThrowSmokeBomb = true;
+
+
+
+            }
+            else
+            {
+                stopLeaning = true;
+                StartCoroutine(startShouting());
+
+                PV.RPC("setText", RpcTarget.All, PV.ViewID, "Arghh! We can't let them do this, Can someone please throw a smoke bomb in their kitchen too!");
+                StartCoroutine(leavingKitchen());
+                returned = true;
+
+
+            }
+            otherOwner.thrownSmokeBomb = false;
+        }
+        if (goThrowSmokeBomb)
+        {
+            throwSmokeBomb();
+            throwNow = true;
+            goThrowSmokeBomb = false;
+        }
+        if (throwNow)
+        {
+
+            if ((agent.transform.position - new Vector3(6.743f, 0.2f, 2.076f)).magnitude < 1)
+            {
+                GetComponent<SmokeGrenade>().UseSmokeOwner(2);
+                throwNow = false;
+                //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
+                agent.ResetPath();
+                agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
+                thrownSmokeBomb = true;
+                returningToKitchen = true;
+
+            }
+        }
+        if (returningToKitchen)
+        {
+            if ((transform.position - new Vector3(-6.363f, 0.2f, -7)).magnitude < 1)
+            {
+                StartCoroutine(leavingKitchen());
+                returningToKitchen = false;
+                returned = true;
+            }
+        }
+        if (returned)
+        {
+            if ((transform.position - spawnPoint).magnitude < 3)
+            {
+                PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
+                returned = false;
+            }
+        }
+    }
+    void findPlayerToShout()
+    {
+        if (!following)
+        {
+            Photon.Realtime.Player p = null;
+            if (team == 1) {
+                p = getLowestCookedDishesByTeam(1);
+            }else if(team == 2) {
+                p = getLowestCookedDishesByTeam(2);
+            }
+
+
+
+            if (p != null)
+            {
+                playerToFollow = PhotonView.Find((int)p.CustomProperties["ViewID"]).gameObject;
+            }
+            if (playerToFollow)
+            {
+
+                agent.SetDestination(playerToFollow.transform.position - new Vector3(1, 0, 1));
+                if (!calledName)
+                {
+                    if (p != null)
+                    {
+                        PV.RPC("setText", RpcTarget.All, PV.ViewID, p.NickName + "!");
+                    }
+                    calledName = true;
+                }
+            }
+            else
+            {
+                if (timer.GetLocalTime() == timer.GetTotalTime() * 3 / 8)
+                {
+                    firstTime = true;
+
+                    shout = false;
+                }
+            }
+
+        }
+    }
+
+
+    void ownerOneInitialAction()
+    {
+
+        if (timer.GetLocalTime() == timer.GetTotalTime() / 2 - 15 && !decided)
+        {
+            if (rnd.Next(2) == 1)
+
+            {
+                stopLeaning = true;
+                goThrowSmokeBomb = true;
+            }
+            else
+            {
+                stopLeaning = true;
+
+                shout = true;
+                notThrowing = true;
+            }
+            decided = true;
+        }
+
+
+
+        if (goThrowSmokeBomb)
+        {
+            throwSmokeBomb();
+            throwNow = true;
+            goThrowSmokeBomb = false;
+
+        }
+        if (throwNow)
+        {
+
+            if ((transform.position - new Vector3(-13.3f, 0.2f, 3.6f)).magnitude < 1)
+            {
+                GetComponent<SmokeGrenade>().UseSmokeOwner(1);
+                stopLeaning = false;
+                throwNow = false;
+                //ADD TEXT SO OWNER SENDS MESSAGE TO OTHER TEAM
+                agent.ResetPath();
+                agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
+                thrownSmokeBomb = true;
+                returningToKitchen = true;
+
+            }
+        }
+        if (returningToKitchen)
+        {
+            if ((transform.position - (new Vector3(12.61f, 0.2f, -4.8f))).magnitude < 1)
+            {
+                StartCoroutine(leavingKitchen());
+                returningToKitchen = false;
+                returned = true;
+            }
+        }
+        if (returned)
+        {
+            if ((transform.position - spawnPoint).magnitude < 1)
+            {
+                PV.RPC("hideOwner", RpcTarget.All, PV.ViewID);
+                returned = false;
+            }
+        }
+
+    }
+
+    void correctingAgentRotationTOne()
+    {
+        if((agent.transform.position - kitchenDestinationPoint).magnitude < 1)
+        {
+            if (!faceforward)
+            {
+                int net = 0;
+                if(team == 1)
+                {
+                    net = scores.GetScore1() - scores.GetScore2();
+                }else if (team == 2)
+                {
+                    net = scores.GetScore2() - scores.GetScore1();
+
+                }
+
+                if (net == 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're drawing. We need to step up our game if we want to get the edge over them!");
+
+
+                }
+                else if (net > 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're winning! Keep it up guys!");
+
+
+                }
+                else if (net < 0)
+                {
+                    PV.RPC("setText", RpcTarget.All, PV.ViewID, "We're losing! We need to stop being lazy and push if we want to win");
+
+
+                }
+                StartCoroutine(talking());
+                faceforward = true;
+
+            }
+
+
+            if (anim.GetBool("IsShakingHead"))
+            {
+                anim.SetBool("IsShakingHead", false);
+            }
+            if (!stopLeaning && !currentlyShouting && !currentlyTalking)
+            {
+                if (!anim.GetBool("IsLeaning"))
+                {
+                    anim.SetBool("IsLeaning", true);
+                }
+            }
+            if (firstTime)
+            {
+                StartCoroutine(leavingKitchen());
+                firstTime = false;
+            }
+
+            if (transform.rotation != Quaternion.Euler(0, 0, 0))
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+        }
+    }
+
+
+    void controllingAnimationsForBothTeams()
+    {
+        if (!currentlyTalking && anim.GetBool("IsTalking"))
+        {
+            anim.SetBool("IsTalking", false);
+        }
+        if (currentlyTalking && !anim.GetBool("IsTalking"))
+        {
+            if (anim.GetBool("IsLeaning"))
+            {
+                anim.SetBool("IsLeaning", false);
+            }
+            anim.SetBool("IsTalking", true);
+        }
+        if (!currentlyShouting && anim.GetBool("IsShouting"))
+        {
+            anim.SetBool("IsShouting", false);
+        }
+        if (currentlyShouting && !anim.GetBool("IsShouting"))
+        {
+            if (anim.GetBool("IsLeaning"))
+            {
+                anim.SetBool("IsLeaning", false);
+            }
+            anim.SetBool("IsShouting", true);
+        }
+        if (!playOnce && (currentlyShouting || currentlyTalking))
+        {
+            StartCoroutine(playSounds());
+            playOnce = true;
+        }
+        if (stopLeaning)
+        {
+            if (anim.GetBool("IsLeaning"))
+            {
+                anim.SetBool("IsLeaning", false);
+            }
+        }
+    }
+
+    void assignOtherOwners()
+    {
+        if (team == 1)
+        {
+            if (AI.Instance.Owner1)
+            {
+                otherOwner = AI.Instance.Owner2.GetComponent<Owner>();
+            }
+        }
+        else if (team == 2)
+        {
+            if (AI.Instance.Owner1)
+            {
+                otherOwner = AI.Instance.Owner1.GetComponent<Owner>();
+            }
+        }
     }
 
     void collectFromOven()
@@ -776,7 +689,7 @@ public class Owner : MonoBehaviour
         }
         else if(team == 2)
         {
-            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
+            PV.RPC("setText", RpcTarget.All, PV.ViewID, "Keep going guys, I'll be back to check on you.");
             agent.SetDestination(spawnPoint);
         }
         returned = true;
@@ -785,8 +698,7 @@ public class Owner : MonoBehaviour
 
     void returnWithHeadShake()
     {
-       if (timer.GetLocalTime() > timer.GetTotalTime()/4)
-       //if(timer.GetLocalTime() > 210)
+        if (timer.GetLocalTime() > timer.GetTotalTime()/4)
         {
             firstTime = true;
         }
@@ -802,12 +714,12 @@ public class Owner : MonoBehaviour
         anim.SetBool("IsShakingHead", true);
     }
 
-    void returnNormally()
+    public void returnNormally()
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(12.61f, 0.2f, -4.8f));
     }
-    void returnNormally2()
+    public void returnNormally2()
     {
         agent.ResetPath();
         agent.SetDestination(new Vector3(-6.363f, 0.2f, -7));
@@ -822,7 +734,7 @@ public class Owner : MonoBehaviour
             agent.SetDestination(new Vector3(-12.6f, 0.2f, 3.6f));
         }else if(team == 2)
         {
-            PV.RPC("setText2", RpcTarget.All, PV.ViewID, "Arghh, we can't let them do this! I'm going to throw a smoke bomb too!");
+            PV.RPC("setText", RpcTarget.All, PV.ViewID, "Arghh, we can't let them do this! I'm going to throw a smoke bomb too!");
             agent.SetDestination(new Vector3(6.743f, 0.2f, 2.076f));
 
         }
@@ -830,7 +742,6 @@ public class Owner : MonoBehaviour
     public IEnumerator playSounds()
     {
         PV.RPC("playOwner", RpcTarget.All, PV.ViewID);
-      //  audioSource.Play();
         yield return new WaitForSeconds(3);
         playOnce = false;
     }
@@ -841,33 +752,30 @@ public class Owner : MonoBehaviour
        int playerID = (int)PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
 
         PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-      
-        if(  pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
+        if (team == 1)
         {
-            o.keyboard.SetActive(false);
-            o.mouse.SetActive(false);
-            o.Owner2.SetActive(false);
-            o.Owner1.SetActive(true);
-            o.Text.text = message;
-        } 
+            if (pVM.entered1 && pVM.GetComponent<PhotonView>().IsMine)
+            {
+                o.keyboard.SetActive(false);
+                o.mouse.SetActive(false);
+                o.Owner2.SetActive(false);
+                o.Owner1.SetActive(true);
+                o.Text.text = message;
+            }
+        }else if(team == 2)
+        {
+            if (pVM.entered2 && pVM.GetComponent<PhotonView>().IsMine)
+            {
+                o.keyboard.SetActive(false);
+                o.mouse.SetActive(false);
+                o.Owner1.SetActive(false);
+                o.Owner2.SetActive(true);
+                o.Text.text = message;
+            }
+        }
 
     }
-    [PunRPC]
-    void setText2(int viewID, string message)
-    {
-        Owner o = PhotonView.Find(viewID).GetComponent<Owner>();
-        int playerID = (int) PhotonNetwork.LocalPlayer.CustomProperties["ViewID"];
-        PlayerVoiceManager pVM = PhotonView.Find(playerID).GetComponent<PlayerVoiceManager>();
-        if ( pVM.entered2  && pVM.GetComponent<PhotonView>().IsMine)
-        {
-            //Debug.LogError("TESTTT");
-            o.keyboard.SetActive(false);
-            o.mouse.SetActive(false);
-            o.Owner1.SetActive(false);
-            o.Owner2.SetActive(true);
-            o.Text.text = message;
-        }
-    }
+
     [PunRPC]
     void hideOwner(int ViewID)
     {

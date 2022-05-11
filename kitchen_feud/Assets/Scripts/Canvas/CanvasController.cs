@@ -20,15 +20,13 @@ public class CanvasController : MonoBehaviour
     public GameObject justClicked;
     public TrayController TC;
     private TicketController ticketController;
-    private GameObject currentTray;
 
-    public List<GameObject> orderStands = new List<GameObject>(); 
+    public List<GameObject> orderStands = new List<GameObject>();
     public GameObject orderNumberPrefab;
     public int teamNumber;
     private int orderNum;
 
     private static GlobalTimer timer = new GlobalTimer();
-    //private static RepeatLock rLock = new RepeatLock();
 
     void Start()
     {
@@ -47,7 +45,7 @@ public class CanvasController : MonoBehaviour
 
         Button btn = serve.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
-        
+
     }
 
     private void Update()
@@ -55,16 +53,17 @@ public class CanvasController : MonoBehaviour
         if (GameObject.Find("Local"))
         {
 
-            if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1&& GameObject.FindGameObjectWithTag("Team2") && GameObject.FindGameObjectWithTag("Team2").activeSelf)
+            if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 1 && GameObject.FindGameObjectWithTag("Team2") && GameObject.FindGameObjectWithTag("Team2").activeSelf)
             {
-                GameObject [] Team2 = GameObject.FindGameObjectsWithTag("Team2");
+                GameObject[] Team2 = GameObject.FindGameObjectsWithTag("Team2");
                 foreach (GameObject obj in Team2)
                 {
                     obj.SetActive(false);
                 }
-            }else if ((int) PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2&& GameObject.FindGameObjectWithTag("Team1") && GameObject.FindGameObjectWithTag("Team1").activeSelf)
+            }
+            else if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Team"] == 2 && GameObject.FindGameObjectWithTag("Team1") && GameObject.FindGameObjectWithTag("Team1").activeSelf)
             {
-                GameObject [] Team1 = GameObject.FindGameObjectsWithTag("Team1");
+                GameObject[] Team1 = GameObject.FindGameObjectsWithTag("Team1");
                 foreach (GameObject obj in Team1)
                 {
                     obj.SetActive(false);
@@ -96,22 +95,18 @@ public class CanvasController : MonoBehaviour
     }
 
     // serve corresponding order depending on what justClicked equals
-    private void Serve(GameObject justClicked)
+    public void Serve(GameObject justClicked)
     {
-        
-        //justClicked.GetComponent<PhotonView>().RPC("SetToF", RpcTarget.All,
-        //    justClicked.GetComponent<PhotonView>().ViewID);
-        
         orderMenu.SetActive(false);
 
         DisplayTicket d_ticket = justClicked.GetComponent<DisplayTicket>();
 
         TC.CompareOrder(d_ticket.orderid, justClicked.GetPhotonView().ViewID);
-       
-        
+
+
         d_ticket.GetComponent<PhotonView>().RPC("clearAll", RpcTarget.All);
-        
-        
+
+
     }
 
     public void ShowNewTicketWithID(Order LeaderOrder) // already inside an rpc
@@ -119,12 +114,11 @@ public class CanvasController : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             string order = LeaderOrder.orderID;
-            int orderN;
             if (ticket1.activeSelf == true)
             {
                 if (ticket2.activeSelf == true)
                 {
-                   
+
                     PV.RPC("showTickets", RpcTarget.AllBuffered, PV.ViewID, ticket3.GetPhotonView().ViewID, 3, order);
 
                 }
@@ -156,26 +150,26 @@ public class CanvasController : MonoBehaviour
         }
     }
 
+    // called every 5 seconds generating new tickets for each team
     private void UpdateOrders()
     {
-        if(CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient){
+        if (CheckIfTicketsNotFull() && PhotonNetwork.IsMasterClient)
+        {
             Order leaderOrder = GetNewRandomOrder();
-
             ShowNewTicketWithID(leaderOrder);
-
         }
 
     }
 
     public int DisplayNewRandomOrder(DisplayTicket ticket)
-    {  
+    {
         // RANDOM ORDER
         Order o = Database.GetRandomOrder();
         string orderID = o.orderID;
-       
+
         TrayController tray_Controller = gameObject.GetComponent<TrayController>();
         tray_Controller.makeTray(orderID);
-        o.orderNumber  = ++orderNum;
+        o.orderNumber = ++orderNum;
         ticket.SetUI(o);
         return o.orderNumber;
 
@@ -197,32 +191,29 @@ public class CanvasController : MonoBehaviour
         o.orderNumber = ++orderNum;
 
         ticket.SetUI(o);
+        ticket.SetUI(o);
         return o.orderNumber;
 
     }
 
     [PunRPC]
-    void setSignParent(int viewIDSign, int viewIDTray){
+    void setSignParent(int viewIDSign, int viewIDTray)
+    {
         PhotonView.Find(viewIDSign).transform.SetParent(PhotonView.Find(viewIDTray).transform);
     }
 
     [PunRPC]
-    void showTickets(int viewID, int ticketID, int num,string order)
+    void showTickets(int viewID, int ticketID, int num, string order)
     {
         CanvasController CC = PhotonView.Find(viewID).GetComponent<CanvasController>();
-        
-        {
-            GameObject ticket = PhotonView.Find(ticketID).gameObject;
-            DisplayTicket dTicket = ticket.GetComponent<DisplayTicket>();
-            ticket.SetActive(true);
-            dTicket.orderNumber = num;
-           
-            int orderN = DisplayOrderFromID(dTicket, order);
-             CC.orderStands[num - 1]
-                .GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString();
-           
-        }
 
+        GameObject ticket = PhotonView.Find(ticketID).gameObject;
+        DisplayTicket dTicket = ticket.GetComponent<DisplayTicket>();
+        ticket.SetActive(true);
+        dTicket.orderNumber = num;
+
+        int orderN = DisplayOrderFromID(dTicket, order);
+        CC.orderStands[num - 1].GetComponentInChildren<TextMeshProUGUI>().text = orderN.ToString();
     }
 
 }

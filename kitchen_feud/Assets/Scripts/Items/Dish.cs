@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class Dish : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float points;
 
 
