@@ -16,7 +16,6 @@ public class cuttingMinigame : MonoBehaviour
    
     void Start()
     {
-        GameEvents.current.assignPoints += UpdateDishPointsCutting;
         appliance = GetComponent<Appliance>();
         
     }
