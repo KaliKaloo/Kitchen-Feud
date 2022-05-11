@@ -34,10 +34,9 @@ public class PhotonTestSetup
     [OneTimeTearDown]
     public void PhotonTearDown()
     {
-        if (PhotonNetwork.OfflineMode)
-        {
+       
             PhotonNetwork.LeaveRoom();
-        }
+     
         PhotonNetwork.Disconnect();
         GameObject fireExtObj = GameObject.Find("fireExtinguisher");;
         if (fireExtObj != null)

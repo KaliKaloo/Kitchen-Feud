@@ -31,11 +31,14 @@ public class MainMenuSetup
         yield return null;
     }
 
-    [OneTimeTearDown]
-    public void PhotonTearDown()
+    [UnityTearDown]
+    public IEnumerator PhotonTearDown()
     {
-        SceneManager.LoadScene("kitchens Test");
+        SceneManager.LoadScene("Test");
+        yield return new WaitForSeconds(4);
         PhotonNetwork.Disconnect();
+        yield return new WaitForSeconds(4);
+
 
 
     }

@@ -18,12 +18,6 @@ public class MenuTest: MainMenuSetup
         yield return null;
     }
 
-    [UnityTearDown]
-    public IEnumerator MovementTearDown()
-    {
-        yield return null;
-    }
-
    
     [UnityTest]
     public IEnumerator createLobby()
