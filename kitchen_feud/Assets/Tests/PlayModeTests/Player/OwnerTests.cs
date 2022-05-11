@@ -160,7 +160,6 @@ public class OwnerTests : PhotonTestSetup
     {
 
         obj.transform.position = new Vector3(-6.363f, 0.2f, -7);
-        //timer.changeTimerOnly(30);
         Debug.Log(timer.GetLocalTime());
         yield return new WaitForSeconds(0.5f);
         Assert.IsTrue(GameObject.FindGameObjectsWithTag("Owner1").Length == 1);

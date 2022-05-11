@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using UnityEngine.TestTools;
 using Photon.Pun;
 using Photon.Realtime;
-
 using UnityEngine.UI;
-
 
 public class PhotonTestSetup
 {
@@ -35,7 +32,7 @@ public class PhotonTestSetup
     public void PhotonTearDown()
     {
        
-            PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveRoom();
      
         PhotonNetwork.Disconnect();
         GameObject fireExtObj = GameObject.Find("fireExtinguisher");;
@@ -51,20 +48,8 @@ public class PhotonTestSetup
 
         public void Connect()
         {
-            Debug.Log("??" + PhotonNetwork.IsConnected);
             PhotonNetwork.OfflineMode = true;
-            //if (!PhotonNetwork.IsConnected)
-            //{
-            //    PhotonNetwork.OfflineMode = true;
-            //}
-            //else
-            //{
-            //    PhotonNetwork.Disconnect();
-              
-            //   StartCoroutine(offlineMode());
-
-            //}
-            
+           
         }
 
         public override void OnConnectedToMaster()
@@ -85,7 +70,6 @@ public class PhotonTestSetup
         {
             yield return new WaitForSeconds(2);
             PhotonNetwork.OfflineMode = true;
-            Debug.Log("66" + PhotonNetwork.IsConnected);
         }
     }
     

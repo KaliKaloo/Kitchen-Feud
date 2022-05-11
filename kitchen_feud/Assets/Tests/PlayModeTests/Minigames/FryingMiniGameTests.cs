@@ -8,8 +8,8 @@ using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 
-    public class FryingMiniGameTests:PhotonTestSetup
-    {
+public class FryingMiniGameTests:PhotonTestSetup
+{
     GameObject obj,obj1;
     GameObject buns, patty;
 
@@ -24,7 +24,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
         buns = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "buns"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
         patty = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "patty"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
-        //lettuce = PhotonNetwork.Instantiate(Path.Combine("IngredientPrefabs", "lettuce"), new Vector3(-1.98f, 0.006363153f, -8.37f), Quaternion.identity);
 
         obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
             "Player_cat_Model"),
@@ -33,11 +32,11 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
             0
         );
         obj1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPlayers",
-       "Player_cat_Model"),
-       new Vector3(-1.98f, 0.006363153f, -8.37f),
-       Quaternion.identity,
-       0
-   );
+            "Player_cat_Model"),
+            new Vector3(-1.98f, 0.006363153f, -8.37f),
+            Quaternion.identity,
+            0
+        );
         obj1.name = "Local";
 
         stove = GameObject.Find("stove1").GetComponent<Appliance>();
@@ -46,7 +45,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
         ht1["Time"] = 10;
         PhotonNetwork.LocalPlayer.SetCustomProperties(ht);
         PhotonNetwork.CurrentRoom.SetCustomProperties(ht1);
-        //PhotonNetwork.LocalPlayer.CustomProperties["Team"] = 0;
         playerHold = obj.GetComponent<PlayerHolding>();
         yield return null;
     }
@@ -83,25 +81,17 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
        
         yield return new WaitForSeconds(2);
         stove.minigameCanvas2.transform.Find("BackButton").gameObject.SetActive(true);
-        // if (obj.GetComponent<PhotonView>().IsMine)
         if (PhotonNetwork.IsMasterClient)
         {
-          //  PhotonNetwork.Destroy(stove.minigameCanvas2.transform.Find("PanGameObject").gameObject);
-
-            {
-                stove.minigameCanvas2.transform.Find("BackButton").GetComponent<ExitFryingMinigame>().appliance = stove;
-                stove.minigameCanvas2.transform.Find("BackButton").gameObject.AddComponent<PhotonView>();
-               yield return new WaitForSeconds(1);
-                stove.minigameCanvas2.transform.Find("BackButton").GetComponent<ExitFryingMinigame>().TaskOnClick();
-            }
+            stove.minigameCanvas2.transform.Find("BackButton").GetComponent<ExitFryingMinigame>().appliance = stove;
+            stove.minigameCanvas2.transform.Find("BackButton").gameObject.AddComponent<PhotonView>();
+            yield return new WaitForSeconds(1);
+            stove.minigameCanvas2.transform.Find("BackButton").GetComponent<ExitFryingMinigame>().TaskOnClick();
         }
-
-      // PhotonNetwork.Destroy(stove.minigameCanvas2);
 
 
         yield return null;
     }
-
 
 
 }
