@@ -70,7 +70,7 @@ public class Stove : PhotonTestSetup
         playerHold.pickUpItem(potato);
         stove.Interact();
         stove.Interact();
-        yield return new WaitForSeconds(3);
+        yield return null;
         Assert.IsTrue(stove.minigameCanvas.activeSelf);
         stove.itemsOnTheAppliance.Clear();
         stove.isBeingInteractedWith = false;
@@ -145,7 +145,7 @@ public class Stove : PhotonTestSetup
         stove.Interact();
         stove.Interact();
         Assert.IsTrue(stove.minigameCanvas.activeSelf);
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         stove.GetComponent<stoveMinigame>().spawner.StartGame();
         Assert.IsFalse(stove.GetComponent<stoveMinigame>().spawner.startButton.activeSelf);
         stove.itemsOnTheAppliance.Clear();
@@ -166,7 +166,7 @@ public class Stove : PhotonTestSetup
         stove.Interact();
         stove.Interact();
         Assert.IsTrue(stove.minigameCanvas.activeSelf);
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         stove.GetComponent<stoveMinigame>().spawner.StartGame();
         Assert.IsFalse(stove.GetComponent<stoveMinigame>().spawner.startButton.activeSelf);
         stove.GetComponent<stoveMinigame>().spawner.backButton.GetComponent<ExitStoveMinigame>().TaskOnClick();

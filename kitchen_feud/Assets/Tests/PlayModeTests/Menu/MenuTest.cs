@@ -10,38 +10,41 @@ using Photon.Realtime;
 public class MenuTest
 {
 
-    [OneTimeSetUp]
-    public void SetUp()
+    [UnitySetUp]
+    public IEnumerator SetUp()
     {
         PlayerPrefs.DeleteAll();
-        
+
         GameObject obj = new GameObject();
         SceneManager.LoadScene("mainMenu");
+        yield return null;
     }
 
 
     [UnityTearDown]
     public IEnumerator PhotonTearDown()
     {
-        SceneManager.LoadScene("Test");
-        yield return new WaitForSeconds(4);
+        GameObject.Find("MenuController").SetActive(false);
+        yield return null;
         PhotonNetwork.Disconnect();
-        yield return new WaitForSeconds(4);
+        yield return null;
+
 
     }
-   
+
     [UnityTest]
     public IEnumerator createLobby()
     {
-        yield return new WaitForSeconds(3f);
+        //yield return null;
+        yield return new WaitForSeconds(1);
         menuController mC = GameObject.Find("MenuController").GetComponent<menuController>();
         Assert.IsTrue(mC);
-        yield return new WaitForSeconds(1f);
+        yield return null;
         GameObject.Find("usernameInput").GetComponent<InputField>().text = "test";
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         Assert.IsTrue(GameObject.Find("startGame"));
 
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         mC.SetUsername();
 
         GameObject.Find("Settings Button").GetComponent<Button>().onClick.Invoke();
@@ -52,10 +55,10 @@ public class MenuTest
         GameObject.Find("Settings Button").GetComponent<Button>().onClick.Invoke();
         GameObject.Find("changeUsername").GetComponent<Button>().onClick.Invoke();
         GameObject.Find("usernameInput").GetComponent<InputField>().text = "test2";
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         Assert.IsTrue(GameObject.Find("startGame"));
 
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         mC.SetUsername();
 
         GameObject.Find("findLobby").GetComponent<Button>().onClick.Invoke();
@@ -63,22 +66,23 @@ public class MenuTest
         GameObject.Find("backToMenu").GetComponent<Button>().onClick.Invoke();
 
         GameObject.Find("MenuController").GetComponent<menuController>().CreateGame();
-        
+
 
         GameObject.Find("createInput").GetComponent<InputField>().text = "AS";
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
 
         GameObject.Find("MenuController").GetComponent<menuController>().CreateGame();
-        yield return new WaitForSeconds(2f);
+        yield return null;
+        yield return new WaitForSeconds(1);
 
         GameObject.Find("Settings").GetComponent<Button>().onClick.Invoke();
         GameObject.Find("IncreaseTime").GetComponent<Button>().onClick.Invoke();
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
 
         GameObject.Find("DecreaseTime").GetComponent<Button>().onClick.Invoke();
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
 
-        Assert.AreEqual("05:00",  GameObject.Find("SettingsCanvas").transform.Find("Timer").transform.Find("Timer").transform.Find("Timer").GetComponent<Text>().text);
+        Assert.AreEqual("05:00", GameObject.Find("SettingsCanvas").transform.Find("Timer").transform.Find("Timer").transform.Find("Timer").GetComponent<Text>().text);
 
 
         yield return null;
