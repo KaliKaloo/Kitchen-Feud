@@ -12,10 +12,13 @@
         "TrayASM",
         "Unity.TextMeshPro"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [
-        "WebGL"
+    "includePlatforms": [
+        "Editor",
+        "macOSStandalone",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
