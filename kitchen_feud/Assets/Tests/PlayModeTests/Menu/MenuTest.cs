@@ -35,7 +35,6 @@ public class MenuTest
     [UnityTest]
     public IEnumerator createLobby()
     {
-        //yield return null;
         yield return new WaitForSeconds(1);
         menuController mC = GameObject.Find("MenuController").GetComponent<menuController>();
         Assert.IsTrue(mC);
@@ -66,7 +65,6 @@ public class MenuTest
         GameObject.Find("backToMenu").GetComponent<Button>().onClick.Invoke();
 
         GameObject.Find("MenuController").GetComponent<menuController>().CreateGame();
-
 
         GameObject.Find("createInput").GetComponent<InputField>().text = "AS";
         yield return null;

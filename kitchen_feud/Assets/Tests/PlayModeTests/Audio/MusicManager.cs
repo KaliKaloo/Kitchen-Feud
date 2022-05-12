@@ -92,7 +92,7 @@ public class MusicManagerTests : PhotonTestSetup
       
       MusicManager.instance.endReaction();
       Assert.AreEqual(1, MusicManager.instance.pitch);
-        yield return null;
+      yield return null;
    }
 
 
