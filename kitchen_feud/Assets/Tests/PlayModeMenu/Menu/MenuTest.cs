@@ -11,6 +11,8 @@ public class MenuTest
 {
 
     [UnitySetUp]
+    [UnityPlatform(RuntimePlatform.WindowsEditor)]
+    [UnityPlatform(RuntimePlatform.OSXEditor)]
     public IEnumerator SetUp()
     {
         PlayerPrefs.DeleteAll();
@@ -21,6 +23,8 @@ public class MenuTest
 
 
     [UnityTearDown]
+    [UnityPlatform(RuntimePlatform.WindowsEditor)]
+    [UnityPlatform(RuntimePlatform.OSXEditor)]
     public IEnumerator PhotonTearDown()
     {
         GameObject.Find("MenuController").SetActive(false);
@@ -33,6 +37,8 @@ public class MenuTest
     
 
     [UnityTest]
+    [UnityPlatform(RuntimePlatform.WindowsEditor)]
+    [UnityPlatform(RuntimePlatform.OSXEditor)]
     public IEnumerator createLobby()
     {
         yield return new WaitForSeconds(1);
