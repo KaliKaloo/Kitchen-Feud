@@ -64,11 +64,6 @@ public class TrayController : MonoBehaviour
                 slot.GetComponentInChildren<TextMeshProUGUI>().text ="";
             }
 
-            // else destroy items on tray, except from item collider
-            if (slot.childCount != 0 && slot.tag != "ItemCollider" && slot.tag != "OrderTower")
-            {
-                //Destroy(slot.GetChild(0).gameObject);
-            }
         }
     }
 

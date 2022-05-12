@@ -34,7 +34,6 @@ public class ExitStoveMinigame : MonoBehaviour
 		Button btn = yourButton.GetComponent<Button>();
 		player = GetComponent<GameObject>();
 		btn.onClick.AddListener(TaskOnClick);
-		//GameEvents.current.assignPoints += appliance.GetComponent<stoveMinigame>().UpdateDishPointsStove;
 	}
 
 	// on clicking the exit button (after the minigame has finished)
@@ -68,10 +67,8 @@ public class ExitStoveMinigame : MonoBehaviour
 		canvas.gameObject.SetActive(true);
 		minigameCanvas.gameObject.SetActive(false);
 
-		//SOUND ----------------------------------------------------------
 		appliance.gameObject.GetComponent<PhotonView>().RPC("StopBoilingSound", RpcTarget.AllBuffered);
 		appliance.GetComponent<stoveMinigame>().hasPlayed = false;
-		//----------------------------------------------------------------
 
 		appliance.GetComponent<PhotonView>().RPC("SetToFalse", RpcTarget.AllBuffered,appliance.GetComponent<PhotonView>().ViewID);
 		appliance.cookedDish.GetComponent<PhotonView>().RPC("EnView", RpcTarget.AllBuffered);

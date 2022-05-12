@@ -84,7 +84,7 @@ public class PhotonPlayer : MonoBehaviour
 
             scene["loaded"] = 1;
             PhotonNetwork.LocalPlayer.SetCustomProperties(scene);
-            //}
+            
         }
         
     }

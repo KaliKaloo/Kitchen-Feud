@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using UnityEngine.TestTools;
 using Photon.Pun;
 using Photon.Realtime;
-
 using UnityEngine.UI;
-
 
 public class PhotonTestSetup
 {
@@ -18,6 +15,7 @@ public class PhotonTestSetup
     [OneTimeSetUp]
     public void SetUp()
     {
+       
         GameObject obj = new GameObject();
         lobby = obj.AddComponent<PhotonTestLobby>();
         lobby.Connect();
@@ -28,26 +26,19 @@ public class PhotonTestSetup
     public IEnumerator UnitySetUp()
     {
         yield return new WaitWhile(() => !lobby.ready);
-       //yield return null;
     }
 
     [OneTimeTearDown]
-    public void TearDown()
+    public void PhotonTearDown()
     {
+       
         PhotonNetwork.LeaveRoom();
+     
         PhotonNetwork.Disconnect();
         GameObject fireExtObj = GameObject.Find("fireExtinguisher");;
         if (fireExtObj != null)
             PhotonNetwork.Destroy(fireExtObj);
     }
-
-    //public GameObject CreatePhotonGameObject()
-    //{
-    //    GameObject obj = new GameObject();
-    //    PhotonView pv = obj.AddComponent<PhotonView>();
-    //    PhotonNetwork.AllocateViewID(pv);
-    //    return obj;
-    //}
 
 
     public class PhotonTestLobby : MonoBehaviourPunCallbacks
@@ -58,6 +49,7 @@ public class PhotonTestSetup
         public void Connect()
         {
             PhotonNetwork.OfflineMode = true;
+           
         }
 
         public override void OnConnectedToMaster()
@@ -74,5 +66,11 @@ public class PhotonTestSetup
             SceneManager.LoadScene("kitchens Test");
             ready = true;
         }
+        public IEnumerator offlineMode()
+        {
+            yield return new WaitForSeconds(2);
+            PhotonNetwork.OfflineMode = true;
+        }
     }
+    
 }

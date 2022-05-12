@@ -27,7 +27,8 @@ public class exitOven : MonoBehaviour
 
 	public void TaskOnClick()
 	{
-		GameEvents.current.assignPointsEventFunction();
+		appliance.GetComponent<ovenMiniGame>().UpdateDishPointsOven();
+
 		CustomProperties.PlayerCookedDishes.AddCookedDishes();
 
 		PV.RPC("globalDestroy", RpcTarget.All, minigameCanvas.GetComponent<PhotonView>().ViewID);

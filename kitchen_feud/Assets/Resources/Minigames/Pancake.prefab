@@ -65,12 +65,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pan: {fileID: 0}
   PV: {fileID: 0}
-  startLocation: {x: 0, y: 0, z: 0}
   isFlipped: 0
   timer: {fileID: 0}
   points: 0
-  minXSpeed: 50
-  maxXSpeed: 150
   Yspeed: 0
   minYSpeed: 10
   maxYSpeed: 100

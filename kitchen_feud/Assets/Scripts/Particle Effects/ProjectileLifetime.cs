@@ -13,7 +13,6 @@ public class ProjectileLifetime : MonoBehaviour
     // Allows smoke to dissipate before destroying everything
     public readonly float timeToDestroyAfterFinish = 5;
 
-    // On 
     private void Start()
     {
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
@@ -34,9 +33,7 @@ public class ProjectileLifetime : MonoBehaviour
         // Start smoke animation
         gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 
-        //SOUND ------------------------------------------------------
         gameObject.GetComponent<PhotonView>().RPC("PlaySmokeBombSound", RpcTarget.AllBuffered);
-        // -----------------------------------------------------------
     }
 
     [PunRPC]

@@ -29,7 +29,6 @@ public class SandwichControllerTests
 
         sandwichController.GameUI = new GameObject();
 
-
         ingredients = new List<IngredientSO>();
         ingredient1 = ScriptableObject.CreateInstance<IngredientSO>();
         ingredient1.ingredientID = "ingr 1";
@@ -37,9 +36,6 @@ public class SandwichControllerTests
         ingredient2.ingredientID = "ingr 2";
         ingredient3 = ScriptableObject.CreateInstance<IngredientSO>();
         ingredient3.ingredientID = "ingr 3";
-
-        GameEvents gameEvents = obj.AddComponent<GameEvents >();
-        GameEvents.current = gameEvents;
 
     }
 
@@ -126,23 +122,6 @@ public class SandwichControllerTests
         Assert.AreEqual(new List<string>(){"ingr 1", "ingr 2", "ingr 3"}, ingredientList);
     }
 
-
-
-    // [Test]
-    // public void checkStoppedIDTrue()
-    // {
-    //     sandwichController.currentActiveID = "ID";
-    //     bool isStoppedID = sandwichController.checkStoppedID("ID");
-    //     Assert.IsTrue(isStoppedID);
-    // }
-
-    // [Test]
-    // public void checkStoppedIDFalse()
-    // {
-    //     sandwichController.currentActiveID = "Wrong ID";
-    //     bool isStoppedID = sandwichController.checkStoppedID("ID");
-    //     Assert.IsFalse(isStoppedID);
-    // }
 
     [Test]
     public void StopGame()

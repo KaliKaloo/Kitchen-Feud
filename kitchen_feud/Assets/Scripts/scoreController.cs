@@ -22,7 +22,6 @@ public class scoreController : MonoBehaviour
     [SerializeField] private GameObject timesUpCanvas;
 
     public List<GameObject> trays = new List<GameObject>();
-    float elapsed = 0f;
     Hashtable ht = new Hashtable();
 
     // updates end scores to compare in game over scene
