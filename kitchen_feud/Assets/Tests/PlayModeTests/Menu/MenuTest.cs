@@ -4,25 +4,35 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
-
-
-public class MenuTest: MainMenuSetup
+using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
+public class MenuTest
 {
-    GlobalTimer timer;
-    [UnitySetUp]
-    public IEnumerator Setup()
+
+    [OneTimeSetUp]
+    public void SetUp()
     {
-
-        timer = new GlobalTimer();
-
-        yield return null;
+        PlayerPrefs.DeleteAll();
+        
+        GameObject obj = new GameObject();
+        SceneManager.LoadScene("mainMenu");
     }
 
+
+    [UnityTearDown]
+    public IEnumerator PhotonTearDown()
+    {
+        SceneManager.LoadScene("Test");
+        yield return new WaitForSeconds(4);
+        PhotonNetwork.Disconnect();
+        yield return new WaitForSeconds(4);
+
+    }
    
     [UnityTest]
     public IEnumerator createLobby()
     {
-
         yield return new WaitForSeconds(3f);
         menuController mC = GameObject.Find("MenuController").GetComponent<menuController>();
         Assert.IsTrue(mC);
