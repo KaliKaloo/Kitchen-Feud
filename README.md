@@ -65,6 +65,6 @@ Your game should now be accessible via https://&lt;user-name>.github.io/&lt;repo
 * Team Manager: Linda Lomencikova
 * Lead Programmer: Lokhei Wong
 * Lead Designer: Pragya Gurung
-* Developer: Hamza Shadid
+* Developer: Hamza Shahid
 * Developer: Jackson Lawrence
 * Developer: Karolina Kadzielawa
