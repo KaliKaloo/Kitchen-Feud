@@ -3,7 +3,7 @@
 [![Deploy 🚀](https://github.com/KaliKaloo/Kitchen-Feud/actions/workflows/deploy.yml/badge.svg?branch=main&event=push)](https://github.com/KaliKaloo/Kitchen-Feud/actions/workflows/deploy.yml)
 [![Testing 😎](https://github.com/KaliKaloo/Kitchen-Feud/actions/workflows/testing.yml/badge.svg?branch=dev&event=pull_request)](https://github.com/KaliKaloo/Kitchen-Feud/actions/workflows/testing.yml)
 
-## Year 4 games project 
+## Year 3 games project 
 A multiplayer web browser game where two teams compete to run the best resturant. Players work together to cook dishes by playing minigames and also sabotage their opponents.
 
 ## Set Up Instructions
