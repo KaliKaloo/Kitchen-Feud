@@ -7,6 +7,7 @@
 
 ## Year 3 games project 
 A multiplayer web browser game where two teams compete to run the best resturant. Players work together to cook dishes by playing minigames and also sabotage their opponents.
+- **GAME**: https://lokhei.github.io/kitchen_feud/
 - **Video**: https://www.youtube.com/watch?v=VfcCLnWZcGs&t=1s
 - **Report**: https://github.com/KaliKaloo/Kitchen-Feud/blob/main/docs/KitchenFeudReport.pdf
 - **Setup Instructions**: https://github.com/KaliKaloo/Kitchen-Feud/blob/main/docs/deployment%20instructions.md
