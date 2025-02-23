@@ -13,7 +13,7 @@ We are using 2 different repositories for our project:
 ### CI/CD
 
 #### Workflow
-This repository uses actions for automated testing and deployment from the [Game CI project](https://game.ci)
+This repository uses actions for automated testing and deployment from the [Game CI project](https://game.ci).
 
 There are two CI/CD workflows present in the `.github/workflows/` folder: `deploy.yml` and
 -  `testing.yml`: Used for running the testing suite against new code changes and reports the result to the Discord server, notifying us of any errors.
